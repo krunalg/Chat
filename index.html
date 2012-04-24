@@ -57,7 +57,7 @@ socket.on('playermove', function (positionx,positiony,currentanimation,thisgamen
       });
 
 //  new player move
-socket.on('playerMove', function (xstart, ystart, direction, client) {
+socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
     
 	 if(otherplayer)

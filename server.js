@@ -38,7 +38,7 @@ socket.on('recievedata', function (positionx,positiony,currentanimation,gamename
 
 
 socket.on('receiveMove', function (xstart, ystart, direction, client) {
-  socket.broadcast.emit('playerMove', xstart, ystart, direction, client);
+  socket.broadcast.emit('moveOtherPlayer', xstart, ystart, direction, client);
 });
 
   
