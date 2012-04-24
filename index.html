@@ -78,7 +78,7 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 		  }
 	 }
 });	 
-		 
+/*		 
 	  socket.on('netreplayer', function (playerlist) {
         var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
 //////////////loop to see if players exist
@@ -98,19 +98,19 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 
 /////////////////////////////////
       });
-	  
+*/	  
 	  
 // the new add player
-socket.on('addPlayer', function (playerlist,otherplayername,x,y,direction) {
+socket.on('addPlayer', function (players,otherplayername,x,y,direction) {
 	 var player = ig.game.getEntitiesByType( EntityPlayer )[0];
 	 player.messagebox = player.messagebox + '\n' + otherplayername + ' joined.';
-	 for(var i = 0;i<playerlist.length;i++)
+	 for(var i = 0;i<players.length;i++)
 	 {
-		  if(player.gamename != playerlist[i])
+		  if(player.gamename != players[i].name)
 		  {  
 			   ig.game.spawnEntity( EntityOtherplayer, x, y,
 			   {
-				    gamename:playerlist[i],
+				    gamename:players[i].name,
 				    animation:6
 			   } );
 		  }

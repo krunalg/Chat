@@ -6,7 +6,7 @@ var app = require('http').createServer(handler)
 app.listen(8080);
 
 //var playerlocation = 0;
-var playerlist = [];
+//var playerlist = [];
 var players = new Array(); // an array of objects
 
 
@@ -66,7 +66,7 @@ io.sockets.on('connection', function (socket)
     
         socket.clientname = newplayername;
         
-        playerlist.push(newplayername);
+        //playerlist.push(newplayername);
          
         // going to replace playerlist
         var player = new Object();
@@ -77,7 +77,8 @@ io.sockets.on('connection', function (socket)
         player.facing = direction;
         players.push(player);
                 
-        io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
+        //io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
+        io.sockets.emit('addPlayer',players,newplayername,x,y,direction);
         
         // here is where i will send back to the origin x and y coordinates
         // of all nearby players
@@ -89,6 +90,7 @@ io.sockets.on('connection', function (socket)
     socket.on('disconnect', function()
     {
         // soon to be unneeded
+        /*
             delete playerlist[socket.clientname];
             for(var i in playerlist)
             {
@@ -97,6 +99,7 @@ io.sockets.on('connection', function (socket)
                     playerlist.splice(i, 1);
                 }
             }
+        */
         
         // remove client from players array
         for(var i in players)
