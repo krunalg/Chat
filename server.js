@@ -35,14 +35,32 @@ io.sockets.on('connection', function (socket)
     });
 
     
-    socket.on('receiveMove', function (xstart, ystart, direction, client) {
-        socket.broadcast.emit('moveOtherPlayer', xstart, ystart, direction, client);
+    socket.on('receiveMove', function (currX, currY, direction, client) {
+        socket.broadcast.emit('moveOtherPlayer', currX, currY, direction, client);
         for(var i in players)
         {
             if(players[i].name==client)
             {
-                players[i].pos.x = xstart; // ** still needs direction added
-                players[i].pos.y = ystart;
+                var x = currX;
+                var y = currY;
+                switch(direction)
+                {
+                    
+                    case 'left':
+                        x = currX - 16; // !! magic numbers, not cool !!
+                        break;
+                    case 'right':
+                        x = currX + 16; // !! magic numbers, not cool !!
+                        break;
+                    case 'up':
+                        y = currY - 16; // !! magic numbers, not cool !!
+                        break;
+                    case 'down':
+                        y = currY + 16; // !! magic numbers, not cool !!
+                        break;
+                };
+                players[i].pos.x = x; // ** still needs direction added
+                players[i].pos.y = y;
             }
         }
     });
