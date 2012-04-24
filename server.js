@@ -41,26 +41,27 @@ io.sockets.on('connection', function (socket)
         {
             if(players[i].name==client)
             {
-                var x = currX;
-                var y = currY;
+                var newX = currX;
+                var newY = currY;
                 switch(direction)
                 {
                     
                     case 'left':
-                        x = currX - 16; // !! magic numbers, not cool !!
+                        newX = currX - 16; // !! magic numbers, not cool !!
                         break;
                     case 'right':
-                        x = currX + 16; // !! magic numbers, not cool !!
+                        newX = currX + 16; // !! magic numbers, not cool !!
                         break;
                     case 'up':
-                        y = currY - 16; // !! magic numbers, not cool !!
+                        newY = currY - 16; // !! magic numbers, not cool !!
                         break;
                     case 'down':
-                        y = currY + 16; // !! magic numbers, not cool !!
+                        newY = currY + 16; // !! magic numbers, not cool !!
                         break;
                 };
-                players[i].pos.x = x; // ** still needs direction added
-                players[i].pos.y = y;
+                players[i].pos.x = newX;
+                players[i].pos.y = newY;
+                players[i].facing = direction;
             }
         }
     });
@@ -79,8 +80,9 @@ io.sockets.on('connection', function (socket)
         player.pos = new Object();
         player.pos.x = x;
         player.pos.y = y;
+        player.facing = direction;
         players.push(player);
-        
+                
         io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
         
         // here is where i will send back to the origin x and y coordinates
