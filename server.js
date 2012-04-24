@@ -53,6 +53,16 @@ socket.on('receiveMove', function (xstart, ystart, direction, client) {
    
    
   });
+  // the new initialize player
+  socket.on('initializePlayer', function (x, y, direction, newplayername) {
+ 
+    socket.clientname = newplayername;
+     playerlist.push(newplayername);
+ //io.sockets.emit('addplayer',playerlist,newplayername);
+ io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
+   
+   
+  });
  socket.on('disconnect', function(){
    delete playerlist[socket.clientname];
  for(var i in playerlist)

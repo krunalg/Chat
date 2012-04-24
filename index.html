@@ -116,6 +116,7 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
       });
 	  
 	  
+ /*
  socket.on('addplayer', function (playerlist,otherplayername) {
 	  var player = ig.game.getEntitiesByType( EntityPlayer )[0];
 	 player.messagebox = player.messagebox + '\n' + otherplayername + ' joined';
@@ -124,6 +125,25 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 		if(player.gamename != playerlist[i])
 	 {  
 		 ig.game.spawnEntity( EntityOtherplayer, 25, 25, {gamename:playerlist[i]} );
+		
+      
+	 }}
+	
+      });
+ */
+ // the new add player
+ socket.on('addPlayer', function (playerlist,otherplayername,x,y,direction) {
+	  var player = ig.game.getEntitiesByType( EntityPlayer )[0];
+	 player.messagebox = player.messagebox + '\n' + otherplayername + ' joined';
+	 for(var i = 0;i<playerlist.length;i++)
+	  {
+		if(player.gamename != playerlist[i])
+	 {  
+		 ig.game.spawnEntity( EntityOtherplayer, x, y,
+				     {
+					     gamename:playerlist[i],
+					     animation:3
+				     } );
 		
       
 	 }}
