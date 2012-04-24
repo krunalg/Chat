@@ -86,6 +86,8 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 					otherplayer[i].pos.x = startx;
 					otherplayer[i].pos.y = starty+16;
 				    }
+				    
+				    otherplayer[i].animation = 1;
 	  
 				    // we'll have to figure out the animation clientside
 			   }
