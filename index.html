@@ -58,43 +58,20 @@ socket.on('playermove', function (positionx,positiony,currentanimation,thisgamen
 
 //  new player move
 socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
-	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	  var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
     
-	 if(otherplayer)
+    if(otherplayer)
+    {
+     for(var i in otherplayer)
 	 {
-		  for(var i in otherplayer)
-		  {
-			   if(client == otherplayer[i].username)
-			   {
-				    if(direction=='left')
-				    {
-					otherplayer[i].pos.x = startx-16;
-					otherplayer[i].pos.y = starty;
-				    }
-				    if(direction=='right')
-				    {
-					otherplayer[i].pos.x = startx+16;
-					otherplayer[i].pos.y = starty;
-				    }
-				    if(direction=='up')
-				    {
-					otherplayer[i].pos.x = startx;
-					otherplayer[i].pos.y = starty-16;
-				    }
-				    if(direction=='down')
-				    {
-					otherplayer[i].pos.x = startx;
-					otherplayer[i].pos.y = starty+16;
-				    }
-				    
-				    otherplayer[i].animation = 1;
-	  
-				    // we'll have to figure out the animation clientside
-			   }
-		  }
-	 }
-});
-	 
+	 if(client == otherplayer[i].gamename)
+	 {
+     otherplayer[i].pos.x = xstart;
+     otherplayer[i].pos.y = ystart;
+     
+    otherplayer[i].animation = 3;
+	 }}}
+      });	 
 		 
 	  socket.on('netreplayer', function (playerlist) {
         var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
