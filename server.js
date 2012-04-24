@@ -7,7 +7,7 @@ app.listen(8080);
 
 //var playerlocation = 0;
 var playerlist = [];
-
+var players = new Array(); // an array of objects
 
 
 function handler (req, res) {
@@ -57,9 +57,20 @@ socket.on('receiveMove', function (xstart, ystart, direction, client) {
   socket.on('initializePlayer', function (x, y, direction, newplayername) {
  
     socket.clientname = newplayername;
-     playerlist.push(newplayername);
+    playerlist.push(newplayername);
+     
+    // going to replace playerlist
+    var player = new Object();
+    player.name = newplayername;
+    player.pos = new Object();
+    player.pos.x = x;
+    player.pos.y = y;
+    players.push(player);
+ 
  //io.sockets.emit('addplayer',playerlist,newplayername);
  io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
+ 
+
  
  // here is where i will send back to the origin x and y coordinates
  // of all nearby players
