@@ -5,7 +5,7 @@ var app = require('http').createServer(handler)
 
 app.listen(8080);
 
-var playerlocation = 0;
+//var playerlocation = 0;
 var playerlist = [];
 
 
