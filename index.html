@@ -42,42 +42,38 @@ socket.on('message', function (data) {
 	 
 //  new player move
 socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
-	  var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
-    
-    if(otherplayer)
-    {
-     for(var i in otherplayer)
+	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 if(otherplayer)
 	 {
-	 if(client == otherplayer[i].gamename)
-	 {
-     //otherplayer[i].pos.x = xstart;
-     //otherplayer[i].pos.y = ystart;
-     
-	 if(direction=='left')
-	 {
-	     otherplayer[i].pos.x = xstart-16;
-	     otherplayer[i].pos.y = ystart;
+		  for(var i in otherplayer)
+		  {
+			   if(client == otherplayer[i].gamename)
+			   {
+				    if(direction=='left')
+				    {
+					otherplayer[i].pos.x = xstart-16; // magic numbers = bad!!
+					otherplayer[i].pos.y = ystart;
+				    }
+				    if(direction=='right')
+				    {
+					otherplayer[i].pos.x = xstart+16; // magic numbers = bad!!
+					otherplayer[i].pos.y = ystart;
+				    }
+				    if(direction=='up')
+				    {
+					otherplayer[i].pos.x = xstart;
+					otherplayer[i].pos.y = ystart-16; // magic numbers = bad!!
+				    }
+				    if(direction=='down')
+				    {
+					otherplayer[i].pos.x = xstart;
+					otherplayer[i].pos.y = ystart+16; // magic numbers = bad!!
+				    }
+				    otherplayer[i].animation = 3;
+			   }
+		  }
 	 }
-	 if(direction=='right')
-	 {
-	     otherplayer[i].pos.x = xstart+16;
-	     otherplayer[i].pos.y = ystart;
-	 }
-	 if(direction=='up')
-	 {
-	     otherplayer[i].pos.x = xstart;
-	     otherplayer[i].pos.y = ystart-16;
-	 }
-	 if(direction=='down')
-	 {
-	     otherplayer[i].pos.x = xstart;
-	     otherplayer[i].pos.y = ystart+16;
-	 }
-     
-     
-    otherplayer[i].animation = 3;
-	 }}}
-      });	 
+});	 
 		 
 	  socket.on('netreplayer', function (playerlist) {
         var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
