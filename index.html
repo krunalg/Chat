@@ -53,23 +53,27 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 				    {
 					otherplayer[i].pos.x = xstart-16; // magic numbers = bad!!
 					otherplayer[i].pos.y = ystart;
+					otherplayer[i].animation = 7;
 				    }
 				    if(direction=='right')
 				    {
 					otherplayer[i].pos.x = xstart+16; // magic numbers = bad!!
 					otherplayer[i].pos.y = ystart;
+					otherplayer[i].animation = 8;
 				    }
 				    if(direction=='up')
 				    {
 					otherplayer[i].pos.x = xstart;
 					otherplayer[i].pos.y = ystart-16; // magic numbers = bad!!
+					otherplayer[i].animation = 5;
 				    }
 				    if(direction=='down')
 				    {
 					otherplayer[i].pos.x = xstart;
 					otherplayer[i].pos.y = ystart+16; // magic numbers = bad!!
+					otherplayer[i].animation = 6;
 				    }
-				    otherplayer[i].animation = 3;
+				    
 			   }
 		  }
 	 }
