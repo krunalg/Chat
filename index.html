@@ -66,8 +66,30 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 	 {
 	 if(client == otherplayer[i].gamename)
 	 {
-     otherplayer[i].pos.x = xstart;
-     otherplayer[i].pos.y = ystart;
+     //otherplayer[i].pos.x = xstart;
+     //otherplayer[i].pos.y = ystart;
+     
+	 if(direction=='left')
+	 {
+	     otherplayer[i].pos.x = xstart-16;
+	     otherplayer[i].pos.y = ystart;
+	 }
+	 if(direction=='right')
+	 {
+	     otherplayer[i].pos.x = xstart+16;
+	     otherplayer[i].pos.y = ystart;
+	 }
+	 if(direction=='up')
+	 {
+	     otherplayer[i].pos.x = xstart;
+	     otherplayer[i].pos.y = ystart-16;
+	 }
+	 if(direction=='down')
+	 {
+	     otherplayer[i].pos.x = xstart;
+	     otherplayer[i].pos.y = ystart+16;
+	 }
+     
      
     otherplayer[i].animation = 3;
 	 }}}
