@@ -63,16 +63,30 @@ io.sockets.on('connection', function (socket)
     
     socket.on('disconnect', function()
     {
-        delete playerlist[socket.clientname];
-        for(var i in playerlist)
-        {
-            if(playerlist[i] == socket.clientname)
+        // soon to be unneeded
+            delete playerlist[socket.clientname];
+            for(var i in playerlist)
             {
-                playerlist.splice(i, 1);
+                if(playerlist[i] == socket.clientname)
+                {
+                    playerlist.splice(i, 1);
+                }
+            }
+        
+        // remove client from players array
+        for(var i in players)
+        {
+            if(players[i].name == socket.clientname)
+            {
+                players.splice(i, 1);
             }
         }
+        
         socket.broadcast.emit('message',socket.clientname);
-        socket.broadcast.emit('netreplayer',playerlist);
+        //socket.broadcast.emit('netreplayer',playerlist);
+        
+        socket.broadcast.emit('dropPlayer',socket.clientname);
+        
     });
  
  

@@ -147,6 +147,28 @@ socket.on('addPlayer', function (playerlist,otherplayername,x,y,direction) {
 		  }
 	 }	
 });
+
+socket.on('dropPlayer', function (client)
+{
+	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
+	 //////////////loop to see if players exist
+	 if(netplayers)
+	 {
+		  for(var i in netplayers)
+		  {
+			   if(netplayers[i].gamename==client) netplayers[i].kill();
+		  }
+	 }
+	 /*
+	 for(var i in playerlist)
+	 {
+		  if(playername != playerlist[i])
+		  {
+			   ig.game.spawnEntity( EntityOtherplayer, 160, 260, {gamename:playerlist[i]} );
+		  }
+	 }
+	 */
+});
  
 
  
