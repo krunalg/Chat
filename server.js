@@ -32,7 +32,14 @@ socket.on('recievedata', function (positionx,positiony,currentanimation,gamename
      socket.broadcast.emit('playermove', positionx,positiony,currentanimation,gamename);
     
     
-  }); 
+  });
+
+
+
+
+socket.on('recieveMove', function (xstart, ystart, direction, client) {
+  socket.broadcast.emit('playerMove', xstart, ystart, direction, client);
+});
 
   
    

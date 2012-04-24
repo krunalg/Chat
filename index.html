@@ -54,7 +54,44 @@ socket.on('playermove', function (positionx,positiony,currentanimation,thisgamen
      
     otherplayer[i].animation = currentanimation;
 	 }}}
-      }); 
+      });
+
+//  new player move
+socket.on('playerMove', function (xstart, ystart, direction, client) {
+	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+    
+	 if(otherplayer)
+	 {
+		  for(var i in otherplayer)
+		  {
+			   if(client == otherplayer[i].username)
+			   {
+				    if(direction=='left')
+				    {
+					otherplayer[i].pos.x = startx-16;
+					otherplayer[i].pos.y = starty;
+				    }
+				    if(direction=='right')
+				    {
+					otherplayer[i].pos.x = startx+16;
+					otherplayer[i].pos.y = starty;
+				    }
+				    if(direction=='up')
+				    {
+					otherplayer[i].pos.x = startx;
+					otherplayer[i].pos.y = starty-16;
+				    }
+				    if(direction=='down')
+				    {
+					otherplayer[i].pos.x = startx;
+					otherplayer[i].pos.y = starty+16;
+				    }
+	  
+				    // we'll have to figure out the animation clientside
+			   }
+		  }
+	 }
+});
 	 
 		 
 	  socket.on('netreplayer', function (playerlist) {
