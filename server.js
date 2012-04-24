@@ -29,12 +29,6 @@ function handler (req, res)
 io.sockets.on('connection', function (socket)
 {
   
-    socket.on('recievedata', function (positionx,positiony,currentanimation,gamename)
-    {
-        socket.broadcast.emit('playermove', positionx,positiony,currentanimation,gamename);
-    });
-
-    
     socket.on('receiveMove', function (currX, currY, direction, client) {
         socket.broadcast.emit('moveOtherPlayer', currX, currY, direction, client);
         for(var i in players)
