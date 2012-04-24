@@ -160,6 +160,28 @@ socket.on('dropPlayer', function (client)
 		  }
 	 }
 });
+
+socket.on('playerPositions', function (players)
+{
+	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
+	 if(netplayers)
+	 {
+		  for(var i in netplayers)
+		  {
+			   for(var j in players)
+			   {
+				    // if names match, update position
+				    if(netplayers[i].gamename==players[j].name)
+				    {
+					     netplayers[i].pos.x = players[j].pos.x;
+					     netplayers[i].pos.y = players[j].pos.y;
+				    }
+			   }
+		  }
+	 }
+});
+
+
  
 
  

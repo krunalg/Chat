@@ -44,6 +44,7 @@ io.sockets.on('connection', function (socket)
     {
     
         socket.clientname = newplayername;
+        
         playerlist.push(newplayername);
          
         // going to replace playerlist
@@ -53,10 +54,12 @@ io.sockets.on('connection', function (socket)
         player.pos.x = x;
         player.pos.y = y;
         players.push(player);
+        
         io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
         
         // here is where i will send back to the origin x and y coordinates
         // of all nearby players
+        socket.emit('playerPositions',players);
     
     });
     
