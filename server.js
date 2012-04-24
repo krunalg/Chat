@@ -37,6 +37,14 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveMove', function (xstart, ystart, direction, client) {
         socket.broadcast.emit('moveOtherPlayer', xstart, ystart, direction, client);
+        for(var i in players)
+        {
+            if(players[i].name==client)
+            {
+                players[i].pos.x = xstart; // ** still needs direction added
+                players[i].pos.y = ystart;
+            }
+        }
     });
       
     
