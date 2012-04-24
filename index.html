@@ -51,6 +51,8 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 			   {
 				    if(direction=='left')
 				    {
+					otherplayer[i].vel.x = 0;
+					otherplayer[i].vel.y = 0;
 					otherplayer[i].pos.x = xstart;
 					otherplayer[i].pos.y = ystart;
 					otherplayer[i].facing = direction;
@@ -58,6 +60,8 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 				    }
 				    if(direction=='right')
 				    {
+					otherplayer[i].vel.x = 0;
+					otherplayer[i].vel.y = 0;
 					otherplayer[i].pos.x = xstart;
 					otherplayer[i].pos.y = ystart;
 					otherplayer[i].facing = direction;
@@ -65,6 +69,8 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 				    }
 				    if(direction=='up')
 				    {
+					otherplayer[i].vel.x = 0;
+					otherplayer[i].vel.y = 0;
 					otherplayer[i].pos.x = xstart;
 					otherplayer[i].pos.y = ystart;
 					otherplayer[i].facing = direction;
@@ -72,6 +78,8 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 				    }
 				    if(direction=='down')
 				    {
+					otherplayer[i].vel.x = 0;
+					otherplayer[i].vel.y = 0;
 					otherplayer[i].pos.x = xstart;
 					otherplayer[i].pos.y = ystart;
 					otherplayer[i].facing = direction;
