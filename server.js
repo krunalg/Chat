@@ -10,88 +10,70 @@ var playerlist = [];
 var players = new Array(); // an array of objects
 
 
-function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
-
-    res.writeHead(200);
-    res.end(data);
-  });
+function handler (req, res)
+{
+    fs.readFile(__dirname + '/index.html',
+    function (err, data)
+    {
+        if (err)
+        {
+            res.writeHead(500);
+            return res.end('Error loading index.html');
+        }
+    
+        res.writeHead(200);
+        res.end(data);
+    });
 }
 
-io.sockets.on('connection', function (socket) {
+io.sockets.on('connection', function (socket)
+{
   
-     
-  
-socket.on('recievedata', function (positionx,positiony,currentanimation,gamename) {
-   
-     socket.broadcast.emit('playermove', positionx,positiony,currentanimation,gamename);
+    socket.on('recievedata', function (positionx,positiony,currentanimation,gamename)
+    {
+        socket.broadcast.emit('playermove', positionx,positiony,currentanimation,gamename);
+    });
+
+    
+    socket.on('receiveMove', function (xstart, ystart, direction, client) {
+        socket.broadcast.emit('moveOtherPlayer', xstart, ystart, direction, client);
+    });
+      
+    
+    socket.on('initializePlayer', function (x, y, direction, newplayername)
+    {
+    
+        socket.clientname = newplayername;
+        playerlist.push(newplayername);
+         
+        // going to replace playerlist
+        var player = new Object();
+        player.name = newplayername;
+        player.pos = new Object();
+        player.pos.x = x;
+        player.pos.y = y;
+        players.push(player);
+        io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
+        
+        // here is where i will send back to the origin x and y coordinates
+        // of all nearby players
+    
+    });
     
     
-  });
-
-
-
-
-socket.on('receiveMove', function (xstart, ystart, direction, client) {
-  socket.broadcast.emit('moveOtherPlayer', xstart, ystart, direction, client);
-});
-
-  
-   
-  
-  
-/*  socket.on('initializeplayer', function (newplayername) {
+    socket.on('disconnect', function()
+    {
+        delete playerlist[socket.clientname];
+        for(var i in playerlist)
+        {
+            if(playerlist[i] == socket.clientname)
+            {
+                playerlist.splice(i, 1);
+            }
+        }
+        socket.broadcast.emit('message',socket.clientname);
+        socket.broadcast.emit('netreplayer',playerlist);
+    });
  
-    socket.clientname = newplayername;
-     playerlist.push(newplayername);
- io.sockets.emit('addplayer',playerlist,newplayername);
-   
-   
-  });*/
-  // the new initialize player
-  socket.on('initializePlayer', function (x, y, direction, newplayername) {
- 
-    socket.clientname = newplayername;
-    playerlist.push(newplayername);
-     
-    // going to replace playerlist
-    var player = new Object();
-    player.name = newplayername;
-    player.pos = new Object();
-    player.pos.x = x;
-    player.pos.y = y;
-    players.push(player);
- 
- //io.sockets.emit('addplayer',playerlist,newplayername);
- io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
- 
-
- 
- // here is where i will send back to the origin x and y coordinates
- // of all nearby players
-   
-   
-  });
- socket.on('disconnect', function(){
-   delete playerlist[socket.clientname];
- for(var i in playerlist)
- {
-  if(playerlist[i] == socket.clientname)
-  {
-    playerlist.splice(i, 1);
-  }
- }
-socket.broadcast.emit('message',socket.clientname);
- socket.broadcast.emit('netreplayer',playerlist);
- 
- 
-});
- 
-
  
 });
