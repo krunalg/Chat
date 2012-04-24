@@ -131,24 +131,22 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 	
       });
  */
- // the new add player
- socket.on('addPlayer', function (playerlist,otherplayername,x,y,direction) {
-	  var player = ig.game.getEntitiesByType( EntityPlayer )[0];
-	 player.messagebox = player.messagebox + '\n' + otherplayername + ' joined';
+// the new add player
+socket.on('addPlayer', function (playerlist,otherplayername,x,y,direction) {
+	 var player = ig.game.getEntitiesByType( EntityPlayer )[0];
+	 player.messagebox = player.messagebox + '\n' + otherplayername + ' joined.';
 	 for(var i = 0;i<playerlist.length;i++)
-	  {
-		if(player.gamename != playerlist[i])
-	 {  
-		 ig.game.spawnEntity( EntityOtherplayer, x, y,
-				     {
-					     gamename:playerlist[i],
-					     animation:3
-				     } );
-		
-      
-	 }}
-	
-      });
+	 {
+		  if(player.gamename != playerlist[i])
+		  {  
+			   ig.game.spawnEntity( EntityOtherplayer, x, y,
+			   {
+				    gamename:playerlist[i],
+				    animation:3
+			   } );
+		  }
+	 }	
+});
  
 
  
