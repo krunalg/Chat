@@ -60,6 +60,9 @@ socket.on('receiveMove', function (xstart, ystart, direction, client) {
      playerlist.push(newplayername);
  //io.sockets.emit('addplayer',playerlist,newplayername);
  io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
+ 
+ // here is where i will send back to the origin x and y coordinates
+ // of all nearby players
    
    
   });
