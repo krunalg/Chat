@@ -45,14 +45,14 @@ socket.on('receiveMove', function (xstart, ystart, direction, client) {
    
   
   
-  socket.on('initializeplayer', function (newplayername) {
+/*  socket.on('initializeplayer', function (newplayername) {
  
     socket.clientname = newplayername;
      playerlist.push(newplayername);
  io.sockets.emit('addplayer',playerlist,newplayername);
    
    
-  });
+  });*/
   // the new initialize player
   socket.on('initializePlayer', function (x, y, direction, newplayername) {
  
