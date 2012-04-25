@@ -91,12 +91,14 @@ io.sockets.on('connection', function (socket)
         player.facing = direction;
         players.push(player);
                 
-        //io.sockets.emit('addPlayer',playerlist,newplayername,x,y,direction);
-        io.sockets.emit('addPlayer',players,newplayername,x,y,direction);
+        //io.sockets.emit('addPlayer', player.name, x, y, direction);
+        socket.broadcast.emit('addPlayer', player.name, x, y, direction);
         
         // here is where i will send back to the origin x and y coordinates
         // of all nearby players
-        socket.emit('playerPositions',players);
+        
+        socket.emit('addAllPlayers', players);
+        //socket.emit('playerPositions',players);
     
     });
     
