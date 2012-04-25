@@ -6,3 +6,9 @@ socket.emit('this', { should: 'go to who started the socket' });
 
 // client side
 socket.emit('this', { is: 'my data' });
+
+
+
+
+
+https://github.com/LearnBoost/socket.io/blob/master/Readme.md
