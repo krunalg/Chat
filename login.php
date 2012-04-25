@@ -75,18 +75,45 @@ if($_GET['do']=="writePosition")
     die (mysql_affected_rows());
 }
 
-// read player's position & the
-// direction he's facing from the database
 if($_GET['do']=="readPosition")
+// print out as JSON
+// players "x", "y", and "facing" data
+// ex. output:
+// {"x": 32, "y": 32, "facing": "up"}
 {
     // needs to be validated
         $user = $_GET['user'];
     
-    /*$query = "SELECT user FROM `users`";
+    $query = "SELECT x, y, facing FROM `users` WHERE user = '$user' LIMIT 1";
     $result = mysql_query($query);
-    $count = 0;
-    while ($row = mysql_fetch_array($result))
-    */
+    $row = mysql_fetch_array($result);
+    if(mysql_num_rows($result)==1) {
+        // user found
+        echo '{';
+        echo '"x": ';
+        echo $row['x'];
+        echo ', "y": ';
+        echo $row['y'];
+        echo ', "facing": "';
+        echo $row['facing'];
+        echo '"';
+        echo '}';
+        die();
+    }
+    else
+    {
+        // no user was found
+        echo '{';
+        echo '"x": ';
+        echo -1;
+        echo ', "y": ';
+        echo -1;
+        echo ', "facing": "';
+        echo down;
+        echo '"';
+        echo '}';
+        die();
+    }
 }
 
 
