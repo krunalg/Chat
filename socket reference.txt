@@ -1,0 +1,8 @@
+// i think on the server can do this one
+io.sockets.emit('this', { will: 'be received by everyone' });
+
+// again the server
+socket.emit('this', { should: 'go to who started the socket' });
+
+// client side
+socket.emit('this', { is: 'my data' });
