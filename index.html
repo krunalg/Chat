@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js" ></script>
+	 
 	 <script type="text/javascript">
 	 // ** Use this code to read the _GET variables from the URL
 	 // ** All to be done before impact starts up.
@@ -36,10 +38,16 @@
 		  }
 	 
 		  // username fetched from url
-		  //if(GETDATA.user.length)
 		  var username = "";
 		  username += GETDATA.user;
 		  if(username=="undefined") username = 'player' + Math.floor(Math.random()*999);
+		  
+		  $.ajax({
+			   url : "login.php?do=readPosition&user=$username",
+			   success : function(result){
+				    alert(result);
+			   }
+		  });
 	 
 	 // ** End login logic
 	 </script>
@@ -67,7 +75,7 @@
 		}
 	 </style>
 	 
-	 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js" ></script>
+	 
 	 <script type="text/javascript" src="lib/impact/impact.js"></script>
 	 <script type="text/javascript" src="lib/game/main.js"></script>
 </head>
