@@ -42,10 +42,12 @@
 		  username += GETDATA.user;
 		  if(username=="undefined") username = 'player' + Math.floor(Math.random()*999);
 		  
+		  var jsonPos = new Object();
 		  $.ajax({
-			   url : "login.php?do=readPosition&user=$username",
+			   url : "login.php?do=readPosition&user=" + username,
 			   success : function(result){
-				    alert(result);
+				    //alert(result);
+				    jsonPos = jQuery.parseJSON(result); // returns JavaScript object
 			   }
 		  });
 	 
