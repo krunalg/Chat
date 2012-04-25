@@ -75,6 +75,19 @@
 			margin: auto;
 			border: 1px solid #555;
 		}
+		#chat {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			border: 1px solid red;
+		}
+		#messages {
+		}
+		#input {
+		}
 	 </style>
 	 
 	 
@@ -233,5 +246,14 @@ socket.on('playerPositions', function (players)
 	
 	
 	<canvas id="canvas"></canvas>
+	<div id="chat">
+		  <div>
+			   <textarea id="messages"></textarea>
+		  </div>
+		  <div>
+			   <input type="text" id="input"></input>
+		  </div>
+	</div>
+	
 </body>
 </html>
