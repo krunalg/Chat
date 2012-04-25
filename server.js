@@ -59,6 +59,20 @@ io.sockets.on('connection', function (socket)
             }
         }
     });
+    
+    
+    socket.on('receiveDirection', function (client, direction) {
+        socket.broadcast.emit('updateOtherPlayer', client, direction);
+        for(var i in players)
+        {
+            if(players[i].name==client)
+            {
+                players[i].facing = direction;
+                break; // client names are unique
+            }
+        }
+    });
+    
       
     
     socket.on('initializePlayer', function (x, y, direction, newplayername)

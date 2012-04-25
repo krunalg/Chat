@@ -58,7 +58,23 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 			   }
 		  }
 	 }
-});	 
+});
+
+
+socket.on('updateOtherPlayer', function (client, direction) {
+	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 if(otherplayer)
+	 {
+		  for(var i in otherplayer)
+		  {
+			   if(client == otherplayer[i].gamename)
+			   {
+				    otherplayer[i].facing = direction;
+				    break; // because client names are unique
+			   }
+		  }
+	 }
+});
 	  
 	  
 // the new add player
