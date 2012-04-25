@@ -94,7 +94,7 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client) {
 	 {
 		  for(var i in otherplayer)
 		  {
-			   if(client == otherplayer[i].gamename)
+			   if(client == otherplayer[i].name)
 			   {
 				    otherplayer[i].vel.x = 0;
 				    otherplayer[i].vel.y = 0;
@@ -114,7 +114,7 @@ socket.on('updateOtherPlayer', function (client, direction) {
 	 {
 		  for(var i in otherplayer)
 		  {
-			   if(client == otherplayer[i].gamename)
+			   if(client == otherplayer[i].name)
 			   {
 				    otherplayer[i].facing = direction;
 				    break; // because client names are unique
@@ -130,18 +130,18 @@ socket.on('addPlayer', function (user, x, y, direction) {
 	 player.messagebox = player.messagebox + '\n' + user + ' joined.';
 	 ig.game.spawnEntity( EntityOtherplayer, x, y,
 	 {
-		  gamename: user,
+		  name: user,
 		  animation: 6
 	 } );
 	 
 	 
 	 /*for(var i = 0;i<players.length;i++)
 	 {
-		  if(player.gamename != players[i].name)
+		  if(player.name != players[i].name)
 		  {  
 			   ig.game.spawnEntity( EntityOtherplayer, x, y,
 			   {
-				    gamename:players[i].name,
+				    name:players[i].name,
 				    animation:6
 			   } );
 		  }
@@ -156,11 +156,11 @@ socket.on('addAllPlayers', function (players) {
 	 
 	 for(i=0; i<players.length; i++)
 	 {
-		  if(localPlayer.gamename!=players[i].name)
+		  if(localPlayer.name!=players[i].name)
 		  {
 			   ig.game.spawnEntity( EntityOtherplayer, players[i].pos.x, players[i].pos.y,
 			   {
-				    gamename: players[i].name,
+				    name: players[i].name,
 				    facing: players[i].facing,
 				    animation:6
 			   } );
@@ -176,7 +176,7 @@ socket.on('dropPlayer', function (client)
 		  for(var i in netplayers)
 		  {
 			   // kill player entity if he exists
-			   if(netplayers[i].gamename==client) netplayers[i].kill();
+			   if(netplayers[i].name==client) netplayers[i].kill();
 		  }
 	 }
 });
@@ -193,7 +193,7 @@ socket.on('playerPositions', function (players)
 			   for(var j in players)
 			   {
 				    // if names match, update position
-				    if(netplayers[i].gamename==players[j].name)
+				    if(netplayers[i].name==players[j].name)
 				    {
 					     netplayers[i].pos.x = players[j].pos.x;
 					     netplayers[i].pos.y = players[j].pos.y;
