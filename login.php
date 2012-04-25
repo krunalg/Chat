@@ -109,7 +109,7 @@ if($_GET['do']=="readPosition")
         echo ', "y": ';
         echo -1;
         echo ', "facing": "';
-        echo down;
+        echo 'down';
         echo '"';
         echo '}';
         die();
