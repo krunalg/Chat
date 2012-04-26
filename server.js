@@ -28,7 +28,9 @@ function handler (req, res)
 
 io.sockets.on('connection', function (socket)
 {
-  
+    console.log('** client connected');
+    
+      
     socket.on('receiveMove', function (currX, currY, direction, client) {
         socket.broadcast.emit('moveOtherPlayer', currX, currY, direction, client);
         for(var i in players)
@@ -94,8 +96,15 @@ io.sockets.on('connection', function (socket)
         }
     });
     
-    socket.on('receiveMsg', function (client, msg) {
+    socket.on('receiveSay', function (client, msg) {
         socket.broadcast.emit('newMsg', client, msg);
+    });
+    
+    socket.on('receiveTell', function (to, msg) {
+        // find recipient from client list where name equal to
+        //console.log('I think TELL ' + socket.clientname + ' bound for ' + to);
+        
+        //socket.broadcast.emit('newMsg', msg);
     });
     
       
@@ -104,8 +113,8 @@ io.sockets.on('connection', function (socket)
     {
     
         socket.clientname = newplayername;
-        
-        //playerlist.push(newplayername);
+        console.log('** initiating player: '+ newplayername
+                    + ' with session id: ' + socket.id);
          
         // going to replace playerlist
         var player = new Object();
@@ -114,6 +123,7 @@ io.sockets.on('connection', function (socket)
         player.pos.x = x;
         player.pos.y = y;
         player.facing = direction;
+        player.sessionId = socket.id;
         players.push(player);
                 
         //io.sockets.emit('addPlayer', player.name, x, y, direction);
