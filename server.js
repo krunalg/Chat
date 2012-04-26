@@ -94,6 +94,10 @@ io.sockets.on('connection', function (socket)
         }
     });
     
+    socket.on('receiveMsg', function (client, msg) {
+        socket.broadcast.emit('newMsg', client, msg);
+    });
+    
       
     
     socket.on('initializePlayer', function (x, y, direction, newplayername)

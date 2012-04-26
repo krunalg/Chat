@@ -108,7 +108,21 @@ socket.on('message', function (data) {
 	 {
 	 player.messagebox = player.messagebox + '\n' + data + ' disconnected';
 	 }
-      });	 
+      });
+
+socket.on('newMsg', function (client, msg) {
+       // this is where i access the newly created textfield
+       
+         ig.game.messages.push(client + ': ' + msg);
+	 ig.game.updateMessageBox(ig.game);
+	 ig.game.scrollMessageBox(ig.game);
+       /*var player = ig.game.getEntitiesByType( EntityPlayer )[0];
+	 if(player)
+	 {
+	 player.messagebox = player.messagebox + '\n'+ client+ ": " + msg + '';
+	 }*/
+      
+      });
 	 
 	 
 //  new player move
