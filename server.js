@@ -111,7 +111,7 @@ io.sockets.on('connection', function (socket)
             {
                 // send tell
                 console.log("Tell going to: " + to + " has session: " + players[i].session);
-                io.sockets[players[i].session].send('incomingTell', socket.clientname, msg);
+                io.sockets.socket(players[i].session).emit('incomingTell', socket.clientname, msg);
                 return;
             }
         }
