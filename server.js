@@ -101,10 +101,22 @@ io.sockets.on('connection', function (socket)
     });
     
     socket.on('receiveTell', function (to, msg) {
-        // find recipient from client list where name equal to
-        //console.log('I think TELL ' + socket.clientname + ' bound for ' + to);
         
-        //socket.broadcast.emit('newMsg', msg);
+        console.log("Tell receieved.");
+
+        // find recipients session id
+        for(var i in players)
+        {
+            if(players[i].name==to)
+            {
+                // send tell
+                console.log("Tell going to: " + to + " has session: " + players[i].session);
+                io.sockets[players[i].session].send('incomingTell', socket.clientname, msg);
+                return;
+            }
+        }
+        console.log("Could find no such user.");
+        
     });
     
       
@@ -123,7 +135,7 @@ io.sockets.on('connection', function (socket)
         player.pos.x = x;
         player.pos.y = y;
         player.facing = direction;
-        player.sessionId = socket.id;
+        player.session = socket.id;
         players.push(player);
                 
         //io.sockets.emit('addPlayer', player.name, x, y, direction);
