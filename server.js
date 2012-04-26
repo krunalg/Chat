@@ -101,22 +101,17 @@ io.sockets.on('connection', function (socket)
     });
     
     socket.on('receiveTell', function (to, msg) {
-        
-        console.log("Tell receieved.");
-
         // find recipients session id
         for(var i in players)
         {
             if(players[i].name==to)
             {
-                // send tell
-                console.log("Tell going to: " + to + " has session: " + players[i].session);
-                io.sockets.socket(players[i].session).emit('incomingTell', socket.clientname, msg);
+                //console.log("Tell going to: " + to + " has session: " + players[i].session);
+                io.sockets.socket(players[i].session).emit('incomingTell', socket.clientname, msg); // send tell
                 return;
             }
         }
-        console.log("Could find no such user.");
-        
+        console.log("** Tell received but recipient does not exist.");
     });
     
       
