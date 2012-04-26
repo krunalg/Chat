@@ -1,9 +1,9 @@
-var app = require('http').createServer(handler)
-  , io = require('socket.io').listen(app)
+var server = require('http').createServer(handler)
+  , io = require('socket.io').listen(server)
   , fs = require('fs')
  
 
-app.listen(8080);
+server.listen(8080);
 
 //var playerlocation = 0;
 //var playerlist = [];
