@@ -9,6 +9,22 @@ server.listen(8080);
 //var playerlist = [];
 var players = new Array(); // an array of objects
 
+/*
+  At some point I plan to have the server cycle
+  through all the maps (when starting up) and
+  read all the NPC names, which map they came
+  from, and the movement pattern.
+  
+  The server will then set up a series of
+  timers (one for each NPC).
+  
+  Before ever moving an NPC, the server will
+  check if the move is legal.
+  
+  If a PC tells the server it is moving to
+  position an NPC just went to (illegal), the
+  server will correct the PC.
+*/
 
 function handler (req, res)
 {
