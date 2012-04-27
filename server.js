@@ -199,7 +199,8 @@ io.sockets.on('connection', function (socket)
     
     socket.on('initializePlayer', function (x, y, direction, newplayername)
     {
-    
+        socket.emit('welcome', 'Welcome to the world.');
+        
         socket.clientname = newplayername;
         console.log('** initiating player: '+ newplayername
                     + ' with session id: ' + socket.id);
