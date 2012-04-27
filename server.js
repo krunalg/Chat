@@ -214,7 +214,6 @@ io.sockets.on('connection', function (socket)
         player.session = socket.id;
         players.push(player);
                 
-        //io.sockets.emit('addPlayer', player.name, x, y, direction);
         socket.broadcast.emit('addPlayer', player.name, x, y, direction);
         
         // here is where i will send back to the origin x and y coordinates
@@ -249,7 +248,7 @@ io.sockets.on('connection', function (socket)
             }
         }
         
-        socket.broadcast.emit('message',socket.clientname);
+        //socket.broadcast.emit('message',socket.clientname);
         //socket.broadcast.emit('netreplayer',playerlist);
         
         socket.broadcast.emit('dropPlayer',socket.clientname);
