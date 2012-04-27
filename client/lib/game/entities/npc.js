@@ -279,7 +279,7 @@ ig.module (
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
 		    type: ig.Entity.TYPE.A,
-		    animSheet: new ig.AnimationSheet( 'media/fatty.png', 16, 32 ),
+		    animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 		    
 		    facing: "down",
 		    facingLast: "down",
@@ -341,6 +341,14 @@ ig.module (
 		    init: function( x, y, settings ) {
 			this.parent( x, y, settings );
 			
+			// weltmeister icon
+			this.addAnim( 'weltmeister', 0.1, [1] );
+			this.currentAnim = this.anims.weltmeister;
+		    },
+		    
+		    ready: function()
+		    {
+			this.animSheet = new ig.AnimationSheet( 'media/fatty.png', 16, 32 );
 			// add the animations
 			var walkRate = 0.13125;
 			this.addAnim( 'walkUpA', walkRate, [2,0,0] );
