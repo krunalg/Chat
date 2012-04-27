@@ -23,8 +23,73 @@ var players = new Array(); // an array of objects
   
   If a PC tells the server it is moving to
   position an NPC just went to (illegal), the
-  server will correct the PC.
+  server will correct the PC. 
+
+
+npcPos = new Object();
+	 
+// manually add npc
+// be sure to add checks so that
+// npc's don't overwrite each other
+npcPos['town'] = new Object();
+npcPos['town'][256] = new Object();
+npcPos['town'][256][256] = new Object();
+npcPos['town'][256][256].pattern = ['left','up','right','down'];
+npcPos['town'][256][256].next = 0;
+npcPos['town'][256][256].last = new Date().getTime();
+npcPos['town'][256][256].delay = 2000;
+npcPos['town'][256][256].x = 256; // current x
+npcPos['town'][256][256].y = 256; // current y
+if(npcPos['town'][256][256]==undefined) console.debug("Should not happen.");
+if(npcPos['town'][256][255]==undefined) console.debug("Should happen.");
+// ^^^ a one time thing when server starts up^^^
+
+// basically what this does is it tells all clients
+// that an npc has moved, every time it does
+for(var level in npcPos)
+{
+         for(var x in npcPos[level])
+         {
+                  for(var y in npcPos[level][x])
+                  {
+                           if(new Date().getTime() - npcPos[level][x][y].last > npcPos[level][x][y].delay)
+                           {
+                                // time to move
+                                io.sockets.emit('npcMove',
+                                      npcPos[level][x][y].x, // x before move
+                                      npcPos[level][x][y].y, // y before move
+                                      npcPos[level][x][y].pattern[  npcPos[level][x][y].next  ] // direction
+                                      );
+                                
+                                switch(npcPos[level][x][y].pattern[next])
+                                {
+                                  case 'left':
+                                    npcPos[level][x][y].x += -16; // magic numbers = bad!
+                                    break;
+                                  case 'right':
+                                    npcPos[level][x][y].x += 16; // magic numbers = bad!
+                                    break;
+                                  case 'up':
+                                    npcPos[level][x][y].y += -16; // magic numbers = bad!
+                                    break;
+                                  case 'down':
+                                    npcPos[level][x][y].y += 16; // magic numbers = bad!
+                                    break;
+                                }
+                                
+                                npcPos[level][x][y].next++;
+                                if(npcPos[level][x][y].next >
+                                      npcPos[level][x][y].pattern.length)
+                                {
+                                    npcPos[level][x][y].next = 0; // reset
+                                }
+                           }
+                  }
+         }
+}
+
 */
+
 
 function handler (req, res)
 {
