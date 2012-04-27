@@ -5,90 +5,9 @@ var server = require('http').createServer(handler)
 
 server.listen(8080);
 
-//var playerlocation = 0;
-//var playerlist = [];
 var players = new Array(); // an array of objects
 
-/*
-  At some point I plan to have the server cycle
-  through all the maps (when starting up) and
-  read all the NPC names, which map they came
-  from, and the movement pattern.
-  
-  The server will then set up a series of
-  timers (one for each NPC).
-  
-  Before ever moving an NPC, the server will
-  check if the move is legal.
-  
-  If a PC tells the server it is moving to
-  position an NPC just went to (illegal), the
-  server will correct the PC. 
 
-
-npcPos = new Object();
-	 
-// manually add npc
-// be sure to add checks so that
-// npc's don't overwrite each other
-npcPos['town'] = new Object();
-npcPos['town'][256] = new Object();
-npcPos['town'][256][256] = new Object();
-npcPos['town'][256][256].pattern = ['left','up','right','down'];
-npcPos['town'][256][256].next = 0;
-npcPos['town'][256][256].last = new Date().getTime();
-npcPos['town'][256][256].delay = 2000;
-npcPos['town'][256][256].x = 256; // current x
-npcPos['town'][256][256].y = 256; // current y
-if(npcPos['town'][256][256]==undefined) console.debug("Should not happen.");
-if(npcPos['town'][256][255]==undefined) console.debug("Should happen.");
-// ^^^ a one time thing when server starts up^^^
-
-// basically what this does is it tells all clients
-// that an npc has moved, every time it does
-for(var level in npcPos)
-{
-         for(var x in npcPos[level])
-         {
-                  for(var y in npcPos[level][x])
-                  {
-                           if(new Date().getTime() - npcPos[level][x][y].last > npcPos[level][x][y].delay)
-                           {
-                                // time to move
-                                io.sockets.emit('npcMove',
-                                      npcPos[level][x][y].x, // x before move
-                                      npcPos[level][x][y].y, // y before move
-                                      npcPos[level][x][y].pattern[  npcPos[level][x][y].next  ] // direction
-                                      );
-                                
-                                switch(npcPos[level][x][y].pattern[next])
-                                {
-                                  case 'left':
-                                    npcPos[level][x][y].x += -16; // magic numbers = bad!
-                                    break;
-                                  case 'right':
-                                    npcPos[level][x][y].x += 16; // magic numbers = bad!
-                                    break;
-                                  case 'up':
-                                    npcPos[level][x][y].y += -16; // magic numbers = bad!
-                                    break;
-                                  case 'down':
-                                    npcPos[level][x][y].y += 16; // magic numbers = bad!
-                                    break;
-                                }
-                                
-                                npcPos[level][x][y].next++;
-                                if(npcPos[level][x][y].next >
-                                      npcPos[level][x][y].pattern.length)
-                                {
-                                    npcPos[level][x][y].next = 0; // reset
-                                }
-                           }
-                  }
-         }
-}
-
-*/
 
 
 function handler (req, res)
@@ -140,24 +59,7 @@ io.sockets.on('connection', function (socket)
                 players[i].pos.y = newY;
                 players[i].facing = direction;
                 
-                // update positions on database
-                /*var url = "login.php?do=writePosition&user=" + client +
-                          "&x=" + newX + "&y=" + newY +
-                          "&facing=" + direction;
-                var xmlhttp;
-                if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                }
-                else { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-                    }
-                }
-                xmlhttp.open("GET", url, true);
-                xmlhttp.send();*/
+                // this would be the place to update players positions to mySQL db
                 
                 break; // no need to search for other players with same name
             }
@@ -216,30 +118,12 @@ io.sockets.on('connection', function (socket)
         players.push(player);
                 
         socket.broadcast.emit('addPlayer', player.name, x, y, direction);
-        
-        // here is where i will send back to the origin x and y coordinates
-        // of all nearby players
-        
-        socket.emit('addAllPlayers', players);
-        //socket.emit('playerPositions',players);
-    
+        socket.emit('addAllPlayers', players);    
     });
     
     
     socket.on('disconnect', function()
     {
-        // soon to be unneeded
-        /*
-            delete playerlist[socket.clientname];
-            for(var i in playerlist)
-            {
-                if(playerlist[i] == socket.clientname)
-                {
-                    playerlist.splice(i, 1);
-                }
-            }
-        */
-        
         // remove client from players array
         for(var i in players)
         {
@@ -248,10 +132,7 @@ io.sockets.on('connection', function (socket)
                 players.splice(i, 1);
             }
         }
-        
-        //socket.broadcast.emit('message',socket.clientname);
-        //socket.broadcast.emit('netreplayer',playerlist);
-        
+
         socket.broadcast.emit('dropPlayer',socket.clientname);
         
     });
