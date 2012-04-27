@@ -5,6 +5,8 @@ ig.module(
 	'impact.game',
 	'impact.font',
 	'game.levels.town',
+	'game.levels.route101',
+	'game.levels.lab',
 	//'game.entities.player', // everything seems to work without it
 	'impact.debug.debug',
 	'plugins.impact-splash-loader'
@@ -20,6 +22,10 @@ MyGame = ig.Game.extend({
 	font2: new ig.Font( 'media/04b03.font.png' ),
 	font: new ig.Font( 'media/04b04.font.png' ),
 	debugfont: new ig.Font( 'media/04b04.font.png' ),
+	
+	levelName: LevelTown,
+	//levelName: LevelRoute101,
+	//levelName: LevelLab,
 	
 	// Chat system
 		// html elements
@@ -138,7 +144,7 @@ MyGame = ig.Game.extend({
 		    }
 		};
 		
-		this.loadLevel (LevelTown);
+		this.loadLevel (this.levelName);
 		
 		// set players name to the username provided from url
 		var player = this.getEntitiesByType( EntityPlayer )[0];
