@@ -104,32 +104,12 @@
 	 // set up sockets
 	 var socket = io.connect('http://localhost:8080');
 
-socket.on('message', function (data) {
-       var player = ig.game.getEntitiesByType( EntityPlayer )[0];
-	 if(player)
-	 {
-	 player.messagebox = player.messagebox + '\n' + data + ' disconnected';
-	 }
-      });
-
 socket.on('newMsg', function (from, msg) {
-       // this is where i access the newly created textfield
-       
-         ig.game.messages.push(from + ': ' + msg);
-	 ig.game.rebuildMessageBox(ig.game);
-	 ig.game.scrollMessageBox(ig.game);
-       /*var player = ig.game.getEntitiesByType( EntityPlayer )[0];
-	 if(player)
-	 {
-	 player.messagebox = player.messagebox + '\n'+ client+ ": " + msg + '';
-	 }*/
-      
+         ig.game.messageBoxPrint(ig.game, (from + ': ' + msg) );      
       });
 
 socket.on('incomingTell', function (from, msg) {
-         ig.game.messages.push(from + '>> ' + msg);
-	 ig.game.rebuildMessageBox(ig.game);
-	 ig.game.scrollMessageBox(ig.game);
+         ig.game.messageBoxPrint(ig.game, (from + '>> ' + msg) );
 });
 	 
 	 
@@ -173,25 +153,12 @@ socket.on('updateOtherPlayer', function (client, direction) {
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction) {
 	 var player = ig.game.getEntitiesByType( EntityPlayer )[0];
-	 player.messagebox = player.messagebox + '\n' + user + ' joined.';
+	 ig.game.messageBoxPrint(ig.game, user + ' joined.' );
 	 ig.game.spawnEntity( EntityOtherplayer, x, y,
 	 {
 		  name: user,
 		  animation: 6
 	 } );
-	 
-	 
-	 /*for(var i = 0;i<players.length;i++)
-	 {
-		  if(player.name != players[i].name)
-		  {  
-			   ig.game.spawnEntity( EntityOtherplayer, x, y,
-			   {
-				    name:players[i].name,
-				    animation:6
-			   } );
-		  }
-	 }	*/
 });
 
 // consider merging this whole thing with playerPositions
@@ -216,6 +183,7 @@ socket.on('addAllPlayers', function (players) {
 
 socket.on('dropPlayer', function (client)
 {
+	 ig.game.messageBoxPrint(ig.game, client + ' disconnected.' );
 	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(netplayers)
 	 {
