@@ -111,6 +111,10 @@ socket.on('newMsg', function (from, msg) {
 socket.on('incomingTell', function (from, msg) {
          ig.game.messageBoxPrint(ig.game, (from + '>> ' + msg) );
 });
+
+socket.on('welcome', function (msg) {
+         ig.game.messageBoxPrint(ig.game, msg);
+});
 	 
 	 
 //  new player move
