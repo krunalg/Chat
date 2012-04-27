@@ -14,14 +14,14 @@ ig.module (
 		    type: ig.Entity.TYPE.B,
 		    //message: 'This is a sign.',
 		    //name: 'sign',
-		    animSheet: new ig.AnimationSheet( 'media/entities/sign.png', 16, 16 ),
+		    animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 		    
 		    init: function( x, y, settings ) {
 			this.parent( x, y, settings );
 			
-			// add the animations
-			this.addAnim( 'defaultState', 0.1, [0] );
-			this.currentAnim = this.anims.defaultState;
+                        // add the animations
+                        this.addAnim( 'weltmeister', 0.1, [3] );
+                        this.currentAnim = this.anims.weltmeister;
 		    },
 		    
 		    update: function() {

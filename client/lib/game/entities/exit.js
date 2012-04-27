@@ -19,11 +19,21 @@ ig.module(
 .defines(function(){
 	
 EntityExit = ig.Entity.extend({
-	_wmDrawBox: true,
-	_wmBoxColor: 'rgba(0, 0, 255, 0.7)',
+	//_wmDrawBox: true,
+	//_wmBoxColor: 'rgba(0, 0, 255, 0.7)',
 	
 	size: {x: 16, y: 16},
 	level: null,
+	
+	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
+	
+	init: function( x, y, settings ) {
+		this.parent( x, y, settings );
+		
+		// add the animations
+		this.addAnim( 'weltmeister', 0.1, [0] );
+		this.currentAnim = this.anims.weltmeister;
+	},
 	
 	triggeredBy: function( entity, trigger ) {	
 		if( this.level ) {
