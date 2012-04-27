@@ -24,7 +24,12 @@ ig.module (
                         this.currentAnim = this.anims.weltmeister;
 		    },
 		    
-		    update: function() {
+		    ready: function()
+                    {
+                        delete this.currentAnim; // invisible in-game	
+                    },
+                    
+                    update: function() {
 			// IMPORANT! DON'T TOUCH!!
 			this.parent();
 		    }

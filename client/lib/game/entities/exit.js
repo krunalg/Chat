@@ -35,6 +35,11 @@ EntityExit = ig.Entity.extend({
 		this.currentAnim = this.anims.weltmeister;
 	},
 	
+	ready: function()
+	{
+		delete this.currentAnim; // invisible in-game	
+	},
+	
 	triggeredBy: function( entity, trigger ) {	
 		if( this.level ) {
 			
