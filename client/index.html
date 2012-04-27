@@ -44,7 +44,7 @@
 		  
 		  var jsonPos = new Object();
 		  $.ajax({
-			   url : "login.php?do=readPosition&user=" + username,
+			   url : "../server/login.php?do=readPosition&user=" + username,
 			   success : function(result){
 				    //alert(result);
 				    jsonPos = jQuery.parseJSON(result); // returns JavaScript object
