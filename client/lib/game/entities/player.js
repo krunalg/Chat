@@ -139,6 +139,14 @@ ig.module (
 		player.vel.x = player.vel.y = 0;
 		moveAnimStop(player);
 	    }
+	    
+	    // possibly turn off exit animation
+	    var exit = overExit(player);
+	    if(exit && exit.isDoor!='1' && player.facing!='down')
+	    {
+		// if exit exists, is not a door, and player is not facing down
+		exit.stopAnim(); // turn off exit arrow
+	    }
     
 	}
 	// continue to destination
