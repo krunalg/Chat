@@ -52,7 +52,7 @@ io.sockets.on('connection', function (socket)
     {
         socket.roomname = mapname;
 	socket.join(socket.roomname);
-	console.log("Player " + socket.clientname + "joined zone: " + mapname);
+	console.log("Player " + socket.clientname + " joined zone: " + mapname);
 	 
         for(var i=0; i<players.length; i++)
 	{
