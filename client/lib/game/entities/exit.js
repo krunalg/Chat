@@ -23,7 +23,9 @@ EntityExit = ig.Entity.extend({
 	//_wmBoxColor: 'rgba(0, 0, 255, 0.7)',
 	
 	size: {x: 16, y: 16},
-	level: null,
+	
+	map: null,
+	pair: null,
 	
 	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 	
@@ -42,28 +44,19 @@ EntityExit = ig.Entity.extend({
 		delete this.currentAnim; // invisible in-game	
 	},
 	
-	triggeredBy: function( entity, trigger ) {	
-		/*if( this.level ) {
-			
-			var levelName = this.level.replace(/^(Level)?(\w)(\w*)/, function( m, l, a, b ) {
-				return a.toUpperCase() + b;
-			});
-			
-			ig.game.loadLevelDeferred( ig.global['Level'+levelName] );
-		}*/
-	},
-	
 	update: function()
 	{
 		if( this.player.pos.x == this.pos.x &&
 		    this.player.pos.y == this.pos.y)
 		{
-			var levelName = this.level.replace(/^(Level)?(\w)(\w*)/, function( m, l, a, b ) {
-				return a.toUpperCase() + b;
-			});
-			
-			ig.game.loadLevelDeferred( ig.global['Level'+levelName] );
+			// if all values not null
+			if( !(this.map==null || this.pair==null) )
+			{
+				ig.game.loadLevelDeferred( ig.global['Level'+this.level] );	
+			}
 		}
+		
+		this.parent();
 	}
 });
 
