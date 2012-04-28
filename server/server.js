@@ -60,7 +60,9 @@ io.sockets.on('connection', function (socket)
 		playersToGiveSocket.push(players[i]);
 	}
         socket.broadcast.to(mapname).emit('addPlayer', player.name, x, y, direction);
-        socket.emit('addAllPlayers', playersToGiveSocket);    
+        
+	if(playersToGiveSocket.length>=1)
+	    socket.emit('addAllPlayers', playersToGiveSocket);    
     });
     
       
