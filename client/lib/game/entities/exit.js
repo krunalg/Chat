@@ -42,7 +42,11 @@ EntityExit = ig.Entity.extend({
 	
 	ready: function()
 	{
-		delete this.currentAnim; // invisible in-game
+		delete this.currentAnim; // no weltmeister icon in-game
+		
+		animSheet: new ig.AnimationSheet( 'media/door-animations.png', 16, 20 ),
+		this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3] );
+		this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0] );
 		
 		// who will trigger the exit?
 		// this.player = ig.game.getEntitiesByType( EntityPlayer )[0];
