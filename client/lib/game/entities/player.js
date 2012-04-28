@@ -413,17 +413,25 @@ ig.module (
 	    
 	    if(!cancelMove)
 	    {
-		// check if going through a door
+		// check facing an exit
 		var exit = facingExit(player);
-		if(exit && exit.isDoor=='1')
+		if(exit)
 		{
-		    //exit.trigger();
-		    exit.startAnim(); //
-		    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
-		    player.moveWhen = 336.7 + new Date().getTime();
-		    player.moveWaiting = true;
-		    player.moveDoor = exit;
-		    cancelMove = true; // prevent player from starting to move too soon
+		    // check if going through a door
+		    if(exit.isDoor=='1')
+		    {
+			exit.startAnim();
+			// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
+			player.moveWhen = 336.7 + new Date().getTime();
+			player.moveWaiting = true;
+			player.moveDoor = exit;
+			cancelMove = true; // prevent player from starting to move too soon
+		    }
+		    // if approaching a ground exit facing down
+		    else if(player.facing=='down')
+		    {
+			exit.startAnim();
+		    }
 		}
 	    
 		// if no exits have taken place, move
