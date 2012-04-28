@@ -148,10 +148,9 @@ ig.module (
 	}  
     };
     
-    var isFacingDoor = function(player)
+    var facingExit = function(player)
     // returns an exit entity if the player
-    // is facing one tagged with isDoor = 1
-    // else returns false;
+    // is facing one
     {
 	var vx = vy = 0;
 	var tilesize = 16; // this should not be here!!
@@ -177,8 +176,7 @@ ig.module (
 	    for(var i=0; i<doors.length; i++)
 	    {
 		if( doors[i].pos.x == player.pos.x + vx &&
-		    doors[i].pos.y == player.pos.y + vy &&
-		    doors[i].isDoor == '1')
+		    doors[i].pos.y == player.pos.y + vy )
 		{
 		    return doors[i];
 		}
@@ -416,7 +414,7 @@ ig.module (
 	    if(!cancelMove)
 	    {
 		// check if going through a door
-		var door = isFacingDoor(player);
+		var door = facingExit(player);
 		if(door)
 		{
 		    //door.trigger();
