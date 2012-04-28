@@ -140,12 +140,17 @@ ig.module (
 		moveAnimStop(player);
 	    }
 	    
+	    /*
+	     // turn off floor exit animations
+	    turnOffExitAnimations();
+	    
+	    // turn on floor exit animations
 	    var exit = overExit(player);
-	    if(exit && exit.isDoor!='1' && player.facing!='down')
+	    if(exit && exit.isDoor!='1' && player.facing=='down')
 	    {
-		// if exit exists, is not a door, and player is not facing down
-		exit.stopAnim(); // turn off exit arrow
+		exit.startAnim(); // turn on exit arrow
 	    }
+	    */
     
 	}
 	// continue to destination
@@ -403,17 +408,18 @@ ig.module (
     
     var movePressed = function(player)
     {
+	turnOffExitAnimations();
 	if(canMove(player))
 	{
 	    var cancelMove = false;
 	    
-	    // check if walking out an exit
-	    if(player.facing=='down') // as far now, exits are always down
+	    // handle zoning
+	    if(player.facing=='down') // as for now, flor exit go down
 	    {
 		var exit = overExit(player);
 		if(exit)
 		{
-		    exit.trigger();
+		    exit.trigger(); // zone
 		    cancelMove = true;
 		}
 	    }
@@ -421,10 +427,10 @@ ig.module (
 	    if(!cancelMove)
 	    {
 		// disable exit animations that shouldn't be
-		turnOffExitAnimations(player);
+		//turnOffExitAnimations(player);
+		//console.debug('turning off arrows.');
 		
-		// enable ones that should
-		// check if facing an exit
+		// facing an exit
 		var exit = facingExit(player);
 		if(exit)
 		{
@@ -438,10 +444,10 @@ ig.module (
 			player.moveDoor = exit;
 			cancelMove = true; // prevent player from starting to move too soon
 		    }
-		    // if approaching a ground exit facing down
-		    else if(player.facing=='down')
+		    // not a door
+		    else
 		    {
-			exit.startAnim();
+			if(player.facing=='down') exit.startAnim(); // approaching floor exit
 		    }
 		}
 	    
@@ -488,20 +494,15 @@ ig.module (
 	}
     }
     
-    var turnOffExitAnimations = function (player)
+    var turnOffExitAnimations = function ()
+    // turn off all exit animations
     {
-	// turn off any exit animations that shouldn't be playing
 	var exits = ig.game.getEntitiesByType( EntityExit );
 	if(exits)
 	{
 	    for(var i=0; i<exits.length; i++)
 	    {
-		// if not standing over
-		if( exits[i].pos.x!=player.pos.x ||
-		    exits[i].pos.y!=player.pos.y )
-		{
-		    exits[i].stopAnim();
-		}
+		exits[i].stopAnim();
 	    }
 	}
     }
@@ -667,7 +668,6 @@ ig.module (
 			    {
 				// if player is trying to move right
 				this.facing = 'right';
-				if(canMove(this))
 				movePressed(this);
 			    }
 			    else if( ig.input.state('up')&&
