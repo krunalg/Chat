@@ -424,6 +424,7 @@ ig.module (
 		    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
 		    player.moveWhen = 336.7 + new Date().getTime();
 		    player.moveWaiting = true;
+		    player.moveDoor = door;
 		    cancelMove = true; // prevent player from starting to move too soon
 		}
 	    
@@ -499,8 +500,10 @@ ig.module (
 		    leftFoot: true, // used to alternate step animations
 		    moveUnit: 16, // per unit of travel
 		    destination: 0, // used for both x and y planes
-		    moveWaiting: false,
+		    moveWaiting: false, // used for waiting while a door opens
 		    moveWhen: 0, // system time in ms to wait before moving
+		    moveDoor: false, // contains exit entity to use after moveWhen
+		    
 		    
 		    startMove: function()
 		    {
@@ -589,6 +592,8 @@ ig.module (
 		    
 		    update: function() {
 			
+			
+			
 			// action
 			if(ig.input.pressed('action') && !this.isMove)
 			{
@@ -596,6 +601,11 @@ ig.module (
 			}
 			
 			// movement
+			if(this.moveDoor && !this.moveWaiting && !this.isMove)
+			{
+			    // we just entered a door, zone
+			    this.moveDoor.trigger();
+			}
 			if(this.moveWaiting)
 			{
 			    console.debug("Waiting to move...");
