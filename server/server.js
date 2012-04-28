@@ -32,7 +32,10 @@ io.sockets.on('connection', function (socket)
     
     socket.on('initializePlayer', function (x, y, direction, newplayername, mapname)
     {
-        socket.emit('welcome', 'Welcome to the world.');
+        socket.join(mapname);
+	console.log("Player " + newplayername + "joined room: " + mapname);
+	
+	socket.emit('welcome', 'Welcome to the world.');
         
         socket.clientname = newplayername;
         console.log('** initiating player: '+ newplayername
@@ -46,10 +49,16 @@ io.sockets.on('connection', function (socket)
         player.pos.y = y;
         player.facing = direction;
         player.session = socket.id;
+	player.room = mapname;
         players.push(player);
-                
-        socket.broadcast.emit('addPlayer', player.name, x, y, direction);
-        socket.emit('addAllPlayers', players);    
+	
+	var playersToGiveSocket = new Array();
+	for(var i=0; i<players.length; i++)
+	{
+	    if(players[i].room==mapname) playersToGiveSocket.push(players[i]);
+	}
+        socket.broadcast.to(mapname).emit('addPlayer', player.name, x, y, direction);
+        socket.emit('addAllPlayers', playersToGiveSocket);    
     });
     
       
