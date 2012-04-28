@@ -140,7 +140,26 @@ ig.module (
 		moveAnimStop(player);
 	    }
 	    
-	    // possibly turn off exit animation
+	    // turn off any exit animations that shouldn't be playing
+	    var exits = ig.game.getEntitiesByType( EntityExit );
+	    if(exits)
+	    {
+		for(var i=0; i<exits.length; i++)
+		{
+		    // if not standing over
+		    if( exits[i].pos.x!=player ||
+		        exits[i].pos.y!=player )
+		    {
+			exits[i].stopAnim();
+		    }
+		    else // player is standing over
+		    {
+			// but not looking the right way
+			if(player.facing!='down') exits[i].stopAnim();
+		    }
+		}
+	    }
+	    
 	    var exit = overExit(player);
 	    if(exit && exit.isDoor!='1' && player.facing!='down')
 	    {
