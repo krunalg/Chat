@@ -46,9 +46,6 @@ io.sockets.on('connection', function (socket)
         player.session = socket.id;
 	player.room = 'limbo';
         players.push(player);
-	
-	if(playersToGiveSocket.length>=1)
-	    socket.emit('addAllPlayers', playersToGiveSocket);    
     });
     
     socket.on('hereIAm', function (x, y, direction, mapname)
