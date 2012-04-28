@@ -25,7 +25,7 @@ EntityExit = ig.Entity.extend({
 	size: {x: 16, y: 16},
 	
 	map: null,
-	goTo: null,
+	goto: null,
 	
 	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 	
@@ -36,12 +36,15 @@ EntityExit = ig.Entity.extend({
 		this.addAnim( 'weltmeister', 0.1, [0] );
 		this.currentAnim = this.anims.weltmeister;
 		
-		this.player = ig.game.getEntitiesByType( EntityPlayer )[0];		
+		//		
 	},
 	
 	ready: function()
 	{
-		delete this.currentAnim; // invisible in-game	
+		delete this.currentAnim; // invisible in-game
+		
+		// who will trigger the exit?
+		this.player = ig.game.getEntitiesByType( EntityPlayer )[0];
 	},
 	
 	update: function()
@@ -51,10 +54,10 @@ EntityExit = ig.Entity.extend({
 		{
 			console.debug("You're stepping on me.");
 			// if all values not null
-			if( !(this.map==null || this.goTo==null) )
+			if( !(this.map==null || this.goto==null) )
 			{
 				console.debug("Gonna load the map.");
-				ig.game.zone(this.map, this.goTo);
+				ig.game.zone(this.map, this.goto);
 			}
 		}
 		
