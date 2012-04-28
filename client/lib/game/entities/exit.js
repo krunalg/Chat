@@ -56,7 +56,7 @@ EntityExit = ig.Entity.extend({
 		}
 		else
 		{
-			this.offset.y = 16;
+			this.offset.y = -16;
 			this.animSheet = new ig.AnimationSheet( 'media/entities/exit/arrows.png', 16, 16 );
 			this.addAnim( 'alternate', 0.5333, [0,1] );
 			this.currentAnim = null; // default state is invisible
