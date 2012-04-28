@@ -429,7 +429,23 @@ ig.module (
 	}
 	else
 	{
-	    player.currentAnim = player.anims.slowdown;
+    	    // can't move, set slow walk animation
+	    switch(player.facing)
+	    {
+		case 'left':
+		    player.currentAnim = player.anims.slowleft;
+		    break;
+		case 'right':
+		    player.currentAnim = player.anims.slowright;
+		    break;
+		case 'up':
+		    player.currentAnim = player.anims.slowup;
+		    break;
+		case 'down':
+		    player.currentAnim = player.anims.slowdown;
+		    break;
+	    }
+	    // emit players faced direction, if changed
 	    if(!player.facingUpdated && player.facing!=player.facingLast)
 	    {
 		emitDirection(player.name, player.facing);
