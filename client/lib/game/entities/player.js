@@ -462,7 +462,7 @@ ig.module (
     {
 	if(player.moveWaiting)
 	{
-	    if(new Date().getTime() - player.moveWhen >= 0) player.startMove()
+	    if(new Date().getTime() - player.moveWhen >= 0)
 	    {
 		player.startMove();
 		player.moveWaiting = false;
@@ -598,6 +598,7 @@ ig.module (
 			// movement
 			if(this.moveWaiting)
 			{
+			    console.debug("Waiting to move...");
 			    moveWait(this);
 			}
 			else
