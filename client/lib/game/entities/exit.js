@@ -44,12 +44,14 @@ EntityExit = ig.Entity.extend({
 	{
 		delete this.currentAnim; // no weltmeister icon in-game
 		
-		animSheet: new ig.AnimationSheet( 'media/door-animations.png', 16, 20 ),
-		this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3] );
-		this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0] );
+		this.offset.y = 4;		
 		
-		// who will trigger the exit?
-		// this.player = ig.game.getEntitiesByType( EntityPlayer )[0];
+		this.animSheet = new ig.AnimationSheet( 'media/door-animations.png', 16, 20 );
+		this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3] );
+		this.addAnim( 'opened', 0.0167, [3] );
+		this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0] );
+		this.addAnim( 'closed', 0.0167, [0] );
+		this.currentAnim = this.anims.closed; // default state
 	},
 	
 	open: function()
@@ -77,8 +79,8 @@ EntityExit = ig.Entity.extend({
 				ig.game.zone(this.map, this.goTo);
 			}
 		}
-		
-		this.parent();*/
+		*/
+		this.parent();
 	}
 });
 
