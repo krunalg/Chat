@@ -635,12 +635,14 @@ ig.module (
 				action(this);	    
 			}
 			
-			// movement
+			// zone
 			if(this.moveDoor && !this.moveWaiting && !this.isMove)
 			{
-			    // we just entered a door, zone
+			    // we just entered a door, so zone
 			    this.moveDoor.trigger();
 			}
+			
+			// about to move
 			if(this.moveWaiting)
 			{
 			    console.debug("Waiting to move...");
@@ -648,33 +650,35 @@ ig.module (
 			}
 			else
 			{
+			    // a move has already been started
 			    if(this.isMove)
-			{
-			    finishMove(this);
-			}
-			else
-			{
-			    if( ig.input.state('left')
-				    && !ig.input.state('right'))
+			    {
+				finishMove(this);
+			    }
+			    else
+			    {
+				
+				if( ig.input.state('left') &&
+			           !ig.input.state('right') )
 				{
 				    this.facing = 'left';
 				    movePressed(this);
 				}
-				else if( ig.input.state('right')
-					&& !ig.input.state('left'))
+				else if( ig.input.state('right') &&
+					!ig.input.state('left') )
 				{
 				    this.facing = 'right';
 				    if(canMove(this))
 				    movePressed(this);
 				}
-				else if( ig.input.state('up')
-					&& !ig.input.state('down'))
+				else if( ig.input.state('up')&&
+					!ig.input.state('down') )
 				{
 				    this.facing = 'up';
 				    movePressed(this);
 				}
-				else if( ig.input.state('down')
-					&& !ig.input.state('up'))
+				else if( ig.input.state('down') &&
+					!ig.input.state('up') )
 				{
 				    this.facing = 'down';
 				    movePressed(this);
@@ -688,9 +692,6 @@ ig.module (
 				    this.anims.slowup.rewind();
 				    this.anims.slowdown.rewind();
 				}
-    
-				
-				//moveAnimStart(this,'slow');
 			    }
 			}
 			
