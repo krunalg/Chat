@@ -149,7 +149,7 @@ ig.module (
     };
     
     var isFacingDoor = function(player)
-    // returns an exit entity if the placing
+    // returns an exit entity if the player
     // is facing one tagged with isDoor = 1
     // else returns false;
     {
@@ -181,6 +181,27 @@ ig.module (
 		    doors[i].isDoor == '1')
 		{
 		    return doors[i];
+		}
+	    }
+	}
+	return false;
+    }
+    
+    var overExit = function (player)
+    // returns an exit entity if the player is standing
+    // on one. else return false
+    {
+	// check for collision against an exit entity
+	var exits = ig.game.getEntitiesByType( EntityExit );
+	if(exits)
+	{
+	    for(var i=0; i<exits.length; i++)
+	    {
+		if( exits[i].pos.x == player.pos.x &&
+		    exits[i].pos.y == player.pos.y &&
+		    exits[i].isDoor != '1')
+		{
+		    return exits[i];
 		}
 	    }
 	}
@@ -502,15 +523,21 @@ ig.module (
 			}
 			else
 			{
-			    if( ig.input.state('left')
-				&& !ig.input.state('right'))
+			    if( ig.input.pressed('left')
+				&& !ig.input.pressed('right'))
 			    {
 				this.facing = 'left';
 				if(canMove(this))
 				{
 				    var door = isFacingDoor(this);
-				    if(door) door.trigger();
-				    else this.startMove();
+				    if(door)
+				    {
+					door.trigger();
+				    }
+				    else
+				    {
+					this.startMove();
+				    }
 				}
 				else
 				{
@@ -522,15 +549,22 @@ ig.module (
 				    }
 				}
 			    }
-			    else if( ig.input.state('right')
-				    && !ig.input.state('left'))
+			    else if( ig.input.pressed('right')
+				    && !ig.input.pressed('left'))
 			    {
 				this.facing = 'right';
 				if(canMove(this))
+				if(canMove(this))
 				{
 				    var door = isFacingDoor(this);
-				    if(door) door.trigger();
-				    else this.startMove();
+				    if(door)
+				    {
+					door.trigger();
+				    }
+				    else
+				    {
+					this.startMove();
+				    }
 				}
 				else
 				{
@@ -542,15 +576,21 @@ ig.module (
 				    }
 				}
 			    }
-			    else if( ig.input.state('up')
-				    && !ig.input.state('down'))
+			    else if( ig.input.pressed('up')
+				    && !ig.input.pressed('down'))
 			    {
 				this.facing = 'up';
 				if(canMove(this))
 				{
 				    var door = isFacingDoor(this);
-				    if(door) door.trigger();
-				    else this.startMove();
+				    if(door)
+				    {
+					door.trigger();
+				    }
+				    else
+				    {
+					this.startMove();
+				    }
 				}
 				else
 				{
@@ -562,15 +602,23 @@ ig.module (
 				    }
 				}
 			    }
-			    else if( ig.input.state('down')
-				    && !ig.input.state('up'))
+			    else if( ig.input.pressed('down')
+				    && !ig.input.pressed('up'))
 			    {
 				this.facing = 'down';
 				if(canMove(this))
 				{
 				    var door = isFacingDoor(this);
-				    if(door) door.trigger();
-				    else this.startMove();
+				    if(door)
+				    {
+					door.trigger();
+				    }
+				    else
+				    {
+					var exit = overExit(this); // down is the exception, cuz exits go down
+					if(exit) exit.trigger();
+					else this.startMove();
+				    }
 				}
 				else
 				{
