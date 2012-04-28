@@ -30,6 +30,28 @@ io.sockets.on('connection', function (socket)
 {
     console.log('** client connected');
     
+    socket.on('initializePlayer', function (x, y, direction, newplayername, mapname)
+    {
+        socket.emit('welcome', 'Welcome to the world.');
+        
+        socket.clientname = newplayername;
+        console.log('** initiating player: '+ newplayername
+                    + ' with session id: ' + socket.id);
+         
+        // going to replace playerlist
+        var player = new Object();
+        player.name = newplayername;
+        player.pos = new Object();
+        player.pos.x = x;
+        player.pos.y = y;
+        player.facing = direction;
+        player.session = socket.id;
+        players.push(player);
+                
+        socket.broadcast.emit('addPlayer', player.name, x, y, direction);
+        socket.emit('addAllPlayers', players);    
+    });
+    
       
     socket.on('receiveMove', function (currX, currY, direction, client) {
         socket.broadcast.emit('moveOtherPlayer', currX, currY, direction, client);
@@ -96,32 +118,7 @@ io.sockets.on('connection', function (socket)
         }
         console.log("** Tell received but recipient does not exist.");
     });
-    
-      
-    
-    socket.on('initializePlayer', function (x, y, direction, newplayername)
-    {
-        socket.emit('welcome', 'Welcome to the world.');
-        
-        socket.clientname = newplayername;
-        console.log('** initiating player: '+ newplayername
-                    + ' with session id: ' + socket.id);
-         
-        // going to replace playerlist
-        var player = new Object();
-        player.name = newplayername;
-        player.pos = new Object();
-        player.pos.x = x;
-        player.pos.y = y;
-        player.facing = direction;
-        player.session = socket.id;
-        players.push(player);
-                
-        socket.broadcast.emit('addPlayer', player.name, x, y, direction);
-        socket.emit('addAllPlayers', players);    
-    });
-    
-    
+
     socket.on('disconnect', function()
     {
         // remove client from players array
