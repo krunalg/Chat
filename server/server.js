@@ -33,6 +33,7 @@ io.sockets.on('connection', function (socket)
     socket.on('initializePlayer', function (x, y, direction, newplayername, mapname)
     {
         socket.join(mapname);
+	socket.roomname = mapname;
 	console.log("Player " + newplayername + "joined room: " + mapname);
 	
 	socket.emit('welcome', 'Welcome to the world.');
@@ -63,7 +64,7 @@ io.sockets.on('connection', function (socket)
     
       
     socket.on('receiveMove', function (currX, currY, direction, client) {
-        socket.broadcast.emit('moveOtherPlayer', currX, currY, direction, client);
+        socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, client);
         for(var i in players)
         {
             if(players[i].name==client)
@@ -99,7 +100,7 @@ io.sockets.on('connection', function (socket)
     
     
     socket.on('receiveDirection', function (client, direction) {
-        socket.broadcast.emit('updateOtherPlayer', client, direction);
+        socket.broadcast.to(socket.roomname).emit('updateOtherPlayer', client, direction);
         for(var i in players)
         {
             if(players[i].name==client)
