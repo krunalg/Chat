@@ -161,7 +161,7 @@ socket.on('playerLeftZone', function (client) {
 		  {
 			   if(client == otherplayer[i].name)
 			   {
-				    delete otherplayer[i];
+				    otherplayer[i].kill();
 				    break; // because client names are unique
 			   }
 		  }
