@@ -24,10 +24,15 @@ MyGame = ig.Game.extend({
 	font: new ig.Font( 'media/04b04.font.png' ),
 	debugfont: new ig.Font( 'media/04b04.font.png' ),
 	
+	mapName: 'Town', // must capitalize first letter
+	defaultLevel: LevelTown,
+	//levelName: LevelRoute101,
+	//levelName: LevelLab,
 	goTo: null, // used to know where to place player when zoning
 	zone: function(map, goTo) // used to change maps
 	{
 		this.goTo = goTo;
+		this.mapName = map;
 		this.loadLevelDeferred( ig.global['Level'+map] );
 	},
 	buildPlayer: function()
@@ -38,10 +43,6 @@ MyGame = ig.Game.extend({
 			 animation: 6
 		} );	
 	},
-	
-	levelName: LevelTown,
-	//levelName: LevelRoute101,
-	//levelName: LevelLab,
 	
 	// Chat system
 		// html elements
@@ -167,7 +168,7 @@ MyGame = ig.Game.extend({
 		//this.myDirector.firstLevel();
 		//this.myDirector.jumpTo(LevelLab);
 		
-		this.loadLevel (this.levelName);
+		this.loadLevel (this.defaultLevel);
 		
 		// build player
 		this.buildPlayer();
