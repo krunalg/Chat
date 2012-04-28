@@ -52,6 +52,12 @@ EntityExit = ig.Entity.extend({
 		// this.player = ig.game.getEntitiesByType( EntityPlayer )[0];
 	},
 	
+	open: function()
+	{
+		console.debug('Opening door.');
+		this.currentAnim = this.anims.open;
+	},
+	
 	trigger: function()
 	{
 		console.debug('trigged an zone!');
