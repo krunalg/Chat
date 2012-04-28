@@ -44,14 +44,24 @@ EntityExit = ig.Entity.extend({
 	{
 		delete this.currentAnim; // no weltmeister icon in-game
 		
-		this.offset.y = 4;		
+		if(this.isDoor=='1')
+		{
+			this.offset.y = 4;		
+			this.animSheet = new ig.AnimationSheet( 'media/door-animations.png', 16, 20 );
+			this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3] );
+			this.addAnim( 'opened', 0.0167, [3] );
+			this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0] );
+			this.addAnim( 'closed', 0.0167, [0] );
+			this.currentAnim = this.anims.closed; // default state	
+		}
+		else
+		{
+			this.offset.y = 16;
+			this.animSheet = new ig.AnimationSheet( 'media/entities/exit/arrows.png', 16, 16 );
+			this.addAnim( 'alternate', 0.5333, [0,1] );
+			this.currentAnim = null; // default state is invisible
+		}
 		
-		this.animSheet = new ig.AnimationSheet( 'media/door-animations.png', 16, 20 );
-		this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3] );
-		this.addAnim( 'opened', 0.0167, [3] );
-		this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0] );
-		this.addAnim( 'closed', 0.0167, [0] );
-		this.currentAnim = this.anims.closed; // default state
 	},
 	
 	open: function()
