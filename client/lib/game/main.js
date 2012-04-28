@@ -145,6 +145,10 @@ MyGame = ig.Game.extend({
 	
 	
 	init: function() {
+		
+		// start talking with network
+		socket.emit('init',username);
+		
 		// Initialize your game here; bind keys etc.
 		ig.input.bind( ig.KEY.A, 'left' );
 		ig.input.bind( ig.KEY.D, 'right' );
