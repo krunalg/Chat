@@ -52,7 +52,7 @@ io.sockets.on('connection', function (socket)
     {
         socket.roomname = mapname;
 	socket.join(socket.roomname);
-	console.log("Player " + newplayername + "joined zone: " + mapname);
+	console.log("Player " + socket.clientname + "joined zone: " + mapname);
 	 
         for(var i=0; i<players.length; i++)
 	{
@@ -72,7 +72,7 @@ io.sockets.on('connection', function (socket)
 	    if(players[i].room==mapname && players[i].name!=socket.clientname)
 		playersToGiveSocket.push(players[i]);
 	}
-        socket.broadcast.to(mapname).emit('addPlayer', player.name, x, y, direction);
+        socket.broadcast.to(mapname).emit('addPlayer', socket.clientname, x, y, direction);
         
 	if(playersToGiveSocket.length>=1)
 	    socket.emit('addAllPlayers', playersToGiveSocket);    
