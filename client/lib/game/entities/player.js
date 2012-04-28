@@ -419,8 +419,13 @@ ig.module (
 		var door = isFacingDoor(player);
 		if(door)
 		{
-		    door.trigger();
-		    cancelMove = true;
+		    //door.trigger();
+		    door.open();
+		    player.moveWaiting = true;
+		    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
+		    player.moveWhen = 336.7 + new Date().getTime();
+		    moveWait(player);
+		    cancelMove = true; // prevent player from starting to move too soon
 		}
 	    
 		// if no exits have taken place, move
@@ -454,6 +459,19 @@ ig.module (
 	}
     }
     
+    var moveWait = function(player)
+    {
+	if(player.moveWaiting)
+	{
+	    if(new Date().getTime() - player.moveWhen >= 0) player.startMove()
+	    {
+		player.startMove();
+		player.moveWaiting = false;
+	    }
+	}
+	
+    }
+    
 
    
 		//////////////////
@@ -482,6 +500,8 @@ ig.module (
 		    leftFoot: true, // used to alternate step animations
 		    moveUnit: 16, // per unit of travel
 		    destination: 0, // used for both x and y planes
+		    moveWaiting: false,
+		    moveWhen: 0, // system time in ms to wait before moving
 		    
 		    startMove: function()
 		    {
@@ -577,7 +597,7 @@ ig.module (
 			}
 			
 			// movement
-			if(this.isMove)
+			if(this.isMove && !this.moveWaiting)
 			{
 			    finishMove(this);
 			}
