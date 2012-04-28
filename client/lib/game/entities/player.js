@@ -140,21 +140,6 @@ ig.module (
 		moveAnimStop(player);
 	    }
 	    
-	    // turn off any exit animations that shouldn't be playing
-	    var exits = ig.game.getEntitiesByType( EntityExit );
-	    if(exits)
-	    {
-		for(var i=0; i<exits.length; i++)
-		{
-		    // if not standing over
-		    if( exits[i].pos.x!=player.pos.x ||
-		        exits[i].pos.y!=player.pos.y )
-		    {
-			exits[i].stopAnim();
-		    }
-		}
-	    }
-	    
 	    var exit = overExit(player);
 	    if(exit && exit.isDoor!='1' && player.facing!='down')
 	    {
@@ -497,7 +482,24 @@ ig.module (
 		player.moveWaiting = false;
 	    }
 	}
-	
+    }
+    
+    var turnOffExitAnimations = function (player)
+    {
+	// turn off any exit animations that shouldn't be playing
+	var exits = ig.game.getEntitiesByType( EntityExit );
+	if(exits)
+	{
+	    for(var i=0; i<exits.length; i++)
+	    {
+		// if not standing over
+		if( exits[i].pos.x!=player.pos.x ||
+		    exits[i].pos.y!=player.pos.y )
+		{
+		    exits[i].stopAnim();
+		}
+	    }
+	}
     }
     
 
