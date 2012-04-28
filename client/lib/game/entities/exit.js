@@ -73,8 +73,17 @@ EntityExit = ig.Entity.extend({
 		}
 		else
 		{
-			console.debug('Turning on arrow.');
+			console.debug('Turning on exit arrow.');
 			this.currentAnim = this.anims.alternate;
+		}
+	},
+	
+	startAnim: function()
+	{
+		if(this.currentAnim!=null)
+		{
+			console.debug('Turning off exit arrow.');
+			this.currentAnim = null;
 		}
 	},
 	
