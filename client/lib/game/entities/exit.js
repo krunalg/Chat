@@ -25,7 +25,7 @@ EntityExit = ig.Entity.extend({
 	size: {x: 16, y: 16},
 	
 	map: null,
-	pair: null,
+	goto: null,
 	
 	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 	
@@ -49,10 +49,12 @@ EntityExit = ig.Entity.extend({
 		if( this.player.pos.x == this.pos.x &&
 		    this.player.pos.y == this.pos.y)
 		{
+			console.debug("You're stepping on me.");
 			// if all values not null
-			if( !(this.map==null || this.pair==null) )
+			if( !(this.map==null || this.goto==null) )
 			{
-				ig.game.loadLevelDeferred( ig.global['Level'+this.level] );	
+				console.debug("Gonna load the map.");
+				ig.game.zone(this.map, this.goto);
 			}
 		}
 		
