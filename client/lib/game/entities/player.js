@@ -396,6 +396,48 @@ ig.module (
 	}
     }
     
+    var movePressed = function(player)
+    {
+	if(canMove(player))
+	{
+	    var cancelMove = false;
+	    
+	    // check if walking out an exit
+	    if(player.facing=='down')
+	    {
+		var exit = overExit(player); // down is the exception, cuz exits go down
+		if(exit)
+		{
+		    exit.trigger();
+		    cancelMove = true;
+		}
+	    }
+	    
+	    if(!cancelMove)
+	    {
+		// check if going through a door
+		var door = isFacingDoor(player);
+		if(door)
+		{
+		    door.trigger();
+		    cancelMove = true;
+		}
+	    
+		// if no exits have taken place, move
+		if(!cancelMove) player.startMove();
+	    }
+	}
+	else
+	{
+	    player.currentAnim = player.anims.slowdown;
+	    if(!player.facingUpdated && player.facing!=player.facingLast)
+	    {
+		emitDirection(player.name, player.facing);
+		player.facingUpdated = true;
+	    }
+	}
+    }
+    
 
    
 		//////////////////
@@ -608,29 +650,7 @@ ig.module (
 				    && !ig.input.pressed('up'))
 			    {
 				this.facing = 'down';
-				if(canMove(this))
-				{
-				    var door = isFacingDoor(this);
-				    if(door)
-				    {
-					door.trigger();
-				    }
-				    else
-				    {
-					var exit = overExit(this); // down is the exception, cuz exits go down
-					if(exit) exit.trigger();
-					else this.startMove();
-				    }
-				}
-				else
-				{
-				    this.currentAnim = this.anims.slowdown;
-				    if(!this.facingUpdated && this.facing!=this.facingLast)
-				    {
-					emitDirection(this.name, 'down');
-					this.facingUpdated = true;
-				    }
-				}
+				movePressed(this);
 			    }
 			    else
 			    {
