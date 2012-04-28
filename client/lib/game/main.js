@@ -119,6 +119,12 @@ MyGame = ig.Game.extend({
 			//game.allowInput = false;
 			game.inputActive = false;
 		},
+		
+		zone: function(map, goTo)
+		// used to change maps
+		{
+			ig.game.loadLevelDeferred( ig.global['Level'+this.map] );	
+		}
 	
 	
 	init: function() {
