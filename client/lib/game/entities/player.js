@@ -499,8 +499,10 @@ ig.module (
 				{
 				    if(exits[i].me==ig.game.goTo)
 				    {
+					var oy = 0;
+					if(exits[i].isDoor == '1') oy += 16; // magic number!! BAD!
 					this.pos.x = exits[i].pos.x;
-					this.pos.y = exits[i].pos.y;
+					this.pos.y = exits[i].pos.y + oy;
 				    }
 				}
 			    }
