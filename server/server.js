@@ -69,16 +69,6 @@ io.sockets.on('connection', function (socket)
 	    }
 	}
 	
-	var player = new Object();
-        player.name = newplayername;
-        player.pos = new Object();
-        player.pos.x = x;
-        player.pos.y = y;
-        player.facing = direction;
-        player.session = socket.id;
-	player.room = mapname;
-        players.push(player);
-	
 	var playersToGiveSocket = new Array();
 	for(var i=0; i<players.length; i++)
 	{
