@@ -655,9 +655,9 @@ ig.module (
 			    {
 				finishMove(this);
 			    }
+			    // else check if player is trying to move
 			    else
 			    {
-				
 				if( ig.input.state('left') &&
 			           !ig.input.state('right') )
 				{
