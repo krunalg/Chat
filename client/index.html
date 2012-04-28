@@ -152,6 +152,21 @@ socket.on('updateOtherPlayer', function (client, direction) {
 		  }
 	 }
 });
+
+socket.on('playerLeftZone', function (client) {
+	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 if(otherplayer)
+	 {
+		  for(var i in otherplayer)
+		  {
+			   if(client == otherplayer[i].name)
+			   {
+				    delete otherplayer[i];
+				    break; // because client names are unique
+			   }
+		  }
+	 }
+});
 	  
 	  
 // the new add player
