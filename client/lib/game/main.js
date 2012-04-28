@@ -33,7 +33,12 @@ MyGame = ig.Game.extend({
 	{
 		this.goTo = goTo;
 		this.mapName = map;
+		this.leaveZone();
 		this.loadLevelDeferred( ig.global['Level'+map] );
+	},
+	leaveZone: function ()
+	{
+		socket.emit('playerLeaveZone');	
 	},
 	buildPlayer: function()
 	{
