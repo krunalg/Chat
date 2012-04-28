@@ -420,7 +420,11 @@ ig.module (
 	    
 	    if(!cancelMove)
 	    {
-		// check facing an exit
+		// disable exit animations that shouldn't be
+		turnOffExitAnimations(player);
+		
+		// enable ones that should
+		// check if facing an exit
 		var exit = facingExit(player);
 		if(exit)
 		{
