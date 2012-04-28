@@ -157,7 +157,7 @@ socket.on('updateOtherPlayer', function (client, direction) {
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction) {
 	 var player = ig.game.getEntitiesByType( EntityPlayer )[0];
-	 ig.game.messageBoxPrint(ig.game, user + ' joined.' );
+	 ig.game.messageBoxPrint(ig.game, user + ' joined the room.' );
 	 ig.game.spawnEntity( EntityOtherplayer, x, y,
 	 {
 		  name: user,

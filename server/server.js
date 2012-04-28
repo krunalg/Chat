@@ -34,7 +34,7 @@ io.sockets.on('connection', function (socket)
     {
         socket.join(mapname);
 	socket.roomname = mapname;
-	console.log("Player " + newplayername + "joined room: " + mapname);
+	console.log("Player " + newplayername + "joined zone: " + mapname);
 	
 	socket.emit('welcome', 'Welcome to the world.');
         
@@ -63,6 +63,13 @@ io.sockets.on('connection', function (socket)
         
 	if(playersToGiveSocket.length>=1)
 	    socket.emit('addAllPlayers', playersToGiveSocket);    
+    });
+    
+    socket.on('playerLeaveZone', function ()
+    {
+        socket.broadcast.to(socket.roomname).emit('playerLeftZone', socket.clientname);
+	socket.roomname = 'limbo'; 
+	socket.join(socket.roomname);
     });
     
       
