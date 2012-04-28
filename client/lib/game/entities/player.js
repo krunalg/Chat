@@ -635,65 +635,68 @@ ig.module (
 				action(this);	    
 			}
 			
-			// zone
+			// handle zoning
 			if(this.moveDoor && !this.moveWaiting && !this.isMove)
 			{
 			    // we just entered a door, so zone
 			    this.moveDoor.trigger();
 			}
-			
-			// about to move
-			if(this.moveWaiting)
-			{
-			    console.debug("Waiting to move...");
-			    moveWait(this);
-			}
 			else
 			{
-			    // a move has already been started
-			    if(this.isMove)
+			    // handle movement
+			    if(this.moveWaiting)
 			    {
+				// about to move
+				console.debug("Waiting to move...");
+				moveWait(this);
+			    }
+			    else if(this.isMove)
+			    {
+				// a move has already been started
 				finishMove(this);
 			    }
-			    // else check if player is trying to move
+			    else if( ig.input.state('left') &&
+				    !ig.input.state('right') )
+			    {
+				// if player is trying to move left
+				this.facing = 'left';
+				movePressed(this);
+			    }
+			    else if( ig.input.state('right') &&
+				    !ig.input.state('left') )
+			    {
+				// if player is trying to move right
+				this.facing = 'right';
+				if(canMove(this))
+				movePressed(this);
+			    }
+			    else if( ig.input.state('up')&&
+				    !ig.input.state('down') )
+			    {
+				// if player is trying to move up
+				this.facing = 'up';
+				movePressed(this);
+			    }
+			    else if( ig.input.state('down') &&
+				    !ig.input.state('up') )
+			    {
+				// if player is trying to move down
+				this.facing = 'down';
+				movePressed(this);
+			    }
 			    else
 			    {
-				if( ig.input.state('left') &&
-			           !ig.input.state('right') )
-				{
-				    this.facing = 'left';
-				    movePressed(this);
-				}
-				else if( ig.input.state('right') &&
-					!ig.input.state('left') )
-				{
-				    this.facing = 'right';
-				    if(canMove(this))
-				    movePressed(this);
-				}
-				else if( ig.input.state('up')&&
-					!ig.input.state('down') )
-				{
-				    this.facing = 'up';
-				    movePressed(this);
-				}
-				else if( ig.input.state('down') &&
-					!ig.input.state('up') )
-				{
-				    this.facing = 'down';
-				    movePressed(this);
-				}
-				else
-				{
-				    moveAnimStop(this);
-				    // keep all slow-walk animations reset
-				    this.anims.slowleft.rewind();
-				    this.anims.slowright.rewind();
-				    this.anims.slowup.rewind();
-				    this.anims.slowdown.rewind();
-				}
+				// if player not trying to move, set to idle
+				moveAnimStop(this);
+				// keep all slow-walk animations reset
+				this.anims.slowleft.rewind();
+				this.anims.slowright.rewind();
+				this.anims.slowup.rewind();
+				this.anims.slowdown.rewind();
 			    }
 			}
+			
+			
 			
 			
 			// IMPORANT! DON'T TOUCH!!
