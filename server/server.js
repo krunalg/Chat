@@ -56,7 +56,8 @@ io.sockets.on('connection', function (socket)
 	var playersToGiveSocket = new Array();
 	for(var i=0; i<players.length; i++)
 	{
-	    if(players[i].room==mapname) playersToGiveSocket.push(players[i]);
+	    if(players[i].room==mapname && players[i].name!=socket.clientname)
+		playersToGiveSocket.push(players[i]);
 	}
         socket.broadcast.to(mapname).emit('addPlayer', player.name, x, y, direction);
         socket.emit('addAllPlayers', playersToGiveSocket);    
