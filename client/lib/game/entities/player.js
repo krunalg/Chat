@@ -414,15 +414,15 @@ ig.module (
 	    if(!cancelMove)
 	    {
 		// check if going through a door
-		var door = facingExit(player);
-		if(door && door.isDoor=='1')
+		var exit = facingExit(player);
+		if(exit && exit.isDoor=='1')
 		{
-		    //door.trigger();
-		    door.open();
+		    //exit.trigger();
+		    exit.startAnim(); //
 		    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
 		    player.moveWhen = 336.7 + new Date().getTime();
 		    player.moveWaiting = true;
-		    player.moveDoor = door;
+		    player.moveDoor = exit;
 		    cancelMove = true; // prevent player from starting to move too soon
 		}
 	    
