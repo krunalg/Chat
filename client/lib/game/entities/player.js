@@ -330,7 +330,7 @@ ig.module (
     
     var netInit = function(player)
     {
-	socket.emit('initializePlayer', player.pos.x, player.pos.y, player.facing, player.name, ig.game.mapName);	
+	socket.emit('hereIAm', player.pos.x, player.pos.y, player.facing, player.name, ig.game.mapName);	
     }
     
     var emitDirection = function(client,direction)

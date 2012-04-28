@@ -51,7 +51,7 @@ io.sockets.on('connection', function (socket)
 	    socket.emit('addAllPlayers', playersToGiveSocket);    
     });
     
-    socket.on('initializePlayer', function (x, y, direction, newplayername, mapname)
+    socket.on('hereIAm', function (x, y, direction, newplayername, mapname)
     {
         socket.join(mapname);
 	socket.roomname = mapname;
