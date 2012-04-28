@@ -33,6 +33,8 @@ EntityExit = ig.Entity.extend({
 		// add the animations
 		this.addAnim( 'weltmeister', 0.1, [0] );
 		this.currentAnim = this.anims.weltmeister;
+		
+		this.player = ig.game.getEntitiesByType( EntityPlayer )[0];		
 	},
 	
 	ready: function()
@@ -41,17 +43,28 @@ EntityExit = ig.Entity.extend({
 	},
 	
 	triggeredBy: function( entity, trigger ) {	
-		if( this.level ) {
+		/*if( this.level ) {
 			
 			var levelName = this.level.replace(/^(Level)?(\w)(\w*)/, function( m, l, a, b ) {
 				return a.toUpperCase() + b;
 			});
 			
 			ig.game.loadLevelDeferred( ig.global['Level'+levelName] );
-		}
+		}*/
 	},
 	
-	update: function(){}
+	update: function()
+	{
+		if( this.player.pos.x == this.pos.x &&
+		    this.player.pos.y == this.pos.y)
+		{
+			var levelName = this.level.replace(/^(Level)?(\w)(\w*)/, function( m, l, a, b ) {
+				return a.toUpperCase() + b;
+			});
+			
+			ig.game.loadLevelDeferred( ig.global['Level'+levelName] );
+		}
+	}
 });
 
 });

@@ -9,8 +9,8 @@ ig.module(
 	'game.levels.lab',
 	//'game.entities.player', // everything seems to work without it
 	'impact.debug.debug',
-	'plugins.impact-splash-loader',
-	'plugins.director.director'
+	'plugins.impact-splash-loader'
+	//'plugins.director.director'
 )
 .defines(function(){
 
@@ -146,11 +146,11 @@ MyGame = ig.Game.extend({
 		};
 		
 		// director
-		this.myDirector = new ig.Director(this, [LevelTown,  LevelRoute101, LevelLab]);
+		//this.myDirector = new ig.Director(this, [LevelTown,  LevelRoute101, LevelLab]);
 		//this.myDirector.firstLevel();
-		this.myDirector.jumpTo(LevelLab);
+		//this.myDirector.jumpTo(LevelLab);
 		
-		//this.loadLevel (this.levelName);
+		this.loadLevel (this.levelName);
 		
 		// set players name to the username provided from url
 		var player = this.getEntitiesByType( EntityPlayer )[0];
