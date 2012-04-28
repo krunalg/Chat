@@ -567,87 +567,27 @@ ig.module (
 			}
 			else
 			{
-			    if( ig.input.pressed('left')
-				&& !ig.input.pressed('right'))
+			    if( ig.input.state('left')
+				&& !ig.input.state('right'))
 			    {
 				this.facing = 'left';
-				if(canMove(this))
-				{
-				    var door = isFacingDoor(this);
-				    if(door)
-				    {
-					door.trigger();
-				    }
-				    else
-				    {
-					this.startMove();
-				    }
-				}
-				else
-				{
-				    this.currentAnim = this.anims.slowleft;
-				    if(!this.facingUpdated && this.facing!=this.facingLast)
-				    {
-					emitDirection(this.name, 'left');
-					this.facingUpdated = true;
-				    }
-				}
+				movePressed(this);
 			    }
-			    else if( ig.input.pressed('right')
-				    && !ig.input.pressed('left'))
+			    else if( ig.input.state('right')
+				    && !ig.input.state('left'))
 			    {
 				this.facing = 'right';
 				if(canMove(this))
-				if(canMove(this))
-				{
-				    var door = isFacingDoor(this);
-				    if(door)
-				    {
-					door.trigger();
-				    }
-				    else
-				    {
-					this.startMove();
-				    }
-				}
-				else
-				{
-				    this.currentAnim = this.anims.slowright;
-				    if(!this.facingUpdated && this.facing!=this.facingLast)
-				    {
-					emitDirection(this.name, 'right');
-					this.facingUpdated = true;
-				    }
-				}
+				movePressed(this);
 			    }
-			    else if( ig.input.pressed('up')
-				    && !ig.input.pressed('down'))
+			    else if( ig.input.state('up')
+				    && !ig.input.state('down'))
 			    {
 				this.facing = 'up';
-				if(canMove(this))
-				{
-				    var door = isFacingDoor(this);
-				    if(door)
-				    {
-					door.trigger();
-				    }
-				    else
-				    {
-					this.startMove();
-				    }
-				}
-				else
-				{
-				    this.currentAnim = this.anims.slowup;
-				    if(!this.facingUpdated && this.facing!=this.facingLast)
-				    {
-					emitDirection(this.name, 'up');
-					this.facingUpdated = true;
-				    }
-				}
+				movePressed(this);
 			    }
-			    else if( ig.input.pressed('down')
-				    && !ig.input.pressed('up'))
+			    else if( ig.input.state('down')
+				    && !ig.input.state('up'))
 			    {
 				this.facing = 'down';
 				movePressed(this);
