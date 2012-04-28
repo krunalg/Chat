@@ -147,15 +147,10 @@ ig.module (
 		for(var i=0; i<exits.length; i++)
 		{
 		    // if not standing over
-		    if( exits[i].pos.x!=player ||
-		        exits[i].pos.y!=player )
+		    if( exits[i].pos.x!=player.pos.x ||
+		        exits[i].pos.y!=player.pos.y )
 		    {
 			exits[i].stopAnim();
-		    }
-		    else // player is standing over
-		    {
-			// but not looking the right way
-			if(player.facing!='down') exits[i].stopAnim();
 		    }
 		}
 	    }
