@@ -415,7 +415,7 @@ ig.module (
 	    {
 		// check if going through a door
 		var door = facingExit(player);
-		if(door)
+		if(door && door.isDoor=='1')
 		{
 		    //door.trigger();
 		    door.open();
