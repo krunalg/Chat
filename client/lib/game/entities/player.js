@@ -409,6 +409,9 @@ ig.module (
 			{
 			    // set player name
 			    this.name = username;			    
+			    
+			    // player position
+				
 			    // grab players db start position
 			    if( (jsonPos.x!=-1) && (jsonPos.y!=-1) )
 			    {
@@ -417,8 +420,31 @@ ig.module (
 				this.pos.x = jsonPos.y;
 				this.facing = jsonPos.facing;
 			    }
+			    
 			    // initiate network
 			    netInit(this);
+			}
+		    },
+		    
+		    ready: function()
+		    {
+			// give preference to a goTo
+			var goTo = ig.game.goTo;
+			if(goTo != null)
+			{
+			    var exits = ig.game.getEntitiesByType( EntityExit );
+			    if(EntityExit)
+			    {
+				for(var i=0; i<exits.length; i++)
+				{
+				    if(exits[i].me==ig.game.goTo)
+				    {
+					this.pos.x = exits[i].pos.x;
+					this.pos.y = exits[i].pos.y;
+				    }
+				}
+			    }
+			    ig.game.goTo = null; // reset
 			}
 		    },
 		    
