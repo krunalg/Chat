@@ -28,7 +28,28 @@ function handler (req, res)
 
 io.sockets.on('connection', function (socket)
 {
-    console.log('** client connected');
+    console.log('** Client ' + socket.id + ' connected');
+    
+    socket.on('init', function (user)
+    {
+	socket.clientname = user;
+	console.log("Performing first time setup of " + user);
+	socket.emit('welcome', 'Welcome to the world.');
+        
+	// set up user info object
+        var player = new Object();
+        player.name = user;
+        player.pos = new Object();
+        player.pos.x = 0;
+        player.pos.y = 0;
+        player.facing = 'down';
+        player.session = socket.id;
+	player.room = 'limbo';
+        players.push(player);
+	
+	if(playersToGiveSocket.length>=1)
+	    socket.emit('addAllPlayers', playersToGiveSocket);    
+    });
     
     socket.on('initializePlayer', function (x, y, direction, newplayername, mapname)
     {
