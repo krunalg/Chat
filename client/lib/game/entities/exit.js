@@ -78,7 +78,7 @@ EntityExit = ig.Entity.extend({
 		}
 	},
 	
-	startAnim: function()
+	stopAnim: function()
 	{
 		if(this.currentAnim!=null)
 		{
