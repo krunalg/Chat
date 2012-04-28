@@ -421,10 +421,9 @@ ig.module (
 		{
 		    //door.trigger();
 		    door.open();
-		    player.moveWaiting = true;
 		    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
 		    player.moveWhen = 336.7 + new Date().getTime();
-		    moveWait(player);
+		    player.moveWaiting = true;
 		    cancelMove = true; // prevent player from starting to move too soon
 		}
 	    
@@ -597,50 +596,58 @@ ig.module (
 			}
 			
 			// movement
-			if(this.isMove && !this.moveWaiting)
+			if(this.moveWaiting)
+			{
+			    moveWait(this);
+			}
+			else
+			{
+			    if(this.isMove)
 			{
 			    finishMove(this);
 			}
 			else
 			{
 			    if( ig.input.state('left')
-				&& !ig.input.state('right'))
-			    {
-				this.facing = 'left';
-				movePressed(this);
+				    && !ig.input.state('right'))
+				{
+				    this.facing = 'left';
+				    movePressed(this);
+				}
+				else if( ig.input.state('right')
+					&& !ig.input.state('left'))
+				{
+				    this.facing = 'right';
+				    if(canMove(this))
+				    movePressed(this);
+				}
+				else if( ig.input.state('up')
+					&& !ig.input.state('down'))
+				{
+				    this.facing = 'up';
+				    movePressed(this);
+				}
+				else if( ig.input.state('down')
+					&& !ig.input.state('up'))
+				{
+				    this.facing = 'down';
+				    movePressed(this);
+				}
+				else
+				{
+				    moveAnimStop(this);
+				    // keep all slow-walk animations reset
+				    this.anims.slowleft.rewind();
+				    this.anims.slowright.rewind();
+				    this.anims.slowup.rewind();
+				    this.anims.slowdown.rewind();
+				}
+    
+				
+				//moveAnimStart(this,'slow');
 			    }
-			    else if( ig.input.state('right')
-				    && !ig.input.state('left'))
-			    {
-				this.facing = 'right';
-				if(canMove(this))
-				movePressed(this);
-			    }
-			    else if( ig.input.state('up')
-				    && !ig.input.state('down'))
-			    {
-				this.facing = 'up';
-				movePressed(this);
-			    }
-			    else if( ig.input.state('down')
-				    && !ig.input.state('up'))
-			    {
-				this.facing = 'down';
-				movePressed(this);
-			    }
-			    else
-			    {
-				moveAnimStop(this);
-				// keep all slow-walk animations reset
-				this.anims.slowleft.rewind();
-				this.anims.slowright.rewind();
-				this.anims.slowup.rewind();
-				this.anims.slowdown.rewind();
-			    }
-
-			    
-			    //moveAnimStart(this,'slow');
 			}
+			
 			
 			// IMPORANT! DON'T TOUCH!!
 			this.parent();
