@@ -51,20 +51,25 @@ io.sockets.on('connection', function (socket)
 	    socket.emit('addAllPlayers', playersToGiveSocket);    
     });
     
-    socket.on('hereIAm', function (x, y, direction, newplayername, mapname)
+    socket.on('hereIAm', function (x, y, direction, mapname)
     {
-        socket.join(mapname);
-	socket.roomname = mapname;
+        socket.roomname = mapname;
+	socket.join(socket.roomname);
 	console.log("Player " + newplayername + "joined zone: " + mapname);
+	 
+        for(var i=0; i<players.length; i++)
+	{
+	    if(players[i].name==socket.clientname)
+	    {
+		// update server records
+		players[i].pos.x = x;
+		players[i].pos.y = y;
+		players[i].pos.facing = direction;
+		break; // because names are unique
+	    }
+	}
 	
-	socket.emit('welcome', 'Welcome to the world.');
-        
-        socket.clientname = newplayername;
-        console.log('** initiating player: '+ newplayername
-                    + ' with session id: ' + socket.id);
-         
-        // going to replace playerlist
-        var player = new Object();
+	var player = new Object();
         player.name = newplayername;
         player.pos = new Object();
         player.pos.x = x;
