@@ -24,6 +24,14 @@ MyGame = ig.Game.extend({
 	font: new ig.Font( 'media/04b04.font.png' ),
 	debugfont: new ig.Font( 'media/04b04.font.png' ),
 	
+	goTo: null, // used to know where to place player when zoning
+	zone: function(map, goTo)
+		// used to change maps
+		{
+			this.goTo = goTo;
+			this.loadLevelDeferred( ig.global['Level'+map] );	
+		},
+	
 	levelName: LevelTown,
 	//levelName: LevelRoute101,
 	//levelName: LevelLab,
@@ -120,11 +128,7 @@ MyGame = ig.Game.extend({
 			game.inputActive = false;
 		},
 		
-		zone: function(map, goTo)
-		// used to change maps
-		{
-			ig.game.loadLevelDeferred( ig.global['Level'+this.map] );	
-		}
+		
 	
 	
 	init: function() {
