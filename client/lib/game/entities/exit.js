@@ -26,6 +26,7 @@ EntityExit = ig.Entity.extend({
 	
 	map: null,
 	goTo: null,
+	isDoor: 0,
 	
 	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 	
@@ -44,12 +45,12 @@ EntityExit = ig.Entity.extend({
 		delete this.currentAnim; // invisible in-game
 		
 		// who will trigger the exit?
-		this.player = ig.game.getEntitiesByType( EntityPlayer )[0];
+		// this.player = ig.game.getEntitiesByType( EntityPlayer )[0];
 	},
 	
 	update: function()
 	{
-		if( this.player.pos.x == this.pos.x &&
+		/*if( this.player.pos.x == this.pos.x &&
 		    this.player.pos.y == this.pos.y)
 		{
 			console.debug("You're stepping on me.");
@@ -61,7 +62,7 @@ EntityExit = ig.Entity.extend({
 			}
 		}
 		
-		this.parent();
+		this.parent();*/
 	}
 });
 
