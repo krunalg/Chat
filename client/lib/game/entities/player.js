@@ -521,6 +521,7 @@ ig.module (
 		    offset: { x: 0, y: 16 },
 		    messagebox: "",
 		    type: ig.Entity.TYPE.A,
+		    zIndex: 1,
 		    
 		    messageboxtimer: 200,
 		    checkAgainst: ig.Entity.TYPE.NONE,

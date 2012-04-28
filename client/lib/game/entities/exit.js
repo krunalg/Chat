@@ -23,6 +23,7 @@ EntityExit = ig.Entity.extend({
 	//_wmBoxColor: 'rgba(0, 0, 255, 0.7)',
 	
 	size: {x: 16, y: 16},
+	zIndex: 0,
 	
 	map: null,
 	goTo: null,
