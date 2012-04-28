@@ -148,6 +148,45 @@ ig.module (
 	}  
     };
     
+    var isFacingDoor = function(player)
+    // returns an exit entity if the placing
+    // is facing one tagged with isDoor = 1
+    // else returns false;
+    {
+	var vx = vy = 0;
+	var tilesize = 16; // this should not be here!!
+	switch(player.facing)
+	{
+	    case 'left':
+		vx = -tilesize;
+		break;
+	    case 'right':
+		vx = tilesize;
+		break;
+	    case 'up':
+		vy = -tilesize;
+		break;
+	    case 'down':
+		vy = tilesize;
+		break;
+	}
+	// check for collision against an exit entity
+	var doors = ig.game.getEntitiesByType( EntityExit );
+	if(doors)
+	{
+	    for(var i=0; i<doors.length; i++)
+	    {
+		if( doors[i].pos.x == player.pos.x + vx &&
+		    doors[i].pos.y == player.pos.y + vy &&
+		    doors[i].isDoor == '1')
+		{
+		    return doors[i];
+		}
+	    }
+	}
+	return false;
+    }
+    
     var canMove = function(player)
     // returns true if no collision will occur
     // in the direction the player faces
@@ -467,7 +506,12 @@ ig.module (
 				&& !ig.input.state('right'))
 			    {
 				this.facing = 'left';
-				if(canMove(this)) this.startMove();
+				if(canMove(this))
+				{
+				    var door = isFacingDoor(this);
+				    if(door) door.trigger();
+				    else this.startMove();
+				}
 				else
 				{
 				    this.currentAnim = this.anims.slowleft;
@@ -482,7 +526,12 @@ ig.module (
 				    && !ig.input.state('left'))
 			    {
 				this.facing = 'right';
-				if(canMove(this)) this.startMove();
+				if(canMove(this))
+				{
+				    var door = isFacingDoor(this);
+				    if(door) door.trigger();
+				    else this.startMove();
+				}
 				else
 				{
 				    this.currentAnim = this.anims.slowright;
@@ -497,7 +546,12 @@ ig.module (
 				    && !ig.input.state('down'))
 			    {
 				this.facing = 'up';
-				if(canMove(this)) this.startMove();
+				if(canMove(this))
+				{
+				    var door = isFacingDoor(this);
+				    if(door) door.trigger();
+				    else this.startMove();
+				}
 				else
 				{
 				    this.currentAnim = this.anims.slowup;
@@ -512,7 +566,12 @@ ig.module (
 				    && !ig.input.state('up'))
 			    {
 				this.facing = 'down';
-				if(canMove(this)) this.startMove();
+				if(canMove(this))
+				{
+				    var door = isFacingDoor(this);
+				    if(door) door.trigger();
+				    else this.startMove();
+				}
 				else
 				{
 				    this.currentAnim = this.anims.slowdown;
