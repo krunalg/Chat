@@ -176,6 +176,7 @@ socket.on('addPlayer', function (user, x, y, direction) {
 	 ig.game.spawnEntity( EntityOtherplayer, x, y,
 	 {
 		  name: user,
+		  facing: direction,
 		  animation: 6
 	 } );
 });
