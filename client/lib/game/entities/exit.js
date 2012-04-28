@@ -60,7 +60,7 @@ EntityExit = ig.Entity.extend({
 	
 	trigger: function()
 	{
-		console.debug('trigged an zone!');
+		console.debug('Changing to map: ' + this.map);
 		ig.game.zone(this.map, this.goTo);
 	},
 	
