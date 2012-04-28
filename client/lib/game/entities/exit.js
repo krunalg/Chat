@@ -64,6 +64,12 @@ EntityExit = ig.Entity.extend({
 		
 	},
 	
+	blink: function()
+	{
+		console.debug('Turning on arrow.');
+		this.currentAnim = this.anims.alternate;
+	},
+	
 	open: function()
 	{
 		console.debug('Opening door.');
