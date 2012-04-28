@@ -48,6 +48,12 @@ EntityExit = ig.Entity.extend({
 		// this.player = ig.game.getEntitiesByType( EntityPlayer )[0];
 	},
 	
+	trigger: function()
+	{
+		console.debug('trigged an zone!');
+		ig.game.zone(this.map, this.goTo);
+	},
+	
 	update: function()
 	{
 		/*if( this.player.pos.x == this.pos.x &&
