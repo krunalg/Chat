@@ -403,9 +403,9 @@ ig.module (
 	    var cancelMove = false;
 	    
 	    // check if walking out an exit
-	    if(player.facing=='down')
+	    if(player.facing=='down') // as far now, exits are always down
 	    {
-		var exit = overExit(player); // down is the exception, cuz exits go down
+		var exit = overExit(player);
 		if(exit)
 		{
 		    exit.trigger();
