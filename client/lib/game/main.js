@@ -7,7 +7,7 @@ ig.module(
 	'game.levels.town',
 	'game.levels.route101',
 	'game.levels.lab',
-	//'game.entities.player', // everything seems to work without it
+	'game.entities.player', // everything seems to work without it
 	'impact.debug.debug',
 	'plugins.impact-splash-loader'
 	//'plugins.director.director'
@@ -25,12 +25,19 @@ MyGame = ig.Game.extend({
 	debugfont: new ig.Font( 'media/04b04.font.png' ),
 	
 	goTo: null, // used to know where to place player when zoning
-	zone: function(map, goTo)
-		// used to change maps
+	zone: function(map, goTo) // used to change maps
+	{
+		this.goTo = goTo;
+		this.loadLevelDeferred( ig.global['Level'+map] );
+	},
+	buildPlayer: function()
+	{
+		return ig.game.spawnEntity( EntityPlayer, 192, 192, // magic numbers = bad
 		{
-			this.goTo = goTo;
-			this.loadLevelDeferred( ig.global['Level'+map] );	
-		},
+			 name: username,
+			 animation: 6
+		} );	
+	},
 	
 	levelName: LevelTown,
 	//levelName: LevelRoute101,
@@ -162,9 +169,12 @@ MyGame = ig.Game.extend({
 		
 		this.loadLevel (this.levelName);
 		
+		// build player
+		this.buildPlayer();
 		// set players name to the username provided from url
-		var player = this.getEntitiesByType( EntityPlayer )[0];
-		player.name = username;
+		//var player = this.getEntitiesByType( EntityPlayer )[0];
+		//player.name = username;
+		
 		
 		// set up chat functionality
 		$('#'+this.inputFieldId).bind('keypress', function(e) {
@@ -180,6 +190,31 @@ MyGame = ig.Game.extend({
 	update: function() {
 		// Update all entities and backgroundMaps
 		this.parent();
+		
+		if(!this.getEntitiesByType( EntityPlayer )[0])
+		{
+			var player = this.buildPlayer();
+			console.debug("Player does not exist. Adding one.");
+			// place character at goTo
+			if(this.goTo != null)
+			{
+			    var exits = ig.game.getEntitiesByType( EntityExit );
+			    if(EntityExit)
+			    {
+				for(var i=0; i<exits.length; i++)
+				{
+				    if(exits[i].me==this.goTo)
+				    {
+					var oy = 0;
+					if(exits[i].isDoor == '1') oy += 16; // magic number!! BAD!
+					player.pos.x = exits[i].pos.x;
+					player.pos.y = exits[i].pos.y + oy;
+				    }
+				}
+			    }
+			    this.goTo = null; // reset
+			}
+		}
 		
 		// Add your own, additional update code here
 		var player = this.getEntitiesByType( EntityPlayer )[0];
