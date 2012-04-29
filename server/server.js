@@ -52,7 +52,7 @@ io.sockets.on('connection', function (socket)
     {
         socket.roomname = mapname;
 	socket.join(socket.roomname);
-	console.log("Player " + socket.clientname + " joined zone: " + mapname);
+	console.log("Player " + socket.clientname + " joined zone: " + socket.roomname);
 	 
         for(var i=0; i<players.length; i++)
 	{
@@ -81,7 +81,10 @@ io.sockets.on('connection', function (socket)
     
     socket.on('playerLeaveZone', function ()
     {
+	// instruct others to drop this player
 	socket.broadcast.to(socket.roomname).emit('dropPlayer', socket.clientname);
+	socket.leave(socket.roomname);
+	// stop listening
 	socket.roomname = 'limbo'; 
 	socket.join(socket.roomname);
     });
