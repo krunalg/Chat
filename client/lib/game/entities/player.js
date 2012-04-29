@@ -279,7 +279,7 @@ ig.module (
 	};
     }
     
-    var moveAnimStart = function(player)
+    var moveAnimStart = function(player, alternateFeet) // ignore is used to skip changing feet
     {
 	switch(player.facing)
 	{
@@ -300,7 +300,7 @@ ig.module (
 		else player.currentAnim = player.anims.walkDownB;
 		break;
 	}
-	player.leftFoot = !player.leftFoot;
+	if(alternateFeet) player.leftFoot = !player.leftFoot;
 	player.currentAnim.rewind();
     };
     
@@ -393,7 +393,7 @@ ig.module (
     {
 	
 	// do a step animation, regardless of whether player moves
-	moveAnimStart(player);
+	moveAnimStart(player, false);
 	
 	
 	if(player.moveCommitDirection!=player.facing)
@@ -559,7 +559,7 @@ ig.module (
 		    {
 			this.isMove = true;
 			setMoveDestination(this);
-			moveAnimStart(this);
+			moveAnimStart(this, true);
 			emitMove(this.pos.x, this.pos.y, this.facing, this.name);
 			this.facingLast = this.facing;
 			this.facingUpdated = false;
@@ -748,7 +748,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    {
 		this.isMove = true;
 		setMoveDestination(this);
-		moveAnimStart(this);
+		moveAnimStart(this, true);
 	    },
 	    
 	    update: function()
