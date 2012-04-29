@@ -46,7 +46,7 @@ MyGame = ig.Game.extend({
 	{
 		var x = 0
 		var y = 0
-		var facing = 'up';
+		var direction = 'up';
 		
 		if(this.goTo==null)
 		{
@@ -55,7 +55,7 @@ MyGame = ig.Game.extend({
 			{
 				x = jsonPos.x;
 				y = jsonPos.y;
-				facing = jsonPos.facing;
+				direction = jsonPos.facing;
 			}
 		}
 		else
@@ -82,6 +82,7 @@ MyGame = ig.Game.extend({
 		return ig.game.spawnEntity( EntityPlayer, x, y, // magic numbers = bad
 		{
 			 name: username,
+			 facing: direction,
 			 animation: 6
 		} );
 	},
