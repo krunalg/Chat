@@ -541,7 +541,7 @@ ig.module (
 		    collides: ig.Entity.COLLIDES.PASSIVE,
 		    animSheet: new ig.AnimationSheet( 'media/main_brendan-walk.png', 16, 32 ),
 		    
-		    facing: "down",
+		    facing: '',
 		    facingLast: '',
 		    facingUpdated: false,
 		    isMove: false, // waiting for move key-press
@@ -592,7 +592,7 @@ ig.module (
 			this.anims.slowright.flip.x = true;
 			this.anims.idleright.flip.x = true;
 			// set initial animation
-			this.currentAnim = this.anims.idledown;
+			this.currentAnim = null; // none
 			
 			// things to skip if loaded in weltmeister
 			if(getFileName()!='weltmeister.html')
