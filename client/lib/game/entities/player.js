@@ -589,7 +589,9 @@ ig.module (
 			}
 			else
 			{
-			    // handle movement
+			    /////////////////////
+			    // Handle Movement //
+			    /////////////////////
 			    if(this.moveWaiting)
 			    {
 				// about to move
