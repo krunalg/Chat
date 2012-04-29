@@ -47,6 +47,7 @@ MyGame = ig.Game.extend({
 		var x = 0
 		var y = 0
 		var direction = 'right'; // should never stay this way in-game
+		var exitAnimation = false;
 		
 		if(this.goTo==null)
 		{
@@ -62,34 +63,48 @@ MyGame = ig.Game.extend({
 		{
 			// find coordinates from goTo
 			var exits = ig.game.getEntitiesByType( EntityExit );
-			       if(EntityExit)
-			       {
-				   for(var i=0; i<exits.length; i++)
-				   {
-				       if(exits[i].me==this.goTo)
-				       {
-					   var oy = 0;
-					   if(exits[i].isDoor == '1')
-					   {
-						oy += 16; // magic number!! BAD!
-						direction = 'down';
-					   }
-					   else direction = 'up';
-					   x = exits[i].pos.x;
-					   y = exits[i].pos.y + oy;
-				       }
-				   }
-			       }
-			       this.goTo = null; // reset
+			if(EntityExit)
+			{
+			    for(var i=0; i<exits.length; i++)
+			    {
+				if(exits[i].me==this.goTo)
+				{
+				    if(exits[i].isDoor == '1')
+				    {
+					 exitAnimation = true;
+					 direction = 'down';
+				    }
+				    else direction = 'up';
+				    x = exits[i].pos.x;
+				    y = exits[i].pos.y;
+				}
+			    }
+			}
+			this.goTo = null; // reset
 		    
 		}
 		
-		return ig.game.spawnEntity( EntityPlayer, x, y, // magic numbers = bad
+		if(exitAnimation) // walking out the door
 		{
-			 name: username,
-			 facing: direction,
-			 animation: 6
-		} );
+			return ig.game.spawnEntity( EntityPlayer, x, y, // magic numbers = bad
+			{
+				 name: username,
+				 facing: direction,
+				 moveWaiting: true,
+				 moveWhen: 336.7 + new Date().getTime(),
+				 animation: 6
+			} );
+		}
+		else
+		{
+			return ig.game.spawnEntity( EntityPlayer, x, y, // magic numbers = bad
+			{
+				 name: username,
+				 facing: direction,
+				 animation: 6
+			} );
+		}
+		
 	},
 	
 	// Chat system
