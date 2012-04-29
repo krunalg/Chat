@@ -583,20 +583,6 @@ ig.module (
 			// things to skip if loaded in weltmeister
 			if(getFileName()!='weltmeister.html')
 			{
-			    // set player name
-			    this.name = username;			    
-			    
-			    // player position
-				
-			    // grab players db start position
-			    if( (jsonPos.x!=-1) && (jsonPos.y!=-1) )
-			    {
-				// player position data from database
-				this.pos.x = jsonPos.x;
-				this.pos.x = jsonPos.y;
-				this.facing = jsonPos.facing;
-			    }
-			    
 			    // initiate network
 			    netInit(this);
 			}

@@ -24,11 +24,13 @@ MyGame = ig.Game.extend({
 	font: new ig.Font( 'media/04b04.font.png' ),
 	debugfont: new ig.Font( 'media/04b04.font.png' ),
 	
-	mapName: 'Town', // must capitalize first letter
+	
 	defaultLevel: LevelTown,
 	//levelName: LevelRoute101,
 	//levelName: LevelLab,
 	goTo: null, // used to know where to place player when zoning
+	mapName: 'Town', // must capitalize first letter
+	//playerFirstBuild: true, // false after initial position is read from database
 	zone: function(map, goTo) // used to change maps
 	{
 		this.goTo = goTo;
@@ -42,11 +44,46 @@ MyGame = ig.Game.extend({
 	},
 	buildPlayer: function()
 	{
-		return ig.game.spawnEntity( EntityPlayer, 192, 192, // magic numbers = bad
+		var x = 0
+		var y = 0
+		var facing = 'up';
+		
+		if(goTo==null)
+		{
+			// first time drawing player, use database
+			if( (jsonPos.x!=-1) && (jsonPos.y!=-1) )
+			{
+				x = jsonPos.x;
+				y = jsonPos.y;
+				facing = jsonPos.facing;
+			}
+		}
+		else
+		{
+			// find coordinates from goTo
+			var exits = ig.game.getEntitiesByType( EntityExit );
+			       if(EntityExit)
+			       {
+				   for(var i=0; i<exits.length; i++)
+				   {
+				       if(exits[i].me==this.goTo)
+				       {
+					   var oy = 0;
+					   if(exits[i].isDoor == '1') oy += 16; // magic number!! BAD!
+					   x = exits[i].pos.x;
+					   y = exits[i].pos.y + oy;
+				       }
+				   }
+			       }
+			       this.goTo = null; // reset
+		    
+		}
+		
+		return ig.game.spawnEntity( EntityPlayer, x, y, // magic numbers = bad
 		{
 			 name: username,
 			 animation: 6
-		} );	
+		} );
 	},
 	
 	// Chat system
@@ -201,29 +238,11 @@ MyGame = ig.Game.extend({
 		// Update all entities and backgroundMaps
 		this.parent();
 		
+		// rebuild player when loadLevel deletes it
 		if(!this.getEntitiesByType( EntityPlayer )[0])
 		{
 			var player = this.buildPlayer();
 			console.debug("Player does not exist. Adding one.");
-			// place character at goTo
-			if(this.goTo != null)
-			{
-			    var exits = ig.game.getEntitiesByType( EntityExit );
-			    if(EntityExit)
-			    {
-				for(var i=0; i<exits.length; i++)
-				{
-				    if(exits[i].me==this.goTo)
-				    {
-					var oy = 0;
-					if(exits[i].isDoor == '1') oy += 16; // magic number!! BAD!
-					player.pos.x = exits[i].pos.x;
-					player.pos.y = exits[i].pos.y + oy;
-				    }
-				}
-			    }
-			    this.goTo = null; // reset
-			}
 		}
 		
 		// Add your own, additional update code here
