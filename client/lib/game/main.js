@@ -51,6 +51,7 @@ MyGame = ig.Game.extend({
 		
 		if(this.goTo==null)
 		{
+			console.debug("First time building player. Using database coordinates.");
 			// first time drawing player, use database
 			if( (jsonPos.x!=-1) && (jsonPos.y!=-1) )
 			{
@@ -61,6 +62,7 @@ MyGame = ig.Game.extend({
 		}
 		else
 		{
+			console.debug("Rebuilding player using map exit values.");
 			// find coordinates from goTo
 			var exits = ig.game.getEntitiesByType( EntityExit );
 			if(EntityExit)
