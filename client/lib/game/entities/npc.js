@@ -277,7 +277,6 @@ ig.module (
 		    // ie 144/2.1 = 68.571428 or ~69
 		    speed: 69,
 		    size: {x: 16, y: 16},
-		    offset: { x: 0, y: 16 },
 		    type: ig.Entity.TYPE.A,
 		    animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 		    
@@ -348,6 +347,8 @@ ig.module (
 		    
 		    ready: function()
 		    {
+			this.offset = { x: 0, y: 16 };
+			
 			this.animSheet = new ig.AnimationSheet( 'media/fatty.png', 16, 32 );
 			// add the animations
 			var walkRate = 0.13125;
