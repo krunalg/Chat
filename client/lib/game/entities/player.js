@@ -391,76 +391,105 @@ ig.module (
     
     var movePressed = function(player)
     {
-	turnOffExitAnimations();
-	if(canMove(player))
+	
+	// do a step animation, regardless of whether player moves
+	moveAnimStart(player);
+	
+	
+	if(player.moveCommitDirection!=player.facing)
 	{
-	    var cancelMove = false;
-	    
-	    // handle zoning
-	    if(player.facing=='down') // as for now, flor exit go down
-	    {
-		var exit = overExit(player);
-		if(exit)
-		{
-		    exit.trigger(); // zone
-		    cancelMove = true;
-		}
-	    }
-	    
-	    if(!cancelMove)
-	    {
-		// disable exit animations that shouldn't be
-		//turnOffExitAnimations(player);
-		//console.debug('turning off arrows.');
-		
-		// facing an exit
-		var exit = facingExit(player);
-		if(exit)
-		{
-		    // check if going through a door
-		    if(exit.isDoor=='1')
-		    {
-			exit.startAnim();
-			// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
-			player.moveWhen = 336.7 + new Date().getTime();
-			player.moveWaiting = true;
-			player.moveDoor = exit;
-			cancelMove = true; // prevent player from starting to move too soon
-		    }
-		    // not a door
-		    else
-		    {
-			if(player.facing=='down') exit.startAnim(); // approaching floor exit
-		    }
-		}
-	    
-		// if no exits have taken place, move
-		if(!cancelMove) player.startMove();
-	    }
+	    // don't let player combine different keys for one commit
+	    player.moveCommitPending = false;
+	    player.moveCommitWhen = 0;
 	}
-	else
+	
+	if(!player.moveCommitPending)
 	{
-    	    // can't move, set slow walk animation
-	    switch(player.facing)
+	    // start pending commit for faced direction
+	    player.moveCommitPending = true;
+	    player.moveCommitDirection = player.facing;
+	    player.moveCommitWhen = new Date().getTime() + 80; // (2/60)sec ! move to globals magic is bad
+	}
+	
+	// if its been (2/60)sec since player first pressed the key
+	// then
+	if( new Date().getTime() - player.moveCommitWhen >= 0 )
+	{
+	    player.moveCommitPending = false; // happening now, so now reset for next time
+	    player.moveCommitWhen = 0; // reset for cleanness
+	    
+	    turnOffExitAnimations();
+	    
+	    if(canMove(player))
 	    {
-		case 'left':
-		    player.currentAnim = player.anims.slowleft;
-		    break;
-		case 'right':
-		    player.currentAnim = player.anims.slowright;
-		    break;
-		case 'up':
-		    player.currentAnim = player.anims.slowup;
-		    break;
-		case 'down':
-		    player.currentAnim = player.anims.slowdown;
-		    break;
+		var cancelMove = false;
+		
+		// handle zoning
+		if(player.facing=='down') // as for now, flor exit go down
+		{
+		    var exit = overExit(player);
+		    if(exit)
+		    {
+			exit.trigger(); // zone
+			cancelMove = true;
+		    }
+		}
+		
+		if(!cancelMove)
+		{
+		    // disable exit animations that shouldn't be
+		    //turnOffExitAnimations(player);
+		    //console.debug('turning off arrows.');
+		    
+		    // facing an exit
+		    var exit = facingExit(player);
+		    if(exit)
+		    {
+			// check if going through a door
+			if(exit.isDoor=='1')
+			{
+			    exit.startAnim();
+			    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
+			    player.moveWhen = 336.7 + new Date().getTime();
+			    player.moveWaiting = true;
+			    player.moveDoor = exit;
+			    cancelMove = true; // prevent player from starting to move too soon
+			}
+			// not a door
+			else
+			{
+			    if(player.facing=='down') exit.startAnim(); // approaching floor exit
+			}
+		    }
+		
+		    // if no exits have taken place, move
+		    if(!cancelMove) player.startMove();
+		}
 	    }
-	    // emit players faced direction, if changed
-	    if(!player.facingUpdated && player.facing!=player.facingLast)
+	    else
 	    {
-		emitDirection(player.name, player.facing);
-		player.facingUpdated = true;
+		// can't move, set slow walk animation
+		switch(player.facing)
+		{
+		    case 'left':
+			player.currentAnim = player.anims.slowleft;
+			break;
+		    case 'right':
+			player.currentAnim = player.anims.slowright;
+			break;
+		    case 'up':
+			player.currentAnim = player.anims.slowup;
+			break;
+		    case 'down':
+			player.currentAnim = player.anims.slowdown;
+			break;
+		}
+		// emit players faced direction, if changed
+		if(!player.facingUpdated && player.facing!=player.facingLast)
+		{
+		    emitDirection(player.name, player.facing);
+		    player.facingUpdated = true;
+		}
 	    }
 	}
     }
@@ -513,7 +542,7 @@ ig.module (
 		    animSheet: new ig.AnimationSheet( 'media/main_brendan-walk.png', 16, 32 ),
 		    
 		    facing: "down",
-		    facingLast: "down",
+		    facingLast: '',
 		    facingUpdated: false,
 		    isMove: false, // waiting for move key-press
 		    leftFoot: true, // used to alternate step animations
@@ -522,7 +551,9 @@ ig.module (
 		    moveWaiting: false, // used for waiting while a door opens
 		    moveWhen: 0, // system time in ms to wait before moving
 		    moveDoor: false, // contains exit entity to use after moveWhen
-		    
+		    moveCommitPending: false, // helps decide whether to move or just change direction
+		    moveCommitWhen: 0, // system time in ms when will commit to a move
+		    moveCommitDirection: '',
 		    
 		    startMove: function()
 		    {
