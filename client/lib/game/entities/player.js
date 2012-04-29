@@ -86,14 +86,10 @@ ig.module (
 	switch(player.facing)
 	{
 	    case 'left':
-		player.pos.x = player.destination;
-		break;
 	    case 'right':
 		player.pos.x = player.destination;
 		break;
 	    case 'up':
-		player.pos.y = player.destination;
-		break;
 	    case 'down':
 		player.pos.y = player.destination;
 		break;
@@ -138,20 +134,7 @@ ig.module (
 		player.isMove = false;
 		player.vel.x = player.vel.y = 0;
 		moveAnimStop(player);
-	    }
-	    
-	    /*
-	     // turn off floor exit animations
-	    turnOffExitAnimations();
-	    
-	    // turn on floor exit animations
-	    var exit = overExit(player);
-	    if(exit && exit.isDoor!='1' && player.facing=='down')
-	    {
-		exit.startAnim(); // turn on exit arrow
-	    }
-	    */
-    
+	    }  
 	}
 	// continue to destination
 	else
