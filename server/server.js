@@ -81,7 +81,7 @@ io.sockets.on('connection', function (socket)
     
     socket.on('playerLeaveZone', function ()
     {
-        socket.broadcast.to(socket.roomname).emit('playerLeftZone', socket.clientname);
+	socket.broadcast.to(socket.roomname).emit('dropPlayer', socket.clientname);
 	socket.roomname = 'limbo'; 
 	socket.join(socket.roomname);
     });

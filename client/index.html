@@ -154,22 +154,6 @@ socket.on('updateOtherPlayer', function (client, direction) {
 		  }
 	 }
 });
-
-socket.on('playerLeftZone', function (client) {
-	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
-	 if(otherplayer)
-	 {
-		  for(var i in otherplayer)
-		  {
-			   if(client == otherplayer[i].name)
-			   {
-				    otherplayer[i].kill();
-				    break; // because client names are unique
-			   }
-		  }
-	 }
-});
-	  
 	  
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction) {
@@ -205,7 +189,7 @@ socket.on('addAllPlayers', function (players) {
 
 socket.on('dropPlayer', function (client)
 {
-	 ig.game.messageBoxPrint(ig.game, client + ' disconnected.' );
+	 ig.game.messageBoxPrint(ig.game, client + ' left the room.' );
 	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(netplayers)
 	 {
