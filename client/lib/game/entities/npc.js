@@ -125,21 +125,21 @@ ig.module (
     // returns true if no collision will occur
     // in the direction the player faces
     {
-	var vx = vy = 0;
-	var tilesize = 16; // this should not be here!!
+	var vx = 0;
+	var vy = 0;
 	switch(player.facing)
 	{
 	    case 'left':
-		vx = -tilesize;
+		vx = -1;
 		break;
 	    case 'right':
-		vx = tilesize;
+		vx = 1;
 		break;
 	    case 'up':
-		vy = -tilesize;
+		vy = -1;
 		break;
 	    case 'down':
-		vy = tilesize;
+		vy = 1;
 		break;
 	}
 	// check map collisions
