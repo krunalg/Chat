@@ -48,7 +48,7 @@ MyGame = ig.Game.extend({
 		var y = 0
 		var facing = 'up';
 		
-		if(goTo==null)
+		if(this.goTo==null)
 		{
 			// first time drawing player, use database
 			if( (jsonPos.x!=-1) && (jsonPos.y!=-1) )
