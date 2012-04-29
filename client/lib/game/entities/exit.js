@@ -49,9 +49,9 @@ EntityExit = ig.Entity.extend({
 		{
 			this.offset.y = 4;		
 			this.animSheet = new ig.AnimationSheet( 'media/door-animations.png', 16, 20 );
-			this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3] );
+			this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3], true );
 			this.addAnim( 'opened', 0.0167, [3] );
-			this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0] );
+			this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0], true );
 			this.addAnim( 'closed', 0.0167, [0] );
 			this.currentAnim = this.anims.closed; // default state	
 		}
