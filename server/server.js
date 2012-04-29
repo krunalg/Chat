@@ -136,7 +136,7 @@ io.sockets.on('connection', function (socket)
     });
     
     socket.on('receiveSay', function (client, msg) {
-        socket.broadcast.emit('newMsg', client, msg);
+        socket.broadcast.to(socket.roomname).emit('newMsg', client, msg);
     });
     
     socket.on('receiveTell', function (to, msg) {
@@ -164,7 +164,7 @@ io.sockets.on('connection', function (socket)
             }
         }
 
-        socket.broadcast.emit('dropPlayer',socket.clientname);
+        socket.broadcast.to(socket.roomname).emit('dropPlayer',socket.clientname);
         
     });
  
