@@ -46,7 +46,7 @@ MyGame = ig.Game.extend({
 	{
 		var x = 0
 		var y = 0
-		var direction = 'up';
+		var direction = 'right'; // should never stay this way in-game
 		
 		if(this.goTo==null)
 		{
@@ -69,7 +69,12 @@ MyGame = ig.Game.extend({
 				       if(exits[i].me==this.goTo)
 				       {
 					   var oy = 0;
-					   if(exits[i].isDoor == '1') oy += 16; // magic number!! BAD!
+					   if(exits[i].isDoor == '1')
+					   {
+						oy += 16; // magic number!! BAD!
+						direction = 'down';
+					   }
+					   else direction = 'up';
 					   x = exits[i].pos.x;
 					   y = exits[i].pos.y + oy;
 				       }
