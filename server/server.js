@@ -61,7 +61,8 @@ io.sockets.on('connection', function (socket)
 		// update server records
 		players[i].pos.x = x;
 		players[i].pos.y = y;
-		players[i].pos.facing = direction;
+		players[i].facing = direction;
+		players[i].room = socket.roomname;
 		break; // because names are unique
 	    }
 	}
