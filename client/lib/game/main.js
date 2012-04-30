@@ -4,13 +4,21 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
+	
+	// levels
 	'game.levels.town',
 	'game.levels.route101',
 	'game.levels.lab',
+	
 	'game.entities.player', // everything seems to work without it
+	
+	//debug
 	'impact.debug.debug',
+	'plugins.astar-for-entities-debug',
+	
+	// plugins
+	'plugins.astar-for-entities',
 	'plugins.impact-splash-loader'
-	//'plugins.director.director'
 )
 .defines(function(){
 
