@@ -217,7 +217,7 @@ MyGame = ig.Game.extend({
 		// start talking with network
 		socket.emit('init',username);
 		
-		// Initialize your game here; bind keys etc.
+		// controls
 		ig.input.bind( ig.KEY.A, 'left' );
 		ig.input.bind( ig.KEY.D, 'right' );
 		ig.input.bind( ig.KEY.W, 'up' );
@@ -229,6 +229,7 @@ MyGame = ig.Game.extend({
 		ig.input.bind( ig.KEY.ENTER, 'chatToggle' );
 		ig.input.bind( ig.KEY.R, 'chatReply' );
 		ig.input.bind( ig.KEY.Z, 'action' );
+		ig.input.bind( ig.KEY.MOUSE1, 'leftClick');
 		
 		
 		// set up animated map tiles
