@@ -605,8 +605,17 @@ ig.module (
 		    update: function() {
 			
 			
+			// handle mouse click pathfinding
+			if (ig.input.pressed('leftClick')) {
+				var runtimeStart = new Date();
+				this.getPath(ig.input.mouse.x + ig.game.screen.x, ig.input.mouse.y + ig.game.screen.y);
+				var runtimeEnd = new Date();
+				ig.log('getPath runtime: ' + (runtimeEnd - runtimeStart));
+			}
+			this.followPath(this.speed);
 			
-			// action
+			
+			// action (like reading a sign or talking to npc)
 			if(ig.input.pressed('action') && !this.isMove)
 			{
 				action(this);	    
