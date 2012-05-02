@@ -553,12 +553,11 @@ ig.module (
 		    speed: 69,
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
-		    type: ig.Entity.TYPE.A,
 		    zIndex: 1,
 		    nameFont: new ig.Font( 'media/04b03.font.png' ),
 		    
-		    checkAgainst: ig.Entity.TYPE.NONE,
 		    type: ig.Entity.TYPE.A,
+		    checkAgainst: ig.Entity.TYPE.NONE,
 		    collides: ig.Entity.COLLIDES.PASSIVE,
 		    animSheet: new ig.AnimationSheet( 'media/main_brendan-walk.png', 16, 32 ),
 		    
