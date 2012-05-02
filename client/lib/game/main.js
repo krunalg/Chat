@@ -352,6 +352,6 @@ ig.main( '#canvas', MyGame, 60, 480, 320, 2 );
 // Start the Game with 60fps, a resolution of 320x240, scaled
 // up by a factor of 2
 // Use the ig.ImpactSplashLoader class as the preloader
-ig.main( '#canvas', MyGame, 60, 480, 320, 2, ig.ImpactSplashLoader );
+ig.main( '#canvas', MyGame, 60, 240, 160, 2, ig.ImpactSplashLoader );
 
 });
