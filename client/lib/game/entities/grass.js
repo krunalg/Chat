@@ -14,10 +14,19 @@ EntityGrass = ig.Entity.extend({
 		this.parent( x, y, settings );
 		
 		this.addAnim( 'rustle', 0.1667, [0,1,2,3,4], true ); // 10 frames of 60 per
-		this.currentAnim = this.anims.rustle;
+		this.currentAnim = null; // invisible by default
 	},	
 	
-	update: function(){}
+	play: function()
+	{
+		this.currentAnim = this.anims.rustle;
+		this.currentAnim.rewind();
+	},
+	
+	update: function()
+	{
+		this.parent();
+	}
 });
 
 });
