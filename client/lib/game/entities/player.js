@@ -369,7 +369,7 @@ ig.module (
 		if( (signs[i].pos.x == player.pos.x + vx) &&
 		       (signs[i].pos.y == player.pos.y + vy) )
 		{
-		    ig.game.messages.push('Sign: ' + signs[i].message);
+		    ig.game.messages.push('Sign: ' + signs[i].msg);
 		    ig.game.rebuildMessageBox(ig.game);
 		}
 	    }
@@ -384,7 +384,7 @@ ig.module (
 		if( (npcs[i].pos.x == player.pos.x + vx) &&
 		       (npcs[i].pos.y == player.pos.y + vy) )
 		{
-		    ig.game.messages.push(npcs[i].name + ': ' + npcs[i].message);
+		    ig.game.messages.push(npcs[i].name + ': ' + npcs[i].msg);
 		    ig.game.rebuildMessageBox(ig.game);
 		}
 	    }
