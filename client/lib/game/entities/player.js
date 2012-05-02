@@ -716,6 +716,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    speed: 69,
 	    name: "otherplayer",
 	    animation: 1,
+	    nameFont: new ig.Font( 'media/04b03.font.bl.png' ),
 	    
 	    //checkAgainst: ig.Entity.TYPE.B,
 	    collides: ig.Entity.COLLIDES.PASSIVE,
@@ -770,6 +771,19 @@ EntityOtherplayer = ig.Entity.extend({
 		this.isMove = true;
 		setMoveDestination(this);
 		moveAnimStart(this, true);
+	    },
+	    
+	    draw: function() {
+			
+		// draw players name above head
+		this.nameFont.draw(
+			this.name,
+			this.pos.x - ig.game.screen.x + this.size.x/2,
+			this.pos.y - ig.game.screen.y - this.size.y,
+			ig.Font.ALIGN.CENTER
+		    );
+		
+		this.parent();
 	    },
 	    
 	    update: function()
