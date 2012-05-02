@@ -1,3 +1,5 @@
+// modified to skip checking of diagonals
+
 /**
 * astar-for-entities
 * https://github.com/hurik/impact-astar-for-entities
@@ -149,6 +151,8 @@ ig.Entity.inject({
             // Now create all 8 neighbors of the node
             for (var dx = -1; dx <= 1; dx++) {
                 for (var dy = -1; dy <= 1; dy++) {
+                    if (Math.abs(dx) == Math.abs(dy)) continue; // skip checking of diagonals
+                    
                     // Don't check the parent node, which is in the middle
                     if (dx == 0 && dy == 0) {
                         continue;
