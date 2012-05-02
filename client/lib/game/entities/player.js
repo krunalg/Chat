@@ -558,6 +558,7 @@ ig.module (
 		    nameFont: new ig.Font( 'media/04b03.font.png' ),
 		    
 		    checkAgainst: ig.Entity.TYPE.NONE,
+		    type: ig.Entity.TYPE.A,
 		    collides: ig.Entity.COLLIDES.PASSIVE,
 		    animSheet: new ig.AnimationSheet( 'media/main_brendan-walk.png', 16, 32 ),
 		    
