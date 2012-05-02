@@ -56,7 +56,42 @@ EntityTrigger = ig.Entity.extend({
 	
 	
 	check: function( other ) {
-		if( this.canFire && this.waitTimer.delta() >= 0 ) {
+		console.debug("Just walked onto the lawn.");
+		
+		// the very first time this is triggered do...
+		
+		// find out where the player is headed
+		var dx = 0; // destination x
+		var dy = 0; // and y
+		var mapTilesize = ig.game.collisionMap.tilesize;
+		switch(other.facing)
+		{
+			case 'left':
+			case 'right':
+				dx = other.destination;
+				dy = other.pos.y;
+				break;
+			case 'up':
+			case 'down':
+				dx = other.pos.x;
+				dy = other.destination;
+				break;
+		}
+		
+		// immediately generate a properly timed
+		// grass-particle animation
+		
+		// after the during of the animation has past
+		// continue to check if player stays or moves
+		
+		// if player moves, wait a set time and then
+		// kill the last grass particle
+		// while at the same time starting a new
+		// one if nessesary
+		
+		
+		
+		/*if( this.canFire && this.waitTimer.delta() >= 0 ) {
 			if( typeof(this.target) == 'object' ) {
 				for( var t in this.target ) {
 					var ent = ig.game.getEntityByName( this.target[t] );
@@ -72,7 +107,7 @@ EntityTrigger = ig.Entity.extend({
 			else {
 				this.waitTimer.set( this.wait );
 			}
-		}
+		}*/
 	},
 	
 	
