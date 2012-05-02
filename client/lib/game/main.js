@@ -10,7 +10,8 @@ ig.module(
 	'game.levels.route101',
 	'game.levels.lab',
 	
-	'game.entities.player', // everything seems to work without it
+	'game.entities.player',
+	'game.entities.grass',
 	
 	//debug
 	'impact.debug.debug',

@@ -78,8 +78,8 @@ EntityTrigger = ig.Entity.extend({
 				break;
 		}
 		
-		// immediately generate a properly timed
-		// grass-particle animation
+		// spawn grass effect entity to the players destination
+		ig.game.spawnEntity( EntityGrass, dx, dy, {} );
 		
 		// after the during of the animation has past
 		// continue to check if player stays or moves
