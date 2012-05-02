@@ -532,11 +532,9 @@ ig.module (
 		    speed: 69,
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
-		    messagebox: "",
 		    type: ig.Entity.TYPE.A,
 		    zIndex: 1,
 		    
-		    messageboxtimer: 200,
 		    checkAgainst: ig.Entity.TYPE.NONE,
 		    collides: ig.Entity.COLLIDES.PASSIVE,
 		    animSheet: new ig.AnimationSheet( 'media/main_brendan-walk.png', 16, 32 ),

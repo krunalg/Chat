@@ -286,14 +286,21 @@ MyGame = ig.Game.extend({
 			// all player to approach the edge of the map
 			// without exposing where no tiles exists
 			
-			var howCloseTop = 5; // how close player can get to top of map without seeing past
-			var howCloseLeft = 7; // how close player can go to left of map without seeing past
-			if(player.pos.x <= (howCloseLeft*16)) this.screen.x = 0;
-			if(player.pos.y <= (howCloseTop*16)) this.screen.y = 0; 
-			if(player.pos.x >= this.collisionMap.width * this.collisionMap.tilesize - (howCloseLeft+1)*this.collisionMap.tilesize )
-				this.screen.x = this.collisionMap.width * this.collisionMap.tilesize - ig.system.width;
-			if(player.pos.y >= this.collisionMap.height * this.collisionMap.tilesize - howCloseTop*this.collisionMap.tilesize )
-				this.screen.y = this.collisionMap.height * this.collisionMap.tilesize - ig.system.height;
+			if(ig.system.width / this.collisionMap.tilesize <= this.collisionMap.width)
+			{
+				var howCloseLeft = 7; // how close player can go to left of map without seeing past
+				if(player.pos.x <= (howCloseLeft*16)) this.screen.x = 0;
+				if(player.pos.x >= this.collisionMap.width * this.collisionMap.tilesize - (howCloseLeft+1)*this.collisionMap.tilesize )
+					this.screen.x = this.collisionMap.width * this.collisionMap.tilesize - ig.system.width;
+			}
+			if(ig.system.height / this.collisionMap.tilesize <= this.collisionMap.width)
+			{
+				var howCloseTop = 5; // how close player can get to top of map without seeing past
+				if(player.pos.y <= (howCloseTop*16)) this.screen.y = 0; 
+				if(player.pos.y >= this.collisionMap.height * this.collisionMap.tilesize - howCloseTop*this.collisionMap.tilesize )
+					this.screen.y = this.collisionMap.height * this.collisionMap.tilesize - ig.system.height;
+			}
+			
 			
 		}
 		
@@ -326,33 +333,10 @@ MyGame = ig.Game.extend({
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
-		
-		var player = this.getEntitiesByType( EntityPlayer )[0];
-		// Add your own drawing code here
-		player.messageboxtimer = player.messageboxtimer - 1;
-		
-		if(player.messageboxtimer < 1)
-		{
-			player.messageboxtimer = 100;
-			var newtext = "";
-			var newsplit = player.messagebox.split("\n");
-			for(var i = 0;i < newsplit.length; i++)
-			{
-				if(i > 1)
-				{
-					newtext = newtext + "\n" + newsplit[i];
-				}
-			}
-		
-		player.messagebox = newtext;
-		}
-		
-		this.font.draw( player.messagebox, 350, 10);
-		
+
 		// put the player name above his head
+		var player = this.getEntitiesByType( EntityPlayer )[0];
 		this.font2.draw( player.name, ig.system.width/2, ig.system.height/2-16, ig.Font.ALIGN.CENTER);
-		
-		//this.debugfont.draw( ig.game.backgroundMaps[0], 10, 10);
 	}
 });
 
