@@ -612,7 +612,7 @@ ig.module (
 				var runtimeEnd = new Date();
 				ig.log('getPath runtime: ' + (runtimeEnd - runtimeStart));
 			}
-			this.followPath(this.speed);
+			//this.followPath(this.speed);
 			
 			
 			// action (like reading a sign or talking to npc)
