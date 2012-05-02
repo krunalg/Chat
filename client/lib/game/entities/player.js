@@ -534,6 +534,7 @@ ig.module (
 		    offset: { x: 0, y: 16 },
 		    type: ig.Entity.TYPE.A,
 		    zIndex: 1,
+		    nameFont: new ig.Font( 'media/04b03.font.png' ),
 		    
 		    checkAgainst: ig.Entity.TYPE.NONE,
 		    collides: ig.Entity.COLLIDES.PASSIVE,
@@ -599,7 +600,20 @@ ig.module (
 			    netInit(this);
 			}
 		    },
-		    		    
+		    
+		    draw: function() {
+			
+			// draw players name above head
+			this.nameFont.draw(
+				this.name,
+				this.pos.x - ig.game.screen.x + this.size.x/2,
+				this.pos.y - ig.game.screen.y - this.size.y + 4,
+				ig.Font.ALIGN.CENTER
+			    );
+			
+			this.parent();
+		    },
+		    
 		    update: function() {
 			
 			
