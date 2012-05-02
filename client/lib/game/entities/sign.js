@@ -19,7 +19,7 @@ ig.module (
 		    init: function( x, y, settings ) {
 			this.parent( x, y, settings );
                         
-                        this.msg = '', // text displayed upon interaction
+                        //this.msg = '', // text displayed upon interaction
 			
                         // add the animations
                         this.addAnim( 'weltmeister', 0.1, [3] );
