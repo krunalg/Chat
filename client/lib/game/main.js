@@ -237,7 +237,7 @@ MyGame = ig.Game.extend({
 		this.backgroundAnims = {
 		    'media/starter-towna.png': {
 			// flower
-			4: new ig.Animation( as, 0.9, [0,1,0,2] )
+			4: new ig.Animation( as, 0.26667, [0,1,0,2] )
 		    }
 		};
 		
