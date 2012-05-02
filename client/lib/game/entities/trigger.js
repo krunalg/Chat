@@ -56,6 +56,7 @@ EntityTrigger = ig.Entity.extend({
 	
 	
 	check: function( other ) {
+		/*
 		console.debug("Just walked onto the lawn.");
 		
 		// the very first time this is triggered do...
@@ -78,8 +79,10 @@ EntityTrigger = ig.Entity.extend({
 				break;
 		}
 		
-		// spawn grass effect entity to the players destination
-		ig.game.spawnEntity( EntityGrass, dx, dy, {} );
+		// check if player destination is within this triggers dimentions
+		
+			// spawn grass effect entity to the players destination
+			ig.game.spawnEntity( EntityGrass, dx, dy, {} );
 		
 		// after the during of the animation has past
 		// continue to check if player stays or moves
@@ -89,7 +92,7 @@ EntityTrigger = ig.Entity.extend({
 		// while at the same time starting a new
 		// one if nessesary
 		
-		
+		*/
 		
 		/*if( this.canFire && this.waitTimer.delta() >= 0 ) {
 			if( typeof(this.target) == 'object' ) {
