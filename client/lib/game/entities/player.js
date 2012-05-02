@@ -607,7 +607,7 @@ ig.module (
 			this.nameFont.draw(
 				this.name,
 				this.pos.x - ig.game.screen.x + this.size.x/2,
-				this.pos.y - ig.game.screen.y - this.size.y + 4,
+				this.pos.y - ig.game.screen.y - this.size.y,
 				ig.Font.ALIGN.CENTER
 			    );
 			
