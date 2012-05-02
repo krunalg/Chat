@@ -282,6 +282,19 @@ MyGame = ig.Game.extend({
 		if( player ) {
 			this.screen.x = player.pos.x - ig.system.width/2 + player.size.x/2;
 			this.screen.y = player.pos.y - ig.system.height/2;
+			
+			// all player to approach the edge of the map
+			// without exposing where no tiles exists
+			
+			var howCloseTop = 5; // how close player can get to top of map without seeing past
+			var howCloseLeft = 7; // how close player can go to left of map without seeing past
+			if(player.pos.x <= (howCloseLeft*16)) this.screen.x = 0;
+			if(player.pos.y <= (howCloseTop*16)) this.screen.y = 0; 
+			if(player.pos.x >= this.collisionMap.width * this.collisionMap.tilesize - (howCloseLeft+1)*this.collisionMap.tilesize )
+				this.screen.x = this.collisionMap.width * this.collisionMap.tilesize - ig.system.width;
+			if(player.pos.y >= this.collisionMap.height * this.collisionMap.tilesize - howCloseTop*this.collisionMap.tilesize )
+				this.screen.y = this.collisionMap.height * this.collisionMap.tilesize - ig.system.height;
+			
 		}
 		
 		// Check for player wanting to chat
