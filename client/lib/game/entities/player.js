@@ -226,6 +226,7 @@ ig.module (
 	var res = ig.game.collisionMap.trace( player.pos.x, player.pos.y, vx, vy, player.size.x, player.size.y );
 	if(res.collision.x || res.collision.y) return false;
 	
+	/* // Don't bother checking collisions agains signs
 	// check sign collisions
 	var signs = ig.game.getEntitiesByType( EntitySign );
 	if(signs)
@@ -239,6 +240,7 @@ ig.module (
 		}
 	    }
 	}
+	*/
 	
 	// check npc collisions
 	var npcs = ig.game.getEntitiesByType( EntityNpc );
