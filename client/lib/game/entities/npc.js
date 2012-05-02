@@ -279,6 +279,7 @@ ig.module (
 		    size: {x: 16, y: 16},
 		    type: ig.Entity.TYPE.A,
 		    animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
+		    nameFont: new ig.Font( 'media/04b03.font.gr.png' ),
 		    
 		    facing: "down",
 		    facingLast: "down",
@@ -370,6 +371,20 @@ ig.module (
 			this.anims.idleright.flip.x = true;
 			// set initial animation
 			this.currentAnim = this.anims.idledown;
+		    },
+		    
+		    draw: function()
+		    {
+			
+			// draw name above head
+			this.nameFont.draw(
+				this.name,
+				this.pos.x - ig.game.screen.x + this.size.x/2,
+				this.pos.y - ig.game.screen.y - this.size.y,
+				ig.Font.ALIGN.CENTER
+			    );
+			
+			this.parent();
 		    },
 		    
 		    update: function() {
