@@ -637,6 +637,7 @@ ig.module (
 		    
 		    update: function() {
 			
+			this.parent();
 			
 			// handle mouse click pathfinding
 			if (ig.input.pressed('leftClick')) {
@@ -720,7 +721,7 @@ ig.module (
 			
 			
 			// IMPORANT! DON'T TOUCH!!
-			this.parent();
+			//this.parent();
 			    
 		    }
 		});
