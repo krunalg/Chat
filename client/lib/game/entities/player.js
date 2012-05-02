@@ -123,16 +123,35 @@ ig.module (
 	    // ensure player is at legal coordinates
 	    alignToGrid(player);
 	    
-	    // check if we should go another time
-	    if( moveStillPressed(player.facing) && canMove(player) )
+	    // stop player
+	    player.vel.x = player.vel.y = 0;
+	    
+	    // check if we should continue moving
+	    if(moveStillPressed('left'))
 	    {
-		player.startMove();
+		player.facing = 'left';
+		if(canMove(player)) player.startMove();
+	    }
+	    else if(moveStillPressed('right'))
+	    {
+		player.facing = 'right';
+		if(canMove(player)) player.startMove();
+	    }
+	    else if(moveStillPressed('up'))
+	    {
+		player.facing = 'up';
+		if(canMove(player)) player.startMove();
+	    }
+	    else if(moveStillPressed('down'))
+	    {
+		player.facing = 'down';
+		if(canMove(player)) player.startMove();
 	    }
 	    else 
 	    {
 		// end move state
 		player.isMove = false;
-		player.vel.x = player.vel.y = 0;
+		//player.vel.x = player.vel.y = 0;
 		moveAnimStop(player);
 	    }  
 	}
