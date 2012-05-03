@@ -189,6 +189,23 @@ socket.on('addAllPlayers', function (players) {
 	 }
 });
 
+
+socket.on('reskinOtherPlayer', function (client, skin) {
+	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 if(otherplayer)
+	 {
+		  for(var i in otherplayer)
+		  {
+			   if(client == otherplayer[i].name)
+			   {
+				    otherplayer[i].skin = skin;
+				    otherplayer[i].reskin();
+				    break; // because client names are unique
+			   }
+		  }
+	 }
+});
+
 socket.on('dropPlayer', function (client)
 {
 	 ig.game.messageBoxPrint(ig.game, client + ' left the room.' );

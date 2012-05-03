@@ -661,11 +661,11 @@ ig.module (
 			}
 		    },
 		    
-		    reskin: function(skin)
+		    reskin: function()
 		    {
-			if(skin)
+			if(this.skin)
 			{
-			    switch(skin)
+			    switch(this.skin)
 			    {
 				// kind of like enum
 				case 'boy':
@@ -673,7 +673,7 @@ ig.module (
 				case 'fat':
 				case 'kid':
 				case 'labgeek':
-				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + skin + '.png', 16, 32 );
+				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + this.skin + '.png', 16, 32 );
 				    break;
 				default:
 				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
@@ -846,11 +846,11 @@ EntityOtherplayer = ig.Entity.extend({
 		this.reskin(this.skin);
 	    },
 	    
-	    reskin: function(skin)
+	    reskin: function()
 	    {
-		if(skin)
+		if(this.skin)
 		{
-		    switch(skin)
+		    switch(this.skin)
 		    {
 			// kind of like enum
 			case 'boy':
@@ -858,7 +858,7 @@ EntityOtherplayer = ig.Entity.extend({
 			case 'fat':
 			case 'kid':
 			case 'labgeek':
-			    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + skin + '.png', 16, 32 );
+			    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + this.skin + '.png', 16, 32 );
 			    break;
 			default:
 			    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
