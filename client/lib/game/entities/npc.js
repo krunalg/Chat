@@ -270,6 +270,63 @@ ig.module (
 	return url;
     }
     
+    var facingGrass = function(player)
+    // returns a grass entity if player is facing one
+    // otherwise returns false
+    {
+	var vx = vy = 0;
+	var tilesize = ig.game.collisionMap.tilesize;
+	switch(player.facing)
+	{
+	    case 'left':
+		vx = -tilesize;
+		break;
+	    case 'right':
+		vx = tilesize;
+		break;
+	    case 'up':
+		vy = -tilesize;
+		break;
+	    case 'down':
+		vy = tilesize;
+		break;
+	}
+	// check for collision against grass entity
+	var allGrass = ig.game.getEntitiesByType( EntityGrass );
+	if(allGrass)
+	{
+	    for(var i=0; i<allGrass.length; i++)
+	    {
+		if( allGrass[i].pos.x == player.pos.x + vx &&
+		    allGrass[i].pos.y == player.pos.y + vy )
+		{
+		    return allGrass[i];
+		}
+	    }
+	}
+	return false;
+    }
+    
+    var inGrass = function(player)
+    // returns a grass entity if player is in one
+    // otherwise returns false
+    {
+	// check for collision against grass entity
+	var allGrass = ig.game.getEntitiesByType( EntityGrass );
+	if(allGrass)
+	{
+	    for(var i=0; i<allGrass.length; i++)
+	    {
+		if( allGrass[i].pos.x == player.pos.x &&
+		    allGrass[i].pos.y == player.pos.y )
+		{
+		    return allGrass[i];
+		}
+	    }
+	}
+	return false;
+    }
+    
    
 		EntityNpc = ig.Entity.extend({
 		    
@@ -280,6 +337,7 @@ ig.module (
 		    size: {x: 16, y: 16},
 		    type: ig.Entity.TYPE.A,
 		    animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
+		    zIndex: 1,
 		    
 		    facing: "down",
 		    facingLast: "down",
@@ -307,6 +365,12 @@ ig.module (
 		    
 		    startMove: function()
 		    {
+			var newGrass = facingGrass(this);
+			if(newGrass) newGrass.play();
+			
+			var oldGrass = inGrass(this);
+			if(oldGrass) oldGrass.hide();
+			
 			this.isMove = true;
 			setMoveDestination(this);
 			moveAnimStart(this);
