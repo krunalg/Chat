@@ -346,6 +346,7 @@ ig.module (
 		    moveUnit: 16, // per unit of travel
 		    destination: 0, // used for both x and y planes
 		    
+		    // NPC movement patterns
 		    movePattern: ['left','up','right','down'],
 		    moveNext: 0,
 		    lastMove: new Date().getTime(),
