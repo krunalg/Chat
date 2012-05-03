@@ -631,6 +631,8 @@ ig.module (
 		    moveCommitWhen: 0, // system time in ms when will commit to a move
 		    moveCommitDirection: '',
 		    
+		    skin: 'boy',
+		    
 		    startMove: function()
 		    {
 			this.isMove = true;
@@ -648,37 +650,60 @@ ig.module (
 		    init: function( x, y, settings ) {
 			this.parent( x, y, settings );
 			
-			// add the animations
-			var walkRate = 0.13125;
-			this.addAnim( 'walkUpA', walkRate, [2,0,0] );
-			this.addAnim( 'walkUpB', walkRate, [1,0,0] );
-			this.addAnim( 'walkDownA', walkRate, [8,6,6] );
-			this.addAnim( 'walkDownB', walkRate, [7,6,6] );
-			this.addAnim( 'walkLeftA', walkRate, [5,3,3] );
-			this.addAnim( 'walkLeftB', walkRate, [4,3,3] );
-			this.addAnim( 'walkRightA', walkRate, [5,3,3] );
-			this.addAnim( 'walkRightB', walkRate, [4,3,3] );
-			this.addAnim( 'slowup', walkRate*2, [2,0,1,0] );
-			this.addAnim( 'slowdown', walkRate*2, [8,6,7,6] );
-			this.addAnim( 'slowleft', walkRate*2, [5,3,4,3] );
-			this.addAnim( 'slowright', walkRate*2, [5,3,4,3] );
-			this.addAnim( 'idleup', 0.1, [0] );
-			this.addAnim( 'idledown', 0.1, [6] );
-			this.addAnim( 'idleleft', 0.1, [3] );
-			this.addAnim( 'idleright', 0.1, [3] );
-			// flip right-facing animations
-			this.anims.walkRightA.flip.x = true;
-			this.anims.walkRightB.flip.x = true;
-			this.anims.slowright.flip.x = true;
-			this.anims.idleright.flip.x = true;
-			// set initial animation
-			this.currentAnim = null; // none
+			// set players appearance
+			this.reskin(this.skin);
 			
 			// things to skip if loaded in weltmeister
 			if(getFileName()!='weltmeister.html')
 			{
 			    // initiate network
 			    netInit(this);
+			}
+		    },
+		    
+		    reskin: function(skin)
+		    {
+			if(skin)
+			{
+			    switch(skin)
+			    {
+				case 'boy':
+				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
+				    break;
+				case 'girl':
+				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
+				    break;
+				case 'fat':
+				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
+				    break;
+				case 'kid':
+				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
+				    break;
+			    }
+			    // add the animations
+			    this.addAnim( 'walkUpA', 0.13125, [2,0,0] );
+			    this.addAnim( 'walkUpB', 0.13125, [1,0,0] );
+			    this.addAnim( 'walkDownA', 0.13125, [8,6,6] );
+			    this.addAnim( 'walkDownB', 0.13125, [7,6,6] );
+			    this.addAnim( 'walkLeftA', 0.13125, [5,3,3] );
+			    this.addAnim( 'walkLeftB', 0.13125, [4,3,3] );
+			    this.addAnim( 'walkRightA', 0.13125, [5,3,3] );
+			    this.addAnim( 'walkRightB', 0.13125, [4,3,3] );
+			    this.addAnim( 'slowup', .5, [2,0,1,0] );
+			    this.addAnim( 'slowdown', .5, [8,6,7,6] );
+			    this.addAnim( 'slowleft', .5, [5,3,4,3] );
+			    this.addAnim( 'slowright', .5, [5,3,4,3] );
+			    this.addAnim( 'idleup', 0.1, [0] );
+			    this.addAnim( 'idledown', 0.1, [6] );
+			    this.addAnim( 'idleleft', 0.1, [3] );
+			    this.addAnim( 'idleright', 0.1, [3] );
+			    // flip right-facing animations
+			    this.anims.walkRightA.flip.x = true;
+			    this.anims.walkRightB.flip.x = true;
+			    this.anims.slowright.flip.x = true;
+			    this.anims.idleright.flip.x = true;
+			    // set initial animation
+			    moveAnimStop(this);
 			}
 		    },
 		    
@@ -812,36 +837,56 @@ EntityOtherplayer = ig.Entity.extend({
 	    destination: 0, // used for both x and y planes
 	    moveUnit: 16, // per unit of travel
 	    
+	    skin: 'boy',
 	    
 	    init: function( x, y, settings )
 	    {
 		this.parent( x, y, settings );
 		this.health = 100;
 		
-		// add the animations
-		this.addAnim( 'walkUpA', 0.13125, [2,0,0] );
-		this.addAnim( 'walkUpB', 0.13125, [1,0,0] );
-		this.addAnim( 'walkDownA', 0.13125, [8,6,6] );
-		this.addAnim( 'walkDownB', 0.13125, [7,6,6] );
-		this.addAnim( 'walkLeftA', 0.13125, [5,3,3] );
-		this.addAnim( 'walkLeftB', 0.13125, [4,3,3] );
-		this.addAnim( 'walkRightA', 0.13125, [5,3,3] );
-		this.addAnim( 'walkRightB', 0.13125, [4,3,3] );
-		this.addAnim( 'slowup', .5, [2,0,1,0] );
-		this.addAnim( 'slowdown', .5, [8,6,7,6] );
-		this.addAnim( 'slowleft', .5, [5,3,4,3] );
-		this.addAnim( 'slowright', .5, [5,3,4,3] );
-		this.addAnim( 'idleup', 0.1, [0] );
-		this.addAnim( 'idledown', 0.1, [6] );
-		this.addAnim( 'idleleft', 0.1, [3] );
-		this.addAnim( 'idleright', 0.1, [3] );
-		// flip right-facing animations
-		this.anims.walkRightA.flip.x = true;
-		this.anims.walkRightB.flip.x = true;
-		this.anims.slowright.flip.x = true;
-		this.anims.idleright.flip.x = true;
-		// set initial animation
-		this.currentAnim = this.anims.idledown;
+		this.reskin(this.skin);
+	    },
+	    
+	    reskin: function(skin)
+	    {
+		if(skin)
+		{
+		    switch(skin)
+		    {
+			// kind of like enum
+			case 'boy':
+			case 'girl':
+			case 'fat':
+			case 'kid':
+			case 'labgeek':
+			    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + skin + '.png', 16, 32 );
+			    break;
+		    }
+		    // add the animations
+		    this.addAnim( 'walkUpA', 0.13125, [2,0,0] );
+		    this.addAnim( 'walkUpB', 0.13125, [1,0,0] );
+		    this.addAnim( 'walkDownA', 0.13125, [8,6,6] );
+		    this.addAnim( 'walkDownB', 0.13125, [7,6,6] );
+		    this.addAnim( 'walkLeftA', 0.13125, [5,3,3] );
+		    this.addAnim( 'walkLeftB', 0.13125, [4,3,3] );
+		    this.addAnim( 'walkRightA', 0.13125, [5,3,3] );
+		    this.addAnim( 'walkRightB', 0.13125, [4,3,3] );
+		    this.addAnim( 'slowup', .5, [2,0,1,0] );
+		    this.addAnim( 'slowdown', .5, [8,6,7,6] );
+		    this.addAnim( 'slowleft', .5, [5,3,4,3] );
+		    this.addAnim( 'slowright', .5, [5,3,4,3] );
+		    this.addAnim( 'idleup', 0.1, [0] );
+		    this.addAnim( 'idledown', 0.1, [6] );
+		    this.addAnim( 'idleleft', 0.1, [3] );
+		    this.addAnim( 'idleright', 0.1, [3] );
+		    // flip right-facing animations
+		    this.anims.walkRightA.flip.x = true;
+		    this.anims.walkRightB.flip.x = true;
+		    this.anims.slowright.flip.x = true;
+		    this.anims.idleright.flip.x = true;
+		    // set initial animation
+		    moveAnimStop(this);
+		}
 	    },
 	    
 	    netmoveplayer: function()
