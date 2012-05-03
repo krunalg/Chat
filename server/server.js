@@ -93,7 +93,7 @@ io.sockets.on('connection', function (socket)
     
     
     socket.on('receiveReskin', function (skin) {
-        socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', username, skin);
+        socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', socket.clientname, skin);
         for(var i in players)
         {
             if(players[i].name==socket.clientname)
