@@ -5,7 +5,8 @@ ig.module (
 
 .requires(
     
-    'impact.entity'
+    'impact.entity',
+    'impact.font'
 )
 .defines(function(){
     
@@ -279,7 +280,6 @@ ig.module (
 		    size: {x: 16, y: 16},
 		    type: ig.Entity.TYPE.A,
 		    animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
-		    nameFont: new ig.Font( 'media/04b03.font.gr.png' ),
 		    
 		    facing: "down",
 		    facingLast: "down",
@@ -341,6 +341,12 @@ ig.module (
 		    init: function( x, y, settings ) {
 			this.parent( x, y, settings );
 			
+			// things to skip if loaded in weltmeister
+			if(getFileName()!='weltmeister.html')
+			{
+			    this.nameFont = new ig.Font( 'media/04b03.font.gr.png' );
+			}
+			
 			// weltmeister icon
 			this.addAnim( 'weltmeister', 0.1, [1] );
 			this.currentAnim = this.anims.weltmeister;
@@ -375,14 +381,17 @@ ig.module (
 		    
 		    draw: function()
 		    {
-			
-			// draw name above head
-			this.nameFont.draw(
-				this.name,
-				this.pos.x - ig.game.screen.x + this.size.x/2,
-				this.pos.y - ig.game.screen.y - this.size.y,
-				ig.Font.ALIGN.CENTER
-			    );
+		    	// things to skip if loaded in weltmeister
+			if(getFileName()!='weltmeister.html')
+			{
+			    // draw name above head
+			    this.nameFont.draw(
+				    this.name,
+				    this.pos.x - ig.game.screen.x + this.size.x/2,
+				    this.pos.y - ig.game.screen.y - this.size.y,
+				    ig.Font.ALIGN.CENTER
+				);
+			}
 			
 			this.parent();
 		    },
