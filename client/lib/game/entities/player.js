@@ -334,7 +334,7 @@ ig.module (
     
     var netInit = function(player)
     {
-	socket.emit('hereIAm', player.pos.x, player.pos.y, player.facing, ig.game.mapName);	
+	socket.emit('hereIAm', player.pos.x, player.pos.y, player.facing, ig.game.mapName, player.skin);	
     }
     
     var emitDirection = function(client,direction)

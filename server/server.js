@@ -36,19 +36,20 @@ io.sockets.on('connection', function (socket)
 	console.log("Performing first time setup of " + user);
 	socket.emit('welcome', 'Welcome to the world.');
         
-	// set up user info object
+	// set up user info object with defaults
         var player = new Object();
         player.name = user;
         player.pos = new Object();
         player.pos.x = 0;
         player.pos.y = 0;
         player.facing = 'down';
+	player.skin = 'boy';
         player.session = socket.id;
 	player.room = 'limbo';
         players.push(player);
     });
     
-    socket.on('hereIAm', function (x, y, direction, mapname)
+    socket.on('hereIAm', function (x, y, direction, mapname, skin)
     {
         socket.roomname = mapname;
 	socket.join(socket.roomname);
@@ -62,6 +63,7 @@ io.sockets.on('connection', function (socket)
 		players[i].pos.x = x;
 		players[i].pos.y = y;
 		players[i].facing = direction;
+		players[i].skin = skin;
 		players[i].room = socket.roomname;
 		break; // because names are unique
 	    }
@@ -73,7 +75,7 @@ io.sockets.on('connection', function (socket)
 	    if(players[i].room==mapname && players[i].name!=socket.clientname)
 		playersToGiveSocket.push(players[i]);
 	}
-        socket.broadcast.to(mapname).emit('addPlayer', socket.clientname, x, y, direction);
+        socket.broadcast.to(mapname).emit('addPlayer', socket.clientname, x, y, direction, skin);
         
 	if(playersToGiveSocket.length>=1)
 	    socket.emit('addAllPlayers', playersToGiveSocket);    

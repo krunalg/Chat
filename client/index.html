@@ -156,12 +156,13 @@ socket.on('updateOtherPlayer', function (client, direction) {
 });
 	  
 // the new add player
-socket.on('addPlayer', function (user, x, y, direction) {
+socket.on('addPlayer', function (user, x, y, direction, skin) {
 	 var player = ig.game.getEntitiesByType( EntityPlayer )[0];
 	 ig.game.messageBoxPrint(ig.game, user + ' joined the room.' );
 	 ig.game.spawnEntity( EntityOtherplayer, x, y,
 	 {
 		  name: user,
+		  skin: skin,
 		  facing: direction,
 		  animation: 6
 	 } );
@@ -181,6 +182,7 @@ socket.on('addAllPlayers', function (players) {
 			   {
 				    name: players[i].name,
 				    facing: players[i].facing,
+				    skin: players[i].skin,
 				    animation:6
 			   } );
 		  }
