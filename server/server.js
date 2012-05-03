@@ -91,6 +91,18 @@ io.sockets.on('connection', function (socket)
 	socket.join(socket.roomname);
     });
     
+    
+    socket.on('receiveReskin', function (skin) {
+        socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', username, skin);
+        for(var i in players)
+        {
+            if(players[i].name==socket.clientname)
+            {
+                players[i].skin = skin; // update server record
+                break;
+            }
+        }
+    });
       
     socket.on('receiveMove', function (currX, currY, direction, client) {
         socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, client);
