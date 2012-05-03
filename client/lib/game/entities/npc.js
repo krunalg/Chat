@@ -367,9 +367,6 @@ ig.module (
 			var newGrass = facingGrass(this);
 			if(newGrass) newGrass.play();
 			
-			var oldGrass = inGrass(this);
-			if(oldGrass) oldGrass.hide();
-			
 			this.isMove = true;
 			setMoveDestination(this);
 			moveAnimStart(this);

@@ -639,9 +639,6 @@ ig.module (
 			var newGrass = facingGrass(this);
 			if(newGrass) newGrass.play();
 			
-			var oldGrass = inGrass(this);
-			if(oldGrass) oldGrass.hide();
-			
 			moveAnimStart(this, true);
 			emitMove(this.pos.x, this.pos.y, this.facing, this.name);
 			this.facingLast = this.facing;
@@ -857,9 +854,6 @@ EntityOtherplayer = ig.Entity.extend({
 	    {
 		var newGrass = facingGrass(this);
 		if(newGrass) newGrass.play();
-		
-		var oldGrass = inGrass(this);
-		if(oldGrass) oldGrass.hide();
 		
 		this.isMove = true;
 		setMoveDestination(this);
