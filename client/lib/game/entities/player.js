@@ -631,7 +631,7 @@ ig.module (
 		    moveCommitWhen: 0, // system time in ms when will commit to a move
 		    moveCommitDirection: '',
 		    
-		    skin: 'boy',
+		    skin: 'labgeek',
 		    
 		    startMove: function()
 		    {
@@ -667,16 +667,15 @@ ig.module (
 			{
 			    switch(skin)
 			    {
+				// kind of like enum
 				case 'boy':
-				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
-				    break;
 				case 'girl':
-				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
-				    break;
 				case 'fat':
-				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
-				    break;
 				case 'kid':
+				case 'labgeek':
+				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + skin + '.png', 16, 32 );
+				    break;
+				default:
 				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
 				    break;
 			    }
@@ -860,6 +859,9 @@ EntityOtherplayer = ig.Entity.extend({
 			case 'kid':
 			case 'labgeek':
 			    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + skin + '.png', 16, 32 );
+			    break;
+			default:
+			    this.animSheet = new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 );
 			    break;
 		    }
 		    // add the animations
