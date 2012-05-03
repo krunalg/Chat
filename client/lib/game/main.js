@@ -131,6 +131,7 @@ MyGame = ig.Game.extend({
 		messages: new Array(),
 		emitSay: function(client, msg) { socket.emit('receiveSay',client,msg); },
 		emitTell: function(to, msg) { socket.emit('receiveTell',to,msg); },
+		emitReskin: function(skin) { socket.emit('receiveReskin',skin); },
 		messageBoxPrint: function(game,msg)
 		{
 			game.messages.push(msg);
@@ -196,6 +197,14 @@ MyGame = ig.Game.extend({
 						game.emitSay( player.name, inputVal ); // send message to other players
 						game.rebuildMessageBox(ig.game);
 						//game.scrollMessageBox(ig.game); // now happens automatically
+					
+					}
+					else if(explodeInput[0]=='/skin')
+					{
+						var skin = explodeInput[1]; // name of skin
+						game.messages.push('Changing skin to: ' + skin);
+						game.emitReskin(skin);
+						game.rebuildMessageBox(ig.game);
 					
 					}
 					
