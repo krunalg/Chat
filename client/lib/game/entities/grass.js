@@ -34,7 +34,7 @@ EntityGrass = ig.Entity.extend({
 	hide: function()
 	{
 		console.debug("Hiding patch of grass");
-		this.currentAnim = null;
+		//this.currentAnim = null;
 		this.zIndex = 0; // below player
 		ig.game.sortEntitiesDeferred();
 	},

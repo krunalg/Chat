@@ -577,6 +577,26 @@ ig.module (
 	return false;
     }
     
+    var inGrass = function(player)
+    // returns a grass entity if player is in one
+    // otherwise returns false
+    {
+	// check for collision against grass entity
+	var allGrass = ig.game.getEntitiesByType( EntityGrass );
+	if(allGrass)
+	{
+	    for(var i=0; i<allGrass.length; i++)
+	    {
+		if( allGrass[i].pos.x == player.pos.x &&
+		    allGrass[i].pos.y == player.pos.y )
+		{
+		    return allGrass[i];
+		}
+	    }
+	}
+	return false;
+    }
+    
 
    
 		//////////////////
@@ -617,8 +637,11 @@ ig.module (
 			this.isMove = true;
 			setMoveDestination(this);
 			
-			var grass = facingGrass(this);
-			if(grass) grass.play();
+			var newGrass = facingGrass(this);
+			if(newGrass) newGrass.play();
+			
+			var oldGrass = inGrass(this);
+			if(oldGrass) oldGrass.hide();
 			
 			moveAnimStart(this, true);
 			emitMove(this.pos.x, this.pos.y, this.facing, this.name);
