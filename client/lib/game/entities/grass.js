@@ -12,6 +12,7 @@ EntityGrass = ig.Entity.extend({
 	coverTimer: null, // timer used to hide player behind grass
 	hideTimer: null, // used to make this entity invis after player leaves
 	zIndex: 0, // below player
+	checkAgainst: ig.Entity.TYPE.A,
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
@@ -36,7 +37,7 @@ EntityGrass = ig.Entity.extend({
 		// while player is touching entity continue resetting
 		// a timer which when it runs out, will make this entity invisible
 		if(this.hideTimer==null) this.hideTimer = new ig.Timer();
-		this.hideTimer.set(1);
+		this.hideTimer.set(0.1);
 	},
 	
 	update: function()
