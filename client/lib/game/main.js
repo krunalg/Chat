@@ -37,8 +37,7 @@ MyGame = ig.Game.extend({
 	
 	
 	defaultLevel: LevelTown,
-	//levelName: LevelRoute101,
-	//levelName: LevelLab,
+	lastSkin: 'boy', // used when rebuilding the player
 	goTo: null, // used to know where to place player when zoning
 	mapName: 'Town', // must capitalize first letter
 	//playerFirstBuild: true, // false after initial position is read from database
@@ -105,7 +104,8 @@ MyGame = ig.Game.extend({
 				 facing: direction,
 				 moveWaiting: true,
 				 moveWhen: 336.7 + new Date().getTime(),
-				 animation: 6
+				 animation: 6,
+				 skin: this.lastSkin
 			} );
 		}
 		else
@@ -114,7 +114,8 @@ MyGame = ig.Game.extend({
 			{
 				 name: username,
 				 facing: direction,
-				 animation: 6
+				 animation: 6,
+				 skin: this.lastSkin
 			} );
 		}
 		
@@ -205,6 +206,9 @@ MyGame = ig.Game.extend({
 						game.messages.push('Changing skin to: ' + skin);
 						game.emitReskin(skin);
 						game.rebuildMessageBox(ig.game);
+						player.skin = skin;
+						player.reskin();
+						game.lastSkin = skin;
 					
 					}
 					
