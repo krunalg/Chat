@@ -610,7 +610,7 @@ ig.module (
 		    speed: 69,
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
-		    zIndex: 1,
+		    zIndex: 2,
 		    nameFont: new ig.Font( 'media/04b03.font.png' ),
 		    
 		    type: ig.Entity.TYPE.A,
@@ -803,6 +803,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    name: "otherplayer",
 	    animation: 1,
 	    nameFont: new ig.Font( 'media/04b03.font.bl.png' ),
+	    zIndex: 1,
 	    
 	    //checkAgainst: ig.Entity.TYPE.B,
 	    collides: ig.Entity.COLLIDES.PASSIVE,
@@ -854,6 +855,12 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    netStartMove: function()
 	    {
+		var newGrass = facingGrass(this);
+		if(newGrass) newGrass.play();
+		
+		var oldGrass = inGrass(this);
+		if(oldGrass) oldGrass.hide();
+		
 		this.isMove = true;
 		setMoveDestination(this);
 		moveAnimStart(this, true);

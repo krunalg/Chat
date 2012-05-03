@@ -44,7 +44,7 @@ EntityGrass = ig.Entity.extend({
 		if(this.aboveTimer != null && this.aboveTimer.delta() >= 0)
 		{
 			console.debug("Putting patch of grass above player");
-			this.zIndex = 2; // above player
+			this.zIndex = 3; // above player and other player
 			ig.game.sortEntitiesDeferred();
 			delete this.aboveTimer;
 		}
