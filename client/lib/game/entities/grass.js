@@ -11,7 +11,6 @@ EntityGrass = ig.Entity.extend({
 	animSheet: new ig.AnimationSheet( 'media/grass-animation.png', 16, 16 ),
 	coverTimer: null, // timer used to hide player behind grass
 	hideTimer: null, // used to make this entity invis after player leaves
-	zIndex: 0, // below player
 	checkAgainst: ig.Entity.TYPE.A,
 	
 	init: function( x, y, settings ) {
@@ -35,7 +34,7 @@ EntityGrass = ig.Entity.extend({
 	{
 		console.debug("Hiding patch of grass");
 		//this.currentAnim = null;
-		this.zIndex = 0; // below player
+		this.zIndex = this.pos.y + 0; // below player all players
 		ig.game.sortEntitiesDeferred();
 	},
 	
@@ -44,7 +43,7 @@ EntityGrass = ig.Entity.extend({
 		if(this.aboveTimer != null && this.aboveTimer.delta() >= 0)
 		{
 			console.debug("Putting patch of grass above player");
-			this.zIndex = 3; // above player and other player
+			this.zIndex = 3 + this.pos.y; // above all players and npcs
 			ig.game.sortEntitiesDeferred();
 			delete this.aboveTimer;
 		}

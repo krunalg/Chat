@@ -337,7 +337,6 @@ ig.module (
 		    size: {x: 16, y: 16},
 		    type: ig.Entity.TYPE.A,
 		    animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
-		    zIndex: 1,
 		    
 		    facing: "down",
 		    facingLast: "down",
@@ -461,6 +460,8 @@ ig.module (
 		    },
 		    
 		    update: function() {
+			
+			this.zIndex = this.pos.y + 1;
 			
 			if(this.isMove)
 			{

@@ -610,7 +610,6 @@ ig.module (
 		    speed: 69,
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
-		    zIndex: 2,
 		    nameFont: new ig.Font( 'media/04b03.font.png' ),
 		    
 		    type: ig.Entity.TYPE.A,
@@ -700,6 +699,8 @@ ig.module (
 		    },
 		    
 		    update: function() {
+			
+			this.zIndex = this.pos.y + 2;
 			
 			this.parent();
 			
@@ -803,7 +804,6 @@ EntityOtherplayer = ig.Entity.extend({
 	    name: "otherplayer",
 	    animation: 1,
 	    nameFont: new ig.Font( 'media/04b03.font.bl.png' ),
-	    zIndex: 1,
 	    
 	    //checkAgainst: ig.Entity.TYPE.B,
 	    collides: ig.Entity.COLLIDES.PASSIVE,
@@ -881,6 +881,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    update: function()
 	    {
+		this.zIndex = this.pos.y + 1;
 		
 		// movement
 		if(this.isMove)

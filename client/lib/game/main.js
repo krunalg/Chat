@@ -28,6 +28,8 @@ ig.module(
 
 MyGame = ig.Game.extend({
 	
+	autoSort: true,
+	
 	// Load a font
 	font2: new ig.Font( 'media/04b03.font.png' ),
 	font: new ig.Font( 'media/04b04.font.png' ),
