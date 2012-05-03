@@ -615,7 +615,7 @@ ig.module (
 		    type: ig.Entity.TYPE.A,
 		    checkAgainst: ig.Entity.TYPE.NONE,
 		    collides: ig.Entity.COLLIDES.PASSIVE,
-		    animSheet: new ig.AnimationSheet( 'media/main_brendan-walk.png', 16, 32 ),
+		    animSheet: new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 ),
 		    
 		    facing: '',
 		    facingLast: '',
@@ -804,7 +804,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    //checkAgainst: ig.Entity.TYPE.B,
 	    collides: ig.Entity.COLLIDES.PASSIVE,
-	    animSheet: new ig.AnimationSheet( 'media/main_brendan-walk.png', 16, 32 ),
+	    animSheet: new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 ),
 	    
 	    facing: 'down',
 	    isMove: false, // being animated or not

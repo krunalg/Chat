@@ -417,7 +417,7 @@ ig.module (
 		    {
 			this.offset = { x: 0, y: 16 };
 			
-			this.animSheet = new ig.AnimationSheet( 'media/fatty.png', 16, 32 );
+			this.animSheet = new ig.AnimationSheet( 'media/people/rs.fat.png', 16, 32 );
 			// add the animations
 			var walkRate = 0.13125;
 			this.addAnim( 'walkUpA', walkRate, [2,0,0] );
