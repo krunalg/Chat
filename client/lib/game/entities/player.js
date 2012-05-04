@@ -665,7 +665,6 @@ ig.module (
 		    facingUpdated: false,
 		    isMove: false, // waiting for move key-press
 		    leftFoot: true, // used to alternate step animations
-		    moveUnit: 16, // per unit of travel
 		    destination: 0, // used for both x and y planes
 		    moveWaiting: false, // used for waiting while a door opens
 		    moveWhen: 0, // system time in ms to wait before moving
@@ -877,7 +876,6 @@ EntityOtherplayer = ig.Entity.extend({
 	    isMove: false, // being animated or not
 	    leftFoot: true, // used to alternate step animations
 	    destination: 0, // used for both x and y planes
-	    moveUnit: 16, // per unit of travel
 	    
 	    skin: 'boy',
 	    

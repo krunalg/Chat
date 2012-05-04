@@ -343,7 +343,6 @@ ig.module (
 		    facingUpdated: false,
 		    isMove: false, // waiting for move key-press
 		    leftFoot: true, // used to alternate step animations
-		    moveUnit: 16, // per unit of travel
 		    destination: 0, // used for both x and y planes
 		    
 		    // NPC movement patterns
