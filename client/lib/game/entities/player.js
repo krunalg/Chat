@@ -166,6 +166,53 @@ ig.module (
 	}  
     };
     
+    var finishJump = function(player) {
+    
+	// check if reached destination
+	if(destinationReached(player)) {
+	    
+	    // ensure player is at legal coordinates
+	    alignToGrid(player);
+	    
+	    // stop player
+	    player.vel.x = player.vel.y = 0;
+	    
+	    // check if we should continue moving
+	    if(moveStillPressed('left'))
+	    {
+		player.facing = 'left';
+		if(canMove(player)) player.startMove();
+	    }
+	    else if(moveStillPressed('right'))
+	    {
+		player.facing = 'right';
+		if(canMove(player)) player.startMove();
+	    }
+	    else if(moveStillPressed('up'))
+	    {
+		player.facing = 'up';
+		if(canMove(player)) player.startMove();
+	    }
+	    else if(moveStillPressed('down'))
+	    {
+		player.facing = 'down';
+		if(canMove(player)) player.startMove();
+	    }
+	    else 
+	    {
+		// end move state
+		player.isJump = false;
+		//player.vel.x = player.vel.y = 0;
+		moveAnimStop(player);
+	    }  
+	}
+	// continue to destination
+	else
+	{
+	    move(player);
+	}  
+    };
+    
     var facingExit = function(player)
     // returns an exit entity if the player
     // is facing one
@@ -315,11 +362,6 @@ ig.module (
 	var pY = player.pos.y + vy;
 	if(c.getTile() == want) return true; // can jump
 	return false; // no collisions
-    };
-    
-    var startJump = function ()
-    {
-	//
     };
     
     var moveAnimStop = function(player)
@@ -486,7 +528,7 @@ ig.module (
 	    
 	    if(canJump(player))
 	    {
-		startJump(player);
+		player.startJump();
 	    }
 	    else if(canMove(player))
 	    {
@@ -694,6 +736,18 @@ ig.module (
 			this.facingUpdated = false;
 		    },
 		    
+		    startJump: function()
+		    {
+			this.isJump = true;
+			this.jumpStart = new ig.Timer();
+			setMoveDestination(this);
+				
+			moveAnimStart(this, true);
+			//emitMove(this.pos.x, this.pos.y, this.facing, this.name);
+			this.facingLast = this.facing;
+			this.facingUpdated = false;
+		    },
+		    
 		    init: function( x, y, settings ) {
 			this.parent( x, y, settings );
 			
@@ -804,6 +858,11 @@ ig.module (
 				// about to move
 				console.debug("Waiting to move...");
 				moveWait(this);
+			    }
+			    else if(this.isJump)
+			    {
+				// a move has already been started
+				finishJump(this);
 			    }
 			    else if(this.isMove)
 			    {
