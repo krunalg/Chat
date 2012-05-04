@@ -98,19 +98,23 @@ ig.module (
     
     var setMoveDestination = function(player)
     {
+	var tilesize = ig.game.collisionMap.tilesize;
+	var distance = 1;
+	if(player.isJump) distance = 2;
+	
 	switch(player.facing)
 	{
 	    case 'left':
-		player.destination = player.pos.x - ig.game.collisionMap.tilesize;
+		player.destination = player.pos.x - tilesize * distance;
 		break;
 	    case 'right':
-		player.destination = player.pos.x + ig.game.collisionMap.tilesize;
+		player.destination = player.pos.x + tilesize * distance;
 		break;
 	    case 'up':
-		player.destination = player.pos.y - ig.game.collisionMap.tilesize;
+		player.destination = player.pos.y - tilesize * distance;
 		break;
 	    case 'down':
-		player.destination = player.pos.y + ig.game.collisionMap.tilesize;
+		player.destination = player.pos.y + tilesize * distance;
 		break;
 	}
     };
@@ -664,6 +668,7 @@ ig.module (
 		    facingLast: '',
 		    facingUpdated: false,
 		    isMove: false, // waiting for move key-press
+		    isJump: false,
 		    leftFoot: true, // used to alternate step animations
 		    destination: 0, // used for both x and y planes
 		    moveWaiting: false, // used for waiting while a door opens
@@ -874,6 +879,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    facing: 'down',
 	    isMove: false, // being animated or not
+	    isJump: false,
 	    leftFoot: true, // used to alternate step animations
 	    destination: 0, // used for both x and y planes
 	    
