@@ -360,7 +360,7 @@ ig.module (
 	}
 	var pX = player.pos.x + vx;
 	var pY = player.pos.y + vy;
-	if(c.getTile() == want) return true; // can jump
+	if(c.getTile(pX,pY) == want) return true; // can jump
 	return false; // no collisions
     };
     
