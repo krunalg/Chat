@@ -279,6 +279,45 @@ ig.module (
 	return true; // no collisions
     };
     
+    var canJump = function(player)
+    // returns true if faced tile is jumpable
+    // otherwise false
+    {
+	var vx = 0;
+	var vy = 0;
+	var want = -1; // to match weltmeister one-way collision tiles
+	var c = ig.game.collisionMap;
+	var tilesize = ig.game.collisionMap.tilesize;
+	switch(player.facing)
+	{
+	    case 'left':
+		vx = -tilesize;
+		want = 45;
+		break;
+	    case 'right':
+		vx = tilesize;
+		want = 34;
+		break;
+	    case 'up':
+		vy = -tilesize;
+		want = 12;
+		break;
+	    case 'down':
+		vy = tilesize;
+		want = 23;
+		break;
+	}
+	var pX = player.pos.x + vx;
+	var pY = player.pos.y + vy;
+	if(c.getTile() == want) return true; // can jump
+	return false; // no collisions
+    };
+    
+    var startJump = function ()
+    {
+	//
+    };
+    
     var moveAnimStop = function(player)
     // set animation to idle
     {
@@ -441,7 +480,11 @@ ig.module (
 	    
 	    turnOffExitAnimations();
 	    
-	    if(canMove(player))
+	    if(canJump(player))
+	    {
+		startJump(player);
+	    }
+	    else if(canMove(player))
 	    {
 		var cancelMove = false;
 		
@@ -610,7 +653,7 @@ ig.module (
 		    speed: 69,
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
-		    nameFont: new ig.Font( 'media/04b03.font.png' ),
+		    nameFont: new ig.Font( 'media/rs.font.png' ),
 		    
 		    type: ig.Entity.TYPE.A,
 		    checkAgainst: ig.Entity.TYPE.NONE,
