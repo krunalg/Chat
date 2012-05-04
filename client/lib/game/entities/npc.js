@@ -106,16 +106,16 @@ ig.module (
 	switch(player.facing)
 	{
 	    case 'left':
-		player.destination = player.pos.x - player.moveUnit;
+		player.destination = player.pos.x - ig.game.collisionMap.tilesize;
 		break;
 	    case 'right':
-		player.destination = player.pos.x + player.moveUnit;
+		player.destination = player.pos.x + ig.game.collisionMap.tilesize;
 		break;
 	    case 'up':
-		player.destination = player.pos.y - player.moveUnit;
+		player.destination = player.pos.y - ig.game.collisionMap.tilesize;
 		break;
 	    case 'down':
-		player.destination = player.pos.y + player.moveUnit;
+		player.destination = player.pos.y + ig.game.collisionMap.tilesize;
 		break;
 	}
     };
