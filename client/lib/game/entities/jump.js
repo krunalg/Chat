@@ -20,7 +20,7 @@ EntityJump = ig.Entity.extend({
 		
 		this.zIndex = 0,
 		
-		this.addAnim( 'jump', 0.1667, [0,0,0,0,1,2,3,4] ); // 10 frames of 60 per
+		this.addAnim( 'jump', (8/60), [0,0,0,0,1,2,3,3], true );
 		this.currentAnim = this.anims.jump;
 		
 		this.dX = this.pos.x; // destination x
@@ -69,6 +69,8 @@ EntityJump = ig.Entity.extend({
 				this.aligned = true;
 				break;
 		}
+		
+		if(this.currentAnim.frame == 7) this.kill();
 		
 		this.parent();
 	}
