@@ -168,6 +168,21 @@ ig.module (
     
     var finishJump = function(player) {
     
+	// update jump animation
+	var jumpTime = player.jumpStart.delta();
+	if(jumpTime >= 0 && jumpTime < (2/60)) player.offset.y = 16+4;
+	else if(jumpTime >= (2/60) && jumpTime < (4/60)) player.offset.y = 16+6;
+	else if(jumpTime >= (4/60) && jumpTime < (6/60)) player.offset.y = 16+8;
+	else if(jumpTime >= (6/60) && jumpTime < (8/60)) player.offset.y = 16+10;
+	else if(jumpTime >= (8/60) && jumpTime < (10/60)) player.offset.y = 16+12;
+	else if(jumpTime >= (10/60) && jumpTime < (16/60)) player.offset.y = 16+14;
+	else if(jumpTime >= (16/60) && jumpTime < (18/60)) player.offset.y = 16+12;
+	else if(jumpTime >= (18/60) && jumpTime < (20/60)) player.offset.y = 16+10;
+	else if(jumpTime >= (20/60) && jumpTime < (22/60)) player.offset.y = 16+8;
+	else if(jumpTime >= (22/60) && jumpTime < (24/60)) player.offset.y = 16+6;
+	else if(jumpTime >= (24/60) && jumpTime < (26/60)) player.offset.y = 16+4;
+	else player.offset.y = 16+0;
+	
 	// check if reached destination
 	if(destinationReached(player)) {
 	    
