@@ -36,10 +36,12 @@ MyGame = ig.Game.extend({
 		font: new ig.Font( 'media/rs.font.png' ),
 		bg: { img: new ig.Image( 'media/rs.actionbox.png' ), pos: { x: 3, y: 115 } },
 		visible: true,
-		rate: 3, // chars per second
+		rate: 60, // chars per second
 		text: { body: '', width: 208, pos: { x: 16, y: 122 } },
 		blurps: new Array(),
 		timer: null,
+		count: { blurp: 0, line: 0 },
+		sticky: '',
 		nextChar: function(game) // starts printing chars
 			{
 				if(!game.actionBox.visible)
@@ -83,16 +85,39 @@ MyGame = ig.Game.extend({
 			},
 		sayHi: function(game)
 			{
-				var text = 'Hello there.';
+				// now i'm going to make it write out the first blurp
+				// simply assuming there is one that it's two lines
 				var show = '';
-				if(game.actionBox.timer==null) game.actionBox.timer = new ig.Timer();
-				for(var i=0; i<game.actionBox.timer.delta(); i++)
+				if(!game.actionBox.pause)
 				{
-					if(i>=text.length) break;
-					show += text.charAt(i);
+					if(game.actionBox.timer==null) game.actionBox.timer = new ig.Timer();
+					for(var i=0; i<game.actionBox.timer.delta()*game.actionBox.rate; i++)
+					{
+						//
+						if(i>=game.actionBox.blurps[game.actionBox.count.blurp][game.actionBox.count.line].length)
+						{
+							// add the whole line into sticky
+							game.actionBox.sticky += game.actionBox.blurps[game.actionBox.count.blurp][game.actionBox.count.line] + "\n";
+							// pause if no more lines in the blurp
+							if(game.actionBox.blurps[game.actionBox.count.blurp].length-1==game.actionBox.count.line)
+							{
+								game.actionBox.pause = true;
+								game.actionBox.count.blurp++;
+							}
+							// otherwise set to read next line
+							else
+							{
+								game.actionBox.count.line++;
+							}
+							game.actionBox.timer.set(0);
+							break;
+						}
+						show += game.actionBox.blurps[game.actionBox.count.blurp][game.actionBox.count.line].charAt(i);
+					}
 				}
+
 				game.actionBox.font.draw(
-					show,
+					game.actionBox.sticky + show,
 					game.actionBox.text.pos.x,
 					game.actionBox.text.pos.y
 					);
@@ -313,7 +338,7 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		
-		this.actionBox.text.body = "Hello.\nI'm PROF. OAK, and this is my laboratory!";
+		this.actionBox.text.body = "Hello there my friend. I would like to introduce you to... well, myself!\nI'm PROF. OAK, and this is my laboratory!";
 		this.actionBox.process(this);
 		//window.alert(this.actionBox.font.widthForString("Hello there."));
 		
