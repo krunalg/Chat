@@ -701,6 +701,13 @@ ig.module (
 	return false;
     }
     
+    var spawnShadow = function(player)
+    {
+	ig.game.spawnEntity( EntityJump, player.pos.x, player.pos.y,
+			    {
+			       direction: player.facing,
+			    } );
+    }
 
    
 		//////////////////
@@ -755,6 +762,7 @@ ig.module (
 		    {
 			this.isJump = true;
 			this.jumpStart = new ig.Timer();
+			spawnShadow(this);
 			setMoveDestination(this);
 				
 			moveAnimStart(this, true);
