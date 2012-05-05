@@ -70,6 +70,11 @@ EntityJump = ig.Entity.extend({
 				break;
 		}
 		
+		// bring only first frame of dust above player
+		if(this.currentAnim.frame == 4)	this.zIndex = this.pos.y + 3;
+		if(this.currentAnim.frame == 5)	this.zIndex = this.pos.y + 0;
+		
+		// kill entity at last frame
 		if(this.currentAnim.frame == 7) this.kill();
 		
 		this.parent();
