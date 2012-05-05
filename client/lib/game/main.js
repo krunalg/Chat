@@ -31,10 +31,75 @@ MyGame = ig.Game.extend({
 	
 	autoSort: true,
 	
-	// Load a font
-	font2: new ig.Font( 'media/04b03.font.png' ),
-	font: new ig.Font( 'media/04b04.font.png' ),
-	debugfont: new ig.Font( 'media/04b04.font.png' ),
+	// set up actionbox
+	actionBox: {
+		font: new ig.Font( 'media/rs.font.png' ),
+		bg: { img: new ig.Image( 'media/rs.actionbox.png' ), pos: { x: 3, y: 115 } },
+		visible: false,
+		rate: 3, // chars per second
+		text: { body: '', width: 208, pos: { x: 16, y: 122 } },
+		blurps: new Array(),
+		nextChar: function(game) // starts printing chars
+			{
+				if(!game.actionBox.visible)
+				{
+					game.actionBox.visible = true;
+					game.actionBox.started = new ig.Timer();
+				}
+			},
+		process: function(game)
+			{
+				var currString = '';
+				var space = '';
+				var blurps = game.actionBox.text.body.split('\n');
+				for(var i=0; i<blurps.length; i++)
+				{
+					game.actionBox.blurps[i] = new Array();
+					
+					var words = blurps[i].split(' ');
+					for(var j=0; j<words.length; j++)
+					{
+						if(currString=='') space = ''; else space = ' ';
+						if( game.actionBox.font.widthForString(
+							currString + space + words[j] )
+							< game.actionBox.text.width )
+						{
+							currString += space + words[j];
+						}
+						else
+						{
+							game.actionBox.blurps[i].push(currString);
+							currString = words[j];
+						}
+					}
+					
+					if(currString!='')
+					{
+						game.actionBox.blurps[i].push(currString);
+						currString = '';
+					}
+				}
+			},
+		draw: function(game)
+			{
+				/*if(game.actionBox.visible)
+				{
+					// draw bg
+					game.actionBox.bg.img.draw(game.actionBox.bg.pos.x, game.actionBox.bg.pos.y);
+					
+					// draw chars
+					var line = '';
+					var depth = Math.floor(game.actionBox.timer * game.actionBox.rate);
+					for(var i=0; i<depth; i++)
+					{
+						if(i>=game.actionBox.text.blurps[0])
+					}
+					game.actionBox.font.draw(line, game.actionBox.text.pos.x, game.actionBox.text.pos.y)
+				}
+				*/
+				
+			}
+	},
 	
 	
 	defaultLevel: LevelTown,
@@ -231,6 +296,10 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		
+		this.actionBox.text.body = "Hello.\nI'm PROF. OAK, and this is my laboratory!";
+		this.actionBox.process(this);
+		//window.alert(this.actionBox.font.widthForString("Hello there."));
+		
 		// start talking with network
 		socket.emit('init',username);
 		
@@ -348,9 +417,10 @@ MyGame = ig.Game.extend({
 	},
 	
 	draw: function() {
-		
 		// Draw all entities and backgroundMaps
 		this.parent();
+		
+		this.actionBox.draw(this);
 	}
 });
 
