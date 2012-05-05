@@ -13,7 +13,7 @@ EntityJump = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.A,
 	offset: {x: 0, y: -8},
 	direction: 'down',
-	aligned: false, // will be true when no longer moving and aligned
+	arrived: false, // will be true when no longer moving and aligned
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
@@ -50,25 +50,45 @@ EntityJump = ig.Entity.extend({
 	
 	update: function()
 	{
-		switch(this.direction)
+		if(!this.arrived)
 		{
-			case 'left':
-				if(this.pos.x <= this.dX) this.vel.x = 0;
-				this.aligned = true;
-				break;
-			case 'right':
-				if(this.pos.x >= this.dX) this.vel.x = 0;
-				this.aligned = true;
-				break;
-			case 'up':
-				if(this.pos.y <= this.dY) this.vel.y = 0;
-				this.aligned = true;
-				break;
-			case 'down':
-				if(this.pos.y >= this.dY) this.vel.y = 0;
-				this.aligned = true;
-				break;
+			switch(this.direction)
+			{
+				case 'left':
+					if(this.pos.x <= this.dX)
+					{
+						this.vel.x = 0;
+						this.pos.x = this.dX;
+						this.arrived = true;
+					}
+					break;
+				case 'right':
+					if(this.pos.x >= this.dX)
+					{
+						this.vel.x = 0;
+						this.pos.x = this.dX;
+						this.arrived = true;
+					}
+					break;
+				case 'up':
+					if(this.pos.y <= this.dY)
+					{
+						this.vel.y = 0;
+						this.pos.y = this.dY;
+						this.arrived = true;
+					}
+					break;
+				case 'down':
+					if(this.pos.y >= this.dY)
+					{
+						this.vel.y = 0;
+						this.pos.y = this.dY;
+						this.arrived = true;
+					}
+					break;
+			}
 		}
+
 		
 		// bring only first frame of dust above player
 		if(this.currentAnim.frame == 4)	this.zIndex = this.pos.y + 3;
