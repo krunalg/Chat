@@ -961,7 +961,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    facing: 'down',
 	    isMove: false, // being animated or not
-	    isJump: false,
+	    isJump: false, // used to time offsets in animation
 	    leftFoot: true, // used to alternate step animations
 	    destination: 0, // used for both x and y planes
 	    
