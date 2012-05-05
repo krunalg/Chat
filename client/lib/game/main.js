@@ -35,10 +35,11 @@ MyGame = ig.Game.extend({
 	actionBox: {
 		font: new ig.Font( 'media/rs.font.png' ),
 		bg: { img: new ig.Image( 'media/rs.actionbox.png' ), pos: { x: 3, y: 115 } },
-		visible: false,
+		visible: true,
 		rate: 3, // chars per second
 		text: { body: '', width: 208, pos: { x: 16, y: 122 } },
 		blurps: new Array(),
+		timer: null,
 		nextChar: function(game) // starts printing chars
 			{
 				if(!game.actionBox.visible)
@@ -80,14 +81,31 @@ MyGame = ig.Game.extend({
 					}
 				}
 			},
+		sayHi: function(game)
+			{
+				var text = 'Hello there.';
+				var show = '';
+				if(game.actionBox.timer==null) game.actionBox.timer = new ig.Timer();
+				for(var i=0; i<game.actionBox.timer.delta(); i++)
+				{
+					if(i>=text.length) break;
+					show += text.charAt(i);
+				}
+				game.actionBox.font.draw(
+					show,
+					game.actionBox.text.pos.x,
+					game.actionBox.text.pos.y
+					);
+			},
 		draw: function(game)
 			{
-				/*if(game.actionBox.visible)
+				if(game.actionBox.visible)
 				{
 					// draw bg
 					game.actionBox.bg.img.draw(game.actionBox.bg.pos.x, game.actionBox.bg.pos.y);
 					
-					// draw chars
+					/*
+					 // draw chars
 					var line = '';
 					var depth = Math.floor(game.actionBox.timer * game.actionBox.rate);
 					for(var i=0; i<depth; i++)
@@ -95,9 +113,8 @@ MyGame = ig.Game.extend({
 						if(i>=game.actionBox.text.blurps[0])
 					}
 					game.actionBox.font.draw(line, game.actionBox.text.pos.x, game.actionBox.text.pos.y)
+					*/
 				}
-				*/
-				
 			}
 	},
 	
@@ -420,7 +437,8 @@ MyGame = ig.Game.extend({
 		// Draw all entities and backgroundMaps
 		this.parent();
 		
-		this.actionBox.draw(this);
+		this.actionBox.draw(this); // shows box
+		this.actionBox.sayHi(this);
 	}
 });
 
