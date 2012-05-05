@@ -10,7 +10,6 @@ EntityJump = ig.Entity.extend({
 	speed: 69,
 	size: {x: 16, y: 16},
 	animSheet: new ig.AnimationSheet( 'media/rs.jump.png', 16, 8 ),
-	checkAgainst: ig.Entity.TYPE.A,
 	offset: {x: 0, y: -8},
 	direction: 'down',
 	arrived: false, // will be true when no longer moving and aligned
