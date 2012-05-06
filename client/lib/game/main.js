@@ -37,6 +37,7 @@ MyGame = ig.Game.extend({
 		bg: { img: new ig.Image( 'media/rs.actionbox.png' ), pos: { x: 3, y: 115 } },
 		visible: true,
 		rate: 60, // chars per second
+		display: 2,
 		text: { body: '', width: 208, pos: { x: 16, y: 122 } },
 		blurps: new Array(),
 		timer: null,
@@ -55,6 +56,7 @@ MyGame = ig.Game.extend({
 				var currString = '';
 				var space = '';
 				var blurps = game.actionBox.text.body.split('\n');
+				
 				for(var i=0; i<blurps.length; i++)
 				{
 					game.actionBox.blurps[i] = new Array();
@@ -82,6 +84,25 @@ MyGame = ig.Game.extend({
 						currString = '';
 					}
 				}
+				
+				// combine blurp lines into groups
+				for(var i=0; i<game.actionBox.blurps.length; i++)
+				{
+					var newBlurp = new Array();
+					for(var j=0; j<game.actionBox.blurps[i].length; j+2)
+					{
+						// if there is not two left to group together
+						if(j + 1 >= game.actionBox.blurps[i].length)
+							// just add the last one
+							newBlurp.push(game.actionBox.blurps[i][j]);
+						// otherwise
+						else
+							// keep grouping as two's
+							newBlurp.push(game.actionBox.blurps[i][j] + "\n" + game.actionBox.blurps[i][j+1]);
+					}
+					game.actionBox.blurps[i] = newBlurp;
+				}
+				
 			},
 		sayHi: function(game)
 			{
