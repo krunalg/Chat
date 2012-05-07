@@ -104,11 +104,13 @@ io.sockets.on('connection', function (socket)
         }
     });
       
-    socket.on('receiveMove', function (currX, currY, direction, client) {
-        socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, client);
-        for(var i in players)
+    socket.on('receiveMove', function (currX, currY, direction, moveState) {
+        socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, socket.clientname, moveState);
+        
+	// update players known position on server
+	for(var i in players)
         {
-            if(players[i].name==client)
+            if(players[i].name==socket.clientname)
             {
                 var newX = currX;
                 var newY = currY;
