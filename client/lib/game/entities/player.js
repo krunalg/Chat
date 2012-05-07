@@ -763,8 +763,8 @@ ig.module (
 		    startMove: function()
 		    {
 			// determine speed (running or walking)
-			if(ig.input.state('run')) this.speed = this.runSpeed;
-			else this.speed = this.walkSpeed;
+			if(this.moveState=='run') this.speed = this.runSpeed;
+			else if(this.moveState=='walk') this.speed = this.walkSpeed;
 			
 			this.isMove = true;
 			setMoveDestination(this);
@@ -1060,8 +1060,8 @@ EntityOtherplayer = ig.Entity.extend({
 	    netStartMove: function()
 	    {
 		// determine speed (running or walking)
-		if(this.moveState!='walk') this.speed = this.runSpeed;
-		else this.speed = this.walkSpeed;
+		if(this.moveState=='run') this.speed = this.runSpeed;
+		else if(this.moveState=='walk') this.speed = this.walkSpeed;
 		
 		var newGrass = facingGrass(this);
 		if(newGrass) newGrass.play();
