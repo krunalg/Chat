@@ -131,33 +131,36 @@ ig.module (
 	    player.vel.x = player.vel.y = 0;
 	    
 	    // check if we should continue moving
-	    if(moveStillPressed('left'))
+	    
+	    if(player.isLocal) // is Player entity
 	    {
-		player.facing = 'left';
-		if(canMove(player)) player.startMove();
+		if(moveStillPressed('left'))         player.facing = 'left';
+		else if(moveStillPressed('right'))   player.facing = 'right';
+		else if(moveStillPressed('up'))      player.facing = 'up';
+		else if(moveStillPressed('down'))    player.facing = 'down';
+		else 				     player.isMove = false;
+
+		if(player.isMove && canMove(player))
+		    player.startMove();
+		else
+		{
+		    player.moveState = 'idle';
+		    moveAnimStop(player);
+		}
 	    }
-	    else if(moveStillPressed('right'))
+	    else // is Otherplayer entity
 	    {
-		player.facing = 'right';
-		if(canMove(player)) player.startMove();
+		if(player.moveState=='idle')
+		{
+		    player.isMove = false;
+		    moveAnimStop(player);
+		}
+		else
+		{
+		    if(canMove(player)) player.netStartMove();
+		}
 	    }
-	    else if(moveStillPressed('up'))
-	    {
-		player.facing = 'up';
-		if(canMove(player)) player.startMove();
-	    }
-	    else if(moveStillPressed('down'))
-	    {
-		player.facing = 'down';
-		if(canMove(player)) player.startMove();
-	    }
-	    else 
-	    {
-		// end move state
-		player.isMove = false;
-		//player.vel.x = player.vel.y = 0;
-		moveAnimStop(player);
-	    }  
+
 	}
 	// continue to destination
 	else
@@ -734,6 +737,8 @@ ig.module (
 		//////////////////
 		EntityPlayer = ig.Entity.extend({
 		    
+		    isLocal: true,
+		    
 		    speed: 69,
 		    runSpeed: 138,
 		    walkSpeed: 69,
@@ -976,6 +981,9 @@ ig.module (
 ///////////////////////
 
 EntityOtherplayer = ig.Entity.extend({
+	    
+	    isLocal: false,
+	    
 	    size: {x: 16, y: 16},
 	    offset: { x: 0, y: 16 },
 	    type: ig.Entity.TYPE.B,
