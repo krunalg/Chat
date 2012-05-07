@@ -733,6 +733,8 @@ ig.module (
 		    runSpeed: 138,
 		    walkSpeed: 69,
 		    maxVel: { x: 138, y: 138 },
+		    moveState: 'walk',
+		    
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
 		    nameFont: new ig.Font( 'media/rs.font.png' ),
