@@ -43,6 +43,7 @@ io.sockets.on('connection', function (socket)
         player.pos.x = 0;
         player.pos.y = 0;
         player.facing = 'down';
+	player.state = 'state'; // every player is idle on first connect
 	player.skin = 'boy';
         player.session = socket.id;
 	player.room = 'limbo';
@@ -104,6 +105,23 @@ io.sockets.on('connection', function (socket)
         }
     });
       
+    socket.on('receiveUpdateMoveState', function (x, y, direction, state) {
+        socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer', x, y, direction, socket.clientname, state);
+        
+	// update players known info on server
+	for(var i in players)
+        {
+            if(players[i].name==socket.clientname)
+            {
+                players[i].pos.x = x;
+                players[i].pos.y = y;
+                players[i].facing = direction;
+		players[i].state = speed;
+                break;
+            }
+        }
+    });
+    
     socket.on('receiveMove', function (currX, currY, direction, moveState) {
         socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, socket.clientname, moveState);
         
@@ -140,7 +158,6 @@ io.sockets.on('connection', function (socket)
             }
         }
     });
-    
     
     socket.on('receiveDirection', function (client, direction) {
         socket.broadcast.to(socket.roomname).emit('updateOtherPlayer', client, direction);
