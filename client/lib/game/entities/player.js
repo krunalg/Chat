@@ -134,18 +134,20 @@ ig.module (
 	    
 	    if(player.isLocal) // is Player entity
 	    {
+		// if key pressed, update direction and proceed with move
 		if(moveStillPressed('left'))         player.facing = 'left';
 		else if(moveStillPressed('right'))   player.facing = 'right';
 		else if(moveStillPressed('up'))      player.facing = 'up';
 		else if(moveStillPressed('down'))    player.facing = 'down';
-		else 				     player.isMove = false;
+		else player.isMove = false; // if no key pressed, set idle
 
-		if(player.isMove && canMove(player))
-		    player.startMove();
+		if(player.isMove && canMove(player)) player.startMove();
 		else
 		{
 		    player.moveState = 'idle';
+		    player.lastState = 'idle';
 		    moveAnimStop(player);
+		    emitUpdateMoveState(player.pos.x, player.pos.y, player.facing, player.moveState);
 		}
 	    }
 	    else // is Otherplayer entity
@@ -754,6 +756,10 @@ ig.module (
 		    collides: ig.Entity.COLLIDES.PASSIVE,
 		    animSheet: new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 ),
 		    
+		    // used to only send network move updates if change occurs
+		    lastFacedDirection: '',
+		    lastState: '',
+	    
 		    facing: '',
 		    facingLast: '',
 		    facingUpdated: false,
@@ -791,10 +797,17 @@ ig.module (
 			if(newGrass) newGrass.play();
 			
 			moveAnimStart(this, true);
-			//emitMove(this.pos.x, this.pos.y, this.facing, this.moveState);
-			emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+			
 			this.facingLast = this.facing;
 			this.facingUpdated = false;
+			
+			// send movement update only when change occurs
+			if( this.lastFacing != this.facing || this.lastState != this.moveState )
+			{
+			    emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+			    this.lastFacing = this.facing;
+			    this.lastState  = this.moveState;
+			}
 		    },
 		    
 		    startJump: function()
