@@ -116,7 +116,7 @@ io.sockets.on('connection', function (socket)
                 players[i].pos.x = x;
                 players[i].pos.y = y;
                 players[i].facing = direction;
-		players[i].state = speed;
+		players[i].state = state;
                 break;
             }
         }
