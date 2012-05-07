@@ -311,22 +311,6 @@ ig.module (
 	var res = ig.game.collisionMap.trace( player.pos.x, player.pos.y, vx, vy, player.size.x, player.size.y );
 	if(res.collision.x || res.collision.y) return false;
 	
-	/* // Don't bother checking collisions agains signs
-	// check sign collisions
-	var signs = ig.game.getEntitiesByType( EntitySign );
-	if(signs)
-	{
-	    for(var i=0; i<signs.length; i++)
-	    {
-		if( (signs[i].pos.x == player.pos.x + vx) &&
-		       (signs[i].pos.y == player.pos.y + vy) )
-		{
-		    return false;
-		}
-	    }
-	}
-	*/
-	
 	// check npc collisions
 	var npcs = ig.game.getEntitiesByType( EntityNpc );
 	if(npcs)
@@ -400,7 +384,7 @@ ig.module (
 	};
     }
     
-    var moveAnimStart = function(player, alternateFeet) // ignore is used to skip changing feet
+    var moveAnimStart = function(player, alternateFeet)
     {
 	switch(player.facing)
 	{
@@ -592,11 +576,7 @@ ig.module (
 		}
 		
 		if(!cancelMove)
-		{
-		    // disable exit animations that shouldn't be
-		    //turnOffExitAnimations(player);
-		    //console.debug('turning off arrows.');
-		    
+		{		    
 		    // facing an exit
 		    var exit = facingExit(player);
 		    if(exit)
@@ -981,12 +961,7 @@ ig.module (
 				this.anims.slowdown.rewind();
 			    }
 			}
-			
-			
-			
-			
-			// IMPORANT! DON'T TOUCH!!
-			//this.parent();
+	
 			    
 		    }
 		});
