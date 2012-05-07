@@ -443,9 +443,9 @@ ig.module (
     
     
     
-    var emitMove = function(xstart,ystart,direction,client)
+    var emitMove = function(xstart,ystart,direction,moveState)
     {
-	socket.emit('receiveMove',xstart,ystart,direction,client);
+	socket.emit('receiveMove',xstart,ystart,direction,moveState);
     }
     
     var netInit = function(player)
@@ -773,7 +773,7 @@ ig.module (
 			if(newGrass) newGrass.play();
 			
 			moveAnimStart(this, true);
-			emitMove(this.pos.x, this.pos.y, this.facing, this.name);
+			emitMove(this.pos.x, this.pos.y, this.facing, this.moveState);
 			this.facingLast = this.facing;
 			this.facingUpdated = false;
 		    },
