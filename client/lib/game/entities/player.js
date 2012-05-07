@@ -443,9 +443,14 @@ ig.module (
     
     
     
-    var emitMove = function(xstart,ystart,direction,moveState)
+    var emitMove = function(xstart,ystart,direction,moveState) // soon to be deprecated
     {
 	socket.emit('receiveMove',xstart,ystart,direction,moveState);
+    }
+    
+    var emitUpdateMoveState = function(x, y, direction, state)
+    {
+	socket.emit('receiveUpdateMoveState', x, y, direction, state);
     }
     
     var netInit = function(player)
@@ -733,7 +738,7 @@ ig.module (
 		    runSpeed: 138,
 		    walkSpeed: 69,
 		    maxVel: { x: 138, y: 138 },
-		    moveState: 'walk',
+		    moveState: 'idle', // idle, walk, run
 		    
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
@@ -781,7 +786,8 @@ ig.module (
 			if(newGrass) newGrass.play();
 			
 			moveAnimStart(this, true);
-			emitMove(this.pos.x, this.pos.y, this.facing, this.moveState);
+			//emitMove(this.pos.x, this.pos.y, this.facing, this.moveState);
+			emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 			this.facingLast = this.facing;
 			this.facingUpdated = false;
 		    },
@@ -978,7 +984,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    runSpeed: 138,
 	    walkSpeed: 69,
 	    maxVel: { x: 138, y: 138 },
-	    moveState: 'walk',
+	    moveState: 'idle', // idle, walk, run
 	    
 	    name: "otherplayer",
 	    animation: 1,
@@ -1067,16 +1073,20 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    netStartMove: function()
 	    {
-		// determine speed (running or walking)
-		if(this.moveState=='run') this.speed = this.runSpeed;
-		else if(this.moveState=='walk') this.speed = this.walkSpeed;
-		
-		var newGrass = facingGrass(this);
-		if(newGrass) newGrass.play();
-		
-		this.isMove = true;
-		setMoveDestination(this);
-		moveAnimStart(this, true);
+		if(this.moveState!='idle')
+		{
+		    // determine speed
+		    if(this.moveState=='run') this.speed = this.runSpeed;
+		    else if(this.moveState=='walk') this.speed = this.walkSpeed;
+		    
+		    // create grass effect
+		    var newGrass = facingGrass(this);
+		    if(newGrass) newGrass.play();
+		    
+		    this.isMove = true;
+		    setMoveDestination(this);
+		    moveAnimStart(this, true);
+		}
 	    },
 	    
 	    draw: function() {
