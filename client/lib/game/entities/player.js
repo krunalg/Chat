@@ -1033,25 +1033,35 @@ EntityOtherplayer = ig.Entity.extend({
 			    break;
 		    }
 		    // add the animations
-		    this.addAnim( 'walkUpA', 0.13125, [2,0,0] );
-		    this.addAnim( 'walkUpB', 0.13125, [1,0,0] );
-		    this.addAnim( 'walkDownA', 0.13125, [8,6,6] );
-		    this.addAnim( 'walkDownB', 0.13125, [7,6,6] );
-		    this.addAnim( 'walkLeftA', 0.13125, [5,3,3] );
-		    this.addAnim( 'walkLeftB', 0.13125, [4,3,3] );
-		    this.addAnim( 'walkRightA', 0.13125, [5,3,3] );
-		    this.addAnim( 'walkRightB', 0.13125, [4,3,3] );
+		    this.addAnim( 'walkUpA', 0.13333, [2,0], true );
+		    this.addAnim( 'walkUpB', 0.13333, [1,0], true );
+		    this.addAnim( 'walkDownA', 0.13333, [14,12], true );
+		    this.addAnim( 'walkDownB', 0.13333, [13,12], true );
+		    this.addAnim( 'walkLeftA', 0.13333, [8,6], true );
+		    this.addAnim( 'walkLeftB', 0.13333, [7,6], true );
+		    this.addAnim( 'walkRightA', 0.13333, [8,6], true );
+		    this.addAnim( 'walkRightB', 0.13333, [8,6], true );
+		    this.addAnim( 'runUpA', 0.08333, [4,3], true );
+		    this.addAnim( 'runUpB', 0.08333, [5,3], true );
+		    this.addAnim( 'runDownA', 0.08333, [16,15], true );
+		    this.addAnim( 'runDownB', 0.08333, [17,15], true );
+		    this.addAnim( 'runLeftA', 0.08333, [10,9], true );
+		    this.addAnim( 'runLeftB', 0.08333, [11,9], true );
+		    this.addAnim( 'runRightA', 0.08333, [10,9], true );
+		    this.addAnim( 'runRightB', 0.08333, [11,9], true );
 		    this.addAnim( 'slowup', .5, [2,0,1,0] );
 		    this.addAnim( 'slowdown', .5, [8,6,7,6] );
 		    this.addAnim( 'slowleft', .5, [5,3,4,3] );
 		    this.addAnim( 'slowright', .5, [5,3,4,3] );
-		    this.addAnim( 'idleup', 0.1, [0] );
-		    this.addAnim( 'idledown', 0.1, [6] );
-		    this.addAnim( 'idleleft', 0.1, [3] );
-		    this.addAnim( 'idleright', 0.1, [3] );
+		    this.addAnim( 'idleup', 0.1, [0], true );
+		    this.addAnim( 'idledown', 0.1, [12], true );
+		    this.addAnim( 'idleleft', 0.1, [6], true );
+		    this.addAnim( 'idleright', 0.1, [6], true );
 		    // flip right-facing animations
 		    this.anims.walkRightA.flip.x = true;
 		    this.anims.walkRightB.flip.x = true;
+		    this.anims.runRightA.flip.x = true;
+		    this.anims.runRightB.flip.x = true;
 		    this.anims.slowright.flip.x = true;
 		    this.anims.idleright.flip.x = true;
 		    // set initial animation
