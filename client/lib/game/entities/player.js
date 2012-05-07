@@ -806,23 +806,33 @@ ig.module (
 			    // add the animations
 			    this.addAnim( 'walkUpA', 0.13125, [2,0,0] );
 			    this.addAnim( 'walkUpB', 0.13125, [1,0,0] );
-			    this.addAnim( 'walkDownA', 0.13125, [8,6,6] );
-			    this.addAnim( 'walkDownB', 0.13125, [7,6,6] );
-			    this.addAnim( 'walkLeftA', 0.13125, [5,3,3] );
-			    this.addAnim( 'walkLeftB', 0.13125, [4,3,3] );
-			    this.addAnim( 'walkRightA', 0.13125, [5,3,3] );
-			    this.addAnim( 'walkRightB', 0.13125, [4,3,3] );
+			    this.addAnim( 'walkDownA', 0.13125, [14,12,12] );
+			    this.addAnim( 'walkDownB', 0.13125, [13,12,12] );
+			    this.addAnim( 'walkLeftA', 0.13125, [8,6,6] );
+			    this.addAnim( 'walkLeftB', 0.13125, [7,6,6] );
+			    this.addAnim( 'walkRightA', 0.13125, [8,6,6] );
+			    this.addAnim( 'walkRightB', 0.13125, [8,6,6] );
+			    this.addAnim( 'runUpA', 0.13125, [2,0,0] );
+			    this.addAnim( 'runUpB', 0.13125, [1,0,0] );
+			    this.addAnim( 'runDownA', 0.13125, [8,6,6] );
+			    this.addAnim( 'runDownB', 0.13125, [7,6,6] );
+			    this.addAnim( 'runLeftA', 0.13125, [5,3,3] );
+			    this.addAnim( 'runLeftB', 0.13125, [4,3,3] );
+			    this.addAnim( 'runRightA', 0.13125, [5,3,3] );
+			    this.addAnim( 'runRightB', 0.13125, [4,3,3] );
 			    this.addAnim( 'slowup', .5, [2,0,1,0] );
 			    this.addAnim( 'slowdown', .5, [8,6,7,6] );
 			    this.addAnim( 'slowleft', .5, [5,3,4,3] );
 			    this.addAnim( 'slowright', .5, [5,3,4,3] );
 			    this.addAnim( 'idleup', 0.1, [0] );
-			    this.addAnim( 'idledown', 0.1, [6] );
-			    this.addAnim( 'idleleft', 0.1, [3] );
-			    this.addAnim( 'idleright', 0.1, [3] );
+			    this.addAnim( 'idledown', 0.1, [12] );
+			    this.addAnim( 'idleleft', 0.1, [6] );
+			    this.addAnim( 'idleright', 0.1, [6] );
 			    // flip right-facing animations
 			    this.anims.walkRightA.flip.x = true;
 			    this.anims.walkRightB.flip.x = true;
+			    this.anims.runRightA.flip.x = true;
+			    this.anims.runRightB.flip.x = true;
 			    this.anims.slowright.flip.x = true;
 			    this.anims.idleright.flip.x = true;
 			    // set initial animation
