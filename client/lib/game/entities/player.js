@@ -977,6 +977,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    speed: 69,
 	    runSpeed: 138,
 	    walkSpeed: 69,
+	    maxVel: { x: 138, y: 138 },
 	    moveState: 'walk',
 	    
 	    name: "otherplayer",
