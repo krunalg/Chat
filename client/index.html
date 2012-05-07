@@ -119,8 +119,9 @@ socket.on('welcome', function (msg) {
 });
 	 
 	 
-//  new player move
-socket.on('moveOtherPlayer', function (xstart, ystart, direction, client, moveState) {
+//  soon to be deprecated
+socket.on('moveOtherPlayer', function (xstart, ystart, direction, client, moveState)
+{
 	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(otherplayer)
 	 {
@@ -140,6 +141,26 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client, moveSt
 	 }
 });
 
+socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
+{
+	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 if(otherplayer)
+	 {
+		  for(var i in otherplayer)
+		  {
+			   if(client == otherplayer[i].name)
+			   {
+				    otherplayer[i].vel.x = 0;
+				    otherplayer[i].vel.y = 0;
+				    otherplayer[i].pos.x = x;
+				    otherplayer[i].pos.y = y;
+				    otherplayer[i].facing = direction;
+				    otherplayer[i].moveState = state;
+				    otherplayer[i].netStartMove();			    
+			   }
+		  }
+	 }
+});
 
 socket.on('updateOtherPlayer', function (client, direction) {
 	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
