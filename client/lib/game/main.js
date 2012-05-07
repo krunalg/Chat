@@ -241,6 +241,7 @@ MyGame = ig.Game.extend({
 		ig.input.bind( ig.KEY.R, 'chatReply' );
 		ig.input.bind( ig.KEY.Z, 'action' );
 		ig.input.bind( ig.KEY.MOUSE1, 'leftClick');
+		ig.input.bind( ig.KEY.X, 'run');
 		
 		
 		// set up animated map tiles
