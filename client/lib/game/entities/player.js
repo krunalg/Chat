@@ -763,8 +763,16 @@ ig.module (
 		    startMove: function()
 		    {
 			// determine speed (running or walking)
-			if(this.moveState=='run') this.speed = this.runSpeed;
-			else if(this.moveState=='walk') this.speed = this.walkSpeed;
+			if(ig.input.state('run'))
+			{
+			    this.moveState = 'run';
+			    this.speed = this.runSpeed;
+			}
+			else
+			{
+			    this.moveState = 'walk';
+			    this.speed = this.walkSpeed;
+			}
 			
 			this.isMove = true;
 			setMoveDestination(this);
