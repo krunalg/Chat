@@ -407,6 +407,13 @@ ig.module (
 			    this.nameFont = new ig.Font( 'media/04b03.font.gr.png' );
 			}
 			
+			if(this.behaviour=='a')
+			{
+			    this.movePattern = ['up','down','up','right','down','down',
+					   'left','left','left','right','right',
+					   'left','up','right'];
+			}
+			
 			// weltmeister icon
 			this.addAnim( 'weltmeister', 0.1, [1] );
 			this.currentAnim = this.anims.weltmeister;
