@@ -16,10 +16,8 @@ ig.module(
 	
 	//debug
 	'impact.debug.debug',
-	'plugins.astar-for-entities-debug',
 	
 	// plugins
-	'plugins.astar-for-entities',
 	'plugins.impact-splash-loader'
 )
 .defines(function(){
@@ -240,7 +238,6 @@ MyGame = ig.Game.extend({
 		ig.input.bind( ig.KEY.ENTER, 'chatToggle' );
 		ig.input.bind( ig.KEY.R, 'chatReply' );
 		ig.input.bind( ig.KEY.Z, 'action' );
-		ig.input.bind( ig.KEY.MOUSE1, 'leftClick');
 		ig.input.bind( ig.KEY.X, 'run');
 		
 		
