@@ -405,20 +405,52 @@ ig.module (
 	switch(player.facing)
 	{
 	    case 'left':
-		if(player.leftFoot) player.currentAnim = player.anims.walkLeftA;
-		else player.currentAnim = player.anims.walkLeftB;
+		if(player.speed==player.walkSpeed)
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.walkLeftA;
+		    else player.currentAnim = player.anims.walkLeftB;
+		}
+		else // assume he is running
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.runLeftA;
+		    else player.currentAnim = player.anims.runLeftB;
+		}
 		break;
 	    case 'right':
-		if(player.leftFoot) player.currentAnim = player.anims.walkRightA;
-		else player.currentAnim = player.anims.walkRightB;
+		if(player.speed==player.walkSpeed)
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.walkRightA;
+		    else player.currentAnim = player.anims.walkRightB;
+		}
+		else // assume he is running
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.runRightA;
+		    else player.currentAnim = player.anims.runRightB;
+		}
 		break;
 	    case 'up':
-		if(player.leftFoot) player.currentAnim = player.anims.walkUpA;
-		else player.currentAnim = player.anims.walkUpB;
+		if(player.speed==player.walkSpeed)
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.walkUpA;
+		    else player.currentAnim = player.anims.walkUpB;
+		}
+		else // assume he is running
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.runUpA;
+		    else player.currentAnim = player.anims.runUpB;
+		}
 		break;
 	    case 'down':
-		if(player.leftFoot) player.currentAnim = player.anims.walkDownA;
-		else player.currentAnim = player.anims.walkDownB;
+		if(player.speed==player.walkSpeed)
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.walkDownA;
+		    else player.currentAnim = player.anims.walkDownB;
+		}
+		else // assume he is running
+		{
+		    if(player.leftFoot) player.currentAnim = player.anims.runDownA;
+		    else player.currentAnim = player.anims.runDownB;
+		}
 		break;
 	}
 	if(alternateFeet) player.leftFoot = !player.leftFoot;
