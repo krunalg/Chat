@@ -1127,6 +1127,8 @@ EntityOtherplayer = ig.Entity.extend({
 	    {
 		this.zIndex = this.pos.y + 1;
 		
+		this.parent();
+		
 		// movement
 		if(this.isMove)
 		{
@@ -1135,9 +1137,7 @@ EntityOtherplayer = ig.Entity.extend({
 		    // keep animation consistent with this.facing
 		    moveAnimStop(this);
 		}
-		
-		// IMPORANT! DON'T TOUCH!!
-		this.parent();
+
 	    }
 	    
 	    

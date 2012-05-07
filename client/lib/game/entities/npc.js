@@ -467,6 +467,8 @@ ig.module (
 			
 			this.zIndex = this.pos.y + 1;
 			
+			this.parent();
+			
 			if(this.isMove)
 			{
 			    this.finishMove(this);
@@ -484,11 +486,7 @@ ig.module (
 				}
 			    }
 			}
-			
-			
-			
-			// IMPORANT! DON'T TOUCH!!
-			this.parent();
+
 			    
 		    }
 		});
