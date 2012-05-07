@@ -737,7 +737,7 @@ ig.module (
 		    
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
-		    nameFont: new ig.Font( 'media/rs.font.png' ),
+		    nameFont: new ig.Font( 'media/04b03.font.png' ),
 		    
 		    type: ig.Entity.TYPE.A,
 		    checkAgainst: ig.Entity.TYPE.NONE,
