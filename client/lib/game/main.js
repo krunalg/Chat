@@ -31,140 +31,6 @@ MyGame = ig.Game.extend({
 	
 	autoSort: true,
 	
-	// set up actionbox
-	actionBox: {
-		font: new ig.Font( 'media/rs.font.png' ),
-		bg: { img: new ig.Image( 'media/rs.actionbox.png' ), pos: { x: 3, y: 115 } },
-		visible: true,
-		rate: 60, // chars per second
-		display: 2,
-		text: { body: '', width: 208, pos: { x: 16, y: 122 } },
-		blurps: new Array(),
-		timer: null,
-		count: { blurp: 0, line: 0 },
-		sticky: '',
-		nextChar: function(game) // starts printing chars
-			{
-				if(!game.actionBox.visible)
-				{
-					game.actionBox.visible = true;
-					game.actionBox.started = new ig.Timer();
-				}
-			},
-		process: function(game)
-			{
-				var currString = '';
-				var space = '';
-				var blurps = game.actionBox.text.body.split('\n');
-				
-				for(var i=0; i<blurps.length; i++)
-				{
-					game.actionBox.blurps[i] = new Array();
-					
-					var words = blurps[i].split(' ');
-					for(var j=0; j<words.length; j++)
-					{
-						if(currString=='') space = ''; else space = ' ';
-						if( game.actionBox.font.widthForString(
-							currString + space + words[j] )
-							< game.actionBox.text.width )
-						{
-							currString += space + words[j];
-						}
-						else
-						{
-							game.actionBox.blurps[i].push(currString);
-							currString = words[j];
-						}
-					}
-					
-					if(currString!='')
-					{
-						game.actionBox.blurps[i].push(currString);
-						currString = '';
-					}
-				}
-				
-				// combine blurp lines into groups
-				for(var i=0; i<game.actionBox.blurps.length; i++)
-				{
-					var newBlurp = new Array();
-					for(var j=0; j<game.actionBox.blurps[i].length; j+2)
-					{
-						// if there is not two left to group together
-						if(j + 1 >= game.actionBox.blurps[i].length)
-							// just add the last one
-							newBlurp.push(game.actionBox.blurps[i][j]);
-						// otherwise
-						else
-							// keep grouping as two's
-							newBlurp.push(game.actionBox.blurps[i][j] + "\n" + game.actionBox.blurps[i][j+1]);
-					}
-					game.actionBox.blurps[i] = newBlurp;
-				}
-				
-			},
-		sayHi: function(game)
-			{
-				// now i'm going to make it write out the first blurp
-				// simply assuming there is one that it's two lines
-				var show = '';
-				if(!game.actionBox.pause)
-				{
-					if(game.actionBox.timer==null) game.actionBox.timer = new ig.Timer();
-					for(var i=0; i<game.actionBox.timer.delta()*game.actionBox.rate; i++)
-					{
-						//
-						if(i>=game.actionBox.blurps[game.actionBox.count.blurp][game.actionBox.count.line].length)
-						{
-							// add the whole line into sticky
-							game.actionBox.sticky += game.actionBox.blurps[game.actionBox.count.blurp][game.actionBox.count.line] + "\n";
-							// pause if no more lines in the blurp
-							if(game.actionBox.blurps[game.actionBox.count.blurp].length-1==game.actionBox.count.line)
-							{
-								game.actionBox.pause = true;
-								game.actionBox.count.blurp++;
-							}
-							// otherwise set to read next line
-							else
-							{
-								game.actionBox.count.line++;
-							}
-							game.actionBox.timer.set(0);
-							break;
-						}
-						show += game.actionBox.blurps[game.actionBox.count.blurp][game.actionBox.count.line].charAt(i);
-					}
-				}
-
-				game.actionBox.font.draw(
-					game.actionBox.sticky + show,
-					game.actionBox.text.pos.x,
-					game.actionBox.text.pos.y
-					);
-			},
-		draw: function(game)
-			{
-				if(game.actionBox.visible)
-				{
-					// draw bg
-					game.actionBox.bg.img.draw(game.actionBox.bg.pos.x, game.actionBox.bg.pos.y);
-					
-					/*
-					 // draw chars
-					var line = '';
-					var depth = Math.floor(game.actionBox.timer * game.actionBox.rate);
-					for(var i=0; i<depth; i++)
-					{
-						if(i>=game.actionBox.text.blurps[0])
-					}
-					game.actionBox.font.draw(line, game.actionBox.text.pos.x, game.actionBox.text.pos.y)
-					*/
-				}
-			}
-	},
-	
-	
 	defaultLevel: LevelTown,
 	lastSkin: 'boy', // used when rebuilding the player
 	goTo: null, // used to know where to place player when zoning
@@ -359,10 +225,6 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		
-		this.actionBox.text.body = "Hello there my friend. I would like to introduce you to... well, myself!\nI'm PROF. OAK, and this is my laboratory!";
-		this.actionBox.process(this);
-		//window.alert(this.actionBox.font.widthForString("Hello there."));
-		
 		// start talking with network
 		socket.emit('init',username);
 		
@@ -482,9 +344,6 @@ MyGame = ig.Game.extend({
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
-		
-		this.actionBox.draw(this); // shows box
-		this.actionBox.sayHi(this);
 	}
 });
 
