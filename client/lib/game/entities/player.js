@@ -601,9 +601,6 @@ ig.module (
 		    // if no exits have taken place, move
 		    if(!cancelMove)
 		    {
-			// determine speed (running or walking)
-			if(ig.input.state('run')) player.speed = player.runSpeed;
-			else player.speed = player.walkSpeed;
 			player.startMove();
 		    }
 		}
@@ -766,6 +763,10 @@ ig.module (
 		    
 		    startMove: function()
 		    {
+			// determine speed (running or walking)
+			if(ig.input.state('run')) this.speed = this.runSpeed;
+			else this.speed = this.walkSpeed;
+			
 			this.isMove = true;
 			setMoveDestination(this);
 			
