@@ -532,8 +532,7 @@ ig.module (
 	    player.moveCommitWhen = new Date().getTime() + 80; // (2/60)sec ! move to globals magic is bad
 	}
 	
-	// if its been (2/60)sec since player first pressed the key
-	// then
+	// player is now committed to (trying to) move
 	if( new Date().getTime() - player.moveCommitWhen >= 0 )
 	{
 	    player.moveCommitPending = false; // happening now, so now reset for next time
