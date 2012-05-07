@@ -729,9 +729,6 @@ ig.module (
 		//////////////////
 		EntityPlayer = ig.Entity.extend({
 		    
-		    // recorded travel time of 9 units (144px)
-		    // in 2.100 seconds in VBA.
-		    // ie 144/2.1 = 68.571428 or ~69
 		    speed: 69,
 		    runSpeed: 138,
 		    walkSpeed: 69,
@@ -976,7 +973,12 @@ EntityOtherplayer = ig.Entity.extend({
 	    size: {x: 16, y: 16},
 	    offset: { x: 0, y: 16 },
 	    type: ig.Entity.TYPE.B,
+	    
 	    speed: 69,
+	    runSpeed: 138,
+	    walkSpeed: 69,
+	    moveState: 'walk',
+	    
 	    name: "otherplayer",
 	    animation: 1,
 	    nameFont: new ig.Font( 'media/04b03.font.bl.png' ),
@@ -1054,6 +1056,10 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    netStartMove: function()
 	    {
+		// determine speed (running or walking)
+		if(this.moveState!='walk') this.speed = this.runSpeed;
+		else this.speed = this.walkSpeed;
+		
 		var newGrass = facingGrass(this);
 		if(newGrass) newGrass.play();
 		
