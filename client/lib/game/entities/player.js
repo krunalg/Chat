@@ -587,7 +587,13 @@ ig.module (
 		    }
 		
 		    // if no exits have taken place, move
-		    if(!cancelMove) player.startMove();
+		    if(!cancelMove)
+		    {
+			// determine speed (running or walking)
+			if(ig.input.state('run')) player.speed = player.runSpeed;
+			else player.speed = player.walkSpeed;
+			player.startMove();
+		    }
 		}
 	    }
 	    else
@@ -718,6 +724,9 @@ ig.module (
 		    // in 2.100 seconds in VBA.
 		    // ie 144/2.1 = 68.571428 or ~69
 		    speed: 69,
+		    runSpeed: 138,
+		    walkSpeed: 69,
+		    maxVel: { x: 138, y: 138 },
 		    size: {x: 16, y: 16},
 		    offset: { x: 0, y: 16 },
 		    nameFont: new ig.Font( 'media/rs.font.png' ),
