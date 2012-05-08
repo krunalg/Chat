@@ -107,8 +107,15 @@
 	 var socket = io.connect('http://localhost:8080');
 
 socket.on('newMsg', function (from, msg) {
-         ig.game.messageBoxPrint(ig.game, (from + ': ' + msg) );      
-      });
+         ig.game.messageBoxPrint(ig.game, (from + ': ' + msg) );
+
+	 ig.game.spawnEntity( EntityBubble, 0, 0,
+	 {
+		  from: from,
+		  msg: msg
+	 } );
+	 
+});
 
 socket.on('incomingTell', function (from, msg) {
          ig.game.messageBoxPrint(ig.game, (from + '>> ' + msg) );
@@ -135,7 +142,8 @@ socket.on('moveOtherPlayer', function (xstart, ystart, direction, client, moveSt
 				    otherplayer[i].pos.y = ystart;
 				    otherplayer[i].facing = direction;
 				    otherplayer[i].moveState = moveState;
-				    otherplayer[i].netStartMove();				    
+				    otherplayer[i].netStartMove();
+				    break;
 			   }
 		  }
 	 }
@@ -156,7 +164,8 @@ socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
 				    otherplayer[i].pos.y = y;
 				    otherplayer[i].facing = direction;
 				    otherplayer[i].moveState = state;
-				    otherplayer[i].netStartMove();			    
+				    otherplayer[i].netStartMove();
+				    break;
 			   }
 		  }
 	 }
@@ -207,6 +216,7 @@ socket.on('addAllPlayers', function (players) {
 				    skin: players[i].skin,
 				    animation:6
 			   } );
+			   break;
 		  }
 	 }
 });

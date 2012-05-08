@@ -10,8 +10,6 @@ ig.module(
 EntityBubble = ig.Entity.extend({
 	size: { x: 16, y: 16 },
 	
-	target: null, // entity to follow
-	
 	animSheet: new ig.AnimationSheet( 'media/rs.jump.png', 16, 8 ),
 	
 	// to work properly, top/bottom-left/right must all be same dimensions
@@ -25,8 +23,10 @@ EntityBubble = ig.Entity.extend({
 	
 	// some vars
 	msg: '',
+	from: '', // name of entity to follow
 	toPrint: '', // will be created later
 	msgMaxWidth: 100, // in px
+	timer: null, // used to kill old bubbles
 	
 	// calculations (in px)
 	heightOfMessage: 0, // found later
@@ -35,6 +35,10 @@ EntityBubble = ig.Entity.extend({
 
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
+		
+		// start timer to destroy bubble
+		this.timer = new ig.Timer();
+		this.timer.set(2); // 3 secs til death
 		
 		// breaks up msg into an array of
 		// parts that don't exceed msgMaxWidth
@@ -82,14 +86,19 @@ EntityBubble = ig.Entity.extend({
 	
 	draw: function()
 	{
-		if(this.target)
+		var target = ig.game.getEntitiesByType( EntityOtherplayer );
+		if(target)
 		{
-			this.pos.x = target.pos.x;
-			this.pos.y = target.pos.y;
+			 for(var i=0; i<target.length; i++)
+			 {
+				  if(target[i].name==this.from)
+				  {
+					   this.pos.x = target[i].pos.x;
+					   this.pos.y = target[i].pos.y;
+					   break;
+				  }
+			 }
 		}
-		else this.kill();
-		
-		
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
 		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
 		var padding = 2;
@@ -151,12 +160,13 @@ EntityBubble = ig.Entity.extend({
 			y,
 			ig.Font.ALIGN.CENTER
 		);
-	
 	},
 	
 	update: function()
 	{
 		this.parent();
+		
+		if(this.timer.delta()>=0) this.kill();
 	}
 	
 });
