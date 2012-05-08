@@ -10,6 +10,8 @@ ig.module(
 EntityBubble = ig.Entity.extend({
 	size: { x: 16, y: 16 },
 	
+	target: null, // entity to follow
+	
 	animSheet: new ig.AnimationSheet( 'media/rs.jump.png', 16, 8 ),
 	
 	// to work properly, top/bottom-left/right must all be same dimensions
@@ -80,12 +82,12 @@ EntityBubble = ig.Entity.extend({
 	
 	draw: function()
 	{
-		var target = ig.game.getEntitiesByType( EntityPlayer )[0];
-		if(target)
+		if(this.target)
 		{
 			this.pos.x = target.pos.x;
 			this.pos.y = target.pos.y;
 		}
+		else this.kill();
 		
 		
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
