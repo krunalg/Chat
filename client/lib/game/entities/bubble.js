@@ -76,11 +76,18 @@ EntityBubble = ig.Entity.extend({
 		}
 		this.heightOfMessage -= 3; // because impact auto adds a few px below even for one-liners
 		this.longestLine -= 1; // DO NOT CHANGE (removes extra px added by Impact)
-		
 	},	
 	
 	draw: function()
 	{
+		var target = ig.game.getEntitiesByType( EntityPlayer )[0];
+		if(target)
+		{
+			this.pos.x = target.pos.x;
+			this.pos.y = target.pos.y;
+		}
+		
+		
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
 		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
 		var padding = 0;

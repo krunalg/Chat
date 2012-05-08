@@ -892,8 +892,8 @@ ig.module (
 			}
 		    },
 		    
-		    draw: function() {
-			
+		    draw: function() {		
+			/*
 			// draw players name above head
 			this.nameFont.draw(
 				this.name,
@@ -901,7 +901,7 @@ ig.module (
 				this.pos.y - ig.game.screen.y - this.size.y,
 				ig.Font.ALIGN.CENTER
 			    );
-			
+			*/
 			this.parent();
 		    },
 		    
