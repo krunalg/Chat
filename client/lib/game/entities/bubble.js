@@ -2,7 +2,8 @@ ig.module(
 	'game.entities.bubble'
 )
 .requires(
-	'impact.entity'
+	'impact.entity',
+	'impact.font'
 )
 .defines(function(){
 
@@ -17,7 +18,7 @@ EntityBubble = ig.Entity.extend({
 	bottomLeft: new ig.Image( 'media/chat-bubble-bleft.png' ),
 	bottomRight: new ig.Image( 'media/chat-bubble-bright.png' ),
 	pointer: new ig.Image( 'media/chat-bubble-point.png' ),
-	font: new ig.Font( 'font.pf.tempesta.seven.8pt.png' ),
+	font: new ig.Font( 'media/font.pf.tempesta.seven.8pt.png' ),
 	
 	// some vars
 	msg: '',
@@ -28,7 +29,7 @@ EntityBubble = ig.Entity.extend({
 		
 		// breaks up msg into an array of
 		// parts that don't exceed msgMaxWidth
-		var explode = msg.split(' ');
+		var explode = this. msg.split(' ');
 		var lines = new Array();
 		var currStr = '';
 		for(var i=0; i<explode.length; i++)
@@ -56,7 +57,7 @@ EntityBubble = ig.Entity.extend({
 	
 	draw: function()
 	{
-		font.draw( 'msg', this.pos.x, this.pos.y, ig.Font.ALIGN.LEFT );
+		this.font.draw( 'msg', this.pos.x, this.pos.y, ig.Font.ALIGN.LEFT );
 	},
 	
 	update: function()
