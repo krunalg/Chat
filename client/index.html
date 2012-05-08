@@ -112,7 +112,8 @@ socket.on('newMsg', function (from, msg) {
 	 ig.game.spawnEntity( EntityBubble, 0, 0,
 	 {
 		  from: from,
-		  msg: msg
+		  msg: msg,
+		  lifespan: 2
 	 } );
 	 
 });

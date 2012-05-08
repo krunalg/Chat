@@ -27,6 +27,7 @@ EntityBubble = ig.Entity.extend({
 	toPrint: '', // will be created later
 	msgMaxWidth: 100, // in px
 	timer: null, // used to kill old bubbles
+	lifespan: 3, // time in seconds before death
 	
 	// calculations (in px)
 	heightOfMessage: 0, // found later
@@ -38,7 +39,7 @@ EntityBubble = ig.Entity.extend({
 		
 		// start timer to destroy bubble
 		this.timer = new ig.Timer();
-		this.timer.set(2); // 3 secs til death
+		this.timer.set(this.lifespan);
 		
 		// breaks up msg into an array of
 		// parts that don't exceed msgMaxWidth
