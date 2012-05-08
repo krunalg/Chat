@@ -29,6 +29,11 @@ ig.module(
 MyGame = ig.Game.extend({
 	
 	autoSort: true,
+	eventsFont: new ig.Font( 'media/04b03.font.png' ),
+	events: new Array(), // contains game events such as player entering area
+	eventsMax: 10, // max events to display on screen
+	eventsTimer: null, // used for pruning old events
+	eventsLifespan: 2, // time in seconds before clearing event
 	
 	defaultLevel: LevelTown,
 	lastSkin: 'boy', // used when rebuilding the player
@@ -338,11 +343,36 @@ MyGame = ig.Game.extend({
 			}
 			*/
 		}
+		
+		// prune the events array
+		if(this.events.length>0)
+		{
+			if(this.eventsTimer==null)
+			{
+				this.eventsTimer = new ig.Timer();
+				this.eventsTimer.set(this.eventsLifespan);
+			}
+			else if(this.eventsTimer.delta()>=0)
+			{
+				// prune oldest
+				this.events.splice(0, 1);
+				this.eventsTimer = null;
+			}
+		}
 	},
 	
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
+		
+		// draw (text) game events to screen
+		var printEvents = '';
+		for(var i=0; i<this.events.length; i++)
+		{
+			if(i==0) var space = ''; else var space = "\n"; 
+			printEvents += space + this.events[i];
+		}
+		this.eventsFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
 	}
 });
 

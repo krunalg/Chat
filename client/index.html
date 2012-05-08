@@ -135,10 +135,12 @@ socket.on('newMsg', function (from, msg) {
 
 socket.on('incomingTell', function (from, msg) {
          ig.game.messageBoxPrint(ig.game, (from + '>> ' + msg) );
+	 ig.game.events.push("Msg from " + from + ": " + msg);
 });
 
 socket.on('welcome', function (msg) {
          ig.game.messageBoxPrint(ig.game, msg);
+	 ig.game.events.push(msg);
 });
 	 
 	 
@@ -205,7 +207,10 @@ socket.on('updateOtherPlayer', function (client, direction) {
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction, skin) {
 	 var player = ig.game.getEntitiesByType( EntityPlayer )[0];
+	 
 	 ig.game.messageBoxPrint(ig.game, user + ' joined the room.' );
+	 ig.game.events.push(user + " entered the area.");
+	 
 	 ig.game.spawnEntity( EntityOtherplayer, x, y,
 	 {
 		  name: user,
@@ -257,6 +262,8 @@ socket.on('reskinOtherPlayer', function (client, skin) {
 socket.on('dropPlayer', function (client)
 {
 	 ig.game.messageBoxPrint(ig.game, client + ' left the room.' );
+	 ig.game.events.push(client + " left the area.");
+	 
 	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(netplayers)
 	 {
