@@ -90,7 +90,7 @@ EntityBubble = ig.Entity.extend({
 		
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
 		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
-		var padding = 0;
+		var padding = 2;
 		var cornerWidth = this.topLeft.width;
 		var cornerHeight = this.topLeft.height;
 		
