@@ -1094,7 +1094,8 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    netStartMove: function()
 	    {
-		if(this.moveState!='idle')
+		if(this.moveState=='idle') this.isMove = false;
+		else
 		{
 		    // determine speed
 		    if(this.moveState=='run') this.speed = this.runSpeed;
