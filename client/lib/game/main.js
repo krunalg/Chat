@@ -128,40 +128,9 @@ MyGame = ig.Game.extend({
 		//allowInput: true,
 		inputActive: false,
 		//lastInput: new Date().getTime(),
-		messages: new Array(),
 		emitSay: function(client, msg) { socket.emit('receiveSay',client,msg); },
 		emitTell: function(to, msg) { socket.emit('receiveTell',to,msg); },
 		emitReskin: function(skin) { socket.emit('receiveReskin',skin); },
-		messageBoxPrint: function(game,msg)
-		{
-			game.messages.push(msg);
-			game.rebuildMessageBox(game);
-			game.scrollMessageBox(game);
-		},
-		rebuildMessageBox: function(game)
-		{
-			$('#' + game.messageBoxId).html('');
-			var newMessages = '';
-			
-			for(var i=0; i<game.messages.length; i++)
-			{
-				if(i!=0) newMessages += "\n";
-				newMessages += game.messages[i];
-				
-			}
-			$('#' + game.messageBoxId).html(newMessages); // print to sreen
-			game.scrollMessageBox(game); // scroll to bottom
-		},
-		scrollMessageBox: function(game)
-		// scroll messagebox to the bottom
-		{
-			$('#' + game.messageBoxId).scrollTop = 999999;
-			//setTimeout(function()
-			//{
-			    var textArea = document.getElementById(game.messageBoxId);
-			    textArea.scrollTop = textArea.scrollHeight;
-			//}, 10);
-		},
 		chatInputOff: function(game)
 		{
 			// check if anything has been typed
@@ -183,9 +152,7 @@ MyGame = ig.Game.extend({
 						var to = explodeInput[1]; // send to who
 						var msg = ''; // message to send
 						for(i=2; i<explodeInput.length; i++) msg += explodeInput[i];
-						game.messages.push('>>' + to + ': ' + msg); // add to array for history
 						game.emitTell( to, msg ); // send message to other players
-						game.rebuildMessageBox(ig.game);
 					}
 					else if(explodeInput[0]=='/say'
 					   || explodeInput[0]=='/s')
@@ -193,18 +160,12 @@ MyGame = ig.Game.extend({
 						// strip away the command and space
 						if(inputVal.substr(0,4)=='/say') inputVal = inputVal.substr(5, inputVal.length-5); // either remove '/say '
 						else inputVal = inputVal.substr(3, inputVal.length-3); // or remove '/s '
-						game.messages.push(player.name + ': ' + inputVal); // add to array for history
-						game.emitSay( player.name, inputVal ); // send message to other players
-						game.rebuildMessageBox(ig.game);
-						//game.scrollMessageBox(ig.game); // now happens automatically
-					
+						game.emitSay( player.name, inputVal ); // send message to other players					
 					}
 					else if(explodeInput[0]=='/skin')
 					{
 						var skin = explodeInput[1]; // name of skin
-						game.messages.push('Changing skin to: ' + skin);
 						game.emitReskin(skin);
-						game.rebuildMessageBox(ig.game);
 						player.skin = skin;
 						player.reskin();
 						game.lastSkin = skin;
@@ -256,19 +217,10 @@ MyGame = ig.Game.extend({
 		    }
 		};
 		
-		// director
-		//this.myDirector = new ig.Director(this, [LevelTown,  LevelRoute101, LevelLab]);
-		//this.myDirector.firstLevel();
-		//this.myDirector.jumpTo(LevelLab);
-		
 		this.loadLevel (this.defaultLevel);
 		
 		// build player
-		this.buildPlayer();
-		// set players name to the username provided from url
-		//var player = this.getEntitiesByType( EntityPlayer )[0];
-		//player.name = username;
-		
+		this.buildPlayer();		
 		
 		// set up chat functionality
 		$('#'+this.inputFieldId).bind('keypress', function(e) {
@@ -292,13 +244,13 @@ MyGame = ig.Game.extend({
 			console.debug("Player does not exist. Adding one.");
 		}
 		
-		// Add your own, additional update code here
+		// screen positioning
 		var player = this.getEntitiesByType( EntityPlayer )[0];
 		if( player ) {
 			this.screen.x = player.pos.x - ig.system.width/2 + player.size.x/2;
 			this.screen.y = player.pos.y - ig.system.height/2;
 			
-			// all player to approach the edge of the map
+			// allow player to approach the edge of the map
 			// without exposing where no tiles exists
 			
 			if(ig.system.width / this.collisionMap.tilesize <= this.collisionMap.width)
