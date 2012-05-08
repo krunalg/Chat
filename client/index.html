@@ -109,13 +109,28 @@
 socket.on('newMsg', function (from, msg) {
          ig.game.messageBoxPrint(ig.game, (from + ': ' + msg) );
 
+	 var showMessageHowLong = 2;
+	 
+	 // hide name briefly
+	 var target = ig.game.getEntitiesByType( EntityOtherplayer );
+	 if(target)
+	 {
+		  for(var i=0; i<target.length; i++)
+		  {
+			   if(target[i].name==from)
+			   {
+				    target[i].hideName.set(showMessageHowLong);
+				    break;
+			   }
+		  }
+	 }
+	 
 	 ig.game.spawnEntity( EntityBubble, 0, 0,
 	 {
 		  from: from,
 		  msg: msg,
-		  lifespan: 2
+		  lifespan: showMessageHowLong
 	 } );
-	 
 });
 
 socket.on('incomingTell', function (from, msg) {

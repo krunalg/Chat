@@ -996,6 +996,7 @@ ig.module (
 EntityOtherplayer = ig.Entity.extend({
 	    
 	    isLocal: false,
+	    hideName: null, // timer for hiding name for chat bubbles
 	    
 	    size: {x: 16, y: 16},
 	    offset: { x: 0, y: 16 },
@@ -1026,7 +1027,9 @@ EntityOtherplayer = ig.Entity.extend({
 	    init: function( x, y, settings )
 	    {
 		this.parent( x, y, settings );
-		this.health = 100;
+		
+		// start hideName timer
+		this.hideName = new ig.Timer();
 		
 		this.reskin(this.skin);
 	    },
@@ -1113,14 +1116,16 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    draw: function() {
 			
-		// draw players name above head
-		this.nameFont.draw(
-			this.name,
-			this.pos.x - ig.game.screen.x + this.size.x/2,
-			this.pos.y - ig.game.screen.y - this.size.y,
-			ig.Font.ALIGN.CENTER
+		if(this.hideName.delta()>=0)
+		{
+		    // draw players name above head
+		    this.nameFont.draw(
+			    this.name,
+			    this.pos.x - ig.game.screen.x + this.size.x/2,
+			    this.pos.y - ig.game.screen.y - this.size.y,
+			    ig.Font.ALIGN.CENTER
 		    );
-		
+		}
 		this.parent();
 	    },
 	    

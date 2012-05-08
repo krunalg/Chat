@@ -13,6 +13,7 @@ ig.module(
 	'game.entities.player',
 	'game.entities.grass',
 	'game.entities.jump',
+	'game.entities.bubble',
 	
 	//debug
 	'impact.debug.debug',
