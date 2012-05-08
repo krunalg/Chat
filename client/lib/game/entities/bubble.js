@@ -82,7 +82,7 @@ EntityBubble = ig.Entity.extend({
 		var context = ig.system.context;
 		
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
-		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage/2;
+		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage;
 		
 		context.fillStyle = '#FFF'; // white
 		context.fillRect (
