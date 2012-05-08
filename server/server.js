@@ -5,7 +5,7 @@ var server = require('http').createServer(handler)
 
 server.listen(8080);
 
-var players = new Array(); // an array of objects
+var onlinePlayers = new Array(); // an array of objects
 
 
 
@@ -47,7 +47,7 @@ io.sockets.on('connection', function (socket)
 	player.skin = 'boy';
         player.session = socket.id;
 	player.room = 'limbo';
-        players.push(player);
+        onlinePlayers.push(player);
     });
     
     socket.on('hereIAm', function (x, y, direction, mapname, skin)
@@ -56,25 +56,25 @@ io.sockets.on('connection', function (socket)
 	socket.join(socket.roomname);
 	console.log("Player " + socket.clientname + " joined zone: " + socket.roomname);
 	 
-        for(var i=0; i<players.length; i++)
+        for(var i=0; i<onlinePlayers.length; i++)
 	{
-	    if(players[i].name==socket.clientname)
+	    if(onlinePlayers[i].name==socket.clientname)
 	    {
 		// update server records
-		players[i].pos.x = x;
-		players[i].pos.y = y;
-		players[i].facing = direction;
-		players[i].skin = skin;
-		players[i].room = socket.roomname;
+		onlinePlayers[i].pos.x = x;
+		onlinePlayers[i].pos.y = y;
+		onlinePlayers[i].facing = direction;
+		onlinePlayers[i].skin = skin;
+		onlinePlayers[i].room = socket.roomname;
 		break; // because names are unique
 	    }
 	}
 	
 	var playersToGiveSocket = new Array();
-	for(var i=0; i<players.length; i++)
+	for(var i=0; i<onlinePlayers.length; i++)
 	{
-	    if(players[i].room==mapname && players[i].name!=socket.clientname)
-		playersToGiveSocket.push(players[i]);
+	    if(onlinePlayers[i].room==mapname && onlinePlayers[i].name!=socket.clientname)
+		playersToGiveSocket.push(onlinePlayers[i]);
 	}
         socket.broadcast.to(mapname).emit('addPlayer', socket.clientname, x, y, direction, skin);
         
@@ -95,11 +95,11 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveReskin', function (skin) {
         socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', socket.clientname, skin);
-        for(var i in players)
+        for(var i in onlinePlayers)
         {
-            if(players[i].name==socket.clientname)
+            if(onlinePlayers[i].name==socket.clientname)
             {
-                players[i].skin = skin; // update server record
+                onlinePlayers[i].skin = skin; // update server record
                 break;
             }
         }
@@ -109,14 +109,14 @@ io.sockets.on('connection', function (socket)
         socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer', x, y, direction, socket.clientname, state);
         
 	// update players known info on server
-	for(var i in players)
+	for(var i in onlinePlayers)
         {
-            if(players[i].name==socket.clientname)
+            if(onlinePlayers[i].name==socket.clientname)
             {
-                players[i].pos.x = x;
-                players[i].pos.y = y;
-                players[i].facing = direction;
-		players[i].state = state;
+                onlinePlayers[i].pos.x = x;
+                onlinePlayers[i].pos.y = y;
+                onlinePlayers[i].facing = direction;
+		onlinePlayers[i].state = state;
                 break;
             }
         }
@@ -126,9 +126,9 @@ io.sockets.on('connection', function (socket)
         socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, socket.clientname, moveState);
         
 	// update players known position on server
-	for(var i in players)
+	for(var i in onlinePlayers)
         {
-            if(players[i].name==socket.clientname)
+            if(onlinePlayers[i].name==socket.clientname)
             {
                 var newX = currX;
                 var newY = currY;
@@ -148,9 +148,9 @@ io.sockets.on('connection', function (socket)
                         newY = currY + 16; // !! magic numbers, not cool !!
                         break;
                 };
-                players[i].pos.x = newX;
-                players[i].pos.y = newY;
-                players[i].facing = direction;
+                onlinePlayers[i].pos.x = newX;
+                onlinePlayers[i].pos.y = newY;
+                onlinePlayers[i].facing = direction;
                 
                 // this would be the place to update players positions to mySQL db
                 
@@ -161,11 +161,11 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveDirection', function (client, direction) {
         socket.broadcast.to(socket.roomname).emit('updateOtherPlayer', client, direction);
-        for(var i in players)
+        for(var i in onlinePlayers)
         {
-            if(players[i].name==client)
+            if(onlinePlayers[i].name==client)
             {
-                players[i].facing = direction;
+                onlinePlayers[i].facing = direction;
                 break; // client names are unique
             }
         }
@@ -177,12 +177,12 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveTell', function (to, msg) {
         // find recipients session id
-        for(var i in players)
+        for(var i in onlinePlayers)
         {
-            if(players[i].name==to)
+            if(onlinePlayers[i].name==to)
             {
-                //console.log("Tell going to: " + to + " has session: " + players[i].session);
-                io.sockets.socket(players[i].session).emit('incomingTell', socket.clientname, msg); // send tell
+                //console.log("Tell going to: " + to + " has session: " + onlinePlayers[i].session);
+                io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, msg); // send tell
                 return;
             }
         }
@@ -191,12 +191,12 @@ io.sockets.on('connection', function (socket)
 
     socket.on('disconnect', function()
     {
-        // remove client from players array
-        for(var i in players)
+        // remove client from onlinePlayers array
+        for(var i in onlinePlayers)
         {
-            if(players[i].name == socket.clientname)
+            if(onlinePlayers[i].name == socket.clientname)
             {
-                players.splice(i, 1);
+                onlinePlayers.splice(i, 1);
             }
         }
 
