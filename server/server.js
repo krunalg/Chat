@@ -95,7 +95,7 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveReskin', function (skin) {
         socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', socket.clientname, skin);
-        for(var i in onlinePlayers)
+        for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==socket.clientname)
             {
@@ -109,7 +109,7 @@ io.sockets.on('connection', function (socket)
         socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer', x, y, direction, socket.clientname, state);
         
 	// update players known info on server
-	for(var i in onlinePlayers)
+	for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==socket.clientname)
             {
@@ -126,7 +126,7 @@ io.sockets.on('connection', function (socket)
         socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, socket.clientname, moveState);
         
 	// update players known position on server
-	for(var i in onlinePlayers)
+	for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==socket.clientname)
             {
@@ -161,7 +161,7 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveDirection', function (client, direction) {
         socket.broadcast.to(socket.roomname).emit('updateOtherPlayer', client, direction);
-        for(var i in onlinePlayers)
+        for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==client)
             {
@@ -177,7 +177,7 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveTell', function (to, msg) {
         // find recipients session id
-        for(var i in onlinePlayers)
+        for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==to)
             {
@@ -192,7 +192,7 @@ io.sockets.on('connection', function (socket)
     socket.on('disconnect', function()
     {
         // remove client from onlinePlayers array
-        for(var i in onlinePlayers)
+        for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name == socket.clientname)
             {
