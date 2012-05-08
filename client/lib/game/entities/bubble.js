@@ -12,14 +12,14 @@ EntityBubble = ig.Entity.extend({
 	
 	animSheet: new ig.AnimationSheet( 'media/rs.jump.png', 16, 8 ),
 	
-	// load resources
+	// to work properly, top/bottom-left/right must all be same dimensions
 	topLeft: new ig.Image( 'media/chat-bubble-tleft.png' ),
 	topRight: new ig.Image( 'media/chat-bubble-tright.png' ),
 	bottomLeft: new ig.Image( 'media/chat-bubble-bleft.png' ),
 	bottomRight: new ig.Image( 'media/chat-bubble-bright.png' ),
 	pointer: new ig.Image( 'media/chat-bubble-point.png' ),
 	fill: new ig.Image( 'media/chat-bubble-fill.png' ),
-	font: new ig.Font( 'media/04b03.black.font.png' ),
+	font: new ig.Font( 'media/04b03.font.png' ),
 	
 	// some vars
 	msg: '',
@@ -75,69 +75,73 @@ EntityBubble = ig.Entity.extend({
 			this.heightOfMessage += this.font.height;
 		}
 		this.heightOfMessage -= 3; // because impact auto adds a few px below even for one-liners
-		this.longestLine -= 1; // because impact auto adds a px to last char
+		this.longestLine -= 1; // DO NOT CHANGE (removes extra px added by Impact)
 		
 	},	
 	
 	draw: function()
 	{
-		var context = ig.system.context;
-		
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
-		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage;
+		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
+		var padding = 0;
+		var cornerWidth = this.topLeft.width;
+		var cornerHeight = this.topLeft.height;
 		
+		// draw rectangles
 		this.fill.draw(
-			x - this.longestLine/2,
-			y,
+			x - this.longestLine/2 - padding - cornerWidth,
+			y - padding,
 			0,
 			0,
-			this.longestLine,
-			this.heightOfMessage
+			this.longestLine + padding + padding + cornerWidth*2,
+			this.heightOfMessage + padding*2
 		);
 		this.fill.draw(
-			x - this.longestLine/2 + 3,
-			y - 3,
+			x - this.longestLine/2 - padding,
+			y - padding - cornerHeight,
 			0,
 			0,
-			this.longestLine - 6,
-			3
+			this.longestLine + padding*2,
+			this.topLeft.height
 		);
 		this.fill.draw(
-			x - this.longestLine/2 + 3,
-			y + this.heightOfMessage,
+			x - this.longestLine/2 - padding,
+			y + this.heightOfMessage + padding,
 			0,
 			0,
-			this.longestLine - 6,
-			3
+			this.longestLine + padding*2,
+			this.topLeft.height
 		);
 		
+		// draw corners
 		this.topLeft.draw(
-				  x - this.longestLine/2,
-				  y - this.topLeft.height
-				  );
+			x - this.longestLine/2 - padding - cornerWidth,
+			y - padding - cornerHeight
+		);
 		this.topRight.draw(
-				  x + this.longestLine/2 - this.topRight.width,
-				  y - this.topRight.height
-				  );
+			x + this.longestLine/2 + padding,
+			y - padding - cornerHeight
+		);
 		this.bottomLeft.draw(
-				  x - this.longestLine/2,
-				  y + this.heightOfMessage
-				  );
+			x - this.longestLine/2 - padding - cornerWidth,
+			y + this.heightOfMessage + padding
+		);
 		this.bottomRight.draw(
-				  x + this.longestLine/2 - this.bottomRight.width,
-				  y + this.heightOfMessage
-				  );
+			x + this.longestLine/2 + padding,
+			y + this.heightOfMessage + padding
+		);
 		this.pointer.draw(
-				  x,
-				  y + this.heightOfMessage + 3
-				  );
+			x,
+			y + this.heightOfMessage + padding + cornerHeight
+		);
 		
+		// draw message
 		this.font.draw(
-			       this.toPrint,
-			       x,
-			       y,
-			       ig.Font.ALIGN.CENTER
-			       );
+			this.toPrint,
+			x,
+			y,
+			ig.Font.ALIGN.CENTER
+		);
 	
 	},
 	
