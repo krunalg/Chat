@@ -18,10 +18,11 @@ EntityBubble = ig.Entity.extend({
 	bottomLeft: new ig.Image( 'media/chat-bubble-bleft.png' ),
 	bottomRight: new ig.Image( 'media/chat-bubble-bright.png' ),
 	pointer: new ig.Image( 'media/chat-bubble-point.png' ),
-	font: new ig.Font( 'media/font.pf.tempesta.seven.8pt.png' ),
+	font: new ig.Font( 'media/04b03.black.font.png' ),
 	
 	// some vars
 	msg: '',
+	toPrint: '', // will be created later
 	msgMaxWidth: 100, // in px
 
 	init: function( x, y, settings ) {
@@ -44,20 +45,26 @@ EntityBubble = ig.Entity.extend({
 				currStr = explode[i];
 			}
 		}
+		if(currStr!='') lines.push(currStr);
 		
 		// converts array of msg parts into
 		// one string to be printed
-		var toPrint = '';
-		for(var i=0; i<lines; i++)
+		this.toPrint = '';
+		for(var i=0; i<lines.length; i++)
 		{
-			if(i!=0) toPrint += "\n";
-			toPrint += lines[i];
+			if(i!=0) this.toPrint += "\n";
+			this.toPrint += lines[i];
 		}
 	},	
 	
 	draw: function()
 	{
-		this.font.draw( 'msg', this.pos.x, this.pos.y, ig.Font.ALIGN.LEFT );
+		this.font.draw(
+			       this.toPrint,
+			       this.pos.x - ig.game.screen.x + this.size.x/2,
+			       this.pos.y - ig.game.screen.y - this.size.y,
+			       ig.Font.ALIGN.LEFT
+			       );
 	},
 	
 	update: function()
