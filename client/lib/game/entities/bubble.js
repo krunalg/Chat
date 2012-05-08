@@ -24,6 +24,11 @@ EntityBubble = ig.Entity.extend({
 	msg: '',
 	toPrint: '', // will be created later
 	msgMaxWidth: 100, // in px
+	
+	// calculations (in px)
+	heightOfMessage: 0, // found later
+	spaceBetweenLines: 2,
+	longestLine: 0, // found later
 
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
@@ -33,6 +38,7 @@ EntityBubble = ig.Entity.extend({
 		var explode = this. msg.split(' ');
 		var lines = new Array();
 		var currStr = '';
+		var lineWidth = 0;
 		for(var i=0; i<explode.length; i++)
 		{
 			if(i==0) var space = ''; else var space = ' ';
@@ -41,11 +47,21 @@ EntityBubble = ig.Entity.extend({
 				currStr = tryStr;
 			else // start new line
 			{
+				lineWidth = this.font.widthForString(currStr);
+				if(lineWidth > this.longestLine)
+					this.longestLine = lineWidth;
 				lines.push(currStr);
 				currStr = explode[i];
 			}
 		}
-		if(currStr!='') lines.push(currStr);
+		// finish array
+		if(currStr!='')
+		{
+			lines.push(currStr);
+			lineWidth = this.font.widthForString(currStr);
+			if(lineWidth > this.longestLine)
+			this.longestLine = lineWidth;
+		}
 		
 		// converts array of msg parts into
 		// one string to be printed
@@ -54,17 +70,68 @@ EntityBubble = ig.Entity.extend({
 		{
 			if(i!=0) this.toPrint += "\n";
 			this.toPrint += lines[i];
+			// for calculating height of entire message
+			this.heightOfMessage += this.font.height;
 		}
+		this.heightOfMessage -= 2; // shave off extra 2px impact seems to add on
+		
 	},	
 	
 	draw: function()
 	{
+		var context = ig.system.context;
+		
+		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
+		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage/2;
+		
+		context.fillStyle = '#FFF'; // white
+		context.fillRect (
+			x - this.longestLine/2,
+			y,
+			this.longestLine,
+			this.heightOfMessage
+			);
+		context.fillRect (
+			x - this.longestLine/2 + 3,
+			y - 3,
+			this.longestLine - 6,
+			3
+			);
+		context.fillRect (
+			x - this.longestLine/2 + 3,
+			y + this.heightOfMessage,
+			this.longestLine - 6,
+			3
+			);
+		
+		this.topLeft.draw(
+				  x - this.longestLine/2,
+				  y - this.topLeft.height
+				  );
+		this.topRight.draw(
+				  x + this.longestLine/2 - this.topRight.width,
+				  y - this.topRight.height
+				  );
+		this.bottomLeft.draw(
+				  x - this.longestLine/2,
+				  y + this.heightOfMessage
+				  );
+		this.bottomRight.draw(
+				  x + this.longestLine/2 - this.bottomRight.width,
+				  y + this.heightOfMessage
+				  );
+		this.pointer.draw(
+				  x,
+				  y + this.heightOfMessage + 3
+				  );
+		
 		this.font.draw(
 			       this.toPrint,
-			       this.pos.x - ig.game.screen.x + this.size.x/2,
-			       this.pos.y - ig.game.screen.y - this.size.y,
-			       ig.Font.ALIGN.LEFT
+			       x,
+			       y,
+			       ig.Font.ALIGN.CENTER
 			       );
+	
 	},
 	
 	update: function()
