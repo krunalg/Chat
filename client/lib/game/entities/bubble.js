@@ -18,6 +18,7 @@ EntityBubble = ig.Entity.extend({
 	bottomLeft: new ig.Image( 'media/chat-bubble-bleft.png' ),
 	bottomRight: new ig.Image( 'media/chat-bubble-bright.png' ),
 	pointer: new ig.Image( 'media/chat-bubble-point.png' ),
+	fill: new ig.Image( 'media/chat-bubble-fill.png' ),
 	font: new ig.Font( 'media/04b03.black.font.png' ),
 	
 	// some vars
@@ -84,6 +85,7 @@ EntityBubble = ig.Entity.extend({
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
 		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage;
 		
+		/*
 		context.fillStyle = '#FFF'; // white
 		context.fillRect (
 			x - this.longestLine/2,
@@ -103,6 +105,31 @@ EntityBubble = ig.Entity.extend({
 			this.longestLine - 6,
 			3
 			);
+		*/
+		this.fill.draw(
+			x - this.longestLine/2,
+			y,
+			0,
+			0,
+			this.longestLine,
+			this.heightOfMessage
+		);
+		this.fill.draw(
+			x - this.longestLine/2 + 3,
+			y - 3,
+			0,
+			0,
+			this.longestLine - 6,
+			3
+		);
+		this.fill.draw(
+			x - this.longestLine/2 + 3,
+			y + this.heightOfMessage,
+			0,
+			0,
+			this.longestLine - 6,
+			3
+		);
 		
 		this.topLeft.draw(
 				  x - this.longestLine/2,
