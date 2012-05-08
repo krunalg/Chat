@@ -31,7 +31,7 @@ MyGame = ig.Game.extend({
 	autoSort: true,
 	eventsFont: new ig.Font( 'media/04b03.font.png' ),
 	events: new Array(), // contains game events such as player entering area
-	eventsMax: 10, // max events to display on screen
+	eventsMax: 4, // max events to display on screen
 	eventsTimer: null, // used for pruning old events
 	eventsLifespan: 2, // time in seconds before clearing event
 	
@@ -310,6 +310,11 @@ MyGame = ig.Game.extend({
 				this.events.splice(0, 1);
 				this.eventsTimer = null;
 			}
+			
+			// if after that the events.length still
+			// exceeds the maximum, prune to size
+			while(this.events.length>this.eventsMax)
+				this.events.splice(0, 1);
 		}
 	},
 	
