@@ -74,7 +74,8 @@ EntityBubble = ig.Entity.extend({
 			// for calculating height of entire message
 			this.heightOfMessage += this.font.height;
 		}
-		this.heightOfMessage -= 2; // shave off extra 2px impact seems to add on
+		this.heightOfMessage -= 3; // because impact auto adds a few px below even for one-liners
+		this.longestLine -= 1; // because impact auto adds a px to last char
 		
 	},	
 	
@@ -85,27 +86,6 @@ EntityBubble = ig.Entity.extend({
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
 		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage;
 		
-		/*
-		context.fillStyle = '#FFF'; // white
-		context.fillRect (
-			x - this.longestLine/2,
-			y,
-			this.longestLine,
-			this.heightOfMessage
-			);
-		context.fillRect (
-			x - this.longestLine/2 + 3,
-			y - 3,
-			this.longestLine - 6,
-			3
-			);
-		context.fillRect (
-			x - this.longestLine/2 + 3,
-			y + this.heightOfMessage,
-			this.longestLine - 6,
-			3
-			);
-		*/
 		this.fill.draw(
 			x - this.longestLine/2,
 			y,
