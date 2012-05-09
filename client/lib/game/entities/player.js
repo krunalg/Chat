@@ -141,7 +141,7 @@ ig.module (
 		else if(moveStillPressed('down'))    player.facing = 'down';
 		else player.isMove = false; // if no key pressed, set idle
 
-		if(player.isMove && canMove(player)) player.startMove();
+		if(player.isMove && canMove(player)) preStartMove(player);
 		else
 		{
 		    player.moveState = 'idle';
@@ -553,6 +553,52 @@ ig.module (
 	}
     }
     
+    var preStartMove = function(player)
+    {
+	var cancelMove = false;
+		
+	// handle zoning
+	if(player.facing=='down') // as for now, floor exits go down
+	{
+	    var exit = overExit(player);
+	    if(exit)
+	    {
+		exit.trigger(); // zone
+		cancelMove = true;
+	    }
+	}
+	
+	if(!cancelMove)
+	{		    
+	    // facing an exit
+	    var exit = facingExit(player);
+	    if(exit)
+	    {
+		// check if going through a door
+		if(exit.isDoor=='1')
+		{
+		    exit.startAnim();
+		    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
+		    player.moveWhen = 336.7 + new Date().getTime();
+		    player.moveWaiting = true;
+		    player.moveDoor = exit;
+		    cancelMove = true; // prevent player from starting to move too soon
+		}
+		// not a door
+		else
+		{
+		    if(player.facing=='down') exit.startAnim(); // approaching floor exit
+		}
+	    }
+	
+	    // if no exits have taken place, move
+	    if(!cancelMove)
+	    {
+		player.startMove();
+	    }
+	}
+    }
+    
     var movePressed = function(player)
     {
 	if(player.moveCommitDirection!=player.facing)
@@ -587,48 +633,7 @@ ig.module (
 	    }
 	    else if(canMove(player))
 	    {
-		var cancelMove = false;
-		
-		// handle zoning
-		if(player.facing=='down') // as for now, floor exits go down
-		{
-		    var exit = overExit(player);
-		    if(exit)
-		    {
-			exit.trigger(); // zone
-			cancelMove = true;
-		    }
-		}
-		
-		if(!cancelMove)
-		{		    
-		    // facing an exit
-		    var exit = facingExit(player);
-		    if(exit)
-		    {
-			// check if going through a door
-			if(exit.isDoor=='1')
-			{
-			    exit.startAnim();
-			    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
-			    player.moveWhen = 336.7 + new Date().getTime();
-			    player.moveWaiting = true;
-			    player.moveDoor = exit;
-			    cancelMove = true; // prevent player from starting to move too soon
-			}
-			// not a door
-			else
-			{
-			    if(player.facing=='down') exit.startAnim(); // approaching floor exit
-			}
-		    }
-		
-		    // if no exits have taken place, move
-		    if(!cancelMove)
-		    {
-			player.startMove();
-		    }
-		}
+		preStartMove(player);
 	    }
 	    else
 	    {
