@@ -58,7 +58,7 @@ EntityExit = ig.Entity.extend({
 		}
 		else
 		{
-			this.offset.y = -16;
+			//this.offset.y = -16;
 			this.animSheet = new ig.AnimationSheet( 'media/entities/exit/arrows.png', 16, 16 );
 			this.addAnim( 'alternate', 0.5333, [0,1] );
 			this.currentAnim = null; // default state is invisible
@@ -67,14 +67,16 @@ EntityExit = ig.Entity.extend({
 		switch(this.direction)
 		{
 			case 'left':
+				this.offset = { x: -16, y: 0 };
 				break;
 			case 'right':
+				this.offset = { x: 16, y: 0 };
 				break;
 			case 'up':
+				this.offset = { x: 0, y: 16 };
 				break;
 			case 'down':
 				this.offset = { x: 0, y: -16 };
-				this.anims.alternate.flip.y = false;
 				break;
 			default:
 				console.debug("An exit was not given a proper direction and will now kill() itself.");
