@@ -590,7 +590,7 @@ ig.module (
 		var cancelMove = false;
 		
 		// handle zoning
-		if(player.facing=='down') // as for now, flor exit go down
+		if(player.facing=='down') // as for now, floor exits go down
 		{
 		    var exit = overExit(player);
 		    if(exit)
