@@ -547,6 +547,7 @@ ig.module (
 			     lifespan: bubbleDuration // magic numbers are bad!
 		    } );
 		    npcs[i].moveTimer.set(bubbleDuration+1);
+		    npcs[i].hideName.set(bubbleDuration);
 		}
 	    }
 	}
