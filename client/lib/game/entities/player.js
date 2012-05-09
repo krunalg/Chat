@@ -766,9 +766,7 @@ ig.module (
 		    collides: ig.Entity.COLLIDES.PASSIVE,
 		    animSheet: new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 ),
 		    
-		    // used to only send network move updates if change occurs
-		    lastFacedDirection: '',
-		    lastState: '',
+		    lastState: '', // used to only send network move updates if change occurs
 	    
 		    facing: '',
 		    facingLast: '',
@@ -807,15 +805,14 @@ ig.module (
 			
 			moveAnimStart(this, true);
 			
-			this.facingLast = this.facing;
-			
 			// send movement update only when change occurs
-			if( this.lastFacing != this.facing || this.lastState != this.moveState )
+			if( this.facingLast != this.facing || this.lastState != this.moveState )
 			{
 			    emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-			    this.lastFacing = this.facing;
 			    this.lastState  = this.moveState;
 			}
+			
+			this.facingLast = this.facing;
 		    },
 		    
 		    startJump: function()
