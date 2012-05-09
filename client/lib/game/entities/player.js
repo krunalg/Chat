@@ -640,12 +640,16 @@ ig.module (
 			player.currentAnim = player.anims.slowdown;
 			break;
 		}
-		// emit players faced direction, if changed
-		if(!player.facingUpdated && player.facing!=player.facingLast)
-		{
-		    emitDirection(player.name, player.facing);
-		    player.facingUpdated = true;
-		}
+	    }
+	}
+	else
+	{
+	    // emit players faced direction, if changed
+	    if(!player.facingUpdated || player.facing!=player.facingLast)
+	    {
+		emitDirection(player.name, player.facing);
+		player.facingLast = player.facing;
+		player.facingUpdated = true;
 	    }
 	}
     }
