@@ -527,7 +527,7 @@ ig.module (
 	    }
 	}
 	
-	// tries to read signs
+	// tries to read npc message
 	var npcs = ig.game.getEntitiesByType( EntityNpc );
 	if(npcs)
 	{
