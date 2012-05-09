@@ -535,11 +535,13 @@ ig.module (
 		if( (npcs[i].pos.x == player.pos.x + vx) &&
 		       (npcs[i].pos.y == player.pos.y + vy) )
 		{
+		    var bubbleDuration = 3; // seconds
 		    ig.game.spawnEntity( EntityBubble, npcs[i].pos.x, npcs[i].pos.y,
 		    {
 			     msg: npcs[i].msg,
-			     lifespan: 3 // magic numbers are bad!
+			     lifespan: bubbleDuration // magic numbers are bad!
 		    } );
+		    npcs[i].moveTimer.set(bubbleDuration+1);
 		}
 	    }
 	}
