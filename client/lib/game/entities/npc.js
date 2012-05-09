@@ -348,8 +348,9 @@ ig.module (
 		    // NPC movement patterns
 		    movePattern: ['left','up','right','down'],
 		    moveNext: 0,
-		    lastMove: new Date().getTime(),
-		    moveDelay: 2000,
+		    moveTimer: null,
+		    moveDelay: 2, // delay in seconds between moves
+		    
 		    faceNextMove: function()
 		    {
 			this.facing = this.movePattern[this.moveNext];
@@ -370,9 +371,6 @@ ig.module (
 			this.isMove = true;
 			setMoveDestination(this);
 			moveAnimStart(this);
-			//emitMove(this.pos.x, this.pos.y, this.facing, this.name);
-			this.facingLast = this.facing;
-			this.facingUpdated = false;
 		    },
 		    
 		    finishMove: function()
@@ -388,7 +386,7 @@ ig.module (
 			    this.isMove = false;
 			    this.vel.x = this.vel.y = 0;
 			    moveAnimStop(this);
-			    this.lastMove = new Date().getTime();
+			    this.moveTimer.set(this.moveDelay);
 		    
 			}
 			// continue to destination
@@ -400,6 +398,8 @@ ig.module (
 		    
 		    init: function( x, y, settings ) {
 			this.parent( x, y, settings );
+			
+			this.moveTimer = new ig.Timer();
 			
 			// things to skip if loaded in weltmeister
 			if(getFileName()!='weltmeister.html')
@@ -475,8 +475,7 @@ ig.module (
 			}
 			else
 			{
-			    var currTime = new Date().getTime();
-			    if(currTime - this.lastMove > this.moveDelay)
+			    if(this.moveTimer.delta()>=0)
 			    {
 				this.faceNextMove();
 				if(canMove(this))
