@@ -535,7 +535,11 @@ ig.module (
 		if( (npcs[i].pos.x == player.pos.x + vx) &&
 		       (npcs[i].pos.y == player.pos.y + vy) )
 		{
-		    // HERE YOU WILL SPAWN A CHAT BUBBLE
+		    ig.game.spawnEntity( EntityBubble, npcs[i].pos.x, npcs[i].pos.y,
+		    {
+			     msg: npcs[i].msg,
+			     lifespan: 3 // magic numbers are bad!
+		    } );
 		}
 	    }
 	}
