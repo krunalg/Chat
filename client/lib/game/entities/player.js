@@ -666,7 +666,7 @@ ig.module (
 		var exit = overExit(player);
 		if(exit)
 		{
-		    if(player.facing=='down') exit.startAnim();
+		    if(player.facing==exit.direction) exit.startAnim();
 		    else exit.stopAnim();
 		}
 	    }
