@@ -645,11 +645,10 @@ ig.module (
 	else
 	{
 	    // emit players faced direction, if changed
-	    if(!player.facingUpdated || player.facing!=player.facingLast)
+	    if(player.facing!=player.facingLast)
 	    {
 		emitDirection(player.name, player.facing);
 		player.facingLast = player.facing;
-		player.facingUpdated = true;
 	    }
 	}
     }
@@ -773,7 +772,6 @@ ig.module (
 	    
 		    facing: '',
 		    facingLast: '',
-		    facingUpdated: false,
 		    isMove: false, // waiting for move key-press
 		    isJump: false,
 		    leftFoot: true, // used to alternate step animations
@@ -810,7 +808,6 @@ ig.module (
 			moveAnimStart(this, true);
 			
 			this.facingLast = this.facing;
-			this.facingUpdated = false;
 			
 			// send movement update only when change occurs
 			if( this.lastFacing != this.facing || this.lastState != this.moveState )
@@ -831,7 +828,6 @@ ig.module (
 			moveAnimStart(this, true);
 			emitJump(this.pos.x, this.pos.y, this.facing);
 			this.facingLast = this.facing;
-			this.facingUpdated = false;
 		    },
 		    
 		    init: function( x, y, settings ) {
@@ -1134,7 +1130,6 @@ EntityOtherplayer = ig.Entity.extend({
 			
 		moveAnimStart(this, true);
 		this.facingLast = this.facing;
-		this.facingUpdated = false;
 	    },
 	    
 	    draw: function() {
