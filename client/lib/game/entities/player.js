@@ -495,7 +495,7 @@ ig.module (
     var action = function(player)
     {
 	var vx = vy = 0;
-	    var tilesize = 16; // this should not be here!!
+	    var tilesize = ig.game.collisionMap.tilesize;
 	    switch(player.facing)
 	    {
 		case 'left':
