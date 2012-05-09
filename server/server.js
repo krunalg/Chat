@@ -121,46 +121,7 @@ io.sockets.on('connection', function (socket)
             }
         }
     });
-    
-    /*
-    socket.on('receiveMove', function (currX, currY, direction, moveState) {
-        socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, socket.clientname, moveState);
         
-	// update players known position on server
-	for(var i=0; i<onlinePlayers.length; i++)
-        {
-            if(onlinePlayers[i].name==socket.clientname)
-            {
-                var newX = currX;
-                var newY = currY;
-                switch(direction)
-                {
-                    
-                    case 'left':
-                        newX = currX - 16; // !! magic numbers, not cool !!
-                        break;
-                    case 'right':
-                        newX = currX + 16; // !! magic numbers, not cool !!
-                        break;
-                    case 'up':
-                        newY = currY - 16; // !! magic numbers, not cool !!
-                        break;
-                    case 'down':
-                        newY = currY + 16; // !! magic numbers, not cool !!
-                        break;
-                };
-                onlinePlayers[i].pos.x = newX;
-                onlinePlayers[i].pos.y = newY;
-                onlinePlayers[i].facing = direction;
-                
-                // this would be the place to update players positions to mySQL db
-                
-                break; // no need to search for other players with same name
-            }
-        }
-    });
-    */
-    
     socket.on('receiveJump', function (x, y, direction) {
         console.log("Received a jump from " + socket.clientname);
     });

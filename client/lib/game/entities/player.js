@@ -446,15 +446,6 @@ ig.module (
 	player.currentAnim.rewind();
     };
     
-    
-    
-    /*
-     var emitMove = function(xstart,ystart,direction,moveState) // soon to be deprecated
-    {
-	socket.emit('receiveMove',xstart,ystart,direction,moveState);
-    }
-    */
-    
     var emitJump = function(x, y, direction)
     {
 	socket.emit('receiveJump', x, y, direction);
