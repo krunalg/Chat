@@ -140,7 +140,7 @@ socket.on('otherPlayerJump', function (x, y, direction, client)
 	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(otherplayer)
 	 {
-		  for(var i in otherplayer)
+		  for(var i=0; i<otherplayer.length; i++)
 		  {
 			   if(client == otherplayer[i].name)
 			   {
@@ -162,7 +162,7 @@ socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
 	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(otherplayer)
 	 {
-		  for(var i in otherplayer)
+		  for(var i=0; i<otherplayer.length; i++)
 		  {
 			   if(client == otherplayer[i].name)
 			   {
@@ -183,7 +183,7 @@ socket.on('updateOtherPlayer', function (client, direction) {
 	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(otherplayer)
 	 {
-		  for(var i in otherplayer)
+		  for(var i=0; i<otherplayer.length; i++)
 		  {
 			   if(client == otherplayer[i].name)
 			   {
@@ -234,7 +234,7 @@ socket.on('reskinOtherPlayer', function (client, skin) {
 	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(otherplayer)
 	 {
-		  for(var i in otherplayer)
+		  for(var i=0; i<otherplayer.length; i++)
 		  {
 			   if(client == otherplayer[i].name)
 			   {
@@ -253,7 +253,7 @@ socket.on('dropPlayer', function (client)
 	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(netplayers)
 	 {
-		  for(var i in netplayers)
+		  for(var i=0; i<netplayers.length; i++)
 		  {
 			   // kill player entity if he exists
 			   if(netplayers[i].name==client) netplayers[i].kill();
@@ -268,7 +268,7 @@ socket.on('playerPositions', function (players)
 	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
 	 if(netplayers)
 	 {
-		  for(var i in netplayers)
+		  for(var i=0; i<netplayers.length; i++)
 		  {
 			   for(var j in players)
 			   {
