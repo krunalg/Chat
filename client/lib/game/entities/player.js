@@ -886,10 +886,10 @@ ig.module (
 			    this.addAnim( 'runLeftB', 0.08333, [11,9], true );
 			    this.addAnim( 'runRightA', 0.08333, [10,9], true );
 			    this.addAnim( 'runRightB', 0.08333, [11,9], true );
-			    this.addAnim( 'slowup', .5, [2,0,1,0] );
-			    this.addAnim( 'slowdown', .5, [8,6,7,6] );
-			    this.addAnim( 'slowleft', .5, [5,3,4,3] );
-			    this.addAnim( 'slowright', .5, [5,3,4,3] );
+			    this.addAnim( 'slowup', 0.26667, [2,0,1,0] );
+			    this.addAnim( 'slowdown', 0.26667, [14,12,13,12] );
+			    this.addAnim( 'slowleft', 0.26667, [8,6,7,6] );
+			    this.addAnim( 'slowright', 0.26667, [8,6,7,6] );
 			    this.addAnim( 'idleup', 0.1, [0], true );
 			    this.addAnim( 'idledown', 0.1, [12], true );
 			    this.addAnim( 'idleleft', 0.1, [6], true );
@@ -990,11 +990,13 @@ ig.module (
 			    {
 				// if player not trying to move, set to idle
 				moveAnimStop(this);
+				/*
 				// keep all slow-walk animations reset
 				this.anims.slowleft.rewind();
 				this.anims.slowright.rewind();
 				this.anims.slowup.rewind();
 				this.anims.slowdown.rewind();
+				*/
 			    }
 			}
 	
@@ -1083,10 +1085,10 @@ EntityOtherplayer = ig.Entity.extend({
 		    this.addAnim( 'runLeftB', 0.08333, [11,9], true );
 		    this.addAnim( 'runRightA', 0.08333, [10,9], true );
 		    this.addAnim( 'runRightB', 0.08333, [11,9], true );
-		    this.addAnim( 'slowup', .5, [2,0,1,0] );
-		    this.addAnim( 'slowdown', .5, [8,6,7,6] );
-		    this.addAnim( 'slowleft', .5, [5,3,4,3] );
-		    this.addAnim( 'slowright', .5, [5,3,4,3] );
+		    this.addAnim( 'slowup', 0.26667, [2,0,1,0] );
+		    this.addAnim( 'slowdown', 0.26667, [14,12,13,12] );
+		    this.addAnim( 'slowleft', 0.26667, [8,6,7,6] );
+		    this.addAnim( 'slowright', 0.26667, [8,6,7,6] );
 		    this.addAnim( 'idleup', 0.1, [0], true );
 		    this.addAnim( 'idledown', 0.1, [12], true );
 		    this.addAnim( 'idleleft', 0.1, [6], true );
