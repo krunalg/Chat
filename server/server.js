@@ -123,7 +123,7 @@ io.sockets.on('connection', function (socket)
     });
     
     socket.on('receiveJump', function (x, y, direction) {
-        socket.broadcast.to(socket.roomname).emit('otherPlayerJump', x, x, direction, socket.clientname);
+        socket.broadcast.to(socket.roomname).emit('otherPlayerJump', x, y, direction, socket.clientname);
     });
     
     socket.on('receiveDirection', function (client, direction) {

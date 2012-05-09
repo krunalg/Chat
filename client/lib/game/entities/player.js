@@ -197,34 +197,43 @@ ig.module (
 	    // stop player
 	    player.vel.x = player.vel.y = 0;
 	    
-	    // check if we should continue moving
-	    if(moveStillPressed('left'))
+	    if(player.isLocal)
 	    {
-		player.facing = 'left';
-		if(canMove(player)) player.startMove();
+		// check if we should continue moving
+		if(moveStillPressed('left'))
+		{
+		    player.facing = 'left';
+		    if(canMove(player)) player.startMove();
+		}
+		else if(moveStillPressed('right'))
+		{
+		    player.facing = 'right';
+		    if(canMove(player)) player.startMove();
+		}
+		else if(moveStillPressed('up'))
+		{
+		    player.facing = 'up';
+		    if(canMove(player)) player.startMove();
+		}
+		else if(moveStillPressed('down'))
+		{
+		    player.facing = 'down';
+		    if(canMove(player)) player.startMove();
+		}
+		else 
+		{
+		    // end move state
+		    player.isJump = false;
+		    moveAnimStop(player);
+		}  
 	    }
-	    else if(moveStillPressed('right'))
+	    else
 	    {
-		player.facing = 'right';
-		if(canMove(player)) player.startMove();
+		    // end move state
+		    player.isJump = false;
+		    moveAnimStop(player);
 	    }
-	    else if(moveStillPressed('up'))
-	    {
-		player.facing = 'up';
-		if(canMove(player)) player.startMove();
-	    }
-	    else if(moveStillPressed('down'))
-	    {
-		player.facing = 'down';
-		if(canMove(player)) player.startMove();
-	    }
-	    else 
-	    {
-		// end move state
-		player.isJump = false;
-		//player.vel.x = player.vel.y = 0;
-		moveAnimStop(player);
-	    }  
+	    
 	}
 	// continue to destination
 	else
@@ -1112,6 +1121,18 @@ EntityOtherplayer = ig.Entity.extend({
 		}
 	    },
 	    
+	    netStartJump: function()
+	    {
+		this.isJump = true;
+		this.jumpStart = new ig.Timer();
+		//spawnShadow(this);
+		setMoveDestination(this);
+			
+		moveAnimStart(this, true);
+		this.facingLast = this.facing;
+		this.facingUpdated = false;
+	    },
+	    
 	    draw: function() {
 			
 		if(this.hideName.delta()>=0)
@@ -1134,10 +1155,17 @@ EntityOtherplayer = ig.Entity.extend({
 		this.parent();
 		
 		// movement
-		if(this.isMove)
+		if(this.isJump)
+		{
+		    // a move has already been started
+		    finishJump(this);
+		}
+		else if(this.isMove)
 		{
 		    finishMove(this);
-		} else {
+		}
+		else
+		{
 		    // keep animation consistent with this.facing
 		    moveAnimStop(this);
 		}
