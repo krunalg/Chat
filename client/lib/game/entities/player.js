@@ -1129,7 +1129,6 @@ EntityOtherplayer = ig.Entity.extend({
 		setMoveDestination(this);
 			
 		moveAnimStart(this, true);
-		this.facingLast = this.facing;
 	    },
 	    
 	    draw: function() {
