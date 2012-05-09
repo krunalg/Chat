@@ -28,6 +28,7 @@ EntityExit = ig.Entity.extend({
 	map: null,
 	goTo: null,
 	isDoor: 0,
+	direction: null, // direction that triggers exit
 	
 	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 	
@@ -61,6 +62,24 @@ EntityExit = ig.Entity.extend({
 			this.animSheet = new ig.AnimationSheet( 'media/entities/exit/arrows.png', 16, 16 );
 			this.addAnim( 'alternate', 0.5333, [0,1] );
 			this.currentAnim = null; // default state is invisible
+		}
+		
+		switch(this.direction)
+		{
+			case 'left':
+				break;
+			case 'right':
+				break;
+			case 'up':
+				break;
+			case 'down':
+				this.offset = { x: 0, y: -16 };
+				this.anims.alternate.flip.y = false;
+				break;
+			default:
+				console.debug("An exit was not given a proper direction and will now kill() itself.");
+				this.kill();
+				break;
 		}
 		
 	},
