@@ -121,9 +121,9 @@ io.sockets.on('connection', function (socket)
             }
         }
     });
-        
+    
     socket.on('receiveJump', function (x, y, direction) {
-        console.log("Received a jump from " + socket.clientname);
+        socket.broadcast.to(socket.roomname).emit('otherPlayerJump', x, x, direction, socket.clientname);
     });
     
     socket.on('receiveDirection', function (client, direction) {
