@@ -88,7 +88,7 @@ EntityBubble = ig.Entity.extend({
 	draw: function()
 	{
 		var target = ig.game.getEntitiesByType( EntityOtherplayer );
-		if(target)
+		if(target && this.from!='')
 		{
 			 for(var i=0; i<target.length; i++)
 			 {
@@ -112,7 +112,7 @@ EntityBubble = ig.Entity.extend({
 			y - padding,
 			0,
 			0,
-			this.longestLine + padding + padding + cornerWidth*2,
+			this.longestLine + padding*2 + cornerWidth*2,
 			this.heightOfMessage + padding*2
 		);
 		this.fill.draw(
