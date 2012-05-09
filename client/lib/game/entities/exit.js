@@ -29,6 +29,7 @@ EntityExit = ig.Entity.extend({
 	goTo: null,
 	isDoor: 0,
 	direction: null, // direction that triggers exit
+	type: null, // floor or door
 	
 	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
 	
@@ -39,51 +40,64 @@ EntityExit = ig.Entity.extend({
 		this.addAnim( 'weltmeister', 0.1, [0] );
 		this.currentAnim = this.anims.weltmeister;
 		
-		//		
+		
+
 	},
 	
 	ready: function()
 	{
 		delete this.currentAnim; // no weltmeister icon in-game
 		
-		if(this.isDoor=='1')
+		switch(this.type)
 		{
-			this.offset.y = 4;		
-			this.animSheet = new ig.AnimationSheet( 'media/door-animations.png', 16, 20 );
-			this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3], true );
-			this.addAnim( 'opened', 0.0167, [3] );
-			this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0], true );
-			this.addAnim( 'closed', 0.0167, [0] );
-			this.currentAnim = this.anims.closed; // default state	
-		}
-		else
-		{
-			//this.offset.y = -16;
-			this.animSheet = new ig.AnimationSheet( 'media/entities/exit/arrows.png', 16, 16 );
-			this.addAnim( 'alternate', 0.5333, [0,1] );
-			this.currentAnim = null; // default state is invisible
-		}
-		
-		switch(this.direction)
-		{
-			case 'left':
-				this.offset = { x: -16, y: 0 };
+			// set up floor exits
+			case 'floor':
+				this.animSheet = new ig.AnimationSheet( 'media/entities/exit/arrows.png', 16, 16 );
+				switch(this.direction)
+				{
+					case 'left':
+						this.addAnim( 'arrow', 0.5333, [2,3] );
+						this.offset = { x: -16, y: 0 };
+						break;
+					case 'right':
+						this.addAnim( 'arrow', 0.5333, [2,3] );
+						this.anims.arrow.flip.x = true;
+						this.offset = { x: 16, y: 0 };
+						break;
+					case 'up':
+						this.addAnim( 'arrow', 0.5333, [0,1] );
+						this.anims.arrow.flip.y = true;
+						this.offset = { x: 0, y: 16 };
+						break;
+					case 'down':
+						this.addAnim( 'arrow', 0.5333, [0,1] );
+						this.offset = { x: 0, y: -16 };
+						break;
+					default:
+						console.debug("Exit at " + this.pos.x + "," + this.pos.y + " was not given proper 'direction' and will now kill() itself.");
+						this.kill();
+						break;
+				}
 				break;
-			case 'right':
-				this.offset = { x: 16, y: 0 };
+			
+			// set up doors
+			case 'door':
+				this.offset.y = 4;		
+				this.animSheet = new ig.AnimationSheet( 'media/door-animations.png', 16, 20 );
+				this.addAnim( 'open', 0.0167, [0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,3], true );
+				this.addAnim( 'opened', 0.0167, [3] );
+				this.addAnim( 'close', 0.0167, [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1,0], true );
+				this.addAnim( 'closed', 0.0167, [0] );
+				//this.currentAnim = this.anims.closed; // default state
 				break;
-			case 'up':
-				this.offset = { x: 0, y: 16 };
-				break;
-			case 'down':
-				this.offset = { x: 0, y: -16 };
-				break;
+			
+			// kill exit if not properly set up
 			default:
-				console.debug("An exit was not given a proper direction and will now kill() itself.");
+				var tilesize = ig.game.collisionMap.tilesize;
+				console.debug("Exit at " + this.pos.x + "," + this.pos.y + " was not given proper 'type' and will now kill() itself.");
 				this.kill();
 				break;
 		}
-		
 	},
 	
 	startAnim: function()
@@ -96,7 +110,7 @@ EntityExit = ig.Entity.extend({
 		else
 		{
 			console.debug('Turning on exit arrow.');
-			this.currentAnim = this.anims.alternate;
+			this.currentAnim = this.anims.arrow;
 		}
 	},
 	
