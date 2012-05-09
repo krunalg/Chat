@@ -330,6 +330,8 @@ ig.module (
    
 		EntityNpc = ig.Entity.extend({
 		    
+		    hideName: null, // timer for hiding name for chat bubbles
+		    
 		    // recorded travel time of 9 units (144px)
 		    // in 2.100 seconds in VBA.
 		    // ie 144/2.1 = 68.571428 or ~69
@@ -401,6 +403,9 @@ ig.module (
 			
 			this.moveTimer = new ig.Timer();
 			
+			// start hideName timer
+			this.hideName = new ig.Timer();
+			
 			// things to skip if loaded in weltmeister
 			if(getFileName()!='weltmeister.html')
 			{
@@ -451,13 +456,16 @@ ig.module (
 		    	// things to skip if loaded in weltmeister
 			if(getFileName()!='weltmeister.html')
 			{
-			    // draw name above head
-			    this.nameFont.draw(
+			    if(this.hideName.delta()>=0)
+			    {
+				// draw name above head
+				this.nameFont.draw(
 				    this.name,
 				    this.pos.x - ig.game.screen.x + this.size.x/2,
 				    this.pos.y - ig.game.screen.y - this.size.y,
 				    ig.Font.ALIGN.CENTER
 				);
+			    }
 			}
 			
 			this.parent();
