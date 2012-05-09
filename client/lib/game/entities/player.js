@@ -1125,7 +1125,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    {
 		this.isJump = true;
 		this.jumpStart = new ig.Timer();
-		//spawnShadow(this);
+		spawnShadow(this);
 		setMoveDestination(this);
 			
 		moveAnimStart(this, true);
