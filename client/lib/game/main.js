@@ -122,7 +122,6 @@ MyGame = ig.Game.extend({
 	
 	// Chat system
 		// html elements
-		messageBoxId: 'messages', // id of HTML element
 		inputFieldId: 'input', // id of HTML element
 		
 		//allowInput: true,
