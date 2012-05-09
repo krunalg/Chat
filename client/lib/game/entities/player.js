@@ -557,7 +557,7 @@ ig.module (
     {
 	
 	// do a step animation, regardless of whether player moves
-	moveAnimStart(player, false);
+	//moveAnimStart(player, false);
 	
 	
 	if(player.moveCommitDirection!=player.facing)
@@ -634,6 +634,7 @@ ig.module (
 	    }
 	    else
 	    {
+		console.debug("Trying to set slow walk...");
 		// can't move, set slow walk animation
 		switch(player.facing)
 		{
@@ -988,15 +989,14 @@ ig.module (
 			    }
 			    else
 			    {
+				
 				// if player not trying to move, set to idle
 				moveAnimStop(this);
-				/*
 				// keep all slow-walk animations reset
 				this.anims.slowleft.rewind();
 				this.anims.slowright.rewind();
 				this.anims.slowup.rewind();
 				this.anims.slowdown.rewind();
-				*/
 			    }
 			}
 	
