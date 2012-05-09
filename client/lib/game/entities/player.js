@@ -877,7 +877,7 @@ ig.module (
 			    this.addAnim( 'walkLeftA', 0.13333, [8,6], true );
 			    this.addAnim( 'walkLeftB', 0.13333, [7,6], true );
 			    this.addAnim( 'walkRightA', 0.13333, [8,6], true );
-			    this.addAnim( 'walkRightB', 0.13333, [8,6], true );
+			    this.addAnim( 'walkRightB', 0.13333, [7,6], true );
 			    this.addAnim( 'runUpA', 0.08333, [4,3], true );
 			    this.addAnim( 'runUpB', 0.08333, [5,3], true );
 			    this.addAnim( 'runDownA', 0.08333, [16,15], true );
@@ -1075,7 +1075,7 @@ EntityOtherplayer = ig.Entity.extend({
 		    this.addAnim( 'walkLeftA', 0.13333, [8,6], true );
 		    this.addAnim( 'walkLeftB', 0.13333, [7,6], true );
 		    this.addAnim( 'walkRightA', 0.13333, [8,6], true );
-		    this.addAnim( 'walkRightB', 0.13333, [8,6], true );
+		    this.addAnim( 'walkRightB', 0.13333, [7,6], true );
 		    this.addAnim( 'runUpA', 0.08333, [4,3], true );
 		    this.addAnim( 'runUpB', 0.08333, [5,3], true );
 		    this.addAnim( 'runDownA', 0.08333, [16,15], true );
