@@ -448,9 +448,16 @@ ig.module (
     
     
     
-    var emitMove = function(xstart,ystart,direction,moveState) // soon to be deprecated
+    /*
+     var emitMove = function(xstart,ystart,direction,moveState) // soon to be deprecated
     {
 	socket.emit('receiveMove',xstart,ystart,direction,moveState);
+    }
+    */
+    
+    var emitJump = function(x, y, direction)
+    {
+	socket.emit('receiveJump', x, y, direction);
     }
     
     var emitUpdateMoveState = function(x, y, direction, state)
@@ -818,7 +825,7 @@ ig.module (
 			setMoveDestination(this);
 				
 			moveAnimStart(this, true);
-			//emitMove(this.pos.x, this.pos.y, this.facing, this.name);
+			emitJump(this.pos.x, this.pos.y, this.facing);
 			this.facingLast = this.facing;
 			this.facingUpdated = false;
 		    },

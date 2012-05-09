@@ -122,6 +122,7 @@ io.sockets.on('connection', function (socket)
         }
     });
     
+    /*
     socket.on('receiveMove', function (currX, currY, direction, moveState) {
         socket.broadcast.to(socket.roomname).emit('moveOtherPlayer', currX, currY, direction, socket.clientname, moveState);
         
@@ -157,6 +158,11 @@ io.sockets.on('connection', function (socket)
                 break; // no need to search for other players with same name
             }
         }
+    });
+    */
+    
+    socket.on('receiveJump', function (x, y, direction) {
+        console.log("Received a jump from " + socket.clientname);
     });
     
     socket.on('receiveDirection', function (client, direction) {
