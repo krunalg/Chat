@@ -555,11 +555,6 @@ ig.module (
     
     var movePressed = function(player)
     {
-	
-	// do a step animation, regardless of whether player moves
-	//moveAnimStart(player, false);
-	
-	
 	if(player.moveCommitDirection!=player.facing)
 	{
 	    // don't let player combine different keys for one commit
@@ -660,6 +655,7 @@ ig.module (
 	    {
 		emitDirection(player.name, player.facing);
 		player.facingLast = player.facing;
+		moveAnimStart(player, false); // animate direction change
 	    }
 	}
     }
