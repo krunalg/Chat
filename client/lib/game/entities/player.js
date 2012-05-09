@@ -656,14 +656,18 @@ ig.module (
 		}
 	    }
 	}
-	else
+	else // player has not yet committed to (trying to) move
 	{
-	    // emit players faced direction, if changed
+	    // if player changed faced direction
 	    if(player.facing!=player.facingLast)
 	    {
-		emitDirection(player.name, player.facing);
-		player.facingLast = player.facing;
-		moveAnimStart(player, false); // animate direction change
+		emitDirection(player.name, player.facing); // inform others players
+		player.facingLast = player.facing; // so we don't inform them again
+		moveAnimStart(player, false); // step-animate the change
+		
+		// check if we are on an exit that needs animating
+		var exit = overExit(player);
+		if(exit && player.facing=='down') exit.startAnim();		
 	    }
 	}
     }
