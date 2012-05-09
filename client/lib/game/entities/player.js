@@ -567,11 +567,14 @@ ig.module (
 	    // start pending commit for faced direction
 	    player.moveCommitPending = true;
 	    player.moveCommitDirection = player.facing;
-	    player.moveCommitWhen = new Date().getTime() + 80; // (2/60)sec ! move to globals magic is bad
+	    
+	    // next line only runs once per direction, skip delay if facing already
+	    if(player.facingLast==player.facing) var delay = 0; else var delay = 80;
+	    player.moveCommitWhen = new Date().getTime() + delay;
 	}
 	
 	// player is now committed to (trying to) move
-	if( new Date().getTime() - player.moveCommitWhen >= 0 )
+	if( new Date().getTime() - player.moveCommitWhen >= 0)
 	{
 	    player.moveCommitPending = false; // happening now, so now reset for next time
 	    player.moveCommitWhen = 0; // reset for cleanness
