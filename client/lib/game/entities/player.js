@@ -667,7 +667,11 @@ ig.module (
 		
 		// check if we are on an exit that needs animating
 		var exit = overExit(player);
-		if(exit && player.facing=='down') exit.startAnim();		
+		if(exit)
+		{
+		    if(player.facing=='down') exit.startAnim();
+		    else exit.stopAnim();
+		}
 	    }
 	}
     }
