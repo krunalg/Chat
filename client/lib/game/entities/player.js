@@ -521,7 +521,12 @@ ig.module (
 		if( (signs[i].pos.x == player.pos.x + vx) &&
 		       (signs[i].pos.y == player.pos.y + vy) )
 		{
-		    // HERE YOU WILL SPAWN A CHAT BUBBLE
+		    var bubbleDuration = 3; // magic numbers are bad!
+		    ig.game.spawnEntity( EntityBubble, signs[i].pos.x, signs[i].pos.y,
+		    {
+			     msg: signs[i].msg,
+			     lifespan: bubbleDuration 
+		    } );
 		}
 	    }
 	}
@@ -535,7 +540,7 @@ ig.module (
 		if( (npcs[i].pos.x == player.pos.x + vx) &&
 		       (npcs[i].pos.y == player.pos.y + vy) )
 		{
-		    var bubbleDuration = 3; // seconds
+		    var bubbleDuration = 3; // magic numbers are bad!
 		    ig.game.spawnEntity( EntityBubble, npcs[i].pos.x, npcs[i].pos.y,
 		    {
 			     msg: npcs[i].msg,
