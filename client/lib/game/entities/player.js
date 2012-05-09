@@ -557,15 +557,12 @@ ig.module (
     {
 	var cancelMove = false;
 		
-	// handle zoning
-	if(player.facing=='down') // as for now, floor exits go down
+	// handle floor-exit zoning
+	var exit = overExit(player);
+	if(exit && player.facing==exit.direction)
 	{
-	    var exit = overExit(player);
-	    if(exit)
-	    {
-		exit.trigger(); // zone
-		cancelMove = true;
-	    }
+	    exit.trigger(); // zone
+	    cancelMove = true;
 	}
 	
 	if(!cancelMove)
