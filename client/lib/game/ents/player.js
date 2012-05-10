@@ -1064,6 +1064,14 @@ EntityOtherplayer = ig.Entity.extend({
 		this.hideName = new ig.Timer();
 		
 		this.reskin(this.skin);
+		
+		// create a name entity to follow this one
+		ig.game.spawnEntity(
+		    EntityName,
+		    this.pos.x,
+		    this.pos.y,
+		    { follow: this.name }
+		);
 	    },
 	    
 	    reskin: function()
@@ -1152,17 +1160,6 @@ EntityOtherplayer = ig.Entity.extend({
 	    },
 	    
 	    draw: function() {
-			
-		if(this.hideName.delta()>=0)
-		{
-		    // draw players name above head
-		    this.nameFont.draw(
-			    this.name,
-			    this.pos.x - ig.game.screen.x + this.size.x/2,
-			    this.pos.y - ig.game.screen.y - this.size.y,
-			    ig.Font.ALIGN.CENTER
-		    );
-		}
 		this.parent();
 	    },
 	    
