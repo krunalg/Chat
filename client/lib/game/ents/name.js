@@ -14,6 +14,8 @@ EntityName = ig.Entity.extend({
 	blue: new ig.Font( 'media/04b03.font.bl.png' ),
 	green: new ig.Font( 'media/04b03.font.gr.png' ),
 	
+	color: null, // what color font to use
+	
 	follow: null, // name of entity to follow
 	
 	init: function( x, y, settings ) {
@@ -39,12 +41,34 @@ EntityName = ig.Entity.extend({
 				this.kill();
 			}
 			
-			this.green.draw(
-				this.follow,
-				this.pos.x - ig.game.screen.x + this.size.x/2,
-				this.pos.y - ig.game.screen.y - this.size.y,
-				ig.Font.ALIGN.CENTER
-			);
+			switch(this.color)
+			{
+				case 'green':
+					this.green.draw(
+						this.follow,
+						this.pos.x - ig.game.screen.x + this.size.x/2,
+						this.pos.y - ig.game.screen.y - this.size.y,
+						ig.Font.ALIGN.CENTER
+					);
+					break;
+				case 'blue':
+					this.blue.draw(
+						this.follow,
+						this.pos.x - ig.game.screen.x + this.size.x/2,
+						this.pos.y - ig.game.screen.y - this.size.y,
+						ig.Font.ALIGN.CENTER
+					);
+					break;
+				default:
+					this.white.draw(
+						this.follow,
+						this.pos.x - ig.game.screen.x + this.size.x/2,
+						this.pos.y - ig.game.screen.y - this.size.y,
+						ig.Font.ALIGN.CENTER
+					);
+					break;
+			}
+			
 			
 			this.parent();
 		}

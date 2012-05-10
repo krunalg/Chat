@@ -446,7 +446,7 @@ ig.module (
 			    EntityName,
 			    this.pos.x,
 			    this.pos.y,
-			    { follow: this.name }
+			    { follow: this.name, color: 'green' }
 			);
 		    },
 		    

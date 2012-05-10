@@ -1070,7 +1070,7 @@ EntityOtherplayer = ig.Entity.extend({
 		    EntityName,
 		    this.pos.x,
 		    this.pos.y,
-		    { follow: this.name }
+		    { follow: this.name, color: 'blue' }
 		);
 	    },
 	    
