@@ -564,23 +564,6 @@ ig.module (
 	}
     }
     
-    var hideName = function(name, seconds)
-    // hides the name supplied as param for
-    // supplied param seconds of time
-    {
-	var names = ig.game.getEntitiesByType( EntityName );
-	if(names)
-	{
-	    for(var j=0; j<names.length; j++)
-	    {
-		if(names[j].follow == name)
-		{
-		    names[j].hideTimer.set(seconds);
-		}
-	    }
-	}
-    }
-    
     var preStartMove = function(player)
     {
 	var cancelMove = false;

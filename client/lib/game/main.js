@@ -24,9 +24,6 @@ ig.module(
 )
 .defines(function(){
 
-
-
-
 MyGame = ig.Game.extend({
 	
 	autoSort: true,
@@ -35,6 +32,23 @@ MyGame = ig.Game.extend({
 	eventsMax: 4, // max events to display on screen
 	eventsTimer: null, // used for pruning old events
 	eventsLifespan: 2, // time in seconds before clearing event
+	
+	hideName: function(name, seconds)
+	// hides the name supplied as param for
+	// supplied param seconds of time
+	{
+	    var names = ig.game.getEntitiesByType( EntityName );
+	    if(names)
+	    {
+		for(var j=0; j<names.length; j++)
+		{
+		    if(names[j].follow == name)
+		    {
+			names[j].hideTimer.set(seconds);
+		    }
+		}
+	    }
+	},
 	
 	defaultLevel: LevelTown,
 	lastSkin: 'boy', // used when rebuilding the player
