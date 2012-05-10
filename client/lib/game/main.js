@@ -10,7 +10,7 @@ ig.module(
 	'game.levels.route101',
 	'game.levels.lab',
 	
-	'game.entities.player',
+	'game.ents.player',
 	'game.entities.grass',
 	'game.ents.jump',
 	'game.ents.bubble',

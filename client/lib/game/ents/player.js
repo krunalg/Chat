@@ -1,6 +1,6 @@
 ig.module (
     
-    'game.entities.player'
+    'game.ents.player'
 )
 
 .requires(
