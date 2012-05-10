@@ -332,6 +332,16 @@ MyGame = ig.Game.extend({
 		// Draw all entities and backgroundMaps
 		this.parent();
 		
+		// draw all chat bubble entities
+		var bubbles = this.getEntitiesByType( EntityBubble );
+		if(bubbles)
+		{
+			for(var i=0; i<bubbles.length; i++)
+			{
+				bubbles[i].draw(true);
+			}
+		}
+		
 		// draw (text) game events to screen
 		var printEvents = '';
 		for(var i=0; i<this.events.length; i++)
