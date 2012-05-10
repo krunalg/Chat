@@ -584,7 +584,7 @@ ig.module (
 		// not a door
 		else
 		{
-		    if(player.facing=='down') exit.startAnim(); // approaching floor exit
+		    if(player.facing==exit.direction) exit.startAnim(); // approaching floor exit
 		}
 	    }
 	
