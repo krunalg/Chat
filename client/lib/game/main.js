@@ -51,6 +51,9 @@ MyGame = ig.Game.extend({
 	},
 	
 	defaultLevel: LevelTown,
+	defaultXStart: 256,
+	defaultYStart: 256,
+	defaultFacing: 'down',
 	lastSkin: 'boy', // used when rebuilding the player
 	goTo: null, // used to know where to place player when zoning
 	mapName: 'Town', // must capitalize first letter
@@ -76,13 +79,10 @@ MyGame = ig.Game.extend({
 		if(this.goTo==null)
 		{
 			console.debug("First time building player. Using database coordinates.");
-			// first time drawing player, use database
-			if( (jsonPos.x!=-1) && (jsonPos.y!=-1) )
-			{
-				x = jsonPos.x;
-				y = jsonPos.y;
-				direction = jsonPos.facing;
-			}
+			// first time drawing player, use defaults
+			x = this.defaultXStart;
+			y = this.defaultYStart;
+			direction = this.defaultFacing;
 		}
 		else
 		{
