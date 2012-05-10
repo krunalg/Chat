@@ -321,8 +321,6 @@ ig.module (
    
 		EntityNpc = ig.Entity.extend({
 		    
-		    hideName: null, // timer for hiding name for chat bubbles
-		    
 		    // recorded travel time of 9 units (144px)
 		    // in 2.100 seconds in VBA.
 		    // ie 144/2.1 = 68.571428 or ~69
@@ -393,9 +391,6 @@ ig.module (
 			this.parent( x, y, settings );
 			
 			this.moveTimer = new ig.Timer();
-			
-			// start hideName timer
-			this.hideName = new ig.Timer();
 			
 			// things to skip if loaded in weltmeister
 			if(getFileName()!='weltmeister.html')
