@@ -126,21 +126,26 @@ ig.module (
     // returns true if no collision will occur
     // in the direction the player faces
     {
-	var vx = 0;
-	var vy = 0;
+	var vx = vy = 0; // velocity
+	var ox = oy = 0; // tile offset
+	var tilesize = ig.game.collisionMap.tilesize;
 	switch(player.facing)
 	{
 	    case 'left':
 		vx = -1;
+		ox = -tilesize;
 		break;
 	    case 'right':
 		vx = 1;
+		ox = tilesize;
 		break;
 	    case 'up':
 		vy = -1;
+		oy = -tilesize;
 		break;
 	    case 'down':
 		vy = 1;
+		oy = tilesize;
 		break;
 	}
 	// check map collisions
@@ -153,8 +158,8 @@ ig.module (
 	{
 	    for(var i=0; i<pcs.length; i++)
 	    {
-		if( (pcs[i].pos.x == player.pos.x + vx) &&
-		       (pcs[i].pos.y == player.pos.y + vy) )
+		if( (pcs[i].pos.x == player.pos.x + ox) &&
+		       (pcs[i].pos.y == player.pos.y + oy) )
 		{
 		    return false;
 		}
@@ -165,8 +170,8 @@ ig.module (
 	var pc = ig.game.getEntitiesByType( EntityPlayer )[0];
 	if(pc)
 	{
-	    if( (pc.pos.x == player.pos.x + vx) &&
-		   (pc.pos.y == player.pos.y + vy) )
+	    if( (pc.pos.x == player.pos.x + ox) &&
+		   (pc.pos.y == player.pos.y + oy) )
 	    {
 		return false;
 	    }
