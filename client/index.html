@@ -106,18 +106,8 @@ socket.on('newMsg', function (from, msg) {
 	 var showMessageHowLong = 2; // how long to hide name and show message
 	 
 	 // hide name briefly
-	 var target = ig.game.getEntitiesByType( EntityOtherplayer );
-	 if(target)
-	 {
-		  for(var i=0; i<target.length; i++)
-		  {
-			   if(target[i].name==from)
-			   {
-				    target[i].hideName.set(showMessageHowLong);
-				    break;
-			   }
-		  }
-	 }
+	 var target = ig.game.getEntityByName(from);
+	 if(target!=undefined) target.hideName.set(showMessageHowLong);
 	 
 	 ig.game.spawnEntity( EntityBubble, 0, 0,
 	 {
