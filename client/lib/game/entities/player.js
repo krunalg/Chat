@@ -139,7 +139,7 @@ ig.module (
 		else if(moveStillPressed('right'))   player.facing = 'right';
 		else if(moveStillPressed('up'))      player.facing = 'up';
 		else if(moveStillPressed('down'))    player.facing = 'down';
-		else player.isMove = false; // if no key pressed, set idle
+		else player.isMove = false; // no key pressed, stop moving
 
 		if(player.isMove && canMove(player)) preStartMove(player);
 		else
