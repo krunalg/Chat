@@ -87,18 +87,11 @@ EntityBubble = ig.Entity.extend({
 	
 	draw: function()
 	{
-		var target = ig.game.getEntitiesByType( EntityOtherplayer );
-		if(target && this.from!='')
+		var target = ig.game.getEntityByName(this.from);
+		if(target!=undefined)
 		{
-			 for(var i=0; i<target.length; i++)
-			 {
-				  if(target[i].name==this.from)
-				  {
-					   this.pos.x = target[i].pos.x;
-					   this.pos.y = target[i].pos.y;
-					   break;
-				  }
-			 }
+			this.pos.x = target.pos.x;
+			this.pos.y = target.pos.y;
 		}
 		var x = this.pos.x - ig.game.screen.x + this.size.x/2;
 		var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
