@@ -133,16 +133,19 @@ ig.module (
 	    
 	    if(player.isLocal) // is Player entity
 	    {
+		var keepMoving = true;
+		
 		// if key pressed, update direction and proceed with move
 		if(moveStillPressed('left'))         player.facing = 'left';
 		else if(moveStillPressed('right'))   player.facing = 'right';
 		else if(moveStillPressed('up'))      player.facing = 'up';
 		else if(moveStillPressed('down'))    player.facing = 'down';
-		else player.isMove = false; // no key pressed, stop moving
+		else keepMoving = false; // no key pressed, stop moving
 
-		if(player.isMove && canMove(player)) preStartMove(player);
+		if(keepMoving && canMove(player)) preStartMove(player);
 		else
 		{
+		    player.isMove = false;
 		    player.moveState = 'idle';
 		    player.lastState = 'idle';
 		    moveAnimStop(player);
