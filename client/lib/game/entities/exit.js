@@ -39,15 +39,10 @@ EntityExit = ig.Entity.extend({
 		// add the animations
 		this.addAnim( 'weltmeister', 0.1, [0] );
 		this.currentAnim = this.anims.weltmeister;
-		
-		
-
 	},
 	
 	ready: function()
 	{
-		delete this.currentAnim; // no weltmeister icon in-game
-		
 		switch(this.type)
 		{
 			// set up floor exits
@@ -94,11 +89,12 @@ EntityExit = ig.Entity.extend({
 			
 			// kill exit if not properly set up
 			default:
-				var tilesize = ig.game.collisionMap.tilesize;
 				console.debug("Exit at " + this.pos.x + "," + this.pos.y + " was not given proper 'type' and will now kill() itself.");
 				this.kill();
 				break;
 		}
+		
+		this.currentAnim = null; // no weltmeister icon in-game
 	},
 	
 	startAnim: function()
