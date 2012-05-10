@@ -547,6 +547,7 @@ ig.module (
 		if( (npcs[i].pos.x == player.pos.x + vx) &&
 		       (npcs[i].pos.y == player.pos.y + vy) )
 		{
+		    // display chat bubble
 		    var bubbleDuration = 3; // magic numbers are bad!
 		    ig.game.spawnEntity( EntityBubble, npcs[i].pos.x, npcs[i].pos.y,
 		    {
@@ -554,7 +555,21 @@ ig.module (
 			     lifespan: bubbleDuration // magic numbers are bad!
 		    } );
 		    npcs[i].moveTimer.set(bubbleDuration+1);
-		    npcs[i].hideName.set(bubbleDuration);
+		    
+		    // hide name
+		    var names = ig.game.getEntitiesByType( EntityName );
+		    if(names)
+		    {
+			for(var j=0; j<names.length; j++)
+			{
+			    if(names[j].follow == npcs[i].name)
+			    {
+				names[j].hideTimer.set(bubbleDuration);
+			    }
+			}
+		    }
+		    
+		    break;
 		}
 	    }
 	}
