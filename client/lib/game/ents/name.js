@@ -13,20 +13,22 @@ EntityName = ig.Entity.extend({
 	white: new ig.Font( 'media/04b03.font.png' ),
 	blue: new ig.Font( 'media/04b03.font.bl.png' ),
 	green: new ig.Font( 'media/04b03.font.gr.png' ),
-	
 	color: null, // what color font to use
-	
 	follow: null, // name of entity to follow
+	hideTimer: null, // used to temporarily not draw
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
+		
+		this.hideTimer = new ig.Timer();
 	},	
 	
 	draw: function( reallyDraw )
 	{
 		// Only draw when the 'reallyDraw' param is true, 
-		// so it ignores the "normal" draw call
-		if( reallyDraw )
+		// so it ignores the "normal" draw call.
+		// Additionally, draw only if we shouldn't hide instead
+		if( reallyDraw && this.hideTimer.delta() >= 0 )
 		{
 			var target = ig.game.getEntityByName(this.follow);
 			if(target!=undefined)

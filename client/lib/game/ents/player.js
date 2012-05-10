@@ -1023,7 +1023,6 @@ ig.module (
 EntityOtherplayer = ig.Entity.extend({
 	    
 	    isLocal: false,
-	    hideName: null, // timer for hiding name for chat bubbles
 	    
 	    size: {x: 16, y: 16},
 	    offset: { x: 0, y: 16 },
@@ -1054,10 +1053,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    init: function( x, y, settings )
 	    {
 		this.parent( x, y, settings );
-		
-		// start hideName timer
-		this.hideName = new ig.Timer();
-		
+				
 		this.reskin(this.skin);
 		
 		// create a name entity to follow this one
