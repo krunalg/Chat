@@ -54,7 +54,13 @@
 	 // ** End login logic
 	 </script>
 	 
-	 <script src="http://192.168.1.95:8080/socket.io/socket.io.js"></script>
+	 <?php  ?>
+	 <?php
+		  if($_SERVER["SERVER_NAME"]=="192.168.1.95")
+			   echo "<script src=\"http://192.168.1.95:8080/socket.io/socket.io.js\"></script>\n";
+		  else
+			   echo "<script src=\"http://h.commins.ca:8080/socket.io/socket.io.js\"></script>\n";
+	 ?>
 	 <title>flaming-sansa</title>
 	 <style type="text/css">
 		html,body {
