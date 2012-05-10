@@ -143,7 +143,7 @@ EntityBubble = ig.Entity.extend({
 			y + this.heightOfMessage + padding
 		);
 		this.pointer.draw(
-			x,
+			x - this.pointer.width/2,
 			y + this.heightOfMessage + padding + cornerHeight
 		);
 		
