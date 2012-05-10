@@ -159,7 +159,18 @@ MyGame = ig.Game.extend({
 						// strip away the command and space
 						if(inputVal.substr(0,4)=='/say') inputVal = inputVal.substr(5, inputVal.length-5); // either remove '/say '
 						else inputVal = inputVal.substr(3, inputVal.length-3); // or remove '/s '
-						game.emitSay( player.name, inputVal ); // send message to other players					
+						this.emitSay( player.name, inputVal ); // send message to other players
+						// display message locally
+						ig.game.spawnEntity(
+							EntityBubble,
+							player.pos.x,
+							player.pos.y,
+							{
+								from: player.name,
+								msg: inputVal,
+								lifespan: 2
+							}
+						);
 					}
 					else if(explodeInput[0]=='/skin')
 					{
