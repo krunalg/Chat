@@ -556,7 +556,7 @@ ig.module (
 		    } );
 		    npcs[i].moveTimer.set(bubbleDuration+1);
 		    
-		    hideName(npcs[i].name, bubbleDuration);
+		    ig.game.hideName(npcs[i].name, bubbleDuration);
 		    
 		    break;
 		}
