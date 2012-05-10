@@ -1,5 +1,10 @@
 // set up sockets
-	 var socket = io.connect('http://localhost:8080');
+<?php
+        if($_SERVER["SERVER_NAME"]=="192.168.1.95")
+                 echo "var socket = io.connect('http://localhost:8080');\n";
+        else
+                 echo "var socket = io.connect('http://h.commins.ca:8080');\n";
+?>
 
 socket.on('newMsg', function (from, msg) {
 	 var showMessageHowLong = 2; // how long to hide name and show message

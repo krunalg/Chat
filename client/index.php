@@ -11,7 +11,7 @@
 	 ?>
 	 <script type="text/javascript" src="lib/impact/impact.js"></script>
 	 <script type="text/javascript" src="lib/game/main.js"></script>
-	 <script type="text/javascript" src="socketClient.js"></script>
+	 <script type="text/javascript" src="socketClient.php"></script>
 	 
 	 <title>flaming-sansa</title>
 	 <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
