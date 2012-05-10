@@ -52,26 +52,27 @@ EntityExit = ig.Entity.extend({
 		{
 			// set up floor exits
 			case 'floor':
+				var tilesize = ig.game.collisionMap.tilesize;
 				this.animSheet = new ig.AnimationSheet( 'media/entities/exit/arrows.png', 16, 16 );
 				switch(this.direction)
 				{
 					case 'left':
 						this.addAnim( 'arrow', 0.5333, [2,3] );
-						this.offset = { x: -16, y: 0 };
+						this.offset = { x: tilesize, y: 0 };
 						break;
 					case 'right':
 						this.addAnim( 'arrow', 0.5333, [2,3] );
 						this.anims.arrow.flip.x = true;
-						this.offset = { x: 16, y: 0 };
+						this.offset = { x: -tilesize, y: 0 };
 						break;
 					case 'up':
 						this.addAnim( 'arrow', 0.5333, [0,1] );
 						this.anims.arrow.flip.y = true;
-						this.offset = { x: 0, y: 16 };
+						this.offset = { x: 0, y: tilesize };
 						break;
 					case 'down':
 						this.addAnim( 'arrow', 0.5333, [0,1] );
-						this.offset = { x: 0, y: -16 };
+						this.offset = { x: 0, y: -tilesize };
 						break;
 					default:
 						console.debug("Exit at " + this.pos.x + "," + this.pos.y + " was not given proper 'direction' and will now kill() itself.");
