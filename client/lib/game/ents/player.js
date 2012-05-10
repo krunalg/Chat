@@ -871,6 +871,7 @@ ig.module (
 			    netInit(this);
 			}
 			
+			/*
 			// create a name entity to follow this one
 			ig.game.spawnEntity(
 			    EntityName,
@@ -878,6 +879,7 @@ ig.module (
 			    this.pos.y,
 			    { follow: this.name, color: 'white' }
 			);
+			*/
 		    },
 		    
 		    reskin: function()
