@@ -14,6 +14,7 @@ ig.module(
 	'game.entities.grass',
 	'game.ents.jump',
 	'game.ents.bubble',
+	'game.ents.name',
 	
 	//debug
 	'impact.debug.debug',
