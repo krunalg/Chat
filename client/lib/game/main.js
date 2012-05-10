@@ -199,6 +199,21 @@ MyGame = ig.Game.extend({
 					
 					// regular message /say or /s
 				}
+				else // assume it's a /say
+				{
+					this.emitSay( player.name, inputVal ); // send message to other players
+					// display message locally
+					ig.game.spawnEntity(
+						EntityBubble,
+						player.pos.x,
+						player.pos.y,
+						{
+							from: player.name,
+							msg: inputVal,
+							lifespan: 2
+						}
+					);
+				}
 				
 								
 			}
