@@ -1103,7 +1103,6 @@ EntityOtherplayer = ig.Entity.extend({
 		    this.anims.walkRightB.flip.x = true;
 		    this.anims.runRightA.flip.x = true;
 		    this.anims.runRightB.flip.x = true;
-		    this.anims.slowright.flip.x = true;
 		    this.anims.idleright.flip.x = true;
 		    // set initial animation
 		    moveAnimStop(this);
