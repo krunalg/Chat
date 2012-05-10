@@ -23,6 +23,5 @@
 			   <input type="text" id="input"></input>
 		  </div>
 	</div>
-	
 </body>
 </html>
