@@ -14,40 +14,7 @@
 	 <script type="text/javascript" src="socketClient.js"></script>
 	 
 	 <title>flaming-sansa</title>
-	 <style type="text/css">
-		html,body {
-			background-color: #000;
-			color: #fff;
-			font-family: helvetica, arial, sans-serif;
-			margin: 0;
-			padding: 0;
-			font-size: 12pt;
-		}
-		
-		#canvas {
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			margin: auto;
-			border: 1px solid #555;
-		}
-		#chat {
-			position: absolute;
-			left: 0;
-			/*right: 0;*/
-			top: 0;
-			/*bottom: 0;*/
-			width:300;
-			height:300;
-			margin: auto;
-			border: 1px solid red;
-		}
-		#input {
-		        display: none;
-		}
-	 </style>
+	 <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
 </head>
 <body>
 	<canvas id="canvas"></canvas>
