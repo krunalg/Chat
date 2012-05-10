@@ -1,5 +1,5 @@
 ig.module(
-	'game.entities.bubble'
+	'game.ents.bubble'
 )
 .requires(
 	'impact.entity',

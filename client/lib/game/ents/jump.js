@@ -1,5 +1,5 @@
 ig.module(
-	'game.entities.jump'
+	'game.ents.jump'
 )
 .requires(
 	'impact.entity'
