@@ -5,10 +5,13 @@
 	 <script type="text/javascript" src="getUsernameFromURL.js" ></script>
 	 <?php
 		  if($_SERVER["SERVER_NAME"]=="192.168.1.95")
-			   echo "<script src=\"http://192.168.1.95:8080/socket.io/socket.io.js\"></script>\n";
+			   echo "<script type=\"text/javascript\" src=\"http://192.168.1.95:8080/socket.io/socket.io.js\"></script>\n";
 		  else
-			   echo "<script src=\"http://h.commins.ca:8080/socket.io/socket.io.js\"></script>\n";
+			   echo "<script type=\"text/javascript\" src=\"http://h.commins.ca:8080/socket.io/socket.io.js\"></script>\n";
 	 ?>
+	 <script type="text/javascript" src="lib/impact/impact.js"></script>
+	 <script type="text/javascript" src="lib/game/main.js"></script>
+	 
 	 <title>flaming-sansa</title>
 	 <style type="text/css">
 		html,body {
@@ -44,10 +47,6 @@
 		        display: none;
 		}
 	 </style>
-	 
-	 
-	 <script type="text/javascript" src="lib/impact/impact.js"></script>
-	 <script type="text/javascript" src="lib/game/main.js"></script>
 </head>
 <body>
 	 <script type="text/javascript">
