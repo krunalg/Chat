@@ -99,8 +99,7 @@ ig.module (
     var setMoveDestination = function(player)
     {
 	var tilesize = ig.game.collisionMap.tilesize;
-	var distance = 1;
-	if(player.isJump) distance = 2;
+	if(player.isJump) var distance = 2; else var distance = 1;
 	
 	switch(player.facing)
 	{
