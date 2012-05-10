@@ -80,7 +80,7 @@ MyGame = ig.Game.extend({
 			    {
 				if(exits[i].me==this.goTo)
 				{
-				    if(exits[i].isDoor == '1')
+				    if(exits[i].type == 'door')
 				    {
 					 exitAnimation = true;
 					 direction = 'down';

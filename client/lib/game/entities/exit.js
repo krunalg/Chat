@@ -27,7 +27,6 @@ EntityExit = ig.Entity.extend({
 	
 	map: null,
 	goTo: null,
-	isDoor: 0,
 	direction: null, // direction that triggers exit
 	type: null, // floor or door
 	
@@ -99,15 +98,16 @@ EntityExit = ig.Entity.extend({
 	
 	startAnim: function()
 	{
-		if(this.isDoor=='1')
+		switch(this.type)
 		{
-			console.debug('Opening door.');
-			this.currentAnim = this.anims.open;
-		}
-		else
-		{
-			console.debug('Turning on exit arrow.');
-			this.currentAnim = this.anims.arrow;
+			case 'door':
+				console.debug('Opening door.');
+				this.currentAnim = this.anims.open;
+				break;
+			case 'floor':
+				console.debug('Turning on exit arrow.');
+				this.currentAnim = this.anims.arrow;
+				break;
 		}
 	},
 	

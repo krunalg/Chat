@@ -291,7 +291,7 @@ ig.module (
 	    {
 		if( exits[i].pos.x == player.pos.x &&
 		    exits[i].pos.y == player.pos.y &&
-		    exits[i].isDoor != '1')
+		    exits[i].type != 'door')
 		{
 		    return exits[i];
 		}
@@ -572,7 +572,7 @@ ig.module (
 	    if(exit)
 	    {
 		// check if going through a door
-		if(exit.isDoor=='1')
+		if(exit.type=='door')
 		{
 		    exit.startAnim();
 		    // 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
