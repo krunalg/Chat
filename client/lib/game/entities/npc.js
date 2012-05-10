@@ -147,20 +147,6 @@ ig.module (
 	var res = ig.game.collisionMap.trace( player.pos.x, player.pos.y, vx, vy, player.size.x, player.size.y );
 	if(res.collision.x || res.collision.y) return false;
 	
-	// check sign collisions
-	var signs = ig.game.getEntitiesByType( EntitySign );
-	if(signs)
-	{
-	    for(var i=0; i<signs.length; i++)
-	    {
-		if( (signs[i].pos.x == player.pos.x + vx) &&
-		       (signs[i].pos.y == player.pos.y + vy) )
-		{
-		    return false;
-		}
-	    }
-	}
-	
 	// check other player collisions
 	var pcs = ig.game.getEntitiesByType( EntityOtherplayer );
 	if(pcs)
