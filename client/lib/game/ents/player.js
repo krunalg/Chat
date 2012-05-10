@@ -556,20 +556,26 @@ ig.module (
 		    } );
 		    npcs[i].moveTimer.set(bubbleDuration+1);
 		    
-		    // hide name
-		    var names = ig.game.getEntitiesByType( EntityName );
-		    if(names)
-		    {
-			for(var j=0; j<names.length; j++)
-			{
-			    if(names[j].follow == npcs[i].name)
-			    {
-				names[j].hideTimer.set(bubbleDuration);
-			    }
-			}
-		    }
+		    hideName(npcs[i].name, bubbleDuration);
 		    
 		    break;
+		}
+	    }
+	}
+    }
+    
+    var hideName = function(name, seconds)
+    // hides the name supplied as param for
+    // supplied param seconds of time
+    {
+	var names = ig.game.getEntitiesByType( EntityName );
+	if(names)
+	{
+	    for(var j=0; j<names.length; j++)
+	    {
+		if(names[j].follow == name)
+		{
+		    names[j].hideTimer.set(seconds);
 		}
 	    }
 	}
