@@ -51,7 +51,7 @@ MyGame = ig.Game.extend({
 	},
 	
 	defaultLevel: LevelTown,
-	defaultXStart: 256,
+	defaultXStart: 352,
 	defaultYStart: 256,
 	defaultFacing: 'down',
 	lastSkin: 'boy', // used when rebuilding the player
