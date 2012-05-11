@@ -142,7 +142,8 @@ ig.module (
 		else if(moveStillPressed('down'))    player.facing = 'down';
 		else keepMoving = false; // no key pressed, stop moving
 
-		if(keepMoving && canMove(player)) preStartMove(player);
+		if(keepMoving && canJump(player)) player.startJump();
+		else if(keepMoving && canMove(player)) preStartMove(player);
 		else
 		{
 		    player.isMove = false;
