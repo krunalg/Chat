@@ -118,6 +118,55 @@ ig.module (
 	}
     };
     
+    var goAgain = function(player)
+    // decides if another move should take place
+    // and either starts one or stops the player
+    {
+	if(player.isLocal) // is Player entity
+	{
+	    var keepMoving = true;
+	    
+	    // if key pressed, update direction and proceed with move
+	    if(moveStillPressed('left'))         player.facing = 'left';
+	    else if(moveStillPressed('right'))   player.facing = 'right';
+	    else if(moveStillPressed('up'))      player.facing = 'up';
+	    else if(moveStillPressed('down'))    player.facing = 'down';
+	    else keepMoving = false; // no key pressed, stop moving
+
+	    if(keepMoving && canJump(player))
+	    {
+		player.isMove = false; // will use isJump instead
+		player.startJump();
+	    }
+	    else if(keepMoving && canMove(player)) preStartMove(player);
+	    else
+	    {
+		// stop the player
+		player.isMove = false;
+		player.isJump = false;
+		player.moveState = 'idle';
+		player.lastState = 'idle';
+		moveAnimStop(player);
+		// tell other players we've stopped
+		emitUpdateMoveState(player.pos.x, player.pos.y, player.facing, player.moveState);
+	    }
+	}
+	else // is Otherplayer entity
+	{
+	    if(player.moveState=='idle')
+	    {
+		// stop the player
+		player.isMove = false;
+		player.isJump = false;
+		moveAnimStop(player);
+	    }
+	    else
+	    {
+		if(canMove(player)) player.netStartMove();
+	    }
+	}
+    }
+    
     var finishMove = function(player) {
     
 	// check if reached destination
@@ -130,41 +179,7 @@ ig.module (
 	    player.vel.x = player.vel.y = 0;
 	    
 	    // check if we should continue moving
-	    
-	    if(player.isLocal) // is Player entity
-	    {
-		var keepMoving = true;
-		
-		// if key pressed, update direction and proceed with move
-		if(moveStillPressed('left'))         player.facing = 'left';
-		else if(moveStillPressed('right'))   player.facing = 'right';
-		else if(moveStillPressed('up'))      player.facing = 'up';
-		else if(moveStillPressed('down'))    player.facing = 'down';
-		else keepMoving = false; // no key pressed, stop moving
-
-		if(keepMoving && canJump(player)) player.startJump();
-		else if(keepMoving && canMove(player)) preStartMove(player);
-		else
-		{
-		    player.isMove = false;
-		    player.moveState = 'idle';
-		    player.lastState = 'idle';
-		    moveAnimStop(player);
-		    emitUpdateMoveState(player.pos.x, player.pos.y, player.facing, player.moveState);
-		}
-	    }
-	    else // is Otherplayer entity
-	    {
-		if(player.moveState=='idle')
-		{
-		    player.isMove = false;
-		    moveAnimStop(player);
-		}
-		else
-		{
-		    if(canMove(player)) player.netStartMove();
-		}
-	    }
+	    goAgain(player);
 
 	}
 	// continue to destination
@@ -200,42 +215,8 @@ ig.module (
 	    // stop player
 	    player.vel.x = player.vel.y = 0;
 	    
-	    if(player.isLocal)
-	    {
-		// check if we should continue moving
-		if(moveStillPressed('left'))
-		{
-		    player.facing = 'left';
-		    if(canMove(player)) player.startMove();
-		}
-		else if(moveStillPressed('right'))
-		{
-		    player.facing = 'right';
-		    if(canMove(player)) player.startMove();
-		}
-		else if(moveStillPressed('up'))
-		{
-		    player.facing = 'up';
-		    if(canMove(player)) player.startMove();
-		}
-		else if(moveStillPressed('down'))
-		{
-		    player.facing = 'down';
-		    if(canMove(player)) player.startMove();
-		}
-		else 
-		{
-		    // end move state
-		    player.isJump = false;
-		    moveAnimStop(player);
-		}  
-	    }
-	    else
-	    {
-		    // end move state
-		    player.isJump = false;
-		    moveAnimStop(player);
-	    }
+	    // check if we should continue moving
+	    goAgain(player);
 	    
 	}
 	// continue to destination
