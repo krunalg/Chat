@@ -360,20 +360,20 @@ MyGame = ig.Game.extend({
 		this.parent();
 		
 		// draw these certain entities above any and all map layers
-		var bubbles = this.getEntitiesByType( EntityBubble );
-		if(bubbles)
-		{
-			for(var i=0; i<bubbles.length; i++)
-			{
-				bubbles[i].draw(true);
-			}
-		}
 		var names = this.getEntitiesByType( EntityName );
 		if(names)
 		{
 			for(var i=0; i<names.length; i++)
 			{
 				names[i].draw(true);
+			}
+		}
+		var bubbles = this.getEntitiesByType( EntityBubble );
+		if(bubbles)
+		{
+			for(var i=0; i<bubbles.length; i++)
+			{
+				bubbles[i].draw(true);
 			}
 		}
 		
