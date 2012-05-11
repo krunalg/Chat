@@ -769,6 +769,7 @@ ig.module (
 		    speed: 69,
 		    runSpeed: 138,
 		    walkSpeed: 69,
+		    jumpSpeed: 69,
 		    maxVel: { x: 138, y: 138 },
 		    moveState: 'idle', // idle, walk, run
 		    
@@ -832,6 +833,10 @@ ig.module (
 		    
 		    startJump: function()
 		    {
+			// determine speed
+			this.moveState = 'jump';
+			this.speed = this.jumpSpeed;
+			
 			this.isJump = true;
 			this.jumpStart = new ig.Timer();
 			spawnShadow(this);
