@@ -1026,6 +1026,7 @@ EntityOtherplayer = ig.Entity.extend({
 	    speed: 69,
 	    runSpeed: 138,
 	    walkSpeed: 69,
+	    jumpSpeed: 69,
 	    maxVel: { x: 138, y: 138 },
 	    moveState: 'idle', // idle, walk, run
 	    
@@ -1137,6 +1138,10 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    netStartJump: function()
 	    {
+		// determine speed
+		this.moveState = 'jump';
+		this.speed = this.jumpSpeed;
+		
 		this.isJump = true;
 		this.jumpStart = new ig.Timer();
 		spawnShadow(this);
