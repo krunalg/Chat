@@ -1,7 +1,7 @@
 // set up sockets
 <?php
         if($_SERVER["SERVER_NAME"]=="192.168.1.95")
-                 echo "var socket = io.connect('http://localhost:8080');\n";
+                 echo "var socket = io.connect('http://192.168.1.95:8080');\n";
         else
                  echo "var socket = io.connect('http://h.commins.ca:8080');\n";
 ?>
