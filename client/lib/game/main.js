@@ -14,13 +14,10 @@ ig.module(
 	'game.entities.grass',
 	'game.ents.jump',
 	'game.ents.bubble',
-	'game.ents.name',
+	'game.ents.name'
 	
 	//debug
 	//'impact.debug.debug',
-	
-	// plugins
-	'plugins.impact-splash-loader'
 )
 .defines(function(){
 
