@@ -437,6 +437,7 @@ ig.module (
 				// kind of like enum
 				case 'fat':
 				case 'kid':
+				case 'hat':
 				case 'labgeek':
 				    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + this.skin + '.png', 16, 32 );
 				    break;
