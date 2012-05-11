@@ -1,0 +1,6 @@
+ig.module( 'game.levels.homeupstairs' )
+.requires('impact.image')
+.defines(function(){
+LevelHomeupstairs=/*JSON[*/{"entities":[],"layer":[{"name":"below","width":11,"height":10,"linkWithCollision":false,"visible":1,"tilesetName":"media/inside-house.png","repeat":false,"preRender":false,"distance":"1","tilesize":16,"foreground":false,"data":[[0,0,0,0,0,0,0,0,0,0,0],[0,25,26,27,88,183,181,177,181,178,0],[0,49,53,54,96,3,214,182,185,186,0],[0,150,22,24,22,190,216,22,209,210,0],[0,252,313,314,314,315,18,273,274,275,0],[0,21,337,338,338,339,18,281,277,278,0],[0,21,337,338,338,339,18,305,285,286,0],[0,21,345,346,346,347,18,18,18,18,0],[0,21,18,18,18,18,18,18,18,18,0],[0,0,0,0,0,0,0,0,0,0,0]]},{"name":"collision","width":11,"height":10,"linkWithCollision":false,"visible":0,"tilesetName":"","repeat":false,"preRender":false,"distance":1,"tilesize":16,"foreground":true,"data":[[1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1],[1,1,0,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,1,0,1],[1,0,0,0,0,0,0,0,1,0,1],[1,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1,1,1]]}]}/*]JSON*/;
+LevelHomeupstairsResources=[new ig.Image('media/inside-house.png')];
+});
