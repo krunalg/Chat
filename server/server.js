@@ -33,21 +33,34 @@ io.sockets.on('connection', function (socket)
     socket.on('init', function (user)
     {
 	socket.clientname = user;
-	console.log("Performing first time setup of " + user);
-	socket.emit('welcome', 'Welcome to the world.');
-        
-	// set up user info object with defaults
-        var player = new Object();
-        player.name = user;
-        player.pos = new Object();
-        player.pos.x = 0;
-        player.pos.y = 0;
-        player.facing = 'down';
-	player.state = 'state'; // every player is idle on first connect
-	player.skin = 'boy';
-        player.session = socket.id;
-	player.room = 'limbo';
-        onlinePlayers.push(player);
+	
+	var welcome = 'Welcome';
+	
+	// check if username is already taken
+	for(var i=0; i<onlinePlayers.length; i++)
+	{
+	    if(onlinePlayers[i].name==socket.clientname) welcome = 'NameTaken';
+	}
+	
+	// set up new player
+	if(welcome=='Welcome')
+	{
+	    console.log("Performing first time setup of " + user);
+	    // set up user info object with defaults
+	    var player = new Object();
+	    player.name = user;
+	    player.pos = new Object();
+	    player.pos.x = 0;
+	    player.pos.y = 0;
+	    player.facing = 'down';
+	    player.state = 'state'; // every player is idle on first connect
+	    player.skin = 'boy';
+	    player.session = socket.id;
+	    player.room = 'limbo';
+	    onlinePlayers.push(player);
+	}
+	
+	socket.emit('welcome', welcome);
     });
     
     socket.on('hereIAm', function (x, y, direction, mapname, skin)
