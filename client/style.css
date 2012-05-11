@@ -19,15 +19,17 @@ html,body {
 }
 #chat {
         position: absolute;
-        left: 0;
+        left: 50%;
         /*right: 0;*/
-        top: 0;
+        top: 50%;
         /*bottom: 0;*/
-        width:300;
-        height:300;
         margin: auto;
-        border: 1px solid red;
+        /*border: 1px solid red;*/
 }
 #input {
         display: none;
+        position: relative;
+        left: -50%;
+        top: 100px;
+        width: 300px;
 }
