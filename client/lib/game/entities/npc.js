@@ -339,7 +339,7 @@ ig.module (
 		    destination: 0, // used for both x and y planes
 		    
 		    // NPC movement patterns
-		    movePattern: ['left','up','right','down'],
+		    movePattern: [], // no pattern by default
 		    moveNext: 0,
 		    moveTimer: null,
 		    moveDelay: 2, // delay in seconds between moves
@@ -399,6 +399,11 @@ ig.module (
 			    this.movePattern = ['up','down','up','right','down','down',
 					   'left','left','left','right','right',
 					   'left','up','right'];
+			}
+			else if(this.behaviour=='b')
+			{
+			    this.movePattern = ['down','left','right',
+					   'left','right','up'];
 			}
 			
 			// weltmeister icon
