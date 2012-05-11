@@ -209,6 +209,8 @@ ig.module (
 	// check if reached destination
 	if(destinationReached(player)) {
 	    
+	    player.isJump = false;
+	    
 	    // ensure player is at legal coordinates
 	    alignToGrid(player);
 	    
