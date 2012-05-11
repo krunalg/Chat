@@ -98,16 +98,19 @@ EntityExit = ig.Entity.extend({
 	
 	startAnim: function()
 	{
-		switch(this.type)
+		if(this.animation!='off') // as supplied in weltmeister
 		{
-			case 'door':
-				console.debug('Opening door.');
-				this.currentAnim = this.anims.open;
-				break;
-			case 'floor':
-				console.debug('Turning on exit arrow.');
-				this.currentAnim = this.anims.arrow;
-				break;
+			switch(this.type)
+			{
+				case 'door':
+					console.debug('Opening door.');
+					this.currentAnim = this.anims.open;
+					break;
+				case 'floor':
+					console.debug('Turning on exit arrow.');
+					this.currentAnim = this.anims.arrow;
+					break;
+			}	
 		}
 	},
 	
