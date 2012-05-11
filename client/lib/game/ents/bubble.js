@@ -19,7 +19,7 @@ EntityBubble = ig.Entity.extend({
 	bottomRight: new ig.Image( 'media/chat-bubble-bright.png' ),
 	pointer: new ig.Image( 'media/chat-bubble-point.png' ),
 	fill: new ig.Image( 'media/chat-bubble-fill.png' ),
-	font: new ig.Font( 'media/04b03.font.png' ),
+	font: new ig.Font( 'media/font.white.with.shadow.png' ),
 	
 	// some vars
 	msg: '',

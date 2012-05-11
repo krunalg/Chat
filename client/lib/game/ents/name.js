@@ -10,9 +10,9 @@ ig.module(
 EntityName = ig.Entity.extend({
 	
 	size: { x: 16, y: 16 },
-	white: new ig.Font( 'media/04b03.font.png' ),
-	blue: new ig.Font( 'media/04b03.font.bl.png' ),
-	green: new ig.Font( 'media/04b03.font.gr.png' ),
+	white: new ig.Font( 'media/font.white.with.shadow.png' ),
+	blue: new ig.Font( 'media/font.blue.with.shadow.png' ),
+	green: new ig.Font( 'media/font.green.with.shadow.png' ),
 	color: null, // what color font to use
 	follow: null, // name of entity to follow
 	hideTimer: null, // used to temporarily not draw

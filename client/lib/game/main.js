@@ -24,7 +24,7 @@ ig.module(
 MyGame = ig.Game.extend({
 	
 	autoSort: true,
-	whiteFont: new ig.Font( 'media/04b03.font.png' ),
+	whiteFont: new ig.Font( 'media/font.white.with.shadow.png' ),
 	events: new Array(), // contains game events such as player entering area
 	eventsMax: 4, // max events to display on screen
 	eventsTimer: null, // used for pruning old events
