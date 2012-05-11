@@ -1031,7 +1031,6 @@ EntityOtherplayer = ig.Entity.extend({
 	    
 	    name: "otherplayer",
 	    animation: 1,
-	    nameFont: new ig.Font( 'media/04b03.font.bl.png' ),
 	    
 	    //checkAgainst: ig.Entity.TYPE.B,
 	    collides: ig.Entity.COLLIDES.PASSIVE,
