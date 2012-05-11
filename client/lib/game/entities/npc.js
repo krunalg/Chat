@@ -393,6 +393,7 @@ ig.module (
 			this.parent( x, y, settings );
 			
 			this.moveTimer = new ig.Timer();
+			this.moveTimer.set(Math.random()*3); // desync NPC's from each other
 			
 			if(this.behaviour=='a')
 			{
