@@ -259,7 +259,11 @@ MyGame = ig.Game.extend({
 		// build player
 		this.buildPlayer();		
 		
-		// set up chat functionality
+		// add tab index to canvas to ensure it
+		// retains focus (needed in Chrome!)
+		$("#canvas").attr("tabindex", "0")
+		
+		// logic for submitting inputted text
 		$('#'+this.inputFieldId).bind('keypress', function(e) {
 			var code = (e.keyCode ? e.keyCode : e.which);
 			if(code == 13) { //Enter keycode
@@ -267,7 +271,6 @@ MyGame = ig.Game.extend({
 				$('#canvas').focus();
 			}
 		});
-		
 	},
 	
 	update: function() {
