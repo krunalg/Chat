@@ -32,20 +32,20 @@ io.sockets.on('connection', function (socket)
     
     socket.on('init', function (user)
     {
-	socket.clientname = user;
-	
 	var welcome = 'Welcome';
 	
 	// check if username is already taken
 	for(var i=0; i<onlinePlayers.length; i++)
 	{
-	    if(onlinePlayers[i].name==socket.clientname) welcome = 'NameTaken';
+	    if(onlinePlayers[i].name==user) welcome = 'NameTaken';
 	}
 	
 	// set up new player
 	if(welcome=='Welcome')
 	{
 	    console.log("Performing first time setup of " + user);
+	    socket.clientname = user;
+	    
 	    // set up user info object with defaults
 	    var player = new Object();
 	    player.name = user;

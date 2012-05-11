@@ -28,12 +28,16 @@ socket.on('incomingTell', function (from, msg) {
 socket.on('welcome', function (msg) {
 	if(msg!='Welcome')
         {
-            delete ig;
-            delete io;
+            document.body.innerHTML = "";
             if(msg=='NameTaken')
+            {
                 window.alert( "That name is currently being used. Please use another.");
+                throw new Error('Halting game due to username being in use.');
+            }
+            window.alert("Did not receive welcome from server.");
+            throw new Error('Halting game because server did not send welcome message.');
         }
-        ig.game.events.push(msg);
+        else ig.game.events.push(msg);
 });
 	 
 socket.on('otherPlayerJump', function (x, y, direction, client)

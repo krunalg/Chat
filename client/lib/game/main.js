@@ -17,7 +17,7 @@ ig.module(
 	'game.ents.name',
 	
 	//debug
-	'impact.debug.debug',
+	//'impact.debug.debug',
 	
 	// plugins
 	'plugins.impact-splash-loader'
