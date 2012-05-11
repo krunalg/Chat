@@ -392,12 +392,6 @@ ig.module (
 			
 			this.moveTimer = new ig.Timer();
 			
-			// things to skip if loaded in weltmeister
-			if(getFileName()!='weltmeister.html')
-			{
-			    this.nameFont = new ig.Font( 'media/04b03.font.gr.png' );
-			}
-			
 			if(this.behaviour=='a')
 			{
 			    this.movePattern = ['up','down','up','right','down','down',
