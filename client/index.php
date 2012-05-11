@@ -20,7 +20,7 @@
 	<canvas id="canvas"></canvas>
 	<div id="chat">
 		  <div>
-			   <input type="text" id="input"></input>
+			   <input type="text" id="input" autocomplete="off"></input>
 		  </div>
 	</div>
 </body>
