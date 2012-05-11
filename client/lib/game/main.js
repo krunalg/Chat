@@ -24,7 +24,7 @@ ig.module(
 MyGame = ig.Game.extend({
 	
 	autoSort: true,
-	eventsFont: new ig.Font( 'media/04b03.font.png' ),
+	whiteFont: new ig.Font( 'media/04b03.font.png' ),
 	events: new Array(), // contains game events such as player entering area
 	eventsMax: 4, // max events to display on screen
 	eventsTimer: null, // used for pruning old events
@@ -380,14 +380,22 @@ MyGame = ig.Game.extend({
 			}
 		}
 		
-		// draw (text) game events to screen
+		// write game events to screen
 		var printEvents = '';
 		for(var i=0; i<this.events.length; i++)
 		{
 			if(i==0) var space = ''; else var space = "\n"; 
 			printEvents += space + this.events[i];
 		}
-		this.eventsFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
+		this.whiteFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
+		
+		// write FPS
+		this.whiteFont.draw(
+			'ARROWS move, Z action, X run, ENTER chat',
+			ig.system.width/2,
+			ig.system.height-10,
+			ig.Font.ALIGN.CENTER
+		);
 	}
 });
 
