@@ -39,7 +39,7 @@ EntityName = ig.Entity.extend({
 			else
 			{
 				console.debug( "Name entity could not find entity '" +
-					       this.follow + "' and will not kill() itself.");
+					       this.follow + "' and will now kill() itself.");
 				this.kill();
 			}
 			
