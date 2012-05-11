@@ -1111,12 +1111,6 @@ EntityOtherplayer = ig.Entity.extend({
 		}
 	    },
 	    
-	    netmoveplayer: function()
-	    {
-		this.pos.x = positionx;
-		this.pos.y = positiony;
-	    },
-	    
 	    netStartMove: function()
 	    {
 		if(this.moveState=='idle') this.isMove = false;
