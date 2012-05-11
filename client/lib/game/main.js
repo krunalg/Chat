@@ -9,6 +9,10 @@ ig.module(
 	'game.levels.town',
 	'game.levels.route101',
 	'game.levels.lab',
+	'game.levels.birchdownstairs',
+	'game.levels.birchupstairs',
+	'game.levels.homedownstairs',
+	'game.levels.homeupstairs',
 	
 	'game.ents.player',
 	'game.entities.grass',
