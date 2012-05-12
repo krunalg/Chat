@@ -61,6 +61,12 @@ io.sockets.on('connection', function (socket)
 	}
 	
 	socket.emit('welcome', welcome);
+	
+	if(welcome=='NameTaken') {
+	    console.log("Booting user from socket server because name already in use: " + user);
+	    socket.disconnect();
+	}
+	
     });
     
     socket.on('hereIAm', function (x, y, direction, mapname, skin)
