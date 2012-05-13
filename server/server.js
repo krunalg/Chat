@@ -7,6 +7,16 @@ server.listen(8080);
 
 var onlinePlayers = new Array(); // an array of objects
 
+var playersReport = function()
+{
+    var players = '';
+    for(var i=0; i<onlinePlayers.length; i++)
+    {
+	if(i!=0) players += ', ';
+	players += onlinePlayers[i].name;
+    }
+    console.log("Currently online players: " + players);
+};
 
 
 
@@ -66,6 +76,8 @@ io.sockets.on('connection', function (socket)
 	    console.log("Booting user from socket server because name already in use: " + user);
 	    socket.disconnect();
 	}
+	
+	playersReport();
 	
     });
     
@@ -187,6 +199,8 @@ io.sockets.on('connection', function (socket)
         }
 
         socket.broadcast.to(socket.roomname).emit('dropPlayer',socket.clientname);
+	
+	playersReport();
         
     });
  
