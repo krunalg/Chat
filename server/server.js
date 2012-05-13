@@ -14,11 +14,11 @@ var playersReport = function()
     var players = '';
     for(var i=0; i<onlinePlayers.length; i++)
     {
-	if(i!=0) players += ', ';
-	players += "\"" + onlinePlayers[i].name + "\"";
+	//if(i!=0) players += "\n";
+	players += "\n-- " + onlinePlayers[i].name;
     }
-    if(players=='') console.log("** ONLINE: _empty_");
-    else console.log("** ONLINE: " + players);
+    if(players=='') console.log("\nWHO IS ONLINE: \n--\n");
+    else console.log("\nWHO IS ONLINE: " + players + "\n");
 };
 
 
@@ -55,7 +55,7 @@ io.sockets.on('connection', function (socket)
 	// set up new player
 	if(welcome=='Welcome')
 	{
-	    console.log("ADDING: " + user);
+	    console.log("ADDING " + user);
 	    socket.clientname = user;
 	    
 	    // set up user info object with defaults
@@ -75,7 +75,7 @@ io.sockets.on('connection', function (socket)
 	socket.emit('welcome', welcome);
 	
 	if(welcome=='NameTaken') {
-	    console.log("Booting user trying to use name already in use: " + user);
+	    console.log("DROPPING " + user + "FOR NAME INFRINGEMENT");
 	    socket.disconnect();
 	}
 	
@@ -87,7 +87,7 @@ io.sockets.on('connection', function (socket)
     {
         socket.roomname = mapname;
 	socket.join(socket.roomname);
-	console.log("Player " + socket.clientname + " entered area: " + socket.roomname);
+	console.log(socket.clientname + " ENTERED " + socket.roomname);
 	 
         for(var i=0; i<onlinePlayers.length; i++)
 	{
@@ -117,8 +117,6 @@ io.sockets.on('connection', function (socket)
     
     socket.on('playerLeaveZone', function ()
     {
-	console.log("SHOULD NEVER SEE THIS MESSAGE BECAUSE I DON'T USE THIS CALL ANYMORE");
-	
 	// instruct others to drop this player
 	socket.broadcast.to(socket.roomname).emit('dropPlayer', socket.clientname);
 	socket.leave(socket.roomname);
@@ -196,7 +194,7 @@ io.sockets.on('connection', function (socket)
 
     socket.on('disconnect', function()
     {
-        console.log("DISCONNECTED: " + socket.clientname);
+        console.log(socket.clientname + "DISCONNECTED");
 	
 	// remove client from onlinePlayers array
         for(var i=0; i<onlinePlayers.length; i++)
