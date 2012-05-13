@@ -15,9 +15,10 @@ var playersReport = function()
     for(var i=0; i<onlinePlayers.length; i++)
     {
 	if(i!=0) players += ', ';
-	players += onlinePlayers[i].name;
+	players += "\"" + onlinePlayers[i].name + "\"";
     }
-    console.log("Currently online players: " + players);
+    if(players=='') console.log("** ONLINE: _empty_");
+    else console.log("** ONLINE: " + players);
 };
 
 
@@ -40,8 +41,7 @@ function handler (req, res)
 
 io.sockets.on('connection', function (socket)
 {
-    console.log('** Client ' + socket.id + ' connected');
-    
+
     socket.on('init', function (user)
     {
 	var welcome = 'Welcome';
@@ -55,7 +55,7 @@ io.sockets.on('connection', function (socket)
 	// set up new player
 	if(welcome=='Welcome')
 	{
-	    console.log("Performing first time setup of " + user);
+	    console.log("ADDING: " + user);
 	    socket.clientname = user;
 	    
 	    // set up user info object with defaults
@@ -75,7 +75,7 @@ io.sockets.on('connection', function (socket)
 	socket.emit('welcome', welcome);
 	
 	if(welcome=='NameTaken') {
-	    console.log("Booting user from socket server because name already in use: " + user);
+	    console.log("Booting user trying to use name already in use: " + user);
 	    socket.disconnect();
 	}
 	
@@ -87,7 +87,7 @@ io.sockets.on('connection', function (socket)
     {
         socket.roomname = mapname;
 	socket.join(socket.roomname);
-	console.log("Player " + socket.clientname + " joined zone: " + socket.roomname);
+	console.log("Player " + socket.clientname + " entered area: " + socket.roomname);
 	 
         for(var i=0; i<onlinePlayers.length; i++)
 	{
@@ -117,6 +117,8 @@ io.sockets.on('connection', function (socket)
     
     socket.on('playerLeaveZone', function ()
     {
+	console.log("SHOULD NEVER SEE THIS MESSAGE BECAUSE I DON'T USE THIS CALL ANYMORE");
+	
 	// instruct others to drop this player
 	socket.broadcast.to(socket.roomname).emit('dropPlayer', socket.clientname);
 	socket.leave(socket.roomname);
@@ -127,7 +129,8 @@ io.sockets.on('connection', function (socket)
     
     
     socket.on('receiveReskin', function (skin) {
-        socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', socket.clientname, skin);
+	console.log("Player " + socket.clientname + " changed skin: " + skin);
+	socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', socket.clientname, skin);
         for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==socket.clientname)
@@ -173,6 +176,7 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveSay', function (client, msg) {
         socket.broadcast.to(socket.roomname).emit('newMsg', client, msg);
+	console.log("[" + socket.roomname + "][" + socket.clientname + "] " + msg);
     });
     
     socket.on('receiveTell', function (to, msg) {
@@ -183,6 +187,7 @@ io.sockets.on('connection', function (socket)
             {
                 //console.log("Tell going to: " + to + " has session: " + onlinePlayers[i].session);
                 io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, msg); // send tell
+		console.log("[" + socket.clientname + ">>" + to + "] " + msg);
                 return;
             }
         }
@@ -191,7 +196,9 @@ io.sockets.on('connection', function (socket)
 
     socket.on('disconnect', function()
     {
-        // remove client from onlinePlayers array
+        console.log("DISCONNECTED: " + socket.clientname);
+	
+	// remove client from onlinePlayers array
         for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name == socket.clientname)
