@@ -129,7 +129,6 @@ socket.on('addAllPlayers', function (players) {
 				    skin: players[i].skin,
 				    animation:6
 			   } );
-			   break;
 		  }
 	 }
 });
