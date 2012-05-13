@@ -1,1 +1,26 @@
-Must have node js installed to run server.bat - see http://nodejs.org/
+This is an experimental game/chat I created entirely in HTML5 and JavaScript
+using the ImpactJS framework, with Socket.IO and NodeJS for the network
+component, and a little bit of jQuery for the chat input.
+
+The game can currently be played at this URL:
+http://commins.ca/fs/
+
+To run the server yourself, you must have NodeJS installed. If server.bat does
+not work, you can drag server.js onto node.exe instead (does the same thing).
+
+Websites:
+NodeJS - http://nodejs.org/
+Socket.IO - http://socket.io/
+ImpactJS - http://impactjs.com/
+jQuery - http://jquery.com/
+
+To-do:
+- Update map scrolling logic to allow any resolution, not just the current
+- Fix "opening door" animation to include not just the final frame
+- Add "closing door" animation when player exits a building
+- Draw FPS to screen
+- bubble.js: rename var 'from' to 'follow'
+- Fix premature triggering of grass effect by network players
+- Add support for signs to contain an accented 'E'
+- Prevent user from spamming the action key to spawn unlimited bubbles
+- socketClient.js: receiveSay method does not require client name
