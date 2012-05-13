@@ -7,6 +7,8 @@ server.listen(8080);
 
 var onlinePlayers = new Array(); // an array of objects
 
+io.set('log level', 2);
+
 var playersReport = function()
 {
     var players = '';
