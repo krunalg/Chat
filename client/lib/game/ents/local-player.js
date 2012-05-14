@@ -50,6 +50,33 @@ ig.module (
 	    socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);	
 	},
 	
+	moveStillPressed: function(facing)
+	// returns true if the supplied param
+	// facing key is currently pressed
+	{
+	    switch(facing)
+	    {
+		case 'left':
+		    return ( ig.input.state('left')
+			&& !ig.input.state('right') )
+		    break;
+		case 'right':
+		    return ( ig.input.state('right')
+			&& !ig.input.state('left') )
+		    break;
+		case 'up':
+		    return ( ig.input.state('up')
+			&& !ig.input.state('down') )
+		    break;
+		case 'down':
+		    return ( ig.input.state('down')
+			&& !ig.input.state('up') )
+		    break;
+		
+	    }
+	    return false;
+	},
+	
 	startMove: function()
 	{
 	    // determine speed (running or walking)
