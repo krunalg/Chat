@@ -422,7 +422,7 @@ ig.module (
 	    // action (like reading a sign or talking to npc)
 	    if(ig.input.pressed('action') && !this.isMove)
 	    {
-		    action(this);	    
+		    this.action(this);	    
 	    }
 	    
 	    // handle zoning
