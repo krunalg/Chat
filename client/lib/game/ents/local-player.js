@@ -68,7 +68,7 @@ ig.module (
 	    socket.emit('receiveUpdateMoveState', x, y, direction, state);
 	},
 	
-	emitDirection: function(client,direction) // FIX THIS: client not needed. perhaps merge method with updateplayer
+	emitDirection: function(client,direction) // FIX THIS: client not needed. perhaps merge method with emitUpdateMoveState
 	// sends player.facing value to server
 	{
 	    socket.emit('receiveDirection',client,direction);
