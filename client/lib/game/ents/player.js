@@ -45,14 +45,6 @@ ig.module (
 		    
 		    skin: 'labgeek',
 		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
 		    facingGrass: function()
 		    // returns a grass entity if player is facing one
 		    // otherwise returns false
@@ -117,19 +109,6 @@ ig.module (
 					       direction: this.facing,
 					    } );
 		    },
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
 		    
 		    finishJump: function() {
 			// update jump animation
@@ -308,21 +287,6 @@ ig.module (
 			if(c.getTile(pX,pY) == want) return true; // can jump
 			return false; // no collisions
 		    },
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
 		    
 		    goAgain: function()
 		    // decides if another move should take place
