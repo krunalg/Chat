@@ -101,9 +101,6 @@ ig.module (
 	init: function( x, y, settings ) {
 	    this.parent( x, y, settings );
 	    
-	    // set players appearance
-	    this.reskin(this.skin);
-	    
 	    // initiate network
 	    this.netInit();
 	},
