@@ -14,7 +14,7 @@ ig.module(
 	'game.levels.homedownstairs',
 	'game.levels.homeupstairs',
 	
-	'game.ents.player',
+	'game.entities.common.player',
 	'game.entities.grass',
 	'game.ents.jump',
 	'game.ents.bubble',
