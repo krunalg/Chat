@@ -12,26 +12,7 @@ ig.module (
     
     
     
-    var destinationReached = function(player)
-    // returns true if reached or past destination
-    // otherwise returns false
-    {
-	switch(player.facing) {
-	    case 'left':
-		return player.pos.x<=player.destination;
-		break;
-	    case 'right':
-		return player.pos.x>=player.destination;
-		break;
-	    case 'up':
-		return player.pos.y<=player.destination;
-		break;
-	    case 'down':
-		return player.pos.y>=player.destination;
-		break;
-	}
-	return false;
-    }
+    
     
     var moveStillPressed = function(facing)
     // returns true if the last held down
@@ -719,6 +700,27 @@ ig.module (
 		    moveCommitDirection: '',
 		    
 		    skin: 'labgeek',
+		    
+		    destinationReached: function()
+		    // returns true if reached or past destination
+		    // otherwise returns false
+		    {
+			switch(this.facing) {
+			    case 'left':
+				return this.pos.x<=this.destination;
+				break;
+			    case 'right':
+				return this.pos.x>=this.destination;
+				break;
+			    case 'up':
+				return this.pos.y<=this.destination;
+				break;
+			    case 'down':
+				return this.pos.y>=this.destination;
+				break;
+			}
+			return false;
+		    },
 		    
 		    moveAnimStart: function(alternateFeet)
 		    {
