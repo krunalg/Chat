@@ -50,6 +50,250 @@ ig.module (
 	    socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);	
 	},
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	emitJump: function(x, y, direction)
+	{
+	    socket.emit('receiveJump', x, y, direction);
+	},
+	
+	emitUpdateMoveState: function(x, y, direction, state)
+	{
+	    socket.emit('receiveUpdateMoveState', x, y, direction, state);
+	},
+	
+	emitDirection: function(client,direction) // FIX THIS: client not needed. perhaps merge method with updateplayer
+	// sends player.facing value to server
+	{
+	    socket.emit('receiveDirection',client,direction);
+	},
+	
+	action: function()
+	{
+	    var vx = vy = 0;
+		var tilesize = ig.game.collisionMap.tilesize;
+		switch(this.facing)
+		{
+		    case 'left':
+			vx = -tilesize;
+			break;
+		    case 'right':
+			vx = tilesize;
+			break;
+		    case 'up':
+			vy = -tilesize;
+			break;
+		    case 'down':
+			vy = tilesize;
+			break;
+		}
+	    
+	    // tries to read signs
+	    var signs = ig.game.getEntitiesByType( EntitySign );
+	    if(signs)
+	    {
+		for(var i=0; i<signs.length; i++)
+		{
+		    if( (signs[i].pos.x == this.pos.x + vx) &&
+			   (signs[i].pos.y == this.pos.y + vy) )
+		    {
+			var bubbleDuration = 3; // magic numbers are bad!
+			ig.game.spawnEntity( EntityBubble, signs[i].pos.x, signs[i].pos.y,
+			{
+				 msg: signs[i].msg,
+				 lifespan: bubbleDuration 
+			} );
+		    }
+		}
+	    }
+	    
+	    // tries to read npc message
+	    var npcs = ig.game.getEntitiesByType( EntityNpc );
+	    if(npcs)
+	    {
+		for(var i=0; i<npcs.length; i++)
+		{
+		    if( (npcs[i].pos.x == this.pos.x + vx) &&
+			   (npcs[i].pos.y == this.pos.y + vy) )
+		    {
+			// display chat bubble
+			var bubbleDuration = 3; // magic numbers are bad!
+			ig.game.spawnEntity( EntityBubble, npcs[i].pos.x, npcs[i].pos.y,
+			{
+				 msg: npcs[i].msg,
+				 lifespan: bubbleDuration // magic numbers are bad!
+			} );
+			npcs[i].moveTimer.set(bubbleDuration+1);
+			
+			ig.game.hideName(npcs[i].name, bubbleDuration);
+			
+			break;
+		    }
+		}
+	    }
+	},
+	
+	preStartMove: function()
+	{
+	    var cancelMove = false;
+		    
+	    // handle floor-exit zoning
+	    var exit = overExit(this);
+	    if(exit && this.facing==exit.direction)
+	    {
+		exit.trigger(); // zone
+		cancelMove = true;
+	    }
+	    
+	    if(!cancelMove)
+	    {		    
+		// facing an exit
+		var exit = facingExit(this);
+		if(exit)
+		{
+		    // check if going through a door
+		    if(exit.type=='door')
+		    {
+			exit.startAnim();
+			// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
+			this.moveWhen = 336.7 + new Date().getTime();
+			this.moveWaiting = true;
+			this.moveDoor = exit;
+			cancelMove = true; // prevent player from starting to move too soon
+		    }
+		    // not a door
+		    else
+		    {
+			if(this.facing==exit.direction) exit.startAnim(); // approaching floor exit
+		    }
+		}
+	    
+		// if no exits have taken place, move
+		if(!cancelMove)
+		{
+		    this.startMove();
+		}
+	    }
+	},
+	
+	movePressed: function()
+	{
+	    if(this.moveCommitDirection!=this.facing)
+	    {
+		// don't let player combine different keys for one commit
+		this.moveCommitPending = false;
+		this.moveCommitWhen = 0;
+	    }
+	    
+	    if(!this.moveCommitPending)
+	    {
+		// start pending commit for faced direction
+		this.moveCommitPending = true;
+		this.moveCommitDirection = this.facing;
+		
+		// next line only runs once per direction, skip delay if facing already
+		if(this.facingLast==this.facing) var delay = 0; else var delay = 80;
+		this.moveCommitWhen = new Date().getTime() + delay;
+	    }
+	    
+	    // player is now committed to (trying to) move
+	    if( new Date().getTime() - this.moveCommitWhen >= 0)
+	    {
+		this.moveCommitPending = false; // happening now, so now reset for next time
+		this.moveCommitWhen = 0; // reset for cleanness
+		
+		turnOffExitAnimations();
+		
+		if(canJump(this))
+		{
+		    this.startJump();
+		}
+		else if(canMove(this))
+		{
+		    preStartMove(this);
+		}
+		else
+		{
+		    console.debug("Trying to set slow walk...");
+		    // can't move, set slow walk animation
+		    switch(this.facing)
+		    {
+			case 'left':
+			    this.currentAnim = this.anims.slowleft;
+			    break;
+			case 'right':
+			    this.currentAnim = this.anims.slowright;
+			    break;
+			case 'up':
+			    this.currentAnim = this.anims.slowup;
+			    break;
+			case 'down':
+			    this.currentAnim = this.anims.slowdown;
+			    break;
+		    }
+		}
+	    }
+	    else // player has not yet committed to (trying to) move
+	    {
+		// if player changed faced direction
+		if(this.facing!=this.facingLast)
+		{
+		    emitDirection(this.name, this.facing); // inform others players
+		    this.facingLast = this.facing; // so we don't inform them again
+		    moveAnimStart(this, false); // step-animate the change
+		    
+		    // check if we are on an exit that needs animating
+		    var exit = overExit(this);
+		    if(exit)
+		    {
+			if(this.facing==exit.direction) exit.startAnim();
+			else exit.stopAnim();
+		    }
+		}
+	    }
+	},
+	
+	moveWait: function()
+	{
+	    if(this.moveWaiting)
+	    {
+		if(new Date().getTime() - this.moveWhen >= 0)
+		{
+		    this.startMove();
+		    this.moveWaiting = false;
+		}
+	    }
+	},
+	
+	turnOffExitAnimations: function ()
+	// turn off all exit animations
+	{
+	    var exits = ig.game.getEntitiesByType( EntityExit );
+	    if(exits)
+	    {
+		for(var i=0; i<exits.length; i++)
+		{
+		    exits[i].stopAnim();
+		}
+	    }
+	},
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	moveStillPressed: function(facing)
 	// returns true if the supplied param
 	// facing key is currently pressed
