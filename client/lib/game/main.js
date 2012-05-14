@@ -18,10 +18,11 @@ ig.module(
 	'game.entities.grass',
 	'game.ents.jump',
 	'game.ents.bubble',
-	'game.ents.name'
+	'game.ents.name',
 	
 	//debug
 	//'impact.debug.debug',
+	'plugins.debug_display' // require the debug display plugin
 )
 .defines(function(){
 
@@ -231,6 +232,9 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		
+		// create a new DebugDisplay, pass in your font
+                this.debugDisplay = new DebugDisplay( this.whiteFont );
+		
 		// start talking with network
 		socket.emit('init',username);
 		
@@ -401,16 +405,25 @@ MyGame = ig.Game.extend({
 			ig.Font.ALIGN.CENTER
 		);
 		
-		// debug variables
-		if(ig.game.screen.x%1===0 && ig.game.screen.y%1===0)
-		{
-			this.whiteFont.draw(
-				'ig.game.screen.x = ' + ig.game.screen.x + ', ig.game.screen.y = ' + ig.game.screen.y,
-				ig.system.width,
-				3,
-				ig.Font.ALIGN.RIGHT
-			);
-		}
+		// debug display
+		var x = ig.system.width/2, y = ig.system.height/2;
+                // this.debugDisplay.draw(info, display_fps, display_average, average_time, interval_count)
+                // info, array:                         this will display each array element on a new line
+                // display_fps, bool:               pass in true or false to either show the FPS or not. defaults to true
+                // display_average, bool:   pass in true or false to either show the average FPS over a period of time or not. 
+                //                                                  defaults to false
+                // average_time, integer:   amount of of time between samples. defaults to 10000 (10 seconds)
+                // interval_count, integer: amount of samples to take over time. defaults to 500
+                this.debugDisplay.draw(
+			[
+				'ig.game.screen.x = ' + ig.game.screen.x,
+				'ig.game.screen.y = ' + ig.game.screen.y
+			],
+			true,
+			false,
+			10000,
+			100
+		);
 	}
 });
 
