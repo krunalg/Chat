@@ -20,76 +20,7 @@ ig.module (
     
     
     
-    var goAgain = function(player)
-    // decides if another move should take place
-    // and either starts one or stops the player
-    {
-	if(player.isLocal) // is Player entity
-	{
-	    var keepMoving = true;
-	    
-	    // if key pressed, update direction and proceed with move
-	    if(moveStillPressed('left'))         player.facing = 'left';
-	    else if(moveStillPressed('right'))   player.facing = 'right';
-	    else if(moveStillPressed('up'))      player.facing = 'up';
-	    else if(moveStillPressed('down'))    player.facing = 'down';
-	    else keepMoving = false; // no key pressed, stop moving
-
-	    if(keepMoving && canJump(player))
-	    {
-		player.isMove = false; // will use isJump instead
-		player.startJump();
-	    }
-	    else if(keepMoving && canMove(player)) preStartMove(player);
-	    else
-	    {
-		// stop the player
-		player.isMove = false;
-		player.isJump = false;
-		player.moveState = 'idle';
-		player.lastState = 'idle';
-		moveAnimStop(player);
-		// tell other players we've stopped
-		emitUpdateMoveState(player.pos.x, player.pos.y, player.facing, player.moveState);
-	    }
-	}
-	else // is Otherplayer entity
-	{
-	    if(player.moveState=='idle')
-	    {
-		// stop the player
-		player.isMove = false;
-		player.isJump = false;
-		moveAnimStop(player);
-	    }
-	    else
-	    {
-		if(canMove(player)) player.netStartMove();
-	    }
-	}
-    }
     
-    var finishMove = function(player) {
-    
-	// check if reached destination
-	if(destinationReached(player)) {
-	    
-	    // ensure player is at legal coordinates
-	    alignToGrid(player);
-	    
-	    // stop player
-	    player.vel.x = player.vel.y = 0;
-	    
-	    // check if we should continue moving
-	    goAgain(player);
-
-	}
-	// continue to destination
-	else
-	{
-	    move(player);
-	}  
-    };
     
     var finishJump = function(player) {
     
@@ -621,6 +552,77 @@ ig.module (
 		    moveCommitDirection: '',
 		    
 		    skin: 'labgeek',
+		    
+		    goAgain: function()
+		    // decides if another move should take place
+		    // and either starts one or stops the player
+		    {
+			if(this.isLocal) // is Player entity
+			{
+			    var keepMoving = true;
+			    
+			    // if key pressed, update direction and proceed with move
+			    if(moveStillPressed('left'))         this.facing = 'left';
+			    else if(moveStillPressed('right'))   this.facing = 'right';
+			    else if(moveStillPressed('up'))      this.facing = 'up';
+			    else if(moveStillPressed('down'))    this.facing = 'down';
+			    else keepMoving = false; // no key pressed, stop moving
+		
+			    if(keepMoving && canJump(this))
+			    {
+				this.isMove = false; // will use isJump instead
+				this.startJump();
+			    }
+			    else if(keepMoving && canMove(this)) preStartMove(this);
+			    else
+			    {
+				// stop the player
+				this.isMove = false;
+				this.isJump = false;
+				this.moveState = 'idle';
+				this.lastState = 'idle';
+				moveAnimStop(this);
+				// tell other players we've stopped
+				emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+			    }
+			}
+			else // is Otherplayer entity
+			{
+			    if(this.moveState=='idle')
+			    {
+				// stop the this
+				this.isMove = false;
+				this.isJump = false;
+				moveAnimStop(this);
+			    }
+			    else
+			    {
+				if(canMove(this)) this.netStartMove();
+			    }
+			}
+		    },
+		    
+		    finishMove: function() {
+		    
+			// check if reached destination
+			if(destinationReached(this)) {
+			    
+			    // ensure player is at legal coordinates
+			    alignToGrid(this);
+			    
+			    // stop player
+			    this.vel.x = this.vel.y = 0;
+			    
+			    // check if we should continue moving
+			    goAgain(this);
+		
+			}
+			// continue to destination
+			else
+			{
+			    move(this);
+			}  
+		    },
 		    
 		    alignToGrid: function()
 		    {
