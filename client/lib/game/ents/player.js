@@ -16,26 +16,7 @@ ig.module (
     
     
     
-    var move = function(player)
-    // instructs impact to move player
-    // in the direction he's facing
-    {
-	switch(player.facing)
-	{
-	    case 'left':
-		player.vel.x = -player.speed;
-		break;
-	    case 'right':
-		player.vel.x = +player.speed;
-		break;
-	    case 'up':
-		player.vel.y = -player.speed;
-		break;
-	    case 'down':
-		player.vel.y = +player.speed;
-		break;
-	}
-    };
+    
     
     var alignToGrid = function(player)
     {
@@ -675,6 +656,27 @@ ig.module (
 		    moveCommitDirection: '',
 		    
 		    skin: 'labgeek',
+		    
+		    move: function()
+		    // instructs impact to move player
+		    // in the direction he's facing
+		    {
+			switch(this.facing)
+			{
+			    case 'left':
+				this.vel.x = -this.speed;
+				break;
+			    case 'right':
+				this.vel.x = +this.speed;
+				break;
+			    case 'up':
+				this.vel.y = -this.speed;
+				break;
+			    case 'down':
+				this.vel.y = +this.speed;
+				break;
+			}
+		    },
 		    
 		    destinationReached: function()
 		    // returns true if reached or past destination
