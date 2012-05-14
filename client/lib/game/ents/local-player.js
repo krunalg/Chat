@@ -136,7 +136,7 @@ ig.module (
 	    var cancelMove = false;
 		    
 	    // handle floor-exit zoning
-	    var exit = this.overExit(this);
+	    var exit = this.overExit();
 	    if(exit && this.facing==exit.direction)
 	    {
 		exit.trigger(); // zone
@@ -146,7 +146,7 @@ ig.module (
 	    if(!cancelMove)
 	    {		    
 		// facing an exit
-		var exit = facingExit(this);
+		var exit = this.facingExit();
 		if(exit)
 		{
 		    // check if going through a door
