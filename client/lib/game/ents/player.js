@@ -30,18 +30,11 @@ ig.module (
 	
 	lastState: '', // used to only send network move updates if change occurs
 
-	facing: '',
-	facingLast: '',
+	facing: '', // direction player currently faces
 	isMove: false, // waiting for move key-press
 	isJump: false,
 	leftFoot: true, // used to alternate step animations
 	destination: 0, // used for both x and y planes
-	moveWaiting: false, // used for waiting while a door opens
-	moveWhen: 0, // system time in ms to wait before moving
-	moveDoor: false, // contains exit entity to use after moveWhen
-	moveCommitPending: false, // helps decide whether to move or just change direction
-	moveCommitWhen: 0, // system time in ms when will commit to a move
-	moveCommitDirection: '',
 	
 	skin: 'labgeek',
 	
