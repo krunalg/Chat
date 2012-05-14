@@ -105,17 +105,7 @@ ig.module (
 	    this.reskin(this.skin);
 	    
 	    // initiate network
-	    netInit(this);
-	    
-	    /*
-	    // create a name entity to follow this one
-	    ig.game.spawnEntity(
-		EntityName,
-		this.pos.x,
-		this.pos.y,
-		{ follow: this.name, color: 'white' }
-	    );
-	    */
+	    this.netInit();
 	},
 	
 	reskin: function()
