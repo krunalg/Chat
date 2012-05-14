@@ -318,9 +318,9 @@ ig.module (
 	    }
 	    
 	    this.isMove = true;
-	    setMoveDestination(this);
+	    this.setMoveDestination();
 	    
-	    var newGrass = facingGrass(this);
+	    var newGrass = this.facingGrass();
 	    if(newGrass) newGrass.play();
 	    
 	    moveAnimStart(true);
@@ -440,17 +440,17 @@ ig.module (
 		{
 		    // about to move
 		    console.debug("Waiting to move...");
-		    moveWait(this);
+		    this.moveWait();
 		}
 		else if(this.isJump)
 		{
 		    // a move has already been started
-		    finishJump(this);
+		    this.finishJump();
 		}
 		else if(this.isMove)
 		{
 		    // a move has already been started
-		    finishMove(this);
+		    this.finishMove();
 		}
 		else if( ig.input.state('left') &&
 			!ig.input.state('right') )
