@@ -101,7 +101,7 @@ socket.on('updateOtherPlayer', function (client, direction) {
 	  
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction, skin) {
-	 var player = ig.game.getEntitiesByType( EntityPlayer )[0];
+	 var player = ig.game.getEntitiesByType( EntityLocalPlayer )[0];
 	 
 	 ig.game.events.push(user + " entered the area.");
 	 
@@ -116,7 +116,7 @@ socket.on('addPlayer', function (user, x, y, direction, skin) {
 
 // consider merging this whole thing with playerPositions
 socket.on('addAllPlayers', function (players) {
-	 var localPlayer = ig.game.getEntitiesByType( EntityPlayer )[0];
+	 var localPlayer = ig.game.getEntitiesByType( EntityLocalPlayer )[0];
 	 
 	 for(i=0; i<players.length; i++)
 	 {

@@ -167,7 +167,7 @@ ig.module (
 	}
 	
 	// check for collision against local player
-	var pc = ig.game.getEntitiesByType( EntityPlayer )[0];
+	var pc = ig.game.getEntitiesByType( EntityLocalPlayer )[0];
 	if(pc)
 	{
 	    if( (pc.pos.x == player.pos.x + ox) &&

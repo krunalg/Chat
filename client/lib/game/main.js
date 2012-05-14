@@ -115,7 +115,7 @@ MyGame = ig.Game.extend({
 		
 		if(exitAnimation) // walking out the door
 		{
-			return ig.game.spawnEntity( EntityPlayer, x, y, // magic numbers = bad
+			return ig.game.spawnEntity( EntityLocalPlayer, x, y, // magic numbers = bad
 			{
 				 name: username,
 				 facing: direction,
@@ -127,7 +127,7 @@ MyGame = ig.Game.extend({
 		}
 		else
 		{
-			return ig.game.spawnEntity( EntityPlayer, x, y, // magic numbers = bad
+			return ig.game.spawnEntity( EntityLocalPlayer, x, y, // magic numbers = bad
 			{
 				 name: username,
 				 facing: direction,
@@ -155,7 +155,7 @@ MyGame = ig.Game.extend({
 			if(inputVal!='')
 			{
 				// if so
-				var player = this.getEntitiesByType( EntityPlayer )[0];
+				var player = this.getEntitiesByType( EntityLocalPlayer )[0];
 				
 				// check for command flag
 				if(inputVal.substr(0,1)=='/')
@@ -287,14 +287,14 @@ MyGame = ig.Game.extend({
 		this.parent();
 		
 		// rebuild player when loadLevel deletes it
-		if(!this.getEntitiesByType( EntityPlayer )[0])
+		if(!this.getEntitiesByType( EntityLocalPlayer )[0])
 		{
 			var player = this.buildPlayer();
 			console.debug("Player does not exist. Adding one.");
 		}
 		
 		// screen positioning
-		var player = this.getEntitiesByType( EntityPlayer )[0];
+		var player = this.getEntitiesByType( EntityLocalPlayer )[0];
 		if( player ) {
 			this.screen.x = player.pos.x - ig.system.width/2 + player.size.x/2;
 			this.screen.y = player.pos.y - ig.system.height/2;
