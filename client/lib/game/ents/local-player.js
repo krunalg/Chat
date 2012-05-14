@@ -323,12 +323,12 @@ ig.module (
 	    var newGrass = this.facingGrass();
 	    if(newGrass) newGrass.play();
 	    
-	    moveAnimStart(true);
+	    this.moveAnimStart();
 	    
 	    // send movement update only when change occurs
 	    if( this.facingLast != this.facing || this.lastState != this.moveState )
 	    {
-		emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+		this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 		this.lastState  = this.moveState;
 	    }
 	    
@@ -343,11 +343,11 @@ ig.module (
 	    
 	    this.isJump = true;
 	    this.jumpStart = new ig.Timer();
-	    spawnShadow(this);
-	    setMoveDestination(this);
+	    this.spawnShadow();
+	    this.setMoveDestination();
 		    
-	    moveAnimStart(true);
-	    emitJump(this.pos.x, this.pos.y, this.facing);
+	    this.moveAnimStart(true);
+	    this.emitJump(this.pos.x, this.pos.y, this.facing);
 	    this.facingLast = this.facing;
 	},
 	
