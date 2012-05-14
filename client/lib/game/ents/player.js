@@ -9,77 +9,6 @@ ig.module (
 )
 .defines(function(){
     
-
-    
-    var facingGrass = function(player)
-    // returns a grass entity if player is facing one
-    // otherwise returns false
-    {
-	var vx = vy = 0;
-	var tilesize = ig.game.collisionMap.tilesize;
-	switch(player.facing)
-	{
-	    case 'left':
-		vx = -tilesize;
-		break;
-	    case 'right':
-		vx = tilesize;
-		break;
-	    case 'up':
-		vy = -tilesize;
-		break;
-	    case 'down':
-		vy = tilesize;
-		break;
-	}
-	// check for collision against grass entity
-	var allGrass = ig.game.getEntitiesByType( EntityGrass );
-	if(allGrass)
-	{
-	    for(var i=0; i<allGrass.length; i++)
-	    {
-		if( allGrass[i].pos.x == player.pos.x + vx &&
-		    allGrass[i].pos.y == player.pos.y + vy )
-		{
-		    return allGrass[i];
-		}
-	    }
-	}
-	return false;
-    }
-    
-    var inGrass = function(player)
-    // returns a grass entity if player is in one
-    // otherwise returns false
-    {
-	// check for collision against grass entity
-	var allGrass = ig.game.getEntitiesByType( EntityGrass );
-	if(allGrass)
-	{
-	    for(var i=0; i<allGrass.length; i++)
-	    {
-		if( allGrass[i].pos.x == player.pos.x &&
-		    allGrass[i].pos.y == player.pos.y )
-		{
-		    return allGrass[i];
-		}
-	    }
-	}
-	return false;
-    }
-    
-    var spawnShadow = function(player)
-    {
-	ig.game.spawnEntity( EntityJump, player.pos.x, player.pos.y,
-			    {
-			       direction: player.facing,
-			    } );
-    }
-
-   
-		//////////////////
-		// EntityPlayer //
-		//////////////////
 		EntityPlayer = ig.Entity.extend({
 		    
 		    isLocal: true,
@@ -115,6 +44,81 @@ ig.module (
 		    moveCommitDirection: '',
 		    
 		    skin: 'labgeek',
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    facingGrass: function()
+		    // returns a grass entity if player is facing one
+		    // otherwise returns false
+		    {
+			var vx = vy = 0;
+			var tilesize = ig.game.collisionMap.tilesize;
+			switch(this.facing)
+			{
+			    case 'left':
+				vx = -tilesize;
+				break;
+			    case 'right':
+				vx = tilesize;
+				break;
+			    case 'up':
+				vy = -tilesize;
+				break;
+			    case 'down':
+				vy = tilesize;
+				break;
+			}
+			// check for collision against grass entity
+			var allGrass = ig.game.getEntitiesByType( EntityGrass );
+			if(allGrass)
+			{
+			    for(var i=0; i<allGrass.length; i++)
+			    {
+				if( allGrass[i].pos.x == this.pos.x + vx &&
+				    allGrass[i].pos.y == this.pos.y + vy )
+				{
+				    return allGrass[i];
+				}
+			    }
+			}
+			return false;
+		    },
+		    
+		    inGrass: function()
+		    // returns a grass entity if player is in one
+		    // otherwise returns false
+		    {
+			// check for collision against grass entity
+			var allGrass = ig.game.getEntitiesByType( EntityGrass );
+			if(allGrass)
+			{
+			    for(var i=0; i<allGrass.length; i++)
+			    {
+				if( allGrass[i].pos.x == this.pos.x &&
+				    allGrass[i].pos.y == this.pos.y )
+				{
+				    return allGrass[i];
+				}
+			    }
+			}
+			return false;
+		    },
+		    
+		    spawnShadow: function()
+		    {
+			ig.game.spawnEntity( EntityJump, this.pos.x, this.pos.y,
+					    {
+					       direction: this.facing,
+					    } );
+		    },
+		    
+		    
 		    
 		    
 		    
