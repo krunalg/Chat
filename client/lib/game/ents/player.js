@@ -303,12 +303,12 @@ ig.module (
 		else if(this.moveStillPressed('down'))    this.facing = 'down';
 		else keepMoving = false; // no key pressed, stop moving
     
-		if(keepMoving && canJump(this))
+		if(keepMoving && this.canJump())
 		{
 		    this.isMove = false; // will use isJump instead
 		    this.startJump();
 		}
-		else if(keepMoving && canMove(this)) preStartMove(this);
+		else if(keepMoving && this.canMove()) this.preStartMove();
 		else
 		{
 		    // stop the player
