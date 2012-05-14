@@ -12,20 +12,6 @@ ig.module (
     EntityLocalPlayer = EntityPlayer.extend({
 	
 	isLocal: true,
-	
-	speed: 69,
-	runSpeed: 138,
-	walkSpeed: 69,
-	jumpSpeed: 69,
-	maxVel: { x: 138, y: 138 },
-	moveState: 'idle', // idle, walk, run
-	
-	size: {x: 16, y: 16},
-	offset: { x: 0, y: 16 },
-	
-	type: ig.Entity.TYPE.A,
-	checkAgainst: ig.Entity.TYPE.NONE,
-	collides: ig.Entity.COLLIDES.PASSIVE,
 	animSheet: new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 ),
 	
 	lastState: '', // used to only send network move updates if change occurs
