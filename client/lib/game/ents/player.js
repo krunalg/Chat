@@ -127,24 +127,24 @@ ig.module (
 	    else this.offset.y = 16+0;
 	    
 	    // check if reached destination
-	    if(destinationReached(this)) {
+	    if(this.destinationReached()) {
 		
 		this.isJump = false;
 		
 		// ensure player is at legal coordinates
-		alignToGrid(this);
+		this.alignToGrid();
 		
 		// stop player
 		this.vel.x = this.vel.y = 0;
 		
 		// check if we should continue moving
-		goAgain(this);
+		this.goAgain();
 		
 	    }
 	    // continue to destination
 	    else
 	    {
-		move(this);
+		this.move();
 	    }  
 	},
 	
