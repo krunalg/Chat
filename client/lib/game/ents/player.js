@@ -458,54 +458,6 @@ ig.module (
 	    };
 	},
 	
-	startMove: function()
-	{
-	    // determine speed (running or walking)
-	    if(ig.input.state('run'))
-	    {
-		this.moveState = 'run';
-		this.speed = this.runSpeed;
-	    }
-	    else
-	    {
-		this.moveState = 'walk';
-		this.speed = this.walkSpeed;
-	    }
-	    
-	    this.isMove = true;
-	    this.setMoveDestination();
-	    
-	    var newGrass = this.facingGrass();
-	    if(newGrass) newGrass.play();
-	    
-	    this.moveAnimStart(true);
-	    
-	    // send movement update only when change occurs
-	    if( this.facingLast != this.facing || this.lastState != this.moveState )
-	    {
-		this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-		this.lastState  = this.moveState;
-	    }
-	    
-	    this.facingLast = this.facing;
-	},
-	
-	startJump: function()
-	{
-	    // determine speed
-	    this.moveState = 'jump';
-	    this.speed = this.jumpSpeed;
-	    
-	    this.isJump = true;
-	    this.jumpStart = new ig.Timer();
-	    this.spawnShadow();
-	    this.setMoveDestination();
-		    
-	    this.moveAnimStart(true);
-	    this.emitJump(this.pos.x, this.pos.y, this.facing);
-	    this.facingLast = this.facing;
-	},
-	
 	init: function( x, y, settings ) {
 	    this.parent( x, y, settings );
 	    
