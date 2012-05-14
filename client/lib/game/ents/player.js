@@ -148,64 +148,6 @@ ig.module (
 	    }  
 	},
 	
-	facingExit: function()
-	// returns an exit entity if the player
-	// is facing one
-	{
-	    var vx = vy = 0;
-	    var tilesize = 16; // this should not be here!!
-	    switch(this.facing)
-	    {
-		case 'left':
-		    vx = -tilesize;
-		    break;
-		case 'right':
-		    vx = tilesize;
-		    break;
-		case 'up':
-		    vy = -tilesize;
-		    break;
-		case 'down':
-		    vy = tilesize;
-		    break;
-	    }
-	    // check for collision against an exit entity
-	    var doors = ig.game.getEntitiesByType( EntityExit );
-	    if(doors)
-	    {
-		for(var i=0; i<doors.length; i++)
-		{
-		    if( doors[i].pos.x == this.pos.x + vx &&
-			doors[i].pos.y == this.pos.y + vy )
-		    {
-			return doors[i];
-		    }
-		}
-	    }
-	    return false;
-	},
-	
-	overExit: function ()
-	// returns an exit entity if the player is standing
-	// on one. else return false
-	{
-	    // check for collision against an exit entity
-	    var exits = ig.game.getEntitiesByType( EntityExit );
-	    if(exits)
-	    {
-		for(var i=0; i<exits.length; i++)
-		{
-		    if( exits[i].pos.x == this.pos.x &&
-			exits[i].pos.y == this.pos.y &&
-			exits[i].type != 'door')
-		    {
-			return exits[i];
-		    }
-		}
-	    }
-	    return false;
-	},
-	
 	canMove: function()
 	// returns true if no collision will occur
 	// in the direction the player faces

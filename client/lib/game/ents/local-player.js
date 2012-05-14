@@ -131,6 +131,64 @@ ig.module (
 	    }
 	},
 	
+	facingExit: function()
+	// returns the exit entity that the local player is
+	// facing, returns false if none
+	{
+	    var vx = vy = 0;
+	    var tilesize = 16; // this should not be here!!
+	    switch(this.facing)
+	    {
+		case 'left':
+		    vx = -tilesize;
+		    break;
+		case 'right':
+		    vx = tilesize;
+		    break;
+		case 'up':
+		    vy = -tilesize;
+		    break;
+		case 'down':
+		    vy = tilesize;
+		    break;
+	    }
+	    // check for collision against an exit entity
+	    var doors = ig.game.getEntitiesByType( EntityExit );
+	    if(doors)
+	    {
+		for(var i=0; i<doors.length; i++)
+		{
+		    if( doors[i].pos.x == this.pos.x + vx &&
+			doors[i].pos.y == this.pos.y + vy )
+		    {
+			return doors[i];
+		    }
+		}
+	    }
+	    return false;
+	},
+	
+	overExit: function ()
+	// returns the exit entity that the local player is
+	// standing on, returns false if none
+	{
+	    // check for collision against an exit entity
+	    var exits = ig.game.getEntitiesByType( EntityExit );
+	    if(exits)
+	    {
+		for(var i=0; i<exits.length; i++)
+		{
+		    if( exits[i].pos.x == this.pos.x &&
+			exits[i].pos.y == this.pos.y &&
+			exits[i].type != 'door')
+		    {
+			return exits[i];
+		    }
+		}
+	    }
+	    return false;
+	},
+	
 	preStartMove: function()
 	{
 	    var cancelMove = false;
