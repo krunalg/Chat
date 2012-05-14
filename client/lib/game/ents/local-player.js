@@ -236,9 +236,9 @@ ig.module (
 		// if player changed faced direction
 		if(this.facing!=this.facingLast)
 		{
-		    emitDirection(this.name, this.facing); // inform others players
+		    this.emitDirection(this.name, this.facing); // inform others players
 		    this.facingLast = this.facing; // so we don't inform them again
-		    moveAnimStart(this, false); // step-animate the change
+		    this.moveAnimStart(false); // step-animate the change
 		    
 		    // check if we are on an exit that needs animating
 		    var exit = overExit(this);
@@ -323,7 +323,7 @@ ig.module (
 	    var newGrass = facingGrass(this);
 	    if(newGrass) newGrass.play();
 	    
-	    moveAnimStart(this, true);
+	    moveAnimStart(true);
 	    
 	    // send movement update only when change occurs
 	    if( this.facingLast != this.facing || this.lastState != this.moveState )
@@ -346,7 +346,7 @@ ig.module (
 	    spawnShadow(this);
 	    setMoveDestination(this);
 		    
-	    moveAnimStart(this, true);
+	    moveAnimStart(true);
 	    emitJump(this.pos.x, this.pos.y, this.facing);
 	    this.facingLast = this.facing;
 	},
@@ -457,28 +457,28 @@ ig.module (
 		{
 		    // if player is trying to move left
 		    this.facing = 'left';
-		    movePressed(this);
+		    this.movePressed();
 		}
 		else if( ig.input.state('right') &&
 			!ig.input.state('left') )
 		{
 		    // if player is trying to move right
 		    this.facing = 'right';
-		    movePressed(this);
+		    this.movePressed();
 		}
 		else if( ig.input.state('up')&&
 			!ig.input.state('down') )
 		{
 		    // if player is trying to move up
 		    this.facing = 'up';
-		    movePressed(this);
+		    this.movePressed();
 		}
 		else if( ig.input.state('down') &&
 			!ig.input.state('up') )
 		{
 		    // if player is trying to move down
 		    this.facing = 'down';
-		    movePressed(this);
+		    this.movePressed();
 		}
 		else
 		{
