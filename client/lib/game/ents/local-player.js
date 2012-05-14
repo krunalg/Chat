@@ -45,6 +45,11 @@ ig.module (
 	
 	skin: 'labgeek',
 	
+	netInit: function()
+	{
+	    socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);	
+	}
+	
 	startMove: function()
 	{
 	    // determine speed (running or walking)
@@ -99,12 +104,8 @@ ig.module (
 	    // set players appearance
 	    this.reskin(this.skin);
 	    
-	    // things to skip if loaded in weltmeister
-	    if(getFileName()!='weltmeister.html')
-	    {
-		// initiate network
-		netInit(this);
-	    }
+	    // initiate network
+	    netInit(this);
 	    
 	    /*
 	    // create a name entity to follow this one
@@ -168,7 +169,7 @@ ig.module (
 		this.anims.slowright.flip.x = true;
 		this.anims.idleright.flip.x = true;
 		// set initial animation
-		moveAnimStop(this);
+		this.moveAnimStop();
 	    }
 	},
 	

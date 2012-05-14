@@ -389,63 +389,6 @@ ig.module (
 	};
     }
     
-    var moveAnimStart = function(player, alternateFeet)
-    {
-	switch(player.facing)
-	{
-	    case 'left':
-		if(player.speed==player.walkSpeed)
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.walkLeftA;
-		    else player.currentAnim = player.anims.walkLeftB;
-		}
-		else // assume he is running
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.runLeftA;
-		    else player.currentAnim = player.anims.runLeftB;
-		}
-		break;
-	    case 'right':
-		if(player.speed==player.walkSpeed)
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.walkRightA;
-		    else player.currentAnim = player.anims.walkRightB;
-		}
-		else // assume he is running
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.runRightA;
-		    else player.currentAnim = player.anims.runRightB;
-		}
-		break;
-	    case 'up':
-		if(player.speed==player.walkSpeed)
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.walkUpA;
-		    else player.currentAnim = player.anims.walkUpB;
-		}
-		else // assume he is running
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.runUpA;
-		    else player.currentAnim = player.anims.runUpB;
-		}
-		break;
-	    case 'down':
-		if(player.speed==player.walkSpeed)
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.walkDownA;
-		    else player.currentAnim = player.anims.walkDownB;
-		}
-		else // assume he is running
-		{
-		    if(player.leftFoot) player.currentAnim = player.anims.runDownA;
-		    else player.currentAnim = player.anims.runDownB;
-		}
-		break;
-	}
-	if(alternateFeet) player.leftFoot = !player.leftFoot;
-	player.currentAnim.rewind();
-    };
-    
     var emitJump = function(x, y, direction)
     {
 	socket.emit('receiveJump', x, y, direction);
@@ -456,31 +399,10 @@ ig.module (
 	socket.emit('receiveUpdateMoveState', x, y, direction, state);
     }
     
-    var netInit = function(player)
-    {
-	socket.emit('hereIAm', player.pos.x, player.pos.y, player.facing, ig.game.mapName, player.skin);	
-    }
-    
     var emitDirection = function(client,direction)
     // sends player.facing value to server
     {
 	socket.emit('receiveDirection',client,direction);
-    }
-    
-    // used for hack to disable sockets only
-    // when running weltmeister
-    var getFileName = function()
-    {
-	//this gets the full url
-	var url = document.location.href;
-	//this removes the anchor at the end, if there is one
-	url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
-	//this removes the query after the file name, if there is one
-	url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
-	//this removes everything before the last slash in the path
-	url = url.substring(url.lastIndexOf("/") + 1, url.length);
-	//return
-	return url;
     }
     
     var action = function(player)
@@ -798,6 +720,84 @@ ig.module (
 		    
 		    skin: 'labgeek',
 		    
+		    moveAnimStart: function(alternateFeet)
+		    {
+			switch(this.facing)
+			{
+			    case 'left':
+				if(this.speed==this.walkSpeed)
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.walkLeftA;
+				    else this.currentAnim = this.anims.walkLeftB;
+				}
+				else // assume he is running
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.runLeftA;
+				    else this.currentAnim = this.anims.runLeftB;
+				}
+				break;
+			    case 'right':
+				if(this.speed==this.walkSpeed)
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.walkRightA;
+				    else this.currentAnim = this.anims.walkRightB;
+				}
+				else // assume he is running
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.runRightA;
+				    else this.currentAnim = this.anims.runRightB;
+				}
+				break;
+			    case 'up':
+				if(this.speed==this.walkSpeed)
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.walkUpA;
+				    else this.currentAnim = this.anims.walkUpB;
+				}
+				else // assume he is running
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.runUpA;
+				    else this.currentAnim = this.anims.runUpB;
+				}
+				break;
+			    case 'down':
+				if(this.speed==this.walkSpeed)
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.walkDownA;
+				    else this.currentAnim = this.anims.walkDownB;
+				}
+				else // assume he is running
+				{
+				    if(this.leftFoot) this.currentAnim = this.anims.runDownA;
+				    else this.currentAnim = this.anims.runDownB;
+				}
+				break;
+			}
+			if(alternateFeet) this.leftFoot = !this.leftFoot;
+			this.currentAnim.rewind();
+		    },
+		    
+		    moveAnimStop: function()
+		    // set animation to idle
+		    {
+			switch(this.facing)
+			{
+		
+			    case 'left':
+				this.currentAnim = this.anims.idleleft;
+				break;
+			    case 'right':
+				this.currentAnim = this.anims.idleright;
+				break;
+			    case 'up':
+				this.currentAnim = this.anims.idleup;
+				break;
+			    case 'down':
+				this.currentAnim = this.anims.idledown;
+				break;
+			};
+		    },
+		    
 		    startMove: function()
 		    {
 			// determine speed (running or walking)
@@ -851,23 +851,6 @@ ig.module (
 			
 			// set players appearance
 			this.reskin(this.skin);
-			
-			// things to skip if loaded in weltmeister
-			if(getFileName()!='weltmeister.html')
-			{
-			    // initiate network
-			    netInit(this);
-			}
-			
-			/*
-			// create a name entity to follow this one
-			ig.game.spawnEntity(
-			    EntityName,
-			    this.pos.x,
-			    this.pos.y,
-			    { follow: this.name, color: 'white' }
-			);
-			*/
 		    },
 		    
 		    reskin: function()
