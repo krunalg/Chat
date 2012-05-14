@@ -9,10 +9,11 @@ ig.module(
 
 EntityName = ig.Entity.extend({
 	
-	size: { x: 16, y: 16 },
 	white: new ig.Font( 'media/font.white.with.shadow.png' ),
 	blue: new ig.Font( 'media/font.blue.with.shadow.png' ),
 	green: new ig.Font( 'media/font.green.with.shadow.png' ),
+	
+	size: { x: 16, y: 16 },
 	color: null, // what color font to use
 	follow: null, // name of entity to follow
 	hideTimer: null, // used to temporarily not draw
@@ -46,15 +47,9 @@ EntityName = ig.Entity.extend({
 			switch(this.color)
 			{
 				case 'green':
-					this.green.draw(
-						this.follow,
-						this.pos.x - ig.game.screen.x + this.size.x/2,
-						this.pos.y - ig.game.screen.y - this.size.y,
-						ig.Font.ALIGN.CENTER
-					);
-					break;
 				case 'blue':
-					this.blue.draw(
+				case 'white':
+					this[this.color].draw(
 						this.follow,
 						this.pos.x - ig.game.screen.x + this.size.x/2,
 						this.pos.y - ig.game.screen.y - this.size.y,
@@ -62,12 +57,9 @@ EntityName = ig.Entity.extend({
 					);
 					break;
 				default:
-					this.white.draw(
-						this.follow,
-						this.pos.x - ig.game.screen.x + this.size.x/2,
-						this.pos.y - ig.game.screen.y - this.size.y,
-						ig.Font.ALIGN.CENTER
-					);
+					console.debug( "Name entity was not supplied valid " +
+						       "color and will now kill() itself.");
+					this.kill();
 					break;
 			}
 			
