@@ -297,10 +297,10 @@ ig.module (
 		var keepMoving = true;
 		
 		// if key pressed, update direction and proceed with move
-		if(moveStillPressed('left'))         this.facing = 'left';
-		else if(moveStillPressed('right'))   this.facing = 'right';
-		else if(moveStillPressed('up'))      this.facing = 'up';
-		else if(moveStillPressed('down'))    this.facing = 'down';
+		if(this.moveStillPressed('left'))         this.facing = 'left';
+		else if(this.moveStillPressed('right'))   this.facing = 'right';
+		else if(this.moveStillPressed('up'))      this.facing = 'up';
+		else if(this.moveStillPressed('down'))    this.facing = 'down';
 		else keepMoving = false; // no key pressed, stop moving
     
 		if(keepMoving && canJump(this))
@@ -316,9 +316,9 @@ ig.module (
 		    this.isJump = false;
 		    this.moveState = 'idle';
 		    this.lastState = 'idle';
-		    moveAnimStop(this);
+		    this.moveAnimStop();
 		    // tell other players we've stopped
-		    emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+		    this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 		}
 	    }
 	    else // is Otherplayer entity
@@ -328,7 +328,7 @@ ig.module (
 		    // stop the this
 		    this.isMove = false;
 		    this.isJump = false;
-		    moveAnimStop(this);
+		    this.moveAnimStop();
 		}
 		else
 		{
