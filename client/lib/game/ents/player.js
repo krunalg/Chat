@@ -9,218 +9,7 @@ ig.module (
 )
 .defines(function(){
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    var finishJump = function(player) {
-    
-	// update jump animation
-	var jumpTime = player.jumpStart.delta();
-	if(jumpTime >= 0 && jumpTime < (2/60)) player.offset.y = 16+4;
-	else if(jumpTime >= (2/60) && jumpTime < (4/60)) player.offset.y = 16+6;
-	else if(jumpTime >= (4/60) && jumpTime < (6/60)) player.offset.y = 16+8;
-	else if(jumpTime >= (6/60) && jumpTime < (8/60)) player.offset.y = 16+10;
-	else if(jumpTime >= (8/60) && jumpTime < (10/60)) player.offset.y = 16+12;
-	else if(jumpTime >= (10/60) && jumpTime < (16/60)) player.offset.y = 16+14;
-	else if(jumpTime >= (16/60) && jumpTime < (18/60)) player.offset.y = 16+12;
-	else if(jumpTime >= (18/60) && jumpTime < (20/60)) player.offset.y = 16+10;
-	else if(jumpTime >= (20/60) && jumpTime < (22/60)) player.offset.y = 16+8;
-	else if(jumpTime >= (22/60) && jumpTime < (24/60)) player.offset.y = 16+6;
-	else if(jumpTime >= (24/60) && jumpTime < (26/60)) player.offset.y = 16+4;
-	else player.offset.y = 16+0;
-	
-	// check if reached destination
-	if(destinationReached(player)) {
-	    
-	    player.isJump = false;
-	    
-	    // ensure player is at legal coordinates
-	    alignToGrid(player);
-	    
-	    // stop player
-	    player.vel.x = player.vel.y = 0;
-	    
-	    // check if we should continue moving
-	    goAgain(player);
-	    
-	}
-	// continue to destination
-	else
-	{
-	    move(player);
-	}  
-    };
-    
-    var facingExit = function(player)
-    // returns an exit entity if the player
-    // is facing one
-    {
-	var vx = vy = 0;
-	var tilesize = 16; // this should not be here!!
-	switch(player.facing)
-	{
-	    case 'left':
-		vx = -tilesize;
-		break;
-	    case 'right':
-		vx = tilesize;
-		break;
-	    case 'up':
-		vy = -tilesize;
-		break;
-	    case 'down':
-		vy = tilesize;
-		break;
-	}
-	// check for collision against an exit entity
-	var doors = ig.game.getEntitiesByType( EntityExit );
-	if(doors)
-	{
-	    for(var i=0; i<doors.length; i++)
-	    {
-		if( doors[i].pos.x == player.pos.x + vx &&
-		    doors[i].pos.y == player.pos.y + vy )
-		{
-		    return doors[i];
-		}
-	    }
-	}
-	return false;
-    }
-    
-    var overExit = function (player)
-    // returns an exit entity if the player is standing
-    // on one. else return false
-    {
-	// check for collision against an exit entity
-	var exits = ig.game.getEntitiesByType( EntityExit );
-	if(exits)
-	{
-	    for(var i=0; i<exits.length; i++)
-	    {
-		if( exits[i].pos.x == player.pos.x &&
-		    exits[i].pos.y == player.pos.y &&
-		    exits[i].type != 'door')
-		{
-		    return exits[i];
-		}
-	    }
-	}
-	return false;
-    }
-    
-    var canMove = function(player)
-    // returns true if no collision will occur
-    // in the direction the player faces
-    {
-	var vx = vy = 0; // velocity
-	var ox = oy = 0; // tile offset
-	var tilesize = ig.game.collisionMap.tilesize;
-	switch(player.facing)
-	{
-	    case 'left':
-		vx = -1;
-		ox = -tilesize;
-		break;
-	    case 'right':
-		vx = 1;
-		ox = tilesize;
-		break;
-	    case 'up':
-		vy = -1;
-		oy = -tilesize;
-		break;
-	    case 'down':
-		vy = 1;
-		oy = tilesize;
-		break;
-	}
-	// check map collisions
-	var res = ig.game.collisionMap.trace( player.pos.x, player.pos.y, vx, vy, player.size.x, player.size.y );
-	if(res.collision.x || res.collision.y) return false;
-	
-	// check npc collisions
-	var npcs = ig.game.getEntitiesByType( EntityNpc );
-	if(npcs)
-	{
-	    for(var i=0; i<npcs.length; i++)
-	    {
-		if( (npcs[i].pos.x == player.pos.x + ox) &&
-		       (npcs[i].pos.y == player.pos.y + oy) )
-		{
-		    return false;
-		}
-	    }
-	}
-	
-	
-	return true; // no collisions
-    };
-    
-    var canJump = function(player)
-    // returns true if faced tile is jumpable
-    // otherwise false
-    {
-	var vx = 0;
-	var vy = 0;
-	var want = -1; // to match weltmeister one-way collision tiles
-	var c = ig.game.collisionMap;
-	var tilesize = ig.game.collisionMap.tilesize;
-	switch(player.facing)
-	{
-	    case 'left':
-		vx = -tilesize;
-		want = 45;
-		break;
-	    case 'right':
-		vx = tilesize;
-		want = 34;
-		break;
-	    case 'up':
-		vy = -tilesize;
-		want = 12;
-		break;
-	    case 'down':
-		vy = tilesize;
-		want = 23;
-		break;
-	}
-	var pX = player.pos.x + vx;
-	var pY = player.pos.y + vy;
-	if(c.getTile(pX,pY) == want) return true; // can jump
-	return false; // no collisions
-    };
-    
-    var moveAnimStop = function(player)
-    // set animation to idle
-    {
-	switch(player.facing)
-	{
 
-	    case 'left':
-		player.currentAnim = player.anims.idleleft;
-		break;
-	    case 'right':
-		player.currentAnim = player.anims.idleright;
-		break;
-	    case 'up':
-		player.currentAnim = player.anims.idleup;
-		break;
-	    case 'down':
-		player.currentAnim = player.anims.idledown;
-		break;
-	};
-    }
     
     var emitJump = function(x, y, direction)
     {
@@ -552,6 +341,210 @@ ig.module (
 		    moveCommitDirection: '',
 		    
 		    skin: 'labgeek',
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    finishJump: function() {
+			// update jump animation
+			var jumpTime = this.jumpStart.delta();
+			if(jumpTime >= 0 && jumpTime < (2/60)) this.offset.y = 16+4;
+			else if(jumpTime >= (2/60) && jumpTime < (4/60)) this.offset.y = 16+6;
+			else if(jumpTime >= (4/60) && jumpTime < (6/60)) this.offset.y = 16+8;
+			else if(jumpTime >= (6/60) && jumpTime < (8/60)) this.offset.y = 16+10;
+			else if(jumpTime >= (8/60) && jumpTime < (10/60)) this.offset.y = 16+12;
+			else if(jumpTime >= (10/60) && jumpTime < (16/60)) this.offset.y = 16+14;
+			else if(jumpTime >= (16/60) && jumpTime < (18/60)) this.offset.y = 16+12;
+			else if(jumpTime >= (18/60) && jumpTime < (20/60)) this.offset.y = 16+10;
+			else if(jumpTime >= (20/60) && jumpTime < (22/60)) this.offset.y = 16+8;
+			else if(jumpTime >= (22/60) && jumpTime < (24/60)) this.offset.y = 16+6;
+			else if(jumpTime >= (24/60) && jumpTime < (26/60)) this.offset.y = 16+4;
+			else this.offset.y = 16+0;
+			
+			// check if reached destination
+			if(destinationReached(this)) {
+			    
+			    this.isJump = false;
+			    
+			    // ensure player is at legal coordinates
+			    alignToGrid(this);
+			    
+			    // stop player
+			    this.vel.x = this.vel.y = 0;
+			    
+			    // check if we should continue moving
+			    goAgain(this);
+			    
+			}
+			// continue to destination
+			else
+			{
+			    move(this);
+			}  
+		    },
+		    
+		    facingExit: function()
+		    // returns an exit entity if the player
+		    // is facing one
+		    {
+			var vx = vy = 0;
+			var tilesize = 16; // this should not be here!!
+			switch(this.facing)
+			{
+			    case 'left':
+				vx = -tilesize;
+				break;
+			    case 'right':
+				vx = tilesize;
+				break;
+			    case 'up':
+				vy = -tilesize;
+				break;
+			    case 'down':
+				vy = tilesize;
+				break;
+			}
+			// check for collision against an exit entity
+			var doors = ig.game.getEntitiesByType( EntityExit );
+			if(doors)
+			{
+			    for(var i=0; i<doors.length; i++)
+			    {
+				if( doors[i].pos.x == this.pos.x + vx &&
+				    doors[i].pos.y == this.pos.y + vy )
+				{
+				    return doors[i];
+				}
+			    }
+			}
+			return false;
+		    },
+		    
+		    overExit: function ()
+		    // returns an exit entity if the player is standing
+		    // on one. else return false
+		    {
+			// check for collision against an exit entity
+			var exits = ig.game.getEntitiesByType( EntityExit );
+			if(exits)
+			{
+			    for(var i=0; i<exits.length; i++)
+			    {
+				if( exits[i].pos.x == this.pos.x &&
+				    exits[i].pos.y == this.pos.y &&
+				    exits[i].type != 'door')
+				{
+				    return exits[i];
+				}
+			    }
+			}
+			return false;
+		    },
+		    
+		    canMove: function()
+		    // returns true if no collision will occur
+		    // in the direction the player faces
+		    {
+			var vx = vy = 0; // velocity
+			var ox = oy = 0; // tile offset
+			var tilesize = ig.game.collisionMap.tilesize;
+			switch(this.facing)
+			{
+			    case 'left':
+				vx = -1;
+				ox = -tilesize;
+				break;
+			    case 'right':
+				vx = 1;
+				ox = tilesize;
+				break;
+			    case 'up':
+				vy = -1;
+				oy = -tilesize;
+				break;
+			    case 'down':
+				vy = 1;
+				oy = tilesize;
+				break;
+			}
+			// check map collisions
+			var res = ig.game.collisionMap.trace( this.pos.x, this.pos.y, vx, vy, this.size.x, this.size.y );
+			if(res.collision.x || res.collision.y) return false;
+			
+			// check npc collisions
+			var npcs = ig.game.getEntitiesByType( EntityNpc );
+			if(npcs)
+			{
+			    for(var i=0; i<npcs.length; i++)
+			    {
+				if( (npcs[i].pos.x == this.pos.x + ox) &&
+				       (npcs[i].pos.y == this.pos.y + oy) )
+				{
+				    return false;
+				}
+			    }
+			}
+			
+			
+			return true; // no collisions
+		    },
+		    
+		    canJump: function()
+		    // returns true if faced tile is jumpable
+		    // otherwise false
+		    {
+			var vx = 0;
+			var vy = 0;
+			var want = -1; // to match weltmeister one-way collision tiles
+			var c = ig.game.collisionMap;
+			var tilesize = ig.game.collisionMap.tilesize;
+			switch(this.facing)
+			{
+			    case 'left':
+				vx = -tilesize;
+				want = 45;
+				break;
+			    case 'right':
+				vx = tilesize;
+				want = 34;
+				break;
+			    case 'up':
+				vy = -tilesize;
+				want = 12;
+				break;
+			    case 'down':
+				vy = tilesize;
+				want = 23;
+				break;
+			}
+			var pX = this.pos.x + vx;
+			var pY = this.pos.y + vy;
+			if(c.getTile(pX,pY) == want) return true; // can jump
+			return false; // no collisions
+		    },
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
 		    
 		    goAgain: function()
 		    // decides if another move should take place
