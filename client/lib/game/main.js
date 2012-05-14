@@ -406,7 +406,6 @@ MyGame = ig.Game.extend({
 		);
 		
 		// debug display
-		var x = ig.system.width/2, y = ig.system.height/2;
                 // this.debugDisplay.draw(info, display_fps, display_average, average_time, interval_count)
                 // info, array:                         this will display each array element on a new line
                 // display_fps, bool:               pass in true or false to either show the FPS or not. defaults to true
@@ -414,16 +413,19 @@ MyGame = ig.Game.extend({
                 //                                                  defaults to false
                 // average_time, integer:   amount of of time between samples. defaults to 10000 (10 seconds)
                 // interval_count, integer: amount of samples to take over time. defaults to 500
-                this.debugDisplay.draw(
-			[
-				'ig.game.screen.x = ' + ig.game.screen.x,
-				'ig.game.screen.y = ' + ig.game.screen.y
-			],
-			true,
-			false,
-			10000,
-			100
-		);
+                if(username=="Joncom")
+		{
+			this.debugDisplay.draw(
+				[
+					'ig.game.screen.x = ' + ig.game.screen.x,
+					'ig.game.screen.y = ' + ig.game.screen.y
+				],
+				true,
+				false,
+				10000,
+				100
+			);	
+		}
 	}
 });
 
