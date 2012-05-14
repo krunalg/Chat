@@ -202,13 +202,13 @@ ig.module (
 		
 		this.turnOffExitAnimations();
 		
-		if(canJump(this))
+		if(this.canJump())
 		{
 		    this.startJump();
 		}
-		else if(canMove(this))
+		else if(this.canMove())
 		{
-		    preStartMove(this);
+		    this.preStartMove();
 		}
 		else
 		{
