@@ -400,6 +400,17 @@ MyGame = ig.Game.extend({
 			ig.system.height-10,
 			ig.Font.ALIGN.CENTER
 		);
+		
+		// debug variables
+		if(ig.game.screen.x%1===0 && ig.game.screen.y%1===0)
+		{
+			this.whiteFont.draw(
+				'ig.game.screen.x = ' + ig.game.screen.x + ', ig.game.screen.y = ' + ig.game.screen.y,
+				ig.system.width,
+				3,
+				ig.Font.ALIGN.RIGHT
+			);
+		}
 	}
 });
 
