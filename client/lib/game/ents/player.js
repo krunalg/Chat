@@ -536,7 +536,7 @@ ig.module (
 	    var newGrass = facingGrass(this);
 	    if(newGrass) newGrass.play();
 	    
-	    moveAnimStart(this, true);
+	    moveAnimStart(true);
 	    
 	    // send movement update only when change occurs
 	    if( this.facingLast != this.facing || this.lastState != this.moveState )
@@ -559,7 +559,7 @@ ig.module (
 	    spawnShadow(this);
 	    setMoveDestination(this);
 		    
-	    moveAnimStart(this, true);
+	    moveAnimStart(true);
 	    emitJump(this.pos.x, this.pos.y, this.facing);
 	    this.facingLast = this.facing;
 	},
@@ -749,7 +749,7 @@ ig.module (
 		
 		this.isMove = true;
 		setMoveDestination(this);
-		moveAnimStart(this, true);
+		moveAnimStart(true);
 	    }
 	},
 	
@@ -764,7 +764,7 @@ ig.module (
 	    spawnShadow(this);
 	    setMoveDestination(this);
 		    
-	    moveAnimStart(this, true);
+	    moveAnimStart(true);
 	},
 	
 	draw: function() {
