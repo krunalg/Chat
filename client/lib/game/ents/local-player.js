@@ -50,14 +50,6 @@ ig.module (
 	    socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);	
 	},
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	emitJump: function(x, y, direction)
 	{
 	    socket.emit('receiveJump', x, y, direction);
@@ -283,16 +275,6 @@ ig.module (
 		}
 	    }
 	},
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	moveStillPressed: function(facing)
 	// returns true if the supplied param
