@@ -18,42 +18,7 @@ ig.module (
     
     
     
-    var alignToGrid = function(player)
-    {
-	switch(player.facing)
-	{
-	    case 'left':
-	    case 'right':
-		player.pos.x = player.destination;
-		break;
-	    case 'up':
-	    case 'down':
-		player.pos.y = player.destination;
-		break;
-	}
-    };
     
-    var setMoveDestination = function(player)
-    {
-	var tilesize = ig.game.collisionMap.tilesize;
-	if(player.isJump) var distance = 2; else var distance = 1;
-	
-	switch(player.facing)
-	{
-	    case 'left':
-		player.destination = player.pos.x - tilesize * distance;
-		break;
-	    case 'right':
-		player.destination = player.pos.x + tilesize * distance;
-		break;
-	    case 'up':
-		player.destination = player.pos.y - tilesize * distance;
-		break;
-	    case 'down':
-		player.destination = player.pos.y + tilesize * distance;
-		break;
-	}
-    };
     
     var goAgain = function(player)
     // decides if another move should take place
@@ -656,6 +621,43 @@ ig.module (
 		    moveCommitDirection: '',
 		    
 		    skin: 'labgeek',
+		    
+		    alignToGrid: function()
+		    {
+			switch(this.facing)
+			{
+			    case 'left':
+			    case 'right':
+				this.pos.x = this.destination;
+				break;
+			    case 'up':
+			    case 'down':
+				this.pos.y = this.destination;
+				break;
+			}
+		    },
+		    
+		    setMoveDestination: function()
+		    {
+			var tilesize = ig.game.collisionMap.tilesize;
+			if(this.isJump) var distance = 2; else var distance = 1;
+			
+			switch(this.facing)
+			{
+			    case 'left':
+				this.destination = this.pos.x - tilesize * distance;
+				break;
+			    case 'right':
+				this.destination = this.pos.x + tilesize * distance;
+				break;
+			    case 'up':
+				this.destination = this.pos.y - tilesize * distance;
+				break;
+			    case 'down':
+				this.destination = this.pos.y + tilesize * distance;
+				break;
+			}
+		    },
 		    
 		    move: function()
 		    // instructs impact to move player
