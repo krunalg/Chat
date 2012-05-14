@@ -48,7 +48,7 @@ ig.module (
 	netInit: function()
 	{
 	    socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);	
-	}
+	},
 	
 	startMove: function()
 	{
