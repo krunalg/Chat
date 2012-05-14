@@ -200,7 +200,7 @@ ig.module (
 		this.moveCommitPending = false; // happening now, so now reset for next time
 		this.moveCommitWhen = 0; // reset for cleanness
 		
-		turnOffExitAnimations();
+		this.turnOffExitAnimations();
 		
 		if(canJump(this))
 		{
@@ -241,7 +241,7 @@ ig.module (
 		    this.moveAnimStart(false); // step-animate the change
 		    
 		    // check if we are on an exit that needs animating
-		    var exit = overExit(this);
+		    var exit = this.overExit(this);
 		    if(exit)
 		    {
 			if(this.facing==exit.direction) exit.startAnim();
