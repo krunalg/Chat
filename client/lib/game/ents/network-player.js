@@ -98,6 +98,22 @@ ig.module (
 
 	},
 	
+	goAgain: function()
+	// determines if player will continue moving or stop
+	{
+	    if(this.moveState=='idle')
+	    {
+		// stop
+		this.isMove = false;
+		this.isJump = false;
+		this.moveAnimStop();
+	    }
+	    else
+	    {
+		if(this.canMove()) this.netStartMove();
+	    }
+	},
+	
 	netStartMove: function()
 	{
 	    if(this.moveState=='idle') this.isMove = false;

@@ -95,10 +95,7 @@ ig.module (
 	
 	spawnShadow: function()
 	{
-	    ig.game.spawnEntity( EntityJump, this.pos.x, this.pos.y,
-				{
-				   direction: this.facing,
-				} );
+	    ig.game.spawnEntity(EntityJump, this.pos.x, this.pos.y, { direction: this.facing });
 	},
 	
 	canMove: function()
@@ -181,61 +178,6 @@ ig.module (
 	    var pY = this.pos.y + vy;
 	    if(c.getTile(pX,pY) == want) return true; // can jump
 	    return false; // no collisions
-	},
-	
-	goAgain: function()
-	// decides if another move should take place
-	// and either starts one or stops the player
-	{
-	    if(this.isLocal) // is Player entity
-	    {
-		var keepMoving = true;
-		
-		// if key pressed, update direction and proceed with move
-		if(this.moveStillPressed('left'))         this.facing = 'left';
-		else if(this.moveStillPressed('right'))   this.facing = 'right';
-		else if(this.moveStillPressed('up'))      this.facing = 'up';
-		else if(this.moveStillPressed('down'))    this.facing = 'down';
-		else keepMoving = false; // no key pressed, stop moving
-    
-		if(keepMoving && this.canJump())
-		{
-		    this.isMove = false; // will use isJump instead
-		    this.startJump();
-		}
-		else if(keepMoving && this.canMove()) this.preStartMove();
-		else
-		{
-		    // stop the player
-		    this.isMove = false;
-		    this.isJump = false;
-		    this.moveState = 'idle';
-		    this.lastState = 'idle';
-		    this.moveAnimStop();
-		    // tell other players we've stopped
-		    this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-		}
-	    }
-	    else if(this.isNPC)
-	    {
-		this.isMove = false;
-		this.moveAnimStop();
-		this.moveTimer.set(this.moveDelay);
-	    }
-	    else // is NetworkPlayer
-	    {
-		if(this.moveState=='idle')
-		{
-		    // stop the this
-		    this.isMove = false;
-		    this.isJump = false;
-		    this.moveAnimStop();
-		}
-		else
-		{
-		    if(this.canMove()) this.netStartMove();
-		}
-	    }
 	},
 	
 	finishMove: function() {

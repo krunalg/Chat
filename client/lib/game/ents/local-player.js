@@ -42,6 +42,37 @@ ig.module (
 	    socket.emit('receiveDirection',client,direction);
 	},
 	
+	goAgain: function()
+	// determines if player will continue moving or stop
+	{
+	    var keepMoving = true;
+	    
+	    // if key pressed, update direction and proceed with move
+	    if(this.moveStillPressed('left'))         this.facing = 'left';
+	    else if(this.moveStillPressed('right'))   this.facing = 'right';
+	    else if(this.moveStillPressed('up'))      this.facing = 'up';
+	    else if(this.moveStillPressed('down'))    this.facing = 'down';
+	    else keepMoving = false; // no key pressed, stop moving
+
+	    if(keepMoving && this.canJump())
+	    {
+		this.isMove = false; // will use isJump instead
+		this.startJump();
+	    }
+	    else if(keepMoving && this.canMove()) this.preStartMove();
+	    else
+	    {
+		// stop the player
+		this.isMove = false;
+		this.isJump = false;
+		this.moveState = 'idle';
+		this.lastState = 'idle';
+		this.moveAnimStop();
+		// tell other players we've stopped
+		this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+	    }
+	},
+	
 	action: function()
 	{
 	    var vx = vy = 0;

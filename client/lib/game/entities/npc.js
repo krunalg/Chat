@@ -41,6 +41,14 @@ ig.module (
 	    this.moveAnimStart();
 	},
 	
+	goAgain: function()
+	// determines if player will continue moving or stop
+	{
+	    this.isMove = false;
+	    this.moveAnimStop();
+	    this.moveTimer.set(this.moveDelay);
+	},
+	
 	init: function( x, y, settings ) {
 	    this.parent( x, y, settings );
 	    
