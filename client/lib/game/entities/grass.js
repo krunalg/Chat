@@ -14,7 +14,7 @@ EntityGrass = ig.Entity.extend({
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
 		
-		this.zIndex = 3 + this.pos.y, // above player, otherplayer, and npc
+		this.zIndex = 4 + this.pos.y, // above players
 		
 		this.addAnim( 'rustle', 0.1667, [0,1,2,3,4], true ); // 10 frames of 60 per
 		this.currentAnim = null; // invisible by default
