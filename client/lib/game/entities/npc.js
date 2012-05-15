@@ -37,7 +37,7 @@ ig.module (
 	faceNextMove: function()
 	{
 	    this.facing = this.movePattern[this.moveNext];
-	    moveAnimStop(this);
+	    this.moveAnimStop();
 	},
 	justMoved: function()
 	{
@@ -52,30 +52,30 @@ ig.module (
 	    if(newGrass) newGrass.play();
 	    
 	    this.isMove = true;
-	    setMoveDestination(this);
-	    moveAnimStart(this);
+	    this.setMoveDestination();
+	    this.moveAnimStart();
 	},
 	
 	finishMove: function()
 	{
 	
 	    // check if reached destination
-	    if(destinationReached(this)) {
+	    if(this.destinationReached()) {
 		
 		// ensure player is at legal coordinates
-		alignToGrid(this);
+		this.alignToGrid();
 		
 		// end move state
 		this.isMove = false;
 		this.vel.x = this.vel.y = 0;
-		moveAnimStop(this);
+		this.moveAnimStop();
 		this.moveTimer.set(this.moveDelay);
 	
 	    }
 	    // continue to destination
 	    else
 	    {
-		move(this);
+		this.move(this);
 	    }  
 	},
 	
