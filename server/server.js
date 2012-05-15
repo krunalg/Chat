@@ -194,7 +194,7 @@ io.sockets.on('connection', function (socket)
 
     socket.on('disconnect', function()
     {
-        console.log(socket.clientname + "DISCONNECTED");
+        console.log(socket.clientname + " DISCONNECTED");
 	
 	// remove client from onlinePlayers array
         for(var i=0; i<onlinePlayers.length; i++)
