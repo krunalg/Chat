@@ -256,7 +256,13 @@ ig.module (
 		    this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 		}
 	    }
-	    else // is Otherplayer entity
+	    else if(this.isNPC)
+	    {
+		this.isMove = false;
+		this.moveAnimStop();
+		this.moveTimer.set(this.moveDelay);
+	    }
+	    else // is NetworkPlayer
 	    {
 		if(this.moveState=='idle')
 		{

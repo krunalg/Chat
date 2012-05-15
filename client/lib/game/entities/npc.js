@@ -11,6 +11,8 @@ ig.module (
    
     EntityNpc = EntityPlayer.extend({
 	
+	isNPC: true,
+	
 	// recorded travel time of 9 units (144px)
 	// in 2.100 seconds in VBA.
 	// ie 144/2.1 = 68.571428 or ~69
@@ -54,29 +56,6 @@ ig.module (
 	    this.isMove = true;
 	    this.setMoveDestination();
 	    this.moveAnimStart();
-	},
-	
-	finishMove: function()
-	{
-	
-	    // check if reached destination
-	    if(this.destinationReached()) {
-		
-		// ensure player is at legal coordinates
-		this.alignToGrid();
-		
-		// end move state
-		this.isMove = false;
-		this.vel.x = this.vel.y = 0;
-		this.moveAnimStop();
-		this.moveTimer.set(this.moveDelay);
-	
-	    }
-	    // continue to destination
-	    else
-	    {
-		this.move(this);
-	    }  
 	},
 	
 	init: function( x, y, settings ) {
