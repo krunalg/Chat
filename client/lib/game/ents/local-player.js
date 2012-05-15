@@ -357,7 +357,7 @@ ig.module (
 	    var newGrass = this.facingGrass();
 	    if(newGrass) newGrass.play();
 	    
-	    this.moveAnimStart();
+	    this.moveAnimStart(true);
 	    
 	    // send movement update only when change occurs
 	    if( this.facingLast != this.facing || this.lastState != this.moveState )
