@@ -14,6 +14,9 @@ ig.module (
 	
 	isLocal: false, // false unless entity defines otherwise
 	
+	// some default values
+	facing: 'down',
+	
 	speed: 69,
 	runSpeed: 138,
 	walkSpeed: 69,
@@ -30,8 +33,6 @@ ig.module (
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
 	lastState: '', // used to only send network move updates if change occurs
-
-	facing: '', // direction player currently faces
 	isMove: false, // waiting for move key-press
 	isJump: false,
 	leftFoot: true, // used to alternate step animations
@@ -305,7 +306,7 @@ ig.module (
 		    var use = false; break;
 	    }
 	    this.offset = { x: 0, y: 16 };
-	    if(!use) this.skin == 'boy';
+	    if(!use) this.skin = 'boy';
 	    this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + this.skin + '.png', 16, 32 );
 	    // add the animations
 	    this.addAnim( 'walkUpA', 0.13333, [2,0], true );
