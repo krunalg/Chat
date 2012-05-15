@@ -267,7 +267,7 @@ ig.module (
 		}
 		else
 		{
-		    if(canMove(this)) this.netStartMove();
+		    if(this.canMove()) this.netStartMove();
 		}
 	    }
 	},

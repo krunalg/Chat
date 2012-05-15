@@ -64,7 +64,7 @@ ig.module (
 		else if(this.moveState=='walk') this.speed = this.walkSpeed;
 		
 		// create grass effect
-		var newGrass = facingGrass(this);
+		var newGrass = this.facingGrass();
 		if(newGrass) newGrass.play();
 		
 		this.isMove = true;
@@ -101,16 +101,16 @@ ig.module (
 	    if(this.isJump)
 	    {
 		// a move has already been started
-		finishJump(this);
+		this.finishJump();
 	    }
 	    else if(this.isMove)
 	    {
-		finishMove(this);
+		this.finishMove();
 	    }
 	    else
 	    {
 		// keep animation consistent with this.facing
-		moveAnimStop(this);
+		this.moveAnimStop();
 	    }
 
 	}
