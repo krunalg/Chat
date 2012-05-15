@@ -12,8 +12,7 @@ ig.module (
     EntityNpc = EntityPlayer.extend({
 	
 	isNPC: true,
-	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
-
+	
 	// NPC movement patterns
 	movePattern: [], // no pattern by default
 	moveNext: 0,
@@ -63,13 +62,13 @@ ig.module (
 	    // weltmeister icon
 	    this.addAnim( 'weltmeister', 0.1, [1] );
 	    this.currentAnim = this.anims.weltmeister;
+	    
+	    this.reskin();
 	},
 	
 	ready: function()
 	{
-	    this.offset = { x: 0, y: 16 };
 	    
-	    this.reskin();
 	    
 	    // create a name entity to follow this one
 	    ig.game.spawnEntity(
