@@ -509,7 +509,7 @@ ig.module (
 		this.anims.slowright.flip.x = true;
 		this.anims.idleright.flip.x = true;
 		// set initial animation
-		moveAnimStop(this);
+		this.moveAnimStop();
 	    }
 	},
 	
