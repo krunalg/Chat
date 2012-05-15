@@ -12,10 +12,7 @@ ig.module (
     EntityLocalPlayer = EntityPlayer.extend({
 	
 	isLocal: true,
-	animSheet: new ig.AnimationSheet( 'media/people/rs.boy.png', 16, 32 ),
-	
 	lastState: '', // used to only send network move updates if change occurs
-	
 	facingLast: '',
 	moveWaiting: false, // used for waiting while a door opens
 	moveWhen: 0, // system time in ms to wait before moving
@@ -23,8 +20,6 @@ ig.module (
 	moveCommitPending: false, // helps decide whether to move or just change direction
 	moveCommitWhen: 0, // system time in ms when will commit to a move
 	moveCommitDirection: '',
-	
-	skin: 'labgeek',
 	
 	netInit: function()
 	{
