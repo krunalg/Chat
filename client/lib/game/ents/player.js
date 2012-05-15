@@ -11,7 +11,7 @@ ig.module (
     
     EntityPlayer = ig.Entity.extend({
 	
-	isLocal: true,
+	isLocal: false, // false unless entity defines otherwise
 	
 	speed: 69,
 	runSpeed: 138,
