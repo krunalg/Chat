@@ -30,6 +30,11 @@ ig.module(
 
 MyGame = ig.Game.extend({
 	
+	capitaliseFirstLetter: function(string)
+	{
+	    return string.charAt(0).toUpperCase() + string.slice(1);
+	},
+	
 	autoSort: true,
 	whiteFont: new ig.Font( 'media/font.white.with.shadow.png' ),
 	events: new Array(), // contains game events such as player entering area

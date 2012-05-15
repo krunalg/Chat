@@ -260,59 +260,19 @@ ig.module (
 	
 	moveAnimStart: function(alternateFeet)
 	{
-	    switch(this.facing)
-	    {
-		case 'left':
-		    if(this.speed==this.walkSpeed)
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.walkLeftA;
-			else this.currentAnim = this.anims.walkLeftB;
-		    }
-		    else // assume he is running
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.runLeftA;
-			else this.currentAnim = this.anims.runLeftB;
-		    }
-		    break;
-		case 'right':
-		    if(this.speed==this.walkSpeed)
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.walkRightA;
-			else this.currentAnim = this.anims.walkRightB;
-		    }
-		    else // assume he is running
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.runRightA;
-			else this.currentAnim = this.anims.runRightB;
-		    }
-		    break;
-		case 'up':
-		    if(this.speed==this.walkSpeed)
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.walkUpA;
-			else this.currentAnim = this.anims.walkUpB;
-		    }
-		    else // assume he is running
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.runUpA;
-			else this.currentAnim = this.anims.runUpB;
-		    }
-		    break;
-		case 'down':
-		    if(this.speed==this.walkSpeed)
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.walkDownA;
-			else this.currentAnim = this.anims.walkDownB;
-		    }
-		    else // assume he is running
-		    {
-			if(this.leftFoot) this.currentAnim = this.anims.runDownA;
-			else this.currentAnim = this.anims.runDownB;
-		    }
-		    break;
-	    }
-	    if(alternateFeet) this.leftFoot = !this.leftFoot;
-	    this.currentAnim.rewind();
+	    // determine rate
+	    if(this.speed==this.walkSpeed) var rate = 'walk'; // is walking
+	    else var rate = 'run'; // else assume running
+	    
+	    // determine foot
+	    if(this.leftFoot) var foot = 'A';
+	    else var foot = 'B'
+	    
+	    // set animation
+	    this.currentAnim = this.anims[rate + ig.game.capitaliseFirstLetter(this.facing) + 'A'];
+			
+	    if(alternateFeet) this.leftFoot = !this.leftFoot; // alternate feet
+	    this.currentAnim.rewind(); // starting at first frame
 	},
 	
 	moveAnimStop: function()
