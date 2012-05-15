@@ -1,9 +1,16 @@
 // set up sockets
 <?php
-        if($_SERVER["SERVER_NAME"]=="192.168.1.95")
-                 echo "var socket = io.connect('http://192.168.1.103:8080');\n";
-        else
-                 echo "var socket = io.connect('http://h.commins.ca:8080');\n";
+        if($_SERVER["SERVER_NAME"]!="commins.ca")
+	{
+                $socketHost = 192.168.1.95; // 103
+		$socketPort = 8080;
+	}
+	else
+        {
+		$socketHost = 'h.commins.ca';
+		$socketPort = 8080;
+	}
+	echo "var socket = io.connect('http://".$socketHost.":".$socketPort."');\n";
 ?>
 
 socket.on('newMsg', function (from, msg) {
