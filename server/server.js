@@ -7,7 +7,7 @@ server.listen(8080);
 
 var onlinePlayers = new Array(); // an array of objects
 
-io.set('log level', 2);
+io.set('log level', 3);
 
 var playersReport = function()
 {
@@ -118,7 +118,7 @@ io.sockets.on('connection', function (socket)
     socket.on('playerLeaveZone', function ()
     {
 	// instruct others to drop this player
-	socket.broadcast.to(socket.roomname).emit('dropPlayer', socket.clientname);
+	socket.broadcast.to(socket.roomname).emit('dropPlayer-'+socket.clientname, socket.clientname);
 	socket.leave(socket.roomname);
 	// stop listening
 	socket.roomname = 'limbo'; 
@@ -128,7 +128,7 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveReskin', function (skin) {
 	console.log("Player " + socket.clientname + " changed skin: " + skin);
-	socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer', socket.clientname, skin);
+	socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-'+socket.clientname, socket.clientname, skin);
         for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==socket.clientname)
@@ -140,7 +140,7 @@ io.sockets.on('connection', function (socket)
     });
       
     socket.on('receiveUpdateMoveState', function (x, y, direction, state) {
-        socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer', x, y, direction, socket.clientname, state);
+        socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer-'+socket.clientname, socket.clientname, x, y, direction, state);
         
 	// update players known info on server
 	for(var i=0; i<onlinePlayers.length; i++)
@@ -157,11 +157,11 @@ io.sockets.on('connection', function (socket)
     });
     
     socket.on('receiveJump', function (x, y, direction) {
-        socket.broadcast.to(socket.roomname).emit('otherPlayerJump', x, y, direction, socket.clientname);
+        socket.broadcast.to(socket.roomname).emit('otherPlayerJump-'+socket.clientname, socket.clientname, x, y, direction);
     });
     
     socket.on('receiveDirection', function (client, direction) {
-        socket.broadcast.to(socket.roomname).emit('updateOtherPlayer', client, direction);
+        socket.broadcast.to(socket.roomname).emit('updateOtherPlayer-'+socket.clientname, client, direction);
         for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==client)
@@ -205,7 +205,7 @@ io.sockets.on('connection', function (socket)
             }
         }
 
-        socket.broadcast.to(socket.roomname).emit('dropPlayer',socket.clientname);
+        socket.broadcast.to(socket.roomname).emit('dropPlayer-'+socket.clientname,socket.clientname);
 	
 	playersReport();
         

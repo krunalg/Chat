@@ -53,42 +53,49 @@ ig.module (
 		{ follow: this.name, color: 'blue' }
 	    );
 	    
-	    socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
+	    socket.on('moveUpdateOtherPlayer-'+this.name, function (client, x, y, direction, state)
 	    {
-		     var otherplayer = ig.game.getEntityByName( client );
-		     /*if(otherplayer)
-		     {
-			      for(var i=0; i<otherplayer.length; i++)
-			      {
-				       if(client == otherplayer[i].name)
-				       {*/
-						otherplayer.vel.x = 0;
-						otherplayer.vel.y = 0;
-						otherplayer.pos.x = x;
-						otherplayer.pos.y = y;
-						otherplayer.facing = direction;
-						otherplayer.moveState = state;
-						otherplayer.netStartMove();
-						/*break;
-				       }
-			      }
-		     }*/
+		    var otherplayer = ig.game.getEntityByName( client );
+		    otherplayer.vel.x = 0;
+		    otherplayer.vel.y = 0;
+		    otherplayer.pos.x = x;
+		    otherplayer.pos.y = y;
+		    otherplayer.facing = direction;
+		    otherplayer.moveState = state;
+		    otherplayer.netStartMove();
 	    });
 	    
-	    socket.on('updateOtherPlayer', function (client, direction) {
+	    socket.on('updateOtherPlayer-'+this.name, function (client, direction) {
 		    var otherplayer = ig.game.getEntityByName( client );
-		    /*if(otherplayer)
-		    {
-			     for(var i=0; i<otherplayer.length; i++)
-			     {
-				      if(client == otherplayer[i].name)
-				      {*/
-					       otherplayer.facing = direction;
-					       /*break; // because client names are unique
-				      }
-			     }
-		    }*/
-	   });
+		    otherplayer.facing = direction;
+	    });
+	    
+	    socket.on('otherPlayerJump-'+this.name, function (client, x, y, direction)
+	    {
+		    var otherplayer = ig.game.getEntityByName( client );
+		    otherplayer.vel.x = 0;
+		    otherplayer.vel.y = 0;
+		    otherplayer.pos.x = x;
+		    otherplayer.pos.y = y;
+		    otherplayer.facing = direction;
+		    otherplayer.moveState = 'jump';
+		    otherplayer.netStartJump();
+	    });
+	    
+	    socket.on('reskinOtherPlayer-'+this.name, function (client, skin) {
+		    var otherplayer = ig.game.getEntityByName( client );
+		    otherplayer.skin = skin;
+		    otherplayer.reskin();
+	    });
+	    
+	    socket.on('dropPlayer-'+this.name, function (client)
+	    {
+		    ig.game.events.push(client + " left the area.");
+		     
+		    var otherplayer = ig.game.getEntityByName( client );
+		    otherplayer.kill();
+	    });
+
 	},
 	
 	netStartMove: function()

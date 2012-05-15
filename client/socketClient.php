@@ -46,28 +46,6 @@ socket.on('welcome', function (msg) {
         }
         else ig.game.events.push(msg);
 });
-	 
-socket.on('otherPlayerJump', function (x, y, direction, client)
-{
-	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
-	 if(otherplayer)
-	 {
-		  for(var i=0; i<otherplayer.length; i++)
-		  {
-			   if(client == otherplayer[i].name)
-			   {
-				    otherplayer[i].vel.x = 0;
-				    otherplayer[i].vel.y = 0;
-				    otherplayer[i].pos.x = x;
-				    otherplayer[i].pos.y = y;
-				    otherplayer[i].facing = direction;
-				    otherplayer[i].moveState = 'jump';
-				    otherplayer[i].netStartJump();
-				    break;
-			   }
-		  }
-	 }
-});
 	  
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction, skin) {
@@ -99,38 +77,6 @@ socket.on('addAllPlayers', function (players) {
 				    skin: players[i].skin,
 				    animation:6
 			   } );
-		  }
-	 }
-});
-
-
-socket.on('reskinOtherPlayer', function (client, skin) {
-	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
-	 if(otherplayer)
-	 {
-		  for(var i=0; i<otherplayer.length; i++)
-		  {
-			   if(client == otherplayer[i].name)
-			   {
-				    otherplayer[i].skin = skin;
-				    otherplayer[i].reskin();
-				    break; // because client names are unique
-			   }
-		  }
-	 }
-});
-
-socket.on('dropPlayer', function (client)
-{
-	 ig.game.events.push(client + " left the area.");
-	 
-	 var netplayers = ig.game.getEntitiesByType( EntityNetworkPlayer );
-	 if(netplayers)
-	 {
-		  for(var i=0; i<netplayers.length; i++)
-		  {
-			   // kill player entity if he exists
-			   if(netplayers[i].name==client) netplayers[i].kill();
 		  }
 	 }
 });
