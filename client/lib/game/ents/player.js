@@ -282,7 +282,7 @@ ig.module (
 	    switch(this.facing)
 	    {
     
-		case 'left', 'right', 'up', 'down':
+		case 'left': case 'right': case 'up': case 'down':
 		    this.currentAnim = this.anims['idle' + this.facing];
 		    break;
 	    };
@@ -299,8 +299,10 @@ ig.module (
 	{
 	    switch(this.skin)
 	    {
-		case 'boy', 'girl', 'fat', 'kid', 'labgeek': var use = true; break;
-		default: var use = false; break;
+		case 'boy': case 'girl': case 'fat': case 'kid': case 'labgeek':
+		    var use = true; break;
+		default:
+		    var use = false; break;
 	    }
 	    this.offset = { x: 0, y: 16 };
 	    if(!use) this.skin == 'boy';
