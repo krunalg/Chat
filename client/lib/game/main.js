@@ -16,6 +16,7 @@ ig.module(
 	
 	'game.ents.player',
 	'game.ents.local-player',
+	'game.ents.network-player',
 	'game.entities.grass',
 	'game.ents.jump',
 	'game.ents.bubble',
