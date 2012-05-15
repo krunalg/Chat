@@ -277,25 +277,13 @@ ig.module (
 	},
 	
 	finishMove: function() {
-	
-	    // check if reached destination
-	    if(this.destinationReached()) {
-		
-		// ensure player is at legal coordinates
-		this.alignToGrid();
-		
-		// stop player
-		this.vel.x = this.vel.y = 0;
-		
-		// check if we should continue moving
-		this.goAgain();
-    
-	    }
-	    // continue to destination
-	    else
+	    if(this.destinationReached()) // check if reached destination
 	    {
-		this.move();
-	    }  
+		this.alignToGrid(); // ensure player is at legal coordinates
+		this.vel.x = this.vel.y = 0; // stop player
+		this.goAgain(); // check if we should continue moving
+	    }
+	    else this.move(); // continue to destination
 	},
 	
 	alignToGrid: function()
@@ -310,22 +298,14 @@ ig.module (
 	setMoveDestination: function()
 	{
 	    var tilesize = ig.game.collisionMap.tilesize;
-	    if(this.isJump) var distance = 2; else var distance = 1;
+	    if(this.isJump) var dist = 2; else var dist = 1;
 	    
 	    switch(this.facing)
 	    {
-		case 'left':
-		    this.destination = this.pos.x - tilesize * distance;
-		    break;
-		case 'right':
-		    this.destination = this.pos.x + tilesize * distance;
-		    break;
-		case 'up':
-		    this.destination = this.pos.y - tilesize * distance;
-		    break;
-		case 'down':
-		    this.destination = this.pos.y + tilesize * distance;
-		    break;
+		case 'left':   this.destination = this.pos.x - tilesize * dist; break;
+		case 'right':  this.destination = this.pos.x + tilesize * dist; break;
+		case 'up':     this.destination = this.pos.y - tilesize * dist; break;
+		case 'down':   this.destination = this.pos.y + tilesize * dist; break;
 	    }
 	},
 	
@@ -335,18 +315,10 @@ ig.module (
 	{
 	    switch(this.facing)
 	    {
-		case 'left':
-		    this.vel.x = -this.speed;
-		    break;
-		case 'right':
-		    this.vel.x = +this.speed;
-		    break;
-		case 'up':
-		    this.vel.y = -this.speed;
-		    break;
-		case 'down':
-		    this.vel.y = +this.speed;
-		    break;
+		case 'left':	this.vel.x = -this.speed; break;
+		case 'right': 	this.vel.x = +this.speed; break;
+		case 'up': 	this.vel.y = -this.speed; break;
+		case 'down':    this.vel.y = +this.speed; break;
 	    }
 	},
 	
@@ -355,18 +327,10 @@ ig.module (
 	// otherwise returns false
 	{
 	    switch(this.facing) {
-		case 'left':
-		    return this.pos.x<=this.destination;
-		    break;
-		case 'right':
-		    return this.pos.x>=this.destination;
-		    break;
-		case 'up':
-		    return this.pos.y<=this.destination;
-		    break;
-		case 'down':
-		    return this.pos.y>=this.destination;
-		    break;
+		case 'left':	return this.pos.x<=this.destination; break;
+		case 'right':   return this.pos.x>=this.destination; break;
+		case 'up': 	return this.pos.y<=this.destination; break;
+		case 'down':	return this.pos.y>=this.destination; break;
 	    }
 	    return false;
 	},
