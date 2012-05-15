@@ -55,45 +55,45 @@ ig.module (
 	    
 	    socket.on('moveUpdateOtherPlayer-'+this.name, function (client, x, y, direction, state)
 	    {
-		    var otherplayer = ig.game.getEntityByName( client );
-		    otherplayer.vel.x = 0;
-		    otherplayer.vel.y = 0;
-		    otherplayer.pos.x = x;
-		    otherplayer.pos.y = y;
-		    otherplayer.facing = direction;
-		    otherplayer.moveState = state;
-		    otherplayer.netStartMove();
+		    var player = ig.game.getEntityByName( client );
+		    player.vel.x = 0;
+		    player.vel.y = 0;
+		    player.pos.x = x;
+		    player.pos.y = y;
+		    player.facing = direction;
+		    player.moveState = state;
+		    player.netStartMove();
 	    });
 	    
 	    socket.on('updateOtherPlayer-'+this.name, function (client, direction) {
-		    var otherplayer = ig.game.getEntityByName( client );
-		    otherplayer.facing = direction;
+		    var player = ig.game.getEntityByName( client );
+		    player.facing = direction;
 	    });
 	    
 	    socket.on('otherPlayerJump-'+this.name, function (client, x, y, direction)
 	    {
-		    var otherplayer = ig.game.getEntityByName( client );
-		    otherplayer.vel.x = 0;
-		    otherplayer.vel.y = 0;
-		    otherplayer.pos.x = x;
-		    otherplayer.pos.y = y;
-		    otherplayer.facing = direction;
-		    otherplayer.moveState = 'jump';
-		    otherplayer.netStartJump();
+		    var player = ig.game.getEntityByName( client );
+		    player.vel.x = 0;
+		    player.vel.y = 0;
+		    player.pos.x = x;
+		    player.pos.y = y;
+		    player.facing = direction;
+		    player.moveState = 'jump';
+		    player.netStartJump();
 	    });
 	    
 	    socket.on('reskinOtherPlayer-'+this.name, function (client, skin) {
-		    var otherplayer = ig.game.getEntityByName( client );
-		    otherplayer.skin = skin;
-		    otherplayer.reskin();
+		    var player = ig.game.getEntityByName( client );
+		    player.skin = skin;
+		    player.reskin();
 	    });
 	    
 	    socket.on('dropPlayer-'+this.name, function (client)
 	    {
 		    ig.game.events.push(client + " left the area.");
 		     
-		    var otherplayer = ig.game.getEntityByName( client );
-		    otherplayer.kill();
+		    var player = ig.game.getEntityByName( client );
+		    player.kill();
 	    });
 
 	},
