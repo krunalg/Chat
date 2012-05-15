@@ -10,6 +10,7 @@ ig.module (
 .defines(function(){
 
     EntityLocalPlayer = EntityPlayer.extend({
+	zPriority: 3,
 	
 	isLocal: true,
 	lastState: '', // used to only send network move updates if change occurs
@@ -424,9 +425,6 @@ ig.module (
 	},
 	
 	update: function() {
-	    
-	    this.zIndex = this.pos.y + 2;
-	    
 	    this.parent();
 	    
 	    // action (like reading a sign or talking to npc)

@@ -10,6 +10,7 @@ ig.module (
 .defines(function(){
     
     EntityPlayer = ig.Entity.extend({
+	zPriority: 0,
 	
 	isLocal: false, // false unless entity defines otherwise
 	
@@ -342,7 +343,7 @@ ig.module (
 	
 	update: function() {
 	    
-	    this.zIndex = this.pos.y + 2;
+	    this.zIndex = this.pos.y + this.zPriority;
 	    
 	    this.parent();    
 	}

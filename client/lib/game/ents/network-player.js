@@ -10,6 +10,7 @@ ig.module (
 .defines(function(){
 
     EntityNetworkPlayer = EntityPlayer.extend({
+	zPriority: 1,
 	    
 	isLocal: false,
 	
@@ -153,8 +154,6 @@ ig.module (
 	
 	update: function()
 	{
-	    this.zIndex = this.pos.y + 1;
-	    
 	    this.parent();
 	    
 	    // movement

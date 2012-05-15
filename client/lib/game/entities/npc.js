@@ -10,6 +10,7 @@ ig.module (
 .defines(function(){
    
     EntityNpc = EntityPlayer.extend({
+	zPriority: 2,
 	
 	isNPC: true,
 	
@@ -93,9 +94,6 @@ ig.module (
 	},
 	
 	update: function() {
-	    
-	    this.zIndex = this.pos.y + 1;
-	    
 	    this.parent();
 	    
 	    if(this.isMove)
