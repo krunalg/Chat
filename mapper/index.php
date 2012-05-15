@@ -15,8 +15,7 @@ function LoadPNG($imgname)
 
 
 function getTile($im, $tilesize, $tx, $ty)
-// returns an array with the color of each
-// pixel in the tile
+// returns m
 {
     $tile = array();
     
@@ -62,7 +61,30 @@ function findMatchingTile($tilesheet, $w, $h, $tilesize, $tile)
     array_push($pos, -1, -1);
     return $pos;
 }
-
+/*
+function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthPx, $tsHeightPx, $tilesize)
+// returns a 2D array of the map with
+// corresponding tiles from tilesheet
+{
+    $map = array(array());
+    print_r($map);
+    
+    // divide map into tiles
+    $mapWidth = $mapWidthPx/$tilesize;
+    $mapHeight = $mapHeightPx/$tilesize;
+    
+    for($y=0; $y<$mapHeight; $y++)
+    {
+        for($x=0; $x<$mapWidth; $x++)
+        {
+            $currTile = getTile($tsImg, $tilesize, $x, $y);
+            $tsPos = findMatchingTile($tsImg, $tsWidthPx, $tsHeightPx, $tilesize, $currTile);
+            array_push($map[$x][$y], $tsPos);
+        }
+    }
+    
+    return $map;
+}*/
 
 
 $tileSize = 16;
@@ -93,6 +115,7 @@ $tilesheet = LoadPNG($tilesheetFile);
 $testTile = getTile($map, 16, 0, 0);
 print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize, $testTile) );
 
+//print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
 
 
 
