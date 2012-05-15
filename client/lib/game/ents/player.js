@@ -269,7 +269,7 @@ ig.module (
 	    else var foot = 'B'
 	    
 	    // set animation
-	    this.currentAnim = this.anims[rate + ig.game.capitaliseFirstLetter(this.facing) + 'A'];
+	    this.currentAnim = this.anims[rate + ig.game.capitaliseFirstLetter(this.facing) + foot];
 			
 	    if(alternateFeet) this.leftFoot = !this.leftFoot; // alternate feet
 	    this.currentAnim.rewind(); // starting at first frame
