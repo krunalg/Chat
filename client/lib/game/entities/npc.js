@@ -12,24 +12,8 @@ ig.module (
     EntityNpc = EntityPlayer.extend({
 	
 	isNPC: true,
-	
-	// recorded travel time of 9 units (144px)
-	// in 2.100 seconds in VBA.
-	// ie 144/2.1 = 68.571428 or ~69
-	speed: 69,
-	size: {x: 16, y: 16},
-	type: ig.Entity.TYPE.A,
 	animSheet: new ig.AnimationSheet( 'media/entity-icons.png', 16, 16 ),
-	
-	skin: 'fat',
-	
-	facing: "down",
-	facingLast: "down",
-	facingUpdated: false,
-	isMove: false, // waiting for move key-press
-	leftFoot: true, // used to alternate step animations
-	destination: 0, // used for both x and y planes
-	
+
 	// NPC movement patterns
 	movePattern: [], // no pattern by default
 	moveNext: 0,
@@ -84,8 +68,6 @@ ig.module (
 	ready: function()
 	{
 	    this.offset = { x: 0, y: 16 };
-	    
-	    this.animSheet = new ig.AnimationSheet( 'media/people/rs.fat.png', 16, 32 );
 	    
 	    this.reskin();
 	    
