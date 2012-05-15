@@ -48,7 +48,7 @@ ig.module (
 	
 	startMove: function()
 	{
-	    var newGrass = facingGrass(this);
+	    var newGrass = this.facingGrass();
 	    if(newGrass) newGrass.play();
 	    
 	    this.isMove = true;
@@ -139,7 +139,7 @@ ig.module (
 		if(this.moveTimer.delta()>=0)
 		{
 		    this.faceNextMove();
-		    if(canMove(this))
+		    if(this.canMove())
 		    {
 			this.startMove();
 			this.justMoved();
