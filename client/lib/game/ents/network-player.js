@@ -52,6 +52,43 @@ ig.module (
 		this.pos.y,
 		{ follow: this.name, color: 'blue' }
 	    );
+	    
+	    socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
+	    {
+		     var otherplayer = ig.game.getEntityByName( client );
+		     /*if(otherplayer)
+		     {
+			      for(var i=0; i<otherplayer.length; i++)
+			      {
+				       if(client == otherplayer[i].name)
+				       {*/
+						otherplayer.vel.x = 0;
+						otherplayer.vel.y = 0;
+						otherplayer.pos.x = x;
+						otherplayer.pos.y = y;
+						otherplayer.facing = direction;
+						otherplayer.moveState = state;
+						otherplayer.netStartMove();
+						/*break;
+				       }
+			      }
+		     }*/
+	    });
+	    
+	    socket.on('updateOtherPlayer', function (client, direction) {
+		    var otherplayer = ig.game.getEntityByName( client );
+		    /*if(otherplayer)
+		    {
+			     for(var i=0; i<otherplayer.length; i++)
+			     {
+				      if(client == otherplayer[i].name)
+				      {*/
+					       otherplayer.facing = direction;
+					       /*break; // because client names are unique
+				      }
+			     }
+		    }*/
+	   });
 	},
 	
 	netStartMove: function()

@@ -61,43 +61,6 @@ socket.on('otherPlayerJump', function (x, y, direction, client)
 		  }
 	 }
 });
-
-socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
-{
-	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
-	 if(otherplayer)
-	 {
-		  for(var i=0; i<otherplayer.length; i++)
-		  {
-			   if(client == otherplayer[i].name)
-			   {
-				    otherplayer[i].vel.x = 0;
-				    otherplayer[i].vel.y = 0;
-				    otherplayer[i].pos.x = x;
-				    otherplayer[i].pos.y = y;
-				    otherplayer[i].facing = direction;
-				    otherplayer[i].moveState = state;
-				    otherplayer[i].netStartMove();
-				    break;
-			   }
-		  }
-	 }
-});
-
-socket.on('updateOtherPlayer', function (client, direction) {
-	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
-	 if(otherplayer)
-	 {
-		  for(var i=0; i<otherplayer.length; i++)
-		  {
-			   if(client == otherplayer[i].name)
-			   {
-				    otherplayer[i].facing = direction;
-				    break; // because client names are unique
-			   }
-		  }
-	 }
-});
 	  
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction, skin) {
