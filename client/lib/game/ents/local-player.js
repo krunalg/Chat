@@ -421,14 +421,9 @@ ig.module (
 		    console.debug("Waiting to move...");
 		    this.moveWait();
 		}
-		else if(this.isJump)
+		else if(this.isJump || this.isMove)
 		{
-		    // a move has already been started
-		    this.finishJump();
-		}
-		else if(this.isMove)
-		{
-		    // a move has already been started
+		    // a move or jump has already been started
 		    this.finishMove();
 		}
 		else if( ig.input.state('left') &&

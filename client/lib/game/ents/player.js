@@ -101,44 +101,6 @@ ig.module (
 				} );
 	},
 	
-	finishJump: function() {
-	    // update jump animation
-	    var jumpTime = this.jumpStart.delta();
-	    if(jumpTime >= 0 && jumpTime < (2/60)) this.offset.y = 16+4;
-	    else if(jumpTime >= (2/60) && jumpTime < (4/60)) this.offset.y = 16+6;
-	    else if(jumpTime >= (4/60) && jumpTime < (6/60)) this.offset.y = 16+8;
-	    else if(jumpTime >= (6/60) && jumpTime < (8/60)) this.offset.y = 16+10;
-	    else if(jumpTime >= (8/60) && jumpTime < (10/60)) this.offset.y = 16+12;
-	    else if(jumpTime >= (10/60) && jumpTime < (16/60)) this.offset.y = 16+14;
-	    else if(jumpTime >= (16/60) && jumpTime < (18/60)) this.offset.y = 16+12;
-	    else if(jumpTime >= (18/60) && jumpTime < (20/60)) this.offset.y = 16+10;
-	    else if(jumpTime >= (20/60) && jumpTime < (22/60)) this.offset.y = 16+8;
-	    else if(jumpTime >= (22/60) && jumpTime < (24/60)) this.offset.y = 16+6;
-	    else if(jumpTime >= (24/60) && jumpTime < (26/60)) this.offset.y = 16+4;
-	    else this.offset.y = 16+0;
-	    
-	    // check if reached destination
-	    if(this.destinationReached()) {
-		
-		this.isJump = false;
-		
-		// ensure player is at legal coordinates
-		this.alignToGrid();
-		
-		// stop player
-		this.vel.x = this.vel.y = 0;
-		
-		// check if we should continue moving
-		this.goAgain();
-		
-	    }
-	    // continue to destination
-	    else
-	    {
-		this.move();
-	    }  
-	},
-	
 	canMove: function()
 	// returns true if no collision will occur
 	// in the direction the player faces
@@ -277,8 +239,27 @@ ig.module (
 	},
 	
 	finishMove: function() {
+	    if(this.isJump)
+	    {
+		// update jump animation
+		var jumpTime = this.jumpStart.delta();
+		if(jumpTime >= 0 && jumpTime < (2/60)) this.offset.y = 16+4;
+		else if(jumpTime >= (2/60) && jumpTime < (4/60)) this.offset.y = 16+6;
+		else if(jumpTime >= (4/60) && jumpTime < (6/60)) this.offset.y = 16+8;
+		else if(jumpTime >= (6/60) && jumpTime < (8/60)) this.offset.y = 16+10;
+		else if(jumpTime >= (8/60) && jumpTime < (10/60)) this.offset.y = 16+12;
+		else if(jumpTime >= (10/60) && jumpTime < (16/60)) this.offset.y = 16+14;
+		else if(jumpTime >= (16/60) && jumpTime < (18/60)) this.offset.y = 16+12;
+		else if(jumpTime >= (18/60) && jumpTime < (20/60)) this.offset.y = 16+10;
+		else if(jumpTime >= (20/60) && jumpTime < (22/60)) this.offset.y = 16+8;
+		else if(jumpTime >= (22/60) && jumpTime < (24/60)) this.offset.y = 16+6;
+		else if(jumpTime >= (24/60) && jumpTime < (26/60)) this.offset.y = 16+4;
+		else this.offset.y = 16+0;
+	    }
+	    
 	    if(this.destinationReached()) // check if reached destination
 	    {
+		this.isJump = false; // no longer jumping (regardless if was)
 		this.alignToGrid(); // ensure player is at legal coordinates
 		this.vel.x = this.vel.y = 0; // stop player
 		this.goAgain(); // check if we should continue moving

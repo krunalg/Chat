@@ -142,12 +142,7 @@ ig.module (
 	    this.parent();
 	    
 	    // movement
-	    if(this.isJump)
-	    {
-		// a move has already been started
-		this.finishJump();
-	    }
-	    else if(this.isMove)
+	    if(this.isJump || this.isMove)
 	    {
 		this.finishMove();
 	    }
