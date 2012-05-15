@@ -119,43 +119,6 @@ ig.module (
 	    );
 	},
 	
-	reskin: function()
-	{
-	    if(this.skin)
-	    {
-		switch(this.skin)
-		{
-		    // kind of like enum
-		    case 'fat':
-		    case 'kid':
-		    case 'hat':
-		    case 'labgeek':
-			this.animSheet = new ig.AnimationSheet( 'media/people/rs.' + this.skin + '.png', 16, 32 );
-			break;
-		}
-		// add the animations
-		var walkRate = 0.13125;
-		this.addAnim( 'walkUpA', walkRate, [2,0,0] );
-		this.addAnim( 'walkUpB', walkRate, [1,0,0] );
-		this.addAnim( 'walkDownA', walkRate, [8,6,6] );
-		this.addAnim( 'walkDownB', walkRate, [7,6,6] );
-		this.addAnim( 'walkLeftA', walkRate, [5,3,3] );
-		this.addAnim( 'walkLeftB', walkRate, [4,3,3] );
-		this.addAnim( 'walkRightA', walkRate, [5,3,3] );
-		this.addAnim( 'walkRightB', walkRate, [4,3,3] );
-		this.addAnim( 'idleup', 0.1, [0] );
-		this.addAnim( 'idledown', 0.1, [6] );
-		this.addAnim( 'idleleft', 0.1, [3] );
-		this.addAnim( 'idleright', 0.1, [3] );
-		// flip right-facing animations
-		this.anims.walkRightA.flip.x = true;
-		this.anims.walkRightB.flip.x = true;
-		this.anims.idleright.flip.x = true;
-		// set initial animation
-		this.currentAnim = this.anims.idledown;
-	    }
-	},
-	
 	draw: function()
 	{
 	    this.parent();
