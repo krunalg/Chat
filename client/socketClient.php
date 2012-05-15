@@ -42,7 +42,7 @@ socket.on('welcome', function (msg) {
 	 
 socket.on('otherPlayerJump', function (x, y, direction, client)
 {
-	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
 	 if(otherplayer)
 	 {
 		  for(var i=0; i<otherplayer.length; i++)
@@ -64,7 +64,7 @@ socket.on('otherPlayerJump', function (x, y, direction, client)
 
 socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
 {
-	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
 	 if(otherplayer)
 	 {
 		  for(var i=0; i<otherplayer.length; i++)
@@ -85,7 +85,7 @@ socket.on('moveUpdateOtherPlayer', function (x, y, direction, client, state)
 });
 
 socket.on('updateOtherPlayer', function (client, direction) {
-	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
 	 if(otherplayer)
 	 {
 		  for(var i=0; i<otherplayer.length; i++)
@@ -101,11 +101,11 @@ socket.on('updateOtherPlayer', function (client, direction) {
 	  
 // the new add player
 socket.on('addPlayer', function (user, x, y, direction, skin) {
-	 var player = ig.game.getEntitiesByType( EntityLocalPlayer )[0];
+	 var player = ig.game.getEntitiesByType( EntityLocalPlayer )[0]; // !! is it needed?
 	 
 	 ig.game.events.push(user + " entered the area.");
 	 
-	 ig.game.spawnEntity( EntityOtherplayer, x, y,
+	 ig.game.spawnEntity( EntityNetworkPlayer, x, y,
 	 {
 		  name: user,
 		  skin: skin,
@@ -122,7 +122,7 @@ socket.on('addAllPlayers', function (players) {
 	 {
 		  if(localPlayer.name!=players[i].name)
 		  {
-			   ig.game.spawnEntity( EntityOtherplayer, players[i].pos.x, players[i].pos.y,
+			   ig.game.spawnEntity( EntityNetworkPlayer, players[i].pos.x, players[i].pos.y,
 			   {
 				    name: players[i].name,
 				    facing: players[i].facing,
@@ -135,7 +135,7 @@ socket.on('addAllPlayers', function (players) {
 
 
 socket.on('reskinOtherPlayer', function (client, skin) {
-	 var otherplayer = ig.game.getEntitiesByType( EntityOtherplayer );
+	 var otherplayer = ig.game.getEntitiesByType( EntityNetworkPlayer );
 	 if(otherplayer)
 	 {
 		  for(var i=0; i<otherplayer.length; i++)
@@ -154,7 +154,7 @@ socket.on('dropPlayer', function (client)
 {
 	 ig.game.events.push(client + " left the area.");
 	 
-	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
+	 var netplayers = ig.game.getEntitiesByType( EntityNetworkPlayer );
 	 if(netplayers)
 	 {
 		  for(var i=0; i<netplayers.length; i++)
@@ -169,7 +169,7 @@ socket.on('playerPositions', function (players)
 // updates all **currently existing**
 // Otherplayer entity positions and directions
 {
-	 var netplayers = ig.game.getEntitiesByType( EntityOtherplayer );
+	 var netplayers = ig.game.getEntitiesByType( EntityNetworkPlayer );
 	 if(netplayers)
 	 {
 		  for(var i=0; i<netplayers.length; i++)

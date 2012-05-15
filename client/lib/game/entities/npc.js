@@ -153,7 +153,7 @@ ig.module (
 	if(res.collision.x || res.collision.y) return false;
 	
 	// check other player collisions
-	var pcs = ig.game.getEntitiesByType( EntityOtherplayer );
+	var pcs = ig.game.getEntitiesByType( EntityNetworkPlayer );
 	if(pcs)
 	{
 	    for(var i=0; i<pcs.length; i++)
