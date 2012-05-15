@@ -15,24 +15,21 @@ function LoadPNG($imgname)
 
 
 function getTile($im, $tilesize, $tx, $ty)
-// returns m
+// returns md5 hash of a tile
 {
-    $tile = array();
-    
+    $tilecolors = '';
     for($y=0; $y<$tilesize; $y++)
     {
         for($x=0; $x<$tilesize; $x++)
         {
             $rgb = imagecolorat($im, $x+$tx*$tilesize, $y+$ty*$tilesize);
-            //$colors = imagecolorsforindex($im, $rgb);
-            array_push($tile, $rgb);
+            $tilecolors += $rgb;
         }
     }
-    
-    return $tile;
+    return md5($tilecolors);
 }
 
-function findMatchingTile($tilesheet, $w, $h, $tilesize, $tile)
+function findMatchingTile($tilesheet, $w, $h, $tilesize, $tileHash)
 // returns the x and y position of the
 // matching tile within the tilesheet
 {
@@ -48,7 +45,7 @@ function findMatchingTile($tilesheet, $w, $h, $tilesize, $tile)
         for($x=0; $x<$width; $x++)
         {
             $currTile = getTile($tilesheet, $tilesize, $x, $y);
-            if($currTile==$tile)
+            if($currTile==$tileHash)
             {
                 // found match!
                 array_push($pos, $x, $y);
