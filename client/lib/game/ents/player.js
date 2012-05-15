@@ -298,14 +298,8 @@ ig.module (
 	{
 	    switch(this.facing)
 	    {
-		case 'left':
-		case 'right':
-		    this.pos.x = this.destination;
-		    break;
-		case 'up':
-		case 'down':
-		    this.pos.y = this.destination;
-		    break;
+		case 'left': case 'right': this.pos.x = this.destination; break;
+		case 'up': case 'down': this.pos.y = this.destination; break;
 	    }
 	},
 	
