@@ -281,17 +281,8 @@ ig.module (
 	    switch(this.facing)
 	    {
     
-		case 'left':
-		    this.currentAnim = this.anims.idleleft;
-		    break;
-		case 'right':
-		    this.currentAnim = this.anims.idleright;
-		    break;
-		case 'up':
-		    this.currentAnim = this.anims.idleup;
-		    break;
-		case 'down':
-		    this.currentAnim = this.anims.idledown;
+		case 'left', 'right', 'up', 'down':
+		    this.currentAnim = this.anims['idle' + this.facing];
 		    break;
 	    };
 	},
