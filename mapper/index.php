@@ -58,6 +58,29 @@ function findMatchingTile($tilesheet, $w, $h, $tilesize, $tileHash)
     array_push($pos, -1, -1);
     return $pos;
 }
+
+function buildTilesheetHashTable($tsImg, $tsWidth, $tsHeight, $tilesize)
+// returns an array with all the hashes
+// that make up its tiles
+{
+    $res = array();
+    
+    // divide tilesheet into tiles
+    $width = $tsWidth/$tilesize;
+    $height = $tsHeight/$tilesize;
+    
+    // iterate over tilesheet
+    for($y=0; $y<$height; $y++)
+    {
+        for($x=0; $x<$width; $x++)
+        {
+            $currTile = getTile($tsImg, $tilesize, $x, $y);
+            array_push($res, $currTile);
+        }
+    }
+    
+    return $res;
+}
 /*
 function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthPx, $tsHeightPx, $tilesize)
 // returns a 2D array of the map with
@@ -76,7 +99,7 @@ function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthP
         {
             $currTile = getTile($tsImg, $tilesize, $x, $y);
             $tsPos = findMatchingTile($tsImg, $tsWidthPx, $tsHeightPx, $tilesize, $currTile);
-            array_push($map[$x][$y], $tsPos);
+            array_push($map[$x][$y], 'hi');
         }
     }
     
@@ -109,12 +132,13 @@ $tilesheet = LoadPNG($tilesheetFile);
 
 //print_r(getTile($map, 16, 0,0));
 
-$testTile = getTile($map, 16, 0, 0);
-print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize, $testTile) );
+//$testTile = getTile($map, 16, 0, 0);
+//print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize, $testTile) );
 
 //print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
 
-
+// print out a hash table of all the tiles within tilesheet
+print_r(buildTilesheetHashTable($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
 
 
 
