@@ -33,20 +33,11 @@ function trim1px($file)
 
 
 
-
-/*
- * variables
- *
- */ 
-$pathToMaps = "./maps"; // dir to scan for tilesheets
-
-
-
 /*
  * create an array containing path of every tilesheet
  *
  */ 
-$tilesheets = findTilesheets($pathToMaps);
+$tilesheets = findTilesheets($globalMapDir);
 echo "<pre>"; var_dump($tilesheets); echo "</pre>";
 
 
