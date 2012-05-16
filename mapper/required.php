@@ -112,7 +112,7 @@ function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
     $mapWidth = count($mapTiles);
     $mapHeight = count($mapTiles[0]);
     
-    echo "ig.module( 'game.levels.town' )\n";
+    echo "ig.module( 'game.levels.".$mapName."' )\n";
     echo ".requires('impact.image')\n";
     echo ".defines(function(){\n";
     echo "Level".ucfirst($mapName)."=/*JSON[*/";
