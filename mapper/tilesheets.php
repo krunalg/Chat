@@ -25,7 +25,7 @@ function findTilesheets($path = '', &$name = array() )
     
       if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
       {
-          scanFileNameRecursivly($path.DIRECTORY_SEPARATOR.$f, &$name); 
+          findTilesheets($path.DIRECTORY_SEPARATOR.$f, &$name); 
       }
       else
       {
