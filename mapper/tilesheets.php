@@ -2,13 +2,15 @@
 
 require('required.php');
 
-function scanFileNameRecursivly($path = '', &$name = array() )
+function findTilesheets($path = '', &$name = array() )
 /**
+ * Previously called scanFileNameRecursivly()...
+ *
  * This function will scan all files recursively in the sub-folder and folder.
  *
  * @author Fazle Elahee
  *
- * Modified by Jonathan Commins to only return paths to tilesheets.
+ * Modified to only return paths to tilesheets.
  * 
  */
 {
@@ -72,7 +74,7 @@ function trim1px($file)
  *
  */ 
 $tilesize = 16;
-$pathToMaps = "maps"; // dir to scan for tilesheets
+$pathToMaps = "./maps"; // dir to scan for tilesheets
 
 
 
@@ -80,7 +82,7 @@ $pathToMaps = "maps"; // dir to scan for tilesheets
  * create an array containing path of every tilesheet
  *
  */ 
-$tilesheets = scanFileNameRecursivly('.'.DIRECTORY_SEPARATOR.$pathToMaps);
+$tilesheets = findTilesheets($pathToMaps);
 echo "<pre>"; var_dump($tilesheets); echo "</pre>";
 
 
