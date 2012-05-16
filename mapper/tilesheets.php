@@ -89,7 +89,7 @@ echo "<pre>"; var_dump($tilesheets); echo "</pre>";
  * for each tilesheet, trim 1px if nessesary
  *
  */ 
-for($i=0; $i<count($tilesheets); $i++)
+/*for($i=0; $i<count($tilesheets); $i++)
 {
     $size  = getimagesize($tilesheets[$i]);
     $width = $size[0];
@@ -100,7 +100,7 @@ for($i=0; $i<count($tilesheets); $i++)
     }
     else
         echo "No trimming needed.<br>";
-}
+}*/
 
 
 
@@ -108,7 +108,7 @@ for($i=0; $i<count($tilesheets); $i++)
  * generates hash values for each tilesheet
  *
  */ 
-for($i=0; $i<count($tilesheets); $i++)
+/*for($i=0; $i<count($tilesheets); $i++)
 {
     $size   = getimagesize($tilesheets[$i]);
     $width  = $size[0];
@@ -123,7 +123,7 @@ for($i=0; $i<count($tilesheets); $i++)
         }
     }
     echo "Hash for $tilesheets[$i] is: " . md5($hashes) ."<br>\n";
-}
+}*/
 
 
 
