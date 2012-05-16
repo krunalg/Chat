@@ -6,13 +6,13 @@ set_time_limit(300);
 
 $tileSize = 16;
 
-$mapFilename = 'maps/oldale-town/map.png';
+$mapFilename = 'maps/rs-oldale-town/map.png';
 $mapSize = getimagesize($mapFilename);
 $mapWidth = $mapSize[0];
 $mapHeight = $mapSize[1];
 $map = LoadPNG($mapFilename);
 
-$tilesheetFilename = 'maps/oldale-town/tilesheet.png';
+$tilesheetFilename = 'maps/rs-oldale-town/tilesheet.png';
 $tilesheetSize = getimagesize($tilesheetFilename);
 $tilesheetWidth = $tilesheetSize[0];
 if($tilesheetWidth==257) $tilesheetWidth = 256;
