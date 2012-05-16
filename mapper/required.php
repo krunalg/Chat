@@ -116,38 +116,75 @@ function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
     echo ".requires('impact.image')\n";
     echo ".defines(function(){\n";
     echo "Level".ucfirst($mapName)."=/*JSON[*/";
+    
     // JSON HERE
-    echo "{" .
-         "\"entities\": []," .
-         "\"layer\": [ {" .
-            "\"name\": \"below\", ".
-            "\"width\": ".$mapWidth.", ".
-            "\"height\": ".$mapHeight.", ".
-            "\"linkWithCollision\": false, ".
-            "\"visible\": 1, ".
-            "\"tilesetName\": \"media/".$tsFilename."\", ".
-            "\"repeat\": false, ".
-            "\"preRender\": false, ".
-            "\"distance\": \"1\", ".
-            "\"tilesize\": ".$tilesize.", ".
-            "\"foreground\": false, ".
-            "\"data\": [ ";
+    echo
+    "{".
+        "\"entities\": [],".
+        "\"layer\": [ ".
+            "{".
+                "\"name\": \"below\", ".
+                "\"width\": ".$mapWidth.", ".
+                "\"height\": ".$mapHeight.", ".
+                "\"linkWithCollision\": false, ".
+                "\"visible\": 1, ".
+                "\"tilesetName\": \"media/".$tsFilename."\", ".
+                "\"repeat\": false, ".
+                "\"preRender\": false, ".
+                "\"distance\": \"1\", ".
+                "\"tilesize\": ".$tilesize.", ".
+                "\"foreground\": false, ".
+                "\"data\": [ ";
+                
+                for($y=0; $y<$mapHeight; $y++)
+                {
+                    echo "[ ";
+                    for($x=0; $x<$mapWidth; $x++)
+                    {
+                        $tileX = $mapTiles[$x][$y][0];
+                        $tileY = $mapTiles[$x][$y][1];
+                        $tileInt = tilePosToInt($tileX, $tileY, $tsWidthInTiles);
+                        echo $tileInt;
+                        if($x!=$mapWidth-1) echo ", "; else echo " ";
+                    }
+                    if($y==$mapHeight-1) echo "] "; else echo "], ";
+                } 
+        
+    echo        "] ".
+            "},"
+            "{".
+                "\"name\": \"collision\", ".
+                "\"width\": ".$mapWidth.", ".
+                "\"height\": ".$mapHeight.", ".
+                "\"linkWithCollision\": false, ".
+                "\"visible\": 0, ".
+                "\"tilesetName\": \"\", ".
+                "\"repeat\": false, ".
+                "\"preRender\": false, ".
+                "\"distance\": \"1\", ".
+                "\"tilesize\": ".$tilesize.", ".
+                "\"foreground\": true, ".
+                "\"data\": [ ";
+                
+                for($y=0; $y<$mapHeight; $y++)
+                {
+                    echo "[ ";
+                    for($x=0; $x<$mapWidth; $x++)
+                    {
+                        //echo $mapTiles[$x][$y][3];
+                        echo 0;
+                        if($x!=$mapWidth-1) echo ", "; else echo " ";
+                    }
+                    if($y==$mapHeight-1) echo "] "; else echo "], ";
+                } 
+        
+    echo        "] ".
+            "}";
     
-    for($y=0; $y<$mapHeight; $y++)
-    {
-        echo "[ ";
-        for($x=0; $x<$mapWidth; $x++)
-        {
-            $tileX = $mapTiles[$x][$y][0];
-            $tileY = $mapTiles[$x][$y][1];
-            $tileInt = tilePosToInt($tileX, $tileY, $tsWidthInTiles);
-            echo $tileInt;
-            if($x!=$mapWidth-1) echo ", "; else echo " ";
-        }
-        if($y==$mapHeight-1) echo "] "; else echo "], ";
-    }
-    
-    echo "] } ] }";
+    echo
+        "] ".
+    "} ";
+    // END JSON
     
     echo "/*]JSON*/;\n";
     echo "Level".ucfirst($mapName)."Resources=[new ig.Image('media/".$tsFilename."')];\n";
