@@ -24,3 +24,8 @@ To-do:
 - Add support for signs to contain an accented 'E'
 - Prevent user from spamming the action key to spawn unlimited bubbles
 - socketClient.js: receiveSay method does not require client name
+- Draw chat log to screen
+
+Food For Thought:
+- Furniture
+- Player customization
