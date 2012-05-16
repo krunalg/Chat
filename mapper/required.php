@@ -201,4 +201,37 @@ function tilePosToInt($x, $y, $widthInTiles)
     return $res + 1;
 }
 
+function findTilesheets($path = '', &$name = array() )
+/**
+ * Previously called scanFileNameRecursivly()...
+ *
+ * This function will scan all files recursively in the sub-folder and folder.
+ *
+ * @author Fazle Elahee
+ *
+ * Modified to only return paths to tilesheets.
+ * 
+ */
+{
+  $path = $path == ''? dirname(__FILE__) : $path;
+  $lists = @scandir($path);
+  
+  if(!empty($lists))
+  {
+      foreach($lists as $f)
+      { 
+    
+      if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
+      {
+          findTilesheets($path.DIRECTORY_SEPARATOR.$f, &$name); 
+      }
+      else
+      {
+          if($f=='tilesheet.png') $name[] = $path.DIRECTORY_SEPARATOR.$f;
+      }
+      }
+  }
+  return $name;
+}
+
 ?>
