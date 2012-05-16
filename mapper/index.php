@@ -1,8 +1,12 @@
 <?php
 
+ini_set('memory_limit','512M');
+set_time_limit(300);
+
+
 require('required.php');
 
-set_time_limit(300);
+
 
 $tileSize = 16;
 

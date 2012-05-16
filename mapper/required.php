@@ -151,7 +151,7 @@ function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
                 } 
         
     echo        "] ".
-            "},"
+            "},".
             "{".
                 "\"name\": \"collision\", ".
                 "\"width\": ".$mapWidth.", ".
