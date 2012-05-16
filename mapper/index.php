@@ -106,6 +106,20 @@ function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthP
     return $map;
 }
 
+function mapToJSON($tsImg, $tilesize, $mapTiles)
+{
+    
+}
+
+function tilePosToInt($x, $y, $widthInTiles)
+// takes an x and y value and returns
+// a single int equivalency
+{
+    $res = 0;
+    $res += $y*$widthInTiles;
+    $res += $x;
+    return $res;
+}
 
 $tileSize = 16;
 
@@ -136,13 +150,13 @@ $mapHeight = 32;
 //$testTile = getTile($map, 16, 0, 0);
 //print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize, $testTile) );
 
-print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
-
 // print out a hash table of all the tiles within tilesheet
 //print_r(buildTilesheetHashTable($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
 
+// print out an array with x, y, and hash of all tiles in map
+//print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
 
-
+echo tilePosToInt(1, 1, 8);
 
 
 //$tilesheet =    LoadPNG('maps/oldale-town/tilesheet.png');
