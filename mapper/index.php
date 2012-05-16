@@ -17,13 +17,13 @@ function LoadPNG($imgname)
 function getTile($im, $tilesize, $tx, $ty)
 // returns md5 hash of a tile
 {
-    $tilecolors = '';
+    $tilecolors = "";
     for($y=0; $y<$tilesize; $y++)
     {
         for($x=0; $x<$tilesize; $x++)
         {
             $rgb = imagecolorat($im, $x+$tx*$tilesize, $y+$ty*$tilesize);
-            $tilecolors += $rgb;
+            $tilecolors = $tilecolors . $rgb;
         }
     }
     return md5($tilecolors);
@@ -106,9 +106,51 @@ function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthP
     return $map;
 }
 
-function mapToJSON($tsImg, $tilesize, $mapTiles)
+function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
 {
+    $mapWidth = count($mapTiles);
+    $mapHeight = count($mapTiles[0]);
     
+    echo "ig.module( 'game.levels.town' )\n";
+    echo ".requires('impact.image')\n";
+    echo ".defines(function(){\n";
+    echo "Level".ucfirst($mapName)."=/*JSON[*/";
+    // JSON HERE
+    echo "{" .
+         "\"entities\": []," .
+         "\"layer\": [ {" .
+            "\"name\": \"below\", ".
+            "\"width\": ".$mapWidth.", ".
+            "\"height\": ".$mapHeight.", ".
+            "\"linkWithCollision\": false, ".
+            "\"visible\": 1, ".
+            "\"tilesetName\": \"media/".$tsFilename."\", ".
+            "\"repeat\": false, ".
+            "\"preRender\": false, ".
+            "\"distance\": \"1\", ".
+            "\"tilesize\": ".$tilesize.", ".
+            "\"foreground\": false, ".
+            "\"data\": [ ";
+    
+    for($y=0; $y<$mapHeight; $y++)
+    {
+        echo "[ ";
+        for($x=0; $x<$mapWidth; $x++)
+        {
+            $tileX = $mapTiles[$x][$y][0];
+            $tileY = $mapTiles[$x][$y][1];
+            $tileInt = tilePosToInt($tileX, $tileY, $tsWidthInTiles);
+            echo $tileInt;
+            if($x!=$mapWidth-1) echo ", "; else echo " ";
+        }
+        if($y==$mapHeight-1) echo "] "; else echo "], ";
+    }
+    
+    echo "] } ] }";
+    
+    echo "/*]JSON*/;\n";
+    echo "Level".ucfirst($mapName)."Resources=[new ig.Image('media/".$tsFilename."')];\n";
+    echo "});";
 }
 
 function tilePosToInt($x, $y, $widthInTiles)
@@ -118,26 +160,28 @@ function tilePosToInt($x, $y, $widthInTiles)
     $res = 0;
     $res += $y*$widthInTiles;
     $res += $x;
-    return $res;
+    return $res + 1;
 }
+
+set_time_limit(300);
 
 $tileSize = 16;
 
-$mapFile = 'maps/oldale-town/map.png';
-$mapSize = getimagesize($mapFile);
+$mapFilename = 'maps/oldale-town/map.png';
+$mapSize = getimagesize($mapFilename);
 $mapWidth = $mapSize[0];
 $mapHeight = $mapSize[1];
-$map = LoadPNG($mapFile);
+$map = LoadPNG($mapFilename);
 
-$tilesheetFile = 'maps/oldale-town/tilesheet.png';
-$tilesheetSize = getimagesize($tilesheetFile);
+$tilesheetFilename = 'maps/oldale-town/tilesheet.png';
+$tilesheetSize = getimagesize($tilesheetFilename);
 $tilesheetWidth = $tilesheetSize[0];
 if($tilesheetWidth==257) $tilesheetWidth = 256;
 $tilesheetHeight = $tilesheetSize[1];
-$tilesheet = LoadPNG($tilesheetFile);
+$tilesheet = LoadPNG($tilesheetFilename);
 
 //$tilesheetHeight = 16;
-$mapHeight = 32;
+//$mapHeight = 32;
 
 
 //$im = $map;
@@ -145,7 +189,7 @@ $mapHeight = 32;
 //$colors = imagecolorsforindex($im, $rgb);
 //var_dump($colors);
 
-//print_r(getTile($map, 16, 0,0));
+//print_r(getTile($map, 16, 10, 1));
 
 //$testTile = getTile($map, 16, 0, 0);
 //print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize, $testTile) );
@@ -156,9 +200,16 @@ $mapHeight = 32;
 // print out an array with x, y, and hash of all tiles in map
 //print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
 
-echo tilePosToInt(1, 1, 8);
+//echo tilePosToInt(10, 1, 16);
 
 
-//$tilesheet =    LoadPNG('maps/oldale-town/tilesheet.png');
+
+$testmap = buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize);
+mapToJSON("test", $testmap, $tilesheetWidth/$tileSize, $tilesheetFilename, $tileSize);
+
+//print_r($testmap);
+
+
+
 
 ?>
