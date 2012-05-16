@@ -3,12 +3,9 @@
 ini_set('memory_limit','512M');
 set_time_limit(300);
 
-
+include('inc.globals.php');
 require('required.php');
 
-
-
-$tileSize = 16;
 
 $mapFilename = 'maps/rs-oldale-town/map.png';
 $mapSize = getimagesize($mapFilename);
@@ -35,20 +32,20 @@ $tilesheet = LoadPNG($tilesheetFilename);
 //print_r(getTile($map, 16, 10, 1));
 
 //$testTile = getTile($map, 16, 0, 0);
-//print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize, $testTile) );
+//print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize, $testTile) );
 
 // print out a hash table of all the tiles within tilesheet
-//print_r(buildTilesheetHashTable($tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
+//print_r(buildTilesheetHashTable($tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize));
 
 // print out an array with x, y, and hash of all tiles in map
-//print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize));
+//print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize));
 
 //echo tilePosToInt(10, 1, 16);
 
 
 
-$testmap = buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $tileSize);
-mapToJSON("test", $testmap, $tilesheetWidth/$tileSize, $tilesheetFilename, $tileSize);
+$testmap = buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize);
+mapToJSON("test", $testmap, $tilesheetWidth/$globalTilesize, $tilesheetFilename, $globalTilesize);
 
 //print_r($testmap);
 

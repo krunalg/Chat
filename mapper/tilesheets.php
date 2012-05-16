@@ -1,5 +1,6 @@
 <?php
 
+include('inc.globals.php');
 require('required.php');
 
 function findTilesheets($path = '', &$name = array() )
@@ -73,7 +74,6 @@ function trim1px($file)
  * variables
  *
  */ 
-$tilesize = 16;
 $pathToMaps = "./maps"; // dir to scan for tilesheets
 
 
@@ -95,7 +95,7 @@ echo "<pre>"; var_dump($tilesheets); echo "</pre>";
 {
     $size  = getimagesize($tilesheets[$i]);
     $width = $size[0];
-    if( ($width - 1) % $tilesize == 0) // if subtracting 1px is helpful
+    if( ($width - 1) % $globalTilesize == 0) // if subtracting 1px is helpful
     {
         echo "Needs trimming.<br>";
         trim1px($tilesheets[$i]);
@@ -116,12 +116,12 @@ echo "<pre>"; var_dump($tilesheets); echo "</pre>";
     $width  = $size[0];
     $height = $size[1];
     $hashes = "";
-    for($y=0; $y<$height/$tilesize; $y++)
+    for($y=0; $y<$height/$globalTilesize; $y++)
     {
-        for($x=0; $x<$width/$tilesize; $x++)
+        for($x=0; $x<$width/$globalTilesize; $x++)
         {
             $img    = LoadPNG($tilesheets[$i]);
-            $hashes = $hashes . getTile($img, $tilesize, $x, $y);
+            $hashes = $hashes . getTile($img, $globalTilesize, $x, $y);
         }
     }
     echo "Hash for $tilesheets[$i] is: " . md5($hashes) ."<br>\n";

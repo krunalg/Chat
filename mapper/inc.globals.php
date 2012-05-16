@@ -1,0 +1,7 @@
+<?php
+
+$globalTilesize = 16;
+
+
+
+?>
