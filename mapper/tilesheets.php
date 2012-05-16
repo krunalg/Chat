@@ -1,5 +1,7 @@
 <?php
 
+require('required.php');
+
 function scanFileNameRecursivly($path = '', &$name = array() )
 /**
  * This function will scan all files recursively in the sub-folder and folder.
@@ -31,6 +33,43 @@ function scanFileNameRecursivly($path = '', &$name = array() )
   return $name;
 }
 
+
+
+
+
+
+
+
+function trim1px($file)
+/*
+ * This function trims 1px from the width of the file supplied in param
+ * 
+ */
+{
+    $size = getimagesize($file);
+    $oldWidth = $size[0];
+    $oldHeight = $size[1];
+    $newWidth = $oldWidth-1;
+    $newHeight = $oldHeight;
+    
+    $img = LoadPNG($file);
+    $newimg = imagecreatetruecolor($newWidth, $newHeight);
+    imagecopy($newimg, $img, 0, 0, 0, 0, $newWidth, $newHeight);
+    
+    if(rename($file, $file.".backup"))
+    {
+        // renamed file, now write new one
+        if(!imagepng($newimg, $file)) die("Could not write new image: $file");
+    }
+    else die("Could not rename image: $file");
+}
+
+
+
+
+
+
+$tilesize = 16;
 $path = "maps"; // dir to scan for tilesheets
 $tilesheets = scanFileNameRecursivly($path);
 
@@ -38,5 +77,35 @@ echo "<pre>";
 var_dump($tilesheets);
 echo "</pre>";
 
-//for($)
+// for each tilesheet found, trim 1px if nessesary
+for($i=0; $i<count($tilesheets); $i++)
+{
+    $size = getimagesize($tilesheets[$i]);
+    $width = $size[0];
+    //die("if($width - 1 % $tilesize == 0)");
+    if( ($width - 1) % $tilesize == 0) // if subtracting 1px is helpful
+    {
+        echo "Needs trimming.";
+        trim1px($tilesheets[$i]);
+    }
+    else
+        echo "No trimming needed.";
+}
+
+
+// make a function that trims off 1px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
