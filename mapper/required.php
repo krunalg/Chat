@@ -266,8 +266,8 @@ function prepCollisions($collisions)
 function getCollisionsFromFile($file)
 {
     $contents = file_get_contents($file);
-    $collisions = prepCollisions($contents);
-    return $collisions;
+    $result = prepCollisions($contents);
+    return $result;
 }
 
 function buildHashIndexCollisions($collisionsArr)
