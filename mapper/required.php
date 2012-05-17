@@ -198,7 +198,7 @@ function tilePosToInt($x, $y, $widthInTiles)
     $res = 0;
     $res += $y*$widthInTiles;
     $res += $x;
-    return $res + 1;
+    return $res;
 }
 
 function findTilesheets($path = '', &$name = array() )
