@@ -73,26 +73,37 @@ else
         'top: 0px; '.
         'width: '.$width.'px;'.
         'height: '.$height.'px;'.
-        '">';
+        '">' ."\n";
     
         // fill with many tile-sized divs
         $widthInTiles = $width/$globalTilesize;
         $heightInTiles = $height/$globalTilesize;
-        $widthInTiles = 3;
-        $heightInTiles = 3;
         
         for($y=0; $y<$heightInTiles; $y++)
         {
             for($x=0; $x<$widthInTiles; $x++)
             {
-                echo '<div style="'.
-                    'background: url(\'http://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Auto_Racing_Red.svg/800px-Auto_Racing_Red.svg.png\'); '.
-                    'width: '.$globalTilesize.'px; '.
-                    'height: '.$globalTilesize.'px; '.
-                    'position: absolute; '.
-                    'left: '.($x*$globalTilesize).'px; '.
-                    'top: '.($y*$globalTilesize).'px; '.
-                    '"></div>';
+                echo '<div '.
+                        'style="'.
+                            'background: none; '.
+                            'width: '.$globalTilesize.'px; '.
+                            'height: '.$globalTilesize.'px; '.
+                            'position: absolute; '.
+                            'left: '.($x*$globalTilesize).'px; '.
+                            'top: '.($y*$globalTilesize).'px; '.
+                        
+                        '" id="x'.$x.'y'.$y.'"'.
+                            
+                        '" onClick="'.
+                            'window.alert(\'You clicked '.$x.', '.$y.'\');'.
+                            
+                        '" onmouseover="'.
+                            '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(icons/mouseover.png)\');'.
+                            
+                        '" onmouseout="'.
+                            '$(\'#x'.$x.'y'.$y.'\').css(\'background\', \'none\');'.
+                        
+                        '"></div>' . "\n";
             }
         }
     
@@ -102,7 +113,6 @@ else
 }
 
 ?>
-
 
 
         
