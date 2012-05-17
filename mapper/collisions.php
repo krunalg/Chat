@@ -98,7 +98,7 @@ else
                             'window.alert(\'You clicked '.$x.', '.$y.'\');'.
                             
                         '" onmouseover="'.
-                            '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(icons/mouseover.png)\');'.
+                            '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/mouseover.png)\');'.
                             
                         '" onmouseout="'.
                             '$(\'#x'.$x.'y'.$y.'\').css(\'background\', \'none\');'.
