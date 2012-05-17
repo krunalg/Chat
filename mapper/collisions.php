@@ -52,6 +52,9 @@ else if( isset($_GET['ts']) )
      *
      */
     
+    // load known collisions from file
+    // $oldCollisions = getCollisionsFromFile($globalCollisionsFile);
+    
     // create save button
     echo '<input type="button" value="Save" onclick="save();" '.
          'style="position: absolute; top: 0; left: 0;" />';
@@ -147,8 +150,7 @@ else if( isset($_POST['tiles']) )
     $oldCollisions = getCollisionsFromFile($globalCollisionsFile);
     
     // build collisions array with hashes as indexes
-    for($i=0; $i<count($oldCollisions); $i++)
-        $collisions[ $oldCollisions[$i][0] ] = $oldCollisions[$i][1];
+    $collisions = buildHashIndexCollisions($oldCollisions);
     
     // create array of new collisions
     $newCollisions = prepCollisions($_POST['tiles']);

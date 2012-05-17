@@ -253,4 +253,11 @@ function getCollisionsFromFile($file)
     return $collisions;
 }
 
+function buildHashIndexCollisions($collisionsArr)
+{
+    for($i=0; $i<count($collisionsArr); $i++)
+        $hashIndexes[ $collisionsArr[$i][0] ] = $collisionsArr[$i][1];
+    return $hashIndexes;
+}
+
 ?>
