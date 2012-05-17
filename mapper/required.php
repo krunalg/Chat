@@ -239,8 +239,8 @@ function findTilesheets($path = '', &$name = array() )
  *
  * @param   $collisions String of lines where each line contains an MD5 hash,
  *          a colon (:), and integer, and a new line (\n).
- * @return  array $result where $res[$n][0] is an MD5 hash
- *          and $res[$n][1] is an int.
+ * @return  array $result where $result[$n][0] is an MD5 hash
+ *          and $result[$n][1] is an int.
  */
 function prepCollisions($collisions)
 {
@@ -256,6 +256,13 @@ function prepCollisions($collisions)
     return $result;
 }
 
+/**
+ * Reads the collision data from a file and preps it for use.
+ *
+ * @param   $file Path of file to be read.
+ * @return  array of collisions where $result[$n][0] is an MD5 hash
+ *          and $result[$n][1] is an int.
+ */
 function getCollisionsFromFile($file)
 {
     $contents = file_get_contents($file);
