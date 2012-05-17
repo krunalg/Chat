@@ -94,8 +94,11 @@ else
                         
                         '" id="x'.$x.'y'.$y.'"'.
                             
+                        /*'" onClick="'.
+                            'window.alert(\'You clicked '.$x.', '.$y.'\');'.*/
+                        
                         '" onClick="'.
-                            'window.alert(\'You clicked '.$x.', '.$y.'\');'.
+                            '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/solid.gif)\');'.
                             
                         '" onmouseover="'.
                             '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/mouseover.png)\');'.
