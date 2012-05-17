@@ -52,6 +52,10 @@ else
      *
      */
     
+    // create save button
+    echo '<input type="button" value="Save" onclick="save();" '.
+         'style="position: absolute; top: 0; left: 0;" />';
+    
     $ts = $_GET['ts'];
     
     $size = getimagesize($ts);
@@ -60,15 +64,11 @@ else
     $widthInTiles = $width/$globalTilesize;
     $heightInTiles = $height/$globalTilesize;
     
-    echo "Width: " . $width . "<br>";
-    echo "Height: " . $height . "<br>";
-    
     // load tilesheet for grabbing hashes
     $tilesheet = LoadPNG($ts);
     
     // comment slashes so background image loads
     $ts = str_replace('\\', "\\\\", $ts);
-    echo "Tilesheet: " . $ts;
     
     // create tiles javascript object
     echo "\n\n" . '<!-- creating tile hash values -->' ."\n";
@@ -92,7 +92,7 @@ else
         'background: url(\''.$ts.'\'); '.
         'position: absolute; '.
         'left: 0px; '.
-        'top: 0px; '.
+        'top: 28px; '.
         'width: '.$width.'px;'.
         'height: '.$height.'px;'.
         '">' ."\n";
@@ -134,9 +134,11 @@ else
     
     echo '</div>'; // close main tilesheet div
     
+    
 }
 
 ?>
+
 
 <script type="text/javascript">
     var collisionTypes = new Array();
@@ -146,6 +148,22 @@ else
     collisionTypes.push(<?php echo $collisionRight ?>); 
     collisionTypes.push(<?php echo $collisionUp ?>); 
     collisionTypes.push(<?php echo $collisionDown ?>);
+    
+    var save = function()
+    {
+        var dump = 'test';
+        for(var x in tiles)
+        {
+            for(var y in tiles[x])
+            {
+                if(tiles[x][y].collision!=0)
+                    dump = dump + tiles[x][y].hash + ":" + collisionTypes[tiles[x][y].collision] + "\n";
+                else
+                    ;//dump = dump + "Added the following dummy data instead: " + tiles[i][j].collision + "\n";
+            }
+        }
+        window.alert(dump);
+    }
     
     var tileClicked = function(x, y)
     {
