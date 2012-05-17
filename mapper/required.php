@@ -234,4 +234,23 @@ function findTilesheets($path = '', &$name = array() )
   return $name;
 }
 
+function prepCollisions($strCollisions)
+{
+    $res = trim($strCollisions);
+    $res = explode("\n", $res);
+    for($i=0; $i<count($res); $i++)
+    {
+        $res[$i] = trim($res[$i]);
+        $res[$i] = explode(":", $res[$i]);
+    }
+    return $res;
+}
+
+function getCollisionsFromFile($file)
+{
+    $contents = file_get_contents($file)
+    $collisions = prepCollisions($contents);
+    return $collisions;
+}
+
 ?>

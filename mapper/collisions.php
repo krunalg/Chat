@@ -143,20 +143,8 @@ else if( isset($_POST['tiles']) )
      *
      */
     
-    function prepCollisions($strCollisions)
-    {
-        $res = trim($strCollisions);
-        $res = explode("\n", $res);
-        for($i=0; $i<count($res); $i++)
-        {
-            $res[$i] = trim($res[$i]);
-            $res[$i] = explode(":", $res[$i]);
-        }
-        return $res;
-    }
-    
     // create array of old collisions
-    $oldCollisions = prepCollisions(file_get_contents($globalCollisionsFile));
+    $oldCollisions = getCollisionsFromFile($globalCollisionsFile);
     
     // build collisions array with hashes as indexes
     for($i=0; $i<count($oldCollisions); $i++)
