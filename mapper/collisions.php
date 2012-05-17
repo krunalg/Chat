@@ -136,14 +136,55 @@ else if( isset($_GET['ts']) )
     
     
 }
-else
+else if( isset($_POST['tiles']) )
 {
     /*
      * Third Page: Write tile hashes and collision data to file
      *
      */
     
-    echo "I found the following data: \n" . $_POST['tiles'];
+    function prepCollisions($strCollisions)
+    {
+        $res = trim($strCollisions);
+        $res = explode("\n", $res);
+        for($i=0; $i<count($res); $i++)
+        {
+            $res[$i] = trim($res[$i]);
+            $res[$i] = explode(":", $res[$i]);
+        }
+        return $res;
+    }
+    
+    // create array of old collisions
+    $oldCollisions = prepCollisions(file_get_contents($globalCollisionsFile));
+    
+    // build collisions array with hashes as indexes
+    for($i=0; $i<count($oldCollisions); $i++)
+        $collisions[ $oldCollisions[$i][0] ] = $oldCollisions[$i][1];
+    
+    // create array of new collisions
+    $newCollisions = prepCollisions($_POST['tiles']);
+    
+    // update collisions array
+    for($i=0; $i<count($newCollisions); $i++)
+    {
+        $collisions[ $newCollisions[$i][0] ] = $newCollisions[$i][1];
+    }
+    
+    // rewrite collisions.txt
+    file_put_contents($globalCollisionsFile);
+
+    
+    //echo "I found the following data: \n" . $_POST['tiles'];
+}
+else
+{
+    /*
+     * Something went wrong
+     *
+     */
+    
+    die("Something went wrong.");
 }
 
 ?>
