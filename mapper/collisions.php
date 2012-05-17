@@ -120,7 +120,8 @@ else
                             'tileClicked('.$x.','.$y.');'.
                             
                         '" onmouseover="'.
-                            '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/mouseover.png)\');'.
+                            'tileOver('.$x.','.$y.');'.
+                            //'$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/mouseover.png)\');'.
                             
                         '" onmouseout="'.
                             '$(\'#x'.$x.'y'.$y.'\').css(\'background\', \'none\');'.
@@ -147,7 +148,41 @@ else
     
     var tileClicked = function(x, y)
     {
-        window.alert("You clicked tile: " + x + "," + y);
+        tiles[x][y].collision++; // next collision in cycle
+        if(tiles[x][y].collision>=collisionTypes.length)
+            tiles[x][y].collision = 0; // restart cycle if need be
+        
+        tileOver(x,y); // update displayed image
+    }
+    
+    var tileOver = function(x, y)
+    {
+        var img = '';
+        switch(collisionTypes[tiles[x][y].collision])
+        {
+            case <?php echo $collisionWalkable ?>:
+                img = 'images/mouseover.png';
+                break;
+            case <?php echo $collisionNoWalk ?>:
+                img = 'images/solid-mouseover.png';
+                break;
+            case <?php echo $collisionLeft ?>:
+                img = 'images/left-mouseover.png';
+                break;
+            case <?php echo $collisionRight ?>:
+                img = 'images/right-mouseover.png';
+                break;
+            case <?php echo $collisionUp ?>:
+                img = 'images/up-mouseover.png';
+                break;
+            case <?php echo $collisionDown ?>:
+                img = 'images/down-mouseover.png';
+                break;
+        }
+        if(img!='') $('#x'+x+'y'+y).css('background-image', 'url("'+img+'")');
+        else window.alert("Tile " + x + "," + y + " has improper collision type: " + tiles[x][y].collision);
+        
+        
     }
 </script>
         
