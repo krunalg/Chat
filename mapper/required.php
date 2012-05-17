@@ -234,16 +234,26 @@ function findTilesheets($path = '', &$name = array() )
   return $name;
 }
 
-function prepCollisions($strCollisions)
+/**
+ * Parse a single string of collision data into an array.
+ *
+ * @param   $collisions String of lines where each line contains an MD5 hash,
+ *          a colon (:), and integer, and a new line (\n).
+ * @return  array $result where $res[$n][0] is an MD5 hash
+ *          and $res[$n][1] is an int.
+ */
+function prepCollisions($collisions)
 {
-    $res = trim($strCollisions);
-    $res = explode("\n", $res);
-    for($i=0; $i<count($res); $i++)
+    $result = trim($collisions);
+    $result = explode("\n", $result);
+    for($i=0; $i<count($result); $i++)
     {
-        $res[$i] = trim($res[$i]);
-        $res[$i] = explode(":", $res[$i]);
+        $result[$i] = trim($result[$i]);
+        $result[$i] = explode(":", $result[$i]);
+        $result[$i][0] = trim($result[$i][0]);
+        $result[$i][1] = trim($result[$i][1]);
     }
-    return $res;
+    return $result;
 }
 
 function getCollisionsFromFile($file)
