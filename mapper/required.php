@@ -270,11 +270,20 @@ function getCollisionsFromFile($file)
     return $result;
 }
 
-function buildHashIndexCollisions($collisionsArr)
+/**
+ * Converts an array of collisions with numerical indexes to
+ * an array of MD5 hash indexes.
+ *
+ * @param   $collisions Array of collisions where $collisions[$n][0] is
+ *          an MD5 hash, and $collisions[$n][1] is an integer.
+ * @return  array of collisions where the indexes are now MD5 hashes and the
+ *          values are integers.
+ */
+function buildHashIndexCollisions($collisions)
 {
-    for($i=0; $i<count($collisionsArr); $i++)
-        $hashIndexes[ $collisionsArr[$i][0] ] = $collisionsArr[$i][1];
-    return $hashIndexes;
+    for($i=0; $i<count($collisions); $i++)
+        $result[ $collisions[$i][0] ] = $collisions[$i][1];
+    return $result;
 }
 
 ?>
