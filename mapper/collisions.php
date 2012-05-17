@@ -57,13 +57,35 @@ else
     $size = getimagesize($ts);
     $width = $size[0]; // width in px of tilesheet
     $height = $size[1]; // height in px of tilesheet
+    $widthInTiles = $width/$globalTilesize;
+    $heightInTiles = $height/$globalTilesize;
     
     echo "Width: " . $width . "<br>";
     echo "Height: " . $height . "<br>";
     
+    // load tilesheet for grabbing hashes
+    $tilesheet = LoadPNG($ts);
+    
     // comment slashes so background image loads
     $ts = str_replace('\\', "\\\\", $ts);
     echo "Tilesheet: " . $ts;
+    
+    // create tiles javascript object
+    echo "\n\n" . '<!-- creating tile hash values -->' ."\n";
+    echo '<script type="text/javascript">' ."\n";
+    echo 'var tiles = new Object();'."\n";
+    for($x=0; $x<$widthInTiles; $x++)
+    {
+        echo 'tiles['.$x.'] = new Object();'."\n";
+        for($y=0; $y<$heightInTiles; $y++)
+        {
+            echo 'tiles['.$x.']['.$y.'] = new Object();'."\n";
+            echo 'tiles['.$x.']['.$y.'].hash = "'.getTile($tilesheet, $globalTilesize, $x, $y).'";'."\n";
+            echo 'tiles['.$x.']['.$y.'].collision = 0;';
+        }
+    }
+    echo '</script>' ."\n";
+    echo '<!-- ending tile hash values -->' ."\n\n";
     
     // create main tilesheet div w/ bg
     echo '<div style="'.
@@ -76,9 +98,6 @@ else
         '">' ."\n";
     
         // fill with many tile-sized divs
-        $widthInTiles = $width/$globalTilesize;
-        $heightInTiles = $height/$globalTilesize;
-        
         for($y=0; $y<$heightInTiles; $y++)
         {
             for($x=0; $x<$widthInTiles; $x++)
@@ -98,7 +117,7 @@ else
                             'window.alert(\'You clicked '.$x.', '.$y.'\');'.*/
                         
                         '" onClick="'.
-                            '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/solid.gif)\');'.
+                            'tileClicked('.$x.','.$y.');'.
                             
                         '" onmouseover="'.
                             '$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/mouseover.png)\');'.
@@ -117,7 +136,20 @@ else
 
 ?>
 
-
+<script type="text/javascript">
+    var collisionTypes = new Array();
+    collisionTypes.push(<?php echo $collisionWalkable ?>);
+    collisionTypes.push(<?php echo $collisionNoWalk ?>); 
+    collisionTypes.push(<?php echo $collisionLeft ?>); 
+    collisionTypes.push(<?php echo $collisionRight ?>); 
+    collisionTypes.push(<?php echo $collisionUp ?>); 
+    collisionTypes.push(<?php echo $collisionDown ?>);
+    
+    var tileClicked = function(x, y)
+    {
+        window.alert("You clicked tile: " + x + "," + y);
+    }
+</script>
         
     </body>
 </html>
