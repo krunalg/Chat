@@ -248,7 +248,7 @@ function prepCollisions($strCollisions)
 
 function getCollisionsFromFile($file)
 {
-    $contents = file_get_contents($file)
+    $contents = file_get_contents($file);
     $collisions = prepCollisions($contents);
     return $collisions;
 }
