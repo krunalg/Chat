@@ -13,7 +13,7 @@ require('required.php');
         
 <?php
 
-if($_GET['ts']=='')
+if( !isset($_GET['ts']) && !isset($_POST['tiles']) )
 { 
     /*
      * First Page: Select a tilesheet
@@ -45,7 +45,7 @@ if($_GET['ts']=='')
     // end html form
     echo '</form>';
 }
-else
+else if( isset($_GET['ts']) )
 {
     /*
      * Second Page: Display tilesheet
@@ -136,11 +136,46 @@ else
     
     
 }
+else
+{
+    /*
+     * Third Page: Write tile hashes and collision data to file
+     *
+     */
+    
+    echo "I found the following data: \n" . $_POST['tiles'];
+}
 
 ?>
 
 
 <script type="text/javascript">
+    
+    function post_to_url(path, params, method) {
+        method = method || "post"; // Set method to post by default, if not specified.
+    
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+    
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+    
+                form.appendChild(hiddenField);
+             }
+        }
+    
+        document.body.appendChild(form);
+        form.submit();
+    }
+    
+    
     var collisionTypes = new Array();
     collisionTypes.push(<?php echo $collisionWalkable ?>);
     collisionTypes.push(<?php echo $collisionNoWalk ?>); 
@@ -151,7 +186,7 @@ else
     
     var save = function()
     {
-        var dump = 'test';
+        var dump = '';
         for(var x in tiles)
         {
             for(var y in tiles[x])
@@ -162,7 +197,7 @@ else
                     ;//dump = dump + "Added the following dummy data instead: " + tiles[i][j].collision + "\n";
             }
         }
-        window.alert(dump);
+        post_to_url('collisions.php', {'tiles': dump} );
     }
     
     var tileClicked = function(x, y)
