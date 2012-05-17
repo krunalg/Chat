@@ -143,7 +143,7 @@ function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
                     {
                         $tileX = $mapTiles[$x][$y][0];
                         $tileY = $mapTiles[$x][$y][1];
-                        $tileInt = tilePosToInt($tileX, $tileY, $tsWidthInTiles);
+                        $tileInt = tilePosToInt($tileX, $tileY, $tsWidthInTiles) + 1; // +1 because WM starts at 1, not 0
                         echo $tileInt;
                         if($x!=$mapWidth-1) echo ", "; else echo " ";
                     }
