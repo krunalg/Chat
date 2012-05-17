@@ -172,7 +172,15 @@ else if( isset($_POST['tiles']) )
     }
     
     // rewrite collisions.txt
-    file_put_contents($globalCollisionsFile);
+    $fileDump = '';
+    foreach($collisions as $key => $value)
+        if($value!=$collisionWalkable) // ignore regular walkable tiles
+            $fileDump = $fileDump . $key . ':' . $value . "\n";
+
+    if(!file_put_contents($globalCollisionsFile, $fileDump))
+        die("Failed writing file: " . $globalCollisionsFile);
+    else
+        die("Success writing file: " . $globalCollisionsFile);
 
     
     //echo "I found the following data: \n" . $_POST['tiles'];
