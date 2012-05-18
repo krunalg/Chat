@@ -289,10 +289,11 @@ function tilePosToInt($x, $y, $widthInTiles)
 
 
 /**
- * Scan all files recursively in the sub-folder and folder for tilesheets.
+ * Scan all folders and sub-folders recursively for matching files.
  *
  * @param   $path String containing the path of which to scan.
  * @param   $name Not initially set; used for recursion.
+ * @param   $filename File name to search for.
  * @return  array $result where $result[$n][0] is an MD5 hash
  *          and $result[$n][1] is an int.
  
