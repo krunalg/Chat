@@ -297,7 +297,7 @@ function prepCollisions($collisions)
         for($j=0; $j<count($result[$i]); $j++)
             $result[$i][$j] = trim($result[$i][$j]);
     }
-    if(count($result[0]!=2)) return array(); // if no data, return empty array
+    if(count($result[0])!=2) return array(); // if no data, return empty array
     else return $result;
 }
 

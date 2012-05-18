@@ -167,16 +167,19 @@ else if( isset($_POST['tiles']) )
     
     // added space because it will be trimmed later and must write
     // *some* data for file_put_contents to not return a 0
-    $fileDump = ' '; 
+    $fileDump = ''; 
     foreach($collisions as $key => $value)
         if($value!=$collisionWalkable) // ignore regular walkable tiles
             $fileDump = $fileDump . $key . ':' . $value . "\n";
 
-    if(!file_put_contents($globalCollisionsFile, $fileDump))
-        die("Failed writing file: " . $globalCollisionsFile);
-    else
-        echo "Success writing file: " . $globalCollisionsFile;
-
+    if($fileDump!='')
+    {
+        if(!file_put_contents($globalCollisionsFile, $fileDump))
+            die("Failed writing file: " . $globalCollisionsFile);
+        else
+            echo "Success writing file: " . $globalCollisionsFile;
+    }
+    else echo "Nothing to write to file.";
     
     //echo "I found the following data: \n" . $_POST['tiles'];
 }
