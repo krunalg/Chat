@@ -21,7 +21,7 @@ function LoadPNG($imgname)
  * @param   $tilesize Base tile size in pixels.
  * @param   $tileX X position of tile to read.
  * @param   $tileY Y position of tile to read.
- * @return  one-dimensional array where index 0 holds x, 1 holds y.
+ * @return  string containing an MD5 hash value.
  */
 function getTile($image, $tilesize, $tileX, $tileY)
 {
