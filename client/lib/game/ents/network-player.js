@@ -89,7 +89,7 @@ ig.module (
 	    
 	    socket.on('dropPlayer-'+this.name, function ()
 	    {
-		    ig.game.events.push(client + " left the area.");
+		    ig.game.events.push(player.name + " left the area.");
 		    player.kill();
 	    });
 
