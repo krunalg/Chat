@@ -14,20 +14,29 @@ function LoadPNG($imgname)
     return $im;
 }
 
-
-function getTile($im, $tilesize, $tx, $ty)
-// returns md5 hash of a tile
+/**
+ * Analyzes a tile and outputs a unique MD5 hash to be used as an idendifier.
+ *
+ * @param   $image Image to read from.
+ * @param   $tilesize Base tile size in pixels.
+ * @param   $tileX X position of tile to read.
+ * @param   $tileY Y position of tile to read.
+ * @return  one-dimensional array where index 0 holds x, 1 holds y.
+ */
+function getTile($image, $tilesize, $tileX, $tileY)
 {
-    $tilecolors = "";
+    $tileColors = "";
     for($y=0; $y<$tilesize; $y++)
     {
         for($x=0; $x<$tilesize; $x++)
         {
-            $rgb = imagecolorat($im, $x+$tx*$tilesize, $y+$ty*$tilesize);
-            $tilecolors = $tilecolors . $rgb;
+            $rgb = imagecolorat( $image,
+                $x + $tileX * $tilesize,
+                $y + $tileY * $tilesize );
+            $tileColors = $tileColors . $rgb;
         }
     }
-    return md5($tilecolors);
+    return md5($tileColors);
 }
 
 /**
