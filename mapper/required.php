@@ -213,7 +213,7 @@ function tilePosToInt($x, $y, $widthInTiles)
  * @author  Fazle Elahee (modified by Jonathan Commins)
  *          Originally called scanFileNameRecursivly
  */
-function findTilesheets($path = '', &$name = array() )
+function findTilesheets($path = '', $filename, &$name = array() )
 {
   $path = $path == ''? dirname(__FILE__) : $path;
   $lists = @scandir($path);
@@ -225,11 +225,11 @@ function findTilesheets($path = '', &$name = array() )
     
       if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
       {
-          findTilesheets($path.DIRECTORY_SEPARATOR.$f, &$name); 
+          findTilesheets($path.DIRECTORY_SEPARATOR.$f, $filename, &$name); 
       }
       else
       {
-          if($f=='tilesheet.png') $name[] = $path.DIRECTORY_SEPARATOR.$f;
+          if($f==$filename) $name[] = $path.DIRECTORY_SEPARATOR.$f;
       }
       }
   }

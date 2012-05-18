@@ -37,7 +37,7 @@ function trim1px($file)
  * create an array containing path of every tilesheet
  *
  */ 
-$tilesheets = findTilesheets($globalMapDir);
+$tilesheets = findTilesheets($globalMapDir, $globalTilesheetFile);
 echo "<pre>"; var_dump($tilesheets); echo "</pre>";
 
 

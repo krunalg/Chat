@@ -3,6 +3,7 @@
 $globalTilesize = 16;
 $globalMapDir = ".\maps";
 $globalCollisionsFile = 'collisions.txt';
+$globalTilesheetFile = 'tilesheet.png';
 
 // collision values in Weltmeister
 // for one-way hoppable ledges

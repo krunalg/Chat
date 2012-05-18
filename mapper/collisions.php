@@ -21,7 +21,7 @@ if( !isset($_GET['ts']) && !isset($_POST['tiles']) )
      */
     
     // get a list of all tilesheets
-    $tilesheets = findTilesheets($globalMapDir);
+    $tilesheets = findTilesheets($globalMapDir, $globalTilesheetFile);
     
     // start html form
     echo '<form method="get">';
