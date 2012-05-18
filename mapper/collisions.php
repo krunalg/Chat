@@ -175,7 +175,7 @@ else if( isset($_POST['tiles']) )
     if(!file_put_contents($globalCollisionsFile, $fileDump))
         die("Failed writing file: " . $globalCollisionsFile);
     else
-        die("Success writing file: " . $globalCollisionsFile);
+        echo "Success writing file: " . $globalCollisionsFile;
 
     
     //echo "I found the following data: \n" . $_POST['tiles'];
