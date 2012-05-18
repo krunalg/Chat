@@ -71,7 +71,7 @@ ig.module (
 		    player.facing = direction;
 	    });
 	    
-	    socket.on('otherPlayerJump-'+this.name, function (client, x, y, direction)
+	    socket.on('otherPlayerJump-'+this.name, function (x, y, direction)
 	    {
 		    player.vel.x = 0;
 		    player.vel.y = 0;

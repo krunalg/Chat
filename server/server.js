@@ -157,7 +157,7 @@ io.sockets.on('connection', function (socket)
     });
     
     socket.on('receiveJump', function (x, y, direction) {
-        socket.broadcast.to(socket.roomname).emit('otherPlayerJump-'+socket.clientname, socket.clientname, x, y, direction);
+        socket.broadcast.to(socket.roomname).emit('otherPlayerJump-'+socket.clientname, x, y, direction);
     });
     
     socket.on('receiveDirection', function (client, direction) {
