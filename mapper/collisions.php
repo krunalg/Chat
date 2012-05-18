@@ -52,8 +52,9 @@ else if( isset($_GET['ts']) )
      *
      */
     
-    // load known collisions from file
-    // $oldCollisions = getCollisionsFromFile($globalCollisionsFile);
+    // previously saved collisions will be needed later
+    $collisions = getCollisionsFromFile($globalCollisionsFile); // read from file
+    $collisions = buildHashIndexCollisions($collisions); // use hashes as indexes
     
     // create save button
     echo '<input type="button" value="Save" onclick="save();" '.
@@ -82,9 +83,12 @@ else if( isset($_GET['ts']) )
         echo 'tiles['.$x.'] = new Object();'."\n";
         for($y=0; $y<$heightInTiles; $y++)
         {
+            $hash = getTile($tilesheet, $globalTilesize, $x, $y);
+            $collision = 0;
+            if(isset($collisions[$hash])) $collision = $collisions[$hash];
             echo 'tiles['.$x.']['.$y.'] = new Object();'."\n";
-            echo 'tiles['.$x.']['.$y.'].hash = "'.getTile($tilesheet, $globalTilesize, $x, $y).'";'."\n";
-            echo 'tiles['.$x.']['.$y.'].collision = 0;';
+            echo 'tiles['.$x.']['.$y.'].hash = "'.$hash.'";'."\n";
+            echo 'tiles['.$x.']['.$y.'].collision = '.$collision.';';
         }
     }
     echo '</script>' ."\n";
