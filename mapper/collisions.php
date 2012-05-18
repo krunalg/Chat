@@ -258,22 +258,22 @@ else
         switch(collisionTypes[tiles[x][y].collision])
         {
             case <?php echo $collisionWalkable ?>:
-                img = 'images/mouseover.png';
+                img = '<?php echo $collisionWalkableMouseoverImg ?>';
                 break;
             case <?php echo $collisionNoWalk ?>:
-                img = 'images/solid-mouseover.png';
+                img = '<?php echo $collisionNoWalkMouseoverImg ?>';
                 break;
             case <?php echo $collisionLeft ?>:
-                img = 'images/left-mouseover.png';
+                img = '<?php echo $collisionLeftMouseoverImg ?>';
                 break;
             case <?php echo $collisionRight ?>:
-                img = 'images/right-mouseover.png';
+                img = '<?php echo $collisionRightMouseoverImg ?>';
                 break;
             case <?php echo $collisionUp ?>:
-                img = 'images/up-mouseover.png';
+                img = '<?php echo $collisionUpMouseoverImg ?>';
                 break;
             case <?php echo $collisionDown ?>:
-                img = 'images/down-mouseover.png';
+                img = '<?php echo $collisionDownMouseoverImg ?>';
                 break;
         }
         if(img!='') $('#x'+x+'y'+y).css('background-image', 'url("'+img+'")');
@@ -286,22 +286,22 @@ else
         switch(collisionTypes[tiles[x][y].collision])
         {
             case <?php echo $collisionWalkable ?>:
-                img = 'images/spacer.png';
+                img = '<?php echo $collisionWalkableMouseoutImg ?>';
                 break;
             case <?php echo $collisionNoWalk ?>:
-                img = 'images/solid.gif';
+                img = '<?php echo $collisionNoWalkMouseoutImg ?>';
                 break;
             case <?php echo $collisionLeft ?>:
-                img = 'images/left.gif';
+                img = '<?php echo $collisionLeftMouseoutImg ?>';
                 break;
             case <?php echo $collisionRight ?>:
-                img = 'images/right.gif';
+                img = '<?php echo $collisionRightMouseoutImg ?>';
                 break;
             case <?php echo $collisionUp ?>:
-                img = 'images/up.gif';
+                img = '<?php echo $collisionUpMouseoutImg ?>';
                 break;
             case <?php echo $collisionDown ?>:
-                img = 'images/down.gif';
+                img = '<?php echo $collisionDownMouseoutImg ?>';
                 break;
         }
         if(img!='') $('#x'+x+'y'+y).css('background-image', 'url("'+img+'")');
