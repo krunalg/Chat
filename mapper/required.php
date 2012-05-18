@@ -1,16 +1,16 @@
 <?php
 
-function LoadPNG($imgname)
+/**
+ * Loads an image to be further used in PHP.
+ *
+ * @param   $image Path to image file.
+ * @return  an image resource identifier.
+ */
+function LoadPNG($image)
 {
-    /* Attempt to open */
-    $im = @imagecreatefrompng($imgname);
-
-    /* See if it failed */
-    if(!$im)
-    {
-        die("Could not load image: " . $imgname);
-    }
-
+    $im = @imagecreatefrompng($image); // Attempt to open
+    if(!$im) // See if it failed
+        die("Could not load image: " . $image);
     return $im;
 }
 
