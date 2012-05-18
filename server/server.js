@@ -118,7 +118,7 @@ io.sockets.on('connection', function (socket)
     socket.on('playerLeaveZone', function ()
     {
 	// instruct others to drop this player
-	socket.broadcast.to(socket.roomname).emit('dropPlayer-'+socket.clientname, socket.clientname);
+	socket.broadcast.to(socket.roomname).emit('dropPlayer-'+socket.clientname);
 	socket.leave(socket.roomname);
 	// stop listening
 	socket.roomname = 'limbo'; 

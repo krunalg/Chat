@@ -87,7 +87,7 @@ ig.module (
 		    player.reskin();
 	    });
 	    
-	    socket.on('dropPlayer-'+this.name, function (client)
+	    socket.on('dropPlayer-'+this.name, function ()
 	    {
 		    ig.game.events.push(client + " left the area.");
 		    player.kill();
