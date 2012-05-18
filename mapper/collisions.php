@@ -165,8 +165,6 @@ else if( isset($_POST['tiles']) )
         $collisions[ $newCollisions[$i][0] ] = $newCollisions[$i][1];
     }
     
-    // added space because it will be trimmed later and must write
-    // *some* data for file_put_contents to not return a 0
     $fileDump = ''; 
     foreach($collisions as $key => $value)
         if($value!=$collisionWalkable) // ignore regular walkable tiles
