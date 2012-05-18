@@ -220,10 +220,14 @@ else
     
     var initTiles = function()
     {
-        if(tiles!=undefined)
+        if(typeof tiles === 'undefined')
         {
-            for(var x=0; x < <?php echo $widthInTiles; ?> ; x++)
-                for(var y=0; y < <?php echo $heightInTiles; ?> ; y++)
+            // do nothing
+        }
+        else   
+        {
+            for(var x=0; x < <?php if(isset($widthInTiles)) echo $widthInTiles; else echo 0; ?> ; x++)
+                for(var y=0; y < <?php if(isset($widthInTiles)) echo $heightInTiles; else echo 0; ?> ; y++)
                     tileOut(x,y);
         }
     }
