@@ -21,7 +21,7 @@ $tilesheetHeight = $tilesheetSize[1];
 $tilesheet = LoadPNG($tilesheetFilename);
 
 //$tilesheetHeight = 16;
-//$mapHeight = 32;
+$mapHeight = 32;
 
 
 //$im = $map;
@@ -43,8 +43,11 @@ $tilesheet = LoadPNG($tilesheetFilename);
 //echo tilePosToInt(10, 1, 16);
 
 
+// previously saved collisions will be needed to build map data
+$collisions = getCollisionsFromFile($globalCollisionsFile); // read from file
+$collisions = buildHashIndexCollisions($collisions); // use hashes as indexes
 
-$testmap = buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize);
+$testmap = buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize, $collisions);
 mapToJSON("test", $testmap, $tilesheetWidth/$globalTilesize, $tilesheetFilename, $globalTilesize);
 
 //print_r($testmap);

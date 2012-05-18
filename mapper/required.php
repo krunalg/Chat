@@ -110,10 +110,13 @@ function buildTilesheetHashTable($tsImg, $tsWidth, $tsHeight, $tilesize)
  * @param   $tsWidthPx Width of tilesheet in pixels.
  * @param   $tsHeightPx Height of tilesheet in pixels.
  * @param   $tilesize Base tile size in pixels.
+ * @param   $collisions Array of collision preferences for tiles (indexes are
+ *          MD5 hashes representing the tile).
  * @return  two-dimentional array in the form $map[$x][$y][$n] where
  *          n==0 is tilesheet-tiles x, n==1 is y
  */
-function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthPx, $tsHeightPx, $tilesize)
+function buildMapFromImage( $mapImg, $mapWidthPx, $mapHeightPx, $tsImg,
+                            $tsWidthPx, $tsHeightPx, $tilesize, $collisions )
 {
     $mapWidth = $mapWidthPx/$tilesize; // need map width-in-tiles for loop
     $mapHeight = $mapHeightPx/$tilesize; // and height
@@ -122,8 +125,15 @@ function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthP
         for($x=0; $x<$mapWidth; $x++)
         {
             $currTile = getTile($mapImg, $tilesize, $x, $y);
-            $tsPos = findMatchingTile($tsImg, $tsWidthPx, $tsHeightPx, $tilesize, $currTile);
+            $tsPos = findMatchingTile( $tsImg, $tsWidthPx,
+                                       $tsHeightPx, $tilesize, $currTile);
             $map[$x][$y] = $tsPos;
+            
+            // add collision data
+            if(isset($collisions[$currTile]))
+                array_push($map[$x][$y], $collisions[$currTile]);
+            else
+                array_push($map[$x][$y], 0);
         }
     }
     return $map;
@@ -204,8 +214,7 @@ function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
                     echo "[ ";
                     for($x=0; $x<$mapWidth; $x++)
                     {
-                        //echo $mapTiles[$x][$y][3];
-                        echo 0;
+                        echo $mapTiles[$x][$y][2];
                         if($x!=$mapWidth-1) echo ", "; else echo " ";
                     }
                     if($y==$mapHeight-1) echo "] "; else echo "], ";
