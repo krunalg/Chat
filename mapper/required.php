@@ -107,6 +107,17 @@ function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthP
     return $map;
 }
 
+/**
+ * Echoes a Weltmeister map file as text on to the screen.
+ *
+ * @param   $mapName Name of the map, which is also used to generate a filename.
+ * @param   $mapTiles 2D-array in the form $mapTiles[$x][$y][$n] where
+ *          $n==0 is the tilesheet-tiles x, and $n==1 is the y.
+ * @param   $tsWidthInTiles The width in tiles (not px) of the tilesheet.
+ * @param   $tsFilename The path to the tilesheet file.
+ * @param   $tilesize The size (in px) of each tile.
+ * @return  null
+ */
 function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
 {
     $mapWidth = count($mapTiles);
