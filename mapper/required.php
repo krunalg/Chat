@@ -294,10 +294,11 @@ function prepCollisions($collisions)
     {
         $result[$i] = trim($result[$i]);
         $result[$i] = explode(":", $result[$i]);
-        $result[$i][0] = trim($result[$i][0]);
-        $result[$i][1] = trim($result[$i][1]);
+        for($j=0; $j<count($result[$i]); $j++)
+            $result[$i][$j] = trim($result[$i][$j]);
     }
-    return $result;
+    if(count($result[0]!=2)) return array(); // if no data, return empty array
+    else return $result;
 }
 
 /**
@@ -325,9 +326,11 @@ function getCollisionsFromFile($file)
  */
 function buildHashIndexCollisions($collisions)
 {
+    $result = array();
     for($i=0; $i<count($collisions); $i++)
         $result[ $collisions[$i][0] ] = $collisions[$i][1];
-    return $result;
+    if(count($result)!=0) return $result;
+    else return array();
 }
 
 ?>
