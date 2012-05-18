@@ -131,12 +131,47 @@ function buildMapFromImage( $mapImg, $mapWidthPx, $mapHeightPx, $tsImg,
             
             // add collision data
             if(isset($collisions[$currTile]))
-                array_push($map[$x][$y], $collisions[$currTile]);
-            else
-                array_push($map[$x][$y], 0);
+            {
+                $collision = getWeltmeisterEquivalent($collisions[$currTile]);
+                array_push($map[$x][$y], $collision);
+            }
+            else array_push($map[$x][$y], 0); // magic numbers are bad
         }
     }
     return $map;
+}
+
+/**
+ * Translates local collision value into one that can be understood by
+ * Weltmeister.
+ *
+ * @param   $collisionIn Input integer to be mapped to another value.
+ * @return  integer representing a collision tile type in Weltmeister
+ */
+function getWeltmeisterEquivalent($collisionIn)
+{
+    switch($collisionIn)
+    {
+        case $GLOBALS['collisionNoWalk']:
+            $collisionOut = $GLOBALS['collisionNoWalkWM'];
+            break;
+        case $GLOBALS['collisionLeft']:
+            $collisionOut = $GLOBALS['collisionLeftWM'];
+            break;
+        case $GLOBALS['collisionRight']:
+            $collisionOut = $GLOBALS['collisionRightWM'];
+            break;
+        case $GLOBALS['collisionUp']:
+            $collisionOut = $GLOBALS['collisionUpWM'];
+            break;
+        case $GLOBALS['collisionDown']:
+            $collisionOut = $GLOBALS['collisionDownWM'];
+            break;
+        default:
+            $collisionOut = $GLOBALS['collisionWalkableWM'];
+            break;
+    }
+    return $collisionOut;
 }
 
 /**
