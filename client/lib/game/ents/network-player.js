@@ -67,7 +67,7 @@ ig.module (
 		    player.netStartMove();
 	    });
 	    
-	    socket.on('updateOtherPlayer-'+this.name, function (client, direction) {
+	    socket.on('updateOtherPlayer-'+this.name, function (direction) {
 		    player.facing = direction;
 	    });
 	    

@@ -161,7 +161,7 @@ io.sockets.on('connection', function (socket)
     });
     
     socket.on('receiveDirection', function (client, direction) {
-        socket.broadcast.to(socket.roomname).emit('updateOtherPlayer-'+socket.clientname, client, direction);
+        socket.broadcast.to(socket.roomname).emit('updateOtherPlayer-'+socket.clientname, direction);
         for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==client)
