@@ -312,7 +312,7 @@ function findTilesheets($path = '', $filename, &$name = array() )
     
       if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
       {
-          findTilesheets($path.DIRECTORY_SEPARATOR.$f, $filename, &$name); 
+          findTilesheets($path.DIRECTORY_SEPARATOR.$f, $filename, $name); 
       }
       else
       {
