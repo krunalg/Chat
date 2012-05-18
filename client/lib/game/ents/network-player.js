@@ -54,9 +54,10 @@ ig.module (
 		{ follow: this.name, color: 'blue' }
 	    );
 	    
+	    var player = this; // reference to be used by socket events
+	    
 	    socket.on('moveUpdateOtherPlayer-'+this.name, function (client, x, y, direction, state)
 	    {
-		    var player = ig.game.getEntityByName( client );
 		    player.vel.x = 0;
 		    player.vel.y = 0;
 		    player.pos.x = x;
@@ -67,13 +68,11 @@ ig.module (
 	    });
 	    
 	    socket.on('updateOtherPlayer-'+this.name, function (client, direction) {
-		    var player = ig.game.getEntityByName( client );
 		    player.facing = direction;
 	    });
 	    
 	    socket.on('otherPlayerJump-'+this.name, function (client, x, y, direction)
 	    {
-		    var player = ig.game.getEntityByName( client );
 		    player.vel.x = 0;
 		    player.vel.y = 0;
 		    player.pos.x = x;
@@ -84,7 +83,6 @@ ig.module (
 	    });
 	    
 	    socket.on('reskinOtherPlayer-'+this.name, function (client, skin) {
-		    var player = ig.game.getEntityByName( client );
 		    player.skin = skin;
 		    player.reskin();
 	    });
@@ -92,8 +90,6 @@ ig.module (
 	    socket.on('dropPlayer-'+this.name, function (client)
 	    {
 		    ig.game.events.push(client + " left the area.");
-		     
-		    var player = ig.game.getEntityByName( client );
 		    player.kill();
 	    });
 
