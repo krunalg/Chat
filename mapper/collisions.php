@@ -9,7 +9,7 @@ require('required.php');
     <head>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js" ></script>
     </head>
-    <body>
+    <body onload="initTiles()">
         
 <?php
 
@@ -218,6 +218,15 @@ else
         form.submit();
     }
     
+    var initTiles = function()
+    {
+        if(tiles!=undefined)
+        {
+            for(var x=0; x < <?php echo $widthInTiles; ?> ; x++)
+                for(var y=0; y < <?php echo $heightInTiles; ?> ; y++)
+                    tileOut(x,y);
+        }
+    }
     
     var collisionTypes = new Array();
     collisionTypes.push(<?php echo $collisionWalkable ?>);
