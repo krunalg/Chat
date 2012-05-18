@@ -30,34 +30,40 @@ function getTile($im, $tilesize, $tx, $ty)
     return md5($tilecolors);
 }
 
-function findMatchingTile($tilesheet, $w, $h, $tilesize, $tileHash)
+/**
+ * Finds a tile within a tilesheet that has a matching hash value
+ * and returns an array containing the tiles x and y position (not pixels).
+ *
+ * @param   $tsImg The tilesheet image to read from.
+ * @param   $tsWidth Width of tilesheet in pixels.
+ * @param   $tsHeight Height of tilsheet in pixels.
+ * @param   $tilesize Base tile size in pixels.
+ * @param   $tileHash MD5 hash value to search for.
+ * @return  one-dimensional array where index 0 holds x, 1 holds y.
+ */
+function findMatchingTile($tsImg, $tsWidth, $tsHeight, $tilesize, $tileHash)
 // returns the x and y position of the
 // matching tile within the tilesheet
 {
-    $pos = array();
-    
-    // divide tilesheet into tiles
-    $width = $w/$tilesize;
-    $height = $h/$tilesize;
-    
-    // iterate over tilesheet
+    $position = array();
+    $width = $tsWidth/$tilesize; // need map width-in-tiles for loop
+    $height = $tsHeight/$tilesize; // and height
     for($y=0; $y<$height; $y++)
     {
         for($x=0; $x<$width; $x++)
         {
-            $currTile = getTile($tilesheet, $tilesize, $x, $y);
+            $currTile = getTile($tsImg, $tilesize, $x, $y);
             if($currTile==$tileHash)
             {
                 // found match!
-                array_push($pos, $x, $y);
-                return $pos;
+                array_push($position, $x, $y);
+                return $position;
             }
         }
     }
-    
     // not found
-    array_push($pos, -1, -1);
-    return $pos;
+    array_push($position, -1, -1);
+    return $position;
 }
 
 /**
