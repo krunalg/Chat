@@ -5,15 +5,13 @@ $globalMapDir = ".\maps";
 $globalCollisionsFile = 'collisions.txt';
 $globalTilesheetFile = 'tilesheet.png';
 
-// collision values
-/*
+// used later to map collision types to a Weltmeister collision value
 $collisionWalkable = 0;
 $collisionNoWalk = 1;
-$collisionLeft = 45;
-$collisionRight = 34;
-$collisionUp = 12;
-$collisionDown = 23;
-*/
+$collisionLeft = 2;
+$collisionRight = 3;
+$collisionUp = 4;
+$collisionDown = 5;
 
 $collisionWalkableMouseoutImg = 'images/spacer.png';
 $collisionNoWalkMouseoutImg = 'images/solid.gif';
