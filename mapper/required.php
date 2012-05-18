@@ -60,27 +60,29 @@ function findMatchingTile($tilesheet, $w, $h, $tilesize, $tileHash)
     return $pos;
 }
 
+/**
+ * Finds all MD5 hash values for the tiles in a tilesheet.
+ *
+ * @param   $tsImg The tilesheet image to read from.
+ * @param   $tsWidth Width of tilesheet in pixels.
+ * @param   $tsHeight Height of tilsheet in pixels.
+ * @param   $tilesize Base tile size in pixels.
+ * @return  one-dimensional array containing the hashes for all tiles. 
+ */
 function buildTilesheetHashTable($tsImg, $tsWidth, $tsHeight, $tilesize)
-// returns an array with all the hashes
-// that make up its tiles
 {
-    $res = array();
-    
-    // divide tilesheet into tiles
-    $width = $tsWidth/$tilesize;
-    $height = $tsHeight/$tilesize;
-    
-    // iterate over tilesheet
+    $result = array();
+    $width = $tsWidth/$tilesize; // need map width-in-tiles for loop
+    $height = $tsHeight/$tilesize; // and height
     for($y=0; $y<$height; $y++)
     {
         for($x=0; $x<$width; $x++)
         {
             $currTile = getTile($tsImg, $tilesize, $x, $y);
-            array_push($res, $currTile);
+            array_push($result, $currTile);
         }
     }
-    
-    return $res;
+    return $result;
 }
 
 /**
