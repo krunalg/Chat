@@ -310,9 +310,13 @@ function prepCollisions($collisions)
  */
 function getCollisionsFromFile($file)
 {
-    $contents = file_get_contents($file);
-    $result = prepCollisions($contents);
-    return $result;
+    if(file_exists($file))
+    {
+        $contents = file_get_contents($file);
+        $result = prepCollisions($contents);
+        return $result;
+    }
+    else return array();
 }
 
 /**
