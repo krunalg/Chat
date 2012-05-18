@@ -140,7 +140,7 @@ io.sockets.on('connection', function (socket)
     });
       
     socket.on('receiveUpdateMoveState', function (x, y, direction, state) {
-        socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer-'+socket.clientname, socket.clientname, x, y, direction, state);
+        socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer-'+socket.clientname, x, y, direction, state);
         
 	// update players known info on server
 	for(var i=0; i<onlinePlayers.length; i++)

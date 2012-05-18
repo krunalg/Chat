@@ -56,7 +56,7 @@ ig.module (
 	    
 	    var player = this; // reference to be used by socket events
 	    
-	    socket.on('moveUpdateOtherPlayer-'+this.name, function (client, x, y, direction, state)
+	    socket.on('moveUpdateOtherPlayer-'+this.name, function (x, y, direction, state)
 	    {
 		    player.vel.x = 0;
 		    player.vel.y = 0;
