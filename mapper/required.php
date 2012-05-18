@@ -191,14 +191,23 @@ function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
     echo "});";
 }
 
+/**
+ * Finds the absolute tile position, given its x and y positions.
+ *
+ * @param   $x Integer representing the tiles position on the x-axis.
+ * @param   $y Integer representing the tiles position on the y-axis.
+ * @param   $widthInTiles Integer representing the width (in tiles) before a
+ *          new row of tiles begins.
+ * @return  integer representing the tile's x/y equivalent.
+ */
 function tilePosToInt($x, $y, $widthInTiles)
 // takes an x and y value and returns
 // a single int equivalency
 {
-    $res = 0;
-    $res += $y*$widthInTiles;
-    $res += $x;
-    return $res;
+    $result = 0;
+    $result += $y * $widthInTiles;
+    $result += $x;
+    return $result;
 }
 
 
