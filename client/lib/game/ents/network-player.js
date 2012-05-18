@@ -82,7 +82,7 @@ ig.module (
 		    player.netStartJump();
 	    });
 	    
-	    socket.on('reskinOtherPlayer-'+this.name, function (client, skin) {
+	    socket.on('reskinOtherPlayer-'+this.name, function (skin) {
 		    player.skin = skin;
 		    player.reskin();
 	    });

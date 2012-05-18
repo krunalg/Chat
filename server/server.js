@@ -128,7 +128,7 @@ io.sockets.on('connection', function (socket)
     
     socket.on('receiveReskin', function (skin) {
 	console.log("Player " + socket.clientname + " changed skin: " + skin);
-	socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-'+socket.clientname, socket.clientname, skin);
+	socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-'+socket.clientname, skin);
         for(var i=0; i<onlinePlayers.length; i++)
         {
             if(onlinePlayers[i].name==socket.clientname)
