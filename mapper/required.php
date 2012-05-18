@@ -83,27 +83,32 @@ function buildTilesheetHashTable($tsImg, $tsWidth, $tsHeight, $tilesize)
     return $res;
 }
 
+/**
+ * Analyzes an image of a map and recreates it using tiles from a tilesheet.
+ *
+ * @param   $mapImg The map image to copy.
+ * @param   $mapWidthPx Width of map in pixels.
+ * @param   $mapHeightPx Height of map in pixels.
+ * @param   $tsImg The tilesheet image to search for matching tiles.
+ * @param   $tsWidthPx Width of tilesheet in pixels.
+ * @param   $tsHeightPx Height of tilesheet in pixels.
+ * @param   $tilesize Base tile size in pixels.
+ * @return  two-dimentional array in the form $map[$x][$y][$n] where
+ *          n==0 is tilesheet-tiles x, n==1 is y
+ */
 function buildMapFromImage($mapImg, $mapWidthPx, $mapHeightPx, $tsImg, $tsWidthPx, $tsHeightPx, $tilesize)
-// returns a 2D array of the map with
-// corresponding tiles from tilesheet
 {
-    //$map = array();
-    
-    // divide map into tiles
-    $mapWidth = $mapWidthPx/$tilesize;
-    $mapHeight = $mapHeightPx/$tilesize;
-    
+    $mapWidth = $mapWidthPx/$tilesize; // need map width-in-tiles for loop
+    $mapHeight = $mapHeightPx/$tilesize; // and height
     for($y=0; $y<$mapHeight; $y++)
     {
         for($x=0; $x<$mapWidth; $x++)
         {
             $currTile = getTile($mapImg, $tilesize, $x, $y);
             $tsPos = findMatchingTile($tsImg, $tsWidthPx, $tsHeightPx, $tilesize, $currTile);
-            //array_push($map, 'hi');
             $map[$x][$y] = $tsPos;
         }
     }
-    
     return $map;
 }
 
