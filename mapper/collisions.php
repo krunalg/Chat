@@ -180,6 +180,7 @@ else if( isset($_POST['tiles']) )
             echo "Success writing file: " . $globalCollisionsFile;
     }
     else echo "Nothing to write to file.";
+    echo '<br /><a href="">Edit another tilesheet</a>';
     
     //echo "I found the following data: \n" . $_POST['tiles'];
 }
