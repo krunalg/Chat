@@ -20,7 +20,7 @@ for($i=0; $i<count($tilesheets); $i++)
     // trimming would make tilesheet eveningly
     // divisible by tilesize... a good thing!
     {
-        echo $tilesheets[$i] . " <b>needs trimming</b>... ";
+        echo $tilesheets[$i] . ' <b style="color: red">needs trimming</b>... ';
         if($allowTrimming) trim1px($tilesheets[$i]);
     }
     else echo $tilesheets[$i] . " does not need trimming... ";

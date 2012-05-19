@@ -399,7 +399,7 @@ function trim1px($filename)
     $newWidth = $oldWidth-1;
     $newHeight = $oldHeight;
     
-    $img = LoadPNG($file);
+    $img = LoadPNG($filename);
     $newimg = imagecreatetruecolor($newWidth, $newHeight);
     imagecopy($newimg, $img, 0, 0, 0, 0, $newWidth, $newHeight);
     
