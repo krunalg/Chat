@@ -103,11 +103,20 @@ else if( isset($_POST['build']) && $_POST['build']=='all' )
         
         // attempt to write master tilesheet to disk
         if(!imagepng($newimg, $globalMasterTilesheetFile))
-            die( "".$globalMasterTilesheetFile.
-                 ' <b style="color: red">failed</b>. '.
-                 'Could not write ' . $globalMasterTilesheetFile );
+            die( '<b style="color:red">Failed</b> writing file: '.
+                 $globalMasterTilesheetFile );
         else
-            echo 'Writing '.$globalMasterTilesheetFile.' <b>succeeded</b>...';
+            echo "<b>Success</b> writing file: ".$globalMasterTilesheetFile."<br>\n";
+            
+        
+        $afterJSON = json_encode($tiles); // need to save this
+        
+        // write to file
+        if(!file_put_contents($globalMasterTilesheetJSON, $afterJSON))
+            die( '<b style="color:red">Failed</b> writing file: '.
+                 $globalMasterTilesheetJSON );
+        else
+            echo "<b>Success</b> writing file: " . $globalMasterTilesheetJSON;
         
     }
     else die("Not enough tiles to perform a merge.");
