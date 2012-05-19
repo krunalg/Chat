@@ -409,4 +409,22 @@ function trim1px($filename)
     else die("Could not rename image: $filename");
 }
 
+/**
+ * Removes the filename at the end of a path, resulting in file's directory.
+ *
+ * @param   $path Path to file.
+ * @return  string containing a directory path.
+ */
+function removeFilenameFromPath($path)
+{
+    $pathParts = explode(DIRECTORY_SEPARATOR, $path);
+    $reconstructedPath = '';
+    
+    // remove just the filename, leaving us with files directory
+    for($j=0; $j < (count($pathParts) - 1) ; $j++)
+        $reconstructedPath = $reconstructedPath . $pathParts[$j] . DIRECTORY_SEPARATOR;
+    
+    return $reconstructedPath;
+}
+
 ?>

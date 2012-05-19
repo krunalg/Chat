@@ -1,14 +1,15 @@
 <?php
 
-ini_set('memory_limit','512M');
-set_time_limit(300);
+set_time_limit(300); // because processing maps can take a while
+ini_set('memory_limit','512M'); // and use a lot of memory
+
 
 include('inc.globals.php');
 require('required.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
 
-if(!isset($_POST['processMap']))
+if(!isset($_POST['mapPath']))
 {
     /*
      * First Page: Display status of maps, whether they are processed or not
@@ -21,26 +22,21 @@ if(!isset($_POST['processMap']))
     // check if the map has been processed yet or not
     for($i=0; $i<count($maps); $i++)
     {
-        $mapPath = explode(DIRECTORY_SEPARATOR, $maps[$i]);
-        $reconstructedPath = '';
-        
-        // remove just the filename, leaving us with files directory
-        for($j=0; $j < (count($mapPath) - 1) ; $j++)
-            $reconstructedPath = $reconstructedPath . $mapPath[$j] . DIRECTORY_SEPARATOR;
+        $reconstructedPath = removeFilenameFromPath($maps[$i]);
         
         // if a JSON file is present, the map has been processed
         if(file_exists($reconstructedPath . $globalMapJSON))
             echo $maps[$i]." has been processed... <br>\n";
         else
         {
-            echo $maps[$i].' <b style="color: red">requires processing</b>...'
-            echo '<input type="button"
-                         value="Process"
-                         onClick="post_to_url( \'master.php\',
-                            {
-                                \'processMap\': \''.$maps[$i].'\'
-                            } );"/>'
-            echo ."<br>\n";
+            echo $maps[$i].' <b style="color: red">requires processing</b>...';
+            echo '<input type="button" '.
+                         'value="Process" '.
+                         'onClick="post_to_url( \'\', '. // post to same file ''
+                            '{ '.
+                                '\'mapPath\': \''.$maps[$i].'\' '.
+                            '} );"/> ';
+            echo "<br>\n";
         }
     }
     
@@ -52,7 +48,13 @@ else
      *
      */
     
+    $mapPath = $_POST['mapPath'];
+    
     // check that map exists
+    if(file_exists($mapPath))
+    {
+        
+    }
     
     // if it exists, make sure it has not been processed, aborting if it has
     
