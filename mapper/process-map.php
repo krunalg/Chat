@@ -70,7 +70,7 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
         $mapPaths = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
     // otherwise leave array empty
     
-    echo 'Will now process ' . count($mapPaths) . 'maps...<br><br>\n\n';
+    echo 'Will now process ' . count($mapPaths) . ' maps...<br><br>'."\n\n";
     
     for($i=0; $i<count($mapPaths); $i++)
     {
