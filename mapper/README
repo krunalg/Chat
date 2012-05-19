@@ -1,0 +1,10 @@
+index.php
+-   Used for testing at the moment.
+
+required.php
+-   Useful functions used in more than one place.
+
+collisions.php
+-   Maintains collisions.txt, a collection of collision preferences. Choose
+    which collision type tiles should be when opened in Weltmeister.
+
