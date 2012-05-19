@@ -12,18 +12,18 @@ echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used
 if( !isset($_POST['dump']) )
 {
     /*
-     * First Page: Display all tilesheets in the maps folder
+     * First Page: Display all maps in the maps folder
      *
      */
     
-    // get a list of all tilesheets
-    $tilesheets = scanFileNameRecursivly($globalMapDir, $globalTilesheetFile);
-    for($i=0; $i<count($tilesheets); $i++)
+    // get a list of all maps
+    $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
+    for($i=0; $i<count($maps); $i++)
     {
         $postSafePath = // needed to not lose slashes on next page
-            str_replace('\\', "\\\\", $tilesheets[$i]);
+            str_replace('\\', "\\\\", $maps[$i]);
             
-        echo $tilesheets[$i].' found...';
+        echo $maps[$i].' found...';
         echo '<input type="button" '.
                      'value="Dump" '.
                      'onClick="post_to_url( \'\', '. // post to same file ''
@@ -33,9 +33,9 @@ if( !isset($_POST['dump']) )
         echo "<br>\n\n";
     }
     
-    if(count($tilesheets)>=1) // only give dump option if something to dump
+    if(count($maps)>=1) // only give dump option if something to dump
     {
-        echo '<br>Dump a specific tilesheet above or... ';
+        echo '<br>Dump a specific map above or... ';
         echo '<input type="button" '.
                 'value="Dump All" '.
                 'onClick="post_to_url( \'\', '. // post to same file ''
@@ -47,41 +47,41 @@ if( !isset($_POST['dump']) )
 else if(isset($_POST['dump']))
 {
     /*
-     * Second Page: dump one or all of tilesheets tiles into the dump directory
+     * Second Page: dump one or all of maps tiles into the dump directory
      *
      */
     
-    $tilesheets = array();
+    $maps = array();
     
     // dump them all if process=='all'
     if(isset($_POST['dump']) && $_POST['dump']=='all')
-        $tilesheets = scanFileNameRecursivly($globalMapDir, $globalTilesheetFile);
+        $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
     // or just do one map if one is specified
     else if(isset($_POST['dump']))
-        array_push($tilesheets, $_POST['dump']);
+        array_push($maps, $_POST['dump']);
         
-    // dump tilesheets
-    for($i=0; $i<count($tilesheets); $i++)
+    // dump maps
+    for($i=0; $i<count($maps); $i++)
     {
-        // make sure tilesheet exists
-        if(file_exists($tilesheets[$i]))
+        // make sure map exists
+        if(file_exists($maps[$i]))
         {
             $skipped = 0;
             $dumped = 0;
             
-            // load tilesheet
-            $tilesheetSize = getimagesize($tilesheets[$i]);
-            $tilesheetWidth = $tilesheetSize[0];
-            $tilesheetHeight = $tilesheetSize[1];
-            $tilesheet = LoadPNG($tilesheets[$i]);
+            // load map
+            $mapSize = getimagesize($maps[$i]);
+            $mapWidth = $mapSize[0];
+            $mapHeight = $mapSize[1];
+            $map = LoadPNG($maps[$i]);
             
-            // copy individual tiles from tilesheet
-            for($y=0; $y<$tilesheetHeight/$globalTilesize; $y++)
+            // copy individual tiles from map
+            for($y=0; $y<$mapHeight/$globalTilesize; $y++)
             {
-                for($x=0; $x<$tilesheetWidth/$globalTilesize; $x++)
+                for($x=0; $x<$mapWidth/$globalTilesize; $x++)
                 {
                     $tileHash = // used in naming tile file
-                        getTile($tilesheet, $globalTilesize, $x, $y);
+                        getTile($map, $globalTilesize, $x, $y);
                    
                     $tileDestination = // path and filename of tile to write
                             $globalTileDumpDir.DIRECTORY_SEPARATOR.$tileHash.'.png';
@@ -95,12 +95,12 @@ else if(isset($_POST['dump']))
                         // attempt to copy current tile into empty tile
                         if(!imagecopy( 
                             $newimg, // destination image
-                            $tilesheet, // source image
+                            $map, // source image
                             0, 0, // x, y destination
                             $x*$globalTilesize, $y*$globalTilesize, // x, y source
                             $globalTilesize, // copy width
                             $globalTilesize // copy height
-                        )) die( "".$tilesheet[$i].' <b>failed</b>. '.
+                        )) die( "".$map[$i].' <b>failed</b>. '.
                                 'Could not copy tile: '.$x.','.$y   );
 
                         // create folder if does not exist
@@ -117,7 +117,7 @@ else if(isset($_POST['dump']))
                             
                         // attempt to write new tile to disk
                         if(!imagepng($newimg, $tileDestination))
-                            die( "".$tilesheet[$i].' <b>failed</b>. '.
+                            die( "".$map[$i].' <b>failed</b>. '.
                                 'Could not write tile ('.$x.','.$y.') to: '.
                                 $tileDestination );
                         
@@ -126,12 +126,12 @@ else if(isset($_POST['dump']))
                     else $skipped++; // not dumping existing tile
                 }
             }
-            // reporting before possible next tilesheet
-            echo "Done dumping ".$tilesheets[$i].
+            // reporting before possible next map
+            echo "Done dumping ".$maps[$i].
                  " (<b>skipped ".$skipped."</b> existing tiles".
                  " and <b>dumped ".$dumped."</b> new tiles)...<br>\n\n";
         }
-        else die( "" . $tilesheets[$i] . " does not exist.");
+        else die( "" . $maps[$i] . " does not exist.");
     } 
 }
 
