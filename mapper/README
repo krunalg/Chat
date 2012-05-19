@@ -15,10 +15,13 @@ trim.php
 collisions.php
 -   Maintains collisions.txt, a collection of collision preferences. Choose
     which collision type tiles should be when opened in Weltmeister.
+
+process-map.php
+-   Lists all maps found in the maps directory, and whether or not they have
+    been processed (a JSON file has been generated for them). If one has not,
+    the option is given to generate one.
     
 master.php
 -   Creates a master tilesheet that contains every tile used by all maps in
-    the maps folder. It scans individual maps and generates a JSON file called
-    map.js, which contains the width, height, and tile information (including
-    x, y, hash values).
-
+    the maps folder. Before doing this, you must make sure that all maps
+    whose tiles need be includes are first processed (see process-map.php).
