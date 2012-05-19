@@ -145,10 +145,11 @@ else if(isset($_POST['dump']))
     } 
 }
 
-<?php 
-$End = getTime(); 
-echo "\n\n<br><br>Time taken = ".number_format(($End - $Start),2)." secs"; 
 ?>
 
 
+
+<?php 
+$End = getTime(); 
+echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs"; 
 ?>
