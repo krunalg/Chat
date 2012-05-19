@@ -23,6 +23,11 @@ process-map.php
 -   Lists all maps found in the maps directory, and whether or not they have
     been processed (a JSON file has been generated for them). If one has not,
     the option is given to generate one.
+
+used-tiles.php
+-   Reads all existing map JSON files in the maps directory and from them it
+    compiles an array of all the tiles that exist throughout the game world,
+    which is stored as a JSON file used-tiles.js
     
 master.php
 -   Creates a master tilesheet that contains every tile used by all maps in
