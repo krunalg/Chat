@@ -71,16 +71,24 @@ else if(isset($_POST['compile']))
         }
         else die("".$maps[$i]." does not exist."); // map JSON file doesn't exist
     }
-    die();
     
     if(count($tileIsUsed)>=1) // array of used-tiles is populated
     {
         $beforeJSON = array(); // to be converted to JSON
+        
         // convert hash-index array to standard array
         foreach($tileIsUsed as $key => $value)
         {
             array_push($beforeJSON, $key); // key is the tile's hash
         }
+        
+        $afterJSON = json_encode($beforeJSON); // must be JSON before writing
+        
+        // write to file
+        if(!file_put_contents($globalUsedTilesFile, $afterJSON))
+            die('<br><b style="color:red">Failed</b> writing file: ' . $globalUsedTilesFile);
+        else
+            echo "<br><b>Success</b> writing file: " . $globalUsedTilesFile;
     }
     else die("Array of tiles used is empty.");
 }
