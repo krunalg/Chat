@@ -311,10 +311,12 @@ function scanFileNameRecursivly($path = '', $filename = '', &$name = array() )
             if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
                 scanFileNameRecursivly($path.DIRECTORY_SEPARATOR.$f, $filename, $name); 
             else
-                if($f=='' || $f==$filename) $name[] = $path.DIRECTORY_SEPARATOR.$f;
+                if($f!= ".." && $f != ".") // don't report these
+                    if($f==$filename || $filename=='') // if found what we want
+                        $name[] = $path.DIRECTORY_SEPARATOR.$f; // add to results
         }
     }
-  return $name;
+    return $name;
 }
 
 /**
