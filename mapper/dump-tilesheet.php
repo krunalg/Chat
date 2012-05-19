@@ -55,7 +55,7 @@ else if(isset($_POST['dump']))
     
     // dump them all if process=='all'
     if(isset($_POST['dump']) && $_POST['dump']=='all')
-        $tilesheets = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
+        $tilesheets = scanFileNameRecursivly($globalMapDir, $globalTilesheetFile);
     // or just do one map if one is specified
     else if(isset($_POST['dump']))
         array_push($tilesheets, $_POST['dump']);
