@@ -1,9 +1,11 @@
+.gitignore
+
 baked/
 impact/
 weltmeister/
 tools/
 
-
+to-do.txt
 weltmeister.html
 how-to-use-git.txt
 challenges.rtf
