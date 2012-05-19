@@ -103,13 +103,18 @@ else if(isset($_POST['dump']))
                         )) die( "".$tilesheet[$i].' <b>failed</b>. '.
                                 'Could not copy tile: '.$x.','.$y   );
 
-                        
-                        if(!is_dir($globalTileDumpDir)) // ensure folder exists
-                            if(!mkdir($globalTileDumpDir)) // if not try creating
-                                die( "Could not create directory ".
+                        // create folder if does not exist
+                        if(!is_dir($globalTileDumpDir))
+                        {
+                            if(mkdir($globalTileDumpDir)) // try creating it
+                                echo $globalTileDumpDir. // success
+                                     " did not exist. <b>Created</b>.".
+                                     "<br><br>\n\n";
+                            else
+                                die( "Could not create directory ". // fail
                                     $globalTileDumpDir );
+                        }
                             
-                        
                         // attempt to write new tile to disk
                         if(!imagepng($newimg, $tileDestination))
                             die( "".$tilesheet[$i].' <b>failed</b>. '.
