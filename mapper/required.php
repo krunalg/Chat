@@ -382,4 +382,33 @@ function buildHashIndexCollisions($collisions)
     else return array();
 }
 
+/**
+ * Trims the last single pixel off the x-axis of an image, replacing
+ * the original, but also generating a backup.
+ *
+ * @param   $collisions Array of collisions where $collisions[$n][0] is
+ *          an MD5 hash, and $collisions[$n][1] is an integer.
+ * @return  array of collisions where the indexes are now MD5 hashes and the
+ *          values are integers.
+ */
+function trim1px($filename)
+{
+    $size = getimagesize($filename);
+    $oldWidth = $size[0];
+    $oldHeight = $size[1];
+    $newWidth = $oldWidth-1;
+    $newHeight = $oldHeight;
+    
+    $img = LoadPNG($file);
+    $newimg = imagecreatetruecolor($newWidth, $newHeight);
+    imagecopy($newimg, $img, 0, 0, 0, 0, $newWidth, $newHeight);
+    
+    if(rename($filename, $filename.".backup"))
+    {
+        // renamed file, now write new one
+        if(!imagepng($newimg, $filename die("Could not write new image: $filename");
+    }
+    else die("Could not rename image: $filename");
+}
+
 ?>

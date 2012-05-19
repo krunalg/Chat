@@ -4,35 +4,6 @@ include('inc.globals.php');
 require('required.php');
 
 
-
-
-
-function trim1px($file)
-/*
- * This function trims 1px from the width of the file supplied in param
- * 
- */
-{
-    $size = getimagesize($file);
-    $oldWidth = $size[0];
-    $oldHeight = $size[1];
-    $newWidth = $oldWidth-1;
-    $newHeight = $oldHeight;
-    
-    $img = LoadPNG($file);
-    $newimg = imagecreatetruecolor($newWidth, $newHeight);
-    imagecopy($newimg, $img, 0, 0, 0, 0, $newWidth, $newHeight);
-    
-    if(rename($file, $file.".backup"))
-    {
-        // renamed file, now write new one
-        if(!imagepng($newimg, $file)) die("Could not write new image: $file");
-    }
-    else die("Could not rename image: $file");
-}
-
-
-
 /*
  * create an array containing path of every tilesheet
  *
