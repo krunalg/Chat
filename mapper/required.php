@@ -385,10 +385,8 @@ function buildHashIndexCollisions($collisions)
  * Trims the last single pixel off the x-axis of an image, replacing
  * the original, but also generating a backup.
  *
- * @param   $collisions Array of collisions where $collisions[$n][0] is
- *          an MD5 hash, and $collisions[$n][1] is an integer.
- * @return  array of collisions where the indexes are now MD5 hashes and the
- *          values are integers.
+ * @param   $filename Path to file to be trimmed.
+ * @return  null
  */
 function trim1px($filename)
 {
