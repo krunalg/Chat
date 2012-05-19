@@ -29,12 +29,13 @@ if(!isset($_POST['mapPath']))
             echo $maps[$i]." has been processed... <br>\n";
         else
         {
+            $postSafeMapPath = str_replace('\\', "\\\\", $maps[$i]); // needed to not lose slashes on next page
             echo $maps[$i].' <b style="color: red">requires processing</b>...';
             echo '<input type="button" '.
                          'value="Process" '.
                          'onClick="post_to_url( \'\', '. // post to same file ''
                             '{ '.
-                                '\'mapPath\': \''.$maps[$i].'\' '.
+                                '\'mapPath\': \''.$postSafeMapPath.'\' '.
                             '} );"/> ';
             echo "<br>\n";
         }
@@ -53,6 +54,7 @@ else
     // check that map exists
     if(file_exists($mapPath))
     {
+        $reconstructedPath = removeFilenameFromPath($mapPath);
         // if a JSON file is present, the map has been processed
         if(!file_exists($reconstructedPath . $globalMapJSON))
         {
@@ -65,18 +67,25 @@ else
             // build array of hashes from tiles
             $hashes = buildHashTableFromImage($map, $mapWidth, $mapHeight, $globalTilesize);
             
-            for($y=0; $y<$mapHeight/$globalTilesize; $y++)
-            {
-                for($x=0; $x<$mapWidth/$globalTilesize; $x++)
-                {
-                    
-                }
-            }
+            // build JSON
+            $mapWidthInTiles = $mapWidth/$globalTilesize;
+            $mapHeightInTiles = $mapHeight/$globalTilesize;
+            $beforeJSON = array (
+                            'width' => $mapWidthInTiles,
+                            'height' => $mapHeightInTiles,
+                            'tiles' => $hashes
+                          );
+            $afterJSON = json_encode($beforeJSON);
+            //echo $afterJSON;
+            $afterAfterJSON = json_decode($afterJSON);
+            print_r($afterAfterJSON);
         }
         // JSON file exists
-        else die("" . $mapPath . " has already been processed.<br>\nYou must first delete it to do this.")
+        else die( "" . $mapPath . " has already been processed." .
+                  "<br>\nYou must first delete it to do this."   );
 
     }
+    else die( "" . $mapPath . " does not exist.");
 }
 
 
