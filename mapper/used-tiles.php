@@ -36,11 +36,53 @@ if( !isset($_POST['compile']) )
 else if(isset($_POST['compile']))
 {
     /*
-     * Second Page: Process an unprocessed map
+     * Second Page: Create an array of unique tiles and write to file
      *
      */
     
-    echo "compile here...";
+    $tileIsUsed = array(); // record of all used tiles
+    
+    // get a list of all maps which have been processed
+    $maps = scanFileNameRecursivly($globalMapDir, $globalMapJSON);
+    for($i=0; $i<count($maps); $i++)
+    {
+        // open json file
+        if(file_exists($maps[$i]))
+        {
+            $mapJSON = file_get_contents($maps[$i]);
+            if(!$mapJSON) die("Problem with ".$maps[$i]);
+            
+            $mapJSON = json_decode($mapJSON); // convert JSON into PHP
+            
+            // read through all tiles, adding them to an array
+            foreach($mapJSON as $couldBeTiles) // traverse the stdClass Object
+            {
+                if(is_array($couldBeTiles)) // the tiles field, not the width/height fields
+                {
+                    for($j=0; $j<count($couldBeTiles); $j++)
+                        // using hash for index so there are no duplicates
+                        $tileIsUsed[ $couldBeTiles[$j] ] = true;
+                    
+                    // reporting
+                    echo $maps[$i] . " contained ".count($couldBeTiles)." tiles... ";
+                    echo "unique tiles so far: <b>".count($tileIsUsed)."</b><br>\n\n";
+                }       
+            }
+        }
+        else die("".$maps[$i]." does not exist."); // map JSON file doesn't exist
+    }
+    die();
+    
+    if(count($tileIsUsed)>=1) // array of used-tiles is populated
+    {
+        $beforeJSON = array(); // to be converted to JSON
+        // convert hash-index array to standard array
+        foreach($tileIsUsed as $key => $value)
+        {
+            array_push($beforeJSON, $key); // key is the tile's hash
+        }
+    }
+    else die("Array of tiles used is empty.");
 }
 
 
