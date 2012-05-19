@@ -20,7 +20,7 @@ collisions.php
     which collision type tiles should be when opened in Weltmeister.
 
 process-map.php
--   Lists all maps found in the maps directory, and whether or not they have
+-   Lists all maps found in the maps directory, whether or not they have
     been processed (a JSON file has been generated for them). If one has not,
     the option is given to generate one.
 
@@ -28,6 +28,11 @@ used-tiles.php
 -   Reads all existing map JSON files in the maps directory and from them it
     compiles an array of all the tiles that exist throughout the game world,
     which is stored as a JSON file used-tiles.js
+
+dump-tilesheet.php
+-   Lists all tilesheets found in the maps directory. You are given the option
+    to dump the individual tiles of a specific tilesheet, or dump from all
+    tilesheets at once. Warning: may be time consuming.
     
 master.php
 -   Creates a master tilesheet that contains every tile used by all maps in
