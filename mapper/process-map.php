@@ -74,8 +74,6 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
     
     for($i=0; $i<count($mapPaths); $i++)
     {
-        flush(); // write any previous process results to screen
-        
         // check that map exists
         if(file_exists($mapPaths[$i]))
         {
