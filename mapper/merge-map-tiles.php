@@ -19,9 +19,21 @@ require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
 
+if( !isset($_POST['build']) )
+{
+    /*
+     * First Page: Display all maps in the maps folder
+     *
+     */
+    
+    // get a list of all maps
+    $tiles = scanFileNameRecursivly($globalMapDir, '.png');
+    print_r($tiles);
+    die();
 
+}
 
-
+?>
 
 <?php 
 $End = getTime(); 
