@@ -299,26 +299,21 @@ function tilePosToInt($x, $y, $widthInTiles)
  
  * @author  Fazle Elahee (modified by Jonathan Commins)
  */
-function scanFileNameRecursivly($path = '', $filename, &$name = array() )
+function scanFileNameRecursivly($path = '', $filename = '', &$name = array() )
 {
-  $path = $path == ''? dirname(__FILE__) : $path;
-  $lists = @scandir($path);
-  
-  if(!empty($lists))
-  {
-      foreach($lists as $f)
-      { 
+    $path = $path == ''? dirname(__FILE__) : $path;
+    $lists = @scandir($path);
     
-      if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
-      {
-          scanFileNameRecursivly($path.DIRECTORY_SEPARATOR.$f, $filename, $name); 
-      }
-      else
-      {
-          if($f==$filename) $name[] = $path.DIRECTORY_SEPARATOR.$f;
-      }
-      }
-  }
+    if(!empty($lists))
+    {
+        foreach($lists as $f)
+        { 
+            if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
+                scanFileNameRecursivly($path.DIRECTORY_SEPARATOR.$f, $filename, $name); 
+            else
+                if($f=='' || $f==$filename) $name[] = $path.DIRECTORY_SEPARATOR.$f;
+        }
+    }
   return $name;
 }
 
