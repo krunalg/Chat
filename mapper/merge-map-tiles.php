@@ -53,7 +53,64 @@ else if( isset($_POST['build']) && $_POST['build']=='all' )
      *
      */
     
-    die("Merge tiles here.");
+    // get a list of all dumped tiles
+    $tiles = scanFileNameRecursivly($globalTileDumpDir);
+    
+    // only perform a merge if there is more than one file
+    if(count($tiles>1))
+    {
+        // calculate master tilesheet dimensions
+        $tilesheetWidthInTiles = $globalMasterTilesheetWidth/$globalTilesize;
+        $tilesheetHeightInTiles = ceil(count($tiles)/$tilesheetWidthInTiles);
+            //echo "w: $tilesheetWidthInTiles ... h: $tilesheetHeightInTiles ";
+        
+        // create new image
+        $newimg = // create empty tilesheet image
+            imagecreatetruecolor(
+                $tilesheetWidthInTiles * $globalTilesize,
+                $tilesheetHeightInTiles * $globalTilesize );
+        
+        // adding tiles to master tilesheet
+        $nextTile = 0; // progresses through tiles array index
+        for($y=0; $y<$tilesheetHeightInTiles; $y++)
+        {
+            for($x=0; $x<$tilesheetWidthInTiles; $x++)
+            {
+                $tile = LoadPNG($tiles[$nextTile]);
+                
+                // regardless of tile's real size (which should always match
+                // the global tilesize) we will use global tilesize
+                
+                // attempt to copy current tile into master tilesheet
+                if(!imagecopy( 
+                    $newimg, // destination image
+                    $tile, // source image
+                    $x*$globalTilesize, $y*$globalTilesize, // x, y destination
+                    0, 0, // x, y source
+                    $globalTilesize, // copy width
+                    $globalTilesize // copy height
+                )) die( "".$tiles[$nextTile].' <b>failed</b>. '.
+                        'Could not copy tile.'  );
+                
+                // stop copy tiles when there are none left to write
+                if($nextTile==count($tiles)-1)
+                {
+                    break;
+                }
+                $nextTile++; // otherwise next tile
+            }
+        }
+        
+        // attempt to write master tilesheet to disk
+        if(!imagepng($newimg, $globalMasterTilesheetFile))
+            die( "".$globalMasterTilesheetFile.
+                 ' <b style="color: red">failed</b>. '.
+                 'Could not write ' . $globalMasterTilesheetFile );
+        else
+            echo 'Writing '.$globalMasterTilesheetFile.' <b>succeeded</b>...';
+        
+    }
+    else die("Not enough tiles to perform a merge.");
 }
 
 ?>
