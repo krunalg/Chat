@@ -10,6 +10,7 @@ $globalMapFilename = 'map.png';
 $globalMapJSON = 'map.js';
 $globalUsedTilesFile = 'used-tiles.js';
 $globalMasterTilesheetFile = 'master.png';
+$globalMasterTilesheetJSON = 'master.js';
 
 // used later to map collision types
 // to a Weltmeister collision value.
