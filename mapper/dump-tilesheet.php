@@ -47,11 +47,79 @@ if( !isset($_POST['dump']) )
 else if(isset($_POST['dump']))
 {
     /*
-     * Second Page: 
+     * Second Page: dump one or all of tilesheets tiles into the dump directory
      *
      */
     
-    echo "Perform dump here.";
+    $tilesheets = array();
+    
+    // dump them all if process=='all'
+    if(isset($_POST['dump']) && $_POST['dump']=='all')
+        $tilesheets = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
+    // or just do one map if one is specified
+    else if(isset($_POST['dump']))
+        array_push($tilesheets, $_POST['mapPath']);
+        
+    // dump tilesheets
+    for($i=0; $i<count($tilesheets); $i++)
+    {
+        // make sure tilesheet exists
+        if(file_exists($tilesheets[$i]))
+        {
+            $skipped = 0;
+            $dumped = 0;
+            
+            // load tilesheet
+            $tilesheetSize = getimagesize($tilesheets[$i]);
+            $tilesheetWidth = $tilesheetSize[0];
+            $tilesheetHeight = $tilesheetSize[1];
+            $tilesheet = LoadPNG($tilesheets[$i]);
+            
+            // copy individual tiles from tilesheet
+            for($y=0; $y<$tilesheetHeight/$globalTilesize; $y++)
+            {
+                for($x=0; $x<$tilesheetWidth/$globalTilesize; $x++)
+                {
+                    $tileHash = // used in naming tile file
+                        getTile($tilesheet, $globalTilesize, $x, $y);
+                   
+                    $tileDestination = // path and filename of tile to write
+                            $globalTileDumpDir.DIRECTORY_SEPARATOR.$hash.'.png';
+                            
+                    // only dump tile to disk if it does not exist
+                    if(!file_exists($tileDestination))
+                    {
+                        $newimg = // create empty tile image
+                            imagecreatetruecolor($globalTilesize, $globalTilesize);
+                        
+                        // attempt to copy current tile into empty tile
+                        if(!imagecopy( 
+                            $newimg, // destination image
+                            $tilesheet, // source image
+                            0, 0, // x, y destination
+                            $x*$globalTilesize, $y*$globalTilesize, // x, y source
+                            $globalTilesize, // copy width
+                            $globalTilesize // copy height
+                        )) die( "".$tilesheet[$i].' <b>failed</b>. '.
+                                'Could not copy tile: '.$x.','.$y   );
+
+                        // attempt to write new tile to disk
+                        if(!imagepng($newimg, $tileDestination));
+                            die( "".$tilesheet[$i].' <b>failed</b>. '.
+                                'Could not write tile ('.$x.','.$y.') to: '.
+                                $tileDestination );
+                        
+                        $dumped++; // successfully dumped a tile
+                    }
+                    else $skipped++; // not dumping existing tile
+                }
+            }
+            // reporting before possible next tilesheet
+            echo $tilesheets[$i]." <b>skipped ".$skipped."</b> existing tiles".
+                 " and <b>dumped ".$dumped."</b> new tiles...<br>\n\n";
+        }
+        else die( "" . $tilesheets[$i] . " does not exist.");
+    } 
 }
 
 
