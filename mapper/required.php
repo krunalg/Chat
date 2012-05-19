@@ -84,16 +84,16 @@ function findMatchingTile($tsImg, $tsWidth, $tsHeight, $tilesize, $tileHash)
  * @param   $tilesize Base tile size in pixels.
  * @return  one-dimensional array containing the hashes for all tiles. 
  */
-function buildTilesheetHashTable($tsImg, $tsWidth, $tsHeight, $tilesize)
+function buildHashTableFromImage($image, $imageWidth, $imageHeight, $tilesize)
 {
     $result = array();
-    $width = $tsWidth/$tilesize; // need map width-in-tiles for loop
-    $height = $tsHeight/$tilesize; // and height
+    $width = $imageWidth/$tilesize; // need map width-in-tiles for loop
+    $height = $imageHeight/$tilesize; // and height
     for($y=0; $y<$height; $y++)
     {
         for($x=0; $x<$width; $x++)
         {
-            $currTile = getTile($tsImg, $tilesize, $x, $y);
+            $currTile = getTile($image, $tilesize, $x, $y);
             array_push($result, $currTile);
         }
     }
