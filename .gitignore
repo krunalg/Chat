@@ -1,10 +1,17 @@
-.gitignore
+# Temp ignore while developing mapper
+map.js
+used-tiles.js
 
+
+
+
+# Folders
 baked/
 impact/
 weltmeister/
 tools/
 
+# Files
 map.js
 to-do.txt
 weltmeister.html
