@@ -1,8 +1,13 @@
 index.php
--   Used for testing at the moment.
+-   Used for testing at the moment. For example, outputing Weltmeister maps.
 
 required.php
 -   Useful functions used in more than one place.
+
+trim.php
+-   Lists all tilesheets within the maps folder and states whether or not
+    they need to be trimmed. Added ?trim=yes to the browser window will
+    enable trimming which is by default disabled.
 
 collisions.php
 -   Maintains collisions.txt, a collection of collision preferences. Choose
