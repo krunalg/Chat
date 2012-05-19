@@ -1,6 +1,7 @@
 <?php
 
 $globalTilesize = 16;
+$globalMasterTilesheetWidth = 256;
 $globalMapDir = ".\maps";
 $globalTileDumpDir = ".\dumped-tiles";
 $globalCollisionsFile = 'collisions.txt';
