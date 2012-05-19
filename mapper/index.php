@@ -35,7 +35,7 @@ $mapHeight = 32;
 //print_r( findMatchingTile($tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize, $testTile) );
 
 // print out a hash table of all the tiles within tilesheet
-//print_r(buildTilesheetHashTable($tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize));
+//print_r(buildHashTableFromImage($tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize));
 
 // print out an array with x, y, and hash of all tiles in map
 //print_r(buildMapFromImage($map, $mapWidth, $mapHeight, $tilesheet, $tilesheetWidth, $tilesheetHeight, $globalTilesize));

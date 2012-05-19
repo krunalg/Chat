@@ -53,16 +53,30 @@ else
     // check that map exists
     if(file_exists($mapPath))
     {
-        
+        // if a JSON file is present, the map has been processed
+        if(!file_exists($reconstructedPath . $globalMapJSON))
+        {
+            // load map
+            $mapSize = getimagesize($mapPath);
+            $mapWidth = $mapSize[0];
+            $mapHeight = $mapSize[1];
+            $map = LoadPNG($mapPath);
+            
+            // build array of hashes from tiles
+            $hashes = buildHashTableFromImage($map, $mapWidth, $mapHeight, $globalTilesize);
+            
+            for($y=0; $y<$mapHeight/$globalTilesize; $y++)
+            {
+                for($x=0; $x<$mapWidth/$globalTilesize; $x++)
+                {
+                    
+                }
+            }
+        }
+        // JSON file exists
+        else die("" . $mapPath . " has already been processed.<br>\nYou must first delete it to do this.")
+
     }
-    
-    // if it exists, make sure it has not been processed, aborting if it has
-    
-    // if map has not been processed, load tilesheet, aborting if it fails
-    
-    // if tilesheet load ok, load map also
-    
-    // if map loads ok, begin
 }
 
 
