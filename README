@@ -8,11 +8,18 @@ http://commins.ca/fs/
 To run the server yourself, you must have NodeJS installed. If server.bat does
 not work, you can drag server.js onto node.exe instead (does the same thing).
 
-Websites:
-NodeJS - http://nodejs.org/
-Socket.IO - http://socket.io/
-ImpactJS - http://impactjs.com/
-jQuery - http://jquery.com/
+NodeJS
+http://nodejs.org/
+
+Socket.IO
+http://socket.io/
+https://github.com/LearnBoost/socket.io/blob/master/Readme.md
+
+ImpactJS
+http://impactjs.com/
+
+jQuery
+http://jquery.com/
 
 To-do:
 - Update map scrolling logic to allow any resolution, not just the current
