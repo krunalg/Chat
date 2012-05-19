@@ -54,4 +54,5 @@ dump-map-tiles.php
 merge-map-tiles.php
 -   Creates a single tilesheet that contains every tile in dumped-tiles folder.
     In other words, this should create a tilesheet that contains every tile
-    that appears any place in the game-world.
+    that appears any place in the game-world. Also generates a JSON file with
+    the hash values for every tile for fast lookup.
