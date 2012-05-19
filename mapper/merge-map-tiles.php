@@ -22,15 +22,38 @@ echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used
 if( !isset($_POST['build']) )
 {
     /*
-     * First Page: Display all maps in the maps folder
+     * First Page: Displays statistics and offer to merge
      *
      */
     
-    // get a list of all maps
-    $tiles = scanFileNameRecursivly($globalMapDir, '.png');
-    print_r($tiles);
-    die();
-
+    // get a list of all dumped tiles
+    $tiles = scanFileNameRecursivly($globalTileDumpDir);
+    
+    // report
+    echo 'Found <b>'.count($tiles).'</b> in '.$globalTileDumpDir.'...';
+    
+    if(count($tiles)>=2) // only offer to merge if some exist
+    {
+        echo "<br><br>\n\n";
+        echo '<input type="button" '.
+                'value="Merge all into single image" '.
+                'onClick="post_to_url( \'\', '. // post to same file ''
+                   '{ '.
+                       '\'build\': \'all\' '.
+                   '} );"/> ';
+    }
+    else echo "Cannot perform a merge on so few tiles.";
+    die(); // prevent execution time from displaying
+    
+}
+else if( isset($_POST['build']) && $_POST['build']=='all' )
+{
+    /*
+     * Second Page: Merges all tiles in dumped tiles folder into one image
+     *
+     */
+    
+    die("Merge tiles here.");
 }
 
 ?>
