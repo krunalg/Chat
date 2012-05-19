@@ -406,7 +406,8 @@ function trim1px($filename)
     if(rename($filename, $filename.".backup"))
     {
         // renamed file, now write new one
-        if(!imagepng($newimg, $filename die("Could not write new image: $filename");
+        if(!imagepng($newimg, $filename)) die("Could not write new image: $filename");
+        else echo "Done!";
     }
     else die("Could not rename image: $filename");
 }
