@@ -51,7 +51,4 @@ dump-map-tiles.php
     to dump the individual tiles of a specific map, or dump from all
     maps at once. Warning: may be time consuming.
     
-master.php
--   Creates a master tilesheet that contains every tile used by all maps in
-    the maps folder. Before doing this, you must make sure that all maps
-    whose tiles need be includes are first processed (see process-map.php).
+
