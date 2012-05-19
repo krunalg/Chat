@@ -8,7 +8,7 @@ require('required.php');
  * create an array containing path of every tilesheet
  *
  */ 
-$tilesheets = findTilesheets($globalMapDir, $globalTilesheetFile);
+$tilesheets = scanFileNameRecursivly($globalMapDir, $globalTilesheetFile);
 echo "<pre>"; var_dump($tilesheets); echo "</pre>";
 
 

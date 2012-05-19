@@ -298,9 +298,8 @@ function tilePosToInt($x, $y, $widthInTiles)
  *          and $result[$n][1] is an int.
  
  * @author  Fazle Elahee (modified by Jonathan Commins)
- *          Originally called scanFileNameRecursivly
  */
-function findTilesheets($path = '', $filename, &$name = array() )
+function scanFileNameRecursivly($path = '', $filename, &$name = array() )
 {
   $path = $path == ''? dirname(__FILE__) : $path;
   $lists = @scandir($path);
@@ -312,7 +311,7 @@ function findTilesheets($path = '', $filename, &$name = array() )
     
       if(is_dir($path.DIRECTORY_SEPARATOR.$f) && $f != ".." && $f != ".")
       {
-          findTilesheets($path.DIRECTORY_SEPARATOR.$f, $filename, $name); 
+          scanFileNameRecursivly($path.DIRECTORY_SEPARATOR.$f, $filename, $name); 
       }
       else
       {

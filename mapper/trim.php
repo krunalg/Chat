@@ -8,7 +8,7 @@ if( isset($_GET['trim']) && $_GET['trim'] == 'yes' ) $allowTrimming = true;
 else $allowTrimming = false;
 
 // get a list of all tilesheets
-$tilesheets = findTilesheets($globalMapDir, $globalTilesheetFile);
+$tilesheets = scanFileNameRecursivly($globalMapDir, $globalTilesheetFile);
 
 // check if tilesheets need trimming or not
 for($i=0; $i<count($tilesheets); $i++)
