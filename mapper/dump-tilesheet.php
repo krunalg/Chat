@@ -58,7 +58,7 @@ else if(isset($_POST['dump']))
         $tilesheets = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
     // or just do one map if one is specified
     else if(isset($_POST['dump']))
-        array_push($tilesheets, $_POST['mapPath']);
+        array_push($tilesheets, $_POST['dump']);
         
     // dump tilesheets
     for($i=0; $i<count($tilesheets); $i++)
@@ -84,7 +84,7 @@ else if(isset($_POST['dump']))
                         getTile($tilesheet, $globalTilesize, $x, $y);
                    
                     $tileDestination = // path and filename of tile to write
-                            $globalTileDumpDir.DIRECTORY_SEPARATOR.$hash.'.png';
+                            $globalTileDumpDir.DIRECTORY_SEPARATOR.$tileHash.'.png';
                             
                     // only dump tile to disk if it does not exist
                     if(!file_exists($tileDestination))
@@ -103,8 +103,15 @@ else if(isset($_POST['dump']))
                         )) die( "".$tilesheet[$i].' <b>failed</b>. '.
                                 'Could not copy tile: '.$x.','.$y   );
 
+                        
+                        if(!is_dir($globalTileDumpDir)) // ensure folder exists
+                            if(!mkdir($globalTileDumpDir)) // if not try creating
+                                die( "Could not create directory ".
+                                    $globalTileDumpDir );
+                            
+                        
                         // attempt to write new tile to disk
-                        if(!imagepng($newimg, $tileDestination));
+                        if(!imagepng($newimg, $tileDestination))
                             die( "".$tilesheet[$i].' <b>failed</b>. '.
                                 'Could not write tile ('.$x.','.$y.') to: '.
                                 $tileDestination );
@@ -115,8 +122,9 @@ else if(isset($_POST['dump']))
                 }
             }
             // reporting before possible next tilesheet
-            echo $tilesheets[$i]." <b>skipped ".$skipped."</b> existing tiles".
-                 " and <b>dumped ".$dumped."</b> new tiles...<br>\n\n";
+            echo "Done dumping ".$tilesheets[$i].
+                 " (<b>skipped ".$skipped."</b> existing tiles".
+                 " and <b>dumped ".$dumped."</b> new tiles)...<br>\n\n";
         }
         else die( "" . $tilesheets[$i] . " does not exist.");
     } 
