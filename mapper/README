@@ -4,6 +4,9 @@ index.php
 inc.globals.php
 -   Contains variables used in more than one place.
 
+inc.functions.js
+-   Contains JavaScript functions used in more than one place.
+
 required.php
 -   Useful functions used in more than one place.
 
