@@ -2,6 +2,7 @@
 
 $globalTilesize = 16;
 $globalMapDir = ".\maps";
+$globalTileDumpDir = ".\dumptiles";
 $globalCollisionsFile = 'collisions.txt';
 $globalTilesheetFile = 'tilesheet.png';
 $globalMapFilename = 'map.png';
