@@ -24,8 +24,8 @@ inc.globals.php
 inc.functions.js
 -   Contains JavaScript functions used in more than one place.
 
-required.php
--   Useful functions used in more than one place.
+inc.functions.php
+-   Useful PHP functions used in more than one place.
 
 trim.php
 -   Lists all tilesheets within the maps folder and states whether or not

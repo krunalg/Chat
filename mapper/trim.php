@@ -1,7 +1,7 @@
 <?php
 
 include('inc.globals.php');
-require('required.php');
+require('inc.functions.php');
 
 // are we allowed to change files?
 if( isset($_GET['trim']) && $_GET['trim'] == 'yes' ) $allowTrimming = true;

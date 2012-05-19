@@ -1,7 +1,7 @@
 <?php
 
 include('inc.globals.php');
-require('required.php');
+require('inc.functions.php');
 
 ?>
 
