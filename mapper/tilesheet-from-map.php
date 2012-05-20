@@ -99,7 +99,13 @@ else if(isset($_POST['map']))
                         $masterJSON = file_get_contents($globalMasterTilesheetJSON);
                         $masterJSON = json_decode($masterJSON);
                         // convert object into hash-indexed array
-                        
+                        $masterTiles = array();
+                        foreach($masterJSON in $key => $tile)
+                        {
+                            // using hash for the index
+                            // and old int index as new value
+                            $masterTiles[$tile] = $key; 
+                        }
                         
                         // get new tilesheet dimensions
                         $tilesheetWidthInTiles =
@@ -118,16 +124,30 @@ else if(isset($_POST['map']))
                         {
                             for($x=0; $x<$tilesheetWidthInTiles; $x++)
                             {
-                                // attempt to copy current tile into tilesheet
+                                // get current tiles pos in master tilesheet
+                                $currTileHash = $tilesToWrite($nextTile);
+                                $currTilePosInMaster = $masterTiles($currTileHash);
+                                $currTilePosXYInMaster = 
+                                    tilePosToXY( $currTilePosInMaster,
+                                                 $masterWidth/$globalTilesize);
+                                
+                                // attempt to copy tile into new tilesheet
                                 if(!imagecopy( 
                                     $newimg, // destination image
-                                    $tile, // source image
-                                    $x*$globalTilesize, $y*$globalTilesize, // x, y destination
-                                    0, 0, // x, y source
+                                    $master, // source image
+                                    $x*$globalTilesize, // x destination
+                                    $y*$globalTilesize, // and y
+                                    // x, y source
+                                    $currTilePosXYInMaster[0] * $globalTilesize,
+                                    $currTilePosXYInMaster[1] * $globalTilesize,
                                     $globalTilesize, // copy width
                                     $globalTilesize // copy height
-                                )) die( "".$tiles[$nextTile].' <b>failed</b>. '.
+                                )) die( "".$tilesToWrite[$nextTile].' <b>failed</b>. '.
                                         'Could not copy tile.'  );
+                                
+                                // break cycle if just wrote last tile
+                                if($nextTile==count($tilesToWrite-1)) break;
+                                $nextTile++; // otherwise select next in array
                             }
                         }
                         
