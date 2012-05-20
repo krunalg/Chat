@@ -31,20 +31,38 @@ $collisionUp = 4;
 $collisionUpWM = 12;
 $collisionDown = 5;
 $collisionDownWM = 23;
+$collisionNoLeft = 6;
+$collisionNoLeftWM = 999; // 999 is just placeholder number for now
+$collisionNoRight = 7;
+$collisionNoRightWM = 999;
+$collisionNoUp = 8;
+$collisionNoUpWM = 999;
+$collisionNoDown = 9;
+$collisionNoDownWM = 999;
 
+// mouse out
 $collisionWalkableMouseoutImg = 'images/spacer.png';
 $collisionNoWalkMouseoutImg = 'images/solid.gif';
-$collisionLeftMouseoutImg = 'images/left.gif';
-$collisionRightMouseoutImg = 'images/right.gif';
-$collisionUpMouseoutImg = 'images/up.gif';
-$collisionDownMouseoutImg = 'images/down.gif';
+    $collisionLeftMouseoutImg = 'images/left.gif';
+    $collisionRightMouseoutImg = 'images/right.gif';
+    $collisionUpMouseoutImg = 'images/up.gif';
+    $collisionDownMouseoutImg = 'images/down.gif';
+$collisionNoLeftMouseoutImg = 'images/noleft.gif';
+$collisionNoRightMouseoutImg = 'images/noright.gif';
+$collisionNoUpMouseoutImg = 'images/noup.gif';
+$collisionNoDownMouseoutImg = 'images/nodown.gif';
 
+// mouse over
 $collisionWalkableMouseoverImg = 'images/mouseover.png';
 $collisionNoWalkMouseoverImg = 'images/solid-mouseover.png';
-$collisionLeftMouseoverImg = 'images/left-mouseover.png';
-$collisionRightMouseoverImg = 'images/right-mouseover.png';
-$collisionUpMouseoverImg = 'images/up-mouseover.png';
-$collisionDownMouseoverImg = 'images/down-mouseover.png';
+    $collisionLeftMouseoverImg = 'images/left-mouseover.png';
+    $collisionRightMouseoverImg = 'images/right-mouseover.png';
+    $collisionUpMouseoverImg = 'images/up-mouseover.png';
+    $collisionDownMouseoverImg = 'images/down-mouseover.png';
+$collisionNoLeftMouseoverImg = 'images/noleft-mouseover.png';
+$collisionNoRightMouseoverImg = 'images/noright-mouseover.png';
+$collisionNoUpMouseoverImg = 'images/noup-mouseover.png';
+$collisionNoDownMouseoverImg = 'images/nodown-mouseover.png';
 
 
 
