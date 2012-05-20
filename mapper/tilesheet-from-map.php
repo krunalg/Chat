@@ -147,15 +147,31 @@ else if(isset($_POST['map']))
                                         'Could not copy tile.'  );
                                 
                                 // break cycle if just wrote last tile
-                                if($nextTile==count($tilesToWrite-1)) break;
+                                if($nextTile==count($tilesToWrite)-1) break;
                                 $nextTile++; // otherwise select next in array
                             }
                         }
                         
-                        // write new tilesheet to a file here...
+                        // attempt to write new tilesheet to disk
+                        $writeTilesheetWhere =
+                            dirname($maps[$i]) . DIRECTORY_SEPARATOR .
+                                $globalTilesheetFile;
+                        if(!file_exists($writeTilesheetWhere)) // make sure not overwriting file
+                        {
+                            if(!imagepng($newimg, $writeTilesheetWhere))
+                                    die( '<b style="color:red">Failed</b> writing file: '.
+                                         $writeTilesheetWhere );
+                            else
+                                echo "<b>Success</b> writing file: " .
+                                     $writeTilesheetWhere."<br>\n";
+                        }
+                        else
+                            echo $writeTilesheetWhere . " already exists. ".
+                                 '<b style="color:red">Skipping</b>...'."<br>\n";
+                                
                         
                     }
-                    else die("Array of tiles used in ".$maps[$i]." is empty.");
+                    else die("Array of tiles in ".$maps[$i]." is empty.");
                 }       
             }
         }
