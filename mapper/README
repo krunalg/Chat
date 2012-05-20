@@ -41,7 +41,7 @@ process-map.php
     been processed (a JSON file has been generated for them). If one has not,
     the option is given to generate one.
 
-used-tiles.php
+used-tiles.php // no longer needed?
 -   Reads all existing map JSON files in the maps directory and from them it
     compiles an array of all the tiles that exist throughout the game world,
     which is stored as a JSON file used-tiles.js
