@@ -223,6 +223,10 @@ else
     collisionTypes.push(<?php echo $collisionRight ?>); 
     collisionTypes.push(<?php echo $collisionUp ?>); 
     collisionTypes.push(<?php echo $collisionDown ?>);
+    collisionTypes.push(<?php echo $collisionNoLeft ?>); 
+    collisionTypes.push(<?php echo $collisionNoRight ?>); 
+    collisionTypes.push(<?php echo $collisionNoUp ?>); 
+    collisionTypes.push(<?php echo $collisionNoDown ?>);
     
     var save = function()
     {
@@ -288,6 +292,18 @@ else
             case <?php echo $collisionDown ?>:
                 img = '<?php echo $collisionDownMouseoverImg ?>';
                 break;
+            case <?php echo $collisionNoLeft ?>:
+                img = '<?php echo $collisionNoLeftMouseoverImg ?>';
+                break;
+            case <?php echo $collisionNoRight ?>:
+                img = '<?php echo $collisionNoRightMouseoverImg ?>';
+                break;
+            case <?php echo $collisionNoUp ?>:
+                img = '<?php echo $collisionNoUpMouseoverImg ?>';
+                break;
+            case <?php echo $collisionNoDown ?>:
+                img = '<?php echo $collisionNoDownMouseoverImg ?>';
+                break;
         }
         if(img!='') $('#x'+x+'y'+y).css('background-image', 'url("'+img+'")');
         else window.alert("Tile " + x + "," + y + " has improper collision type: " + tiles[x][y].collision);
@@ -315,6 +331,18 @@ else
                 break;
             case <?php echo $collisionDown ?>:
                 img = '<?php echo $collisionDownMouseoutImg ?>';
+                break;
+            case <?php echo $collisionNoLeft ?>:
+                img = '<?php echo $collisionNoLeftMouseoutImg ?>';
+                break;
+            case <?php echo $collisionNoRight ?>:
+                img = '<?php echo $collisionNoRightMouseoutImg ?>';
+                break;
+            case <?php echo $collisionNoUp ?>:
+                img = '<?php echo $collisionNoUpMouseoutImg ?>';
+                break;
+            case <?php echo $collisionNoDown ?>:
+                img = '<?php echo $collisionNoDownMouseoutImg ?>';
                 break;
         }
         if(img!='') $('#x'+x+'y'+y).css('background-image', 'url("'+img+'")');
