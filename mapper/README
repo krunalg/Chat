@@ -27,11 +27,6 @@ inc.functions.js
 inc.functions.php
 -   Useful PHP functions used in more than one place.
 
-trim.php
--   Lists all tilesheets within the maps folder and states whether or not
-    they need to be trimmed. Added ?trim=yes to the browser window will
-    enable trimming which is by default disabled.
-
 collisions.php      (requires tilesheet image be in the maps folder)
 -   Use this tool to manage what collision type a tile will be.
 
