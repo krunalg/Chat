@@ -35,7 +35,7 @@ if( !isset($_POST['compile']) )
     
     if(count($maps)>=1) // only offer to compile list if there are maps to read
     {
-        echo '<input type="button" '.
+        echo '<br><input type="button" '.
             'value="Create tilesheets for all of the above" '.
             'onClick="post_to_url( \'\', '. // post to same file ''
                '{ '.
@@ -92,7 +92,7 @@ else if(isset($_POST['map']))
                         
                         // load master tilesheet to read tiles from
                         $master = LoadPNG($globalMasterTilesheetFile);
-                        $masterSize = getimagesize($globalMasterTilesheetFile;
+                        $masterSize = getimagesize($globalMasterTilesheetFile);
                         $masterWidth = $masterSize[0];
                         $masterHeight = $masterSize[1];
                         // load master JSON containing hashes
@@ -100,7 +100,7 @@ else if(isset($_POST['map']))
                         $masterJSON = json_decode($masterJSON);
                         // convert object into hash-indexed array
                         $masterTiles = array();
-                        foreach($masterJSON in $key => $tile)
+                        foreach($masterJSON as $key => $tile)
                         {
                             // using hash for the index
                             // and old int index as new value
