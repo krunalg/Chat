@@ -114,7 +114,7 @@ else if( isset($_POST['build']) && $_POST['build']=='all' )
         {
             $splitAtSlashes = explode(DIRECTORY_SEPARATOR, $tiles[$i]);
             $justFilename = $splitAtSlashes[ count($splitAtSlashes)-1 ];
-            $justHash = substr($justFilename, 0, count($justFilename-3) ); // cuts off '.png'
+            $justHash = substr($justFilename, 0, count($justFilename)-5 ); // cuts off '.png'
             array_push($justHashes, $justHash);
         }
         $afterJSON = json_encode($justHashes); // need to save this
