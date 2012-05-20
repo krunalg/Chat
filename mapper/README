@@ -32,16 +32,14 @@ trim.php
     they need to be trimmed. Added ?trim=yes to the browser window will
     enable trimming which is by default disabled.
 
-collisions.php
--   Maintains collisions.txt, a collection of collision preferences. Choose
-    which collision type tiles should be when opened in Weltmeister.
+collisions.php      (requires tilesheet image be in the maps folder)
+-   Use this tool to manage what collision type a tile will be.
 
-process-map.php
--   Lists all maps found in the maps directory, whether or not they have
-    been processed (a JSON file has been generated for them). If one has not,
-    the option is given to generate one.
+process-map.php     (requires map image be in the maps folder)
+-   Use this to generate a map JSON file, containing map width, height,
+    and hashes for all its tiles.
 
-dump-map-tiles.php
+dump-map-tiles.php  (requires map image be in the maps folder)
 -   Use this to rip tiles directly from a map source image into a folder.
     Warning: time consuming.
     
