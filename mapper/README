@@ -56,3 +56,7 @@ merge-map-tiles.php
     In other words, this should create a tilesheet that contains every tile
     that appears any place in the game-world. Also generates a JSON file with
     the hash values for every tile for fast lookup.
+
+tilesheet-from-map.php
+-   Reads map JSON files and from that generates a minimal tilesheet containing
+    just the tiles used by that map (requires master tilesheet).
