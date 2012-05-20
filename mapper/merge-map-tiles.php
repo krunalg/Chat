@@ -10,7 +10,7 @@ $Start = getTime();
 
 <?php
 
-set_time_limit(300);
+set_time_limit(30); // should only take a few seconds
 ini_set('memory_limit','512M'); // and use a lot of memory
 
 
@@ -109,7 +109,15 @@ else if( isset($_POST['build']) && $_POST['build']=='all' )
             echo "<b>Success</b> writing file: ".$globalMasterTilesheetFile."<br>\n";
             
         
-        $afterJSON = json_encode($tiles); // need to save this
+        $justHashes = array();
+        for($i=0; $i<count($tiles); $i++)
+        {
+            $splitAtSlashes = explode(DIRECTORY_SEPARATOR, $tiles[$i]);
+            $justFilename = $splitAtSlashes[ count($splitAtSlashes)-1 ];
+            $justHash = substr($justFilename, 0, count($justFilename-3) ); // cuts off '.png'
+            array_push($justHashes, $justHash);
+        }
+        $afterJSON = json_encode($justHashes); // need to save this
         
         // write to file
         if(!file_put_contents($globalMasterTilesheetJSON, $afterJSON))
