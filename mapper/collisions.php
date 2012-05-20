@@ -28,7 +28,7 @@ if( !isset($_GET['ts']) && !isset($_POST['tiles']) )
     echo '<form method="get">';
     
     // echo html form element
-    echo '<select name="ts" multiple="multiple">' . "\n";
+    echo '<select name="ts" multiple="multiple" style="height: 400px">' . "\n";
         for($i=0; $i<count($maps); $i++)
         {
             $explode = explode('\\', $maps[$i]);
@@ -167,19 +167,22 @@ else if( isset($_POST['tiles']) )
         $collisions[ $newCollisions[$i][0] ] = $newCollisions[$i][1];
     }
     
-    $fileDump = ''; 
+    $fileDump = ' '; // at the very least we will write a space
+                     // we don't want to write nothing because then it appears
+                     // that the file_put_contents failed
+                     
     foreach($collisions as $key => $value)
         if($value!=$collisionWalkable) // ignore regular walkable tiles
             $fileDump = $fileDump . $key . ':' . $value . "\n";
 
-    if($fileDump!='')
-    {
+    //if($fileDump!='')
+    //{
         if(!file_put_contents($globalCollisionsFile, $fileDump))
             die("Failed writing file: " . $globalCollisionsFile);
         else
             echo "Success writing file: " . $globalCollisionsFile;
-    }
-    else echo "Nothing to write to file.";
+    //}
+    //else echo "Nothing to write to file.";
     echo '<br /><a href="">Edit another map</a>';
     
     //echo "I found the following data: \n" . $_POST['tiles'];
