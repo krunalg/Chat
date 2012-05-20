@@ -278,8 +278,6 @@ function mapToJSON($mapName, $mapTiles, $tsWidthInTiles, $tsFilename, $tilesize)
  * @return  integer representing the tile's x/y equivalent.
  */
 function tilePosToInt($x, $y, $widthInTiles)
-// takes an x and y value and returns
-// a single int equivalency
 {
     $result = 0;
     $result += $y * $widthInTiles;
@@ -287,6 +285,22 @@ function tilePosToInt($x, $y, $widthInTiles)
     return $result;
 }
 
+/**
+ * Finds the x, y position, given its absolute position.
+ *
+ * @param   $int Integer representing the absolute tile value.
+ * @param   $widthInTiles Integer representing the width (in tiles) before a
+ *          new row of tiles begins.
+ * @return  array where index 0 holds x, and index 1 holds y.
+ */
+function tilePosToXY($int, $widthInTiles)
+{
+    $result = array();
+    $y = floor($int/$widthInTiles);
+    $x = $int - ($y*$widthInTiles);
+    array_push($result, $x, $y);
+    return $result;
+}
 
 /**
  * Scan all folders and sub-folders recursively for matching files.
