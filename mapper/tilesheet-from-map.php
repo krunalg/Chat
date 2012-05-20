@@ -80,7 +80,7 @@ else if(isset($_POST['map']))
                         $tileIsUsed[ $couldBeTiles[$j] ] = true;
                     
                     // reporting
-                    echo $maps[$i] . " contained ".count($couldBeTiles)." tiles... ";
+                    echo $maps[$i] . " contains ".count($couldBeTiles)." tiles... ";
                     
                     // prepare array for writing tilesheet
                     $tilesToWrite = array(); // stores unique tiles
@@ -118,15 +118,16 @@ else if(isset($_POST['map']))
                                 $tilesheetWidthInTiles * $globalTilesize,
                                 $tilesheetHeightInTiles * $globalTilesize );
                             
+                        
+                        // copy all unique tiles into a new tilesheet image
                         $nextTile = 0; // used to traverse index of tiles array
-                        // create tilesheet from array
                         for($y=0; $y<$tilesheetHeightInTiles; $y++)
                         {
                             for($x=0; $x<$tilesheetWidthInTiles; $x++)
                             {
                                 // get current tiles pos in master tilesheet
-                                $currTileHash = $tilesToWrite($nextTile);
-                                $currTilePosInMaster = $masterTiles($currTileHash);
+                                $currTileHash = $tilesToWrite[$nextTile];
+                                $currTilePosInMaster = $masterTiles[$currTileHash];
                                 $currTilePosXYInMaster = 
                                     tilePosToXY( $currTilePosInMaster,
                                                  $masterWidth/$globalTilesize);
@@ -150,6 +151,8 @@ else if(isset($_POST['map']))
                                 $nextTile++; // otherwise select next in array
                             }
                         }
+                        
+                        // write new tilesheet to a file here...
                         
                     }
                     else die("Array of tiles used in ".$maps[$i]." is empty.");
