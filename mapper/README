@@ -30,7 +30,10 @@ inc.functions.php
 collisions.php - requires tilesheet image be in the maps folder.
 -   Use this tool to manage what collision type a tile will be.
 
-process-map.php - requires map image be in the maps folder).
+animated-tiles.php - requires tilesheet image be in the maps folder.
+-   Use this tool to manage which tiles are animated.
+
+process-map.php - requires map image be in the maps folder.
 -   Use this to generate a map JSON file, containing map width, height,
     and hashes for all its tiles.
 
@@ -43,7 +46,7 @@ merge-map-tiles.php - requires that map tiles be dumped.
     image and a JSON are generated. The JSON contains hash information for
     each tile.
 
-tilesheet-from-map.php - requires that maps be processed - have a JSON file.
+tilesheet-from-map.php - requires that maps are processed, ie. have a JSON file.
 -   Reads map JSON files and from that generates a minimal tilesheet containing
     just the tiles used by that map (requires master tilesheet).
     
