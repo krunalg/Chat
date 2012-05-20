@@ -27,24 +27,23 @@ inc.functions.js
 inc.functions.php
 -   Useful PHP functions used in more than one place.
 
-collisions.php      (requires tilesheet image be in the maps folder)
+collisions.php - requires tilesheet image be in the maps folder.
 -   Use this tool to manage what collision type a tile will be.
 
-process-map.php     (requires map image be in the maps folder)
+process-map.php - requires map image be in the maps folder).
 -   Use this to generate a map JSON file, containing map width, height,
     and hashes for all its tiles.
 
-dump-map-tiles.php  (requires map image be in the maps folder)
+dump-map-tiles.php  - requires map image be in the maps folder.
 -   Use this to rip tiles directly from a map source image into a folder.
     Warning: time consuming.
     
-merge-map-tiles.php
--   Creates a single tilesheet that contains every tile in dumped-tiles folder.
-    In other words, this should create a tilesheet that contains every tile
-    that appears any place in the game-world. Also generates a JSON file with
-    the hash values for every tile for fast lookup.
+merge-map-tiles.php - requires that map tiles be dumped.
+-   Use this to combine all dumped tiles into a single tilesheet. A tilesheet
+    image and a JSON are generated. The JSON contains hash information for
+    each tile.
 
-tilesheet-from-map.php
+tilesheet-from-map.php - requires that maps be processed - have a JSON file.
 -   Reads map JSON files and from that generates a minimal tilesheet containing
     just the tiles used by that map (requires master tilesheet).
     
