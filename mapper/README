@@ -41,15 +41,9 @@ process-map.php
     been processed (a JSON file has been generated for them). If one has not,
     the option is given to generate one.
 
-used-tiles.php // no longer needed?
--   Reads all existing map JSON files in the maps directory and from them it
-    compiles an array of all the tiles that exist throughout the game world,
-    which is stored as a JSON file used-tiles.js
-
 dump-map-tiles.php
--   Lists all maps found in the maps directory. You are given the option
-    to dump the individual tiles of a specific map, or dump from all
-    maps at once. Warning: may be time consuming.
+-   Use this to rip tiles directly from a map source image into a folder.
+    Warning: time consuming.
     
 merge-map-tiles.php
 -   Creates a single tilesheet that contains every tile in dumped-tiles folder.
@@ -60,3 +54,4 @@ merge-map-tiles.php
 tilesheet-from-map.php
 -   Reads map JSON files and from that generates a minimal tilesheet containing
     just the tiles used by that map (requires master tilesheet).
+    
