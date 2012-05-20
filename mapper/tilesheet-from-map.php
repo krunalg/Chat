@@ -9,7 +9,7 @@ require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
 
-if( !isset($_POST['compile']) )
+if( !isset($_POST['map']) )
 {
     /*
      * First Page: Display maps which have been processed only
