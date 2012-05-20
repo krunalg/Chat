@@ -98,92 +98,95 @@ else if(isset($_POST['map']))
             $mapJSON = json_decode($mapJSON); // convert JSON into PHP
             
             // read through all tiles, adding them to an array
+            $tileIsUsed = array(); // used to find unique used tiles
             foreach($mapJSON as $couldBeTiles) // traverse the stdClass Object
             {
+                
                 if(is_array($couldBeTiles)) // found tiles within map JSON!
                 {
                     for($j=0; $j<count($couldBeTiles); $j++)
                     {
                         // using hash for index so there are no duplicates
                         $tileIsUsed[ $couldBeTiles[$j] ] = true;
-                        echo $maps[$i] . " contains ".count($couldBeTiles)." tiles... ";
                     }
+                    echo $maps[$i] . " contains ".count($couldBeTiles)." tiles... ";
+                    break;
                 }
-                    
-                // prepare array for writing tilesheet
-                $tilesToWrite = array(); // stores unique tiles
-                if(count($tileIsUsed)>=1) // array of used-tiles is populated
-                {
-                    // fetch hashes from index
-                    foreach($tileIsUsed as $key => $value)
-                        array_push($tilesToWrite, $key); // key is the tile's hash
-                    
-                    // get new tilesheet dimensions
-                    $tilesheetWidthInTiles =
-                        $globalMasterTilesheetWidth / $globalTilesize;
-                    $tilesheetHeightInTiles =
-                        ceil(count($tilesToWrite) / $tilesheetWidthInTiles);
-                    
-                    $newimg = // create empty tilesheet image
-                        imagecreatetruecolor(
-                            $tilesheetWidthInTiles * $globalTilesize,
-                            $tilesheetHeightInTiles * $globalTilesize );
-                        
-                    
-                    // copy all unique tiles into a new tilesheet image
-                    $nextTile = 0; // used to traverse index of tiles array
-                    for($y=0; $y<$tilesheetHeightInTiles; $y++)
-                    {
-                        for($x=0; $x<$tilesheetWidthInTiles; $x++)
-                        {
-                            // get current tiles pos in master tilesheet
-                            $currTileHash = $tilesToWrite[$nextTile];
-                            $currTilePosInMaster = $masterTiles[$currTileHash];
-                            $currTilePosXYInMaster = 
-                                tilePosToXY( $currTilePosInMaster,
-                                             $masterWidth/$globalTilesize);
-                            
-                            // attempt to copy tile into new tilesheet
-                            if(!imagecopy( 
-                                $newimg, // destination image
-                                $master, // source image
-                                $x*$globalTilesize, // x destination
-                                $y*$globalTilesize, // and y
-                                // x, y source
-                                $currTilePosXYInMaster[0] * $globalTilesize,
-                                $currTilePosXYInMaster[1] * $globalTilesize,
-                                $globalTilesize, // copy width
-                                $globalTilesize // copy height
-                            )) die( "".$tilesToWrite[$nextTile].' <b>failed</b>. '.
-                                    'Could not copy tile.'  );
-                            
-                            // break cycle if just wrote last tile
-                            if($nextTile==count($tilesToWrite)-1) break;
-                            $nextTile++; // otherwise select next in array
-                        }
-                    }
-                    
-                    // attempt to write new tilesheet to disk
-                    $writeTilesheetWhere =
-                        dirname($maps[$i]) . DIRECTORY_SEPARATOR .
-                            $globalTilesheetFile;
-                    if(!file_exists($writeTilesheetWhere)) // make sure not overwriting file
-                    {
-                        if(!imagepng($newimg, $writeTilesheetWhere))
-                                die( '<b style="color:red">Failed</b> writing file: '.
-                                     $writeTilesheetWhere );
-                        else
-                            echo "<b>Success</b> writing file: " .
-                                 $writeTilesheetWhere."<br>\n";
-                    }
-                    else
-                        echo $writeTilesheetWhere . " already exists. ".
-                             '<b style="color:red">Skipping</b>...'."<br>\n";
-                            
-                    
-                }
-                else die("Array of tiles in ".$maps[$i]." is empty.");     
             }
+                    
+            // prepare array for writing tilesheet
+            $tilesToWrite = array(); // stores unique tiles
+            if(count($tileIsUsed)>=1) // array of used-tiles is populated
+            {
+                // fetch hashes from index
+                foreach($tileIsUsed as $key => $value)
+                    array_push($tilesToWrite, $key); // key is the tile's hash
+                
+                // get new tilesheet dimensions
+                $tilesheetWidthInTiles =
+                    $globalMasterTilesheetWidth / $globalTilesize;
+                $tilesheetHeightInTiles =
+                    ceil(count($tilesToWrite) / $tilesheetWidthInTiles);
+                
+                $newimg = // create empty tilesheet image
+                    imagecreatetruecolor(
+                        $tilesheetWidthInTiles * $globalTilesize,
+                        $tilesheetHeightInTiles * $globalTilesize );
+                    
+                
+                // copy all unique tiles into a new tilesheet image
+                $nextTile = 0; // used to traverse index of tiles array
+                for($y=0; $y<$tilesheetHeightInTiles; $y++)
+                {
+                    for($x=0; $x<$tilesheetWidthInTiles; $x++)
+                    {
+                        // get current tiles pos in master tilesheet
+                        $currTileHash = $tilesToWrite[$nextTile];
+                        $currTilePosInMaster = $masterTiles[$currTileHash];
+                        $currTilePosXYInMaster = 
+                            tilePosToXY( $currTilePosInMaster,
+                                         $masterWidth/$globalTilesize);
+                        
+                        // attempt to copy tile into new tilesheet
+                        if(!imagecopy( 
+                            $newimg, // destination image
+                            $master, // source image
+                            $x*$globalTilesize, // x destination
+                            $y*$globalTilesize, // and y
+                            // x, y source
+                            $currTilePosXYInMaster[0] * $globalTilesize,
+                            $currTilePosXYInMaster[1] * $globalTilesize,
+                            $globalTilesize, // copy width
+                            $globalTilesize // copy height
+                        )) die( "".$tilesToWrite[$nextTile].' <b>failed</b>. '.
+                                'Could not copy tile.'  );
+                        
+                        // break cycle if just wrote last tile
+                        if($nextTile==count($tilesToWrite)-1) break;
+                        $nextTile++; // otherwise select next in array
+                    }
+                }
+                
+                // attempt to write new tilesheet to disk
+                $writeTilesheetWhere =
+                    dirname($maps[$i]) . DIRECTORY_SEPARATOR .
+                        $globalTilesheetFile;
+                if(!file_exists($writeTilesheetWhere)) // make sure not overwriting file
+                {
+                    if(!imagepng($newimg, $writeTilesheetWhere))
+                            die( '<b style="color:red">Failed</b> writing file: '.
+                                 $writeTilesheetWhere );
+                    else
+                        echo "<b>Success</b> writing file: " .
+                             $writeTilesheetWhere."<br>\n";
+                }
+                else
+                    echo $writeTilesheetWhere . " already exists. ".
+                         '<b style="color:red">Skipping</b>...'."<br>\n";
+                        
+                
+            }
+            else die("Array of tiles in ".$maps[$i]." is empty.");     
         }
         else die("".$maps[$i]." does not exist."); // map JSON file doesn't exist
     }
