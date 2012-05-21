@@ -27,7 +27,7 @@ inc.functions.js
 inc.functions.php
 -   Useful PHP functions used in more than one place.
 
-collisions.php - requires tilesheet image be in the maps folder.
+collisions.php - requires map images in the maps folder.
 -   Use this tool to manage what collision type a tile will be.
 
 animated-tiles.php - requires tilesheet image be in the maps folder.
