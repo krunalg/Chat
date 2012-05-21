@@ -31,9 +31,7 @@ if( !isset($_GET['ts']) && !isset($_POST['tiles']) )
     echo '<select name="ts" multiple="multiple" style="height: 400px">' . "\n";
         for($i=0; $i<count($maps); $i++)
         {
-            $explode = explode('\\', $maps[$i]);
-            $fileName = $explode[count($explode)-1];
-            $dirName = $explode[count($explode)-2];
+            $dirName = dirname($maps[$i]);
             if($i==0) $selected = 'selected="selected" '; else $selected = '';
             echo '<option '.$selected.'value="'.$maps[$i].'">'.$dirName.'</option>' . "\n";
         }
