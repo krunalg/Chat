@@ -231,20 +231,16 @@ else if( isset($_POST['generate']) )
             
             
             
-            echo "\n\n\n\n".$export; die();
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-  
+            // attempt to write weltmeister map
+            $putDir = dirname($jsonMapPaths[$i]);
+            $putFile = $mapName.".js";
+            $putPath = $putDir.DIRECTORY_SEPARATOR.$putFile;
+            if(!file_put_contents($putPath, $export))
+                die("Failed writing file: " . $putPath);
+            else
+                echo "Success writing file: " . $putPath;
         }
         else die( "" . $jsonMapPaths[$i] . " does not exist.");
         echo "<br>\n"; // new line between each attempt
