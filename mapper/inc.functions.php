@@ -8,7 +8,7 @@
  */
 function LoadPNG($image)
 {
-    $im = @imagecreatefrompng($image); // Attempt to open
+    $im = imagecreatefrompng($image); // Attempt to open
     if(!$im) // See if it failed
         die("Could not load image: " . $image);
     return $im;
