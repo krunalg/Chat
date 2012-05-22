@@ -22,6 +22,7 @@ ig.module(
 	'game.ents.jump',
 	'game.entities.exit',
 	'game.entities.npc',
+	'game.entities.sign',
 	'game.ents.bubble',
 	'game.ents.name',
 	
