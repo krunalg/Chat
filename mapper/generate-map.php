@@ -173,9 +173,12 @@ else if( isset($_POST['generate']) )
                             $export .= "[ ";
                             for($x=0; $x<$mapWidth; $x++)
                             {
+                                if(isset($currTileCollision)) unset($currTileCollision);
                                 if(isset($collisions[$mapTiles[$mapTilesIndex]]))
+                                {
                                     $currTileCollision = // set preference
                                         $collisions[$mapTiles[$mapTilesIndex]];
+                                }
                                 
                                 $currTileCollisionWM =
                                     $globalCollisions['walkable']; // default
@@ -184,7 +187,7 @@ else if( isset($_POST['generate']) )
                                 // what it in in terms of weltmeister
                                 if(isset($currTileCollision)) 
                                 {
-                                    $collisionIndex = 0; // position in collisions array
+                                    $collisionIndex = 0; // position in master collisions array
                                     foreach($globalCollisions as $weltmeisterValue)
                                     {
                                         if($collisionIndex==$currTileCollision)
@@ -192,6 +195,7 @@ else if( isset($_POST['generate']) )
                                             $currTileCollisionWM = $weltmeisterValue;
                                             break;
                                         }
+                                        $collisionIndex++;
                                     }
                                 }
                                 
