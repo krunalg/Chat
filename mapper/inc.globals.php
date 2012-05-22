@@ -19,6 +19,18 @@ $globalMasterTilesheetJSON = 'master.js';
 // generator. the _second value_ is
 // used at the very end when we
 // generate a map.
+$globalCollisions =
+    array( 'walkable' => 0,
+           'nowalk'   => 1,
+           'left'     => 45,
+           'right'    => 34,
+           'up'       => 12,
+           'down'     => 23,
+           'noleft'   => 999,
+           'noright'  => 999,
+           'noup'     => 999,
+           'nodown'   => 999
+         );
 $collisionWalkable = 0;
 $collisionWalkableWM = 0;
 $collisionNoWalk = 1;
