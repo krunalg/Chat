@@ -6,13 +6,14 @@ ig.module(
 	'impact.font',
 	
 	// levels
-	'game.levels.town',
-	'game.levels.route101',
-	'game.levels.lab',
-	'game.levels.birchdownstairs',
-	'game.levels.birchupstairs',
-	'game.levels.homedownstairs',
-	'game.levels.homeupstairs',
+	'game.levels.test',
+	//'game.levels.town',
+	//'game.levels.route101',
+	//'game.levels.lab',
+	//'game.levels.birchdownstairs',
+	//'game.levels.birchupstairs',
+	//'game.levels.homedownstairs',
+	//'game.levels.homeupstairs',
 	
 	'game.ents.player',
 	'game.ents.local-player',
@@ -59,9 +60,9 @@ MyGame = ig.Game.extend({
 	    }
 	},
 	
-	defaultLevel: LevelTown,
-	defaultXStart: 352,
-	defaultYStart: 256,
+	defaultLevel: LevelTest,
+	defaultXStart: 2032,
+	defaultYStart: 4624,
 	defaultFacing: 'down',
 	lastSkin: 'boy', // used when rebuilding the player
 	goTo: null, // used to know where to place player when zoning
