@@ -27,7 +27,7 @@ ig.module(
 	'game.ents.name',
 	
 	//debug
-	//'impact.debug.debug',
+	'impact.debug.debug',
 	'plugins.debug_display' // require the debug display plugin
 )
 .defines(function(){
