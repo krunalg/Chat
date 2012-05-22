@@ -1,7 +1,7 @@
 <?php
 
 set_time_limit(300); // because processing maps can take a while
-ini_set('memory_limit','512M'); // and use a lot of memory
+ini_set('memory_limit','1024M'); // 512M was not enough
 
 
 include('inc.globals.php');
