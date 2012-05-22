@@ -141,9 +141,18 @@ else if( isset($_POST['generate']) )
                             for($x=0; $x<$mapWidth; $x++)
                             {
                                 $currTileHash = $mapTiles[$mapTilesIndex];
-                                $currTilePosInTilesheet =
-                                    $masterTilesheetByHash[$currTileHash];
-                                $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
+                                
+                                // use no tile (which is 0 in weltmeister)
+                                // when tile can't be found in tilesheet
+                                if(!isset($masterTilesheetByHash[$currTileHash]))
+                                    $currTilePosInTilesheet = 0;
+                                else
+                                {
+                                    $currTilePosInTilesheet =
+                                        $masterTilesheetByHash[$currTileHash];
+                                        $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
+                                }
+                                
                                 $export .= $currTilePosInTilesheet;
                                 if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
                                 $mapTilesIndex++; // next tile in the map
