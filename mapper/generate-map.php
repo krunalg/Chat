@@ -84,6 +84,7 @@ else if( isset($_POST['generate']) )
         {
             // map specific data
             $mapName = dirname($jsonMapPaths[$i]);
+                $mapName = 'test';
             $mapJSON = $jsonMapPaths[$i];
             $mapJSON = file_get_contents($mapJSON);
             $mapJSON = json_decode($mapJSON);
@@ -143,7 +144,7 @@ else if( isset($_POST['generate']) )
                                 $currTilePosInTilesheet =
                                     $masterTilesheetByHash[$currTileHash];
                                 $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
-                                $export .= $tileInt;
+                                $export .= $currTilePosInTilesheet;
                                 if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
                                 $mapTilesIndex++; // next tile in the map
                             }
@@ -162,18 +163,42 @@ else if( isset($_POST['generate']) )
                         "\"repeat\": false, ".
                         "\"preRender\": false, ".
                         "\"distance\": \"1\", ".
-                        "\"tilesize\": ".$tilesize.", ".
+                        "\"tilesize\": ".$globalTilesize.", ".
                         "\"foreground\": true, ".
                         "\"data\": [ ";
                         
+                        $mapTilesIndex = 0; // used to traverse all tiles in map
                         for($y=0; $y<$mapHeight; $y++)
                         {
                             $export .= "[ ";
                             for($x=0; $x<$mapWidth; $x++)
                             {
-                                $currTileCollision = 
-                                $export .= $mapTiles[$x][$y][2];
+                                if(isset($collisions[$mapTiles[$mapTilesIndex]]))
+                                    $currTileCollision = // set preference
+                                        $collisions[$mapTiles[$mapTilesIndex]];
+                                
+                                $currTileCollisionWM =
+                                    $globalCollisions['walkable']; // default
+                                    
+                                // if there's a collision preference, find out
+                                // what it in in terms of weltmeister
+                                if(isset($currTileCollision)) 
+                                {
+                                    $collisionIndex = 0; // position in collisions array
+                                    foreach($globalCollisions as $weltmeisterValue)
+                                    {
+                                        if($collisionIndex==$currTileCollision)
+                                        {
+                                            $currTileCollisionWM = $weltmeisterValue;
+                                            break;
+                                        }
+                                    }
+                                }
+                                
+                                $export .= $currTileCollisionWM;
                                 if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
+                                
+                                $mapTilesIndex++; // next tile in the map
                             }
                             if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
                         } 
@@ -187,13 +212,13 @@ else if( isset($_POST['generate']) )
             // END JSON
             
             $export .= "/*]JSON*/;\n";
-            $export .= "Level".ucfirst($mapName)."Resources=[new ig.Image('media/".$tsFilename."')];\n";
+            $export .= "Level".ucfirst($mapName)."Resources=[new ig.Image('media/".$globalMasterTilesheetFile."')];\n";
             $export .= "});";
 
             
             
             
-            
+            echo "\n\n\n\n".$export; die();
             
             
             
