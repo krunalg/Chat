@@ -20,6 +20,8 @@ ig.module(
 	'game.ents.network-player',
 	'game.entities.grass',
 	'game.ents.jump',
+	'game.entities.exit',
+	'game.entities.npc',
 	'game.ents.bubble',
 	'game.ents.name',
 	
