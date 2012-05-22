@@ -1,9 +1,19 @@
 <?php
 
+// MEASUREMENTS / DIMENSIONS
 $globalTilesize = 16;
 $globalMasterTilesheetWidth = 256;
-$globalMapDir = ".\maps";
-$globalTileDumpDir = ".\dumped-tiles";
+
+// DIRECTORIES
+$globalMapDir =
+    "." . DIRECTORY_SEPARATOR .
+    "maps" . DIRECTORY_SEPARATOR .
+    "rs-hoenn-outside";
+$globalTileDumpDir =
+    "." . DIRECTORY_SEPARATOR .
+    "dumped-tiles";
+    
+// FILE NAMES
 $globalCollisionsFile = 'collisions.txt';
 $globalTilesheetFile = 'tilesheet.png';
 $globalMapFilename = 'map.png';
@@ -11,6 +21,8 @@ $globalMapJSON = 'map.js';
 $globalUsedTilesFile = 'used-tiles.js';
 $globalMasterTilesheetFile = 'master.png';
 $globalMasterTilesheetJSON = 'master.js';
+$globalPlacementFile = 'placement.js';
+
 
 // used later to map collision types
 // to a Weltmeister collision value.
