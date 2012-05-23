@@ -393,6 +393,21 @@ function buildHashIndexCollisions($collisions)
 }
 
 /**
+ * For each item in an array, swaps the index with the value.
+ *
+ * @param   $array Array of values to be swapped with indexes.
+ * @return  array
+ */
+function valToIndexAndIndexToVal($array)
+{
+    $result = array();
+    foreach($array as $index => $value)
+        $result[ $value ] = $index;
+    if(count($result)!=0) return $result;
+    else return array();
+}
+
+/**
  * Trims the last single pixel off the x-axis of an image, replacing
  * the original, but also generating a backup.
  *
