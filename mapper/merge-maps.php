@@ -215,6 +215,7 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
     if(!imagepng($finalMapImage, '.'.DIRECTORY_SEPARATOR.'test-merge.png' ))
         die( 'Write attempt <b style="color:red">failed</b>. '.
              'Could not write final map.');
+    else echo "<b>Successfully</b> wrote test-merge.png... Pick a better name.";
 
     
 }
