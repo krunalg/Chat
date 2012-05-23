@@ -37,21 +37,20 @@ if( !isset($_POST['save']) )
         $pathToPlacementFile =
             $dirName . DIRECTORY_SEPARATOR . $globalPlacementFile;
         
-        echo $pathToPlacementFile . "... X: ";
-        echo '<input id="x-'.$i.'" type="text value="" />';
-        echo 'Y: ';
-        echo '<input id="y-'.$i.'" type="text value="" />';
-        
-        // if a JSON file is present, the map has been processed
+        // read old values into form inputs
+        $x = $y = '';
         if(file_exists($pathToPlacementFile))
         {
-            // GET THE PLACEMENT DATA FROM JSON FILE
+            $placementFileData = file_get_contents($pathToPlacementFile);
+            $placementDataParts = explode(':', $placementFileData);
+            $x = trim($placementDataParts[0]);
+            $y = trim($placementDataParts[1]);
         }
         
-        // CREATE FORM FOR ADDING PLACEMENT DATA
-        
-            // IF WE HAVE PLACEMENT DATA AUTOFILL IN, ELSE USE BLANK
-            
+        echo $pathToPlacementFile . "... X: ";
+        echo '<input id="x-'.$i.'" type="text" value="'.$x.'" />';
+        echo 'Y: ';
+        echo '<input id="y-'.$i.'" type="text" value="'.$y.'" />';
         echo "<br>\n\n";  
         
     }
@@ -81,6 +80,9 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
     // as we have maps
     if(count($maps)!=count($dataByMap))
         die("Amount of data does not match amount of maps");
+    
+    // back button
+    echo 'Click <a href="">here</a> to edit some more...<br><br>'."\n\n";
     
     // add data to an array
     $placementByMap = array(); // where we'll keep placement data until we write files
