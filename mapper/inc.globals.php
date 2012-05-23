@@ -21,7 +21,7 @@ $globalMapJSON = 'map.js';
 $globalUsedTilesFile = 'used-tiles.js';
 $globalMasterTilesheetFile = 'master.png';
 $globalMasterTilesheetJSON = 'master.js';
-$globalPlacementFile = 'placement.js';
+$globalPlacementFile = 'placement.txt';
 
 
 // used later to map collision types
