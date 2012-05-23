@@ -112,9 +112,10 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
                 
                 // write to file
                 if(!file_put_contents($reconstructedPath.$globalMapJSON, $afterJSON))
-                    die("Failed writing file: " . $reconstructedPath.$globalMapJSON);
+                    die( '<b style="color:red">Failed writing file: ' .
+                         $reconstructedPath.$globalMapJSON);
                 else
-                    echo "Success writing file: " . $reconstructedPath.$globalMapJSON;
+                    echo "<b>Success</b> writing file: " . $reconstructedPath.$globalMapJSON;
             }
             // JSON file exists
             else echo "" . $mapPaths[$i] . " has already been processed. " .
