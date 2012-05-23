@@ -28,75 +28,67 @@ $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
 
 
-// used later to map collision types
-// to a Weltmeister collision value.
-// the _first value_ is the internal
-// collision value used by the code
-// generator. the _second value_ is
-// used at the very end when we
-// generate a map.
+// its important that if you add a new tile state to this
+// array, you add it to the end, not the middle, otherwise
+// you may break existing tiles that have already been
+// assigned to a specific state. if your state file is
+// currently empty, this won't matter.
 $globalCollisions =
-    array( 'walkable' => 0,
-           'nowalk'   => 1,
-           'above'    => 0,
-           'left'     => 45,
-           'right'    => 34,
-           'up'       => 12,
-           'down'     => 23,
-           'noleft'   => 999,
-           'noright'  => 999,
-           'noup'     => 999,
-           'nodown'   => 999
-         );
-$collisionWalkable = 0;
-$collisionWalkableWM = 0;
-$collisionNoWalk = 1;
-$collisionNoWalkWM = 1;
-$collisionLeft = 2;
-$collisionLeftWM = 45;
-$collisionRight = 3;
-$collisionRightWM = 34;
-$collisionUp = 4;
-$collisionUpWM = 12;
-$collisionDown = 5;
-$collisionDownWM = 23;
-$collisionNoLeft = 6;
-$collisionNoLeftWM = 999; // 999 is just placeholder number for now
-$collisionNoRight = 7;
-$collisionNoRightWM = 999;
-$collisionNoUp = 8;
-$collisionNoUpWM = 999;
-$collisionNoDown = 9;
-$collisionNoDownWM = 999;
-
-// mouse out
-$collisionWalkableMouseoutImg = 'images/spacer.png';
-$collisionNoWalkMouseoutImg = 'images/solid.gif';
-$collisionsAboveMouseoutImg = 'images/above-player.gif';
-
-$collisionLeftMouseoutImg = 'images/left.gif';
-$collisionRightMouseoutImg = 'images/right.gif';
-$collisionUpMouseoutImg = 'images/up.gif';
-$collisionDownMouseoutImg = 'images/down.gif';
-    $collisionNoLeftMouseoutImg = 'images/noleft.gif';
-    $collisionNoRightMouseoutImg = 'images/noright.gif';
-    $collisionNoUpMouseoutImg = 'images/noup.gif';
-    $collisionNoDownMouseoutImg = 'images/nodown.gif';
-
-// mouse over
-
-$collisionWalkableMouseoverImg = 'images/mouseover.png';
-$collisionNoWalkMouseoverImg = 'images/solid-mouseover.png';
-$collisionsAboveMouseoverImg = 'images/above-player-mouseover.png';
-
-$collisionLeftMouseoverImg = 'images/left-mouseover.png';
-$collisionRightMouseoverImg = 'images/right-mouseover.png';
-$collisionUpMouseoverImg = 'images/up-mouseover.png';
-$collisionDownMouseoverImg = 'images/down-mouseover.png';
-    $collisionNoLeftMouseoverImg = 'images/noleft-mouseover.png';
-    $collisionNoRightMouseoverImg = 'images/noright-mouseover.png';
-    $collisionNoUpMouseoverImg = 'images/noup-mouseover.png';
-    $collisionNoDownMouseoverImg = 'images/nodown-mouseover.png';
-
+    array( 'walkable' =>
+        array( 'collision'    => 0,
+               'mouseoutImg'  => 'images/spacer.png',
+               'mouseoverImg' => 'images/mouseover.png'
+        ),
+           'nowalk'   => 
+        array( 'collision'    => 1,
+               'mouseoutImg'  => 'images/solid.gif',
+               'mouseoverImg' => 'images/solid-mouseover.png'
+        ),
+           'left'     => 
+        array( 'collision'    => 45,
+               'mouseoutImg'  => 'images/left.gif',
+               'mouseoverImg' => 'images/left-mouseover.png'
+        ),
+           'right'    => 
+        array( 'collision'    => 34,
+               'mouseoutImg'  => 'images/right.gif',
+               'mouseoverImg' => 'images/right-mouseover.png'
+        ),
+           'up'       => 
+        array( 'collision'    => 12,
+               'mouseoutImg'  => 'images/up.gif',
+               'mouseoverImg' => 'images/up-mouseover.png'
+        ),
+           'down'     => 
+        array( 'collision'    => 23,
+               'mouseoutImg'  => 'images/down.gif',
+               'mouseoverImg' => 'images/down-mouseover.png'
+        ),
+           'noleft'   => 
+        array( 'collision'    => 999,
+               'mouseoutImg'  => 'images/noleft.gif',
+               'mouseoverImg' => 'images/noleft-mouseover.png'
+        ),
+           'noright'  => 
+        array( 'collision'    => 999,
+               'mouseoutImg'  => 'images/noright.gif',
+               'mouseoverImg' => 'images/noright-mouseover.png'
+        ),
+           'noup'     => 
+        array( 'collision'    => 999,
+               'mouseoutImg'  => 'images/noup.gif',
+               'mouseoverImg' => 'images/noup-mouseover.png'
+        ),
+           'nodown'   => 
+        array( 'collision'    => 999,
+               'mouseoutImg'  => 'images/nodown.gif',
+               'mouseoverImg' => 'images/nodown-mouseover.png'
+        ),
+           'above'    =>
+        array( 'collision'    => 0,
+               'mouseoutImg'  => 'images/above-player.gif',
+               'mouseoverImg' => 'images/above-player-mouseover.png'
+        )
+    );
 
 ?>     
