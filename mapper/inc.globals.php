@@ -93,5 +93,9 @@ $collisionNoUpMouseoverImg = 'images/noup-mouseover.png';
 $collisionNoDownMouseoverImg = 'images/nodown-mouseover.png';
 
 
+// ABOVE PLAYER
+$abovePlayerMouseoutImg = 'images/above-player.gif';
+$abovePlayerMouseoverImg = 'images/above-player-mouseover.png';
+
 
 ?>     
