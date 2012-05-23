@@ -171,17 +171,17 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
         $borderFillHeight = $mapImageInfo[$i]['fullHeight'];
            
         // tile the border to fill the area
-        $borderFillWidthInTiles = $borderFillWidth / $globalTilesize;
-        $borderFillHeightInTiles = $borderFillHeight / $globalTilesize;
-        for($y=0; $y<$borderFillHeightInTiles; $y++)
+        $borderFillWidthInChunks = $borderFillWidth / $mapImageInfo[$i]['borderWidth'];
+        $borderFillHeightInChunks = $borderFillHeight / $mapImageInfo[$i]['borderHeight'];
+        for($y=0; $y<$borderFillHeightInChunks; $y++)
         {
-            for($x=0; $x<$borderFillWidthInTiles; $x++)
+            for($x=0; $x<$borderFillWidthInChunks; $x++)
             {
                 if(!imagecopy( 
                     $finalMapImage, // destination image
                     $mapBorderImageResources[$i], // source image
-                    $xStart + ( $x * $globalTilesize ), // x destination
-                    $yStart + ( $y * $globalTilesize ), // and y
+                    $xStart + ( $x * $mapImageInfo[$i]['borderWidth'] ), // x destination
+                    $yStart + ( $y * $mapImageInfo[$i]['borderHeight'] ), // and y
                     0, 0, // x, y source
                     $mapImageInfo[$i]['borderWidth'], // copy width
                     $mapImageInfo[$i]['borderHeight'] // copy height
@@ -217,7 +217,7 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
     
     //print_r($mapImageInfo); die();
     //echo "width = $maxWidth and height = $maxHeight ...<br>\n\n";
-    die();
+    //die();
     
     
     
