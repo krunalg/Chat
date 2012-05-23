@@ -156,8 +156,6 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
             $mapImageInfo[$i]['borderHeight'] * $globalBorderRepeatY;
     }
     
-    $countMaps = 1;
-    
     // now that we know how big the entire map is, let's create it
     $finalMapImage = imagecreatetruecolor($maxWidth, $maxHeight);
 
@@ -215,19 +213,9 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
     }
     
     if(!imagepng($finalMapImage, '.'.DIRECTORY_SEPARATOR.'test-merge.png' ))
-            die( "Border attempt ".$i.' <b>failed</b>. '.
-                'Could not write tile ('.$x.','.$y.') to: '.
-                $tileDestination );
-    
-    
-    
-    
-    //print_r($mapImageInfo); die();
-    //echo "width = $maxWidth and height = $maxHeight ...<br>\n\n";
-    //die();
-    
-    
-    
+        die( 'Write attempt <b style="color:red">failed</b>. '.
+             'Could not write final map.');
+
     
 }
 else
