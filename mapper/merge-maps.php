@@ -153,6 +153,12 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
         // because we're going to reuse them
         $mapImageInfo[$i]['fullWidth'] = $extendsX;
         $mapImageInfo[$i]['fullHeight'] = $extendsY;
+        
+        // and update each maps position to account for its border
+        $mapImageInfo[$i]['x'] +=
+            $mapImageInfo[$i]['borderWidth'] * $globalBorderRepeatX;
+        $mapImageInfo[$i]['y'] +=
+            $mapImageInfo[$i]['borderHeight'] * $globalBorderRepeatY;
     }
     
     // now that we know how big the entire map is, let's create it
