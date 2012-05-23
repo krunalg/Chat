@@ -64,8 +64,8 @@ MyGame = ig.Game.extend({
 	},
 	
 	defaultLevel: LevelTest,
-	defaultXStart: 2032,
-	defaultYStart: 4624,
+	defaultXStart: 2048,
+	defaultYStart: 4640,
 	defaultFacing: 'down',
 	lastSkin: 'boy', // used when rebuilding the player
 	goTo: null, // used to know where to place player when zoning
@@ -443,6 +443,6 @@ MyGame = ig.Game.extend({
 // Start the Game with 60fps, a resolution of 240x160, scaled
 // up by a factor of 2
 // Use the ig.ImpactSplashLoader class as the preloader
-ig.main( '#canvas', MyGame, 60, 360, 240, 2, ig.ImpactSplashLoader );
+ig.main( '#canvas', MyGame, 60, 240, 160, 2, ig.ImpactSplashLoader );
 
 });
