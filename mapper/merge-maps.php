@@ -149,19 +149,74 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
         if($extendsX > $maxWidth) $maxWidth = $extendsX;
         if($extendsY > $maxHeight) $maxHeight = $extendsY;
         
-        // and while we're at it, let's update the x and y positions
-        // to take reflect having its borders
-        $mapImageInfo[$i]['x'] +=
-            ( $mapImageInfo[$i]['borderWidth'] * $globalBorderRepeatX );
-        $mapImageInfo[$i]['x'] +=
-            ( $mapImageInfo[$i]['borderHeight'] * $globalBorderRepeatY );
+        // and while we're at it we may as well store these values
+        // because we're going to reuse them
+        $mapImageInfo[$i]['fullWidth'] = $extendsX;
+        $mapImageInfo[$i]['fullHeight'] = $extendsY;
     }
     
-    // 
+    // now that we know how big the entire map is, let's create it
+    $finalMapImage = imagecreatetruecolor($maxWidth, $maxHeight);
+
+    // now we can begin adding the borders
+    for($i=0; $i<$countMaps; $i++)
+    {
+        $xStart =           $mapImageInfo[$i]['x'] -
+                            $mapImageInfo[$i]['borderWidth'] *
+                            $globalBorderRepeatX;
+        $yStart =           $mapImageInfo[$i]['y'] -
+                            $mapImageInfo[$i]['borderHeight'] *
+                            $globalBorderRepeatX;
+        $borderFillWidth =  $mapImageInfo[$i]['fullWidth'];
+        $borderFillHeight = $mapImageInfo[$i]['fullHeight'];
+           
+        // tile the border to fill the area
+        $borderFillWidthInTiles = $borderFillWidth / $globalTilesize;
+        $borderFillHeightInTiles = $borderFillHeight / $globalTilesize;
+        for($y=0; $y<$borderFillHeightInTiles; $y++)
+        {
+            for($x=0; $x<$borderFillWidthInTiles; $x++)
+            {
+                if(!imagecopy( 
+                    $finalMapImage, // destination image
+                    $mapBorderImageResources[$i], // source image
+                    $xStart + ( $x * $globalTilesize ), // x destination
+                    $yStart + ( $y * $globalTilesize ), // and y
+                    0, 0, // x, y source
+                    $mapImageInfo[$i]['borderWidth'], // copy width
+                    $mapImageInfo[$i]['borderHeight'] // copy height
+                )) die( "Writing of border in map ".$i.
+                        ' <b style="color: red">failed</b>. '.
+                        'Could not copy tile: '.$x.','.$y   );
+            }
+        }
+    }
+    
+    // and finally we can add the maps themselves
+    for($i=0; $i<$countMaps; $i++)
+    {
+        if(!imagecopy( 
+            $finalMapImage, // destination image
+            $mapImageResources[$i], // source image
+            $mapImageInfo[$i]['x'], // x destination
+            $mapImageInfo[$i]['y'], // and y
+            0, 0, // x, y source
+            $mapImageInfo[$i]['width'], // copy width
+            $mapImageInfo[$i]['height'] // copy height
+        )) die( "Writing of map ".$i.
+                ' <b style="color: red">failed</b>. ');
+    }
+    
+    if(!imagepng($finalMapImage, '.'.DIRECTORY_SEPARATOR.'test-merge.png' ))
+            die( "Border attempt ".$i.' <b>failed</b>. '.
+                'Could not write tile ('.$x.','.$y.') to: '.
+                $tileDestination );
+    
+    
     
     
     //print_r($mapImageInfo); die();
-    echo "width = $maxWidth and height = $maxHeight ...<br>\n\n";
+    //echo "width = $maxWidth and height = $maxHeight ...<br>\n\n";
     die();
     
     
