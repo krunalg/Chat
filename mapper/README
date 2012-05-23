@@ -49,5 +49,13 @@ tilesheet-from-map.php
     tiles used in the map.
         (requires at least one map is processed, ie. has JSON file)
         (requires master tilesheet from which to extract tiles)
-   
+
+map-placement.php
+-   Use this tool to manage how maps are placed with relation to each other (if
+    they are to be joined into one).
+    
+add-borders.php
+-   Reads all maps that have placement data and arranges them according to
+    placement data, creating a single map that contains them all. It also
+    adds borders to each individual map, closing it off.
     
