@@ -149,17 +149,14 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
         if($extendsX > $maxWidth) $maxWidth = $extendsX;
         if($extendsY > $maxHeight) $maxHeight = $extendsY;
         
-        // and while we're at it we may as well store these values
-        // because we're going to reuse them
-        $mapImageInfo[$i]['fullWidth'] = $extendsX;
-        $mapImageInfo[$i]['fullHeight'] = $extendsY;
-        
         // and update each maps position to account for its border
         $mapImageInfo[$i]['x'] +=
             $mapImageInfo[$i]['borderWidth'] * $globalBorderRepeatX;
         $mapImageInfo[$i]['y'] +=
             $mapImageInfo[$i]['borderHeight'] * $globalBorderRepeatY;
     }
+    
+    $countMaps = 1;
     
     // now that we know how big the entire map is, let's create it
     $finalMapImage = imagecreatetruecolor($maxWidth, $maxHeight);
@@ -168,13 +165,17 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
     for($i=0; $i<$countMaps; $i++)
     {
         $xStart =           $mapImageInfo[$i]['x'] -
-                            $mapImageInfo[$i]['borderWidth'] *
-                            $globalBorderRepeatX;
+                            ($mapImageInfo[$i]['borderWidth'] *
+                            $globalBorderRepeatX);
         $yStart =           $mapImageInfo[$i]['y'] -
-                            $mapImageInfo[$i]['borderHeight'] *
-                            $globalBorderRepeatX;
-        $borderFillWidth =  $mapImageInfo[$i]['fullWidth'];
-        $borderFillHeight = $mapImageInfo[$i]['fullHeight'];
+                            ($mapImageInfo[$i]['borderHeight'] *
+                            $globalBorderRepeatY);
+        $borderFillWidth =  $mapImageInfo[$i]['width'] +
+                            ($mapImageInfo[$i]['borderWidth'] *
+                            $globalBorderRepeatX * 2);
+        $borderFillHeight = $mapImageInfo[$i]['height'] +
+                            ($mapImageInfo[$i]['borderHeight'] *
+                            $globalBorderRepeatY * 2);
            
         // tile the border to fill the area
         $borderFillWidthInChunks = $borderFillWidth / $mapImageInfo[$i]['borderWidth'];
