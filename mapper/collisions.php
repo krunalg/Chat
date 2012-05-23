@@ -170,7 +170,7 @@ else if( isset($_POST['tiles']) )
                      // that the file_put_contents failed
                      
     foreach($collisions as $key => $value)
-        if($value!=$collisionWalkable) // ignore regular walkable tiles
+        if($value!=0) // ignore regular walkable tiles (magic numbers are bad!)
             $fileDump = $fileDump . $key . ':' . $value . "\n";
 
     //if($fileDump!='')
@@ -214,17 +214,14 @@ else
         }
     }
     
-    var collisionTypes = new Array();
-    collisionTypes.push(<?php echo $collisionWalkable ?>);
-    collisionTypes.push(<?php echo $collisionNoWalk ?>); 
-    collisionTypes.push(<?php echo $collisionLeft ?>); 
-    collisionTypes.push(<?php echo $collisionRight ?>); 
-    collisionTypes.push(<?php echo $collisionUp ?>); 
-    collisionTypes.push(<?php echo $collisionDown ?>);
-    collisionTypes.push(<?php echo $collisionNoLeft ?>); 
-    collisionTypes.push(<?php echo $collisionNoRight ?>); 
-    collisionTypes.push(<?php echo $collisionNoUp ?>); 
-    collisionTypes.push(<?php echo $collisionNoDown ?>);
+    var tileStates = new Array();
+    <?php
+    $stateIndex = 0;
+    for($i=0; $i<count($globalCollisions); $i++)
+    {
+        echo 'tileStates.push('.$i.');';
+    }
+    ?>
     
     var save = function()
     {
@@ -235,7 +232,7 @@ else
             {
                 //if(tiles[x][y].collision!=0)
                     // dump even the walkable tiles because we need to be able to convert tiles to walkable
-                    dump = dump + tiles[x][y].hash + ":" + collisionTypes[tiles[x][y].collision] + "\n";
+                    dump = dump + tiles[x][y].hash + ":" + tileStates[tiles[x][y].collision] + "\n";
                 //else
                     ;//dump = dump + "Added the following dummy data instead: " + tiles[i][j].collision + "\n";
             }
@@ -246,7 +243,7 @@ else
     var tileClicked = function(x, y)
     {
         tiles[x][y].collision++; // next collision in cycle
-        if(tiles[x][y].collision>=collisionTypes.length)
+        if(tiles[x][y].collision>=tileStates.length)
             tiles[x][y].collision = 0; // restart cycle if need be
         
         tileOver(x,y); // update displayed image
@@ -270,38 +267,18 @@ else
     var tileOver = function(x, y)
     {
         var img = '';
-        switch(collisionTypes[tiles[x][y].collision])
+        switch(tileStates[tiles[x][y].collision])
         {
-            case <?php echo $collisionWalkable ?>:
-                img = '<?php echo $collisionWalkableMouseoverImg ?>';
-                break;
-            case <?php echo $collisionNoWalk ?>:
-                img = '<?php echo $collisionNoWalkMouseoverImg ?>';
-                break;
-            case <?php echo $collisionLeft ?>:
-                img = '<?php echo $collisionLeftMouseoverImg ?>';
-                break;
-            case <?php echo $collisionRight ?>:
-                img = '<?php echo $collisionRightMouseoverImg ?>';
-                break;
-            case <?php echo $collisionUp ?>:
-                img = '<?php echo $collisionUpMouseoverImg ?>';
-                break;
-            case <?php echo $collisionDown ?>:
-                img = '<?php echo $collisionDownMouseoverImg ?>';
-                break;
-            case <?php echo $collisionNoLeft ?>:
-                img = '<?php echo $collisionNoLeftMouseoverImg ?>';
-                break;
-            case <?php echo $collisionNoRight ?>:
-                img = '<?php echo $collisionNoRightMouseoverImg ?>';
-                break;
-            case <?php echo $collisionNoUp ?>:
-                img = '<?php echo $collisionNoUpMouseoverImg ?>';
-                break;
-            case <?php echo $collisionNoDown ?>:
-                img = '<?php echo $collisionNoDownMouseoverImg ?>';
-                break;
+            <?php
+            $stateIndex = 0;
+            foreach($globalCollisions as $state)
+            {
+                echo 'case ' . $stateIndex . ':' . "\n" .
+                        'img = \''.$state['mouseoverImg'].'\';' . "\n" .
+                        'break;' . "\n";
+                $stateIndex++;
+            }
+            ?>
         }
         if(img!='') $('#x'+x+'y'+y).css('background-image', 'url("'+img+'")');
         else window.alert("Tile " + x + "," + y + " has improper collision type: " + tiles[x][y].collision);
@@ -310,38 +287,18 @@ else
     var tileOut = function(x, y)
     {
         var img = '';
-        switch(collisionTypes[tiles[x][y].collision])
+        switch(tileStates[tiles[x][y].collision])
         {
-            case <?php echo $collisionWalkable ?>:
-                img = '<?php echo $collisionWalkableMouseoutImg ?>';
-                break;
-            case <?php echo $collisionNoWalk ?>:
-                img = '<?php echo $collisionNoWalkMouseoutImg ?>';
-                break;
-            case <?php echo $collisionLeft ?>:
-                img = '<?php echo $collisionLeftMouseoutImg ?>';
-                break;
-            case <?php echo $collisionRight ?>:
-                img = '<?php echo $collisionRightMouseoutImg ?>';
-                break;
-            case <?php echo $collisionUp ?>:
-                img = '<?php echo $collisionUpMouseoutImg ?>';
-                break;
-            case <?php echo $collisionDown ?>:
-                img = '<?php echo $collisionDownMouseoutImg ?>';
-                break;
-            case <?php echo $collisionNoLeft ?>:
-                img = '<?php echo $collisionNoLeftMouseoutImg ?>';
-                break;
-            case <?php echo $collisionNoRight ?>:
-                img = '<?php echo $collisionNoRightMouseoutImg ?>';
-                break;
-            case <?php echo $collisionNoUp ?>:
-                img = '<?php echo $collisionNoUpMouseoutImg ?>';
-                break;
-            case <?php echo $collisionNoDown ?>:
-                img = '<?php echo $collisionNoDownMouseoutImg ?>';
-                break;
+            <?php
+            $stateIndex = 0;
+            foreach($globalCollisions as $state)
+            {
+                echo 'case ' . $stateIndex . ':' . "\n" .
+                        'img = \''.$state['mouseoutImg'].'\';' . "\n" .
+                        'break;' . "\n";
+                $stateIndex++;
+            }
+            ?>
         }
         if(img!='') $('#x'+x+'y'+y).css('background-image', 'url("'+img+'")');
         else window.alert("Tile " + x + "," + y + " has improper collision type: " + tiles[x][y].collision);
