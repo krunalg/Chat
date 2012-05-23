@@ -38,9 +38,9 @@ if( !isset($_POST['save']) )
             $dirName . DIRECTORY_SEPARATOR . $globalPlacementFile;
         
         echo $pathToPlacementFile . "... X: ";
-        echo '<input name="x-'.$i.'" type="text value="" />';
+        echo '<input id="x-'.$i.'" type="text value="" />';
         echo 'Y: ';
-        echo '<input name="y" type="text value="" />';
+        echo '<input id="y-'.$i.'" type="text value="" />';
         
         // if a JSON file is present, the map has been processed
         if(file_exists($pathToPlacementFile))
@@ -98,16 +98,18 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
         $dirName = dirname($maps[$i]);
         $pathToPlacementFile =
             $dirName . DIRECTORY_SEPARATOR . $globalPlacementFile;
-            
+         
         if( is_numeric($placementByMap[$i]['x']) &&
                     is_numeric($placementByMap[$i]['y']) )
         {
             // write file paying no regard to
             // whether it exists already or not
             $xAndY = $placementByMap[$i]['x'] . ':' . $placementByMap[$i]['y'];
-            
-            // i still need to write the file
-            // *****
+            if(!file_put_contents($pathToPlacementFile, $xAndY))
+                die( '<b style="color:red">Failed</b> writing file: ' .
+                     $pathToPlacementFile);
+            else
+                echo "<b>Success</b> writing file: " . $pathToPlacementFile;
         }
         else
         {
@@ -115,18 +117,23 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
             // either delete existing file, or
             // do nothing
             if(file_exists($pathToPlacementFile))
-                if(!unlink($pathToPlacementFile)) // deletes
-                    die("Failed to delete ". $pathToPlacementFile);
+            {
+                if(unlink($pathToPlacementFile)) // deletes
+                {
+                    echo 'Removal of unused '. $pathToPlacementFile .
+                         ' <b>successful</b>.';
+                }
+                else die("Failed to delete ". $pathToPlacementFile);
+            }
             else
-                echo $pathToPlacementFile . 'does not exist, and '.
+                echo $pathToPlacementFile . ' does not exist, and '.
                      'will not be created.';
         }
+        echo "<br>\n\n";
+        
     }
     
-    
-    print_r($placementByMap);
-    die();
-    
+
 }
 
 
