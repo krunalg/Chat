@@ -94,7 +94,7 @@ $globalCollisions =
         ),
            'grass'    =>
         array( 'collision'    => 0,
-               'mouseoutImg'  => 'images/grass-player.gif',
+               'mouseoutImg'  => 'images/grass.gif',
                'mouseoverImg' => 'images/grass-mouseover.png'
         )
     );
