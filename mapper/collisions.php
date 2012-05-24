@@ -60,6 +60,7 @@ else if( isset($_GET['ts']) )
          'style="position: absolute; top: 0; left: 0;" />';
     
     $ts = $_GET['ts'];
+    $dirName = dirname($ts);
     
     $size = getimagesize($ts);
     $width = $size[0]; // width in px of map
@@ -142,7 +143,7 @@ else if( isset($_GET['ts']) )
     
     
 }
-else if( isset($_POST['tiles']) )
+else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
 {
     /*
      * Third Page: Write tile hashes and collision data to file
@@ -165,22 +166,108 @@ else if( isset($_POST['tiles']) )
         $collisions[ $newCollisions[$i][0] ] = $newCollisions[$i][1];
     }
     
+    // build array of important collision types
+    // for special cases such as tiles which need to be above player
+    $collisionIndex = 0;
+    $indexOfCollision = array(); // holds special cases
+    foreach($globalCollisions as $index => $collision)
+    {
+        if($index=='walkable' || $index=='above')
+            $indexOfCollision[$index] = $collisionIndex;
+        $collisionIndex++;
+    }
+    
+    // load map JSON data which we'll need if there are any
+    // above-the-player tiles
+    $mapJSONPath = $_POST['mapJSON'];
+    $mapJSONContents = file_get_contents($mapJSONPath);
+    $mapJSON = json_decode($mapJSONContents);
+    foreach($mapJSON as $key => $value)
+    {
+        if($key=='width') $mapWidthInTiles = $value;
+        else if($key=='height') $mapHeightInTiles = $value;
+        else if(    $key=='tiles' && is_array($value)
+                    && is_numeric($mapWidthInTiles)
+                    && is_numeric($mapHeightInTiles)   )
+        {
+            // build an array containing one known position for every tile
+            // (by hash) so we can look up, and write copies of specific tiles
+            // to disk later on
+            $tilesIndex = 0;
+            $posOfTileInMap = array();
+            for($y=0; $y<$mapHeightInTiles; $y++)
+            {
+                for($x=0; $x<$mapWidthInTiles; $x++)
+                {
+                    $currentHash = $value[$tilesIndex];
+                    $posOfTileInMap[$currentHash] = array();
+                    $posOfTileInMap[$currentHash]['x'] = $x;
+                    $posOfTileInMap[$currentHash]['y'] = $y;
+                    $tilesIndex++;
+                }        
+            }
+        }
+        else die($mapJSONPath . " contained unexpected content.");
+    }
+    
+    // load map as an image resource for saving certain tiles to disk
+    $mapPath = dirname($mapJSONPath) . DIRECTORY_SEPARATOR . $globalMapFilename;
+    $mapImage = LoadPNG($mapPath);
+    
     $fileDump = ' '; // at the very least we will write a space
                      // we don't want to write nothing because then it appears
                      // that the file_put_contents failed
                      
-    foreach($collisions as $key => $value)
-        if($value!=0) // ignore regular walkable tiles (magic numbers are bad!)
-            $fileDump = $fileDump . $key . ':' . $value . "\n";
+    foreach($collisions as $hash => $index)
+        if($index!=$indexOfCollision['walkable']) // ignore regular walkable tiles
+    {
+        $fileDump = $fileDump . $hash . ':' . $index . "\n";
+        
+        // export 'above-player' tiles to a special folder
+        if($index==$indexOfCollision['above'])
+        {
+            $currentTilePos = $posOfTileInMap[$hash];
+            $newTileFile = md5($hash) . '.png';
+            $newTilePath = $globalAboveDumpDir .
+                DIRECTORY_SEPARATOR . $newTileFile;
+            if(!file_exists($newTilePath))
+            {
+                $newTileImage =
+                    imagecreatetruecolor($globalTilesize, $globalTilesize);
+                $sourceX = $posOfTileInMap[$hash]['x'] * $globalTilesize;
+                $sourecY = $posOfTileInMap[$hash]['y'] * $globalTilesize;
+                
+                // attempt to copy tile from map
+                if(!imagecopy( 
+                    $newTileImage, // destination image
+                    $mapImage, // source image
+                    0, // x destination
+                    0, // and y
+                    $sourceX, // x source
+                    $sourecY, // and y
+                    $globalTilesize, // copy width
+                    $globalTilesize // and height
+                )) die( 'Copying of tile <b style="color: red">failed</b>' .
+                        ' from map px position x: '. $sourceX .
+                        ' y: ' . $sourecY .'.');
+                
+                // write file to disk
+                if(!is_dir($globalAboveDumpDir)) mkdir($globalAboveDumpDir);
+                if(!imagepng($newTileImage, $newTilePath))
+                    die( 'Write attempt <b style="color:red">failed</b>. '.
+                         'Could not write ' . $newTilePath);
+                else echo "<b>Successfully</b> wrote new 'above' tile " .
+                    $newTilePath.'...<br>';
+            }
+        }
+    }
 
-    //if($fileDump!='')
-    //{
-        if(!file_put_contents($globalCollisionsFile, $fileDump))
-            die("Failed writing file: " . $globalCollisionsFile);
-        else
-            echo "Success writing file: " . $globalCollisionsFile;
-    //}
-    //else echo "Nothing to write to file.";
+    // write to collision file
+    if(!file_put_contents($globalCollisionsFile, $fileDump))
+        die("Failed writing file: " . $globalCollisionsFile);
+    else
+        echo "Success writing file: " . $globalCollisionsFile;
+
     echo '<br /><a href="">Edit another map</a>';
     
     //echo "I found the following data: \n" . $_POST['tiles'];
@@ -237,7 +324,14 @@ else
                     ;//dump = dump + "Added the following dummy data instead: " + tiles[i][j].collision + "\n";
             }
         }
-        post_to_url('collisions.php', {'tiles': dump} );
+        post_to_url('collisions.php', {'tiles': dump , 'mapJSON': '<?php
+        
+            $mapJSON = $dirName . DIRECTORY_SEPARATOR . $globalMapJSON;
+            $mapJSON = str_replace('\\', "\\\\", $mapJSON);
+            echo $mapJSON;
+            
+        
+        ?>'} );
     }
     
     var tileClicked = function(x, y)
