@@ -98,6 +98,10 @@ else if( isset($_POST['build']) && $_POST['build']=='all' )
                 $tilesheetWidthInTiles * $globalTilesize,
                 $tilesheetHeightInTiles * $globalTilesize );
         
+        // we want to save alpha channel
+        imagealphablending($newimg, false);
+        imagesavealpha($newimg, true);
+        
         // adding tiles to master tilesheet
         $nextTile = 0; // progresses through tiles array index
         for($y=0; $y<$tilesheetHeightInTiles; $y++)
