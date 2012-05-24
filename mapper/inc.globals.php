@@ -14,6 +14,9 @@ $globalMapDir =
 $globalTileDumpDir =
     "." . DIRECTORY_SEPARATOR .
     "dumped-tiles";
+$globalTileAboveDir =
+    "." . DIRECTORY_SEPARATOR .
+    "above-tiles";
     
 // FILE NAMES
 $globalCollisionsFile = 'collisions.txt';
