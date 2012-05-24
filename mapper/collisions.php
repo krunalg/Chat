@@ -226,43 +226,48 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
         // export 'above-player' tiles to a special folder
         if($index==$indexOfCollision['above'])
         {
-            $currentTilePos = $posOfTileInMap[$hash];
-            $newTileFile = md5($hash) . '.png';
-            $newTilePath = $globalAboveDumpDir .
-                DIRECTORY_SEPARATOR . $newTileFile;
-            if(!file_exists($newTilePath))
+            // we only want to try ripping an 'above-tile' from the map
+            // if its part of the current map (ie. not previously saved)
+            if(isset($posOfTileInMap[$hash]))
             {
-                $newTileImage =
-                    imagecreatetruecolor($globalTilesize, $globalTilesize);
-                $sourceX = $posOfTileInMap[$hash]['x'] * $globalTilesize;
-                $sourecY = $posOfTileInMap[$hash]['y'] * $globalTilesize;
-                
-                // attempt to copy tile from map
-                if(!imagecopy( 
-                    $newTileImage, // destination image
-                    $mapImage, // source image
-                    0, // x destination
-                    0, // and y
-                    $sourceX, // x source
-                    $sourecY, // and y
-                    $globalTilesize, // copy width
-                    $globalTilesize // and height
-                )) die( 'Copying of tile <b style="color: red">failed</b>' .
-                        ' from map px position x: '. $sourceX .
-                        ' y: ' . $sourecY .'.');
-                
-                // write file to disk
-                if(!is_dir($globalAboveDumpDir)) mkdir($globalAboveDumpDir);
-                if(!imagepng($newTileImage, $newTilePath))
-                    die( 'Write attempt <b style="color:red">failed</b>. '.
-                         'Could not write ' . $newTilePath);
-                else echo "<b>Successfully</b> wrote new 'above' tile " .
-                    $newTilePath.'...<br>';
-            }
-            else
-            {
-                echo "Above-player tile ". $newTilePath . " already exists. " .
-                     "<b>Skipping</b>...<br>\n\n";
+                $currentTilePos = $posOfTileInMap[$hash];
+                $newTileFile = md5($hash) . '.png';
+                $newTilePath = $globalAboveDumpDir .
+                    DIRECTORY_SEPARATOR . $newTileFile;
+                if(!file_exists($newTilePath))
+                {
+                    $newTileImage =
+                        imagecreatetruecolor($globalTilesize, $globalTilesize);
+                    $sourceX = $posOfTileInMap[$hash]['x'] * $globalTilesize;
+                    $sourecY = $posOfTileInMap[$hash]['y'] * $globalTilesize;
+                    
+                    // attempt to copy tile from map
+                    if(!imagecopy( 
+                        $newTileImage, // destination image
+                        $mapImage, // source image
+                        0, // x destination
+                        0, // and y
+                        $sourceX, // x source
+                        $sourecY, // and y
+                        $globalTilesize, // copy width
+                        $globalTilesize // and height
+                    )) die( 'Copying of tile <b style="color: red">failed</b>' .
+                            ' from map px position x: '. $sourceX .
+                            ' y: ' . $sourecY .'.');
+                    
+                    // write file to disk
+                    if(!is_dir($globalAboveDumpDir)) mkdir($globalAboveDumpDir);
+                    if(!imagepng($newTileImage, $newTilePath))
+                        die( 'Write attempt <b style="color:red">failed</b>. '.
+                             'Could not write ' . $newTilePath);
+                    else echo "<b>Successfully</b> wrote new 'above' tile " .
+                        $newTilePath.'...<br>';
+                }
+                else
+                {
+                    echo "Above-player tile ". $newTilePath . " already exists. " .
+                         "<b>Skipping</b>...<br>\n\n";
+                }
             }
         }
     }
