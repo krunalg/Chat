@@ -30,11 +30,12 @@ if( !isset($_POST['build']) )
     $tiles = scanFileNameRecursivly($globalTileDumpDir);
     
     // report
-    echo 'Found <b>'.count($tiles).'</b> tiles in '.$globalTileDumpDir.'...';
+    echo 'Found <b>'.count($tiles).'</b> tiles in '.$globalTileDumpDir.'...<br>';
+    echo 'To-do: also list how many "above-player" tiles will be included...<br>'
     
     if(count($tiles)>=2) // only offer to merge if some exist
     {
-        echo "<br><br>\n\n";
+        echo "<br>\n\n";
         echo '<input type="button" '.
                 'value="Merge all into single image" '.
                 'onClick="post_to_url( \'\', '. // post to same file ''
