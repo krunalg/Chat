@@ -30,7 +30,7 @@ if( !isset($_POST['build']) )
     $tiles = scanFileNameRecursivly($globalTileDumpDir);
     
     // report
-    echo 'Found <b>'.count($tiles).'</b> in '.$globalTileDumpDir.'...';
+    echo 'Found <b>'.count($tiles).'</b> tiles in '.$globalTileDumpDir.'...';
     
     if(count($tiles)>=2) // only offer to merge if some exist
     {
@@ -59,6 +59,34 @@ else if( isset($_POST['build']) && $_POST['build']=='all' )
     // only perform a merge if there is more than one file
     if(count($tiles>1))
     {
+        // build array of important collision types
+        // for special cases such as tiles which need to be above player
+        $collisionIndex = 0;
+        $indexOfCollision = array(); // holds special cases
+        foreach($globalCollisions as $index => $collision)
+        {
+            if($index=='above')
+                $indexOfCollision[$index] = $collisionIndex;
+            $collisionIndex++;
+        }
+        
+        // we need to open the tile states file and find out which
+        // tiles have been marked as "above" the player
+        $savedCollisions = getCollisionsFromFile($globalCollisionsFile);
+        $savedCollisions = buildHashIndexCollisions($savedCollisions);
+        foreach($savedCollisions as $hash => $collision)
+        {
+            if($collision == $indexOfCollision['above'])
+            {
+                // remember that we md5 the name of the "above" tile because
+                // it has to be a different name than the original tile,
+                // and still be easily findable.
+                $collisionTilePath = $globalAboveDumpDir .
+                    DIRECTORY_SEPARATOR . md5($hash) . '.png';
+                array_push($tiles, $collisionTilePath);
+            }
+        }
+        
         // calculate master tilesheet dimensions
         $tilesheetWidthInTiles = $globalMasterTilesheetWidth/$globalTilesize;
         $tilesheetHeightInTiles = ceil(count($tiles)/$tilesheetWidthInTiles);
