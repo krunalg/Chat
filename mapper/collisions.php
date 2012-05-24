@@ -259,6 +259,11 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
                 else echo "<b>Successfully</b> wrote new 'above' tile " .
                     $newTilePath.'...<br>';
             }
+            else
+            {
+                echo "Above-player tile ". $newTilePath . " already exists. " .
+                     "<b>Skipping</b>...<br>\n\n";
+            }
         }
     }
 
