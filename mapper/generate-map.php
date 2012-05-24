@@ -82,6 +82,24 @@ else if( isset($_POST['generate']) )
     {
         if(file_exists($jsonMapPaths[$i]))
         {
+            // build array of important collision types
+            // for special cases such as tiles which need to be above player
+            $collisionIndex = 0;
+            $indexOfCollision = array(); // holds special cases
+            foreach($globalCollisions as $index => $collision)
+            {
+                if($index=='above')
+                    $indexOfCollision[$index] = $collisionIndex;
+                $collisionIndex++;
+            }
+            
+            // we need to know all the tiles which will be placed
+            // above the player so that we can add the upper layer
+            $abovePlayerTiles = array();
+            foreach($collisions as $hash => $collision)
+                if($collision == $indexOfCollision['above'])
+                    $abovePlayerTiles[$hash] = md5($hash);            
+            
             // map specific data
             $mapName = dirname($jsonMapPaths[$i]);
                 $mapName = 'test';
@@ -121,7 +139,7 @@ else if( isset($_POST['generate']) )
                 "\"entities\": [],".
                 "\"layer\": [ ".
                     "{".
-                        "\"name\": \"below\", ".
+                        "\"name\": \"lower\", ".
                         "\"width\": ".$mapWidth.", ".
                         "\"height\": ".$mapHeight.", ".
                         "\"linkWithCollision\": false, ".
@@ -160,8 +178,50 @@ else if( isset($_POST['generate']) )
                             if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
                         } 
                 
-            $export .=  "] ".
+            $export .=  "] ". // close off data
                     "},".
+                    "{".
+                        "\"name\": \"upper\", ".
+                        "\"width\": ".$mapWidth.", ".
+                        "\"height\": ".$mapHeight.", ".
+                        "\"linkWithCollision\": false, ".
+                        "\"visible\": 1, ".
+                        "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
+                        "\"repeat\": false, ".
+                        "\"preRender\": true, ".
+                        "\"distance\": \"1\", ".
+                        "\"tilesize\": ".$globalTilesize.", ".
+                        "\"foreground\": true, ".
+                        "\"data\": [ ";
+                        
+                        $mapTilesIndex = 0; // used to traverse all tiles in map
+                        for($y=0; $y<$mapHeight; $y++)
+                        {
+                            $export .= "[ ";
+                            for($x=0; $x<$mapWidth; $x++)
+                            {
+                                $currTileHash = $mapTiles[$mapTilesIndex];
+                                
+                                // use no tile (which is 0 in weltmeister)
+                                // when no found in "above" player tiles array
+                                if(!isset($abovePlayerTiles[$currTileHash]))
+                                    $currTilePosInTilesheet = 0;
+                                else
+                                {
+                                    $currTilePosInTilesheet =
+                                        $masterTilesheetByHash[md5($currTileHash)];
+                                        $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
+                                }
+                                
+                                $export .= $currTilePosInTilesheet;
+                                if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
+                                $mapTilesIndex++; // next tile in the map
+                            }
+                            if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
+                        } 
+                
+            $export .=  "] ".
+                    "}, ".
                     "{".
                         "\"name\": \"collision\", ".
                         "\"width\": ".$mapWidth.", ".
@@ -190,18 +250,18 @@ else if( isset($_POST['generate']) )
                                 }
                                 
                                 $currTileCollisionWM =
-                                    $globalCollisions['walkable']; // default
+                                    $globalCollisions['walkable']['collision']; // default
                                     
                                 // if there's a collision preference, find out
                                 // what it in in terms of weltmeister
                                 if(isset($currTileCollision)) 
                                 {
                                     $collisionIndex = 0; // position in master collisions array
-                                    foreach($globalCollisions as $weltmeisterValue)
+                                    foreach($globalCollisions as $collision)
                                     {
                                         if($collisionIndex==$currTileCollision)
                                         {
-                                            $currTileCollisionWM = $weltmeisterValue;
+                                            $currTileCollisionWM = $collision['collision'];
                                             break;
                                         }
                                         $collisionIndex++;
