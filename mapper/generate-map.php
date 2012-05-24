@@ -88,17 +88,27 @@ else if( isset($_POST['generate']) )
             $indexOfCollision = array(); // holds special cases
             foreach($globalCollisions as $index => $collision)
             {
-                if($index=='above')
+                if($index=='above' || $index=='grass')
                     $indexOfCollision[$index] = $collisionIndex;
                 $collisionIndex++;
             }
             
             // we need to know all the tiles which will be placed
             // above the player so that we can add the upper layer
+            // or if tile is grass, so we can add an entity
             $abovePlayerTiles = array();
+            $grassTiles = array();
             foreach($collisions as $hash => $collision)
+            {
                 if($collision == $indexOfCollision['above'])
-                    $abovePlayerTiles[$hash] = md5($hash);            
+                {
+                    $abovePlayerTiles[$hash] = 1; // note any value works,
+                                                  // all we are checking for
+                                                  // is isset()
+                }
+                else if($collision == $indexOfCollision['grass'])
+                    $grassTiles[$hash] = 1;       // here too
+            }   
             
             // map specific data
             $mapName = dirname($jsonMapPaths[$i]);
@@ -136,7 +146,41 @@ else if( isset($_POST['generate']) )
             // JSON HERE
             $export .=
             "{".
-                "\"entities\": [],".
+                "\"entities\": [";
+                
+                    // generate grass entities
+                    $mapTilesIndex = 0; // used to traverse all tiles in map
+                    $firstGrass = true;
+                    for($y=0; $y<$mapHeight; $y++)
+                    {
+                        for($x=0; $x<$mapWidth; $x++)
+                        {
+                            $currTileHash = $mapTiles[$mapTilesIndex];
+                            
+                            //echo "Current hash is $currTileHash ... grass should be ";
+                            //print_r($grassTiles);
+                            //echo "<br><br>\n\n\n";
+                        
+                            // only add entity if tile is grass
+                            if(isset($grassTiles[$currTileHash]))
+                            {
+                                if(!$firstGrass) $export .= ',';
+                                else $firstGrass = false;
+                                $export .= ''.
+                                '{ '.
+                                    '"type": "EntityGrass", '.
+                                    '"x": '.($x*$globalTilesize).', '.
+                                    '"y": '.($y*$globalTilesize).', '.
+                                    '"settings": {} '.
+                                '}';
+                            }
+                            
+                            $mapTilesIndex++;
+                        }
+                    }
+                                
+                $export .= "],". // close off entities
+                
                 "\"layer\": [ ".
                     "{".
                         "\"name\": \"lower\", ".
