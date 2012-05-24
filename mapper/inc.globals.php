@@ -14,7 +14,7 @@ $globalMapDir =
 $globalTileDumpDir =
     "." . DIRECTORY_SEPARATOR .
     "dumped-tiles";
-$globalTileAboveDir =
+$globalAboveDumpDir =
     "." . DIRECTORY_SEPARATOR .
     "above-tiles";
     
