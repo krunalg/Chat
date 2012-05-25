@@ -31,7 +31,7 @@ if( !isset($_POST['build']) )
     
     // report
     echo 'Found <b>'.count($tiles).'</b> tiles in '.$globalTileDumpDir.'...<br>';
-    echo 'To-do: also list how many "above-player" tiles will be included...<br>'
+    echo 'To-do: also list how many "above-player" tiles will be included...<br>';
     
     if(count($tiles)>=2) // only offer to merge if some exist
     {
