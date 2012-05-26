@@ -17,6 +17,9 @@ $globalTileDumpDir =
 $globalAboveDumpDir =
     "." . DIRECTORY_SEPARATOR .
     "above-tiles";
+$globalAnimationsDir =
+    "." . DIRECTORY_SEPARATOR .
+    "animations";
     
 // FILE NAMES
 $globalCollisionsFile = 'collisions.txt';
