@@ -86,11 +86,11 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
     if(count($animationExists)>=1)
     {
         $animationExistsToJSON = json_encode($animationExists);
-        $putPath = $globalAnimationFile;
-        if(!file_put_contents($putPath, $animationExistsToJSON))
-            die("Failed writing file: " . $putPath);
-        else
-            echo "Success writing file: " . $putPath;
+        //$putPath = $globalAnimationFile;
+        //if(!file_put_contents($putPath, $animationExistsToJSON))
+        //    die("Failed writing file: " . $putPath);
+        //else
+        //    echo "Success writing file: " . $putPath;
     }
 }
 

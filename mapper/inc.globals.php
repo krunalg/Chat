@@ -32,7 +32,6 @@ $globalMasterTilesheetFile = 'master.png';
 $globalMasterTilesheetJSON = 'master.js';
 $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
-$globalAnimationFile = 'animations.js';
 
 
 
