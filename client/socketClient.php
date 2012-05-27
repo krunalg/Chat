@@ -2,7 +2,7 @@
 <?php
         if($_SERVER["SERVER_NAME"]!="commins.ca")
 	{
-                $socketHost = '192.168.1.95'; // 103
+                $socketHost = '192.168.1.70'; // 103
 		$socketPort = 8080;
 	}
 	else
