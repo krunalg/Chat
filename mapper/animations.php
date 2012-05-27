@@ -85,12 +85,79 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
 
     if(count($animationExists)>=1)
     {
-        $animationExistsToJSON = json_encode($animationExists);
-        //$putPath = $globalAnimationFile;
-        //if(!file_put_contents($putPath, $animationExistsToJSON))
-        //    die("Failed writing file: " . $putPath);
-        //else
-        //    echo "Success writing file: " . $putPath;
+        // we are going to need to look up certain tile positions
+        // within the master tilesheet so lets build the lookup array
+        $tilesheetJSON = $globalMasterTilesheetJSON;
+        $tilesheetJSON = file_get_contents($tilesheetJSON);
+        $tilesheetJSON = json_decode($tilesheetJSON);
+        $masterTilesheetByHash = array();
+        foreach($tilesheetJSON as $key => $hash)
+        {
+            // key is position in tilesheet where tile can be found
+            $masterTilesheetByHash[$hash] = $key;
+        }
+
+        // generate impact code for adding animations
+        $export = '';
+        $fileCount = 0;
+        $animationSheetName = "animationSheet";
+        foreach($animationExists as $filename => $tiles)
+        {
+            $export .=  "var " . $animationSheetName . $fileCount . 
+                        " = new ig.AnimationSheet( ".
+                            "'media/" . $filename . "', " . $globalTilesize . 
+                            ", " . $globalTilesize . 
+                        " );\n";
+            $fileCount++;
+        }
+        $export .=  "this.backgroundAnims = { " .
+                        "'media/".$globalMasterTilesheetFile."': {";
+        
+        $fileCount = 0;
+        $animationSheetWidthInTiles = 9;
+        foreach($animationExists as $filename => $tiles)
+        {
+            $skipCommaFirstTime = '';
+            foreach($tiles as $hash => $y)
+            {
+                if(!isset($masterTilesheetByHash[$hash]))
+                {
+                    die( "Tile " / $hash . " from animation file " . $filename .
+                         "not found in " . $globalMasterTilesheetJSON );
+                }
+                else
+                {
+                    $export .=  $skipCommaFirstTime . "\n" .
+                        ( $masterTilesheetByHash[$hash] + 1 ) . // +1 because
+                                            // weltmeister uses 0 for 'no tile'
+                    ": new ig.Animation( " . $animationSheetName . $fileCount .
+                    ", 0.26667, " .
+                    "[" .
+                        (1 + ($animationSheetWidthInTiles*$y)) . "," . 
+                        (2 + ($animationSheetWidthInTiles*$y)) . "," . 
+                        (3 + ($animationSheetWidthInTiles*$y)) . "," . 
+                        (4 + ($animationSheetWidthInTiles*$y)) . "," . 
+                        (5 + ($animationSheetWidthInTiles*$y)) . "," . 
+                        (6 + ($animationSheetWidthInTiles*$y)) . "," . 
+                        (7 + ($animationSheetWidthInTiles*$y)) . "," . 
+                        (8 + ($animationSheetWidthInTiles*$y)) . 
+                    "] " .
+                    ") ";
+                }
+                $skipCommaFirstTime = ','; // from now on inject comma
+            }
+            $fileCount++;
+        }
+        
+        $export .=      "} " .
+                    "}; ";
+
+        echo "Use the following code in Impact to set up animations:<br><br>\n\n";
+        echo $export;
+        echo "\n\n<br><br>";
+        echo "And make sure you copy the files in " . $globalAnimationsDir .
+             " to the media directory.";
+
     }
 }
 
