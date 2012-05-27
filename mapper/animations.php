@@ -128,8 +128,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                 else
                 {
                     $export .=  $skipCommaFirstTime . "\n" .
-                        ( $masterTilesheetByHash[$hash] + 1 ) . // +1 because
-                                            // weltmeister uses 0 for 'no tile'
+                        ( $masterTilesheetByHash[$hash] ) . 
                     ": new ig.Animation( " . $animationSheetName . $fileCount .
                     ", 0.26667, " .
                     "[" .
