@@ -71,16 +71,27 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
             {
                 $x = 0;
                 $tileHash = getTile($image, $globalTilesize, $x, $y);
-                
                 $path_parts = pathinfo($imagesInDir[$i]);
+                $filename = $path_parts['basename'];
 
-                die($path_parts['basename']);
-
-                $animationExists[$tileHash] = 1;
+                if(!isset($animationExists[$filename]))
+                    $animationExists[$filename] = array();
+                
+                $animationExists[$filename][$tileHash] = $y;
             }
         }
         else die( "" . $imagesInDir[$i] . " does not exist.");
-    } 
+    }
+
+    if(count($animationExists)>=1)
+    {
+        $animationExistsToJSON = json_encode($animationExists);
+        $putPath = $globalAnimationFile;
+        if(!file_put_contents($putPath, $animationExistsToJSON))
+            die("Failed writing file: " . $putPath);
+        else
+            echo "Success writing file: " . $putPath;
+    }
 }
 
 ?>
