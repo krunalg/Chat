@@ -122,8 +122,8 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
             {
                 if(!isset($masterTilesheetByHash[$hash]))
                 {
-                    die( "Tile " / $hash . " from animation file " . $filename .
-                         "not found in " . $globalMasterTilesheetJSON );
+                    die( "Tile " . $hash . " from animation file " . $filename .
+                         " not found in " . $globalMasterTilesheetJSON );
                 }
                 else
                 {
