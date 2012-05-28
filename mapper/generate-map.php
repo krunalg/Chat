@@ -232,7 +232,7 @@ else if( isset($_POST['generate']) )
                         "\"visible\": 1, ".
                         "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
                         "\"repeat\": false, ".
-                        "\"preRender\": true, ".
+                        "\"preRender\": false, ".
                         "\"distance\": \"1\", ".
                         "\"tilesize\": ".$globalTilesize.", ".
                         "\"foreground\": true, ".
