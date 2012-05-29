@@ -151,11 +151,11 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
         $export .=      "} " .
                     "}; ";
 
-        echo "Use the following code in Impact to set up animations:<br><br>\n\n";
+        //echo "Use the following code in Impact to set up animations:<br><br>\n\n";
         echo $export;
-        echo "\n\n<br><br>";
-        echo "And make sure you copy the files in " . $globalAnimationsDir .
-             " to the media directory.";
+        //echo "\n\n<br><br>";
+        //echo "And make sure you copy the files in " . $globalAnimationsDir .
+        //     " to the media directory.";
 
     }
 }
