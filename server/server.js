@@ -3,7 +3,7 @@ var server = require('http').createServer(handler)
   , fs = require('fs')
  
 
-server.listen(8080);
+server.listen(9090);
 
 var onlinePlayers = new Array(); // an array of objects
 

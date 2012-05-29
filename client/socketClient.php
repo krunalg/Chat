@@ -2,13 +2,13 @@
 <?php
         if($_SERVER["SERVER_NAME"]!="commins.ca")
 	{
-                $socketHost = '192.168.1.70'; // 103
-		$socketPort = 8080;
+        $socketHost = '192.168.1.70';
+		$socketPort = 9090;
 	}
 	else
         {
 		$socketHost = 'h.commins.ca';
-		$socketPort = 8080;
+		$socketPort = 9090;
 	}
 	echo "var socket = io.connect('http://".$socketHost.":".$socketPort."');\n";
 ?>
