@@ -4,6 +4,8 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
+
+	'game.background-animations',
 	
 	// levels
 	'game.levels.test',
@@ -264,15 +266,22 @@ MyGame = ig.Game.extend({
 		ig.input.bind( ig.KEY.X, 'run');
 		
 		
-		// set up animated map tiles
-		var as = new ig.AnimationSheet( 'media/bg-flower.png', 16, 16 );
-		this.backgroundAnims = {
-		    'media/starter-towna.png': {
-			// flower
-			4: new ig.Animation( as, 0.26667, [0,1,0,2] ) // 16 frames out of 60 per
-		    }
-		};
+		// set up map animations
 		
+			// flower animation from earlier version
+			var as = new ig.AnimationSheet( 'media/bg-flower.png', 16, 16 );
+			this.backgroundAnims = {
+			    'media/starter-towna.png': {
+				// flower
+				4: new ig.Animation( as, 0.26667, [0,1,0,2] ) // 16 frames out of 60 per
+			    }
+			};
+			
+			// generated animations from mapper
+			initBackgroundAnimations();
+  		
+		
+
 		this.loadLevel (this.defaultLevel);
 		
 		// build player
@@ -416,26 +425,31 @@ MyGame = ig.Game.extend({
 			ig.Font.ALIGN.CENTER
 		);
 		
-		// debug display
-                // this.debugDisplay.draw(info, display_fps, display_average, average_time, interval_count)
-                // info, array:                         this will display each array element on a new line
-                // display_fps, bool:               pass in true or false to either show the FPS or not. defaults to true
-                // display_average, bool:   pass in true or false to either show the average FPS over a period of time or not. 
-                //                                                  defaults to false
-                // average_time, integer:   amount of of time between samples. defaults to 10000 (10 seconds)
-                // interval_count, integer: amount of samples to take over time. defaults to 500
-                if(username=="Joncom")
+        if(username=="Joncom")
 		{
 			this.debugDisplay.draw(
 				[
 					'ig.game.screen.x = ' + ig.game.screen.x,
 					'ig.game.screen.y = ' + ig.game.screen.y
-				],
-				true,
-				false,
-				10000,
-				100
-			);	
+				], // will display each array element on a new line
+				true, // true or false to either show the FPS
+				false, // true or false to show the average FPS over a period of time
+				10000, // amount of of time between samples. defaults to 10000 (10 seconds)
+				100 // amount of samples to take over time. defaults to 500
+			);
+
+			// disable collisions
+			ig.CollisionMap.inject({
+			    trace: function( x, y, vx, vy, objectWidth, objectHeight ) {
+			        // Return a dummy trace result, indicating that the object
+			        // did not collide
+			        return {
+			            collision: {x: false, y: false},
+			            pos: {x: x+vx, y: y+vy},
+			            tile: {x: 0, y: 0}
+			        };
+			    }
+			});
 		}
 	}
 });
@@ -443,6 +457,6 @@ MyGame = ig.Game.extend({
 // Start the Game with 60fps, a resolution of 240x160, scaled
 // up by a factor of 2
 // Use the ig.ImpactSplashLoader class as the preloader
-ig.main( '#canvas', MyGame, 60, 240, 160, 2, ig.ImpactSplashLoader );
+ig.main( '#canvas', MyGame, 60, 360, 240, 2, ig.ImpactSplashLoader );
 
 });
