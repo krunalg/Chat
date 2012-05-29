@@ -18,10 +18,10 @@ ig.module (
 	facing: 'down',
 	
 	speed: 69,
-	runSpeed: 138,
+	runSpeed: (138*8),
 	walkSpeed: 69,
 	jumpSpeed: 69,
-	maxVel: { x: 138, y: 138 },
+	maxVel: { x: (138*8), y: (138*8) },
 	moveState: 'idle', // idle, walk, run
 	
 	size: {x: 16, y: 16},
