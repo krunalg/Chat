@@ -110,7 +110,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                         " );<br>";
             $fileCount++;
         }
-        $export .=  "this.backgroundAnims = { " .
+        $export .=  "ig.game.backgroundAnims = { " .
                         "'media/".$globalMasterTilesheetFile."': {";
         
         $fileCount = 0;
