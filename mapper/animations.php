@@ -107,7 +107,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                         " = new ig.AnimationSheet( ".
                             "'media/" . $filename . "', " . $globalTilesize . 
                             ", " . $globalTilesize . 
-                        " );\n";
+                        " );<br>";
             $fileCount++;
         }
         $export .=  "this.backgroundAnims = { " .
@@ -115,9 +115,11 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
         
         $fileCount = 0;
         $animationSheetWidthInTiles = 9;
+        $skipCommaFirstTime = '';
+        // something to the effect of
+        // 1: new ig.Animation( animationSheet0, 0.26667, [1,2,3,4,5,6,7,8] ) (,)
         foreach($animationExists as $filename => $tiles)
         {
-            $skipCommaFirstTime = '';
             foreach($tiles as $hash => $y)
             {
                 if(!isset($masterTilesheetByHash[$hash]))
@@ -127,7 +129,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                 }
                 else
                 {
-                    $export .=  $skipCommaFirstTime . "\n" .
+                    $export .=  $skipCommaFirstTime . "<br>" .
                         ( $masterTilesheetByHash[$hash] ) . 
                     ": new ig.Animation( " . $animationSheetName . $fileCount .
                     ", 0.26667, " .
@@ -148,7 +150,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
             $fileCount++;
         }
         
-        $export .=      "} " .
+        $export .=      "<br>} " .
                     "}; ";
 
         //echo "Use the following code in Impact to set up animations:<br><br>\n\n";
