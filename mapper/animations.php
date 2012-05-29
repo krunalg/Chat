@@ -114,12 +114,24 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                         "'media/".$globalMasterTilesheetFile."': {";
         
         $fileCount = 0;
-        $animationSheetWidthInTiles = 9;
         $skipCommaFirstTime = '';
         // something to the effect of
         // 1: new ig.Animation( animationSheet0, 0.26667, [1,2,3,4,5,6,7,8] ) (,)
         foreach($animationExists as $filename => $tiles)
         {
+            // based on filename, find out how many frames are in each 
+            // animations, and how long each frame should last
+            // filenames should be in the format: int-int.png
+            // where the first int is how many frames, and the second
+            // int is how many frames out of 60 it will last
+            $filenameLessExtension = // removes '.png'
+                substr($filename, 0, strlen($filename)-4);
+            $frameCountAndDuration = explode('-', $filenameLessExtension);
+            $frameCount = $frameCountAndDuration[0]; // how many frames in anim
+            $frameDurationInFrames = $frameCountAndDuration[1];
+            $frameDurationInSeconds = // set number to 5 decimal points
+                number_format( ($frameDurationInFrames/60), 5);
+
             foreach($tiles as $hash => $y)
             {
                 if(!isset($masterTilesheetByHash[$hash]))
@@ -132,16 +144,15 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                     $export .=  $skipCommaFirstTime . "<br>" .
                         ( $masterTilesheetByHash[$hash] ) . 
                     ": new ig.Animation( " . $animationSheetName . $fileCount .
-                    ", 0.26667, " .
-                    "[" .
-                        (1 + ($animationSheetWidthInTiles*$y)) . "," . 
-                        (2 + ($animationSheetWidthInTiles*$y)) . "," . 
-                        (3 + ($animationSheetWidthInTiles*$y)) . "," . 
-                        (4 + ($animationSheetWidthInTiles*$y)) . "," . 
-                        (5 + ($animationSheetWidthInTiles*$y)) . "," . 
-                        (6 + ($animationSheetWidthInTiles*$y)) . "," . 
-                        (7 + ($animationSheetWidthInTiles*$y)) . "," . 
-                        (8 + ($animationSheetWidthInTiles*$y)) . 
+                    ", ".$frameDurationInSeconds.", " .
+                    "[";
+                        // export all frames, seperated by commas
+                        for($x=1; $x<=$frameCount; $x++)
+                        {
+                            $export .= ($x + (($frameCount+1)*$y) );
+                            if($x!=$frameCount) $export .= ",";
+                        }
+                    $export .=
                     "] " .
                     ") ";
                 }
