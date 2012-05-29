@@ -18,11 +18,6 @@ ig.module (
 	offset: { x: 0, y: 16 },
 	type: ig.Entity.TYPE.B,
 	
-	speed: 69,
-	runSpeed: 138,
-	walkSpeed: 69,
-	jumpSpeed: 69,
-	maxVel: { x: 138, y: 138 },
 	moveState: 'idle', // idle, walk, run
 	
 	name: "otherplayer",
