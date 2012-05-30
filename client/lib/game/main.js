@@ -278,11 +278,69 @@ MyGame = ig.Game.extend({
 			};
 			
 			// generated animations from mapper
-			initBackgroundAnimations();
+			//initBackgroundAnimations();
   		
+		// replace flowers with custom flower animations
+		var animationSheetX = new ig.AnimationSheet( 'media/32-8.png', 16, 16 );
+		this.backgroundAnims = { 'media/master.png': {
+				101: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				102: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				103: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				104: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				105: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				106: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				107: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				108: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+		} };
+		var animationOffset = 0;
+		for(i=108; i>=101; i--)
+		{
+			ig.game.backgroundAnims['media/master.png'][i].gotoFrame(
+															(32/60) * animationOffset );
+			animationOffset++;
+		}
 		
-
 		this.loadLevel (this.defaultLevel);
+
+		var flowerTile = 1189+1;
+		var flowerCount = 0;
+		for(var i=0; i<this.backgroundMaps.length; i++)
+		{
+			if(this.backgroundMaps[i].name=='lower')
+			{
+				for(var y=0; y<this.backgroundMaps[i].height; y++)
+				{
+					for(var x=0; x<this.backgroundMaps[i].width; x++)
+					{
+						if(
+							this.backgroundMaps[i].getTile( 
+								x * this.backgroundMaps[i].tilesize, 
+								y * this.backgroundMaps[i].tilesize 
+							) == flowerTile
+						  )
+						{
+							if(x%8==0) var animToUse = 101;
+							else if(x%8==1) var animToUse = 102;
+							else if(x%8==2) var animToUse = 103;
+							else if(x%8==3) var animToUse = 104;
+							else if(x%8==4) var animToUse = 105;
+							else if(x%8==5) var animToUse = 106;
+							else if(x%8==6) var animToUse = 107;
+							else var animToUse = 108;
+							//alert('found flower');
+							flowerCount++;
+							this.backgroundMaps[i].setTile(
+								x * this.backgroundMaps[i].tilesize, 
+								y * this.backgroundMaps[i].tilesize,
+								animToUse
+							);
+						}
+					}
+				}
+				//alert(flowerCount);
+				break;
+			}
+		}
 		
 		// build player
 		this.buildPlayer();		
