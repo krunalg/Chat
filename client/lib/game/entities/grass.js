@@ -28,7 +28,7 @@ EntityGrass = ig.Entity.extend({
 	
 	update: function()
 	{
-		this.parent();
+		if(this.currentAnim!=null) this.currentAnim.update();
 	}
 });
 
