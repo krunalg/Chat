@@ -318,15 +318,13 @@ MyGame = ig.Game.extend({
 							) == flowerTile
 						  )
 						{
-							if(x%8==0) var animToUse = 109;
-							else if(x%8==1) var animToUse = 102;
-							else if(x%8==2) var animToUse = 103;
-							else if(x%8==3) var animToUse = 104;
-							else if(x%8==4) var animToUse = 105;
-							else if(x%8==5) var animToUse = 106;
-							else if(x%8==6) var animToUse = 107;
-							else if(x%8==7) var animToUse = 108;
-							else var animToUse = 0;
+							var repeatEvery = 8;
+							var xOffset = x % repeatEvery;
+							var yOffset = y % repeatEvery;
+							var whichAnim = xOffset - yOffset;
+							if(whichAnim<0) whichAnim += repeatEvery;
+
+							var animToUse = 102 + whichAnim;
 							
 							this.backgroundMaps[i].setTile(
 								x * this.backgroundMaps[i].tilesize, 
