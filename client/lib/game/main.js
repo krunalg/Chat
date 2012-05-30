@@ -296,14 +296,13 @@ MyGame = ig.Game.extend({
 		for(i=108; i>=101; i--)
 		{
 			ig.game.backgroundAnims['media/master.png'][i].gotoFrame(
-															(32/60) * animationOffset );
+													((1/60)/0.13333) * animationOffset );
 			animationOffset++;
 		}
 		
 		this.loadLevel (this.defaultLevel);
 
 		var flowerTile = 1189+1;
-		var flowerCount = 0;
 		for(var i=0; i<this.backgroundMaps.length; i++)
 		{
 			if(this.backgroundMaps[i].name=='lower')
@@ -319,25 +318,25 @@ MyGame = ig.Game.extend({
 							) == flowerTile
 						  )
 						{
-							if(x%8==0) var animToUse = 101;
+							if(x%8==0) var animToUse = 109;
 							else if(x%8==1) var animToUse = 102;
 							else if(x%8==2) var animToUse = 103;
 							else if(x%8==3) var animToUse = 104;
 							else if(x%8==4) var animToUse = 105;
 							else if(x%8==5) var animToUse = 106;
 							else if(x%8==6) var animToUse = 107;
-							else var animToUse = 108;
-							//alert('found flower');
-							flowerCount++;
+							else if(x%8==7) var animToUse = 108;
+							else var animToUse = 0;
+							
 							this.backgroundMaps[i].setTile(
 								x * this.backgroundMaps[i].tilesize, 
 								y * this.backgroundMaps[i].tilesize,
 								animToUse
 							);
+							
 						}
 					}
 				}
-				//alert(flowerCount);
 				break;
 			}
 		}
