@@ -278,31 +278,63 @@ MyGame = ig.Game.extend({
 			};
 			
 			// generated animations from mapper
-			//initBackgroundAnimations();
+			initBackgroundAnimations();
   		
+		// /*
 		// replace flowers with custom flower animations
+		var repeatEvery = 16;
+
 		var animationSheetX = new ig.AnimationSheet( 'media/32-8.png', 16, 16 );
 		this.backgroundAnims = { 'media/master.png': {
-				101: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
-				102: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
-				103: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
-				104: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
-				105: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
-				106: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
-				107: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
-				108: new ig.Animation( animationSheetX, 0.13333, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				101: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				102: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				103: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				104: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				105: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				106: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				107: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				108: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				109: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				110: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				111: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				112: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				113: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				114: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				115: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				116: new ig.Animation( animationSheetX, (8/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
+				117: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				118: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				119: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				120: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				121: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				122: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				123: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				124: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				125: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				126: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				127: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				128: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				129: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				130: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				131: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
+				132: new ig.Animation( animationSheetX, (8/60), [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65] ) ,
 		} };
-		var animationOffset = 0;
-		for(i=108; i>=101; i--)
+		for(var flower=0; flower<2; flower++)
 		{
-			ig.game.backgroundAnims['media/master.png'][i].gotoFrame(
-													((1/60)/0.13333) * animationOffset );
-			animationOffset++;
+			var animationOffset = 0;
+			for(var i=(101+(flower*repeatEvery)); i<=(116+(flower*repeatEvery)); i++)
+			{
+				ig.game.backgroundAnims['media/master.png'][i].gotoFrame(
+														((9/60)/(8/60)) * animationOffset );
+				animationOffset++;
+			}
 		}
-		
+			
+		// */
 		this.loadLevel (this.defaultLevel);
 
-		var flowerTile = 1189+1;
+		var flowerTileA = 1189+1;
+		var flowerTileB = 443+1;
 		for(var i=0; i<this.backgroundMaps.length; i++)
 		{
 			if(this.backgroundMaps[i].name=='lower')
@@ -311,21 +343,24 @@ MyGame = ig.Game.extend({
 				{
 					for(var x=0; x<this.backgroundMaps[i].width; x++)
 					{
-						if(
-							this.backgroundMaps[i].getTile( 
+						var currentTile = this.backgroundMaps[i].getTile( 
 								x * this.backgroundMaps[i].tilesize, 
 								y * this.backgroundMaps[i].tilesize 
-							) == flowerTile
-						  )
+							);
+						if(currentTile==flowerTileA || currentTile==flowerTileB)
 						{
-							var repeatEvery = 8;
 							var xOffset = x % repeatEvery;
 							var yOffset = y % repeatEvery;
 							var whichAnim = xOffset - yOffset;
-							if(whichAnim<0) whichAnim += repeatEvery;
+							if(whichAnim<0) whichAnim = repeatEvery + whichAnim;
 
-							var animToUse = 102 + whichAnim;
+							if(currentTile==flowerTileB)
+								var addExtra = repeatEvery;
+							else
+								var addExtra = 0;
 							
+							var animToUse = 102 + whichAnim + addExtra;
+
 							this.backgroundMaps[i].setTile(
 								x * this.backgroundMaps[i].tilesize, 
 								y * this.backgroundMaps[i].tilesize,
