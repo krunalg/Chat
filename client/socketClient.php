@@ -1,15 +1,6 @@
 // set up sockets
 <?php
-        if($_SERVER["SERVER_NAME"]!="commins.ca")
-	{
-        $socketHost = '192.168.1.70';
-		$socketPort = 9090;
-	}
-	else
-        {
-		$socketHost = 'h.commins.ca';
-		$socketPort = 9090;
-	}
+    include('connection.php');
 	echo "var socket = io.connect('http://".$socketHost.":".$socketPort."');\n";
 ?>
 
