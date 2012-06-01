@@ -160,7 +160,8 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                         for($i=0; $i<count($frameSequence); $i++)
                         {
                             $export .= $frameSequence[$i] + 
-                                       ($frameSequence[$i] * $y);
+                                       ($y * count($frameSequence)) +
+                                       ($y * 1); // skip id-tiles
                             if($i!=count($frameSequence)-1) $export .= ",";
                         }
                     $export .=
