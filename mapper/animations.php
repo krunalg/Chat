@@ -57,6 +57,10 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
     $imagesInDir = scanFileNameRecursivly($globalAnimationsDir);
     $animationExists = array();
         
+    // reads in all images from the animations directory and 
+    // make a record of the first tile in every row, also 
+    // recording where that tile can be found and in what file.
+    // do print_r($animationExists) for more info.
     for($i=0; $i<count($imagesInDir); $i++)
     {
         if(file_exists($imagesInDir[$i]))
