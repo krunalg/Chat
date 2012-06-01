@@ -15,7 +15,7 @@ ig.module ('game.position-dependent-animation')
 			// How many tiles are above since last 'base animation'?
 			var frameOffsetY = (posInMapY/ig.game.collisionMap.tilesize) % (this.sequence.length - 1);
 			
-			// As frameOffsetY increases, shift animation left
+			// As frameOffsetY increases, shift animation right
 			var frameOffset = frameOffsetX - frameOffsetY;
 			if(frameOffset<0) frameOffset = (this.sequence.length - 1) + frameOffset;
 			
