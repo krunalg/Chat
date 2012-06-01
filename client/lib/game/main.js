@@ -283,7 +283,7 @@ MyGame = ig.Game.extend({
 		// /*
 		// replace flowers with custom flower animations
 		var repeatEvery = 31;
-
+		var baseTile = 101;
 		var animationSheetX = new ig.AnimationSheet( 'media/32-8.png', 16, 16 );
 		this.backgroundAnims = { 'media/master.png': {
 				101: new ig.Animation( animationSheetX, (9/60), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] ) ,
@@ -352,7 +352,7 @@ MyGame = ig.Game.extend({
 		for(var flower=0; flower<2; flower++)
 		{
 			var animationOffset = 0;
-			for(var i=(101+(flower*repeatEvery)); i<=(131+(flower*repeatEvery)); i++)
+			for(var i=(baseTile+(flower*repeatEvery)); i<((baseTile+repeatEvery)+(flower*repeatEvery)); i++)
 			{
 				ig.game.backgroundAnims['media/master.png'][i].gotoFrame(
 														((9/60)/(9/60)) * animationOffset );
@@ -389,7 +389,7 @@ MyGame = ig.Game.extend({
 							else
 								var addExtra = 0;
 							
-							var animToUse = 102 + whichAnim + addExtra;
+							var animToUse = (baseTile+1) + whichAnim + addExtra;
 
 							this.backgroundMaps[i].setTile(
 								x * this.backgroundMaps[i].tilesize, 
