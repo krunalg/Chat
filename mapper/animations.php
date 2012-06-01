@@ -56,6 +56,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
     
     $imagesInDir = scanFileNameRecursivly($globalAnimationsDir);
     $animationExists = array();
+    $fileWidthInTiles = array();
         
     // reads in all images from the animations directory and 
     // make a record of the first tile in every row, also 
@@ -70,14 +71,17 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
             $imageWidth = $imageSize[0];
             $imageHeight = $imageSize[1];
             $image = LoadPNG($imagesInDir[$i]);
+
+            $path_parts = pathinfo($imagesInDir[$i]);
+            $filename = $path_parts['basename'];
+
+            // store filename widths-in-tiles for later
+            $fileWidthInTiles[$filename] = $imageWidth/$globalTilesize;
             
             for($y=0; $y<$imageHeight/$globalTilesize; $y++)
             {
                 $x = 0;
                 $tileHash = getTile($image, $globalTilesize, $x, $y);
-                $path_parts = pathinfo($imagesInDir[$i]);
-                $filename = $path_parts['basename'];
-
                 if(!isset($animationExists[$filename]))
                     $animationExists[$filename] = array();
                 
@@ -160,8 +164,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                         for($i=0; $i<count($frameSequence); $i++)
                         {
                             $export .= $frameSequence[$i] + 
-                                       ($y * count($frameSequence)) +
-                                       ($y * 1); // skip id-tiles
+                                       ($y * $fileWidthInTiles[$filename]);
                             if($i!=count($frameSequence)-1) $export .= ",";
                         }
                     $export .=
