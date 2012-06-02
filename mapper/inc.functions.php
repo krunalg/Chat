@@ -310,7 +310,7 @@ function tilePosToXY($int, $widthInTiles)
  * @param   $filename File name to search for.
  * @return  array $result where $result[$n][0] is an MD5 hash
  *          and $result[$n][1] is an int.
- 
+ *
  * @author  Fazle Elahee (modified by Jonathan Commins)
  */
 function scanFileNameRecursivly($path = '', $filename = '', &$name = array() )
