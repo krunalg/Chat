@@ -37,4 +37,7 @@ merge-maps.php
 -   Reads all maps that have placement data and combines them according to
     placement data, creating a single map that contains them all. It also
     adds borders to each individual map, closing it off.
-    
+
+map-placement.php
+-   Use this tool to assign x and y position values to specific maps that you
+    wish to merge into one large map.
