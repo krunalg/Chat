@@ -27,12 +27,6 @@ merge-map-tiles.php
     and a JSON file containing hash information.
         (requires all tiles to be inluded are dumped)
 
-tilesheet-from-map.php
--   Reads map JSON file(s) and generates "minimal" tilesheet containing only
-    tiles used in the map.
-        (requires at least one map is processed, ie. has JSON file)
-        (requires master tilesheet from which to extract tiles)
-
 map-placement.php
 -   Use this tool to manage how maps are placed with relation to each other (if
     they are to be joined into one).
