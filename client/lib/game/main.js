@@ -7,6 +7,7 @@ ig.module(
 
 	'game.background-animations',
 	'game.position-dependent-animation',
+	'game.update-border',
 	
 	// levels
 	'game.levels.test',
