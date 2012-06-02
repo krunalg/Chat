@@ -155,22 +155,21 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
                 'player.pos.x <  ' . ($mapImageInfo[$i]['x'] + $mapImageInfo[$i]['width']) . ' && ' . 
                 'player.pos.y <  ' . ($mapImageInfo[$i]['y'] + $mapImageInfo[$i]['height']) . ' && ' .
                 'player.pos.y >= ' . $mapImageInfo[$i]['y'] . ' ) ';
-        echo // begin console.log
-            'console.log("Borders: ';
-
+        echo // issue new border graphics
+            "{ <br>\n";
             for($y=0; $y<$borderHeightInTiles; $y++)
             {
-                if($y!=0) echo ',';
                 for($x=0; $x<$borderWidthInTiles; $x++)
                 {
-                    if($x!=0) echo ',';
                     $currentHash = $mapImageInfo[$i]['borderTiles'][$x][$y];
-                    echo $masterTilesheetByHash[$currentHash];
+                    $currentTile = $masterTilesheetByHash[$currentHash] + 1; // +1 for weltmeister
+                    echo "ig.game.backgroundMaps[0]['data'][".$x."][".$y."] = " . $currentTile . "; <br>\n";
                 }
             }
 
-        echo // close console.log
-            '"); <br><br>';
+
+        echo // end issue command
+            "} <br><br>\n\n";
     }
 
     die();
