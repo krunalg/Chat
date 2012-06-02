@@ -75,6 +75,9 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
     $mapImageInfo = array(); // array of image dimensions and position
     $countMaps = 0; // increases as we decide to use more maps
     
+    // get master tilesheet info
+    $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
+
     // populate the above arrays with map image information and resouces
     for($i=0; $i<count($maps); $i++)
     {
@@ -161,7 +164,8 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
                 for($x=0; $x<$borderWidthInTiles; $x++)
                 {
                     if($x!=0) echo ',';
-                    echo $mapImageInfo[$i]['borderTiles'][$x][$y];
+                    $currentHash = $mapImageInfo[$i]['borderTiles'][$x][$y];
+                    echo $masterTilesheetByHash[$currentHash];
                 }
             }
 
