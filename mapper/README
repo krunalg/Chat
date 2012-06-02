@@ -17,12 +17,12 @@ collisions.php - requires map images in the maps folder.
 
 process-map.php
 -   Use this to generate a map JSON file, containing map width, height,
-    and hashes for all its tiles.
-        (requires at least one map image be in the maps folder)
+    and hashes for all its tiles (requires map.png file in maps directory).
+    NOTICE: can be time consuming with large maps.
 
 dump-map-tiles.php  - requires map image be in the maps folder.
 -   Rip tiles directly from a source map image into a folder.
-    NOTICE: time consuming.
+    NOTICE: can be time consuming with multiple maps.
     
 merge-map-tiles.php
 -   Combines all dumped tiles into single "master" tilesheet. Generates an image
