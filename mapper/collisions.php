@@ -236,7 +236,8 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
                     DIRECTORY_SEPARATOR . $newTileFile;
                 if(!file_exists($newTilePath))
                 {
-                    $newTileImage =
+                    //die("Writing of tiles disabled while I rename all above-tiles.");
+                    /*$newTileImage =
                         imagecreatetruecolor($globalTilesize, $globalTilesize);
                     $sourceX = $posOfTileInMap[$hash]['x'] * $globalTilesize;
                     $sourecY = $posOfTileInMap[$hash]['y'] * $globalTilesize;
@@ -262,11 +263,20 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
                              'Could not write ' . $newTilePath);
                     else echo "<b>Successfully</b> wrote new 'above' tile " .
                         $newTilePath.'...<br>';
+                    */
                 }
                 else
                 {
+                    $rewriteTilePath = $globalAboveDumpDir .
+                        DIRECTORY_SEPARATOR . $hash . ".png";
+                    echo "Renaming $newTilePath to $rewriteTilePath ... ";
+                    if(rename($newTilePath, $rewriteTilePath)) echo "Done.<br>\n\n";
+                    else die("<br>\n\nProblem renaming $newTilePath to $rewriteTilePath ...");
+
+                    /*
                     echo "Above-player tile ". $newTilePath . " already exists. " .
                          "<b>Skipping</b>...<br>\n\n";
+                    */
                 }
             }
         }
