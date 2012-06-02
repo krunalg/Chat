@@ -453,4 +453,24 @@ function removeFilenameFromPath($path)
     return $reconstructedPath;
 }
 
+// we can now use a hash to find where in the tilesheet any tile is
+/**
+ * Builds an array containing all positions of tiles within the a 
+ * tilesheet, with hashes for indexes.
+ *
+ * @param   $json Path to tilesheet JSON file.
+ * @return  array with MD5 hash indexes and integer values representing 
+ *          the location of each tile within the tilesheet.
+ */
+function getTilesheetHashTable($json)
+{
+    $tilesheetJSON          = $json; 
+    $tilesheetJSON          = file_get_contents($tilesheetJSON);
+    $tilesheetJSON          = json_decode($tilesheetJSON);
+    $masterTilesheetByHash  = array();
+    foreach($tilesheetJSON as $key => $hash)
+        $masterTilesheetByHash[$hash] = $key; // key is tile position in tilesheet
+    return $masterTilesheetByHash;
+}
+
 ?>

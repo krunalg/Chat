@@ -63,16 +63,8 @@ else if( isset($_POST['generate']) )
     // get details about the master tilesheet
     if(count($jsonMapPaths)>=1)
     {
-        $tilesheetJSON = $globalMasterTilesheetJSON;
-        $tilesheetJSON = file_get_contents($tilesheetJSON);
-        $tilesheetJSON = json_decode($tilesheetJSON);
-        $masterTilesheetByHash = array();
-        foreach($tilesheetJSON as $key => $hash)
-        {
-            // key is position in tilesheet where tile can be found
-            $masterTilesheetByHash[$hash] = $key;
-        }
-    } // we can now use a hash to find where in the tilesheet any tile is
+        $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
+    }
     
     // get collision details about all tiles
     $collisions = getCollisionsFromFile($globalCollisionsFile); // read from file
