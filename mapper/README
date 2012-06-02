@@ -1,23 +1,3 @@
-/*
-Will be needing this example of how to set up animations in Impact:
-
-// set up animated map tiles
-var as = new ig.AnimationSheet( 'media/bg-flower.png', 16, 16 );
-var as2 = new ig.AnimationSheet( 'media/bg-flower2.png', 16, 16 );
-this.backgroundAnims = {
-    'media/starter-towna.png': {
-        // flower
-        4: new ig.Animation( as, 0.26667, [0,1,0,2] ), // 16 frames out of 60 per
-        1: new ig.Animation( as2, 0.26667, [3,5,3,4] ) // 16 frames out of 60 per
-    }
-};
-*/
-
-
-
-index.php
--   Used for testing at the moment. For example, outputing Weltmeister maps.
-
 inc.globals.php
 -   Contains variables used in more than one place.
 
