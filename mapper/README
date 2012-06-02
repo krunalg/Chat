@@ -12,7 +12,7 @@ inc.functions.php
 
 
 collisions.php - requires map images in the maps folder.
--   Use this tool to manage what collision type a tile will be, add grass 
+-   Use this  to manage what collision type a tile will be, add grass 
     entities, or set tiles "above player".
 
 process-map.php
@@ -30,7 +30,7 @@ merge-map-tiles.php
         (requires all tiles to be inluded are dumped)
 
 map-placement.php
--   Use this tool to manage how maps are placed with relation to each other (if
+-   Use this to manage how maps are placed with relation to each other (if
     they are to be joined into one).
     
 merge-maps.php
@@ -39,5 +39,13 @@ merge-maps.php
     adds borders to each individual map, closing it off.
 
 map-placement.php
--   Use this tool to assign x and y position values to specific maps that you
+-   Use this to assign x and y position values to specific maps that you
     wish to merge into one large map.
+
+merge-maps.php
+-   Use this to merge all maps which have been assigned x and y values into 
+    a single map. Uses border.png image to pad each map.
+
+generate-map.php
+-   Outputs a Weltmeister readable map file complete with collision map, 
+    lower layer, above layer, and entities.
