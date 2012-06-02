@@ -175,6 +175,22 @@ else if( isset($_POST['generate']) )
                 
                 "\"layer\": [ ".
                     "{".
+                        "\"name\": \"border\", ".
+                        "\"width\": ".(2).", ".
+                        "\"height\": ".(2).", ".
+                        "\"linkWithCollision\": false, ".
+                        "\"visible\": 1, ".
+                        "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
+                        "\"repeat\": true, ".
+                        "\"preRender\": false, ".
+                        "\"distance\": \"1\", ".
+                        "\"tilesize\": ".$globalTilesize.", ".
+                        "\"foreground\": false, ".
+                        "\"data\": [ " .
+                            "[ 0, 0 ], [ 0, 0 ]";
+            $export .=  "] ".
+                    "}, ".
+                    "{".
                         "\"name\": \"lower\", ".
                         "\"width\": ".$mapWidth.", ".
                         "\"height\": ".$mapHeight.", ".
@@ -215,7 +231,7 @@ else if( isset($_POST['generate']) )
                         } 
                 
             $export .=  "] ". // close off data
-                    "},".
+                    "}, ".
                     "{".
                         "\"name\": \"upper\", ".
                         "\"width\": ".$mapWidth.", ".
