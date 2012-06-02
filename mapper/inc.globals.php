@@ -3,8 +3,8 @@
 // MEASUREMENTS / DIMENSIONS
 $globalTilesize = 16;
 $globalMasterTilesheetWidth = 256;
-$globalBorderRepeatX = 4;
-$globalBorderRepeatY = 3;
+$globalBorderRepeatX = 0; // 4;
+$globalBorderRepeatY = 0; // 3;
 
 // DIRECTORIES
 $globalMapDir =
