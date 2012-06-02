@@ -163,7 +163,7 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
                 {
                     $currentHash = $mapImageInfo[$i]['borderTiles'][$x][$y];
                     $currentTile = $masterTilesheetByHash[$currentHash] + 1; // +1 for weltmeister
-                    echo "ig.game.backgroundMaps[0]['data'][".$x."][".$y."] = " . $currentTile . "; <br>\n";
+                    echo "ig.game.backgroundMaps[0]['data'][".$y."][".$x."] = " . $currentTile . "; <br>\n";
                 }
             }
 
