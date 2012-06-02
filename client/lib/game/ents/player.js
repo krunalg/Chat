@@ -203,10 +203,11 @@ ig.module (
 	    
 	    if(this.destinationReached()) // check if reached destination
 	    {
-		this.isJump = false; // no longer jumping (regardless if was)
-		this.alignToGrid(); // ensure player is at legal coordinates
-		this.vel.x = this.vel.y = 0; // stop player
-		this.goAgain(); // check if we should continue moving
+			this.isJump = false; // no longer jumping (regardless if was)
+			this.alignToGrid(); // ensure player is at legal coordinates
+			this.vel.x = this.vel.y = 0; // stop player
+			this.goAgain(); // check if we should continue moving
+			if(this.isLocal) updateBorder(this); // change repeating border
 	    }
 	    else this.move(); // continue to destination
 	},
