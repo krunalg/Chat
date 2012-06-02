@@ -20,7 +20,8 @@ ig.module ('game.position-dependent-animation')
 			if(frameOffset<0) frameOffset = (this.sequence.length - 1) + frameOffset;
 			
 			// Add slight delay so tiles don't all update at the same time
-			var delay = 0.017 / this.frameTime; // about 1 frame out of 60
+			var delay = 0.01 / this.frameTime; // smallest number possible that 
+											   // still causes desynchronization
 
 			// Make the frame dependant on the world position (add frame offset)
 	        var f = (this.timer.delta() / this.frameTime) + frameOffset + (frameOffset * delay);
