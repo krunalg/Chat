@@ -386,8 +386,13 @@ ig.module (
 	    this.isMove = true;
 	    this.setMoveDestination();
 	    
+	    // Spawn new grass entity if needed.
 	    var newGrass = this.trySpawningGrass();
 	    if(newGrass) newGrass.play();
+
+	    // Remove old grass entity if leaving one.
+	    var oldGrass = this.inGrass();
+	    if(oldGrass) oldGrass.markForDeath();
 	    
 	    this.moveAnimStart(true);
 	    

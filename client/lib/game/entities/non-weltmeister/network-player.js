@@ -115,9 +115,13 @@ ig.module (
 		if(this.moveState=='run') this.speed = this.runSpeed;
 		else if(this.moveState=='walk') this.speed = this.walkSpeed;
 		
-		// create grass effect
-		var newGrass = this.trySpawningGrass();
-		if(newGrass) newGrass.play();
+		// Spawn new grass entity if needed.
+	    var newGrass = this.trySpawningGrass();
+	    if(newGrass) newGrass.play();
+
+	    // Remove old grass entity if leaving one.
+	    var oldGrass = this.inGrass();
+	    if(oldGrass) oldGrass.markForDeath();
 		
 		this.isMove = true;
 		this.setMoveDestination();
