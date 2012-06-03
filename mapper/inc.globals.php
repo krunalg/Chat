@@ -5,6 +5,7 @@ $globalTilesize = 16;
 $globalMasterTilesheetWidth = 256;
 $globalBorderRepeatX = 0; // 4;
 $globalBorderRepeatY = 0; // 3;
+$globalWMTileOffset = 1; // because Weltmeister considers 1, not 0 to be the first tile
 
 // DIRECTORIES
 $globalMapDir =
