@@ -1,6 +1,23 @@
 <?php
 
 /**
+ * Write text to a file and echo its success or die
+ * on failure.
+ *
+ * @param   $filepath Where to save the file to.
+ * @param   $text Contents to write to file.
+ * @return  null
+ */
+function writeTextToFile($filepath, $text)
+{
+    if(!file_put_contents($globalCollisionsFile, $text))
+        die("<b style='color:red'>Failed</b> writing file: " . $filepath);
+    else
+        echo "Success writing file: " . $filepath;
+    return null;
+}
+
+/**
  * Loads an image to be further used in PHP.
  *
  * @param   $image Path to image file.
