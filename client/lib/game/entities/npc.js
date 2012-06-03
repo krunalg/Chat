@@ -34,7 +34,7 @@ ig.module (
 	
 	startMove: function()
 	{
-	    var newGrass = this.facingGrass();
+	    var newGrass = this.trySpawningGrass();
 	    if(newGrass) newGrass.play();
 	    
 	    this.isMove = true;

@@ -116,7 +116,7 @@ ig.module (
 		else if(this.moveState=='walk') this.speed = this.walkSpeed;
 		
 		// create grass effect
-		var newGrass = this.facingGrass();
+		var newGrass = this.trySpawningGrass();
 		if(newGrass) newGrass.play();
 		
 		this.isMove = true;

@@ -74,6 +74,53 @@ ig.module (
 	    }
 	    return false;
 	},
+
+	trySpawningGrass: function()
+	{
+	    var vx = vy = 0;
+	    var tilesize = ig.game.collisionMap.tilesize;
+	    switch(this.facing)
+	    {
+		case 'left':
+		    vx--;
+		    break;
+		case 'right':
+		    vx++;
+		    break;
+		case 'up':
+		    vy--;
+		    break;
+		case 'down':
+		    vy++;
+		    break;
+	    }
+	    // Try to find grass tiles in the backgroundMap
+	    for(var i=0; i<ig.game.backgroundMaps.length; i++)
+	    {
+	    	if(ig.game.backgroundMaps[i].name=='lower')
+	    	{
+	    		for(var j=0; j<specialTiles['grass'].length; j++)
+		    	{
+		    		if( specialTiles['grass'][j] ==
+		    				ig.game.backgroundMaps[i]['data'][ 
+		    					(this.pos.y/tilesize) + vy ][ 
+		    					(this.pos.x/tilesize) + vx ])
+		    		{
+		    			var grassX = this.pos.x + (vx * tilesize);
+		    			var grassY = this.pos.y + (vy * tilesize);
+		    			console.log("Creating grass entity at: " + grassX + "," + grassY);
+		    			return ig.game.spawnEntity(EntityGrass, 
+		    				this.pos.x + (vx * tilesize), 
+		    				this.pos.y + (vy * tilesize), 
+		    				{ direction: this.facing });
+		    		}
+		    		break;
+		    	}
+		    	break;
+	    	}
+	    }
+	    return false;
+	},
 	
 	inGrass: function()
 	// returns a grass entity if player is in one

@@ -386,7 +386,7 @@ ig.module (
 	    this.isMove = true;
 	    this.setMoveDestination();
 	    
-	    var newGrass = this.facingGrass();
+	    var newGrass = this.trySpawningGrass();
 	    if(newGrass) newGrass.play();
 	    
 	    this.moveAnimStart(true);
