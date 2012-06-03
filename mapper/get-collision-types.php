@@ -52,14 +52,14 @@ require('inc.functions.php');
                 '.defines(function() {' . "\n";
 
         // create JavaScript object
-        $export .=  'var specialTiles = new Object();' . "\n";
+        $export .=  'specialTiles = new Object();' . "\n";
         foreach($tilesByCollisionType as $collisionType => $tiles)
         {
             $tileIndex = 0;
             foreach($tiles as $tile)
             {
                 if($tileIndex==0)
-                    $export .= 'specialTiles.' . $collisionType . ' = new Object();' . "\n";
+                    $export .= 'specialTiles.' . $collisionType . ' = new Array();' . "\n";
                 $export .= 'specialTiles.' . $collisionType . '.push('.$tile.');' . "\n";
                 $tileIndex++;
             }
