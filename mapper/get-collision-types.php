@@ -32,11 +32,14 @@ require('inc.functions.php');
     foreach($collisions as $tileHash => $collisionType)
     {
         $currentCollisionName = $nameOfCollisionByIndex[$collisionType];
-        if( !isset( $tilesByCollisionType[ $currentCollisionName ] ))
-            $tilesByCollisionType[ $currentCollisionName ] = array();
-        
-        $tilePosInTilesheet = $masterTilesheetByHash[$tileHash] + $globalWMTileOffset; 
-        array_push( $tilesByCollisionType[ $currentCollisionName ], $tilePosInTilesheet );
+        if($currentCollisionName=='grass')
+        {
+            if( !isset( $tilesByCollisionType[ $currentCollisionName ] ))
+                $tilesByCollisionType[ $currentCollisionName ] = array();
+            
+            $tilePosInTilesheet = $masterTilesheetByHash[$tileHash] + $globalWMTileOffset; 
+            array_push( $tilesByCollisionType[ $currentCollisionName ], $tilePosInTilesheet );
+        }
     }
 
     print_r($tilesByCollisionType);
