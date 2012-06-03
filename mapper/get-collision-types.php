@@ -5,7 +5,7 @@ require('inc.functions.php');
 
 
     /*
-     * List each collision type and the tiles that below to each type.
+     * List each collision type and the tiles that belong to each type.
      *
      */
     
