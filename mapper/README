@@ -11,7 +11,7 @@ inc.functions.php
 
 
 
-collisions.php - requires map images in the maps folder.
+set-collision-types.php - requires map images in the maps folder.
 -   Use this  to manage what collision type a tile will be, add grass 
     entities, or set tiles "above player".
 
@@ -24,10 +24,10 @@ dump-map-tiles.php  - requires map image be in the maps folder.
 -   Rip tiles directly from a source map image into a folder.
     NOTICE: can be time consuming with multiple maps.
     
-merge-map-tiles.php
+merge-map-tiles.php - requires all tiles to be inluded are dumped.
 -   Combines all dumped tiles into single "master" tilesheet. Generates an image
     and a JSON file containing hash information.
-        (requires all tiles to be inluded are dumped)
+        
 
 map-placement.php
 -   Use this to manage how maps are placed with relation to each other (if
