@@ -9,7 +9,20 @@ ig.module(
 EntityGrass = ig.Entity.extend({
 	size: {x: 16, y: 16},
 	animSheet: new ig.AnimationSheet( 'media/grass-animation.png', 16, 16 ),
-	
+	killTimer: new ig.Timer(),
+	markedForDeath: false,
+
+	markForDeath: function()
+	{
+		this.killTimer.set(3);
+		this.markedForDeath = true;
+	}
+
+	revive: function()
+	{
+		this.markedForDeath = false;
+	}
+
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
 		
@@ -28,6 +41,7 @@ EntityGrass = ig.Entity.extend({
 	update: function()
 	{
 		if(this.currentAnim!=null) this.currentAnim.update();
+		if(this.markedForDeath && this.killTimer.delta()>=0) this.kill();
 	}
 });
 
