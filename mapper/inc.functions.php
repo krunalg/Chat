@@ -10,7 +10,7 @@
  */
 function writeTextToFile($filepath, $text)
 {
-    if(!file_put_contents($globalCollisionsFile, $text))
+    if(!file_put_contents($filepath, $text))
         die("<b style='color:red'>Failed</b> writing file: " . $filepath);
     else
         echo "Success writing file: " . $filepath;
