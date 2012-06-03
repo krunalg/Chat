@@ -65,10 +65,8 @@ require('inc.functions.php');
             }
         }
     $export .=  '})'; // close JavaScript output
-
-    //echo $export; die();
-    //print_r($tilesByCollisionType); die();
     
+    // Write output to a file.
     writeTextToFile($globalSpecialTilesJSON, $export);
     
 ?>
