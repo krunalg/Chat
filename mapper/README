@@ -49,3 +49,7 @@ merge-maps.php
 generate-map.php
 -   Outputs a Weltmeister readable map file complete with collision map, 
     lower layer, above layer, and entities.
+
+border-change.php
+-   Outputs a series of if-statements used by the player to determine if 
+    a change in the repeated-background-border layer should be changed.
