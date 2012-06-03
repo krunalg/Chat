@@ -42,14 +42,13 @@ Player system:
 Chat system:
 - Chat log is needed.
 - Prevent multiple chat bubbles from one source from existing at the same time.
-- socketClient.js: receiveSay method does not require client name.
 - Chat bubble repositions itself to be on-screen if it is not (low priority).
 
 Animations: 
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
 - Overhead smoke-effect in LAVARIDGE TOWN.
 - Weather effects: rain in ROUTE 119, sandstorm in ROUTE 111, ash in ROUTE 113.
-- Sinking logs in PACIFIDLOG TOWN.
+- Sinking logs in PACIFIDLOG TOWN (low priority).
 
 
 Known Issues:
