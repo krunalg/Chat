@@ -9,6 +9,8 @@ require('inc.functions.php');
      *
      */
     
+    $interestedIn = array('grass', 'walkable');
+
     // we'll need master tilesheet info to translate hashes into tile positions
     $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
 
@@ -32,18 +34,41 @@ require('inc.functions.php');
     foreach($collisions as $tileHash => $collisionType)
     {
         $currentCollisionName = $nameOfCollisionByIndex[$collisionType];
-        if($currentCollisionName=='grass')
+        if(in_array($currentCollisionName, $interestedIn))
         {
             if( !isset( $tilesByCollisionType[ $currentCollisionName ] ))
+            {
                 $tilesByCollisionType[ $currentCollisionName ] = array();
+            }
             
             $tilePosInTilesheet = $masterTilesheetByHash[$tileHash] + $globalWMTileOffset; 
             array_push( $tilesByCollisionType[ $currentCollisionName ], $tilePosInTilesheet );
         }
     }
 
-    // convert to json for reading into client
-    $tilesOutputJson = json_encode($tilesByCollisionType);
-    writeTextToFile($globalSpecialTilesJSON, $tilesOutputJson);
+    // create JavaScript output
+    $export =  'ig.module(\'game.special-tiles\')' . "\n" .
+                '.requires()' . "\n" . 
+                '.defines(function() {' . "\n";
+
+        // create JavaScript object
+        $export .=  'var specialTiles = new Object();' . "\n";
+        foreach($tilesByCollisionType as $collisionType => $tiles)
+        {
+            $tileIndex = 0;
+            foreach($tiles as $tile)
+            {
+                if($tileIndex==0)
+                    $export .= 'specialTiles.' . $collisionType . ' = new Object();' . "\n";
+                $export .= 'specialTiles.' . $collisionType . '.push('.$tile.');' . "\n";
+                $tileIndex++;
+            }
+        }
+    $export .=  '})'; // close JavaScript output
+
+    //echo $export; die();
+    //print_r($tilesByCollisionType); die();
+    
+    writeTextToFile($globalSpecialTilesJSON, $export);
     
 ?>
