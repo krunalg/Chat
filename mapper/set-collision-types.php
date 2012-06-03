@@ -334,7 +334,7 @@ else
                     ;//dump = dump + "Added the following dummy data instead: " + tiles[i][j].collision + "\n";
             }
         }
-        post_to_url('collisions.php', {'tiles': dump , 'mapJSON': '<?php
+        post_to_url('', {'tiles': dump , 'mapJSON': '<?php
         
             $mapJSON = $dirName . DIRECTORY_SEPARATOR . $globalMapJSON;
             $mapJSON = str_replace('\\', "\\\\", $mapJSON);
