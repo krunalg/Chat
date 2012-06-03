@@ -27,7 +27,6 @@ dump-map-tiles.php  - requires map image be in the maps folder.
 merge-map-tiles.php - requires all tiles to be inluded are dumped.
 -   Combines all dumped tiles into single "master" tilesheet. Generates an image
     and a JSON file containing hash information.
-        
 
 map-placement.php
 -   Use this to manage how maps are placed with relation to each other (if
