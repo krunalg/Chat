@@ -63,14 +63,14 @@ ig.module (
 	    var allGrass = ig.game.getEntitiesByType( EntityGrass );
 	    if(allGrass)
 	    {
-		for(var i=0; i<allGrass.length; i++)
-		{
-		    if( allGrass[i].pos.x == this.pos.x + vx &&
-			allGrass[i].pos.y == this.pos.y + vy )
-		    {
-			return allGrass[i];
-		    }
-		}
+			for(var i=0; i<allGrass.length; i++)
+			{
+			    if( allGrass[i].pos.x == this.pos.x + vx &&
+				allGrass[i].pos.y == this.pos.y + vy )
+			    {
+				return allGrass[i];
+			    }
+			}
 	    }
 	    return false;
 	},
@@ -130,14 +130,14 @@ ig.module (
 	    var allGrass = ig.game.getEntitiesByType( EntityGrass );
 	    if(allGrass)
 	    {
-		for(var i=0; i<allGrass.length; i++)
-		{
-		    if( allGrass[i].pos.x == this.pos.x &&
-			allGrass[i].pos.y == this.pos.y )
-		    {
-			return allGrass[i];
-		    }
-		}
+			for(var i=0; i<allGrass.length; i++)
+			{
+			    if( allGrass[i].pos.x == this.pos.x &&
+				allGrass[i].pos.y == this.pos.y )
+			    {
+				return allGrass[i];
+			    }
+			}
 	    }
 	    return false;
 	},
