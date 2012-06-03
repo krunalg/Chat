@@ -1,11 +1,11 @@
 ig.module (
     
-    'game.ents.network-player'
+    'game.entities.non-weltmeister.network-player'
 )
 
 .requires(
     
-    'game.ents.player'
+    'game.entities.non-weltmeister.player'
 )
 .defines(function(){
 

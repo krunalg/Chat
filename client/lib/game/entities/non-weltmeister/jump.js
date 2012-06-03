@@ -1,5 +1,5 @@
 ig.module(
-	'game.ents.jump'
+	'game.entities.non-weltmeister.jump'
 )
 .requires(
 	'impact.entity'

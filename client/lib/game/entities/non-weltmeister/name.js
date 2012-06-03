@@ -1,5 +1,5 @@
 ig.module(
-	'game.ents.name'
+	'game.entities.non-weltmeister.name'
 )
 .requires(
 	'impact.entity',

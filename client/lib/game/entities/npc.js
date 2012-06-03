@@ -5,7 +5,7 @@ ig.module (
 
 .requires(
     
-    'game.ents.player'
+    'game.entities.non-weltmeister.player'
 )
 .defines(function(){
    

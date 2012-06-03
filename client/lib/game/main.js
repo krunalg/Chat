@@ -20,17 +20,18 @@ ig.module(
 	//'game.levels.homedownstairs',
 	//'game.levels.homeupstairs',
 	
-	'game.ents.player',
-	'game.ents.local-player',
-	'game.ents.network-player',
+	// Entities
 	'game.entities.grass',
-	'game.ents.jump',
 	'game.entities.exit',
 	'game.entities.npc',
 	'game.entities.sign',
-	'game.ents.bubble',
-	'game.ents.name',
-	
+	'game.entities.non-weltmeister.player',
+	'game.entities.non-weltmeister.local-player',
+	'game.entities.non-weltmeister.network-player',
+	'game.entities.non-weltmeister.bubble',
+	'game.entities.non-weltmeister.name',
+	'game.entities.non-weltmeister.jump',
+
 	//debug
 	'impact.debug.debug',
 	'plugins.debug_display' // require the debug display plugin

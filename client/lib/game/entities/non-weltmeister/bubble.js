@@ -1,5 +1,5 @@
 ig.module(
-	'game.ents.bubble'
+	'game.entities.non-weltmeister.bubble'
 )
 .requires(
 	'impact.entity',
