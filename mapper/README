@@ -53,3 +53,7 @@ generate-map.php
 border-change.php
 -   Outputs a series of if-statements used by the player to determine if 
     a change in the repeated-background-border layer should be changed.
+
+animations.php
+-   Outputs a bunch of JavaScript which is used to define which tiles
+    in the master tilesheet are to be animated, and how.
