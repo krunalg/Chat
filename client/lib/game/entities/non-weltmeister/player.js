@@ -38,43 +38,6 @@ ig.module (
 	leftFoot: true, // used to alternate step animations
 	destination: 0, // used for both x and y planes
 	
-	facingGrass: function()
-	// returns a grass entity if player is facing one
-	// otherwise returns false
-	{
-	    var vx = vy = 0;
-	    var tilesize = ig.game.collisionMap.tilesize;
-	    switch(this.facing)
-	    {
-		case 'left':
-		    vx = -tilesize;
-		    break;
-		case 'right':
-		    vx = tilesize;
-		    break;
-		case 'up':
-		    vy = -tilesize;
-		    break;
-		case 'down':
-		    vy = tilesize;
-		    break;
-	    }
-	    // check for collision against grass entity
-	    var allGrass = ig.game.getEntitiesByType( EntityGrass );
-	    if(allGrass)
-	    {
-			for(var i=0; i<allGrass.length; i++)
-			{
-			    if( allGrass[i].pos.x == this.pos.x + vx &&
-				allGrass[i].pos.y == this.pos.y + vy )
-			    {
-				return allGrass[i];
-			    }
-			}
-	    }
-	    return false;
-	},
-
 	trySpawningGrass: function()
 	{
 	    var vx = vy = 0;
