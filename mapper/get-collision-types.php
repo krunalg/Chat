@@ -42,8 +42,8 @@ require('inc.functions.php');
         }
     }
 
-    print_r($tilesByCollisionType);
-
+    // convert to json for reading into client
+    $tilesOutputJson = json_encode($tilesByCollisionType);
+    writeTextToFile($globalSpecialTilesJSON, $tilesOutputJson);
     
-
 ?>
