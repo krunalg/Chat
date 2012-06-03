@@ -8,6 +8,7 @@ ig.module(
 	'game.background-animations',
 	'game.position-dependent-animation',
 	'game.update-border',
+	'game.special-tiles',
 	
 	// levels
 	'game.levels.test',
