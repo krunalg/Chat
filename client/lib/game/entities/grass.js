@@ -16,12 +16,12 @@ EntityGrass = ig.Entity.extend({
 	{
 		this.killTimer.set(3);
 		this.markedForDeath = true;
-	}
+	},
 
 	revive: function()
 	{
 		this.markedForDeath = false;
-	}
+	},
 
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
