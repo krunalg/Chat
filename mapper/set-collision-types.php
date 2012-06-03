@@ -44,7 +44,7 @@ if( !isset($_GET['ts']) && !isset($_POST['tiles']) )
     // end html form
     echo '</form>';
 }
-else if( isset($_GET['ts']) )
+else if( isset($_GET['ts']) && !isset($_POST['tiles']) )
 {
     /*
      * Second Page: Display map
