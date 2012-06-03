@@ -33,6 +33,7 @@ $globalMasterTilesheetFile = 'master.png';
 $globalMasterTilesheetJSON = 'master.js';
 $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
+$globalSpecialTilesJSON = 'special-tiles.js'
 
 
 
