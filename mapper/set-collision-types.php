@@ -273,10 +273,7 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
     }
 
     // write to collision file
-    if(!file_put_contents($globalCollisionsFile, $fileDump))
-        die("Failed writing file: " . $globalCollisionsFile);
-    else
-        echo "Success writing file: " . $globalCollisionsFile;
+    writeTextToFile($globalCollisionsFile, $fileDump);
 
     echo '<br /><a href="">Edit another map</a>';
     
