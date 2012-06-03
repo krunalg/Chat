@@ -94,7 +94,24 @@ ig.module (
 		    vy++;
 		    break;
 	    }
-	    // Try to find grass tiles in the backgroundMap
+	    // First check if entity already exists
+	    var allGrass = ig.game.getEntitiesByType( EntityGrass );
+	    if(allGrass)
+	    {
+			for(var i=0; i<allGrass.length; i++)
+			{
+			    if( allGrass[i].pos.x == this.pos.x + (vx * tilesize) &&
+					allGrass[i].pos.y == this.pos.y + (vy * tilesize) &&
+					!allGrass[i]._killed )
+			    {
+					// Save from being killed if marked for death.
+					if(allGrass[i].markedForDeath) allGrass[i].revive();
+					
+					return allGrass[i];
+			    }
+			}
+	    }
+	    // Check if the faced tile is a grass tile.
 	    for(var i=0; i<ig.game.backgroundMaps.length; i++)
 	    {
 	    	if(ig.game.backgroundMaps[i].name=='lower')
