@@ -244,76 +244,76 @@ ig.module (
 	{
 	    if(this.moveCommitDirection!=this.facing)
 	    {
-		// don't let player combine different keys for one commit
-		this.moveCommitPending = false;
-		this.moveCommitWhen = 0;
+			// don't let player combine different keys for one commit
+			this.moveCommitPending = false;
+			this.moveCommitWhen = 0;
 	    }
 	    
 	    if(!this.moveCommitPending)
 	    {
-		// start pending commit for faced direction
-		this.moveCommitPending = true;
-		this.moveCommitDirection = this.facing;
-		
-		// next line only runs once per direction, skip delay if facing already
-		if(this.facingLast==this.facing) var delay = 0; else var delay = 80;
-		this.moveCommitWhen = new Date().getTime() + delay;
+			// start pending commit for faced direction
+			this.moveCommitPending = true;
+			this.moveCommitDirection = this.facing;
+			
+			// next line only runs once per direction, skip delay if facing already
+			if(this.facingLast==this.facing) var delay = 0; else var delay = 80;
+			this.moveCommitWhen = new Date().getTime() + delay;
 	    }
 	    
 	    // player is now committed to (trying to) move
 	    if( new Date().getTime() - this.moveCommitWhen >= 0)
 	    {
-		this.moveCommitPending = false; // happening now, so now reset for next time
-		this.moveCommitWhen = 0; // reset for cleanness
-		
-		this.turnOffExitAnimations();
-		
-		if(this.canJump())
-		{
-		    this.startJump();
-		}
-		else if(this.canMove())
-		{
-		    this.preStartMove();
-		}
-		else
-		{
-		    console.debug("Trying to set slow walk...");
-		    // can't move, set slow walk animation
-		    switch(this.facing)
-		    {
-			case 'left':
-			    this.currentAnim = this.anims.slowleft;
-			    break;
-			case 'right':
-			    this.currentAnim = this.anims.slowright;
-			    break;
-			case 'up':
-			    this.currentAnim = this.anims.slowup;
-			    break;
-			case 'down':
-			    this.currentAnim = this.anims.slowdown;
-			    break;
-		    }
-		}
+			this.moveCommitPending = false; // happening now, so now reset for next time
+			this.moveCommitWhen = 0; // reset for cleanness
+			
+			this.turnOffExitAnimations();
+			
+			if(this.canJump())
+			{
+			    this.startJump();
+			}
+			else if(this.canMove())
+			{
+			    this.preStartMove();
+			}
+			else
+			{
+			    console.debug("Trying to set slow walk...");
+			    // can't move, set slow walk animation
+			    switch(this.facing)
+			    {
+				case 'left':
+				    this.currentAnim = this.anims.slowleft;
+				    break;
+				case 'right':
+				    this.currentAnim = this.anims.slowright;
+				    break;
+				case 'up':
+				    this.currentAnim = this.anims.slowup;
+				    break;
+				case 'down':
+				    this.currentAnim = this.anims.slowdown;
+				    break;
+			    }
+			}
 	    }
 	    else // player has not yet committed to (trying to) move
 	    {
-		// if player changed faced direction
-		if(this.facing!=this.facingLast)
-		{
-		    this.emitDirection(this.name, this.facing); // inform others players
-		    this.facingLast = this.facing; // so we don't inform them again
-		    this.moveAnimStart(false); // step-animate the change
-		    
-		    // check if we are on an exit that needs animating
-		    var exit = this.overExit(this);
-		    if(exit)
-		    {
-			if(this.facing==exit.direction) exit.startAnim();
-			else exit.stopAnim();
-		    }
-		}
+			// if player changed faced direction
+			if(this.facing!=this.facingLast)
+			{
+			    this.emitDirection(this.name, this.facing); // inform others players
+			    this.facingLast = this.facing; // so we don't inform them again
+			    this.moveAnimStart(false); // step-animate the change
+			    
+			    // check if we are on an exit that needs animating
+			    var exit = this.overExit(this);
+			    if(exit)
+			    {
+					if(this.facing==exit.direction) exit.startAnim();
+					else exit.stopAnim();
+			    }
+			}
 	    }
 	},
 	
@@ -321,11 +321,11 @@ ig.module (
 	{
 	    if(this.moveWaiting)
 	    {
-		if(new Date().getTime() - this.moveWhen >= 0)
-		{
-		    this.startMove();
-		    this.moveWaiting = false;
-		}
+			if(new Date().getTime() - this.moveWhen >= 0)
+			{
+			    this.startMove();
+			    this.moveWaiting = false;
+			}
 	    }
 	},
 	
@@ -335,10 +335,10 @@ ig.module (
 	    var exits = ig.game.getEntitiesByType( EntityExit );
 	    if(exits)
 	    {
-		for(var i=0; i<exits.length; i++)
-		{
-		    exits[i].stopAnim();
-		}
+			for(var i=0; i<exits.length; i++)
+			{
+			    exits[i].stopAnim();
+			}
 	    }
 	},
 	
@@ -374,13 +374,13 @@ ig.module (
 	    // determine speed (running or walking)
 	    if(ig.input.state('run'))
 	    {
-		this.moveState = 'run';
-		this.speed = this.runSpeed;
+			this.moveState = 'run';
+			this.speed = this.runSpeed;
 	    }
 	    else
 	    {
-		this.moveState = 'walk';
-		this.speed = this.walkSpeed;
+			this.moveState = 'walk';
+			this.speed = this.walkSpeed;
 	    }
 	    
 	    this.isMove = true;
@@ -399,8 +399,8 @@ ig.module (
 	    // send movement update only when change occurs
 	    if( this.facingLast != this.facing || this.lastState != this.moveState )
 	    {
-		this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-		this.lastState  = this.moveState;
+			this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+			this.lastState  = this.moveState;
 	    }
 	    
 	    this.facingLast = this.facing;
@@ -446,59 +446,59 @@ ig.module (
 	    }
 	    else
 	    {
-		/////////////////////
-		// Handle Movement //
-		/////////////////////
-		if(this.moveWaiting)
-		{
-		    // about to move
-		    console.debug("Waiting to move...");
-		    this.moveWait();
-		}
-		else if(this.isJump || this.isMove)
-		{
-		    // a move or jump has already been started
-		    this.finishMove();
-		}
-		else if( ig.input.state('left') &&
-			!ig.input.state('right') )
-		{
-		    // if player is trying to move left
-		    this.facing = 'left';
-		    this.movePressed();
-		}
-		else if( ig.input.state('right') &&
-			!ig.input.state('left') )
-		{
-		    // if player is trying to move right
-		    this.facing = 'right';
-		    this.movePressed();
-		}
-		else if( ig.input.state('up')&&
-			!ig.input.state('down') )
-		{
-		    // if player is trying to move up
-		    this.facing = 'up';
-		    this.movePressed();
-		}
-		else if( ig.input.state('down') &&
-			!ig.input.state('up') )
-		{
-		    // if player is trying to move down
-		    this.facing = 'down';
-		    this.movePressed();
-		}
-		else
-		{
-		    
-		    // if player not trying to move, set to idle
-		    this.moveAnimStop();
-		    // keep all slow-walk animations reset
-		    this.anims.slowleft.rewind();
-		    this.anims.slowright.rewind();
-		    this.anims.slowup.rewind();
-		    this.anims.slowdown.rewind();
-		}
+			/////////////////////
+			// Handle Movement //
+			/////////////////////
+			if(this.moveWaiting)
+			{
+			    // about to move
+			    console.debug("Waiting to move...");
+			    this.moveWait();
+			}
+			else if(this.isJump || this.isMove)
+			{
+			    // a move or jump has already been started
+			    this.finishMove();
+			}
+			else if( ig.input.state('left') &&
+				!ig.input.state('right') )
+			{
+			    // if player is trying to move left
+			    this.facing = 'left';
+			    this.movePressed();
+			}
+			else if( ig.input.state('right') &&
+				!ig.input.state('left') )
+			{
+			    // if player is trying to move right
+			    this.facing = 'right';
+			    this.movePressed();
+			}
+			else if( ig.input.state('up')&&
+				!ig.input.state('down') )
+			{
+			    // if player is trying to move up
+			    this.facing = 'up';
+			    this.movePressed();
+			}
+			else if( ig.input.state('down') &&
+				!ig.input.state('up') )
+			{
+			    // if player is trying to move down
+			    this.facing = 'down';
+			    this.movePressed();
+			}
+			else
+			{
+			    
+			    // if player not trying to move, set to idle
+			    this.moveAnimStop();
+			    // keep all slow-walk animations reset
+			    this.anims.slowleft.rewind();
+			    this.anims.slowright.rewind();
+			    this.anims.slowup.rewind();
+			    this.anims.slowdown.rewind();
+			}
 	    }
     
 		
