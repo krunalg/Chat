@@ -57,20 +57,20 @@ ig.module (
 
 	    if(keepMoving && this.canJump())
 	    {
-		this.isMove = false; // will use isJump instead
-		this.startJump();
+			this.isMove = false; // will use isJump instead
+			this.startJump();
 	    }
 	    else if(keepMoving && this.canMove()) this.preStartMove();
 	    else
 	    {
-		// stop the player
-		this.isMove = false;
-		this.isJump = false;
-		this.moveState = 'idle';
-		this.lastState = 'idle';
-		this.moveAnimStop();
-		// tell other players we've stopped
-		this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+			// stop the player
+			this.isMove = false;
+			this.isJump = false;
+			this.moveState = 'idle';
+			this.lastState = 'idle';
+			this.moveAnimStop();
+			// tell other players we've stopped
+			this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 	    }
 	},
 	
