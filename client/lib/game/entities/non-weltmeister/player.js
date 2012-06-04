@@ -182,7 +182,6 @@ ig.module(
 				break;
 			}
 			if (ig.game.isSpecialTile((this.pos.x / tilesize) + offsetX, (this.pos.y / tilesize) + offsetY, specialTiles['water'], 'lower')) {
-				console.log("Water ahead.");
 				return true;
 			}
 			return false;
