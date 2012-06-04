@@ -392,33 +392,35 @@ ig.module(
 				y: 16
 			};
 			if (!use) this.skin = 'boy';
-			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 16, 32);
-			// add the animations
-			this.addAnim('walkUpA', 0.13333, [2, 0], true);
-			this.addAnim('walkUpB', 0.13333, [1, 0], true);
-			this.addAnim('walkDownA', 0.13333, [14, 12], true);
-			this.addAnim('walkDownB', 0.13333, [13, 12], true);
-			this.addAnim('walkLeftA', 0.13333, [8, 6], true);
-			this.addAnim('walkLeftB', 0.13333, [7, 6], true);
-			this.addAnim('walkRightA', 0.13333, [8, 6], true);
-			this.addAnim('walkRightB', 0.13333, [7, 6], true);
-			this.addAnim('runUpA', 0.08333, [4, 3], true);
-			this.addAnim('runUpB', 0.08333, [5, 3], true);
-			this.addAnim('runDownA', 0.08333, [16, 15], true);
-			this.addAnim('runDownB', 0.08333, [17, 15], true);
-			this.addAnim('runLeftA', 0.08333, [10, 9], true);
-			this.addAnim('runLeftB', 0.08333, [11, 9], true);
-			this.addAnim('runRightA', 0.08333, [10, 9], true);
-			this.addAnim('runRightB', 0.08333, [11, 9], true);
-			this.addAnim('slowUp', 0.26667, [2, 0, 1, 0]);
-			this.addAnim('slowDown', 0.26667, [14, 12, 13, 12]);
-			this.addAnim('slowLeft', 0.26667, [8, 6, 7, 6]);
-			this.addAnim('slowRight', 0.26667, [8, 6, 7, 6]);
+			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 32, 32);
+			
+			// Add movement animations.
+			this.addAnim('walkUpA', 0.13333, [3, 0], true);
+			this.addAnim('walkUpB', 0.13333, [6, 0], true);
+			this.addAnim('walkDownA', 0.13333, [5, 2], true);
+			this.addAnim('walkDownB', 0.13333, [8, 2], true);
+			this.addAnim('walkLeftA', 0.13333, [4, 1], true);
+			this.addAnim('walkLeftB', 0.13333, [7, 1], true);
+			this.addAnim('walkRightA', 0.13333, [4, 1], true);
+			this.addAnim('walkRightB', 0.13333, [7, 1], true);
+			this.addAnim('runUpA', 0.08333, [12, 9], true);
+			this.addAnim('runUpB', 0.08333, [15, 9], true);
+			this.addAnim('runDownA', 0.08333, [14, 11], true);
+			this.addAnim('runDownB', 0.08333, [17, 11], true);
+			this.addAnim('runLeftA', 0.08333, [13, 10], true);
+			this.addAnim('runLeftB', 0.08333, [16, 10], true);
+			this.addAnim('runRightA', 0.08333, [16, 10], true);
+			this.addAnim('runRightB', 0.08333, [13, 10], true);
+			this.addAnim('slowUp', 0.26667, [3, 0, 6, 0]);
+			this.addAnim('slowDown', 0.26667, [5, 2, 8, 2]);
+			this.addAnim('slowLeft', 0.26667, [4, 1, 7, 1]);
+			this.addAnim('slowRight', 0.26667, [7, 1, 4, 1]);
 			this.addAnim('idleUp', 0.1, [0], true);
-			this.addAnim('idleDown', 0.1, [12], true);
-			this.addAnim('idleLeft', 0.1, [6], true);
-			this.addAnim('idleRight', 0.1, [6], true);
-			// flip right-facing animations
+			this.addAnim('idleDown', 0.1, [2], true);
+			this.addAnim('idleLeft', 0.1, [1], true);
+			this.addAnim('idleRight', 0.1, [1], true);
+			
+			// Right animations are just left animations, but flipped over x-axis.
 			this.anims.walkRightA.flip.x = true;
 			this.anims.walkRightB.flip.x = true;
 			this.anims.runRightA.flip.x = true;
