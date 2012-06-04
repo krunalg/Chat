@@ -28,6 +28,11 @@ EntitySurf = ig.Entity.extend({
 		this.anims.right.flip.x = true;
 
 		// Set current animation.
+		this.resetAnimation();
+	},
+
+	resetAnimation: function()
+	{
 		switch(this.facing) {
 			case 'left':
 			case 'right':
@@ -39,20 +44,30 @@ EntitySurf = ig.Entity.extend({
 				throw "Error: tried giving surf entity illegal direction to face.";
 				break;
 		}
-	},	
+	},
 	
 	draw: function()
 	{
 		var player = ig.game.getEntityByName(this.follow);
 		if(player!=undefined)
 		{
+			// Kill entity when no long swimming.
 			if(!player.swimming) this.kill();
+			
+			// Update direction according to player.
+			if(this.facing!=player.facing) 
+			{
+				this.facing = player.facing;
+				this.resetAnimation();
+			}
+			
+			// Copy coordinates of player.
 			this.pos.x = player.pos.x;
 			this.pos.y = player.pos.y;
 		}
 		else
 		{
-			console.debug( "Suft entity could not find entity '" +
+			console.debug( "Surf entity could not find entity '" +
 				this.follow + "' and will now kill() itself.");
 			this.kill();
 		}
