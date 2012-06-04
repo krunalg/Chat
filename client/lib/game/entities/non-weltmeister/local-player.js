@@ -336,7 +336,7 @@ ig.module(
 				if(!this.swimming) 
 				{
 					//this.jumpOnToSurfAnim.play();
-					//this.spawnSurf();
+					this.spawnSurf();
 					//this.whyWontYouDie();
 					console.log("Water ahead!");
 				}
