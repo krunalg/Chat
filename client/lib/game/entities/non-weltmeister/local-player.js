@@ -326,6 +326,10 @@ ig.module(
 		},
 
 		startMove: function() {
+			
+			// Check if moving through land or water.
+			if(this.facingWater()) console.log("Water ahead!");
+
 			// determine speed (running or walking)
 			if (ig.input.state('run')) {
 				this.moveState = 'run';
