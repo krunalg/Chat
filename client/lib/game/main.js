@@ -44,6 +44,35 @@ MyGame = ig.Game.extend({
 	{
 	    return string.charAt(0).toUpperCase() + string.slice(1);
 	},
+
+	/*
+	 * Returns true if any tiles within 'tiles' are found at x, y 
+	 * on the map layer named 'layer'.
+	 *
+	 * @param  x     int Position on x-axis in tiles.
+	 * @param  y     int Position on y-axis in tiles.
+	 * @param  tiles array Tiles to check for.
+	 * @param  layer string Name of layer containing tile.
+	 * @return bool	 true if tile is queried type, else false.
+	 */
+	isSpecialTile: function(x, y, tiles, layer)
+	{
+		// Search all map layers.
+		for (var i = 0; i < this.backgroundMaps.length; i++) {
+
+			// Find the layer with the correct name.
+			if (this.backgroundMaps[i].name == layer) {
+				
+				// Try all tiles for a match.
+				for (var j = 0; j < tiles.length; j++)
+				{
+					if (tiles[j] == this.backgroundMaps[i]['data'][y][x]) return true;
+				}
+				break; // No need to search further.
+			}
+		}
+		return false;
+	}
 	
 	autoSort: true,
 	whiteFont: new ig.Font( 'media/font.white.with.shadow.png' ),
