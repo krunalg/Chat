@@ -339,13 +339,9 @@ ig.module(
 
 		moveAnimStart: function(alternateFeet) {
 			// Determine which foot to put forward.
-			if(this.swimming || this.moveState=='idle') var foot = '';
-			else 
-			{
-				//this.leftFoot ? var foot = 'A' : var foot = 'B';
-				if (this.leftFoot==true) var foot = 'A';
-				else var foot = 'B';
-			}
+			var foot = '';
+			if(!this.swimming && this.moveState!='idle') 
+				this.leftFoot ? foot = 'A' : foot = 'B';
 
 			// Set current animation.
 			this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
