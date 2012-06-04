@@ -369,7 +369,8 @@ ig.module(
 				this.leftFoot ? foot = 'A' : foot = 'B';
 
 			// Set current animation.
-			this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
+			if(!this.swimming) this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
+			else this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing) + foot];
 
 			// Debug which animation is being played when.
 			console.debug("Player animation: " + this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot);
