@@ -36,7 +36,7 @@ EntitySurf = ig.Entity.extend({
 				this.currentAnim = this.anims[this.facing]
 				break;
 			default: 
-				throw "Error: tried giving surf entity illegal faced-direction.";
+				throw "Error: tried giving surf entity illegal direction to face.";
 				break;
 		}
 	},	
