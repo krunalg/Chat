@@ -451,6 +451,10 @@ ig.module(
 			this.addAnim('swimDown', 1, [23], true);
 			this.addAnim('swimLeft', 1, [22], true);
 			this.addAnim('swimRight', 1, [22], true);
+			this.addAnim('hopUp', 0.53333, [18, 21], true);
+			this.addAnim('hopDown', 0.53333, [20, 23], true);
+			this.addAnim('hopLeft', 0.53333, [19, 22], true);
+			this.addAnim('hopRight', 0.53333, [19, 22], true);
 			this.addAnim('idleUp', 0.1, [0], true);
 			this.addAnim('idleDown', 0.1, [2], true);
 			this.addAnim('idleLeft', 0.1, [1], true);
@@ -463,6 +467,7 @@ ig.module(
 			this.anims.runRightB.flip.x = true;
 			this.anims.slowRight.flip.x = true;
 			this.anims.swimRight.flip.x = true;
+			this.anims.hopRight.flip.x = true;
 			this.anims.idleRight.flip.x = true;
 			// set initial animation
 			this.moveAnimStop();
