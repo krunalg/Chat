@@ -447,14 +447,10 @@ ig.module(
 			this.addAnim('slowDown', 0.26667, [5, 2, 8, 2]);
 			this.addAnim('slowLeft', 0.26667, [4, 1, 7, 1]);
 			this.addAnim('slowRight', 0.26667, [7, 1, 4, 1]);
-			this.addAnim('swimUp', 1, [21], true);
-			this.addAnim('swimDown', 1, [23], true);
-			this.addAnim('swimLeft', 1, [22], true);
-			this.addAnim('swimRight', 1, [22], true);
-			this.addAnim('hopUp', 0.53333, [18, 21], true);
-			this.addAnim('hopDown', 0.53333, [20, 23], true);
-			this.addAnim('hopLeft', 0.53333, [19, 22], true);
-			this.addAnim('hopRight', 0.53333, [19, 22], true);
+			this.addAnim('swimUp', 0.53333, [18, 21], true);
+			this.addAnim('swimDown', 0.53333, [20, 23], true);
+			this.addAnim('swimLeft', 0.53333, [19, 22], true);
+			this.addAnim('swimRight', 0.53333, [19, 22], true);
 			this.addAnim('idleUp', 0.1, [0], true);
 			this.addAnim('idleDown', 0.1, [2], true);
 			this.addAnim('idleLeft', 0.1, [1], true);
@@ -467,7 +463,6 @@ ig.module(
 			this.anims.runRightB.flip.x = true;
 			this.anims.slowRight.flip.x = true;
 			this.anims.swimRight.flip.x = true;
-			this.anims.hopRight.flip.x = true;
 			this.anims.idleRight.flip.x = true;
 			// set initial animation
 			this.moveAnimStop();

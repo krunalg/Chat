@@ -335,10 +335,14 @@ ig.module(
 
 				if(!this.swimming) 
 				{
-					//this.jumpOnToSurfAnim.play();
+					// Reset hop-on-to-surf-entity animation.
+					this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)].rewind();
+
+					// Spawn a surf entity.
 					this.spawnSurf();
+
+					// Play is no longer on land.
 					this.swimming = true;
-					console.log("Water ahead!");
 				}
 			}
 			else // Land
