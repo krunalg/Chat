@@ -343,6 +343,9 @@ ig.module(
 			}
 			else // Land
 			{
+				// It's difficult to swim on land.
+				this.swimming = false;
+
 				// Determine movement speed on land.
 				if (ig.input.state('run')) this.setMoveState('run');
 				else this.setMoveState('walk');

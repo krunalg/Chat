@@ -43,16 +43,17 @@ EntitySurf = ig.Entity.extend({
 	
 	draw: function()
 	{
-		var target = ig.game.getEntityByName(this.follow);
-		if(target!=undefined)
+		var player = ig.game.getEntityByName(this.follow);
+		if(player!=undefined)
 		{
-			this.pos.x = target.pos.x;
-			this.pos.y = target.pos.y;
+			if(!player.swimming) this.kill();
+			this.pos.x = player.pos.x;
+			this.pos.y = player.pos.y;
 		}
 		else
 		{
 			console.debug( "Suft entity could not find entity '" +
-				       this.follow + "' and will now kill() itself.");
+				this.follow + "' and will now kill() itself.");
 			this.kill();
 		}
 		
