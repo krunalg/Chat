@@ -23,8 +23,10 @@ ig.module(
 			x: (138 * 8),
 			y: (138 * 8)
 		},
-		moveState: 'idle',
+
 		// idle, walk, run, swim, (jump?)
+		moveState: 'idle',
+
 		size: {
 			x: 16,
 			y: 16
@@ -36,15 +38,20 @@ ig.module(
 		checkAgainst: ig.Entity.TYPE.NONE,
 		collides: ig.Entity.COLLIDES.PASSIVE,
 
-		lastState: '',
 		// used to only send network move updates if change occurs
-		isMove: false,
+		lastState: '',
+
 		// waiting for move key-press
+		isMove: false,
+
 		isJump: false,
-		leftFoot: true,
+
 		// used to alternate step animations
-		destination: 0,
+		leftFoot: true,
+
 		// used for both x and y planes
+		destination: 0,
+
 		trySpawningGrass: function() {
 			var vx = vy = 0;
 			var tilesize = ig.game.collisionMap.tilesize;
@@ -433,9 +440,7 @@ ig.module(
 		},
 
 		update: function() {
-
 			this.zIndex = this.pos.y + this.zPriority;
-
 			this.parent();
 		}
 
