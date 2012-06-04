@@ -449,9 +449,8 @@ ig.module(
 					this.anims.slowDown.rewind();
 				}
 			}
-
-
 		}
+		
 	});
 
 })
