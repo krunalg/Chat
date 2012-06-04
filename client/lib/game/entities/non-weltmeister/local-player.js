@@ -276,8 +276,9 @@ ig.module (
 			}
 			else if(this.canMove())
 			{
-			    if(this.canSwim()) ;
-			    else this.preStartMove();
+			    //if(this.canSwim()) ;
+			    //else 
+			    	this.preStartMove();
 			}
 			else
 			{

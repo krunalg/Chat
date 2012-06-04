@@ -52,6 +52,8 @@ ig.module(
 		// used for both x and y planes
 		destination: 0,
 
+		
+
 		trySpawningGrass: function() {
 			var vx = vy = 0;
 			var tilesize = ig.game.collisionMap.tilesize;
@@ -173,43 +175,7 @@ ig.module(
 		// returns true the faced tile is a swimmable
 		// water tile
 		{
-			var vx = vy = 0; // velocity
-			var ox = oy = 0; // tile offset
-			var tilesize = ig.game.collisionMap.tilesize;
-			switch (this.facing) {
-			case 'left':
-				vx = -1;
-				ox = -tilesize;
-				break;
-			case 'right':
-				vx = 1;
-				ox = tilesize;
-				break;
-			case 'up':
-				vy = -1;
-				oy = -tilesize;
-				break;
-			case 'down':
-				vy = 1;
-				oy = tilesize;
-				break;
-			}
-			// check map collisions
-			var res = ig.game.collisionMap.trace(this.pos.x, this.pos.y, vx, vy, this.size.x, this.size.y);
-			if (res.collision.x || res.collision.y) return false;
-
-			// check npc collisions
-			var npcs = ig.game.getEntitiesByType(EntityNpc);
-			if (npcs) {
-				for (var i = 0; i < npcs.length; i++) {
-					if ((npcs[i].pos.x == this.pos.x + ox) && (npcs[i].pos.y == this.pos.y + oy)) {
-						return false;
-					}
-				}
-			}
-
-
-			return true; // no collisions
+			
 		},
 
 		canJump: function()
