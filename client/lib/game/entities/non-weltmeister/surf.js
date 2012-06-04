@@ -9,6 +9,7 @@ ig.module(
 EntitySurf = ig.Entity.extend({
 	
 	size: { x: 16, y: 16 },
+	offset: { x: 8, y: 8 },
 
 	follow: null, // name of entity to follow
 
