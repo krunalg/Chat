@@ -31,6 +31,7 @@ ig.module(
 	'game.entities.non-weltmeister.bubble',
 	'game.entities.non-weltmeister.name',
 	'game.entities.non-weltmeister.jump',
+	'game.entities.non-weltmeister.surf',
 
 	//debug
 	'impact.debug.debug',
