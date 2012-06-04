@@ -26,6 +26,19 @@ EntitySurf = ig.Entity.extend({
 		
 		// Flip the image for facing right.
 		this.anims.right.flip.x = true;
+
+		// Set current animation.
+		switch(this.facing) {
+			case 'left':
+			case 'right':
+			case 'up':
+			case 'down':
+				this.currentAnim = this.anims[this.facing]
+				break;
+			default: 
+				throw "Error: tried giving surf entity illegal faced-direction.";
+				break;
+		}
 	},	
 	
 	draw: function()
