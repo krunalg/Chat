@@ -372,7 +372,7 @@ ig.module(
 			{
 				// Determine which foot to put forward.
 				var foot = '';
-				if(this.moveState!='idle') this.leftFoot ? foot = 'A' : foot = 'B';
+				if(this.moveState!='idle') foot = this.leftFoot ? 'A':'B';
 				
 				// Set current animation.
 				this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
