@@ -162,11 +162,30 @@ ig.module(
 			return true; // no collisions
 		},
 
-		canSwim: function()
-		// returns true the faced tile is a swimmable
-		// water tile
+		facingWater: function()
+		// returns true if the faced tile is a swimmable water tile
 		{
-
+			var offsetX = offsetY = 0;
+			var tilesize = ig.game.collisionMap.tilesize;
+			switch (this.facing) {
+			case 'left':
+				offsetX--;
+				break;
+			case 'right':
+				offsetX++;
+				break;
+			case 'up':
+				offsetY--;
+				break;
+			case 'down':
+				offsetY++;
+				break;
+			}
+			if (ig.game.isSpecialTile((this.pos.x / tilesize) + offsetX, (this.pos.y / tilesize) + offsetY, specialTiles['water'], 'lower')) {
+				console.log("Water ahead.");
+				return true;
+			}
+			return false;
 		},
 
 		canJump: function()
