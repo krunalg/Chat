@@ -23,7 +23,7 @@ ig.module (
 	runSpeed: (138*8),
 	swimSpeed: 138,
 	maxVel: { x: (138*8), y: (138*8) },
-	moveState: 'idle', // idle, walk, run
+	moveState: 'idle', // idle, walk, run, swim, (jump?)
 	
 	size: {x: 16, y: 16},
 
