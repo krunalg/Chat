@@ -197,6 +197,8 @@ ig.module (
 	    return false;
 	},
 	
+	// Checks for exits before each move.
+	// If none exist, it calls startMove().
 	preStartMove: function()
 	{
 	    var cancelMove = false;
@@ -205,53 +207,53 @@ ig.module (
 	    var exit = this.overExit();
 	    if(exit && this.facing==exit.direction)
 	    {
-		exit.trigger(); // zone
-		cancelMove = true;
+			exit.trigger(); // zone
+			cancelMove = true;
 	    }
 	    
 	    if(!cancelMove)
 	    {		    
-		// facing an exit
-		var exit = this.facingExit();
-		if(exit)
-		{
-		    // check if going through a door
-		    if(exit.type=='door')
-		    {
-			exit.startAnim();
-			// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
-			this.moveWhen = 336.7 + new Date().getTime();
-			this.moveWaiting = true;
-			this.moveDoor = exit;
-			cancelMove = true; // prevent player from starting to move too soon
-		    }
-		    // not a door
-		    else
-		    {
-			if(this.facing==exit.direction) exit.startAnim(); // approaching floor exit
-		    }
-		}
-	    
-		// if no exits have taken place, move
-		if(!cancelMove)
-		{
-		    this.startMove();
-		}
+			// facing an exit
+			var exit = this.facingExit();
+			if(exit)
+			{
+			    // check if going through a door
+			    if(exit.type=='door')
+			    {
+					exit.startAnim();
+					// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
+					this.moveWhen = 336.7 + new Date().getTime();
+					this.moveWaiting = true;
+					this.moveDoor = exit;
+					cancelMove = true; // prevent player from starting to move too soon
+			    }
+			    // not a door
+			    else
+			    {
+					if(this.facing==exit.direction) exit.startAnim(); // approaching floor exit
+			    }
+			}
+		    
+			// if no exits have taken place, move
+			if(!cancelMove)
+			{
+			    this.startMove();
+			}
 	    }
 	},
 	
 	movePressed: function()
 	{
+	    // Reset the commit process if new direction is detected.
 	    if(this.moveCommitDirection!=this.facing)
 	    {
-			// don't let player combine different keys for one commit
 			this.moveCommitPending = false;
 			this.moveCommitWhen = 0;
 	    }
 	    
+	    // Start new commit process if one does not exist.
 	    if(!this.moveCommitPending)
 	    {
-			// start pending commit for faced direction
 			this.moveCommitPending = true;
 			this.moveCommitDirection = this.facing;
 			
@@ -274,7 +276,8 @@ ig.module (
 			}
 			else if(this.canMove())
 			{
-			    this.preStartMove();
+			    if(this.canSwim()) ;
+			    else this.preStartMove();
 			}
 			else
 			{
