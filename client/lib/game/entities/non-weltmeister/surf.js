@@ -43,7 +43,6 @@ EntitySurf = ig.Entity.extend({
 	
 	draw: function()
 	{
-		/*
 		var target = ig.game.getEntityByName(this.follow);
 		if(target!=undefined)
 		{
@@ -56,7 +55,6 @@ EntitySurf = ig.Entity.extend({
 				       this.follow + "' and will now kill() itself.");
 			this.kill();
 		}
-		*/
 		
 		this.parent();
 	},

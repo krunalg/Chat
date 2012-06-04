@@ -87,7 +87,8 @@ ig.module(
 				break;
 			}
 			ig.game.spawnEntity(EntitySurf, this.pos.x + (offsetX * tilesize), this.pos.y + (offsetY * tilesize), {
-				facing: this.facing
+				facing: this.facing,
+				follow: this.name
 			});
 		},
 
