@@ -65,7 +65,7 @@ ig.module(
 				this.moveState = state;
 			}
 			else throw "No speed value set for for state: " + state;
-		}
+		},
 
 		trySpawningGrass: function() {
 			var vx = vy = 0;
@@ -338,18 +338,23 @@ ig.module(
 		},
 
 		moveAnimStart: function(alternateFeet) {
-			// determine rate
-			if (this.speed == this.walkSpeed) var rate = 'walk'; // is walking
-			else var rate = 'run'; // else assume running
-			// determine foot
-			if (this.leftFoot) var foot = 'A';
-			else var foot = 'B'
+			// Determine which foot to put forward.
+			if(this.swimming) var foot = '';
+			else 
+			{
+				//this.leftFoot ? var foot = 'A' : var foot = 'B';
+				if (this.leftFoot==true) var foot = 'A';
+				else var foot = 'B';
+			}
 
-			// set animation
-			this.currentAnim = this.anims[rate + ig.game.capitaliseFirstLetter(this.facing) + foot];
+			// Set current animation.
+			this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
 
-			if (alternateFeet) this.leftFoot = !this.leftFoot; // alternate feet
-			this.currentAnim.rewind(); // starting at first frame
+			// Play from first frame.
+			this.currentAnim.rewind();
+
+			// Switch foot for next time.
+			if (alternateFeet) this.leftFoot = !this.leftFoot;
 		},
 
 		moveAnimStop: function()

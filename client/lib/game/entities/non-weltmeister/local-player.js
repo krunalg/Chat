@@ -327,28 +327,37 @@ ig.module(
 
 		startMove: function() {
 			
-			// Check if moving through land or water.
-			if(this.facingWater()) console.log("Water ahead!");
+			if(this.facingWater()) // Water
+			{
+				// Set movement speed on water.
+				this.moveState = 'swim';
+				this.speed = this.swimSpeed;
 
-			// determine speed (running or walking)
-			if (ig.input.state('run')) {
-				this.moveState = 'run';
-				this.speed = this.runSpeed;
-			} else {
-				this.moveState = 'walk';
-				this.speed = this.walkSpeed;
+				if(!this.swimming) 
+				{
+					//this.jumpOnToSurfAnim.play();
+					//this.spawnSurf();
+					//this.whyWontYouDie();
+					console.log("Water ahead!");
+				}
+			}
+			else // Land
+			{
+				// Determine movement speed on land.
+				if (ig.input.state('run')) this.setMoveState('run');
+				else this.setMoveState('walk');
+
+				// Spawn new grass entity if needed.
+				var newGrass = this.trySpawningGrass();
+				if (newGrass) newGrass.play();
+
+				// Remove old grass entity if leaving one.
+				var oldGrass = this.inGrass();
+				if (oldGrass) oldGrass.markForDeath();
 			}
 
 			this.isMove = true;
 			this.setMoveDestination();
-
-			// Spawn new grass entity if needed.
-			var newGrass = this.trySpawningGrass();
-			if (newGrass) newGrass.play();
-
-			// Remove old grass entity if leaving one.
-			var oldGrass = this.inGrass();
-			if (oldGrass) oldGrass.markForDeath();
 
 			this.moveAnimStart(true);
 
