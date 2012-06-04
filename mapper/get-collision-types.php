@@ -4,12 +4,18 @@ include('inc.globals.php');
 require('inc.functions.php');
 
 
+    if(!isset($_GET['go']))
+    {
+        echo 'Click <a href="?go=true">here</a> to write special tiles file.';
+        die();
+    }
+
     /*
      * List each collision type and the tiles that belong to each type.
      *
      */
     
-    $interestedIn = array('grass', 'walkable');
+    $interestedIn = array('grass', 'water');
 
     // we'll need master tilesheet info to translate hashes into tile positions
     $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
