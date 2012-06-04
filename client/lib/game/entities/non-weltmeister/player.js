@@ -412,7 +412,7 @@ ig.module(
 				break;
 			}
 			this.offset = {
-				x: 0,
+				x: 8,
 				y: 16
 			};
 			if (!use) this.skin = 'boy';
