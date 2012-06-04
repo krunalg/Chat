@@ -9,10 +9,14 @@ ig.module(
 	EntityPlayer = ig.Entity.extend({
 		zPriority: 0,
 
-		isLocal: false,
 		// false unless entity defines otherwise
+		isLocal: false,
+		
 		// some default values
 		facing: 'down',
+
+		// True when over water; False on land.
+		swimming: false,
 
 		speed: 69,
 		walkSpeed: 69,
@@ -52,6 +56,16 @@ ig.module(
 		// used for both x and y planes
 		destination: 0,
 
+		// Updates the speed the player and his moveState.
+		setMoveState: function(state)
+		{
+			if (typeof this[state + 'Speed'] != 'undefined')
+			{
+				this.speed = this[state + 'Speed'];
+				this.moveState = state;
+			}
+			else throw "No speed value set for for state: " + state;
+		}
 
 		trySpawningGrass: function() {
 			var vx = vy = 0;
