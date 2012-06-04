@@ -363,23 +363,26 @@ ig.module(
 		},
 
 		moveAnimStart: function(alternateFeet) {
-			// Determine which foot to put forward.
-			var foot = '';
-			if(!this.swimming && this.moveState!='idle') 
-				this.leftFoot ? foot = 'A' : foot = 'B';
+			if(this.swimming) // Water
+			{
+				// Set current animation.
+				this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
+			}
+			else // Land
+			{
+				// Determine which foot to put forward.
+				var foot = '';
+				if(this.moveState!='idle') this.leftFoot ? foot = 'A' : foot = 'B';
+				
+				// Set current animation.
+				this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
 
-			// Set current animation.
-			if(!this.swimming) this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
-			else this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing) + foot];
+				// Play from first frame.
+				this.currentAnim.rewind();
 
-			// Debug which animation is being played when.
-			console.debug("Player animation: " + this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot);
-
-			// Play from first frame.
-			this.currentAnim.rewind();
-
-			// Switch foot for next time.
-			if (alternateFeet) this.leftFoot = !this.leftFoot;
+				// Switch foot for next time.
+				if (alternateFeet) this.leftFoot = !this.leftFoot;
+			}
 		},
 
 		moveAnimStop: function()
