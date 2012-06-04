@@ -270,7 +270,7 @@ ig.module (
 	    {
 		case 'left':	this.vel.x = -this.speed; break;
 		case 'right': 	this.vel.x = +this.speed; break;
-		case 'up': 	this.vel.y = -this.speed; break;
+		case 'up': 		this.vel.y = -this.speed; break;
 		case 'down':    this.vel.y = +this.speed; break;
 	    }
 	},
@@ -282,7 +282,7 @@ ig.module (
 	    switch(this.facing) {
 		case 'left':	return this.pos.x<=this.destination; break;
 		case 'right':   return this.pos.x>=this.destination; break;
-		case 'up': 	return this.pos.y<=this.destination; break;
+		case 'up': 		return this.pos.y<=this.destination; break;
 		case 'down':	return this.pos.y>=this.destination; break;
 	    }
 	    return false;
@@ -378,6 +378,7 @@ ig.module (
 	    
 	    this.parent();    
 	}
+    
     });
  
     
