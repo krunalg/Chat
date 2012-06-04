@@ -436,10 +436,10 @@ ig.module(
 					// if player not trying to move, set to idle
 					this.moveAnimStop();
 					// keep all slow-walk animations reset
-					this.anims.slowleft.rewind();
-					this.anims.slowright.rewind();
-					this.anims.slowup.rewind();
-					this.anims.slowdown.rewind();
+					this.anims.slowLeft.rewind();
+					this.anims.slowRight.rewind();
+					this.anims.slowUp.rewind();
+					this.anims.slowDown.rewind();
 				}
 			}
 

@@ -339,7 +339,7 @@ ig.module(
 
 		moveAnimStart: function(alternateFeet) {
 			// Determine which foot to put forward.
-			if(this.swimming) var foot = '';
+			if(this.swimming || this.moveState=='idle') var foot = '';
 			else 
 			{
 				//this.leftFoot ? var foot = 'A' : var foot = 'B';
@@ -366,7 +366,7 @@ ig.module(
 			case 'right':
 			case 'up':
 			case 'down':
-				this.currentAnim = this.anims['idle' + this.facing];
+				this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
 				break;
 			};
 		},
@@ -414,21 +414,21 @@ ig.module(
 			this.addAnim('runLeftB', 0.08333, [11, 9], true);
 			this.addAnim('runRightA', 0.08333, [10, 9], true);
 			this.addAnim('runRightB', 0.08333, [11, 9], true);
-			this.addAnim('slowup', 0.26667, [2, 0, 1, 0]);
-			this.addAnim('slowdown', 0.26667, [14, 12, 13, 12]);
-			this.addAnim('slowleft', 0.26667, [8, 6, 7, 6]);
-			this.addAnim('slowright', 0.26667, [8, 6, 7, 6]);
-			this.addAnim('idleup', 0.1, [0], true);
-			this.addAnim('idledown', 0.1, [12], true);
-			this.addAnim('idleleft', 0.1, [6], true);
-			this.addAnim('idleright', 0.1, [6], true);
+			this.addAnim('slowUp', 0.26667, [2, 0, 1, 0]);
+			this.addAnim('slowDown', 0.26667, [14, 12, 13, 12]);
+			this.addAnim('slowLeft', 0.26667, [8, 6, 7, 6]);
+			this.addAnim('slowRight', 0.26667, [8, 6, 7, 6]);
+			this.addAnim('idleUp', 0.1, [0], true);
+			this.addAnim('idleDown', 0.1, [12], true);
+			this.addAnim('idleLeft', 0.1, [6], true);
+			this.addAnim('idleRight', 0.1, [6], true);
 			// flip right-facing animations
 			this.anims.walkRightA.flip.x = true;
 			this.anims.walkRightB.flip.x = true;
 			this.anims.runRightA.flip.x = true;
 			this.anims.runRightB.flip.x = true;
-			this.anims.slowright.flip.x = true;
-			this.anims.idleright.flip.x = true;
+			this.anims.slowRight.flip.x = true;
+			this.anims.idleRight.flip.x = true;
 			// set initial animation
 			this.moveAnimStop();
 		},
