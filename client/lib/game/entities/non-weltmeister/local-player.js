@@ -253,16 +253,16 @@ ig.module(
 					// can't move, set slow walk animation
 					switch (this.facing) {
 					case 'left':
-						this.currentAnim = this.anims.slowleft;
+						this.currentAnim = this.anims.slowLeft;
 						break;
 					case 'right':
-						this.currentAnim = this.anims.slowright;
+						this.currentAnim = this.anims.slowRight;
 						break;
 					case 'up':
-						this.currentAnim = this.anims.slowup;
+						this.currentAnim = this.anims.slowUp;
 						break;
 					case 'down':
-						this.currentAnim = this.anims.slowdown;
+						this.currentAnim = this.anims.slowDown;
 						break;
 					}
 				}
