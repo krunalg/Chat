@@ -52,7 +52,6 @@ ig.module(
 		// used for both x and y planes
 		destination: 0,
 
-		
 
 		trySpawningGrass: function() {
 			var vx = vy = 0;
@@ -84,11 +83,8 @@ ig.module(
 				}
 			}
 			// Check if the faced tile is a grass tile.
-			if( ig.game.isSpecialTile(
-				(this.pos.x / tilesize) + vx, 
-				(this.pos.y / tilesize) + vy, 
-				specialTiles['grass'], 'lower'))
-			{
+			if (ig.game.isSpecialTile(
+			(this.pos.x / tilesize) + vx, (this.pos.y / tilesize) + vy, specialTiles['grass'], 'lower')) {
 				var grassX = this.pos.x + (vx * tilesize);
 				var grassY = this.pos.y + (vy * tilesize);
 				console.log("Creating grass entity at: " + grassX + "," + grassY);
@@ -96,7 +92,7 @@ ig.module(
 					direction: this.facing
 				});
 			}
-			
+
 			return false;
 		},
 
@@ -170,7 +166,7 @@ ig.module(
 		// returns true the faced tile is a swimmable
 		// water tile
 		{
-			
+
 		},
 
 		canJump: function()
