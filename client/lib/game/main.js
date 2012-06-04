@@ -72,7 +72,7 @@ MyGame = ig.Game.extend({
 			}
 		}
 		return false;
-	}
+	},
 	
 	autoSort: true,
 	whiteFont: new ig.Font( 'media/font.white.with.shadow.png' ),
