@@ -84,24 +84,19 @@ ig.module(
 				}
 			}
 			// Check if the faced tile is a grass tile.
-			for (var i = 0; i < ig.game.backgroundMaps.length; i++) {
-				if (ig.game.backgroundMaps[i].name == 'lower') {
-					for (var j = 0; j < specialTiles['grass'].length; j++) {
-						if (specialTiles['grass'][j] == ig.game.backgroundMaps[i]['data'][
-						(this.pos.y / tilesize) + vy][
-						(this.pos.x / tilesize) + vx]) {
-							var grassX = this.pos.x + (vx * tilesize);
-							var grassY = this.pos.y + (vy * tilesize);
-							console.log("Creating grass entity at: " + grassX + "," + grassY);
-							return ig.game.spawnEntity(EntityGrass, this.pos.x + (vx * tilesize), this.pos.y + (vy * tilesize), {
-								direction: this.facing
-							});
-						}
-						break;
-					}
-					break;
-				}
+			if( ig.game.isSpecialTile(
+				(this.pos.x / tilesize) + vx, 
+				(this.pos.y / tilesize) + vy, 
+				specialTiles['grass'], 'lower'))
+			{
+				var grassX = this.pos.x + (vx * tilesize);
+				var grassY = this.pos.y + (vy * tilesize);
+				console.log("Creating grass entity at: " + grassX + "," + grassY);
+				return ig.game.spawnEntity(EntityGrass, this.pos.x + (vx * tilesize), this.pos.y + (vy * tilesize), {
+					direction: this.facing
+				});
 			}
+			
 			return false;
 		},
 
