@@ -60,7 +60,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			var lines = new Array();
 
 			// Initialize our first line.
-			var currStr = '';
+			var currentLine = '';
 			var lineWidth = 0;
 
 			// 
@@ -70,20 +70,20 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 				var space = (i==0) ? '':' ';
 
 				// Add a word to the current line.
-				var tryStr = currStr + space + words[i];
+				var tryStr = currentLine + space + words[i];
 
 				// Check if current line fits within maximum.
 				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) 
 				{
 					// It does, so make this our new current line.
-					currStr = tryStr;
+					currentLine = tryStr;
 				}
 				
 				// We exceeded the max width, so make a new line.
 				else
 				{
 					// Measure width of current line.
-					lineWidth = this.font.widthForString(currStr);
+					lineWidth = this.font.widthForString(currentLine);
 					
 					// Check if this has been the longest line so far.
 					if (lineWidth > this.longestLine) 
@@ -93,16 +93,16 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 					}
 
 					// Add current line to the rest.
-					lines.push(currStr);
+					lines.push(currentLine);
 
 					// Start a new current line with one word in it.
-					currStr = words[i];
+					currentLine = words[i];
 				}
 			}
 			// finish array
-			if (currStr != '') {
-				lines.push(currStr);
-				lineWidth = this.font.widthForString(currStr);
+			if (currentLine != '') {
+				lines.push(currentLine);
+				lineWidth = this.font.widthForString(currentLine);
 				if (lineWidth > this.longestLine) this.longestLine = lineWidth;
 			}
 
