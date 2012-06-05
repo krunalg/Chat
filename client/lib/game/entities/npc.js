@@ -71,6 +71,7 @@ ig.module(
 			// create a name entity to follow this one
 			ig.game.spawnEntity(
 			EntityName, this.pos.x, this.pos.y, {
+				name: this.name + "NameEntity",
 				follow: this.name,
 				color: 'green'
 			});

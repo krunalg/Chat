@@ -20,6 +20,7 @@ ig.module(
 			// Spawn a NameEntity to follow this player.
 			ig.game.spawnEntity(
 			EntityName, this.pos.x, this.pos.y, {
+				name: this.name + "NameEntity",
 				follow: this.name,
 				color: 'blue'
 			});
