@@ -9,8 +9,6 @@ ig.module(
 	EntityNetworkPlayer = EntityPlayer.extend({
 		zPriority: 1,
 
-		isLocal: false,
-
 		size: {
 			x: 16,
 			y: 16
@@ -19,25 +17,12 @@ ig.module(
 			x: 0,
 			y: 16
 		},
-		type: ig.Entity.TYPE.B,
 
 		moveState: 'idle',
 		// idle, walk, run
-		name: "otherplayer",
-		animation: 1,
 
-		//checkAgainst: ig.Entity.TYPE.B,
-		collides: ig.Entity.COLLIDES.PASSIVE,
 		animSheet: new ig.AnimationSheet('media/people/rs.boy.png', 16, 32),
 
-		facing: 'down',
-		isMove: false,
-		// being animated or not
-		isJump: false,
-		// used to time offsets in animation
-		leftFoot: true,
-		// used to alternate step animations
-		destination: 0,
 		// used for both x and y planes
 		skin: 'boy',
 
@@ -135,10 +120,6 @@ ig.module(
 			this.setMoveDestination();
 
 			this.moveAnimStart();
-		},
-
-		draw: function() {
-			this.parent();
 		},
 
 		update: function() {
