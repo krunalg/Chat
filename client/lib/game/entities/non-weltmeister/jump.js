@@ -33,29 +33,49 @@ ig.module('game.entities.non-weltmeister.jump')
 
 			this.zIndex = 0,
 
+			// Define animation sequence.
 			this.addAnim('jump', (8 / 60), [0, 0, 0, 0, 1, 2, 3, 3], true);
+
+			// Set current animation.
 			this.currentAnim = this.anims.jump;
 
-			this.destinationX = this.pos.x; // destination x
-			this.destinationY = this.pos.y; // and y
+			// Get map tilesize.
 			var tilesize = ig.game.collisionMap.tilesize;
 
+			// Set movement speed and destination based on direction.
 			switch (this.direction) {
 			case 'left':
+				
+				// Set movement speed.
 				this.vel.x = -this.speed;
-				this.destinationX -= tilesize * 2;
+
+				// Set destination.
+				this.destinationX = this.pos.x - tilesize * 2;
+
 				break;
 			case 'right':
+
+				// Set movement speed.
 				this.vel.x = +this.speed;
-				this.destinationX += tilesize * 2;
+
+				// Set destination.
+				this.destinationX = this.pos.x + tilesize * 2;
 				break;
 			case 'up':
+
+				// Set movement speed.
 				this.vel.y = -this.speed;
-				this.destinationY -= tilesize * 2;
+
+				// Set destination.
+				this.destinationY = this.pos.y - tilesize * 2;
 				break;
 			case 'down':
+
+				// Set movement speed.
 				this.vel.y = +this.speed;
-				this.destinationY += tilesize * 2;
+
+				// Set destination.
+				this.destinationY = this.pos.y + tilesize * 2;
 				break;
 			}
 		},
