@@ -2,6 +2,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 
 	EntityName = ig.Entity.extend({
 
+		// Load font resources.
 		white: new ig.Font('media/font.white.with.shadow.png'),
 		blue: new ig.Font('media/font.blue.with.shadow.png'),
 		green: new ig.Font('media/font.green.with.shadow.png'),
@@ -20,6 +21,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 		// Used to temporarily stop drawing.
 		hideTimer: new ig.Timer(),
 
+		// Initialize
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 		},
@@ -66,15 +68,19 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 				default:
 
 					console.debug("EntityName was not supplied valid color and will now kill() itself.");
-					
+
 					// Free up resources.
 					this.kill();
-					
+
 					break;
 
 				}
 			}
+
+			// Call parent function.
+			this.parent();
 		}
+
 
 	});
 });
