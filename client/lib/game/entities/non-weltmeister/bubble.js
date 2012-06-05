@@ -33,7 +33,7 @@ ig.module('game.entities.non-weltmeister.bubble')
 		msgMaxWidth: 100,
 
 		// Used to kill() old bubbles.
-		timer: new ig.Timer(),
+		timer: null,
 
 		// Time in seconds before entity is killed.
 		lifespan: 3,
@@ -133,6 +133,9 @@ ig.module('game.entities.non-weltmeister.bubble')
 		// Initialize
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
+
+			// Create timer for death count-down.
+			this.timer = new ig.Timer();
 
 			// Start count-down to this entity's death.
 			this.timer.set(this.lifespan);
