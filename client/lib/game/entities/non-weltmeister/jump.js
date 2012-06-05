@@ -43,7 +43,7 @@ ig.module('game.entities.non-weltmeister.jump')
 			// Set movement speed and destination based on direction.
 			switch (this.direction) {
 			case 'left':
-				
+
 				// Set movement speed.
 				this.vel.x = -this.speed;
 
@@ -79,14 +79,14 @@ ig.module('game.entities.non-weltmeister.jump')
 		},
 
 		update: function() {
-			
+
 			// Try to stop moving.
 			if (!this.arrived) {
-				
+
 				switch (this.direction) {
 				case 'left':
 					if (this.pos.x <= this.destinationX) {
-						
+
 						// Stop moving.
 						this.vel.x = 0;
 
@@ -99,7 +99,7 @@ ig.module('game.entities.non-weltmeister.jump')
 					break;
 				case 'right':
 					if (this.pos.x >= this.destinationX) {
-						
+
 						// Stop moving.
 						this.vel.x = 0;
 
@@ -112,7 +112,7 @@ ig.module('game.entities.non-weltmeister.jump')
 					break;
 				case 'up':
 					if (this.pos.y <= this.destinationY) {
-						
+
 						// Stop moving.
 						this.vel.y = 0;
 
@@ -125,7 +125,7 @@ ig.module('game.entities.non-weltmeister.jump')
 					break;
 				case 'down':
 					if (this.pos.y >= this.destinationY) {
-						
+
 						// Stop moving.
 						this.vel.y = 0;
 
