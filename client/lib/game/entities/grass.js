@@ -8,7 +8,7 @@ ig.module('game.entities.grass').requires('impact.entity').defines(function() {
 		},
 
 		animSheet: new ig.AnimationSheet('media/grass-animation.png', 16, 16),
-		killTimer: new ig.Timer(),
+		killTimer: null,
 		markedForDeath: false,
 
 		// Start count-down until this entity will be killed.
@@ -25,6 +25,9 @@ ig.module('game.entities.grass').requires('impact.entity').defines(function() {
 		// Initiate
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
+
+			// Create timer to count-down to entity's death.
+			killTimer = new ig.Timer();
 
 			this.zIndex = 4 + this.pos.y, // above players
 			this.addAnim('rustle', 0.1667, [0, 1, 2, 3, 4], true); // 10 frames of 60 per
