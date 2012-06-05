@@ -54,7 +54,6 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 
 			// Initialize our first line.
 			var currentLine = '';
-			var lineWidth = 0;
 
 			// Try adding words to the current line.
 			for (var i = 0; i < words.length; i++) {
@@ -73,15 +72,8 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 				}
 				else {
 					
-					// Get width of current line.
-					lineWidth = this.font.widthForString(currentLine);
-
-					// Check if this has been the longest line so far.
-					if (lineWidth > this.longestLine) {
-						
-						// Record new longest line.
-						this.longestLine = lineWidth;
-					}
+					// Record potential longest line.
+					this.recordLongestLine(currentLine);
 
 					// Add current line to the rest.
 					lines.push(currentLine);
@@ -94,18 +86,12 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			// Add the final line.
 			if (currentLine != '') {
 				
+				// Record potential longest line.
+				this.recordLongestLine(currentLine);
+
 				// Add current line to the rest.
 				lines.push(currentLine);
 				
-				// Get width of current line.
-				lineWidth = this.font.widthForString(currentLine);
-				
-				// Check if this has been the longest line so far.
-				if (lineWidth > this.longestLine) 
-				{
-					// Record new longest line.
-					this.longestLine = lineWidth;
-				}
 			}
 
 			// converts array of msg parts into
@@ -119,6 +105,19 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			}
 			this.heightOfMessage -= 3; // because impact auto adds a few px below even for one-liners
 			this.longestLine -= 1; // DO NOT CHANGE (removes extra px added by Impact)
+		},
+
+		recordLongestLine: function(line)
+		{
+			// Get width of current line.
+			var lineWidth = this.font.widthForString(line);
+			
+			// Check if this has been the longest line so far.
+			if (lineWidth > this.longestLine) 
+			{
+				// Record new longest line.
+				this.longestLine = lineWidth;
+			}
 		},
 
 		// Initialize
