@@ -363,19 +363,32 @@ ig.module(
 		},
 
 		moveAnimStart: function(alternateFeet) {
+			
+			// State to use for animation.
+			var state = this.moveState;
+
 			if(this.swimming) // Water
 			{
 				// Set current animation.
 				this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
+
+				// Debug animation.
+				console.debug('Current animation: ' + 'swim' + ig.game.capitaliseFirstLetter(this.facing));
 			}
 			else // Land
 			{
 				// Determine which foot to put forward.
 				var foot = '';
-				if(this.moveState!='idle') foot = this.leftFoot ? 'A':'B';
+				if(state!='idle') foot = this.leftFoot ? 'A':'B';
 				
+				// Over-ride jump to share same animation as walk.
+				if(state=='jump') state = 'walk';
+
 				// Set current animation.
-				this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing) + foot];
+				this.currentAnim = this.anims[state + ig.game.capitaliseFirstLetter(this.facing) + foot];
+
+				// Debug animation.
+				console.debug('Current animation: ' + state + ig.game.capitaliseFirstLetter(this.facing) + foot);
 
 				// Play from first frame.
 				this.currentAnim.rewind();
