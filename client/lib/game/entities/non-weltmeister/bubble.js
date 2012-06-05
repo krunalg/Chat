@@ -54,7 +54,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			// smaller messagew which do not violate msgMaxWidth.
 			
 			// Break into individual words.
-			var explode = this.msg.split(' ');
+			var words = this.msg.split(' ');
 			
 			// Create an array where we'll store our <=msgMaxWidth lines.
 			var lines = new Array();
@@ -63,17 +63,17 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			var currStr = '';
 			var lineWidth = 0;
 
-
-			for (var i = 0; i < explode.length; i++) {
+			//
+			for (var i = 0; i < words.length; i++) {
 				var space = (i==0) ? '':' ';
-				var tryStr = currStr + space + explode[i];
+				var tryStr = currStr + space + words[i];
 				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) currStr = tryStr;
 				else // start new line
 				{
 					lineWidth = this.font.widthForString(currStr);
 					if (lineWidth > this.longestLine) this.longestLine = lineWidth;
 					lines.push(currStr);
-					currStr = explode[i];
+					currStr = words[i];
 				}
 			}
 			// finish array
