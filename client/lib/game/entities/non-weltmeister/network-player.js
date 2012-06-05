@@ -36,7 +36,7 @@ ig.module(
 				player.pos.y = y;
 				player.facing = direction;
 				player.moveState = state;
-				player.netStartMove();
+				player.startMove();
 			});
 
 			// Some player faced a new direction.
@@ -78,11 +78,11 @@ ig.module(
 				this.isJump = false;
 				this.moveAnimStop();
 			} else {
-				if (this.canMove()) this.netStartMove();
+				if (this.canMove()) this.startMove();
 			}
 		},
 
-		netStartMove: function() {
+		startMove: function() {
 			if (this.moveState == 'idle') this.isMove = false;
 			else {
 				// determine speed
