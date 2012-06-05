@@ -44,8 +44,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 		spaceBetweenLines: 2,
 
 		// Breaks up msg into an array of small messages which don't exceed msgMaxWidth.
-		process: function()
-		{
+		process: function() {
 			// Break into individual words.
 			var words = this.msg.split(' ');
 
@@ -66,12 +65,11 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 
 				// Does the current line fit within the maxium width?
 				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) {
-					
+
 					// It fits, commit word to current line.
 					currentLine = tryStr;
-				}
-				else {
-					
+				} else {
+
 					// Record potential longest line.
 					this.recordLongestLine(currentLine);
 
@@ -85,36 +83,41 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 
 			// Add the final line.
 			if (currentLine != '') {
-				
+
 				// Record potential longest line.
 				this.recordLongestLine(currentLine);
 
 				// Add current line to the rest.
 				lines.push(currentLine);
-				
+
 			}
 
-			// converts array of msg parts into
-			// one string to be printed
-			this.toPrint = '';
+			// Combine lines back together into a single string.
 			for (var i = 0; i < lines.length; i++) {
+
+				// Set new line character if not the first line.
 				if (i != 0) this.toPrint += "\n";
+
+				// Add current line.
 				this.toPrint += lines[i];
-				// for calculating height of entire message
+
+				// Add to message height.
 				this.heightOfMessage += this.font.height;
 			}
-			this.heightOfMessage -= 3; // because impact auto adds a few px below even for one-liners
-			this.longestLine -= 1; // DO NOT CHANGE (removes extra px added by Impact)
+
+			// Shave the few pixels Impact adds below text.
+			this.heightOfMessage -= 3;
+
+			// Removes extra pixel added by Impact - DO NOT CHANGE!
+			this.longestLine -= 1;
 		},
 
-		recordLongestLine: function(line)
-		{
+		recordLongestLine: function(line) {
 			// Get width of current line.
 			var lineWidth = this.font.widthForString(line);
-			
+
 			// Check if this has been the longest line so far.
-			if (lineWidth > this.longestLine) 
-			{
+			if (lineWidth > this.longestLine) {
 				// Record new longest line.
 				this.longestLine = lineWidth;
 			}
@@ -127,6 +130,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			// Start count-down to this entity's death.
 			this.timer.set(this.lifespan);
 
+			// Prepare the message before it can be drawn.
 			this.process();
 		},
 
