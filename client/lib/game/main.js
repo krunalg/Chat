@@ -127,7 +127,7 @@ MyGame = ig.Game.extend({
 		
 		if(this.goTo==null)
 		{
-			console.debug("First time building player. Using database coordinates.");
+			console.debug("First time building player.");
 			// first time drawing player, use defaults
 			x = this.defaultXStart;
 			y = this.defaultYStart;
@@ -167,7 +167,6 @@ MyGame = ig.Game.extend({
 				 facing: direction,
 				 moveWaiting: true,
 				 moveWhen: 336.7 + new Date().getTime(),
-				 animation: 6,
 				 skin: this.lastSkin
 			} );
 		}
@@ -177,7 +176,6 @@ MyGame = ig.Game.extend({
 			{
 				 name: username,
 				 facing: direction,
-				 animation: 6,
 				 skin: this.lastSkin
 			} );
 		}
@@ -317,7 +315,8 @@ MyGame = ig.Game.extend({
 		this.loadLevel (this.defaultLevel);
 
 		// build player
-		this.buildPlayer();		
+		var player = this.buildPlayer();
+		updateBorder(player);
 		
 		// add tab index to canvas to ensure it
 		// retains focus (needed in Chrome!)
