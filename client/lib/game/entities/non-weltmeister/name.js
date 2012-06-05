@@ -19,11 +19,13 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 		follow: null,
 
 		// Used to temporarily stop drawing.
-		hideTimer: new ig.Timer(),
+		hideTimer: null,
 
 		// Initialize
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
+
+			this.hideTimer = new ig.Timer();
 		},
 
 		draw: function(reallyDraw) {
@@ -40,7 +42,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 					// Align to players position.
 					this.pos.x = player.pos.x;
 					this.pos.y = player.pos.y;
-					
+
 				} else {
 
 					// Write debug message.
