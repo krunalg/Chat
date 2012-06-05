@@ -50,12 +50,20 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			// Start count-down to this entity's death.
 			this.timer.set(this.lifespan);
 
-			// breaks up msg into an array of
-			// parts that don't exceed msgMaxWidth
+			// The following code breaks up our msg into an array of
+			// smaller messagew which do not violate msgMaxWidth.
+			
+			// Break into individual words.
 			var explode = this.msg.split(' ');
+			
+			// Create an array where we'll store our <=msgMaxWidth lines.
 			var lines = new Array();
+
+			// Initialize our first line.
 			var currStr = '';
 			var lineWidth = 0;
+
+			
 			for (var i = 0; i < explode.length; i++) {
 				if (i == 0) var space = '';
 				else var space = ' ';
