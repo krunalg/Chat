@@ -160,18 +160,6 @@ io.sockets.on('connection', function (socket)
         socket.broadcast.to(socket.roomname).emit('otherPlayerJump-'+socket.clientname, x, y, direction);
     });
     
-    socket.on('receiveDirection', function (client, direction) {
-        socket.broadcast.to(socket.roomname).emit('updateOtherPlayer-'+socket.clientname, direction);
-        for(var i=0; i<onlinePlayers.length; i++)
-        {
-            if(onlinePlayers[i].name==client)
-            {
-                onlinePlayers[i].facing = direction;
-                break; // client names are unique
-            }
-        }
-    });
-    
     socket.on('receiveSay', function (client, msg) {
         socket.broadcast.to(socket.roomname).emit('newMsg', client, msg);
 	console.log("[" + socket.roomname + "][" + socket.clientname + "] " + msg);

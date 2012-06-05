@@ -48,12 +48,6 @@ ig.module(
 			socket.emit('receiveUpdateMoveState', x, y, direction, state);
 		},
 
-		// sends player.facing value to server
-		emitDirection: function(client, direction) // FIX THIS: client not needed. perhaps merge method with emitUpdateMoveState
-		{
-			socket.emit('receiveDirection', client, direction);
-		},
-
 		// determines if player will continue moving or stop
 		goAgain: function() {
 			var keepMoving = true;
@@ -272,7 +266,9 @@ ig.module(
 			{
 				// if player changed faced direction
 				if (this.facing != this.facingLast) {
-					this.emitDirection(this.name, this.facing); // inform others players
+					
+					// Tell other players that we changed our faced direction.
+					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 					this.facingLast = this.facing; // so we don't inform them again
 					this.moveAnimStart(false); // step-animate the change
 					// check if we are on an exit that needs animating
