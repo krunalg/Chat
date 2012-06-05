@@ -10,16 +10,18 @@ ig.module(
 	'game.update-border',
 	'game.special-tiles',
 	
-	// levels
-	'game.levels.test',
-	//'game.levels.town',
-	//'game.levels.route101',
-	//'game.levels.lab',
-	//'game.levels.birchdownstairs',
-	//'game.levels.birchupstairs',
-	//'game.levels.homedownstairs',
-	//'game.levels.homeupstairs',
-	
+	// Levels
+	//'game.levels.test',
+	// /*
+	'game.levels.town',
+	'game.levels.route101',
+	'game.levels.lab',
+	'game.levels.birchdownstairs',
+	'game.levels.birchupstairs',
+	'game.levels.homedownstairs',
+	'game.levels.homeupstairs',
+	// */
+
 	// Entities
 	'game.entities.grass',
 	'game.entities.exit',
@@ -99,9 +101,9 @@ MyGame = ig.Game.extend({
 	    }
 	},
 	
-	defaultLevel: LevelTest,
-	defaultXStart: 2048,
-	defaultYStart: 4640,
+	defaultLevel: LevelTown,
+	defaultXStart: 256,
+	defaultYStart: 256,
 	defaultFacing: 'down',
 	lastSkin: 'boy', // used when rebuilding the player
 	goTo: null, // used to know where to place player when zoning
