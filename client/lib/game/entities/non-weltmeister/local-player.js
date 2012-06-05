@@ -124,7 +124,8 @@ ig.module(
 						});
 						npcs[i].moveTimer.set(bubbleDuration + 1);
 
-						ig.game.hideName(npcs[i].name, bubbleDuration);
+						var nameEntity = ig.game.getEntityByName(npcs[i].name+"NameEntity");
+ 						if(nameEntity!=undefined) nameEntity.hideTimer.set(bubbleDuration);
 
 						break;
 					}

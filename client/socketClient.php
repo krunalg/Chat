@@ -8,8 +8,8 @@ socket.on('newMsg', function (from, msg) {
 	 var showMessageHowLong = 2; // how long to hide name and show message
 	 
 	 // hide name briefly
-	 var target = ig.game.getEntityByName(from);
-	 if(target!=undefined) ig.game.hideName(target.name, showMessageHowLong);
+ 	var nameEntity = ig.game.getEntityByName(from+"NameEntity");
+ 	if(nameEntity!=undefined) nameEntity.hideTimer.set(showMessageHowLong);
 	 
 	 ig.game.spawnEntity( EntityBubble, 0, 0,
 	 {
