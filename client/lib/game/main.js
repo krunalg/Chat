@@ -276,7 +276,13 @@ MyGame = ig.Game.extend({
 		
 		
 	
-	
+	//		  _____ _   _ _____ _______ 
+	//		 |_   _| \ | |_   _|__   __|
+	//		   | | |  \| | | |    | |   
+	//		   | | | . ` | | |    | |   
+	//		  _| |_| |\  |_| |_   | |   
+	//		 |_____|_| \_|_____|  |_| 
+	//		 
 	init: function() {
 		
 		// create a new DebugDisplay, pass in your font
@@ -333,7 +339,14 @@ MyGame = ig.Game.extend({
 			}
 		});
 	},
-	
+
+	//	  _    _ _____  _____       _______ ______ 
+	//	 | |  | |  __ \|  __ \   /\|__   __|  ____|
+	//	 | |  | | |__) | |  | | /  \  | |  | |__   
+	//	 | |  | |  ___/| |  | |/ /\ \ | |  |  __|  
+	//	 | |__| | |    | |__| / ____ \| |  | |____ 
+	//	  \____/|_|    |_____/_/    \_\_|  |______|
+	//	                                           	
 	update: function() {
 		// Update all entities and backgroundMaps
 		this.parent();
@@ -415,7 +428,14 @@ MyGame = ig.Game.extend({
 				this.events.splice(0, 1);
 		}
 	},
-	
+
+	//	  _____  _____       __          __
+	//	 |  __ \|  __ \     /\ \        / /
+	//	 | |  | | |__) |   /  \ \  /\  / / 
+	//	 | |  | |  _  /   / /\ \ \/  \/ /  
+	//	 | |__| | | \ \  / ____ \  /\  /   
+	//	 |_____/|_|  \_\/_/    \_\/  \/    
+	//	                                   
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
