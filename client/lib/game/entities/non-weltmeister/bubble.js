@@ -1,7 +1,7 @@
 ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'impact.font').defines(function() {
 
 	EntityBubble = ig.Entity.extend({
-		
+
 		size: {
 			x: 16,
 			y: 16
@@ -52,10 +52,9 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 
 			// The following code breaks up our msg into an array of
 			// smaller messagew which do not violate msgMaxWidth.
-			
 			// Break into individual words.
 			var words = this.msg.split(' ');
-			
+
 			// Create an array where we'll store our <=msgMaxWidth lines.
 			var lines = new Array();
 
@@ -65,29 +64,26 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 
 			// 
 			for (var i = 0; i < words.length; i++) {
-				
+
 				// Only add a space if it's not the first word.
-				var space = (i==0) ? '':' ';
+				var space = (i == 0) ? '' : ' ';
 
 				// Add a word to the current line.
 				var tryStr = currentLine + space + words[i];
 
 				// Check if current line fits within maximum.
-				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) 
-				{
+				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) {
 					// It does, so make this our new current line.
 					currentLine = tryStr;
 				}
-				
+
 				// We exceeded the max width, so make a new line.
-				else
-				{
+				else {
 					// Measure width of current line.
 					lineWidth = this.font.widthForString(currentLine);
-					
+
 					// Check if this has been the longest line so far.
-					if (lineWidth > this.longestLine) 
-					{
+					if (lineWidth > this.longestLine) {
 						// Update the longest line.
 						this.longestLine = lineWidth;
 					}
