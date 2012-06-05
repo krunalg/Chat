@@ -150,6 +150,7 @@ ig.module('game.entities.non-weltmeister.jump')
 			// Kill the entity on the last frame.
 			if (this.currentAnim.frame == this.currentAnim.sequence.length - 1) this.kill();
 
+			// Call parent.
 			this.parent();
 		}
 	});
