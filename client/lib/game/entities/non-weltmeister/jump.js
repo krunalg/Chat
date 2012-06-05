@@ -61,45 +61,74 @@ ig.module('game.entities.non-weltmeister.jump')
 		},
 
 		update: function() {
+			
+			// Try to stop moving.
 			if (!this.arrived) {
+				
 				switch (this.direction) {
 				case 'left':
 					if (this.pos.x <= this.destinationX) {
+						
+						// Stop moving.
 						this.vel.x = 0;
+
+						// Align to grid.
 						this.pos.x = this.destinationX;
+
+						// No need to stop again.
 						this.arrived = true;
 					}
 					break;
 				case 'right':
 					if (this.pos.x >= this.destinationX) {
+						
+						// Stop moving.
 						this.vel.x = 0;
+
+						// Align to grid.
 						this.pos.x = this.destinationX;
+
+						// No need to stop again.
 						this.arrived = true;
 					}
 					break;
 				case 'up':
 					if (this.pos.y <= this.destinationY) {
+						
+						// Stop moving.
 						this.vel.y = 0;
+
+						// Align to grid.
 						this.pos.y = this.destinationY;
+
+						// No need to stop again.
 						this.arrived = true;
 					}
 					break;
 				case 'down':
 					if (this.pos.y >= this.destinationY) {
+						
+						// Stop moving.
 						this.vel.y = 0;
+
+						// Align to grid.
 						this.pos.y = this.destinationY;
+
+						// No need to stop again.
 						this.arrived = true;
 					}
 					break;
 				}
 			}
 
-			// bring only first frame of dust above player
+			// Show the first frame of dust as being above the player.
 			if (this.currentAnim.frame == 4) this.zIndex = this.pos.y + 3;
+
+			// Then place the rest of the animation under the player.
 			if (this.currentAnim.frame == 5) this.zIndex = this.pos.y + 0;
 
-			// kill entity at last frame
-			if (this.currentAnim.frame == 7) this.kill();
+			// Kill the entity on the last frame.
+			if (this.currentAnim.frame == this.currentAnim.sequence.length - 1) this.kill();
 
 			this.parent();
 		}
