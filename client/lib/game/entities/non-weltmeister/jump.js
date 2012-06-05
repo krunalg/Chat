@@ -78,65 +78,41 @@ ig.module('game.entities.non-weltmeister.jump')
 			}
 		},
 
+		// Stop the entity and align to grid.
+		stopMoving: function(axis)
+		{
+			// Stop moving.
+			this.vel[axis] = 0;
+
+			// Align to grid.
+			this.pos[axis] = this['destination' + axis.toUpperCase()];
+
+			// No need to stop again.
+			this.arrived = true;
+		},
+
 		update: function() {
 
-			// Try to stop moving.
+			
 			if (!this.arrived) {
 
+				// Stop moving if reached destination.
 				switch (this.direction) {
 				case 'left':
-					if (this.pos.x <= this.destinationX) {
-
-						// Stop moving.
-						this.vel.x = 0;
-
-						// Align to grid.
-						this.pos.x = this.destinationX;
-
-						// No need to stop again.
-						this.arrived = true;
-					}
+					if (this.pos.x <= this.destinationX) this.stopMoving('x');
 					break;
+
 				case 'right':
-					if (this.pos.x >= this.destinationX) {
-
-						// Stop moving.
-						this.vel.x = 0;
-
-						// Align to grid.
-						this.pos.x = this.destinationX;
-
-						// No need to stop again.
-						this.arrived = true;
-					}
+					if (this.pos.x >= this.destinationX) this.stopMoving('x');
 					break;
+
 				case 'up':
-					if (this.pos.y <= this.destinationY) {
-
-						// Stop moving.
-						this.vel.y = 0;
-
-						// Align to grid.
-						this.pos.y = this.destinationY;
-
-						// No need to stop again.
-						this.arrived = true;
-					}
+					if (this.pos.y <= this.destinationY) this.stopMoving('y');
 					break;
+
 				case 'down':
-					if (this.pos.y >= this.destinationY) {
-
-						// Stop moving.
-						this.vel.y = 0;
-
-						// Align to grid.
-						this.pos.y = this.destinationY;
-
-						// No need to stop again.
-						this.arrived = true;
-					}
+					if (this.pos.y >= this.destinationY) this.stopMoving('y');
 					break;
-				}
 			}
 
 			// Show the first frame of dust as being above the player.
