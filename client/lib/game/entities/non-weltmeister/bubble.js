@@ -1,4 +1,8 @@
-ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'impact.font').defines(function() {
+ig.module('game.entities.non-weltmeister.bubble')
+
+.requires('impact.entity', 'impact.font')
+
+.defines(function() {
 
 	EntityBubble = ig.Entity.extend({
 
