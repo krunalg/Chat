@@ -45,6 +45,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 
 		// Breaks up msg into an array of small messages which don't exceed msgMaxWidth.
 		process: function() {
+
 			// Break into individual words.
 			var words = this.msg.split(' ');
 
@@ -112,7 +113,9 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			this.longestLine -= 1;
 		},
 
+		// Compares line width to longest recorded width and keeps highest value.
 		recordLongestLine: function(line) {
+
 			// Get width of current line.
 			var lineWidth = this.font.widthForString(line);
 
@@ -135,23 +138,23 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 		},
 
 		draw: function(reallyDraw) {
-			
+
 			// Only draw when the 'reallyDraw' param is true, 
 			// so it ignores the "normal" draw call
 			if (reallyDraw) {
-				
+
 				// Try to find reference entity.
 				var target = ig.game.getEntityByName(this.from);
 
 				// Check if we found entity.
 				if (target != undefined) {
-					
+
 					// Use target entity's position.
 					this.pos.x = target.pos.x;
 					this.pos.y = target.pos.y;
 				}
 
-				// Position bubble not hide source.
+				// Position bubble not to hide target/source.
 				var x = this.pos.x - ig.game.screen.x + this.size.x / 2;
 				var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
 
@@ -162,7 +165,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 				var cornerWidth = this.topLeft.width;
 				var cornerHeight = this.topLeft.height;
 
-				// draw rectangles
+				// Fill in rectangles.
 				this.fill.draw(
 				x - this.longestLine / 2 - padding - cornerWidth, y - padding, 0, 0, this.longestLine + padding * 2 + cornerWidth * 2, this.heightOfMessage + padding * 2);
 				this.fill.draw(
@@ -170,7 +173,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 				this.fill.draw(
 				x - this.longestLine / 2 - padding, y + this.heightOfMessage + padding, 0, 0, this.longestLine + padding * 2, this.topLeft.height);
 
-				// draw corners
+				// Draw corners.
 				this.topLeft.draw(
 				x - this.longestLine / 2 - padding - cornerWidth, y - padding - cornerHeight);
 				this.topRight.draw(
@@ -182,10 +185,11 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 				this.pointer.draw(
 				x - this.pointer.width / 2, y + this.heightOfMessage + padding + cornerHeight);
 
-				// draw message
+				// Draw message.
 				this.font.draw(
 				this.toPrint, x, y, ig.Font.ALIGN.CENTER);
 
+				// Call parent.
 				this.parent();
 			}
 		},
@@ -193,9 +197,9 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 		update: function() {
 			this.parent();
 
+			// Kill this entity after it's lifespan.
 			if (this.timer.delta() >= 0) this.kill();
 		}
 
 	});
-
 });
