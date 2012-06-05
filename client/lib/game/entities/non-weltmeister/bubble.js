@@ -1,12 +1,11 @@
 ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'impact.font').defines(function() {
 
 	EntityBubble = ig.Entity.extend({
+		
 		size: {
 			x: 16,
 			y: 16
 		},
-
-		animSheet: new ig.AnimationSheet('media/rs.jump.png', 16, 8),
 
 		// Load image resources.
 		topLeft: new ig.Image('media/chat-bubble-tleft.png'),
@@ -17,37 +16,38 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 		fill: new ig.Image('media/chat-bubble-fill.png'),
 		font: new ig.Font('media/font.white.with.shadow.png'),
 
-		// some vars
+		// Raw, unprocessed message.
 		msg: '',
 
-		// name of entity to follow
+		// Name of the entity to follow.
 		from: '',
 
-		// will be created later
+		// Processed version of msg.
 		toPrint: '',
 
-		// in px
+		// Maximum width in pixels for text.
 		msgMaxWidth: 100,
 
-		// used to kill old bubbles
-		timer: null,
+		// Used to kill() old bubbles.
+		timer: new ig.Timer(),
 
-		// time in seconds before death 
+		// Time in seconds before entity is killed.
 		lifespan: 3,
 
-		// calculations (in px) // found later
+		// This value is calculated later.
 		heightOfMessage: 0,
-		
-		spaceBetweenLines: 2,
 
-		// found later
+		// This value is calculated later.
 		longestLine: 0,
 
+		// How much space does Impact put between lines?
+		spaceBetweenLines: 2,
+
+		// Initialize
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// start timer to destroy bubble
-			this.timer = new ig.Timer();
+			// Start count-down to this entity's death.
 			this.timer.set(this.lifespan);
 
 			// breaks up msg into an array of
