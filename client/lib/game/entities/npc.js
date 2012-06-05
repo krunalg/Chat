@@ -12,8 +12,6 @@ ig.module (
     EntityNpc = EntityPlayer.extend({
 	zPriority: 2,
 	
-	isNPC: true,
-	
 	// NPC movement patterns
 	movePattern: [], // no pattern by default
 	moveNext: 0,
