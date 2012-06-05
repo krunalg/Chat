@@ -63,10 +63,9 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			var currStr = '';
 			var lineWidth = 0;
 
-			
+
 			for (var i = 0; i < explode.length; i++) {
-				if (i == 0) var space = '';
-				else var space = ' ';
+				var space = (i==0) ? '':' ';
 				var tryStr = currStr + space + explode[i];
 				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) currStr = tryStr;
 				else // start new line
