@@ -42,7 +42,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 					this.pos.y = player.pos.y;
 
 					// Set name so this entity can be found.
-					this.name = player.name + "-NameEntity";
+					this.name = player.name + "NameEntity";
 
 				} else {
 
