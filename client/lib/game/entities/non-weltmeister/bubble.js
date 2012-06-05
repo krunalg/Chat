@@ -43,15 +43,9 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 		// How much space does Impact put between lines?
 		spaceBetweenLines: 2,
 
-		// Initialize
-		init: function(x, y, settings) {
-			this.parent(x, y, settings);
-
-			// Start count-down to this entity's death.
-			this.timer.set(this.lifespan);
-
-			// The following code breaks up our msg into an array of
-			// smaller messagew which do not violate msgMaxWidth.
+		// Breaks up msg into an array of small messages which don't exceed msgMaxWidth.
+		process: function()
+		{
 			// Break into individual words.
 			var words = this.msg.split(' ');
 
@@ -62,7 +56,7 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			var currentLine = '';
 			var lineWidth = 0;
 
-			// 
+			// Try adding words to the current line.
 			for (var i = 0; i < words.length; i++) {
 
 				// Only add a space if it's not the first word.
@@ -71,30 +65,32 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 				// Add a word to the current line.
 				var tryStr = currentLine + space + words[i];
 
-				// Check if current line fits within maximum.
+				// Does the current line fit within the maxium width?
 				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) {
-					// It does, so make this our new current line.
+					
+					// It fits, commit word to current line.
 					currentLine = tryStr;
 				}
-
-				// We exceeded the max width, so make a new line.
 				else {
-					// Measure width of current line.
+					
+					// Get width of current line.
 					lineWidth = this.font.widthForString(currentLine);
 
 					// Check if this has been the longest line so far.
 					if (lineWidth > this.longestLine) {
-						// Update the longest line.
+						
+						// Record new longest line.
 						this.longestLine = lineWidth;
 					}
 
 					// Add current line to the rest.
 					lines.push(currentLine);
 
-					// Start a new current line with one word in it.
+					// Start a new line off with one word.
 					currentLine = words[i];
 				}
 			}
+
 			// finish array
 			if (currentLine != '') {
 				lines.push(currentLine);
@@ -113,6 +109,16 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			}
 			this.heightOfMessage -= 3; // because impact auto adds a few px below even for one-liners
 			this.longestLine -= 1; // DO NOT CHANGE (removes extra px added by Impact)
+		},
+
+		// Initialize
+		init: function(x, y, settings) {
+			this.parent(x, y, settings);
+
+			// Start count-down to this entity's death.
+			this.timer.set(this.lifespan);
+
+			this.process();
 		},
 
 		draw: function(reallyDraw) {
