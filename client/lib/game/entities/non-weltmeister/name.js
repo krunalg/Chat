@@ -67,6 +67,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 
 				default:
 
+					// Throw an error if no color was specified when spawned.
 					throw "Error: EntityName was not supplied valid color.";
 					break;
 
