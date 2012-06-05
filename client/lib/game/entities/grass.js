@@ -11,15 +11,18 @@ ig.module('game.entities.grass').requires('impact.entity').defines(function() {
 		killTimer: new ig.Timer(),
 		markedForDeath: false,
 
+		// Start count-down until this entity will be killed.
 		markForDeath: function() {
 			this.killTimer.set(3);
 			this.markedForDeath = true;
 		},
 
+		// Save this entity from being killed.
 		revive: function() {
 			this.markedForDeath = false;
 		},
 
+		// Initiate
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
@@ -29,13 +32,25 @@ ig.module('game.entities.grass').requires('impact.entity').defines(function() {
 		},
 
 		play: function() {
+			// Reset animation to first frame.
+			this.anims.rustle.rewind();
+
+			// Set animation.
 			this.currentAnim = this.anims.rustle;
-			this.currentAnim.rewind();
 		},
 
+		// Override all update function.
 		update: function() {
+			
+			// Update animations.
 			if (this.currentAnim != null) this.currentAnim.update();
-			if (this.markedForDeath && this.killTimer.delta() >= 0) this.kill();
+			
+			// Check if entity is no longer needed.
+			if (this.markedForDeath && this.killTimer.delta() >= 0) 
+			{
+				// Free up resources.
+				this.kill();
+			}
 		}
 
 	});
