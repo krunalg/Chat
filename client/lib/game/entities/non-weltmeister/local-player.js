@@ -4,7 +4,9 @@ ig.module(
 
 .requires(
 
-'game.entities.non-weltmeister.player').defines(function() {
+'game.entities.non-weltmeister.player')
+
+.defines(function() {
 
 	EntityLocalPlayer = EntityPlayer.extend({
 
@@ -25,7 +27,6 @@ ig.module(
 
 		// contains exit entity to use after moveWhen
 		moveDoor: false,
-
 
 		// helps decide whether to move or just change direction
 		moveCommitPending: false,
