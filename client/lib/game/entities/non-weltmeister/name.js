@@ -73,7 +73,6 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 					break;
 
 				}
-				//this.parent();
 			}
 		}
 
