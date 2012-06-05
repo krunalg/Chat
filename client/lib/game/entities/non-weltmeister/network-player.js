@@ -98,7 +98,7 @@ ig.module(
 
 				this.isMove = true;
 				this.setMoveDestination();
-				this.moveAnimStart();
+				this.moveAnimStart(true);
 			}
 		},
 
