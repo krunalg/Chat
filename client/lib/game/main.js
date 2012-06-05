@@ -1,44 +1,70 @@
 ig.module( 
 	'game.main' 
 )
+
 .requires(
+
 	'impact.game',
+
 	'impact.font',
 
 	'game.background-animations',
+
 	'game.position-dependent-animation',
+
 	'game.update-border',
+
 	'game.special-tiles',
 	
 	// Levels
 	'game.levels.test',
+
 	// /*
 	'game.levels.town',
+
 	'game.levels.route101',
+
 	'game.levels.lab',
+
 	'game.levels.birchdownstairs',
+
 	'game.levels.birchupstairs',
+
 	'game.levels.homedownstairs',
+
 	'game.levels.homeupstairs',
 	// */
 
 	// Entities
 	'game.entities.grass',
+
 	'game.entities.exit',
+
 	'game.entities.npc',
+
 	'game.entities.sign',
+
 	'game.entities.non-weltmeister.player',
+
 	'game.entities.non-weltmeister.local-player',
+
 	'game.entities.non-weltmeister.network-player',
+
 	'game.entities.non-weltmeister.bubble',
+
 	'game.entities.non-weltmeister.name',
+
 	'game.entities.non-weltmeister.jump',
+
 	'game.entities.non-weltmeister.surf',
 
 	//debug
 	'impact.debug.debug',
-	'plugins.debug_display' // require the debug display plugin
+
+	// require the debug display plugin
+	'plugins.debug_display' 
 )
+
 .defines(function(){
 
 MyGame = ig.Game.extend({
@@ -78,19 +104,38 @@ MyGame = ig.Game.extend({
 	},
 	
 	autoSort: true,
+	
 	whiteFont: new ig.Font( 'media/font.white.with.shadow.png' ),
-	events: new Array(), // contains game events such as player entering area
-	eventsMax: 4, // max events to display on screen
-	eventsTimer: null, // used for pruning old events
-	eventsLifespan: 2, // time in seconds before clearing event
+	
+	// contains game events such as player entering area
+	events: new Array(), 
+	
+	// max events to display on screen
+	eventsMax: 4, 
+	
+	// used for pruning old events
+	eventsTimer: null, 
+	
+	// time in seconds before clearing event
+	eventsLifespan: 2, 
 	
 	defaultLevel: LevelTown,
+	
 	defaultXStart: 256,
+	
 	defaultYStart: 256,
+	
 	defaultFacing: 'down',
-	lastSkin: 'boy', // used when rebuilding the player
-	goTo: null, // used to know where to place player when zoning
-	mapName: 'Town', // must capitalize first letter
+	
+	// used when rebuilding the player
+	lastSkin: 'boy', 
+	
+	// used to know where to place player when zoning
+	goTo: null, 
+	
+	// must capitalize first letter
+	mapName: 'Town', 
+	
 	//playerFirstBuild: true, // false after initial position is read from database
 	zone: function(map, goTo) // used to change maps
 	{
@@ -99,15 +144,20 @@ MyGame = ig.Game.extend({
 		this.leaveZone();
 		this.loadLevelDeferred( ig.global['Level'+map] );
 	},
+
 	leaveZone: function ()
 	{
 		socket.emit('playerLeaveZone');	
 	},
+
 	buildPlayer: function()
 	{
 		var x = 0
 		var y = 0
-		var direction = 'right'; // should never stay this way in-game
+		
+		// should never stay this way in-game
+		var direction = 'right'; 
+
 		var exitAnimation = false;
 		
 		if(this.goTo==null)
@@ -167,7 +217,9 @@ MyGame = ig.Game.extend({
 		
 	},
 	
-	// Chat system
+	   /*
+		* Chat system
+		*/
 		// html elements
 		inputFieldId: 'input', // id of HTML element
 		
