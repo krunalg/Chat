@@ -63,16 +63,39 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 			var currStr = '';
 			var lineWidth = 0;
 
-			//
+			// 
 			for (var i = 0; i < words.length; i++) {
+				
+				// Only add a space if it's not the first word.
 				var space = (i==0) ? '':' ';
+
+				// Add a word to the current line.
 				var tryStr = currStr + space + words[i];
-				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) currStr = tryStr;
-				else // start new line
+
+				// Check if current line fits within maximum.
+				if (this.font.widthForString(tryStr) <= this.msgMaxWidth) 
 				{
+					// It does, so make this our new current line.
+					currStr = tryStr;
+				}
+				
+				// We exceeded the max width, so make a new line.
+				else
+				{
+					// Measure width of current line.
 					lineWidth = this.font.widthForString(currStr);
-					if (lineWidth > this.longestLine) this.longestLine = lineWidth;
+					
+					// Check if this has been the longest line so far.
+					if (lineWidth > this.longestLine) 
+					{
+						// Update the longest line.
+						this.longestLine = lineWidth;
+					}
+
+					// Add current line to the rest.
 					lines.push(currStr);
+
+					// Start a new current line with one word in it.
 					currStr = words[i];
 				}
 			}
