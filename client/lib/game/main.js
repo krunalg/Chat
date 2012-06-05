@@ -350,10 +350,8 @@ MyGame = ig.Game.extend({
 		if( player ) {
 			this.screen.x = player.pos.x - ig.system.width/2 + player.size.x/2;
 			this.screen.y = player.pos.y - ig.system.height/2;
-			
-			// allow player to approach the edge of the map
-			// without exposing where no tiles exists
-			
+			/*
+			// Prevent player from seeing beyond the end of the world.
 			if(ig.system.width / this.collisionMap.tilesize <= this.collisionMap.width)
 			{
 				var howCloseLeft = 7; // how close player can go to left of map without seeing past
@@ -368,8 +366,7 @@ MyGame = ig.Game.extend({
 				if(player.pos.y >= this.collisionMap.height * this.collisionMap.tilesize - howCloseTop*this.collisionMap.tilesize )
 					this.screen.y = this.collisionMap.height * this.collisionMap.tilesize - ig.system.height;
 			}
-			
-			
+			*/
 		}
 		
 		// Check for player wanting to chat
