@@ -67,11 +67,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 
 				default:
 
-					console.debug("EntityName was not supplied valid color and will now kill() itself.");
-
-					// Free up resources.
-					this.kill();
-
+					throw "Error: EntityName was not supplied valid color.";
 					break;
 
 				}
