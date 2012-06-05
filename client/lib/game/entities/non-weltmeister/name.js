@@ -11,13 +11,13 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 			y: 16
 		},
 
-		// what color font to use
+		// What color of font to use.
 		color: null,
 
-		// name of entity to follow
+		// Name of the entity to follow.
 		follow: null,
 
-		// used to temporarily not draw
+		// Used to temporarily stop drawing.
 		hideTimer: new ig.Timer(),
 
 		init: function(x, y, settings) {
