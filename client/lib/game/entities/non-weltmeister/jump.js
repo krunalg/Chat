@@ -31,8 +31,6 @@ ig.module('game.entities.non-weltmeister.jump')
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			this.zIndex = 0,
-
 			// Define animation sequence.
 			this.addAnim('jump', (8 / 60), [0, 0, 0, 0, 1, 2, 3, 3], true);
 
