@@ -11,15 +11,20 @@ ig.module(
 
 		// NPC movement patterns
 		movePattern: [],
+
 		// no pattern by default
 		moveNext: 0,
+
 		moveTimer: null,
+
 		moveDelay: 2,
+
 		// delay in seconds between moves
 		faceNextMove: function() {
 			this.facing = this.movePattern[this.moveNext];
 			this.moveAnimStop();
 		},
+
 		justMoved: function() {
 			this.moveNext++;
 			if (this.moveNext >= this.movePattern.length) this.moveNext = 0; // cycle pattern
@@ -66,7 +71,6 @@ ig.module(
 		},
 
 		ready: function() {
-
 
 			// create a name entity to follow this one
 			ig.game.spawnEntity(
