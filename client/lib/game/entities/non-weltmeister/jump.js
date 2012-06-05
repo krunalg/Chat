@@ -113,6 +113,7 @@ ig.module('game.entities.non-weltmeister.jump')
 				case 'down':
 					if (this.pos.y >= this.destinationY) this.stopMoving('y');
 					break;
+				}
 			}
 
 			// Show the first frame of dust as being above the player.
@@ -127,6 +128,7 @@ ig.module('game.entities.non-weltmeister.jump')
 			// Call parent.
 			this.parent();
 		}
+
 	});
 
 });
