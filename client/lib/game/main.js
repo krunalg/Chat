@@ -11,7 +11,7 @@ ig.module(
 	'game.special-tiles',
 	
 	// Levels
-	//'game.levels.test',
+	'game.levels.test',
 	// /*
 	'game.levels.town',
 	'game.levels.route101',
@@ -101,7 +101,8 @@ MyGame = ig.Game.extend({
 	    }
 	},
 	
-	defaultLevel: LevelTown,
+	
+	defaultLevel: LevelTest,
 	defaultXStart: 256,
 	defaultYStart: 256,
 	defaultFacing: 'down',
