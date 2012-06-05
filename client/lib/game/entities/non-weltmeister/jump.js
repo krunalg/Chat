@@ -6,6 +6,7 @@ ig.module('game.entities.non-weltmeister.jump')
 
 	EntityJump = ig.Entity.extend({
 
+		// Should be the same as player walk speed.
 		speed: 69,
 
 		size: {
@@ -13,12 +14,13 @@ ig.module('game.entities.non-weltmeister.jump')
 			y: 16
 		},
 
-		animSheet: new ig.AnimationSheet('media/rs.jump.png', 16, 8),
-
 		offset: {
 			x: 0,
 			y: -8
 		},
+
+		// Load image resource.
+		animSheet: new ig.AnimationSheet('media/rs.jump.png', 16, 8),
 
 		direction: 'down',
 
