@@ -31,6 +31,9 @@ ig.module(
 		},
 
 		startMove: function() {
+			// determine speed
+			this.setMoveState('walk');
+
 			// Spawn new grass entity if needed.
 			var newGrass = this.trySpawningGrass();
 			if (newGrass) newGrass.play();
@@ -41,7 +44,7 @@ ig.module(
 
 			this.isMove = true;
 			this.setMoveDestination();
-			this.moveAnimStart();
+			this.moveAnimStart(true);
 		},
 
 		goAgain: function()
