@@ -135,17 +135,30 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 		},
 
 		draw: function(reallyDraw) {
+			
 			// Only draw when the 'reallyDraw' param is true, 
 			// so it ignores the "normal" draw call
 			if (reallyDraw) {
+				
+				// Try to find reference entity.
 				var target = ig.game.getEntityByName(this.from);
+
+				// Check if we found entity.
 				if (target != undefined) {
+					
+					// Use target entity's position.
 					this.pos.x = target.pos.x;
 					this.pos.y = target.pos.y;
 				}
+
+				// Position bubble not hide source.
 				var x = this.pos.x - ig.game.screen.x + this.size.x / 2;
 				var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
+
+				// Add some space around the text.
 				var padding = 2;
+
+				// Assume all corner images share the same dimensions.
 				var cornerWidth = this.topLeft.width;
 				var cornerHeight = this.topLeft.height;
 
