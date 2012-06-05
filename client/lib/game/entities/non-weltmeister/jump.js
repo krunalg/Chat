@@ -22,7 +22,8 @@ ig.module('game.entities.non-weltmeister.jump')
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.jump.png', 16, 8),
 
-		direction: 'down',
+		// Direction to move, supplied when spawned.
+		direction: null,
 
 		// will be true when no longer moving and aligned
 		arrived: false,
@@ -35,26 +36,26 @@ ig.module('game.entities.non-weltmeister.jump')
 			this.addAnim('jump', (8 / 60), [0, 0, 0, 0, 1, 2, 3, 3], true);
 			this.currentAnim = this.anims.jump;
 
-			this.dX = this.pos.x; // destination x
-			this.dY = this.pos.y; // and y
+			this.destinationX = this.pos.x; // destination x
+			this.destinationY = this.pos.y; // and y
 			var tilesize = ig.game.collisionMap.tilesize;
 
 			switch (this.direction) {
 			case 'left':
 				this.vel.x = -this.speed;
-				this.dX -= tilesize * 2;
+				this.destinationX -= tilesize * 2;
 				break;
 			case 'right':
 				this.vel.x = +this.speed;
-				this.dX += tilesize * 2;
+				this.destinationX += tilesize * 2;
 				break;
 			case 'up':
 				this.vel.y = -this.speed;
-				this.dY -= tilesize * 2;
+				this.destinationY -= tilesize * 2;
 				break;
 			case 'down':
 				this.vel.y = +this.speed;
-				this.dY += tilesize * 2;
+				this.destinationY += tilesize * 2;
 				break;
 			}
 		},
@@ -63,30 +64,30 @@ ig.module('game.entities.non-weltmeister.jump')
 			if (!this.arrived) {
 				switch (this.direction) {
 				case 'left':
-					if (this.pos.x <= this.dX) {
+					if (this.pos.x <= this.destinationX) {
 						this.vel.x = 0;
-						this.pos.x = this.dX;
+						this.pos.x = this.destinationX;
 						this.arrived = true;
 					}
 					break;
 				case 'right':
-					if (this.pos.x >= this.dX) {
+					if (this.pos.x >= this.destinationX) {
 						this.vel.x = 0;
-						this.pos.x = this.dX;
+						this.pos.x = this.destinationX;
 						this.arrived = true;
 					}
 					break;
 				case 'up':
-					if (this.pos.y <= this.dY) {
+					if (this.pos.y <= this.destinationY) {
 						this.vel.y = 0;
-						this.pos.y = this.dY;
+						this.pos.y = this.destinationY;
 						this.arrived = true;
 					}
 					break;
 				case 'down':
-					if (this.pos.y >= this.dY) {
+					if (this.pos.y >= this.destinationY) {
 						this.vel.y = 0;
-						this.pos.y = this.dY;
+						this.pos.y = this.destinationY;
 						this.arrived = true;
 					}
 					break;
