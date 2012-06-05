@@ -91,11 +91,21 @@ ig.module('game.entities.non-weltmeister.bubble').requires('impact.entity', 'imp
 				}
 			}
 
-			// finish array
+			// Add the final line.
 			if (currentLine != '') {
+				
+				// Add current line to the rest.
 				lines.push(currentLine);
+				
+				// Get width of current line.
 				lineWidth = this.font.widthForString(currentLine);
-				if (lineWidth > this.longestLine) this.longestLine = lineWidth;
+				
+				// Check if this has been the longest line so far.
+				if (lineWidth > this.longestLine) 
+				{
+					// Record new longest line.
+					this.longestLine = lineWidth;
+				}
 			}
 
 			// converts array of msg parts into
