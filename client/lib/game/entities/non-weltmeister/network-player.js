@@ -7,38 +7,27 @@ ig.module(
 'game.entities.non-weltmeister.player').defines(function() {
 
 	EntityNetworkPlayer = EntityPlayer.extend({
+		
+		// Priority relative to other entities.
 		zPriority: 1,
-
-		size: {
-			x: 16,
-			y: 16
-		},
-		offset: {
-			x: 0,
-			y: 16
-		},
-
-		moveState: 'idle',
-		// idle, walk, run
-
-		animSheet: new ig.AnimationSheet('media/people/rs.boy.png', 16, 32),
-
-		// used for both x and y planes
-		skin: 'boy',
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
+			// Set the players skin.
 			this.reskin(this.skin);
 
-			// create a name entity to follow this one
+			// Spawn a NameEntity to follow this player.
 			ig.game.spawnEntity(
 			EntityName, this.pos.x, this.pos.y, {
 				follow: this.name,
 				color: 'blue'
 			});
 
-			var player = this; // reference to be used by socket events
+			// Reference to this entity needed by socket events.
+			var player = this;
+			
+			// Some player changed his movement state.
 			socket.on('moveUpdateOtherPlayer-' + this.name, function(x, y, direction, state) {
 				player.vel.x = 0;
 				player.vel.y = 0;
@@ -49,10 +38,12 @@ ig.module(
 				player.netStartMove();
 			});
 
+			// Some player faced a new direction.
 			socket.on('updateOtherPlayer-' + this.name, function(direction) {
 				player.facing = direction;
 			});
 
+			// A player jumped a ledge.
 			socket.on('otherPlayerJump-' + this.name, function(x, y, direction) {
 				player.vel.x = 0;
 				player.vel.y = 0;
@@ -63,11 +54,13 @@ ig.module(
 				player.netStartJump();
 			});
 
+			// A player set his skin.
 			socket.on('reskinOtherPlayer-' + this.name, function(skin) {
 				player.skin = skin;
 				player.reskin();
 			});
 
+			// A player disconnected or left the area.
 			socket.on('dropPlayer-' + this.name, function() {
 				ig.game.events.push(player.name + " left the area.");
 				player.kill();
