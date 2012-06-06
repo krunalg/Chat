@@ -465,11 +465,17 @@ ig.module(
 				break;
 
 			}
+
+			// Position image to world.
 			this.offset = {
 				x: 8,
 				y: 16
 			};
+
+			// Set the default skin.
 			if (!allowedSkin) this.skin = 'boy';
+			
+			// Load skin image resource.
 			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 32, 32);
 
 			// Add movement animations.
@@ -502,7 +508,7 @@ ig.module(
 			this.addAnim('idleLeft', 0.1, [1], true);
 			this.addAnim('idleRight', 0.1, [1], true);
 
-			// Right animations are just left animations, but flipped over x-axis.
+			// Right-side animations are simply a mirror of the left.
 			this.anims.walkRightA.flip.x = true;
 			this.anims.walkRightB.flip.x = true;
 			this.anims.runRightA.flip.x = true;
@@ -510,7 +516,8 @@ ig.module(
 			this.anims.slowRight.flip.x = true;
 			this.anims.swimRight.flip.x = true;
 			this.anims.idleRight.flip.x = true;
-			// set initial animation
+
+			// Set current animation.
 			this.moveAnimStop();
 		},
 
