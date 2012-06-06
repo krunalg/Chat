@@ -129,9 +129,6 @@ ig.module(
 			this.parent();
 		}
 
-
-		//                                                                                                                                                                                                                                                       
-		//                                                                                                                                                                                                                                                       
 		//                                                tttt          MMMMMMMM               MMMMMMMM                                                           SSSSSSSSSSSSSSS      tttt                                    tttt                              
 		//                                             ttt:::t          M:::::::M             M:::::::M                                                         SS:::::::::::::::S  ttt:::t                                 ttt:::t                              
 		//                                             t:::::t          M::::::::M           M::::::::M                                                        S:::::SSSSSS::::::S  t:::::t                                 t:::::t                              
@@ -157,8 +154,6 @@ ig.module(
 			} else throw "No speed value set for for state: " + state;
 		},
 
-		//                                                                                                                                                                                              
-		//                                                                                                                                                                                              
 		//                                                                                                                    SSSSSSSSSSSSSSS                                         ffffffffffffffff  
 		//                                                                                                                  SS:::::::::::::::S                                       f::::::::::::::::f 
 		//                                                                                                                 S:::::SSSSSS::::::S                                      f::::::::::::::::::f
@@ -210,8 +205,6 @@ ig.module(
 			});
 		},
 
-		//                                                                                                                                                                                                                                                                                                                         
-		//                                                                                                                                                                                                                                                                                                                         
 		//           tttt                                                      SSSSSSSSSSSSSSS                                                                                                iiii                                               GGGGGGGGGGGGG                                                                     
 		//        ttt:::t                                                    SS:::::::::::::::S                                                                                              i::::i                                           GGG::::::::::::G                                                                     
 		//        t:::::t                                                   S:::::SSSSSS::::::S                                                                                               iiii                                          GG:::::::::::::::G                                                                     
@@ -297,12 +290,6 @@ ig.module(
 		//  i::::::i n::::n    n::::n     GGG::::::GGG:::G r:::::r           a::::::::::aa:::as:::::::::::ss   s:::::::::::ss  
 		//  iiiiiiii nnnnnn    nnnnnn        GGGGGG   GGGG rrrrrrr            aaaaaaaaaa  aaaa sssssssssss      sssssssssss    
 		//                                                                                                                     
-		//                                                                                                                     
-		//                                                                                                                     
-		//                                                                                                                     
-		//                                                                                                                     
-		//                                                                                                                     
-		//                                                                                                                     
 		inGrass: function()
 		// returns a grass entity if player is in one
 		// otherwise returns false
@@ -319,7 +306,6 @@ ig.module(
 			return false;
 		},
 
-		//                                                                                                                                                                                                                                                     
 		//                                                                                                                                                                                     dddddddd                                                        
 		//                                                                                                                    SSSSSSSSSSSSSSS hhhhhhh                                          d::::::d                                                        
 		//                                                                                                                  SS:::::::::::::::Sh:::::h                                          d::::::d                                                        
@@ -350,8 +336,6 @@ ig.module(
 			});
 		},
 
-		//                                                                                                                                                 
-		//                                                                                                                                                 
 		//                                                         MMMMMMMM               MMMMMMMM                                                         
 		//                                                         M:::::::M             M:::::::M                                                         
 		//                                                         M::::::::M           M::::::::M                                                         
@@ -368,12 +352,6 @@ ig.module(
 		//   c:::::::::::::::::ca:::::aaaa::::::a  n::::n    n::::nM::::::M               M::::::Mo:::::::::::::::o       v:::::v       e::::::::eeeeeeee  
 		//    cc:::::::::::::::c a::::::::::aa:::a n::::n    n::::nM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::e  
 		//      cccccccccccccccc  aaaaaaaaaa  aaaa nnnnnn    nnnnnnMMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeee  
-		//                                                                                                                                                 
-		//                                                                                                                                                 
-		//                                                                                                                                                 
-		//                                                                                                                                                 
-		//                                                                                                                                                 
-		//                                                                                                                                                 
 		//                                                                                                                                                 
 		canMove: function()
 		// returns true if no collision will occur
@@ -418,8 +396,6 @@ ig.module(
 			return true; // no collisions
 		},
 
-		//                                                                                                                                                                                                                               
-		//                                                                                                                                                                                                                               
 		//      ffffffffffffffff                                       iiii                                      WWWWWWWW                           WWWWWWWW                       tttt                                                  
 		//     f::::::::::::::::f                                     i::::i                                     W::::::W                           W::::::W                    ttt:::t                                                  
 		//    f::::::::::::::::::f                                     iiii                                      W::::::W                           W::::::W                    t:::::t                                                  
@@ -468,8 +444,6 @@ ig.module(
 			return false;
 		},
 
-		//                                                                                                                                          
-		//                                                                                                                                          
 		//                                                                   JJJJJJJJJJJ                                                            
 		//                                                                   J:::::::::J                                                            
 		//                                                                   J:::::::::J                                                            
@@ -526,8 +500,6 @@ ig.module(
 			return false; // no collisions
 		},
 
-		//                                                                                                                                                                                     
-		//                                                                                                                                                                                     
 		//      ffffffffffffffff    iiii                     iiii                  hhhhhhh             MMMMMMMM               MMMMMMMM                                                         
 		//     f::::::::::::::::f  i::::i                   i::::i                 h:::::h             M:::::::M             M:::::::M                                                         
 		//    f::::::::::::::::::f  iiii                     iiii                  h:::::h             M::::::::M           M::::::::M                                                         
@@ -544,12 +516,6 @@ ig.module(
 		//   f:::::::f            i::::::i n::::n    n::::ni::::::is::::::::::::::s h:::::h     h:::::hM::::::M               M::::::Mo:::::::::::::::o       v:::::v       e::::::::eeeeeeee  
 		//   f:::::::f            i::::::i n::::n    n::::ni::::::i s:::::::::::ss  h:::::h     h:::::hM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::e  
 		//   fffffffff            iiiiiiii nnnnnn    nnnnnniiiiiiii  sssssssssss    hhhhhhh     hhhhhhhMMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeee  
-		//                                                                                                                                                                                     
-		//                                                                                                                                                                                     
-		//                                                                                                                                                                                     
-		//                                                                                                                                                                                     
-		//                                                                                                                                                                                     
-		//                                                                                                                                                                                     
 		//                                                                                                                                                                                     
 		finishMove: function() {
 			if (this.isJump) {
@@ -579,7 +545,6 @@ ig.module(
 			} else this.move(); // continue to destination
 		},
 
-		//                                                                                                                                                                               
 		//                                                                                                                                                                       dddddddd
 		//                    lllllll   iiii                                    TTTTTTTTTTTTTTTTTTTTTTT                      GGGGGGGGGGGGG                     iiii              d::::::d
 		//                    l:::::l  i::::i                                   T:::::::::::::::::::::T                   GGG::::::::::::G                    i::::i             d::::::d
@@ -617,8 +582,6 @@ ig.module(
 			}
 		},
 
-		//                                                                                                                                                                                                                                                                                                                                                 
-		//                                                                                                                                                                                                                                                                                                                                                 
 		//                                                tttt          MMMMMMMM               MMMMMMMM                                                       DDDDDDDDDDDDD                                                      tttt            iiii                                             tttt            iiii                                     
 		//                                             ttt:::t          M:::::::M             M:::::::M                                                       D::::::::::::DDD                                                ttt:::t           i::::i                                         ttt:::t           i::::i                                    
 		//                                             t:::::t          M::::::::M           M::::::::M                                                       D:::::::::::::::DD                                              t:::::t            iiii                                          t:::::t            iiii                                     
@@ -635,12 +598,6 @@ ig.module(
 		//  s::::::::::::::s  e::::::::eeeeeeee        tt::::::::::::::tM::::::M               M::::::Mo:::::::::::::::o       v:::::v       e::::::::eeeeeeeeD:::::::::::::::DD    e::::::::eeeeeeee  s::::::::::::::s       tt::::::::::::::ti::::::i n::::n    n::::na:::::aaaa::::::a      tt::::::::::::::ti::::::io:::::::::::::::o  n::::n    n::::n
 		//   s:::::::::::ss    ee:::::::::::::e          tt:::::::::::ttM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::eD::::::::::::DDD       ee:::::::::::::e   s:::::::::::ss          tt:::::::::::tti::::::i n::::n    n::::n a::::::::::aa:::a       tt:::::::::::tti::::::i oo:::::::::::oo   n::::n    n::::n
 		//    sssssssssss        eeeeeeeeeeeeee            ttttttttttt  MMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeeeDDDDDDDDDDDDD            eeeeeeeeeeeeee    sssssssssss              ttttttttttt  iiiiiiii nnnnnn    nnnnnn  aaaaaaaaaa  aaaa         ttttttttttt  iiiiiiii   ooooooooooo     nnnnnn    nnnnnn
-		//                                                                                                                                                                                                                                                                                                                                                 
-		//                                                                                                                                                                                                                                                                                                                                                 
-		//                                                                                                                                                                                                                                                                                                                                                 
-		//                                                                                                                                                                                                                                                                                                                                                 
-		//                                                                                                                                                                                                                                                                                                                                                 
-		//                                                                                                                                                                                                                                                                                                                                                 
 		//                                                                                                                                                                                                                                                                                                                                                 
 		setMoveDestination: function() {
 			var tilesize = ig.game.collisionMap.tilesize;
@@ -694,7 +651,6 @@ ig.module(
 			}
 		},
 
-		//                                                                                                                                                                                                                                                                                                                                    
 		//              dddddddd                                                                                                                                                                                                                                                                                                      dddddddd
 		//              d::::::d                                              tttt            iiii                                             tttt            iiii                                     RRRRRRRRRRRRRRRRR                                                         hhhhhhh                                             d::::::d
 		//              d::::::d                                           ttt:::t           i::::i                                         ttt:::t           i::::i                                    R::::::::::::::::R                                                        h:::::h                                             d::::::d
@@ -712,12 +668,6 @@ ig.module(
 		//   d:::::::::::::::::d e::::::::eeeeeeee  s::::::::::::::s       tt::::::::::::::ti::::::i n::::n    n::::na:::::aaaa::::::a      tt::::::::::::::ti::::::io:::::::::::::::o  n::::n    n::::nR::::::R     R:::::R e::::::::eeeeeeeea:::::aaaa::::::a c:::::::::::::::::ch:::::h     h:::::h e::::::::eeeeeeee   d:::::::::::::::::d
 		//    d:::::::::ddd::::d  ee:::::::::::::e   s:::::::::::ss          tt:::::::::::tti::::::i n::::n    n::::n a::::::::::aa:::a       tt:::::::::::tti::::::i oo:::::::::::oo   n::::n    n::::nR::::::R     R:::::R  ee:::::::::::::e a::::::::::aa:::a cc:::::::::::::::ch:::::h     h:::::h  ee:::::::::::::e    d:::::::::ddd::::d
 		//     ddddddddd   ddddd    eeeeeeeeeeeeee    sssssssssss              ttttttttttt  iiiiiiii nnnnnn    nnnnnn  aaaaaaaaaa  aaaa         ttttttttttt  iiiiiiii   ooooooooooo     nnnnnn    nnnnnnRRRRRRRR     RRRRRRR    eeeeeeeeeeeeee  aaaaaaaaaa  aaaa   cccccccccccccccchhhhhhh     hhhhhhh    eeeeeeeeeeeeee     ddddddddd   ddddd
-		//                                                                                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                                                                                    
 		//                                                                                                                                                                                                                                                                                                                                    
 		destinationReached: function()
 		// returns true if reached or past destination
@@ -740,8 +690,6 @@ ig.module(
 			return false;
 		},
 
-		//                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                    
 		//                                                                                                AAA                                 iiii                             SSSSSSSSSSSSSSS      tttt                                                        tttt          
 		//                                                                                               A:::A                               i::::i                          SS:::::::::::::::S  ttt:::t                                                     ttt:::t          
 		//                                                                                              A:::::A                               iiii                          S:::::SSSSSS::::::S  t:::::t                                                     t:::::t          
@@ -758,12 +706,6 @@ ig.module(
 		//  m::::m   m::::m   m::::mo:::::::::::::::o       v:::::v       e::::::::eeeeeeee  A:::::A               A:::::A  n::::n    n::::ni::::::im::::m   m::::m   m::::mS::::::SSSSSS:::::S  tt::::::::::::::ta:::::aaaa::::::a r:::::r                  tt::::::::::::::t
 		//  m::::m   m::::m   m::::m oo:::::::::::oo         v:::v         ee:::::::::::::e A:::::A                 A:::::A n::::n    n::::ni::::::im::::m   m::::m   m::::mS:::::::::::::::SS     tt:::::::::::tt a::::::::::aa:::ar:::::r                    tt:::::::::::tt
 		//  mmmmmm   mmmmmm   mmmmmm   ooooooooooo            vvv            eeeeeeeeeeeeeeAAAAAAA                   AAAAAAAnnnnnn    nnnnnniiiiiiiimmmmmm   mmmmmm   mmmmmm SSSSSSSSSSSSSSS         ttttttttttt    aaaaaaaaaa  aaaarrrrrrr                      ttttttttttt  
-		//                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                    
-		//                                                                                                                                                                                                                                                                    
 		//                                                                                                                                                                                                                                                                    
 		moveAnimStart: function(alternateFeet) {
 
@@ -800,8 +742,6 @@ ig.module(
 			}
 		},
 
-		//                                                                                                                                                                                                                                             
-		//                                                                                                                                                                                                                                             
 		//                                                                                                AAA                                 iiii                             SSSSSSSSSSSSSSS      tttt                                               
 		//                                                                                               A:::A                               i::::i                          SS:::::::::::::::S  ttt:::t                                               
 		//                                                                                              A:::::A                               iiii                          S:::::SSSSSS::::::S  t:::::t                                               
@@ -824,7 +764,6 @@ ig.module(
 		//                                                                                                                                                                                                                         p:::::::p           
 		//                                                                                                                                                                                                                         p:::::::p           
 		//                                                                                                                                                                                                                         ppppppppp           
-		//                                                                                                                                                                                                                                             
 		moveAnimStop: function()
 		// set animation to idle
 		{
@@ -840,8 +779,6 @@ ig.module(
 			};
 		},
 
-		//                                                                                                       
-		//                                                                                                       
 		//                                                           kkkkkkkk             iiii                   
 		//                                                           k::::::k            i::::i                  
 		//                                                           k::::::k             iiii                   
@@ -858,13 +795,7 @@ ig.module(
 		//   r:::::r             e::::::::eeeeeeee  s::::::::::::::s k::::::k  k:::::k  i::::::i n::::n    n::::n
 		//   r:::::r              ee:::::::::::::e   s:::::::::::ss  k::::::k   k:::::k i::::::i n::::n    n::::n
 		//   rrrrrrr                eeeeeeeeeeeeee    sssssssssss    kkkkkkkk    kkkkkkkiiiiiiii nnnnnn    nnnnnn
-		//                                                                                                       
-		//                                                                                                       
-		//                                                                                                       
-		//                                                                                                       
-		//                                                                                                       
-		//                                                                                                       
-		//                                                                                                                                                     
+		//
 		// Reload skin image resource and set animations.
 		reskin: function() {
 
