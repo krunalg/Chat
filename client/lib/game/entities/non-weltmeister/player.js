@@ -10,6 +10,24 @@ ig.module(
 
 	EntityPlayer = ig.Entity.extend({
 
+		//  
+		//  VVVVVVVV           VVVVVVVV   AAA               RRRRRRRRRRRRRRRRR      SSSSSSSSSSSSSSS 
+		//  V::::::V           V::::::V  A:::A              R::::::::::::::::R   SS:::::::::::::::S
+		//  V::::::V           V::::::V A:::::A             R::::::RRRRRR:::::R S:::::SSSSSS::::::S
+		//  V::::::V           V::::::VA:::::::A            RR:::::R     R:::::RS:::::S     SSSSSSS
+		//   V:::::V           V:::::VA:::::::::A             R::::R     R:::::RS:::::S            
+		//    V:::::V         V:::::VA:::::A:::::A            R::::R     R:::::RS:::::S            
+		//     V:::::V       V:::::VA:::::A A:::::A           R::::RRRRRR:::::R  S::::SSSS         
+		//      V:::::V     V:::::VA:::::A   A:::::A          R:::::::::::::RR    SS::::::SSSSS    
+		//       V:::::V   V:::::VA:::::A     A:::::A         R::::RRRRRR:::::R     SSS::::::::SS  
+		//        V:::::V V:::::VA:::::AAAAAAAAA:::::A        R::::R     R:::::R       SSSSSS::::S 
+		//         V:::::V:::::VA:::::::::::::::::::::A       R::::R     R:::::R            S:::::S
+		//          V:::::::::VA:::::AAAAAAAAAAAAA:::::A      R::::R     R:::::R            S:::::S
+		//           V:::::::VA:::::A             A:::::A   RR:::::R     R:::::RSSSSSSS     S:::::S
+		//            V:::::VA:::::A               A:::::A  R::::::R     R:::::RS::::::SSSSSS:::::S
+		//             V:::VA:::::A                 A:::::A R::::::R     R:::::RS:::::::::::::::SS 
+		//              VVVAAAAAAA                   AAAAAAARRRRRRRR     RRRRRRR SSSSSSSSSSSSSSS   
+		//
 		size: {
 			x: 16,
 			y: 16
@@ -57,22 +75,22 @@ ig.module(
 		destination: 0,
 
 		//
-		//    IIIIIIIIIINNNNNNNN        NNNNNNNNIIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT
-		//    I::::::::IN:::::::N       N::::::NI::::::::IT:::::::::::::::::::::T
-		//    I::::::::IN::::::::N      N::::::NI::::::::IT:::::::::::::::::::::T
-		//    II::::::IIN:::::::::N     N::::::NII::::::IIT:::::TT:::::::TT:::::T
-		//      I::::I  N::::::::::N    N::::::N  I::::I  TTTTTT  T:::::T  TTTTTT
-		//      I::::I  N:::::::::::N   N::::::N  I::::I          T:::::T        
-		//      I::::I  N:::::::N::::N  N::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N N::::N N::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N  N::::N:::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N   N:::::::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N    N::::::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N     N:::::::::N  I::::I          T:::::T        
-		//    II::::::IIN::::::N      N::::::::NII::::::II      TT:::::::TT      
-		//    I::::::::IN::::::N       N:::::::NI::::::::I      T:::::::::T      
-		//    I::::::::IN::::::N        N::::::NI::::::::I      T:::::::::T      
-		//    IIIIIIIIIINNNNNNNN         NNNNNNNIIIIIIIIII      TTTTTTTTTTT      
+		//  IIIIIIIIIINNNNNNNN        NNNNNNNNIIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT
+		//  I::::::::IN:::::::N       N::::::NI::::::::IT:::::::::::::::::::::T
+		//  I::::::::IN::::::::N      N::::::NI::::::::IT:::::::::::::::::::::T
+		//  II::::::IIN:::::::::N     N::::::NII::::::IIT:::::TT:::::::TT:::::T
+		//    I::::I  N::::::::::N    N::::::N  I::::I  TTTTTT  T:::::T  TTTTTT
+		//    I::::I  N:::::::::::N   N::::::N  I::::I          T:::::T        
+		//    I::::I  N:::::::N::::N  N::::::N  I::::I          T:::::T        
+		//    I::::I  N::::::N N::::N N::::::N  I::::I          T:::::T        
+		//    I::::I  N::::::N  N::::N:::::::N  I::::I          T:::::T        
+		//    I::::I  N::::::N   N:::::::::::N  I::::I          T:::::T        
+		//    I::::I  N::::::N    N::::::::::N  I::::I          T:::::T        
+		//    I::::I  N::::::N     N:::::::::N  I::::I          T:::::T        
+		//  II::::::IIN::::::N      N::::::::NII::::::II      TT:::::::TT      
+		//  I::::::::IN::::::N       N:::::::NI::::::::I      T:::::::::T      
+		//  I::::::::IN::::::N        N::::::NI::::::::I      T:::::::::T      
+		//  IIIIIIIIIINNNNNNNN         NNNNNNNIIIIIIIIII      TTTTTTTTTTT      
 		//                                                               
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
@@ -83,6 +101,33 @@ ig.module(
 			// Set max velocity equal to run speed.
 			this.maxVel.x = this.maxVel.y = this.runSpeed;
 		},
+
+		//                                                                                                                                     
+		//  UUUUUUUU     UUUUUUUUPPPPPPPPPPPPPPPPP   DDDDDDDDDDDDD                  AAA         TTTTTTTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEE
+		//  U::::::U     U::::::UP::::::::::::::::P  D::::::::::::DDD              A:::A        T:::::::::::::::::::::TE::::::::::::::::::::E
+		//  U::::::U     U::::::UP::::::PPPPPP:::::P D:::::::::::::::DD           A:::::A       T:::::::::::::::::::::TE::::::::::::::::::::E
+		//  UU:::::U     U:::::UUPP:::::P     P:::::PDDD:::::DDDDD:::::D         A:::::::A      T:::::TT:::::::TT:::::TEE::::::EEEEEEEEE::::E
+		//   U:::::U     U:::::U   P::::P     P:::::P  D:::::D    D:::::D       A:::::::::A     TTTTTT  T:::::T  TTTTTT  E:::::E       EEEEEE
+		//   U:::::D     D:::::U   P::::P     P:::::P  D:::::D     D:::::D     A:::::A:::::A            T:::::T          E:::::E             
+		//   U:::::D     D:::::U   P::::PPPPPP:::::P   D:::::D     D:::::D    A:::::A A:::::A           T:::::T          E::::::EEEEEEEEEE   
+		//   U:::::D     D:::::U   P:::::::::::::PP    D:::::D     D:::::D   A:::::A   A:::::A          T:::::T          E:::::::::::::::E   
+		//   U:::::D     D:::::U   P::::PPPPPPPPP      D:::::D     D:::::D  A:::::A     A:::::A         T:::::T          E:::::::::::::::E   
+		//   U:::::D     D:::::U   P::::P              D:::::D     D:::::D A:::::AAAAAAAAA:::::A        T:::::T          E::::::EEEEEEEEEE   
+		//   U:::::D     D:::::U   P::::P              D:::::D     D:::::DA:::::::::::::::::::::A       T:::::T          E:::::E             
+		//   U::::::U   U::::::U   P::::P              D:::::D    D:::::DA:::::AAAAAAAAAAAAA:::::A      T:::::T          E:::::E       EEEEEE
+		//   U:::::::UUU:::::::U PP::::::PP          DDD:::::DDDDD:::::DA:::::A             A:::::A   TT:::::::TT      EE::::::EEEEEEEE:::::E
+		//    UU:::::::::::::UU  P::::::::P          D:::::::::::::::DDA:::::A               A:::::A  T:::::::::T      E::::::::::::::::::::E
+		//      UU:::::::::UU    P::::::::P          D::::::::::::DDD A:::::A                 A:::::A T:::::::::T      E::::::::::::::::::::E
+		//        UUUUUUUUU      PPPPPPPPPP          DDDDDDDDDDDDD   AAAAAAA                   AAAAAAATTTTTTTTTTT      EEEEEEEEEEEEEEEEEEEEEE
+		//                                                                                                                                                                                                                                     
+		update: function() {
+
+			// Set zIndex by position in game, and its priority.
+			this.zIndex = this.pos.y + this.zPriority;
+
+			// Call parent.
+			this.parent();
+		}
 
 		// Updates the speed the player and his moveState.
 		setMoveState: function(state) {
@@ -441,22 +486,22 @@ ig.module(
 		},
 
 		//                                                                                                                       
-		//    RRRRRRRRRRRRRRRRR   EEEEEEEEEEEEEEEEEEEEEE   SSSSSSSSSSSSSSS KKKKKKKKK    KKKKKKKIIIIIIIIIINNNNNNNN        NNNNNNNN
-		//    R::::::::::::::::R  E::::::::::::::::::::E SS:::::::::::::::SK:::::::K    K:::::KI::::::::IN:::::::N       N::::::N
-		//    R::::::RRRRRR:::::R E::::::::::::::::::::ES:::::SSSSSS::::::SK:::::::K    K:::::KI::::::::IN::::::::N      N::::::N
-		//    RR:::::R     R:::::REE::::::EEEEEEEEE::::ES:::::S     SSSSSSSK:::::::K   K::::::KII::::::IIN:::::::::N     N::::::N
-		//      R::::R     R:::::R  E:::::E       EEEEEES:::::S            KK::::::K  K:::::KKK  I::::I  N::::::::::N    N::::::N
-		//      R::::R     R:::::R  E:::::E             S:::::S              K:::::K K:::::K     I::::I  N:::::::::::N   N::::::N
-		//      R::::RRRRRR:::::R   E::::::EEEEEEEEEE    S::::SSSS           K::::::K:::::K      I::::I  N:::::::N::::N  N::::::N
-		//      R:::::::::::::RR    E:::::::::::::::E     SS::::::SSSSS      K:::::::::::K       I::::I  N::::::N N::::N N::::::N
-		//      R::::RRRRRR:::::R   E:::::::::::::::E       SSS::::::::SS    K:::::::::::K       I::::I  N::::::N  N::::N:::::::N
-		//      R::::R     R:::::R  E::::::EEEEEEEEEE          SSSSSS::::S   K::::::K:::::K      I::::I  N::::::N   N:::::::::::N
-		//      R::::R     R:::::R  E:::::E                         S:::::S  K:::::K K:::::K     I::::I  N::::::N    N::::::::::N
-		//      R::::R     R:::::R  E:::::E       EEEEEE            S:::::SKK::::::K  K:::::KKK  I::::I  N::::::N     N:::::::::N
-		//    RR:::::R     R:::::REE::::::EEEEEEEE:::::ESSSSSSS     S:::::SK:::::::K   K::::::KII::::::IIN::::::N      N::::::::N
-		//    R::::::R     R:::::RE::::::::::::::::::::ES::::::SSSSSS:::::SK:::::::K    K:::::KI::::::::IN::::::N       N:::::::N
-		//    R::::::R     R:::::RE::::::::::::::::::::ES:::::::::::::::SS K:::::::K    K:::::KI::::::::IN::::::N        N::::::N
-		//    RRRRRRRR     RRRRRRREEEEEEEEEEEEEEEEEEEEEE SSSSSSSSSSSSSSS   KKKKKKKKK    KKKKKKKIIIIIIIIIINNNNNNNN         NNNNNNN
+		//  RRRRRRRRRRRRRRRRR   EEEEEEEEEEEEEEEEEEEEEE   SSSSSSSSSSSSSSS KKKKKKKKK    KKKKKKKIIIIIIIIIINNNNNNNN        NNNNNNNN
+		//  R::::::::::::::::R  E::::::::::::::::::::E SS:::::::::::::::SK:::::::K    K:::::KI::::::::IN:::::::N       N::::::N
+		//  R::::::RRRRRR:::::R E::::::::::::::::::::ES:::::SSSSSS::::::SK:::::::K    K:::::KI::::::::IN::::::::N      N::::::N
+		//  RR:::::R     R:::::REE::::::EEEEEEEEE::::ES:::::S     SSSSSSSK:::::::K   K::::::KII::::::IIN:::::::::N     N::::::N
+		//    R::::R     R:::::R  E:::::E       EEEEEES:::::S            KK::::::K  K:::::KKK  I::::I  N::::::::::N    N::::::N
+		//    R::::R     R:::::R  E:::::E             S:::::S              K:::::K K:::::K     I::::I  N:::::::::::N   N::::::N
+		//    R::::RRRRRR:::::R   E::::::EEEEEEEEEE    S::::SSSS           K::::::K:::::K      I::::I  N:::::::N::::N  N::::::N
+		//    R:::::::::::::RR    E:::::::::::::::E     SS::::::SSSSS      K:::::::::::K       I::::I  N::::::N N::::N N::::::N
+		//    R::::RRRRRR:::::R   E:::::::::::::::E       SSS::::::::SS    K:::::::::::K       I::::I  N::::::N  N::::N:::::::N
+		//    R::::R     R:::::R  E::::::EEEEEEEEEE          SSSSSS::::S   K::::::K:::::K      I::::I  N::::::N   N:::::::::::N
+		//    R::::R     R:::::R  E:::::E                         S:::::S  K:::::K K:::::K     I::::I  N::::::N    N::::::::::N
+		//    R::::R     R:::::R  E:::::E       EEEEEE            S:::::SKK::::::K  K:::::KKK  I::::I  N::::::N     N:::::::::N
+		//  RR:::::R     R:::::REE::::::EEEEEEEE:::::ESSSSSSS     S:::::SK:::::::K   K::::::KII::::::IIN::::::N      N::::::::N
+		//  R::::::R     R:::::RE::::::::::::::::::::ES::::::SSSSSS:::::SK:::::::K    K:::::KI::::::::IN::::::N       N:::::::N
+		//  R::::::R     R:::::RE::::::::::::::::::::ES:::::::::::::::SS K:::::::K    K:::::KI::::::::IN::::::N        N::::::N
+		//  RRRRRRRR     RRRRRRREEEEEEEEEEEEEEEEEEEEEE SSSSSSSSSSSSSSS   KKKKKKKKK    KKKKKKKIIIIIIIIIINNNNNNNN         NNNNNNN
 		//                                                
 		// Reload skin image resource and set animations.
 		reskin: function() {
@@ -538,33 +583,6 @@ ig.module(
 			// Set current animation.
 			this.moveAnimStop();
 		},
-
-		//                                                                                                                                     
-		//    UUUUUUUU     UUUUUUUUPPPPPPPPPPPPPPPPP   DDDDDDDDDDDDD                  AAA         TTTTTTTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEE
-		//    U::::::U     U::::::UP::::::::::::::::P  D::::::::::::DDD              A:::A        T:::::::::::::::::::::TE::::::::::::::::::::E
-		//    U::::::U     U::::::UP::::::PPPPPP:::::P D:::::::::::::::DD           A:::::A       T:::::::::::::::::::::TE::::::::::::::::::::E
-		//    UU:::::U     U:::::UUPP:::::P     P:::::PDDD:::::DDDDD:::::D         A:::::::A      T:::::TT:::::::TT:::::TEE::::::EEEEEEEEE::::E
-		//     U:::::U     U:::::U   P::::P     P:::::P  D:::::D    D:::::D       A:::::::::A     TTTTTT  T:::::T  TTTTTT  E:::::E       EEEEEE
-		//     U:::::D     D:::::U   P::::P     P:::::P  D:::::D     D:::::D     A:::::A:::::A            T:::::T          E:::::E             
-		//     U:::::D     D:::::U   P::::PPPPPP:::::P   D:::::D     D:::::D    A:::::A A:::::A           T:::::T          E::::::EEEEEEEEEE   
-		//     U:::::D     D:::::U   P:::::::::::::PP    D:::::D     D:::::D   A:::::A   A:::::A          T:::::T          E:::::::::::::::E   
-		//     U:::::D     D:::::U   P::::PPPPPPPPP      D:::::D     D:::::D  A:::::A     A:::::A         T:::::T          E:::::::::::::::E   
-		//     U:::::D     D:::::U   P::::P              D:::::D     D:::::D A:::::AAAAAAAAA:::::A        T:::::T          E::::::EEEEEEEEEE   
-		//     U:::::D     D:::::U   P::::P              D:::::D     D:::::DA:::::::::::::::::::::A       T:::::T          E:::::E             
-		//     U::::::U   U::::::U   P::::P              D:::::D    D:::::DA:::::AAAAAAAAAAAAA:::::A      T:::::T          E:::::E       EEEEEE
-		//     U:::::::UUU:::::::U PP::::::PP          DDD:::::DDDDD:::::DA:::::A             A:::::A   TT:::::::TT      EE::::::EEEEEEEE:::::E
-		//      UU:::::::::::::UU  P::::::::P          D:::::::::::::::DDA:::::A               A:::::A  T:::::::::T      E::::::::::::::::::::E
-		//        UU:::::::::UU    P::::::::P          D::::::::::::DDD A:::::A                 A:::::A T:::::::::T      E::::::::::::::::::::E
-		//          UUUUUUUUU      PPPPPPPPPP          DDDDDDDDDDDDD   AAAAAAA                   AAAAAAATTTTTTTTTTT      EEEEEEEEEEEEEEEEEEEEEE
-		//                                                                                                                                                                                                                                     
-		update: function() {
-
-			// Set zIndex by position in game, and its priority.
-			this.zIndex = this.pos.y + this.zPriority;
-
-			// Call parent.
-			this.parent();
-		}
 
 
 	});
