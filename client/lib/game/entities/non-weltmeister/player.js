@@ -405,9 +405,12 @@ ig.module(
 		//    cc:::::::::::::::c a::::::::::aa:::a n::::n    n::::nM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::e  
 		//      cccccccccccccccc  aaaaaaaaaa  aaaa nnnnnn    nnnnnnMMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeee  
 		//                                                                                                                                                 
+		/*
+		 * Check if the player is allowed to move in the faced direction.
+		 *
+		 * @return boolean true if no collision, else false.
+		 */
 		canMove: function()
-		// returns true if no collision will occur
-		// in the direction the player faces
 		{
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
