@@ -561,36 +561,43 @@ ig.module(
 		//                                                                                                                      ppppppppp           
 		//                                                                                                                                          
 		canJump: function()
-		// returns true if faced tile is jumpable
-		// otherwise false
+		/*
+		 * Check if the players faced tile is jumpable.
+		 *
+		 * @return boolean true if jumpable, else false.
+		 */
 		{
-			var vx = 0;
-			var vy = 0;
-			var want = -1; // to match weltmeister one-way collision tiles
-			var c = ig.game.collisionMap;
-			var tilesize = ig.game.collisionMap.tilesize;
+			// Get position of faced tile.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+
+			// Get collision map.
+			var collisionMap = ig.game.collisionMap;
+
+			// Define Weltmeister jump tile values.
 			switch (this.facing) {
 			case 'left':
-				vx = -tilesize;
-				want = 45;
+				var jumpTile = 45;
 				break;
 			case 'right':
-				vx = tilesize;
-				want = 34;
+				var jumpTile = 34;
 				break;
 			case 'up':
-				vy = -tilesize;
-				want = 12;
+				var jumpTile = 12;
 				break;
 			case 'down':
-				vy = tilesize;
-				want = 23;
+				var jumpTile = 23;
 				break;
 			}
-			var pX = this.pos.x + vx;
-			var pY = this.pos.y + vy;
-			if (c.getTile(pX, pY) == want) return true; // can jump
-			return false; // no collisions
+
+			// Check if tile is a jump tile.
+			if (collisionMap.getTile(position.x, position.y) == jumpTile) 
+			{
+				// Tile is jumpable.
+				return true;
+			}
+
+			// Tile is not jumpable.
+			return false;
 		},
 
 		//      ffffffffffffffff    iiii                     iiii                  hhhhhhh             MMMMMMMM               MMMMMMMM                                                         
