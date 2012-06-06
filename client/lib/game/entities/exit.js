@@ -154,21 +154,29 @@ ig.module('game.entities.exit')
 			}
 		},
 
+		// Stop animating.
 		stopAnim: function() {
+			
+			// Check if animation needs to be stopped.
 			if (this.currentAnim != null) {
+				
+				// Debug message.
 				console.debug('Turning off exit arrow.');
+
+				// Stop animation.
 				this.currentAnim = null;
 			}
 		},
 
+		// Initiate a map change.
 		trigger: function() {
+			
+			// Debug message.
 			console.debug('Changing to map: ' + this.map);
+
+			// Call map change.
 			ig.game.zone(this.map, this.goTo);
 		},
-
-		update: function() {
-			this.parent();
-		}
 
 
 	});
