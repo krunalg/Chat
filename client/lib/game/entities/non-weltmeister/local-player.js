@@ -22,7 +22,7 @@ ig.module(
 		// Used to send network move update when faced direction changes.
 		lastFacing: '',
 
-		// used for waiting while a door opens
+		// Waiting for a door to open.
 		waitingToMove: false,
 
 		// system time in ms to wait before moving
