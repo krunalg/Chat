@@ -13,7 +13,7 @@ ig.module(
 		zPriority: 3,
 
 		// Missleading name because NPC's are technically local also.
-		isLocal: true,
+		isLocalHuman: true,
 
 		lastState: '',
 

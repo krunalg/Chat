@@ -33,7 +33,7 @@ ig.module(
 		zPriority: 0,
 
 		// Missleading name because NPC's are technically local also.
-		isLocal: false,
+		isLocalHuman: false,
 
 		// True when over water; False on land.
 		swimming: false,
@@ -715,7 +715,7 @@ ig.module(
 				this.goAgain();
 
 				// Check if player is a local human player.
-				if (this.isLocal) {
+				if (this.isLocalHuman) {
 					// Update repeating border to reflect current location.
 					updateBorder(this);
 				}
