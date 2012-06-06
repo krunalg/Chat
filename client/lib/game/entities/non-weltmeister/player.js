@@ -394,10 +394,21 @@ ig.module(
 			}
 		},
 
-		move: function()
-		// instructs impact to move player
-		// in the direction he's facing
-		{
+		//    mmmmmmm    mmmmmmm      ooooooooooo vvvvvvv           vvvvvvv eeeeeeeeeeee    
+		//  mm:::::::m  m:::::::mm  oo:::::::::::oov:::::v         v:::::vee::::::::::::ee  
+		// m::::::::::mm::::::::::mo:::::::::::::::ov:::::v       v:::::ve::::::eeeee:::::ee
+		// m::::::::::::::::::::::mo:::::ooooo:::::o v:::::v     v:::::ve::::::e     e:::::e
+		// m:::::mmm::::::mmm:::::mo::::o     o::::o  v:::::v   v:::::v e:::::::eeeee::::::e
+		// m::::m   m::::m   m::::mo::::o     o::::o   v:::::v v:::::v  e:::::::::::::::::e 
+		// m::::m   m::::m   m::::mo::::o     o::::o    v:::::v:::::v   e::::::eeeeeeeeeee  
+		// m::::m   m::::m   m::::mo::::o     o::::o     v:::::::::v    e:::::::e           
+		// m::::m   m::::m   m::::mo:::::ooooo:::::o      v:::::::v     e::::::::e          
+		// m::::m   m::::m   m::::mo:::::::::::::::o       v:::::v       e::::::::eeeeeeee  
+		// m::::m   m::::m   m::::m oo:::::::::::oo         v:::v         ee:::::::::::::e  
+		// mmmmmm   mmmmmm   mmmmmm   ooooooooooo            vvv            eeeeeeeeeeeeee  
+		//
+		// Sets player velocity to his speed based on his faced direction.
+		move: function() {
 			switch (this.facing) {
 			case 'left':
 				this.vel.x = -this.speed;
