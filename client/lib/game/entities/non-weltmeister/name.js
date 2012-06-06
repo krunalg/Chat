@@ -15,7 +15,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 		// What color of font to use.
 		color: null,
 
-		// Reference to entity to follow.
+		// Reference of entity of which to follow.
 		follow: null,
 
 		// Used to temporarily stop drawing.
@@ -25,6 +25,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
+			// Create timer used for hiding name.
 			this.hideTimer = new ig.Timer();
 		},
 
