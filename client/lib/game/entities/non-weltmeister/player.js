@@ -86,9 +86,13 @@ ig.module(
 				offsetY++;
 				break;
 			}
+			
+			// Player entity reference to pass into surf entity.
+			var player = this;
+
 			ig.game.spawnEntity(EntitySurf, this.pos.x + (offsetX * tilesize), this.pos.y + (offsetY * tilesize), {
 				facing: this.facing,
-				follow: this.name
+				follow: player
 			});
 		},
 

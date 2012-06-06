@@ -15,7 +15,7 @@ ig.module('game.entities.non-weltmeister.surf')
 			y: 8
 		},
 
-		// name of entity to follow
+		// Entity to follow.
 		follow: null,
 
 		animSheet: new ig.AnimationSheet('media/rs.surf.png', 32, 32),
@@ -51,29 +51,37 @@ ig.module('game.entities.non-weltmeister.surf')
 		},
 
 		draw: function() {
-			var player = ig.game.getEntityByName(this.follow);
-			if (player != undefined) {
+			
+			// Check that we have entity to follow.
+			if (this.follow) {
+
 				// Kill entity when no long swimming.
-				if (!player.swimming) this.kill();
+				if (!this.follow.swimming) this.kill();
 
 				// Update direction according to player.
-				if (this.facing != player.facing) {
-					this.facing = player.facing;
+				if (this.facing != this.follow.facing) {
+					this.facing = this.follow.facing;
 					this.resetAnimation();
 				}
 
 				// Copy coordinates of player.
-				this.pos.x = player.pos.x;
-				this.pos.y = player.pos.y;
-			} else {
-				console.debug("Surf entity could not find entity '" + this.follow + "' and will now kill() itself.");
-				this.kill();
-			}
+				this.pos = this.follow.pos;
 
+			} 
+			
+			// Catch error.
+			else throw "Error: EntitySurf was created without a player to follow.";
+
+			// Parent call.
 			this.parent();
 		},
 
 		update: function() {
+			
+			// Kill this entity if player no longer exists.
+			if(this.follow._killed) this.kill();
+
+			// Parent call.
 			this.parent();
 		}
 
