@@ -139,7 +139,7 @@ ig.module(
 		},
 
 		/*
-		 * Calculate and returns an object containing the x and y position of a tile 
+		 * Calculate and returns an object containing the x and y position of a tile
 		 * relative to a given X and Y position.
 		 *
 		 * @param  x 		 integer X origin in pixels.
@@ -148,15 +148,14 @@ ig.module(
 		 * @param  distance  integer Number of tiles from source position.
 		 * @return           object  with two properties, x and y, pixel coordinates.
 		 */
-		getTilePos: function(x, y, direction, distance)
-		{
-			
+		getTilePos: function(x, y, direction, distance) {
+
 			// Start offset off at zero.
 			var offsetX = offsetY = 0;
 
 			// Get the map tilesize.
 			var tilesize = ig.game.collisionMap.tilesize;
-			
+
 			// Update offset based on direction.
 			switch (direction) {
 			case 'left':
@@ -243,7 +242,7 @@ ig.module(
 			// Player entity reference to pass into surf entity.
 			var player = this;
 
-			ig.game.spawnEntity(EntitySurf, position.x, position.y , {
+			ig.game.spawnEntity(EntitySurf, position.x, position.y, {
 				facing: this.facing,
 				follow: player
 			});
@@ -272,10 +271,14 @@ ig.module(
 		//                                           yyyyyyy                                  p:::::::p                                                                                                                gg:::::::::::::g                                                                                            
 		//                                                                                    ppppppppp                                                                                                                  ggg::::::ggg                                                                                              
 		//                                                                                                                                                                                                                  gggggg                                                                                                 
-		// Spawns a new grass entity at the tile the player is facing and returns it,
-		// unless one already exists, in which case it returns that one.
+		/*
+		 * Return the grass entity (if it exists) at the tile faced by the player. If it
+		 * does not exist and the tile is of grass type, spawn a grass entity and return it.
+		 *
+		 * @return EntityGrass if one exists or is spawned, else return undefined.
+		 */
 		trySpawningGrass: function() {
-			
+
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
@@ -287,7 +290,7 @@ ig.module(
 			if (allGrass) {
 				for (var i = 0; i < allGrass.length; i++) {
 					if (allGrass[i].pos.x == position.x && allGrass[i].pos.y == position.y && !allGrass[i]._killed) {
-						
+
 						// Save from being killed if marked for death.
 						if (allGrass[i].markedForDeath) allGrass[i].revive();
 
@@ -300,15 +303,13 @@ ig.module(
 			// Check if the faced tile is grass.
 			if (ig.game.isSpecialTile(
 			(position.x / tilesize), (position.y / tilesize), specialTiles['grass'], 'lower')) {
-				
+
 				// Debut message.
 				console.debug("Creating grass entity at: " + position.x + "," + position.y);
-				
+
 				// Spawn new grass entity and return it.
 				return ig.game.spawnEntity(EntityGrass, position.x, position.y, {});
 			}
-
-			return false;
 		},
 
 		//                                                                                                                     
