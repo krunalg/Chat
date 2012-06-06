@@ -34,6 +34,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 			// Kill name entity if player no longer exists.
 			if(this.follow._killed) this.kill();
 
+			// Call parent.
 			this.parent();
 		},
 
@@ -78,7 +79,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 				}
 			}
 
-			// Call parent function.
+			// Call parent.
 			this.parent();
 		}
 
