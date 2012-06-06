@@ -23,7 +23,7 @@ ig.module(
 		lastFacing: '',
 
 		// used for waiting while a door opens
-		moveWaiting: false,
+		waitingToMove: false,
 
 		// system time in ms to wait before moving
 		moveWhen: 0,
@@ -202,7 +202,7 @@ ig.module(
 						exit.startAnim();
 						// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
 						this.moveWhen = 336.7 + new Date().getTime();
-						this.moveWaiting = true;
+						this.waitingToMove = true;
 						this.moveDoor = exit;
 						cancelMove = true; // prevent player from starting to move too soon
 					}
@@ -287,10 +287,10 @@ ig.module(
 		},
 
 		moveWait: function() {
-			if (this.moveWaiting) {
+			if (this.waitingToMove) {
 				if (new Date().getTime() - this.moveWhen >= 0) {
 					this.startMove();
-					this.moveWaiting = false;
+					this.waitingToMove = false;
 				}
 			}
 		},
@@ -411,14 +411,14 @@ ig.module(
 			}
 
 			// handle zoning
-			if (this.moveDoor && !this.moveWaiting && !this.isMove) {
+			if (this.moveDoor && !this.waitingToMove && !this.isMove) {
 				// we just entered a door, so zone
 				this.moveDoor.trigger();
 			} else {
 				/////////////////////
 				// Handle Movement //
 				/////////////////////
-				if (this.moveWaiting) {
+				if (this.waitingToMove) {
 					// about to move
 					console.debug("Waiting to move...");
 					this.moveWait();
