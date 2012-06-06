@@ -272,6 +272,8 @@ ig.module(
 		//                                           yyyyyyy                                  p:::::::p                                                                                                                gg:::::::::::::g                                                                                            
 		//                                                                                    ppppppppp                                                                                                                  ggg::::::ggg                                                                                              
 		//                                                                                                                                                                                                                  gggggg                                                                                                 
+		// Spawns a new grass entity at the tile the player is facing and returns it,
+		// unless one already exists, in which case it returns that one.
 		trySpawningGrass: function() {
 			
 			// Get position of faced tile.
@@ -280,26 +282,30 @@ ig.module(
 			// Get map tilesize.
 			var tilesize = ig.game.collisionMap.tilesize;
 
-			// First check if entity already exists
+			// Do not spawn a grass entity if one already exists there.
 			var allGrass = ig.game.getEntitiesByType(EntityGrass);
 			if (allGrass) {
 				for (var i = 0; i < allGrass.length; i++) {
 					if (allGrass[i].pos.x == position.x && allGrass[i].pos.y == position.y && !allGrass[i]._killed) {
+						
 						// Save from being killed if marked for death.
 						if (allGrass[i].markedForDeath) allGrass[i].revive();
 
+						// Return grass entity.
 						return allGrass[i];
 					}
 				}
 			}
 
-			// Check if the faced tile is a grass tile.
+			// Check if the faced tile is grass.
 			if (ig.game.isSpecialTile(
 			(position.x / tilesize), (position.y / tilesize), specialTiles['grass'], 'lower')) {
-				console.log("Creating grass entity at: " + position.x + "," + position.y);
-				return ig.game.spawnEntity(EntityGrass, position.x, position.y, {
-					direction: this.facing
-				});
+				
+				// Debut message.
+				console.debug("Creating grass entity at: " + position.x + "," + position.y);
+				
+				// Spawn new grass entity and return it.
+				return ig.game.spawnEntity(EntityGrass, position.x, position.y, {});
 			}
 
 			return false;
