@@ -12,8 +12,8 @@ ig.module(
 
 		zPriority: 3,
 
-		// Missleading name because NPC's are technically local also.
-		isLocalHuman: true,
+		// Does the local keyboard move the player?
+		controlledByLocalKeyboard: true,
 
 		lastState: '',
 
