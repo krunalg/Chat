@@ -518,7 +518,7 @@ ig.module(
 		 *
 		 * @return boolean true if swimmable, else false.
 		 */
-		facingWater: function()
+		canSwim: function()
 		{
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);

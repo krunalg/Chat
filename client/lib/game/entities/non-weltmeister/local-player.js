@@ -328,7 +328,7 @@ ig.module(
 
 		startMove: function() {
 			
-			if(this.facingWater()) // Water
+			if(this.canSwim()) // Water
 			{
 				// Set movement speed on water.
 				this.moveState = 'swim';
