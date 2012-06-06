@@ -15,7 +15,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 		// What color of font to use.
 		color: null,
 
-		// Name of the entity to follow.
+		// Reference to entity to follow.
 		follow: null,
 
 		// Used to temporarily stop drawing.
@@ -34,19 +34,16 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 			// Additionally, draw only if we shouldn't hide instead
 			if (reallyDraw && this.hideTimer.delta() >= 0) {
 
-				// Create reference to player.
-				var player = ig.game.getEntityByName(this.follow);
+				// If we know of an entity to follow.
+				if (this.follow) {
 
-				if (player != undefined) {
-
-					// Align to players position.
-					this.pos.x = player.pos.x;
-					this.pos.y = player.pos.y;
+					// Use position of that entity.
+					this.pos = this.follow.pos;
 
 				} else {
 
 					// Write debug message.
-					console.debug("EntityName does not an Entity by the name '" + this.follow + "' and will now kill() itself.");
+					console.debug("EntityName: " + this.name + " does not have an entity to follow and will now suicide.");
 
 					// Free up resources.
 					this.kill();
@@ -61,7 +58,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 
 					// Draw font to screen.
 					this[this.color].draw(
-					this.follow, this.pos.x - ig.game.screen.x + this.size.x / 2, this.pos.y - ig.game.screen.y - this.size.y, ig.Font.ALIGN.CENTER);
+					this.follow.name, this.pos.x - ig.game.screen.x + this.size.x / 2, this.pos.y - ig.game.screen.y - this.size.y, ig.Font.ALIGN.CENTER);
 					break;
 
 				default:

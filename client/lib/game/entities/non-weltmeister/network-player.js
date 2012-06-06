@@ -17,16 +17,16 @@ ig.module(
 			// Set the players skin.
 			this.reskin(this.skin);
 
+			// Needed for passing a persistent reference of self into functions.
+			var player = this;
+
 			// Spawn a NameEntity to follow this player.
 			ig.game.spawnEntity(
 			EntityName, this.pos.x, this.pos.y, {
 				name: this.name + "NameEntity",
-				follow: this.name,
+				follow: player,
 				color: 'blue'
 			});
-
-			// Reference to this entity needed by socket events.
-			var player = this;
 			
 			// Some player changed his movement state.
 			socket.on('moveUpdateOtherPlayer-' + this.name, function(x, y, direction, state) {

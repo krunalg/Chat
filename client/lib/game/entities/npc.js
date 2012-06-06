@@ -75,11 +75,14 @@ ig.module(
 
 		ready: function() {
 
+			// Needed for passing a persistent reference of self into functions.
+			var player = this;
+
 			// create a name entity to follow this one
 			ig.game.spawnEntity(
 			EntityName, this.pos.x, this.pos.y, {
 				name: this.name + "NameEntity",
-				follow: this.name,
+				follow: player,
 				color: 'green'
 			});
 		},
