@@ -446,6 +446,7 @@ ig.module(
 			// Check if current skin is allowed.
 			switch (this.skin) {
 
+			// These skins are allowed.
 			case 'boy':
 			case 'girl':
 			case 'fat':
@@ -453,13 +454,14 @@ ig.module(
 			case 'labgeek':
 
 				// Selected skin is good, use it.
-				var use = true;
+				var useCurrentSkin = true;
 				break;
 
+			// Skin is not allowed.
 			default:
 
-				// No legal skin was found, use the default.
-				var use = false;
+				// Use the default skin.
+				var useCurrentSkin = false;
 				break;
 
 			}
@@ -467,7 +469,7 @@ ig.module(
 				x: 8,
 				y: 16
 			};
-			if (!use) this.skin = 'boy';
+			if (!useCurrentSkin) this.skin = 'boy';
 			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 32, 32);
 
 			// Add movement animations.
