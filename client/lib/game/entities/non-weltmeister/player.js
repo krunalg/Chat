@@ -185,6 +185,20 @@ ig.module(
 			return position;
 		},
 
+		/*
+		 * Returns the game tilesize.
+		 *
+		 * @return integer pixel size of game tiles.
+		 */
+		getTilesize: function() {
+
+			// Get tilesize from collisionMap.
+			var tilesize = ig.game.collisionMap.tilesize;
+
+			// Return tilesize.
+			return tilesize;
+		},
+
 		//                                                tttt          MMMMMMMM               MMMMMMMM                                                           SSSSSSSSSSSSSSS      tttt                                    tttt                              
 		//                                             ttt:::t          M:::::::M             M:::::::M                                                         SS:::::::::::::::S  ttt:::t                                 ttt:::t                              
 		//                                             t:::::t          M::::::::M           M::::::::M                                                        S:::::SSSSSS::::::S  t:::::t                                 t:::::t                              
@@ -415,9 +429,6 @@ ig.module(
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
-			// Get map tilesize.
-			var tilesize = ig.game.collisionMap.tilesize;
-
 			var velocityX = velocityY = 0; // velocity
 			switch (this.facing) {
 			case 'left':
@@ -444,7 +455,7 @@ ig.module(
 				return false;
 			}
 
-			// check npc collisions
+			// Check for collision against an NPC.
 			var npcs = ig.game.getEntitiesByType(EntityNpc);
 			if (npcs) {
 				for (var i = 0; i < npcs.length; i++) {
