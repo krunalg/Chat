@@ -454,14 +454,14 @@ ig.module(
 			case 'labgeek':
 
 				// Selected skin is good, use it.
-				var useCurrentSkin = true;
+				var allowedSkin = true;
 				break;
 
 			// Skin is not allowed.
 			default:
 
 				// Use the default skin.
-				var useCurrentSkin = false;
+				var allowedSkin = false;
 				break;
 
 			}
@@ -469,7 +469,7 @@ ig.module(
 				x: 8,
 				y: 16
 			};
-			if (!useCurrentSkin) this.skin = 'boy';
+			if (!allowedSkin) this.skin = 'boy';
 			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 32, 32);
 
 			// Add movement animations.
