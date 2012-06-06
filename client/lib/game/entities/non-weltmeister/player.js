@@ -236,27 +236,14 @@ ig.module(
 		//
 		// Spawns a surf entity on the tile currently faced.
 		spawnSurf: function() {
-			var offsetX = offsetY = 0;
-			var tilesize = ig.game.collisionMap.tilesize;
-			switch (this.facing) {
-			case 'left':
-				offsetX--;
-				break;
-			case 'right':
-				offsetX++;
-				break;
-			case 'up':
-				offsetY--;
-				break;
-			case 'down':
-				offsetY++;
-				break;
-			}
+
+			// Get position of faced tile.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
 			// Player entity reference to pass into surf entity.
 			var player = this;
 
-			ig.game.spawnEntity(EntitySurf, this.pos.x + (offsetX * tilesize), this.pos.y + (offsetY * tilesize), {
+			ig.game.spawnEntity(EntitySurf, position.x, position.y , {
 				facing: this.facing,
 				follow: player
 			});
