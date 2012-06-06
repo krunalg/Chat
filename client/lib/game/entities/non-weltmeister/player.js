@@ -32,7 +32,7 @@ ig.module(
 		// Layering priority relative to other entities.
 		zPriority: 0,
 
-		// Missleading name because NPC's are technically local also.
+		// Does the local keyboard move the player?
 		controlledByLocalKeyboard: false,
 
 		// True when over water; False on land.
