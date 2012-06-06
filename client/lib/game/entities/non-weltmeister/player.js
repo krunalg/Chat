@@ -127,7 +127,7 @@ ig.module(
 
 			// Call parent.
 			this.parent();
-		}
+		},
 
 		//                                                tttt          MMMMMMMM               MMMMMMMM                                                           SSSSSSSSSSSSSSS      tttt                                    tttt                              
 		//                                             ttt:::t          M:::::::M             M:::::::M                                                         SS:::::::::::::::S  ttt:::t                                 ttt:::t                              
@@ -875,7 +875,7 @@ ig.module(
 
 			// Set current animation.
 			this.moveAnimStop();
-		},
+		}
 
 
 	});
