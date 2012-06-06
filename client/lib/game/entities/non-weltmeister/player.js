@@ -9,7 +9,7 @@ ig.module(
 .defines(function() {
 
 	EntityPlayer = ig.Entity.extend({
-		
+
 		size: {
 			x: 16,
 			y: 16
@@ -19,7 +19,7 @@ ig.module(
 
 		// false unless entity defines otherwise
 		isLocal: false,
-		
+
 		// some default values
 		facing: 'down',
 
@@ -29,13 +29,13 @@ ig.module(
 		speed: 69,
 
 		walkSpeed: 69,
-		
+
 		jumpSpeed: 69,
-		
+
 		runSpeed: (138 * 8),
-		
+
 		swimSpeed: 138,
-		
+
 		maxVel: {
 			x: (138 * 8),
 			y: (138 * 8)
@@ -61,19 +61,15 @@ ig.module(
 		destination: 0,
 
 		// Updates the speed the player and his moveState.
-		setMoveState: function(state)
-		{
-			if (typeof this[state + 'Speed'] != 'undefined')
-			{
+		setMoveState: function(state) {
+			if (typeof this[state + 'Speed'] != 'undefined') {
 				this.speed = this[state + 'Speed'];
 				this.moveState = state;
-			}
-			else throw "No speed value set for for state: " + state;
+			} else throw "No speed value set for for state: " + state;
 		},
 
 		// Spawns a surf entity on the tile currently faced.
-		spawnSurf: function()
-		{
+		spawnSurf: function() {
 			var offsetX = offsetY = 0;
 			var tilesize = ig.game.collisionMap.tilesize;
 			switch (this.facing) {
@@ -90,7 +86,7 @@ ig.module(
 				offsetY++;
 				break;
 			}
-			
+
 			// Player entity reference to pass into surf entity.
 			var player = this;
 
@@ -371,26 +367,25 @@ ig.module(
 		},
 
 		moveAnimStart: function(alternateFeet) {
-			
+
 			// State to use for animation.
 			var state = this.moveState;
 
-			if(this.swimming) // Water
+			if (this.swimming) // Water
 			{
 				// Set current animation.
 				this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
 
 				// Debug animation.
 				console.debug('Current animation: ' + 'swim' + ig.game.capitaliseFirstLetter(this.facing));
-			}
-			else // Land
+			} else // Land
 			{
 				// Determine which foot to put forward.
 				var foot = '';
-				if(state!='idle') foot = this.leftFoot ? 'A':'B';
-				
+				if (state != 'idle') foot = this.leftFoot ? 'A' : 'B';
+
 				// Over-ride jump to share same animation as walk.
-				if(state=='jump') state = 'walk';
+				if (state == 'jump') state = 'walk';
 
 				// Set current animation.
 				this.currentAnim = this.anims[state + ig.game.capitaliseFirstLetter(this.facing) + foot];
@@ -415,10 +410,8 @@ ig.module(
 			case 'right':
 			case 'up':
 			case 'down':
-				if(this.swimming) 
-					this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
-				else 
-					this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
+				if (this.swimming) this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
+				else this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
 				break;
 			};
 		},
@@ -449,7 +442,7 @@ ig.module(
 			};
 			if (!use) this.skin = 'boy';
 			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 32, 32);
-			
+
 			// Add movement animations.
 			this.addAnim('walkUpA', 0.13333, [3, 0], true);
 			this.addAnim('walkUpB', 0.13333, [6, 0], true);
@@ -479,7 +472,7 @@ ig.module(
 			this.addAnim('idleDown', 0.1, [2], true);
 			this.addAnim('idleLeft', 0.1, [1], true);
 			this.addAnim('idleRight', 0.1, [1], true);
-			
+
 			// Right animations are just left animations, but flipped over x-axis.
 			this.anims.walkRightA.flip.x = true;
 			this.anims.walkRightB.flip.x = true;
