@@ -11,31 +11,38 @@ ig.module('game.entities.exit')
 			y: 16
 		},
 
-		zIndex: 0,
-
+		// Name of map to load.
 		map: null,
 
+		// Integer ID of this exit entity.
+		me: null,
+
+		// Integer ID of exit to spawn at in next level.
 		goTo: null,
 
-		// direction that triggers exit
+		// Direction travelled through which triggers a zone.
 		direction: null,
 
-		// floor or door
+		// One of two types: door, floor
 		type: null,
 
+		// Load Weltmeister icon resource.
 		animSheet: new ig.AnimationSheet('media/entity-icons.png', 16, 16),
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// add the animations
+			// Specify which icon to use.
 			this.addAnim('weltmeister', 0.1, [0]);
+
+			// Set the current icon.
 			this.currentAnim = this.anims.weltmeister;
 		},
 
 		ready: function() {
+			
+			// set up floor exits
 			switch (this.type) {
-				// set up floor exits
 			case 'floor':
 				var tilesize = ig.game.collisionMap.tilesize;
 				this.animSheet = new ig.AnimationSheet('media/entities/exit/arrows.png', 16, 16);
