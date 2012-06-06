@@ -397,7 +397,11 @@ ig.module(
 		 * @return EntityJump
 		 */
 		spawnShadow: function() {
+			
+			// Create and return a jump entity.
 			return ig.game.spawnEntity(EntityJump, this.pos.x, this.pos.y, {
+				
+				// Face same direction as player.
 				direction: this.facing
 			});
 		},
