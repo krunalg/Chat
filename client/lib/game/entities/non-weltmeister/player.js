@@ -825,19 +825,31 @@ ig.module(
 			}
 		},
 
-		//    mmmmmmm    mmmmmmm      ooooooooooo vvvvvvv           vvvvvvv eeeeeeeeeeee    
-		//  mm:::::::m  m:::::::mm  oo:::::::::::oov:::::v         v:::::vee::::::::::::ee  
-		// m::::::::::mm::::::::::mo:::::::::::::::ov:::::v       v:::::ve::::::eeeee:::::ee
-		// m::::::::::::::::::::::mo:::::ooooo:::::o v:::::v     v:::::ve::::::e     e:::::e
-		// m:::::mmm::::::mmm:::::mo::::o     o::::o  v:::::v   v:::::v e:::::::eeeee::::::e
-		// m::::m   m::::m   m::::mo::::o     o::::o   v:::::v v:::::v  e:::::::::::::::::e 
-		// m::::m   m::::m   m::::mo::::o     o::::o    v:::::v:::::v   e::::::eeeeeeeeeee  
-		// m::::m   m::::m   m::::mo::::o     o::::o     v:::::::::v    e:::::::e           
-		// m::::m   m::::m   m::::mo:::::ooooo:::::o      v:::::::v     e::::::::e          
-		// m::::m   m::::m   m::::mo:::::::::::::::o       v:::::v       e::::::::eeeeeeee  
-		// m::::m   m::::m   m::::m oo:::::::::::oo         v:::v         ee:::::::::::::e  
-		// mmmmmm   mmmmmm   mmmmmm   ooooooooooo            vvv            eeeeeeeeeeeeee  
-		//
+		//                                                                                                                                                                                                   
+		//                                                                                                                                                                                                   
+		//                                                tttt     VVVVVVVV           VVVVVVVV               lllllll                                        iiii          tttt                               
+		//                                             ttt:::t     V::::::V           V::::::V               l:::::l                                       i::::i      ttt:::t                               
+		//                                             t:::::t     V::::::V           V::::::V               l:::::l                                        iiii       t:::::t                               
+		//                                             t:::::t     V::::::V           V::::::V               l:::::l                                                   t:::::t                               
+		//      ssssssssss       eeeeeeeeeeee    ttttttt:::::tttttttV:::::V           V:::::V eeeeeeeeeeee    l::::l    ooooooooooo       cccccccccccccccciiiiiiittttttt:::::tttttttyyyyyyy           yyyyyyy
+		//    ss::::::::::s    ee::::::::::::ee  t:::::::::::::::::t V:::::V         V:::::Vee::::::::::::ee  l::::l  oo:::::::::::oo   cc:::::::::::::::ci:::::it:::::::::::::::::t y:::::y         y:::::y 
+		//  ss:::::::::::::s  e::::::eeeee:::::eet:::::::::::::::::t  V:::::V       V:::::Ve::::::eeeee:::::eel::::l o:::::::::::::::o c:::::::::::::::::c i::::it:::::::::::::::::t  y:::::y       y:::::y  
+		//  s::::::ssss:::::se::::::e     e:::::etttttt:::::::tttttt   V:::::V     V:::::Ve::::::e     e:::::el::::l o:::::ooooo:::::oc:::::::cccccc:::::c i::::itttttt:::::::tttttt   y:::::y     y:::::y   
+		//   s:::::s  ssssss e:::::::eeeee::::::e      t:::::t          V:::::V   V:::::V e:::::::eeeee::::::el::::l o::::o     o::::oc::::::c     ccccccc i::::i      t:::::t          y:::::y   y:::::y    
+		//     s::::::s      e:::::::::::::::::e       t:::::t           V:::::V V:::::V  e:::::::::::::::::e l::::l o::::o     o::::oc:::::c              i::::i      t:::::t           y:::::y y:::::y     
+		//        s::::::s   e::::::eeeeeeeeeee        t:::::t            V:::::V:::::V   e::::::eeeeeeeeeee  l::::l o::::o     o::::oc:::::c              i::::i      t:::::t            y:::::y:::::y      
+		//  ssssss   s:::::s e:::::::e                 t:::::t    tttttt   V:::::::::V    e:::::::e           l::::l o::::o     o::::oc::::::c     ccccccc i::::i      t:::::t    tttttt   y:::::::::y       
+		//  s:::::ssss::::::se::::::::e                t::::::tttt:::::t    V:::::::V     e::::::::e         l::::::lo:::::ooooo:::::oc:::::::cccccc:::::ci::::::i     t::::::tttt:::::t    y:::::::y        
+		//  s::::::::::::::s  e::::::::eeeeeeee        tt::::::::::::::t     V:::::V       e::::::::eeeeeeee l::::::lo:::::::::::::::o c:::::::::::::::::ci::::::i     tt::::::::::::::t     y:::::y         
+		//   s:::::::::::ss    ee:::::::::::::e          tt:::::::::::tt      V:::V         ee:::::::::::::e l::::::l oo:::::::::::oo   cc:::::::::::::::ci::::::i       tt:::::::::::tt    y:::::y          
+		//    sssssssssss        eeeeeeeeeeeeee            ttttttttttt         VVV            eeeeeeeeeeeeee llllllll   ooooooooooo       cccccccccccccccciiiiiiii         ttttttttttt     y:::::y           
+		//                                                                                                                                                                                y:::::y            
+		//                                                                                                                                                                               y:::::y             
+		//                                                                                                                                                                              y:::::y              
+		//                                                                                                                                                                             y:::::y               
+		//                                                                                                                                                                            yyyyyyy                
+		//                                                                                                                                                                                                   
+		//                                                                                                                                                                                                   
 		/*
 		 * Set players velocity to equal his current set speed.
 		 *
