@@ -273,27 +273,18 @@ ig.module(
 		//                                                                                    ppppppppp                                                                                                                  ggg::::::ggg                                                                                              
 		//                                                                                                                                                                                                                  gggggg                                                                                                 
 		trySpawningGrass: function() {
-			var offsetX = offsetY = 0;
+			
+			// Get position of faced tile.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+
+			// Get map tilesize.
 			var tilesize = ig.game.collisionMap.tilesize;
-			switch (this.facing) {
-			case 'left':
-				offsetX--;
-				break;
-			case 'right':
-				offsetX++;
-				break;
-			case 'up':
-				offsetY--;
-				break;
-			case 'down':
-				offsetY++;
-				break;
-			}
+
 			// First check if entity already exists
 			var allGrass = ig.game.getEntitiesByType(EntityGrass);
 			if (allGrass) {
 				for (var i = 0; i < allGrass.length; i++) {
-					if (allGrass[i].pos.x == this.pos.x + (offsetX * tilesize) && allGrass[i].pos.y == this.pos.y + (offsetY * tilesize) && !allGrass[i]._killed) {
+					if (allGrass[i].pos.x == position.x && allGrass[i].pos.y == position.y && !allGrass[i]._killed) {
 						// Save from being killed if marked for death.
 						if (allGrass[i].markedForDeath) allGrass[i].revive();
 
@@ -301,13 +292,12 @@ ig.module(
 					}
 				}
 			}
+
 			// Check if the faced tile is a grass tile.
 			if (ig.game.isSpecialTile(
-			(this.pos.x / tilesize) + offsetX, (this.pos.y / tilesize) + offsetY, specialTiles['grass'], 'lower')) {
-				var grassX = this.pos.x + (offsetX * tilesize);
-				var grassY = this.pos.y + (offsetY * tilesize);
-				console.log("Creating grass entity at: " + grassX + "," + grassY);
-				return ig.game.spawnEntity(EntityGrass, this.pos.x + (offsetX * tilesize), this.pos.y + (offsetY * tilesize), {
+			(position.x / tilesize), (position.y / tilesize), specialTiles['grass'], 'lower')) {
+				console.log("Creating grass entity at: " + position.x + "," + position.y);
+				return ig.game.spawnEntity(EntityGrass, position.x, position.y, {
 					direction: this.facing
 				});
 			}
