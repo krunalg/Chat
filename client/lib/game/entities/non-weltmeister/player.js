@@ -4,9 +4,17 @@ ig.module(
 
 .requires(
 
-'impact.entity').defines(function() {
+'impact.entity')
+
+.defines(function() {
 
 	EntityPlayer = ig.Entity.extend({
+		
+		size: {
+			x: 16,
+			y: 16
+		},
+
 		zPriority: 0,
 
 		// false unless entity defines otherwise
@@ -19,10 +27,15 @@ ig.module(
 		swimming: false,
 
 		speed: 69,
+
 		walkSpeed: 69,
+		
 		jumpSpeed: 69,
+		
 		runSpeed: (138 * 8),
+		
 		swimSpeed: 138,
+		
 		maxVel: {
 			x: (138 * 8),
 			y: (138 * 8)
@@ -31,16 +44,7 @@ ig.module(
 		// idle, walk, run, swim, (jump?)
 		moveState: 'idle',
 
-		size: {
-			x: 16,
-			y: 16
-		},
-
 		animSheet: new ig.AnimationSheet('media/entity-icons.png', 16, 16),
-
-		type: ig.Entity.TYPE.A,
-		checkAgainst: ig.Entity.TYPE.NONE,
-		collides: ig.Entity.COLLIDES.PASSIVE,
 
 		// used to only send network move updates if change occurs
 		lastState: '',
@@ -493,7 +497,6 @@ ig.module(
 			this.parent();
 		}
 
+
 	});
-
-
 })
