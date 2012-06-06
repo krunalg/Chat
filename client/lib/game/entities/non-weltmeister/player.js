@@ -893,11 +893,16 @@ ig.module(
 		//    d:::::::::ddd::::d  ee:::::::::::::e   s:::::::::::ss          tt:::::::::::tti::::::i n::::n    n::::n a::::::::::aa:::a       tt:::::::::::tti::::::i oo:::::::::::oo   n::::n    n::::nR::::::R     R:::::R  ee:::::::::::::e a::::::::::aa:::a cc:::::::::::::::ch:::::h     h:::::h  ee:::::::::::::e    d:::::::::ddd::::d
 		//     ddddddddd   ddddd    eeeeeeeeeeeeee    sssssssssss              ttttttttttt  iiiiiiii nnnnnn    nnnnnn  aaaaaaaaaa  aaaa         ttttttttttt  iiiiiiii   ooooooooooo     nnnnnn    nnnnnnRRRRRRRR     RRRRRRR    eeeeeeeeeeeeee  aaaaaaaaaa  aaaa   cccccccccccccccchhhhhhh     hhhhhhh    eeeeeeeeeeeeee     ddddddddd   ddddd
 		//                                                                                                                                                                                                                                                                                                                                    
+		/*
+		 * Checks if player has arrive at or passed his destination.
+		 *
+		 * @return boolean true if destination has been reached, else false.
+		 */
 		destinationReached: function()
-		// returns true if reached or past destination
-		// otherwise returns false
 		{
+			// Check which axis destination is on.
 			switch (this.facing) {
+			
 			case 'left':
 				return this.pos.x <= this.destination;
 				break;
@@ -911,6 +916,8 @@ ig.module(
 				return this.pos.y >= this.destination;
 				break;
 			}
+
+			// Player has not yet arrived.
 			return false;
 		},
 
