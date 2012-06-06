@@ -62,9 +62,6 @@ ig.module(
 		// Load Weltmeister icon resource.
 		animSheet: new ig.AnimationSheet('media/entity-icons.png', 16, 16),
 
-		// Used to send network move updates when move state changes.
-		lastState: '',
-
 		// Is the player moving or not.
 		isMove: false,
 

@@ -10,15 +10,17 @@ ig.module(
 
 	EntityLocalPlayer = EntityPlayer.extend({
 
+		// Layering priority relative to other entities.
 		zPriority: 3,
 
 		// Does the local keyboard move the player?
 		controlledByLocalKeyboard: true,
 
+		// Used to send network move update when move state changes.
 		lastState: '',
 
-		// used to only send network move updates if change occurs
-		facingLast: '',
+		// Used to send network move update when faced direction changes.
+		lastFacing: '',
 
 		// used for waiting while a door opens
 		moveWaiting: false,
@@ -230,7 +232,7 @@ ig.module(
 				this.moveCommitDirection = this.facing;
 
 				// next line only runs once per direction, skip delay if facing already
-				if (this.facingLast == this.facing) var delay = 0;
+				if (this.lastFacing == this.facing) var delay = 0;
 				else var delay = 80;
 				this.moveCommitWhen = new Date().getTime() + delay;
 			}
@@ -268,11 +270,11 @@ ig.module(
 			} else // player has not yet committed to (trying to) move
 			{
 				// if player changed faced direction
-				if (this.facing != this.facingLast) {
+				if (this.facing != this.lastFacing) {
 					
 					// Tell other players that we changed our faced direction.
 					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-					this.facingLast = this.facing; // so we don't inform them again
+					this.lastFacing = this.facing; // so we don't inform them again
 					this.moveAnimStart(false); // step-animate the change
 					// check if we are on an exit that needs animating
 					var exit = this.overExit(this);
@@ -370,12 +372,12 @@ ig.module(
 			this.moveAnimStart(true);
 
 			// send movement update only when change occurs
-			if (this.facingLast != this.facing || this.lastState != this.moveState) {
+			if (this.lastFacing != this.facing || this.lastState != this.moveState) {
 				this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 				this.lastState = this.moveState;
 			}
 
-			this.facingLast = this.facing;
+			this.lastFacing = this.facing;
 		},
 
 		startJump: function() {
@@ -390,7 +392,7 @@ ig.module(
 
 			this.moveAnimStart(true);
 			this.emitJump(this.pos.x, this.pos.y, this.facing);
-			this.facingLast = this.facing;
+			this.lastFacing = this.facing;
 		},
 
 		init: function(x, y, settings) {
