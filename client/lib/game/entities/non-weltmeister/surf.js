@@ -18,6 +18,7 @@ ig.module('game.entities.non-weltmeister.surf')
 		// Entity to follow.
 		follow: null,
 
+		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.surf.png', 32, 32),
 
 		init: function(x, y, settings) {
@@ -33,19 +34,25 @@ ig.module('game.entities.non-weltmeister.surf')
 			this.anims.right.flip.x = true;
 
 			// Set current animation.
-			this.resetAnimation();
+			this.updateAnimation();
 		},
 
-		resetAnimation: function() {
+		// Keep animation consistent with faced direction.
+		updateAnimation: function() {
 			switch (this.facing) {
 			case 'left':
 			case 'right':
 			case 'up':
 			case 'down':
+				
+				// Update current animation.
 				this.currentAnim = this.anims[this.facing]
 				break;
+
 			default:
-				throw "Error: tried giving surf entity illegal direction to face.";
+				
+				// Catch error.
+				throw "Error: Surf entity cannot face that direction.";
 				break;
 			}
 		},
@@ -61,7 +68,7 @@ ig.module('game.entities.non-weltmeister.surf')
 				// Update direction according to player.
 				if (this.facing != this.follow.facing) {
 					this.facing = this.follow.facing;
-					this.resetAnimation();
+					this.updateAnimation();
 				}
 
 				// Copy coordinates of player.
