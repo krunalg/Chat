@@ -223,17 +223,17 @@ ig.module(
 		 * @return undefined
 		 */
 		setMoveState: function(state) {
-			
+
 			// Check that a speed value matches input.
 			if (typeof this[state + 'Speed'] != 'undefined') {
-				
+
 				// Set player speed.
 				this.speed = this[state + 'Speed'];
 
 				// Update player movement state.
 				this.moveState = state;
 
-			} 
+			}
 
 			// Throw an error if unexpected input.
 			else throw "No speed value set for for state: " + state;
@@ -371,10 +371,10 @@ ig.module(
 			var allGrass = ig.game.getEntitiesByType(EntityGrass);
 			if (allGrass) {
 				for (var i = 0; i < allGrass.length; i++) {
-					
+
 					// Compare grass entity position to the player's.
 					if (allGrass[i].pos.x == this.pos.x && allGrass[i].pos.y == this.pos.y) {
-						
+
 						// Return matching grass entity.
 						return allGrass[i];
 					}
@@ -412,10 +412,10 @@ ig.module(
 		 * @return EntityJump
 		 */
 		spawnShadow: function() {
-			
+
 			// Create and return a jump entity.
 			return ig.game.spawnEntity(EntityJump, this.pos.x, this.pos.y, {
-				
+
 				// Face same direction as player.
 				direction: this.facing
 			});
@@ -443,8 +443,7 @@ ig.module(
 		 *
 		 * @return boolean true if no collision, else false.
 		 */
-		canMove: function()
-		{
+		canMove: function() {
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
@@ -466,10 +465,9 @@ ig.module(
 
 			// Check map for collision.
 			var res = ig.game.collisionMap.trace(this.pos.x, this.pos.y, velocityX, velocityY, this.size.x, this.size.y);
-			
+
 			// Did a collision occur?
-			if (res.collision.x || res.collision.y) 
-			{
+			if (res.collision.x || res.collision.y) {
 				// Collision occured.
 				return false;
 			}
@@ -479,7 +477,7 @@ ig.module(
 			if (npcs) {
 				for (var i = 0; i < npcs.length; i++) {
 					if ((npcs[i].pos.x == position.x) && (npcs[i].pos.y == position.y)) {
-						
+
 						// Collision occured.
 						return false;
 					}
@@ -490,36 +488,36 @@ ig.module(
 			return true;
 		},
 
-		//      ffffffffffffffff                                       iiii                                      WWWWWWWW                           WWWWWWWW                       tttt                                                  
-		//     f::::::::::::::::f                                     i::::i                                     W::::::W                           W::::::W                    ttt:::t                                                  
-		//    f::::::::::::::::::f                                     iiii                                      W::::::W                           W::::::W                    t:::::t                                                  
-		//    f::::::fffffff:::::f                                                                               W::::::W                           W::::::W                    t:::::t                                                  
-		//    f:::::f       ffffffaaaaaaaaaaaaa      cccccccccccccccciiiiiiinnnn  nnnnnnnn       ggggggggg   gggggW:::::W           WWWWW           W:::::Waaaaaaaaaaaaa  ttttttt:::::ttttttt        eeeeeeeeeeee    rrrrr   rrrrrrrrr   
-		//    f:::::f             a::::::::::::a   cc:::::::::::::::ci:::::in:::nn::::::::nn    g:::::::::ggg::::g W:::::W         W:::::W         W:::::W a::::::::::::a t:::::::::::::::::t      ee::::::::::::ee  r::::rrr:::::::::r  
-		//   f:::::::ffffff       aaaaaaaaa:::::a c:::::::::::::::::c i::::in::::::::::::::nn  g:::::::::::::::::g  W:::::W       W:::::::W       W:::::W  aaaaaaaaa:::::at:::::::::::::::::t     e::::::eeeee:::::eer:::::::::::::::::r 
-		//   f::::::::::::f                a::::ac:::::::cccccc:::::c i::::inn:::::::::::::::ng::::::ggggg::::::gg   W:::::W     W:::::::::W     W:::::W            a::::atttttt:::::::tttttt    e::::::e     e:::::err::::::rrrrr::::::r
-		//   f::::::::::::f         aaaaaaa:::::ac::::::c     ccccccc i::::i  n:::::nnnn:::::ng:::::g     g:::::g     W:::::W   W:::::W:::::W   W:::::W      aaaaaaa:::::a      t:::::t          e:::::::eeeee::::::e r:::::r     r:::::r
-		//   f:::::::ffffff       aa::::::::::::ac:::::c              i::::i  n::::n    n::::ng:::::g     g:::::g      W:::::W W:::::W W:::::W W:::::W     aa::::::::::::a      t:::::t          e:::::::::::::::::e  r:::::r     rrrrrrr
-		//    f:::::f            a::::aaaa::::::ac:::::c              i::::i  n::::n    n::::ng:::::g     g:::::g       W:::::W:::::W   W:::::W:::::W     a::::aaaa::::::a      t:::::t          e::::::eeeeeeeeeee   r:::::r            
-		//    f:::::f           a::::a    a:::::ac::::::c     ccccccc i::::i  n::::n    n::::ng::::::g    g:::::g        W:::::::::W     W:::::::::W     a::::a    a:::::a      t:::::t    tttttte:::::::e            r:::::r            
-		//   f:::::::f          a::::a    a:::::ac:::::::cccccc:::::ci::::::i n::::n    n::::ng:::::::ggggg:::::g         W:::::::W       W:::::::W      a::::a    a:::::a      t::::::tttt:::::te::::::::e           r:::::r            
-		//   f:::::::f          a:::::aaaa::::::a c:::::::::::::::::ci::::::i n::::n    n::::n g::::::::::::::::g          W:::::W         W:::::W       a:::::aaaa::::::a      tt::::::::::::::t e::::::::eeeeeeee   r:::::r            
-		//   f:::::::f           a::::::::::aa:::a cc:::::::::::::::ci::::::i n::::n    n::::n  gg::::::::::::::g           W:::W           W:::W         a::::::::::aa:::a       tt:::::::::::tt  ee:::::::::::::e   r:::::r            
-		//   fffffffff            aaaaaaaaaa  aaaa   cccccccccccccccciiiiiiii nnnnnn    nnnnnn    gggggggg::::::g            WWW             WWW           aaaaaaaaaa  aaaa         ttttttttttt      eeeeeeeeeeeeee   rrrrrrr            
-		//                                                                                                g:::::g                                                                                                                        
-		//                                                                                    gggggg      g:::::g                                                                                                                        
-		//                                                                                    g:::::gg   gg:::::g                                                                                                                        
-		//                                                                                     g::::::ggg:::::::g                                                                                                                        
-		//                                                                                      gg:::::::::::::g                                                                                                                         
-		//                                                                                        ggg::::::ggg                                                                                                                           
-		//                                                                                           gggggg                                                                                                                              
+		//                                                                                                                                               
+		//                                                                                                                                               
+		//                                                            SSSSSSSSSSSSSSS                                      iiii                          
+		//                                                          SS:::::::::::::::S                                    i::::i                         
+		//                                                         S:::::SSSSSS::::::S                                     iiii                          
+		//                                                         S:::::S     SSSSSSS                                                                   
+		//      cccccccccccccccc  aaaaaaaaaaaaa  nnnn  nnnnnnnn    S:::::S      wwwwwww           wwwww           wwwwwwwiiiiiii    mmmmmmm    mmmmmmm   
+		//    cc:::::::::::::::c  a::::::::::::a n:::nn::::::::nn  S:::::S       w:::::w         w:::::w         w:::::w i:::::i  mm:::::::m  m:::::::mm 
+		//   c:::::::::::::::::c  aaaaaaaaa:::::an::::::::::::::nn  S::::SSSS     w:::::w       w:::::::w       w:::::w   i::::i m::::::::::mm::::::::::m
+		//  c:::::::cccccc:::::c           a::::ann:::::::::::::::n  SS::::::SSSSS w:::::w     w:::::::::w     w:::::w    i::::i m::::::::::::::::::::::m
+		//  c::::::c     ccccccc    aaaaaaa:::::a  n:::::nnnn:::::n    SSS::::::::SSw:::::w   w:::::w:::::w   w:::::w     i::::i m:::::mmm::::::mmm:::::m
+		//  c:::::c               aa::::::::::::a  n::::n    n::::n       SSSSSS::::Sw:::::w w:::::w w:::::w w:::::w      i::::i m::::m   m::::m   m::::m
+		//  c:::::c              a::::aaaa::::::a  n::::n    n::::n            S:::::Sw:::::w:::::w   w:::::w:::::w       i::::i m::::m   m::::m   m::::m
+		//  c::::::c     ccccccca::::a    a:::::a  n::::n    n::::n            S:::::S w:::::::::w     w:::::::::w        i::::i m::::m   m::::m   m::::m
+		//  c:::::::cccccc:::::ca::::a    a:::::a  n::::n    n::::nSSSSSSS     S:::::S  w:::::::w       w:::::::w        i::::::im::::m   m::::m   m::::m
+		//   c:::::::::::::::::ca:::::aaaa::::::a  n::::n    n::::nS::::::SSSSSS:::::S   w:::::w         w:::::w         i::::::im::::m   m::::m   m::::m
+		//    cc:::::::::::::::c a::::::::::aa:::a n::::n    n::::nS:::::::::::::::SS     w:::w           w:::w          i::::::im::::m   m::::m   m::::m
+		//      cccccccccccccccc  aaaaaaaaaa  aaaa nnnnnn    nnnnnn SSSSSSSSSSSSSSS        www             www           iiiiiiiimmmmmm   mmmmmm   mmmmmm
+		//                                                                                                                                               
+		//                                                                                                                                               
+		//                                                                                                                                               
+		//                                                                                                                                               
+		//                                                                                                                                               
+		//                                                                                                                                               
 		/*
 		 * Check if the players faced tile is swimmable.
 		 *
 		 * @return boolean true if swimmable, else false.
 		 */
-		canSwim: function()
-		{
+		canSwim: function() {
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
@@ -527,8 +525,8 @@ ig.module(
 			var tilesize = this.getTilesize();
 
 			// Check if faced tile is of water type.
-			if (ig.game.isSpecialTile( (position.x / tilesize), (position.y / tilesize), specialTiles['water'], 'lower')) {
-				
+			if (ig.game.isSpecialTile((position.x / tilesize), (position.y / tilesize), specialTiles['water'], 'lower')) {
+
 				// Faced tile is water.
 				return true;
 			}
@@ -590,8 +588,7 @@ ig.module(
 			}
 
 			// Check if tile is a jump tile.
-			if (collisionMap.getTile(position.x, position.y) == jumpTile) 
-			{
+			if (collisionMap.getTile(position.x, position.y) == jumpTile) {
 				// Tile is jumpable.
 				return true;
 			}
