@@ -97,7 +97,7 @@ ig.module(
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// set players appearance
+			// Set the players appearance.
 			this.reskin(this.skin);
 
 			// Set max velocity equal to run speed.
@@ -131,11 +131,59 @@ ig.module(
 		//                                                                                        
 		update: function() {
 
-			// Set zIndex by position in game, and its priority.
+			// Set zIndex dynamically using Y position and priority.
 			this.zIndex = this.pos.y + this.zPriority;
 
 			// Call parent.
 			this.parent();
+		},
+
+		/*
+		 * Calculate and returns an object containing the x and y position of a tile 
+		 * relative to a given X and Y position.
+		 *
+		 * @param  x 		 integer X origin in pixels.
+		 * @param  y         integer Y origin in pixels.
+		 * @param  direction string  One of the following: up, right, down, left.
+		 * @param  distance  integer Number of tiles from source position.
+		 * @return           object  with two properties, x and y, pixel coordinates.
+		 */
+		getTilePos: function(x, y, direction, distance)
+		{
+			
+			// Start offset off at zero.
+			var offsetX = offsetY = 0;
+
+			// Get the map tilesize.
+			var tilesize = ig.game.collisionMap.tilesize;
+			
+			// Update offset based on direction.
+			switch (direction) {
+			case 'left':
+				offsetX--;
+				break;
+			case 'right':
+				offsetX++;
+				break;
+			case 'up':
+				offsetY--;
+				break;
+			case 'down':
+				offsetY++;
+				break;
+			}
+
+			// Create JavaScript object.
+			var position = new Object();
+
+			// Set X coordinate.
+			position.x = x + (offsetX * tilesize * distance);
+
+			// Set Y coordinate.
+			position.y = y + (offsetY * tilesize * distance);
+
+			// Return new position.
+			return position;
 		},
 
 		//                                                tttt          MMMMMMMM               MMMMMMMM                                                           SSSSSSSSSSSSSSS      tttt                                    tttt                              
@@ -155,7 +203,7 @@ ig.module(
 		//   s:::::::::::ss    ee:::::::::::::e          tt:::::::::::ttM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::e S:::::::::::::::SS     tt:::::::::::tt a::::::::::aa:::a       tt:::::::::::tt  ee:::::::::::::e  
 		//    sssssssssss        eeeeeeeeeeeeee            ttttttttttt  MMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeee  SSSSSSSSSSSSSSS         ttttttttttt    aaaaaaaaaa  aaaa         ttttttttttt      eeeeeeeeeeeeee  
 		//
-		// Updates the speed the player and his moveState.
+		// Update player speed and his moveState.
 		setMoveState: function(state) {
 			if (typeof this[state + 'Speed'] != 'undefined') {
 				this.speed = this[state + 'Speed'];
