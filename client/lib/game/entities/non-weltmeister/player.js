@@ -323,10 +323,10 @@ ig.module(
 
 			// Spawn a surf entity.
 			ig.game.spawnEntity(EntitySurf, position.x, position.y, {
-				
+
 				// Use players faced direction.
 				facing: this.facing,
-				
+
 				// Pass a reference of the player.
 				follow: player
 			});
@@ -523,6 +523,7 @@ ig.module(
 
 			// Did a collision occur?
 			if (res.collision.x || res.collision.y) {
+
 				// Collision occured.
 				return false;
 			}
@@ -573,6 +574,7 @@ ig.module(
 		 * @return boolean true if swimmable, else false.
 		 */
 		canSwim: function() {
+
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
@@ -613,12 +615,12 @@ ig.module(
 		//                                                                                                                      p:::::::p           
 		//                                                                                                                      ppppppppp           
 		//                                                                                                                                          
-		canJump: function()
 		/*
 		 * Check if the players faced tile is jumpable.
 		 *
 		 * @return boolean true if jumpable, else false.
 		 */
+		canJump: function()
 		{
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
@@ -669,10 +671,22 @@ ig.module(
 		//   f:::::::f            i::::::i n::::n    n::::ni::::::i s:::::::::::ss  h:::::h     h:::::hM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::e  
 		//   fffffffff            iiiiiiii nnnnnn    nnnnnniiiiiiii  sssssssssss    hhhhhhh     hhhhhhhMMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeee  
 		//                                                                                                                                                                                     
+		/*
+		 * Stops player if he has reached his destination or move him if he has not.
+		 *
+		 * @return undefined
+		 */
 		finishMove: function() {
+
+			// Animate the players vertical offset to simulate jumping.
 			if (this.isJump) {
-				// update jump animation
+
+				// Get how much time into the jump has elapsed.
 				var jumpTime = this.jumpStart.delta();
+
+				// This is a mess! Consider replacing this whole thing with tweens.
+				// The number 16 is used irresponsibly and should be the players 
+				// 'resting' y-offset.
 				if (jumpTime >= 0 && jumpTime < (2 / 60)) this.offset.y = 16 + 4;
 				else if (jumpTime >= (2 / 60) && jumpTime < (4 / 60)) this.offset.y = 16 + 6;
 				else if (jumpTime >= (4 / 60) && jumpTime < (6 / 60)) this.offset.y = 16 + 8;
@@ -687,14 +701,29 @@ ig.module(
 				else this.offset.y = 16 + 0;
 			}
 
-			if (this.destinationReached()) // check if reached destination
-			{
-				this.isJump = false; // no longer jumping (regardless if was)
-				this.alignToGrid(); // ensure player is at legal coordinates
-				this.vel.x = this.vel.y = 0; // stop player
-				this.goAgain(); // check if we should continue moving
-				if (this.isLocal) updateBorder(this); // change repeating border
-			} else this.move(); // continue to destination
+			// Check if player has reached his destination.
+			if (this.destinationReached()) {
+				// Player is not jumping.
+				this.isJump = false;
+
+				// Snap player to legal destination coordinates.
+				this.alignToGrid();
+
+				// Prevent Impact from moving the player further.
+				this.vel.x = this.vel.y = 0;
+
+				// Assess whether to try moving again or rest.
+				this.goAgain();
+
+				// Check if player is a local human player.
+				if (this.isLocal) {
+					// Update repeating border to reflect current location.
+					updateBorder(this);
+				}
+			} else {
+				// Have not reached destination, keep moving.
+				this.move();
+			}
 		},
 
 		//                                                                                                                                                                       dddddddd
