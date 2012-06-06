@@ -29,6 +29,14 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 			this.hideTimer = new ig.Timer();
 		},
 
+		update: function() {
+
+			// Kill name entity if player no longer exists.
+			if(this.follow._killed) this.kill();
+
+			this.parent();
+		},
+
 		draw: function(reallyDraw) {
 			// Only draw when the 'reallyDraw' param is true, 
 			// so it ignores the "normal" draw call.
@@ -48,7 +56,6 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 
 					// Free up resources.
 					this.kill();
-
 				}
 
 				// Select font color.
