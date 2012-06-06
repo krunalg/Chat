@@ -15,13 +15,11 @@ ig.module(
 			y: 16
 		},
 
+		// Layering priority relative to other entities.
 		zPriority: 0,
 
-		// false unless entity defines otherwise
+		// Missleading name because NPC's are technically local also.
 		isLocal: false,
-
-		// some default values
-		facing: 'down',
 
 		// True when over water; False on land.
 		swimming: false,
@@ -36,10 +34,8 @@ ig.module(
 
 		swimSpeed: 138,
 
-		maxVel: {
-			x: (138 * 8),
-			y: (138 * 8)
-		},
+		// some default values
+		facing: 'down',
 
 		// idle, walk, run, swim, (jump?)
 		moveState: 'idle',
@@ -421,6 +417,9 @@ ig.module(
 
 			// set players appearance
 			this.reskin(this.skin);
+
+			// Set max velocity equal to run speed.
+			this.maxVel.x = this.maxVel.y = this.runSpeed;
 		},
 
 		reskin: function() {
