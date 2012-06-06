@@ -22,6 +22,8 @@ ig.module(
 		//           v:::::v       a:::::aaaa::::::a r:::::r            s::::::::::::::s 
 		//            v:::v         a::::::::::aa:::ar:::::r             s:::::::::::ss  
 		//             vvv           aaaaaaaaaa  aaaarrrrrrr              sssssssssss    
+		//
+		// Size of collision box.
 		size: {
 			x: 16,
 			y: 16
@@ -36,36 +38,43 @@ ig.module(
 		// True when over water; False on land.
 		swimming: false,
 
-		speed: 69,
+		// Current speed of player.
+		speed: null,
 
+		// Speed when walking.
 		walkSpeed: 69,
 
+		// Speed when jumping.
 		jumpSpeed: 69,
 
+		// Speed when running.
 		runSpeed: (138 * 8),
 
+		// Speed when swimming.
 		swimSpeed: 138,
 
-		// some default values
+		// Direction player is currently facing.
 		facing: 'down',
 
-		// idle, walk, run, swim, (jump?)
+		// Current movement state.
 		moveState: 'idle',
 
+		// Load Weltmeister icon resource.
 		animSheet: new ig.AnimationSheet('media/entity-icons.png', 16, 16),
 
-		// used to only send network move updates if change occurs
+		// Used to send network move updates when move state changes.
 		lastState: '',
 
-		// waiting for move key-press
+		// Is the player moving or not.
 		isMove: false,
 
+		// Is the player jumping or not.
 		isJump: false,
 
-		// used to alternate step animations
+		// Used to alternate between step animations.
 		leftFoot: true,
 
-		// used for both x and y planes
+		// Movement destination (either on x or y axis).
 		destination: 0,
 
 		//    iiii                     iiii          tttt          
