@@ -216,12 +216,27 @@ ig.module(
 		//   s:::::::::::ss    ee:::::::::::::e          tt:::::::::::ttM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::e S:::::::::::::::SS     tt:::::::::::tt a::::::::::aa:::a       tt:::::::::::tt  ee:::::::::::::e  
 		//    sssssssssss        eeeeeeeeeeeeee            ttttttttttt  MMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeee  SSSSSSSSSSSSSSS         ttttttttttt    aaaaaaaaaa  aaaa         ttttttttttt      eeeeeeeeeeeeee  
 		//
-		// Update player speed and his moveState.
+		/*
+		 * Update player speed and move state.
+		 *
+		 * @param  state     string The current movement state of player.
+		 * @return undefined
+		 */
 		setMoveState: function(state) {
+			
+			// Check that a speed value matches input.
 			if (typeof this[state + 'Speed'] != 'undefined') {
+				
+				// Set player speed.
 				this.speed = this[state + 'Speed'];
+
+				// Update player movement state.
 				this.moveState = state;
-			} else throw "No speed value set for for state: " + state;
+
+			} 
+
+			// Throw an error if unexpected input.
+			else throw "No speed value set for for state: " + state;
 		},
 
 		//                                                                                                                    SSSSSSSSSSSSSSS                                         ffffffffffffffff  
