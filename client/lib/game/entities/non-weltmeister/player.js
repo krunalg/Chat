@@ -332,19 +332,25 @@ ig.module(
 		//  iiiiiiii nnnnnn    nnnnnn        GGGGGG   GGGG rrrrrrr            aaaaaaaaaa  aaaa sssssssssss      sssssssssss    
 		//                                                                                                                     
 		inGrass: function()
-		// returns a grass entity if player is in one
-		// otherwise returns false
+		/*
+		 * Return the grass entity located at the tile where the player is.
+		 *
+		 * @return EntityGrass if one exists, else return undefined.
+		 */
 		{
-			// check for collision against grass entity
+			// Search all grass entities for one that shares the players position.
 			var allGrass = ig.game.getEntitiesByType(EntityGrass);
 			if (allGrass) {
 				for (var i = 0; i < allGrass.length; i++) {
+					
+					// Compare grass entity position to the player's.
 					if (allGrass[i].pos.x == this.pos.x && allGrass[i].pos.y == this.pos.y) {
+						
+						// Return matching grass entity.
 						return allGrass[i];
 					}
 				}
 			}
-			return false;
 		},
 
 		//                                                                                                                                                                                     dddddddd                                                        
