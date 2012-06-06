@@ -411,7 +411,25 @@ ig.module(
 				break;
 			};
 		},
-
+		
+		//
+		//    IIIIIIIIIINNNNNNNN        NNNNNNNNIIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT
+		//    I::::::::IN:::::::N       N::::::NI::::::::IT:::::::::::::::::::::T
+		//    I::::::::IN::::::::N      N::::::NI::::::::IT:::::::::::::::::::::T
+		//    II::::::IIN:::::::::N     N::::::NII::::::IIT:::::TT:::::::TT:::::T
+		//      I::::I  N::::::::::N    N::::::N  I::::I  TTTTTT  T:::::T  TTTTTT
+		//      I::::I  N:::::::::::N   N::::::N  I::::I          T:::::T        
+		//      I::::I  N:::::::N::::N  N::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N N::::N N::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N  N::::N:::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N   N:::::::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N    N::::::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N     N:::::::::N  I::::I          T:::::T        
+		//    II::::::IIN::::::N      N::::::::NII::::::II      TT:::::::TT      
+		//    I::::::::IN::::::N       N:::::::NI::::::::I      T:::::::::T      
+		//    I::::::::IN::::::N        N::::::NI::::::::I      T:::::::::T      
+		//    IIIIIIIIIINNNNNNNN         NNNNNNNIIIIIIIIII      TTTTTTTTTTT      
+		//                                                               
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
@@ -484,6 +502,24 @@ ig.module(
 			this.moveAnimStop();
 		},
 
+		//                                                                                                                                     
+		//    UUUUUUUU     UUUUUUUUPPPPPPPPPPPPPPPPP   DDDDDDDDDDDDD                  AAA         TTTTTTTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEE
+		//    U::::::U     U::::::UP::::::::::::::::P  D::::::::::::DDD              A:::A        T:::::::::::::::::::::TE::::::::::::::::::::E
+		//    U::::::U     U::::::UP::::::PPPPPP:::::P D:::::::::::::::DD           A:::::A       T:::::::::::::::::::::TE::::::::::::::::::::E
+		//    UU:::::U     U:::::UUPP:::::P     P:::::PDDD:::::DDDDD:::::D         A:::::::A      T:::::TT:::::::TT:::::TEE::::::EEEEEEEEE::::E
+		//     U:::::U     U:::::U   P::::P     P:::::P  D:::::D    D:::::D       A:::::::::A     TTTTTT  T:::::T  TTTTTT  E:::::E       EEEEEE
+		//     U:::::D     D:::::U   P::::P     P:::::P  D:::::D     D:::::D     A:::::A:::::A            T:::::T          E:::::E             
+		//     U:::::D     D:::::U   P::::PPPPPP:::::P   D:::::D     D:::::D    A:::::A A:::::A           T:::::T          E::::::EEEEEEEEEE   
+		//     U:::::D     D:::::U   P:::::::::::::PP    D:::::D     D:::::D   A:::::A   A:::::A          T:::::T          E:::::::::::::::E   
+		//     U:::::D     D:::::U   P::::PPPPPPPPP      D:::::D     D:::::D  A:::::A     A:::::A         T:::::T          E:::::::::::::::E   
+		//     U:::::D     D:::::U   P::::P              D:::::D     D:::::D A:::::AAAAAAAAA:::::A        T:::::T          E::::::EEEEEEEEEE   
+		//     U:::::D     D:::::U   P::::P              D:::::D     D:::::DA:::::::::::::::::::::A       T:::::T          E:::::E             
+		//     U::::::U   U::::::U   P::::P              D:::::D    D:::::DA:::::AAAAAAAAAAAAA:::::A      T:::::T          E:::::E       EEEEEE
+		//     U:::::::UUU:::::::U PP::::::PP          DDD:::::DDDDD:::::DA:::::A             A:::::A   TT:::::::TT      EE::::::EEEEEEEE:::::E
+		//      UU:::::::::::::UU  P::::::::P          D:::::::::::::::DDA:::::A               A:::::A  T:::::::::T      E::::::::::::::::::::E
+		//        UU:::::::::UU    P::::::::P          D::::::::::::DDD A:::::A                 A:::::A T:::::::::T      E::::::::::::::::::::E
+		//          UUUUUUUUU      PPPPPPPPPP          DDDDDDDDDDDDD   AAAAAAA                   AAAAAAATTTTTTTTTTT      EEEEEEEEEEEEEEEEEEEEEE
+		//                                                                                                                                                                                                                                     
 		update: function() {
 			this.zIndex = this.pos.y + this.zPriority;
 			this.parent();
