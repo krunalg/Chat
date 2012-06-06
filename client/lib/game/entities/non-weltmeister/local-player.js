@@ -112,10 +112,12 @@ ig.module(
 			if (npcs) {
 				for (var i = 0; i < npcs.length; i++) {
 					if ((npcs[i].pos.x == this.pos.x + vx) && (npcs[i].pos.y == this.pos.y + vy)) {
+						
 						// display chat bubble
 						var bubbleDuration = 3; // magic numbers are bad!
 						ig.game.spawnEntity(EntityBubble, npcs[i].pos.x, npcs[i].pos.y, {
 							msg: npcs[i].msg,
+							follow: npcs[i],
 							lifespan: bubbleDuration // magic numbers are bad!
 						});
 						npcs[i].moveTimer.set(bubbleDuration + 1);

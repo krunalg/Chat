@@ -5,18 +5,30 @@
 ?>
 
 socket.on('newMsg', function (from, msg) {
-	 var showMessageHowLong = 2; // how long to hide name and show message
+	var showMessageHowLong = 2; // how long to hide name and show message
 	 
-	 // hide name briefly
- 	var nameEntity = ig.game.getEntityByName(from+"NameEntity");
- 	if(nameEntity!=undefined) nameEntity.hideTimer.set(showMessageHowLong);
-	 
-	 ig.game.spawnEntity( EntityBubble, 0, 0,
-	 {
-		  from: from,
-		  msg: msg,
-		  lifespan: showMessageHowLong
-	 } );
+	// Get reference to player which name will follow.
+	var player = ig.game.getEntityByName(from);
+
+	// Does the player who sent us a message exist?
+	if(player)
+	{
+		// hide name briefly
+	 	var nameEntity = ig.game.getEntityByName(from+"NameEntity");
+	 	if(nameEntity!=undefined) nameEntity.hideTimer.set(showMessageHowLong);
+		 
+		 ig.game.spawnEntity( EntityBubble, 0, 0,
+		 {
+			  follow: player,
+			  msg: msg,
+			  lifespan: showMessageHowLong
+		 } );
+	}
+	else
+	{
+		console.debug("Received message from non-existent player: " + from);
+	}
+	
 });
 
 socket.on('incomingTell', function (from, msg) {

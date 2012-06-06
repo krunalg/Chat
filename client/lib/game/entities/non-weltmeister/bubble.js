@@ -23,8 +23,8 @@ ig.module('game.entities.non-weltmeister.bubble')
 		// Raw, unprocessed message.
 		msg: '',
 
-		// Name of the entity to follow.
-		from: '',
+		// Reference of entity of which to follow.
+		follow: null,
 
 		// Processed version of msg.
 		toPrint: '',
@@ -150,15 +150,11 @@ ig.module('game.entities.non-weltmeister.bubble')
 			// so it ignores the "normal" draw call
 			if (reallyDraw) {
 
-				// Try to find reference entity.
-				var target = ig.game.getEntityByName(this.from);
+				// We have an entity to follow.
+				if (this.follow) {
 
-				// Check if we found entity.
-				if (target != undefined) {
-
-					// Use target entity's position.
-					this.pos.x = target.pos.x;
-					this.pos.y = target.pos.y;
+					// Use position of entity to follow.
+					this.pos = this.follow.pos;
 				}
 
 				// Position bubble not to hide target/source.
