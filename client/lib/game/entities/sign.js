@@ -15,6 +15,9 @@ ig.module(
 			y: 16
 		},
 
+		// The message to be drawn to screen.
+		msg: '',
+
 		// Load image resource for Weltmeister.
 		animSheet: new ig.AnimationSheet('media/entity-icons.png', 16, 16),
 
