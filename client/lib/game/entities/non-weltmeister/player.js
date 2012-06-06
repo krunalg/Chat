@@ -620,8 +620,7 @@ ig.module(
 		 *
 		 * @return boolean true if jumpable, else false.
 		 */
-		canJump: function()
-		{
+		canJump: function() {
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
@@ -750,16 +749,29 @@ ig.module(
 		//                                      gg:::::::::::::g                                                                                                                         
 		//                                        ggg::::::ggg                                                                                                                           
 		//                                           gggggg                                                                                                                              
+		/*
+		 * Snap player to legal destination coordinates.
+		 *
+		 * @return undefined
+		 */
 		alignToGrid: function() {
+
+			// Select which axis players destination is on.
 			switch (this.facing) {
 			case 'left':
 			case 'right':
+
+				// Horizontal move.
 				this.pos.x = this.destination;
 				break;
+
 			case 'up':
 			case 'down':
+
+				// Vertical move.
 				this.pos.y = this.destination;
 				break;
+
 			}
 		},
 
