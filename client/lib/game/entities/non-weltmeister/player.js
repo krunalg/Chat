@@ -494,28 +494,27 @@ ig.module(
 		//                                                                                      gg:::::::::::::g                                                                                                                         
 		//                                                                                        ggg::::::ggg                                                                                                                           
 		//                                                                                           gggggg                                                                                                                              
+		/*
+		 * Check if the players faced tile is swimmable.
+		 *
+		 * @return boolean true if swimmable, else false.
+		 */
 		facingWater: function()
-		// returns true if the faced tile is a swimmable water tile
 		{
-			var offsetX = offsetY = 0;
-			var tilesize = ig.game.collisionMap.tilesize;
-			switch (this.facing) {
-			case 'left':
-				offsetX--;
-				break;
-			case 'right':
-				offsetX++;
-				break;
-			case 'up':
-				offsetY--;
-				break;
-			case 'down':
-				offsetY++;
-				break;
-			}
-			if (ig.game.isSpecialTile((this.pos.x / tilesize) + offsetX, (this.pos.y / tilesize) + offsetY, specialTiles['water'], 'lower')) {
+			// Get position of faced tile.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+
+			// Get game tilesize.
+			var tilesize = this.getTilesize();
+
+			// Check if faced tile is of water type.
+			if (ig.game.isSpecialTile( (position.x / tilesize), (position.y / tilesize), specialTiles['water'], 'lower')) {
+				
+				// Faced tile is water.
 				return true;
 			}
+
+			// Faced tile is not water.
 			return false;
 		},
 
