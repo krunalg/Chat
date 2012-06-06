@@ -321,8 +321,13 @@ ig.module(
 			// Player entity reference to pass into surf entity.
 			var player = this;
 
+			// Spawn a surf entity.
 			ig.game.spawnEntity(EntitySurf, position.x, position.y, {
+				
+				// Use players faced direction.
 				facing: this.facing,
+				
+				// Pass a reference of the player.
 				follow: player
 			});
 		},
