@@ -138,6 +138,31 @@ ig.module(
 			this.parent();
 		},
 
+		//                                                                                                                                                                           
+		//                                                                                                                                                                           
+		//                                                   tttt      TTTTTTTTTTTTTTTTTTTTTTT  iiii  lllllll                   PPPPPPPPPPPPPPPPP                                    
+		//                                                ttt:::t      T:::::::::::::::::::::T i::::i l:::::l                   P::::::::::::::::P                                   
+		//                                                t:::::t      T:::::::::::::::::::::T  iiii  l:::::l                   P::::::PPPPPP:::::P                                  
+		//                                                t:::::t      T:::::TT:::::::TT:::::T        l:::::l                   PP:::::P     P:::::P                                 
+		//     ggggggggg   ggggg    eeeeeeeeeeee    ttttttt:::::tttttttTTTTTT  T:::::T  TTTTTTiiiiiii  l::::l     eeeeeeeeeeee    P::::P     P:::::P  ooooooooooo       ssssssssss   
+		//    g:::::::::ggg::::g  ee::::::::::::ee  t:::::::::::::::::t        T:::::T        i:::::i  l::::l   ee::::::::::::ee  P::::P     P:::::Poo:::::::::::oo   ss::::::::::s  
+		//   g:::::::::::::::::g e::::::eeeee:::::eet:::::::::::::::::t        T:::::T         i::::i  l::::l  e::::::eeeee:::::eeP::::PPPPPP:::::Po:::::::::::::::oss:::::::::::::s 
+		//  g::::::ggggg::::::gge::::::e     e:::::etttttt:::::::tttttt        T:::::T         i::::i  l::::l e::::::e     e:::::eP:::::::::::::PP o:::::ooooo:::::os::::::ssss:::::s
+		//  g:::::g     g:::::g e:::::::eeeee::::::e      t:::::t              T:::::T         i::::i  l::::l e:::::::eeeee::::::eP::::PPPPPPPPP   o::::o     o::::o s:::::s  ssssss 
+		//  g:::::g     g:::::g e:::::::::::::::::e       t:::::t              T:::::T         i::::i  l::::l e:::::::::::::::::e P::::P           o::::o     o::::o   s::::::s      
+		//  g:::::g     g:::::g e::::::eeeeeeeeeee        t:::::t              T:::::T         i::::i  l::::l e::::::eeeeeeeeeee  P::::P           o::::o     o::::o      s::::::s   
+		//  g::::::g    g:::::g e:::::::e                 t:::::t    tttttt    T:::::T         i::::i  l::::l e:::::::e           P::::P           o::::o     o::::ossssss   s:::::s 
+		//  g:::::::ggggg:::::g e::::::::e                t::::::tttt:::::t  TT:::::::TT      i::::::il::::::le::::::::e        PP::::::PP         o:::::ooooo:::::os:::::ssss::::::s
+		//   g::::::::::::::::g  e::::::::eeeeeeee        tt::::::::::::::t  T:::::::::T      i::::::il::::::l e::::::::eeeeeeeeP::::::::P         o:::::::::::::::os::::::::::::::s 
+		//    gg::::::::::::::g   ee:::::::::::::e          tt:::::::::::tt  T:::::::::T      i::::::il::::::l  ee:::::::::::::eP::::::::P          oo:::::::::::oo  s:::::::::::ss  
+		//      gggggggg::::::g     eeeeeeeeeeeeee            ttttttttttt    TTTTTTTTTTT      iiiiiiiillllllll    eeeeeeeeeeeeeePPPPPPPPPP            ooooooooooo     sssssssssss    
+		//              g:::::g                                                                                                                                                      
+		//  gggggg      g:::::g                                                                                                                                                      
+		//  g:::::gg   gg:::::g                                                                                                                                                      
+		//   g::::::ggg:::::::g                                                                                                                                                      
+		//    gg:::::::::::::g                                                                                                                                                       
+		//      ggg::::::ggg                                                                                                                                                         
+		//         gggggg                                                                                                                                                            
 		/*
 		 * Calculate and returns an object containing the x and y position of a tile
 		 * relative to a given X and Y position.
@@ -185,6 +210,31 @@ ig.module(
 			return position;
 		},
 
+		//                                                                                                                                                                                      
+		//                                                                                                                                                                                      
+		//                                                   tttt      TTTTTTTTTTTTTTTTTTTTTTT  iiii  lllllll                                        iiii                                       
+		//                                                ttt:::t      T:::::::::::::::::::::T i::::i l:::::l                                       i::::i                                      
+		//                                                t:::::t      T:::::::::::::::::::::T  iiii  l:::::l                                        iiii                                       
+		//                                                t:::::t      T:::::TT:::::::TT:::::T        l:::::l                                                                                   
+		//     ggggggggg   ggggg    eeeeeeeeeeee    ttttttt:::::tttttttTTTTTT  T:::::T  TTTTTTiiiiiii  l::::l     eeeeeeeeeeee        ssssssssss   iiiiiii zzzzzzzzzzzzzzzzz    eeeeeeeeeeee    
+		//    g:::::::::ggg::::g  ee::::::::::::ee  t:::::::::::::::::t        T:::::T        i:::::i  l::::l   ee::::::::::::ee    ss::::::::::s  i:::::i z:::::::::::::::z  ee::::::::::::ee  
+		//   g:::::::::::::::::g e::::::eeeee:::::eet:::::::::::::::::t        T:::::T         i::::i  l::::l  e::::::eeeee:::::eess:::::::::::::s  i::::i z::::::::::::::z  e::::::eeeee:::::ee
+		//  g::::::ggggg::::::gge::::::e     e:::::etttttt:::::::tttttt        T:::::T         i::::i  l::::l e::::::e     e:::::es::::::ssss:::::s i::::i zzzzzzzz::::::z  e::::::e     e:::::e
+		//  g:::::g     g:::::g e:::::::eeeee::::::e      t:::::t              T:::::T         i::::i  l::::l e:::::::eeeee::::::e s:::::s  ssssss  i::::i       z::::::z   e:::::::eeeee::::::e
+		//  g:::::g     g:::::g e:::::::::::::::::e       t:::::t              T:::::T         i::::i  l::::l e:::::::::::::::::e    s::::::s       i::::i      z::::::z    e:::::::::::::::::e 
+		//  g:::::g     g:::::g e::::::eeeeeeeeeee        t:::::t              T:::::T         i::::i  l::::l e::::::eeeeeeeeeee        s::::::s    i::::i     z::::::z     e::::::eeeeeeeeeee  
+		//  g::::::g    g:::::g e:::::::e                 t:::::t    tttttt    T:::::T         i::::i  l::::l e:::::::e           ssssss   s:::::s  i::::i    z::::::z      e:::::::e           
+		//  g:::::::ggggg:::::g e::::::::e                t::::::tttt:::::t  TT:::::::TT      i::::::il::::::le::::::::e          s:::::ssss::::::si::::::i  z::::::zzzzzzzze::::::::e          
+		//   g::::::::::::::::g  e::::::::eeeeeeee        tt::::::::::::::t  T:::::::::T      i::::::il::::::l e::::::::eeeeeeee  s::::::::::::::s i::::::i z::::::::::::::z e::::::::eeeeeeee  
+		//    gg::::::::::::::g   ee:::::::::::::e          tt:::::::::::tt  T:::::::::T      i::::::il::::::l  ee:::::::::::::e   s:::::::::::ss  i::::::iz:::::::::::::::z  ee:::::::::::::e  
+		//      gggggggg::::::g     eeeeeeeeeeeeee            ttttttttttt    TTTTTTTTTTT      iiiiiiiillllllll    eeeeeeeeeeeeee    sssssssssss    iiiiiiiizzzzzzzzzzzzzzzzz    eeeeeeeeeeeeee  
+		//              g:::::g                                                                                                                                                                 
+		//  gggggg      g:::::g                                                                                                                                                                 
+		//  g:::::gg   gg:::::g                                                                                                                                                                 
+		//   g::::::ggg:::::::g                                                                                                                                                                 
+		//    gg:::::::::::::g                                                                                                                                                                  
+		//      ggg::::::ggg                                                                                                                                                                    
+		//         gggggg                                                                                                                                                                       
 		/*
 		 * Returns the game tilesize.
 		 *
