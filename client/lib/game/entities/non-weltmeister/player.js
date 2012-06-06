@@ -56,6 +56,34 @@ ig.module(
 		// used for both x and y planes
 		destination: 0,
 
+		//
+		//    IIIIIIIIIINNNNNNNN        NNNNNNNNIIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT
+		//    I::::::::IN:::::::N       N::::::NI::::::::IT:::::::::::::::::::::T
+		//    I::::::::IN::::::::N      N::::::NI::::::::IT:::::::::::::::::::::T
+		//    II::::::IIN:::::::::N     N::::::NII::::::IIT:::::TT:::::::TT:::::T
+		//      I::::I  N::::::::::N    N::::::N  I::::I  TTTTTT  T:::::T  TTTTTT
+		//      I::::I  N:::::::::::N   N::::::N  I::::I          T:::::T        
+		//      I::::I  N:::::::N::::N  N::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N N::::N N::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N  N::::N:::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N   N:::::::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N    N::::::::::N  I::::I          T:::::T        
+		//      I::::I  N::::::N     N:::::::::N  I::::I          T:::::T        
+		//    II::::::IIN::::::N      N::::::::NII::::::II      TT:::::::TT      
+		//    I::::::::IN::::::N       N:::::::NI::::::::I      T:::::::::T      
+		//    I::::::::IN::::::N        N::::::NI::::::::I      T:::::::::T      
+		//    IIIIIIIIIINNNNNNNN         NNNNNNNIIIIIIIIII      TTTTTTTTTTT      
+		//                                                               
+		init: function(x, y, settings) {
+			this.parent(x, y, settings);
+
+			// set players appearance
+			this.reskin(this.skin);
+
+			// Set max velocity equal to run speed.
+			this.maxVel.x = this.maxVel.y = this.runSpeed;
+		},
+
 		// Updates the speed the player and his moveState.
 		setMoveState: function(state) {
 			if (typeof this[state + 'Speed'] != 'undefined') {
@@ -411,47 +439,29 @@ ig.module(
 				break;
 			};
 		},
-		
-		//
-		//    IIIIIIIIIINNNNNNNN        NNNNNNNNIIIIIIIIIITTTTTTTTTTTTTTTTTTTTTTT
-		//    I::::::::IN:::::::N       N::::::NI::::::::IT:::::::::::::::::::::T
-		//    I::::::::IN::::::::N      N::::::NI::::::::IT:::::::::::::::::::::T
-		//    II::::::IIN:::::::::N     N::::::NII::::::IIT:::::TT:::::::TT:::::T
-		//      I::::I  N::::::::::N    N::::::N  I::::I  TTTTTT  T:::::T  TTTTTT
-		//      I::::I  N:::::::::::N   N::::::N  I::::I          T:::::T        
-		//      I::::I  N:::::::N::::N  N::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N N::::N N::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N  N::::N:::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N   N:::::::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N    N::::::::::N  I::::I          T:::::T        
-		//      I::::I  N::::::N     N:::::::::N  I::::I          T:::::T        
-		//    II::::::IIN::::::N      N::::::::NII::::::II      TT:::::::TT      
-		//    I::::::::IN::::::N       N:::::::NI::::::::I      T:::::::::T      
-		//    I::::::::IN::::::N        N::::::NI::::::::I      T:::::::::T      
-		//    IIIIIIIIIINNNNNNNN         NNNNNNNIIIIIIIIII      TTTTTTTTTTT      
-		//                                                               
-		init: function(x, y, settings) {
-			this.parent(x, y, settings);
 
-			// set players appearance
-			this.reskin(this.skin);
-
-			// Set max velocity equal to run speed.
-			this.maxVel.x = this.maxVel.y = this.runSpeed;
-		},
-
+		// Reload skin image resource and set animations.
 		reskin: function() {
+
+			// Check if current skin is allowed.
 			switch (this.skin) {
+
 			case 'boy':
 			case 'girl':
 			case 'fat':
 			case 'kid':
 			case 'labgeek':
+
+				// Selected skin is good, use it.
 				var use = true;
 				break;
+
 			default:
+
+				// No legal skin was found, use the default.
 				var use = false;
 				break;
+
 			}
 			this.offset = {
 				x: 8,
@@ -521,7 +531,11 @@ ig.module(
 		//          UUUUUUUUU      PPPPPPPPPP          DDDDDDDDDDDDD   AAAAAAA                   AAAAAAATTTTTTTTTTT      EEEEEEEEEEEEEEEEEEEEEE
 		//                                                                                                                                                                                                                                     
 		update: function() {
+
+			// Set zIndex by position in game, and its priority.
 			this.zIndex = this.pos.y + this.zPriority;
+
+			// Call parent.
 			this.parent();
 		}
 
