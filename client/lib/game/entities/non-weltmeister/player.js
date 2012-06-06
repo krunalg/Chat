@@ -898,11 +898,10 @@ ig.module(
 		 *
 		 * @return boolean true if destination has been reached, else false.
 		 */
-		destinationReached: function()
-		{
+		destinationReached: function() {
 			// Check which axis destination is on.
 			switch (this.facing) {
-			
+
 			case 'left':
 				return this.pos.x <= this.destination;
 				break;
@@ -1005,21 +1004,20 @@ ig.module(
 		 *
 		 * @return undefined
 		 */
-		moveAnimStop: function()
-		{
+		moveAnimStop: function() {
 			// Use faced direction to determine the animation.
 			switch (this.facing) {
 			case 'left':
 			case 'right':
 			case 'up':
 			case 'down':
-				
+
 				// Swimming idle.
 				if (this.swimming) this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
-				
+
 				// Land idle.
 				else this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
-				
+
 				break;
 			};
 		},
@@ -1041,7 +1039,11 @@ ig.module(
 		//   r:::::r              ee:::::::::::::e   s:::::::::::ss  k::::::k   k:::::k i::::::i n::::n    n::::n
 		//   rrrrrrr                eeeeeeeeeeeeee    sssssssssss    kkkkkkkk    kkkkkkkiiiiiiii nnnnnn    nnnnnn
 		//
-		// Reload skin image resource and set animations.
+		/*
+		 * Loads and sets players current skin.
+		 *
+		 * @return undefined
+		 */
 		reskin: function() {
 
 			// Check if current skin is allowed.
