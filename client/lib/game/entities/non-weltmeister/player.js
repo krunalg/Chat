@@ -333,7 +333,7 @@ ig.module(
 			if (ig.game.isSpecialTile(
 			(position.x / tilesize), (position.y / tilesize), specialTiles['grass'], 'lower')) {
 
-				// Debut message.
+				// Debug message.
 				console.debug("Creating grass entity at: " + position.x + "," + position.y);
 
 				// Spawn new grass entity and return it.
