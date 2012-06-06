@@ -409,43 +409,52 @@ ig.module(
 		// returns true if no collision will occur
 		// in the direction the player faces
 		{
-			var vx = vy = 0; // velocity
-			var ox = oy = 0; // tile offset
+			// Get position of faced tile.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+
+			// Get map tilesize.
 			var tilesize = ig.game.collisionMap.tilesize;
+
+			var velocityX = velocityY = 0; // velocity
 			switch (this.facing) {
 			case 'left':
-				vx = -1;
-				ox = -tilesize;
+				velocityX = -1;
 				break;
 			case 'right':
-				vx = 1;
-				ox = tilesize;
+				velocityX = 1;
 				break;
 			case 'up':
-				vy = -1;
-				oy = -tilesize;
+				velocityY = -1;
 				break;
 			case 'down':
-				vy = 1;
-				oy = tilesize;
+				velocityY = 1;
 				break;
 			}
-			// check map collisions
-			var res = ig.game.collisionMap.trace(this.pos.x, this.pos.y, vx, vy, this.size.x, this.size.y);
-			if (res.collision.x || res.collision.y) return false;
+
+			// Check map for collision.
+			var res = ig.game.collisionMap.trace(this.pos.x, this.pos.y, velocityX, velocityY, this.size.x, this.size.y);
+			
+			// Did a collision occur?
+			if (res.collision.x || res.collision.y) 
+			{
+				// Collision occured.
+				return false;
+			}
 
 			// check npc collisions
 			var npcs = ig.game.getEntitiesByType(EntityNpc);
 			if (npcs) {
 				for (var i = 0; i < npcs.length; i++) {
-					if ((npcs[i].pos.x == this.pos.x + ox) && (npcs[i].pos.y == this.pos.y + oy)) {
+					if ((npcs[i].pos.x == position.x) && (npcs[i].pos.y == position.y)) {
+						
+						// Collision occured.
 						return false;
 					}
 				}
 			}
 
-
-			return true; // no collisions
+			// No collisions.
+			return true;
 		},
 
 		//      ffffffffffffffff                                       iiii                                      WWWWWWWW                           WWWWWWWW                       tttt                                                  
