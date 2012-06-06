@@ -68,7 +68,7 @@ ig.module(
 		// Is the player moving or not.
 		isMove: false,
 
-		// Is the player jumping or not.
+		// Used to know when to move extra distance.
 		isJump: false,
 
 		// Used to alternate between step animations.
@@ -792,24 +792,36 @@ ig.module(
 		//   s:::::::::::ss    ee:::::::::::::e          tt:::::::::::ttM::::::M               M::::::M oo:::::::::::oo         v:::v         ee:::::::::::::eD::::::::::::DDD       ee:::::::::::::e   s:::::::::::ss          tt:::::::::::tti::::::i n::::n    n::::n a::::::::::aa:::a       tt:::::::::::tti::::::i oo:::::::::::oo   n::::n    n::::n
 		//    sssssssssss        eeeeeeeeeeeeee            ttttttttttt  MMMMMMMM               MMMMMMMM   ooooooooooo            vvv            eeeeeeeeeeeeeeDDDDDDDDDDDDD            eeeeeeeeeeeeee    sssssssssss              ttttttttttt  iiiiiiii nnnnnn    nnnnnn  aaaaaaaaaa  aaaa         ttttttttttt  iiiiiiii   ooooooooooo     nnnnnn    nnnnnn
 		//                                                                                                                                                                                                                                                                                                                                                 
+		/*
+		 * Set the players destination.
+		 *
+		 * @return undefined
+		 */
 		setMoveDestination: function() {
-			var tilesize = ig.game.collisionMap.tilesize;
-			if (this.isJump) var dist = 2;
-			else var dist = 1;
+			
+			// Specify distance based on move type.
+			if (this.isJump) var distance = 2;
+			else var distance = 1;
 
+			// Get destination position.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, distance);
+
+			// Dertermine which axis move is over.
 			switch (this.facing) {
 			case 'left':
-				this.destination = this.pos.x - tilesize * dist;
-				break;
 			case 'right':
-				this.destination = this.pos.x + tilesize * dist;
+				
+				// Set horizontal destination.
+				this.destination = position.x;
 				break;
+
 			case 'up':
-				this.destination = this.pos.y - tilesize * dist;
-				break;
 			case 'down':
-				this.destination = this.pos.y + tilesize * dist;
+
+				// Set vertical destination.
+				this.destination = position.y;
 				break;
+
 			}
 		},
 
