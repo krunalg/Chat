@@ -440,13 +440,31 @@ ig.module(
 			};
 		},
 
+		//                                                                                                                       
+		//    RRRRRRRRRRRRRRRRR   EEEEEEEEEEEEEEEEEEEEEE   SSSSSSSSSSSSSSS KKKKKKKKK    KKKKKKKIIIIIIIIIINNNNNNNN        NNNNNNNN
+		//    R::::::::::::::::R  E::::::::::::::::::::E SS:::::::::::::::SK:::::::K    K:::::KI::::::::IN:::::::N       N::::::N
+		//    R::::::RRRRRR:::::R E::::::::::::::::::::ES:::::SSSSSS::::::SK:::::::K    K:::::KI::::::::IN::::::::N      N::::::N
+		//    RR:::::R     R:::::REE::::::EEEEEEEEE::::ES:::::S     SSSSSSSK:::::::K   K::::::KII::::::IIN:::::::::N     N::::::N
+		//      R::::R     R:::::R  E:::::E       EEEEEES:::::S            KK::::::K  K:::::KKK  I::::I  N::::::::::N    N::::::N
+		//      R::::R     R:::::R  E:::::E             S:::::S              K:::::K K:::::K     I::::I  N:::::::::::N   N::::::N
+		//      R::::RRRRRR:::::R   E::::::EEEEEEEEEE    S::::SSSS           K::::::K:::::K      I::::I  N:::::::N::::N  N::::::N
+		//      R:::::::::::::RR    E:::::::::::::::E     SS::::::SSSSS      K:::::::::::K       I::::I  N::::::N N::::N N::::::N
+		//      R::::RRRRRR:::::R   E:::::::::::::::E       SSS::::::::SS    K:::::::::::K       I::::I  N::::::N  N::::N:::::::N
+		//      R::::R     R:::::R  E::::::EEEEEEEEEE          SSSSSS::::S   K::::::K:::::K      I::::I  N::::::N   N:::::::::::N
+		//      R::::R     R:::::R  E:::::E                         S:::::S  K:::::K K:::::K     I::::I  N::::::N    N::::::::::N
+		//      R::::R     R:::::R  E:::::E       EEEEEE            S:::::SKK::::::K  K:::::KKK  I::::I  N::::::N     N:::::::::N
+		//    RR:::::R     R:::::REE::::::EEEEEEEE:::::ESSSSSSS     S:::::SK:::::::K   K::::::KII::::::IIN::::::N      N::::::::N
+		//    R::::::R     R:::::RE::::::::::::::::::::ES::::::SSSSSS:::::SK:::::::K    K:::::KI::::::::IN::::::N       N:::::::N
+		//    R::::::R     R:::::RE::::::::::::::::::::ES:::::::::::::::SS K:::::::K    K:::::KI::::::::IN::::::N        N::::::N
+		//    RRRRRRRR     RRRRRRREEEEEEEEEEEEEEEEEEEEEE SSSSSSSSSSSSSSS   KKKKKKKKK    KKKKKKKIIIIIIIIIINNNNNNNN         NNNNNNN
+		//                                                
 		// Reload skin image resource and set animations.
 		reskin: function() {
 
 			// Check if current skin is allowed.
 			switch (this.skin) {
 
-			// These skins are allowed.
+				// These skins are allowed.
 			case 'boy':
 			case 'girl':
 			case 'fat':
@@ -457,7 +475,7 @@ ig.module(
 				var allowedSkin = true;
 				break;
 
-			// Skin is not allowed.
+				// Skin is not allowed.
 			default:
 
 				// Use the default skin.
@@ -474,7 +492,7 @@ ig.module(
 
 			// Set the default skin.
 			if (!allowedSkin) this.skin = 'boy';
-			
+
 			// Load skin image resource.
 			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 32, 32);
 
