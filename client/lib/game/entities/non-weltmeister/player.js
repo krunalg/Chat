@@ -938,6 +938,11 @@ ig.module(
 		//  m::::m   m::::m   m::::m oo:::::::::::oo         v:::v         ee:::::::::::::e A:::::A                 A:::::A n::::n    n::::ni::::::im::::m   m::::m   m::::mS:::::::::::::::SS     tt:::::::::::tt a::::::::::aa:::ar:::::r                    tt:::::::::::tt
 		//  mmmmmm   mmmmmm   mmmmmm   ooooooooooo            vvv            eeeeeeeeeeeeeeAAAAAAA                   AAAAAAAnnnnnn    nnnnnniiiiiiiimmmmmm   mmmmmm   mmmmmm SSSSSSSSSSSSSSS         ttttttttttt    aaaaaaaaaa  aaaarrrrrrr                      ttttttttttt  
 		//                                                                                                                                                                                                                                                                    
+		/*
+		 * Plays the players movement animation.
+		 *
+		 * @return undefined
+		 */
 		moveAnimStart: function(alternateFeet) {
 
 			// State to use for animation.
@@ -995,17 +1000,26 @@ ig.module(
 		//                                                                                                                                                                                                                         p:::::::p           
 		//                                                                                                                                                                                                                         p:::::::p           
 		//                                                                                                                                                                                                                         ppppppppp           
+		/*
+		 * Plays the players idle (non-movement) animation.
+		 *
+		 * @return undefined
+		 */
 		moveAnimStop: function()
-		// set animation to idle
 		{
+			// Use faced direction to determine the animation.
 			switch (this.facing) {
-
 			case 'left':
 			case 'right':
 			case 'up':
 			case 'down':
+				
+				// Swimming idle.
 				if (this.swimming) this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
+				
+				// Land idle.
 				else this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
+				
 				break;
 			};
 		},
