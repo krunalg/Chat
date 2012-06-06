@@ -377,8 +377,13 @@ ig.module(
 		//                   p:::::::p                                                                                                                                                                                                                         
 		//                   ppppppppp                                                                                                                                                                                                                         
 		//                                                                                                                                                                                                                                                     
+		/*
+		 * Spawn a jump entity (shadow) at the players position.
+		 *
+		 * @return EntityJump
+		 */
 		spawnShadow: function() {
-			ig.game.spawnEntity(EntityJump, this.pos.x, this.pos.y, {
+			return ig.game.spawnEntity(EntityJump, this.pos.x, this.pos.y, {
 				direction: this.facing
 			});
 		},
