@@ -111,7 +111,7 @@ ig.module('game.main')
 		// time in seconds before clearing event
 		eventsLifespan: 2,
 
-		defaultLevel: LevelTown,
+		defaultLevel: LevelTest,
 
 		defaultXStart: 256,
 
