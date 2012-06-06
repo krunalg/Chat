@@ -721,7 +721,7 @@ ig.module(
 				}
 			} else {
 				// Have not reached destination, keep moving.
-				this.move();
+				this.setVelocity(this.speed);
 			}
 		},
 
@@ -841,23 +841,24 @@ ig.module(
 		/*
 		 * Set players velocity to equal his current set speed.
 		 *
-		 * @return undefined
+		 * @param  speed integer Pixels per second to move.
+		 * @return       undefined
 		 */
-		move: function() {
+		setVelocity: function(speed) {
 
 			// Check which direction the player is facing.
 			switch (this.facing) {
 			case 'left':
-				this.vel.x = -this.speed;
+				this.vel.x = -speed;
 				break;
 			case 'right':
-				this.vel.x = +this.speed;
+				this.vel.x = +speed;
 				break;
 			case 'up':
-				this.vel.y = -this.speed;
+				this.vel.y = -speed;
 				break;
 			case 'down':
-				this.vel.y = +this.speed;
+				this.vel.y = +speed;
 				break;
 			}
 		},
