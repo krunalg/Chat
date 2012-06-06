@@ -798,7 +798,7 @@ ig.module(
 		 * @return undefined
 		 */
 		setMoveDestination: function() {
-			
+
 			// Specify distance based on move type.
 			if (this.isJump) var distance = 2;
 			else var distance = 1;
@@ -810,7 +810,7 @@ ig.module(
 			switch (this.facing) {
 			case 'left':
 			case 'right':
-				
+
 				// Set horizontal destination.
 				this.destination = position.x;
 				break;
@@ -838,8 +838,14 @@ ig.module(
 		// m::::m   m::::m   m::::m oo:::::::::::oo         v:::v         ee:::::::::::::e  
 		// mmmmmm   mmmmmm   mmmmmm   ooooooooooo            vvv            eeeeeeeeeeeeee  
 		//
-		// Sets player velocity to his speed based on his faced direction.
+		/*
+		 * Set players velocity to equal his current set speed.
+		 *
+		 * @return undefined
+		 */
 		move: function() {
+
+			// Check which direction the player is facing.
 			switch (this.facing) {
 			case 'left':
 				this.vel.x = -this.speed;
