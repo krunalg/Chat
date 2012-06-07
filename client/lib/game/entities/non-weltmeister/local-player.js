@@ -200,35 +200,29 @@ ig.module(
 			}
 		},
 
+		// Returns the exit entity if found at the faced tile, else returns false.
 		facingExit: function()
-		// returns the exit entity that the local player is
-		// facing, returns false if none
 		{
-			var vx = vy = 0;
-			var tilesize = ig.game.collisionMap.tilesize;
-			switch (this.facing) {
-			case 'left':
-				vx = -tilesize;
-				break;
-			case 'right':
-				vx = tilesize;
-				break;
-			case 'up':
-				vy = -tilesize;
-				break;
-			case 'down':
-				vy = tilesize;
-				break;
-			}
-			// check for collision against an exit entity
+			// Get position of faced tile.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+
+			// Get all door entities.
 			var doors = ig.game.getEntitiesByType(EntityExit);
+			
+			// Check that at least one door was found.
 			if (doors) {
 				for (var i = 0; i < doors.length; i++) {
-					if (doors[i].pos.x == this.pos.x + vx && doors[i].pos.y == this.pos.y + vy) {
+					
+					// Check that door location is the same as the faced tile.
+					if (doors[i].pos.x == position.x && doors[i].pos.y == position.y) {
+						
+						// Found an exit entity at the faced tile.
 						return doors[i];
 					}
 				}
 			}
+
+			// Found no exit at the faced tile.
 			return false;
 		},
 
