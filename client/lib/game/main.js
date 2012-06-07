@@ -425,7 +425,7 @@ ig.module('game.main')
 		 * @param  message    string    Message to be send and displayed.
 		 * @return            undefined
 		 */
-		chatSendMessage: function(playerName, message) {
+		chatSendSay: function(playerName, message) {
 			// Get the local player entity.
 			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 
@@ -445,6 +445,25 @@ ig.module('game.main')
 
 			// HTML for chat log.
 			var html = '<div><span class="name">[' + playerName + ']</span> says: ' + message + '</div>';
+			
+			// Write to chat log.
+			this.chatLog.push(html);
+		},
+
+		/*
+		 * Send /tell message to the server and create a local chat bubble.
+		 *
+		 * @param  playerName string    Name of the player message is from.
+		 * @param  message    string    Message to be send and displayed.
+		 * @return            undefined
+		 */
+		chatSendTell: function(recipient, message) {
+			
+			// Send message to server.
+			this.emitTell(recipient, message);
+
+			// HTML for chat log.
+			var html = '<div>To <span class="name">[' + recipient + ']</span>: ' + message + '</div>';
 			
 			// Write to chat log.
 			this.chatLog.push(html);
@@ -485,8 +504,7 @@ ig.module('game.main')
 						for (i = 2; i < explodeInput.length; i++) msg += explodeInput[i];
 
 						// Send message to server.
-						this.emitTell(to, msg);
-
+						this.chatSendTell(to, msg);
 					}
 					// Check for commands: /say or /s
 					else if (explodeInput[0] == '/say' || explodeInput[0] == '/s') {
@@ -503,7 +521,7 @@ ig.module('game.main')
 						}
 
 						// Send message to server.
-						this.chatSendMessage(player.name, inputVal);
+						this.chatSendSay(player.name, inputVal);
 
 					}
 					// Check for command: /skin
@@ -528,7 +546,7 @@ ig.module('game.main')
 				// Assume it's a /say
 				else {
 					// Send message to server.
-					this.chatSendMessage(player.name, inputVal);
+					this.chatSendSay(player.name, inputVal);
 				}
 
 
