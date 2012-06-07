@@ -544,26 +544,28 @@ ig.module(
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// initiate network
+			// Tell the world all about this player.
 			this.netInit();
 		},
 
 		update: function() {
 			this.parent();
 
-			// action (like reading a sign or talking to npc)
+			// Check for actions, like reading signs, or talking to NPC's.
 			if (ig.input.pressed('action') && !this.isMove) {
+				
+				// Action key was pressed.
 				this.action(this);
 			}
 
-			// handle zoning
+			// Player just entered a door but has not yet changed zones.
 			if (this.moveDoor && !this.waitingToMove && !this.isMove) {
-				// we just entered a door, so zone
+				
+				// Change zones.
 				this.moveDoor.trigger();
+
 			} else {
-				/////////////////////
-				// Handle Movement //
-				/////////////////////
+			
 				if (this.waitingToMove) {
 					// about to move
 					console.debug("Waiting to move...");
