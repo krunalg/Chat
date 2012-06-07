@@ -74,11 +74,17 @@ ig.module(
 		// Determine if player should continue moving or stop.
 		continueOrStop: function()
 		{
+			// Not moving.
 			this.isMove = false;
+
+			// Set idle animation.
 			this.moveAnimStop();
+
+			// Prevent movement for a time.
 			this.moveTimer.set(this.moveDelay);
 		},
 
+		
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
