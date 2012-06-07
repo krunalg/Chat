@@ -443,8 +443,11 @@ ig.module('game.main')
 				msg: message,
 			});
 
+			// HTML for chat log.
+			var html = '<div><span class="name">[' + playerName + ']</span> says: ' + message + '</div>';
+			
 			// Write to chat log.
-			this.chatLog.push(message);
+			this.chatLog.push(html);
 		},
 
 		/*
