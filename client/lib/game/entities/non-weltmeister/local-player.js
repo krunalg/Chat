@@ -61,12 +61,18 @@ ig.module(
 			// Assume we will keep moving unless told otherwise.
 			var keepMoving = true;
 
-			// if key pressed, update direction and proceed with move
+			// Check if player is pressing down the movement key.
 			if (this.moveKeyDown('left')) this.facing = 'left';
 			else if (this.moveKeyDown('right')) this.facing = 'right';
 			else if (this.moveKeyDown('up')) this.facing = 'up';
 			else if (this.moveKeyDown('down')) this.facing = 'down';
-			else keepMoving = false; // no key pressed, stop moving
+			else 
+			{
+				// Player is no longer trying to move.
+				keepMoving = false;
+			}
+
+			
 			if (keepMoving && this.canJump()) {
 				this.isMove = false; // will use isJump instead
 				this.startJump();
