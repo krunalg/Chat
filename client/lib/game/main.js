@@ -609,14 +609,20 @@ ig.module('game.main')
 				// Add new lines.
 				var space = (i==0 ? '' : "\n");
 
+				// Add event to print.
 				printEvents += space + this.events[i];
 			}
+
+			// Draw game events to screen.
 			this.whiteFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
 
-			// write FPS
+			// Write controls to screen.
 			this.whiteFont.draw('ARROWS move, Z action, X run, ENTER chat', ig.system.width / 2, ig.system.height - 10, ig.Font.ALIGN.CENTER);
 
+			// Enable extra debugging for just myself.
 			if (username == "Joncom") {
+
+				// Draw debug display.
 				this.debugDisplay.draw(
 				[this.mapName], // will display each array element on a new line
 				true, // true or false to either show the FPS
@@ -625,11 +631,10 @@ ig.module('game.main')
 				100 // amount of samples to take over time. defaults to 500
 				);
 
-				// disable collisions
+				// Disable collisions
 				ig.CollisionMap.inject({
 					trace: function(x, y, vx, vy, objectWidth, objectHeight) {
-						// Return a dummy trace result, indicating that the object
-						// did not collide
+						// Return a dummy trace result, indicating that the object did not collide.
 						return {
 							collision: {
 								x: false,
@@ -650,9 +655,7 @@ ig.module('game.main')
 		}
 	});
 
-	// Start the Game with 60fps, a resolution of 240x160, scaled
-	// up by a factor of 2
-	// Use the ig.ImpactSplashLoader class as the preloader
-	ig.main('#canvas', MyGame, 60, 360, 240, 2, ig.ImpactSplashLoader);
+	// Start the game.
+	ig.main('#canvas', MyGame, 60, 360, 240, 2);
 
 });
