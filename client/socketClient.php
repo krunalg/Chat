@@ -22,6 +22,12 @@ socket.on('newMsg', function(from, msg) {
 			lifespan: showMessageHowLong
 		});
 	}
+
+	// HTML for chat log.
+	var html = '<div><span class="name">[' + from + ']</span> says: ' + msg + '</div>';
+	
+	// Write to chat log.
+	ig.game.chatLog.push(html);
 });
 
 // Receive /tell message from server.
