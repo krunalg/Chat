@@ -564,29 +564,38 @@ ig.module(
 				// Change zones.
 				this.moveDoor.trigger();
 
-			} else {
+			} 
+			// Handle movements.
+			else {
 			
+				// Check if waiting to walk through a door.
 				if (this.waitingToMove) {
-					// about to move
+					
+					// Debug message.
 					console.debug("Waiting to move...");
+
+					// Waiting to move.
 					this.moveWait();
-				} else if (this.isJump || this.isMove) {
-					// a move or jump has already been started
+
+				} 
+				// Check if currently jumping or moving.
+				else if (this.isJump || this.isMove) {
+					
+					// Finish the current move.
 					this.finishMove();
-				} else if (ig.input.state('left') && !ig.input.state('right')) {
-					// if player is trying to move left
+
+				} 
+				// Check if trying to start a new move.
+				else if (this.moveKeyDown('left')) {
 					this.facing = 'left';
 					this.movePressed();
-				} else if (ig.input.state('right') && !ig.input.state('left')) {
-					// if player is trying to move right
+				} else if (this.moveKeyDown('right')) {
 					this.facing = 'right';
 					this.movePressed();
-				} else if (ig.input.state('up') && !ig.input.state('down')) {
-					// if player is trying to move up
+				} else if (this.moveKeyDown('up')) {
 					this.facing = 'up';
 					this.movePressed();
-				} else if (ig.input.state('down') && !ig.input.state('up')) {
-					// if player is trying to move down
+				} else if (this.moveKeyDown('down')) {
 					this.facing = 'down';
 					this.movePressed();
 				} else {
