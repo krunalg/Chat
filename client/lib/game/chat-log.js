@@ -41,8 +41,14 @@ ig.module('game.chat-log')
 			// Set a red border for debugging.
 			$('#' + this.htmlLogId).css("border", "2px solid red");
 
-			// Set a red border for debugging.
-			$('#' + this.htmlLogId).css("overflow", "scroll");
+			// Setting scrolling.
+			$('#' + this.htmlLogId).css("overflow-x", "hidden");
+			$('#' + this.htmlLogId).css("overflow-y", "scroll");
+
+			/*
+			overflow-x: hidden;
+			overflow-y: scroll;
+			*/
 		},
 
 		/*
