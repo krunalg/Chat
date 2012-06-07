@@ -487,28 +487,44 @@ ig.module('game.main')
 			// Update all entities and backgroundMaps
 			this.parent();
 
-			// rebuild player when loadLevel deletes it
+			// Local player entity does not exist (after map change).
 			if (!this.getEntitiesByType(EntityLocalPlayer)[0]) {
+				
+				// Spawn new local player entity.
 				var player = this.buildPlayer();
+
+				// Debug message.
 				console.debug("Player does not exist. Adding one.");
 			}
-
-			// screen positioning
-			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
+			// Local player exists.
+			else 
+			{
+				// Get local player entity.
+				var player = this.getEntitiesByType(EntityLocalPlayer)[0];	
+			}
+			
+			// Player exists.
 			if (player) {
+
+				// Screen centers on player.
 				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
 				this.screen.y = player.pos.y - ig.system.height / 2;
 			}
 
-			// Check for player wanting to chat
+			// Is player trying to chat?
 			if (ig.input.pressed('chatToggle')) {
+				
+				// Make sure chat input isn't already open.
 				if (!this.inputActive)
-				// if input is hidden and allowed to open chat
 				{
 
+					// Make input visible.
 					$('#input').fadeIn(100);
+
+					// Set focus.
 					$('#input').focus();
-					//this.lastInput = new Date().getTime();
+
+					// Prevent opening when it's already open.
 					this.inputActive = true;
 				}
 			}
