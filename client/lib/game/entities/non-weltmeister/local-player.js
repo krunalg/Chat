@@ -97,6 +97,7 @@ ig.module(
 			}
 		},
 
+		// Sets player to idle state and notifies the server.
 		stopMoving: function()
 		{
 			// Player is not moving.
@@ -115,57 +116,85 @@ ig.module(
 			this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 		},
 
+		// Tries interacted with the faced tile.
 		action: function() {
-			var vx = vy = 0;
-			var tilesize = ig.game.collisionMap.tilesize;
-			switch (this.facing) {
-			case 'left':
-				vx = -tilesize;
-				break;
-			case 'right':
-				vx = tilesize;
-				break;
-			case 'up':
-				vy = -tilesize;
-				break;
-			case 'down':
-				vy = tilesize;
-				break;
-			}
+			
+			// Get faced tile position.
+			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
-			// tries to read signs
+			// Get all signs.
 			var signs = ig.game.getEntitiesByType(EntitySign);
+
+			// Check that at least one sign exists.
 			if (signs) {
 				for (var i = 0; i < signs.length; i++) {
-					if ((signs[i].pos.x == this.pos.x + vx) && (signs[i].pos.y == this.pos.y + vy)) {
+					
+					// Check if the tile is located at the faced tile.
+					if ((signs[i].pos.x == position.x) && (signs[i].pos.y == position.y)) {
+						
+						// Set chat bubble duration.
 						var bubbleDuration = 3; // magic numbers are bad!
+
+						// Spawn a chat bubble at the sign.
 						ig.game.spawnEntity(EntityBubble, signs[i].pos.x, signs[i].pos.y, {
+							
+							// Pass in sign message to chat bubble.
 							msg: signs[i].msg,
+
+							// Entity to follow.
+							follow: signs[i],
+
+							// Life of chat bubble.
 							lifespan: bubbleDuration
 						});
+
+						// Shouldn't be more than one interactable object per tile.
+						return;
 					}
 				}
 			}
 
-			// tries to read npc message
+			// Get all NPC's.
 			var npcs = ig.game.getEntitiesByType(EntityNpc);
+			
+			// Check that at least one NPC exists.
 			if (npcs) {
 				for (var i = 0; i < npcs.length; i++) {
-					if ((npcs[i].pos.x == this.pos.x + vx) && (npcs[i].pos.y == this.pos.y + vy)) {
+					
+					// Check if the NPC is located at the faced tile.
+					if ((npcs[i].pos.x == position.x) && (npcs[i].pos.y == position.y)) {
 						
-						// display chat bubble
+						// Set chat bubble duration.
 						var bubbleDuration = 3; // magic numbers are bad!
+
+						// Spawn a chat bubble at the NPC.
 						ig.game.spawnEntity(EntityBubble, npcs[i].pos.x, npcs[i].pos.y, {
+							
+							// Pass in NPC message to chat bubble.
 							msg: npcs[i].msg,
+
+							// Entity to follow.
 							follow: npcs[i],
+
+							// Life of chat bubble.
 							lifespan: bubbleDuration // magic numbers are bad!
 						});
+
+						// Delay NPC's movement.
 						npcs[i].moveTimer.set(bubbleDuration + 1);
 
+						// Get NPC's name entity.
 						var nameEntity = ig.game.getEntityByName(npcs[i].name+"NameEntity");
- 						if(nameEntity!=undefined) nameEntity.hideTimer.set(bubbleDuration);
+ 						
+						// Check if name entity was found.
+ 						if(nameEntity!=undefined) 
+						{
+							// Hide name for duration of chat bubble.
+							nameEntity.hideTimer.set(bubbleDuration);
+						}
 
-						break;
+						// Shouldn't be more than one interactable object per tile.
+						return;
 					}
 				}
 			}
