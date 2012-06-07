@@ -57,7 +57,7 @@ ig.module(
 
 		// Determine if player should continue moving or stop.
 		continueOrStop: function() {
-			
+
 			// Assume we will keep moving unless told otherwise.
 			var keepMoving = true;
 
@@ -66,8 +66,7 @@ ig.module(
 			else if (this.moveKeyDown('right')) this.facing = 'right';
 			else if (this.moveKeyDown('up')) this.facing = 'up';
 			else if (this.moveKeyDown('down')) this.facing = 'down';
-			else 
-			{
+			else {
 				// Player is no longer trying to move.
 				keepMoving = false;
 			}
@@ -75,50 +74,42 @@ ig.module(
 			// Try to keep moving.
 			if (keepMoving) {
 
-				if(this.canJump())
-				{
+				if (this.canJump()) {
 					this.isMove = false; // will use isJump instead
-					this.startJump();	
-				}
-				else if(this.canMove())
-				{
+					this.startJump();
+				} else if (this.canMove()) {
 					this.preStartMove();
-				}
-				else
-				{
+				} else {
 					// Stop player.
 					this.stopMoving();
 				}
-			}
-			else
-			{
+			} else {
 				// Stop player.
 				this.stopMoving();
 			}
 		},
 
 		// Sets player to idle state and notifies the server.
-		stopMoving: function()
-		{
+		stopMoving: function() {
 			// Player is not moving.
 			this.isMove = false;
 
 			// Player is not jumping.
 			this.isJump = false;
-			
+
 			// Set move state.
 			this.moveState = this.lastState = 'idle';
-			
+
 			// Stop the movement animation.
 			this.moveAnimStop();
-			
+
 			// Tell other players we've stopped.
 			this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 		},
 
 		// Tries interacted with the faced tile.
 		action: function() {
-			
+
 			// Get faced tile position.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
@@ -128,16 +119,15 @@ ig.module(
 			// Check that at least one sign exists.
 			if (signs) {
 				for (var i = 0; i < signs.length; i++) {
-					
+
 					// Check if the tile is located at the faced tile.
 					if ((signs[i].pos.x == position.x) && (signs[i].pos.y == position.y)) {
-						
+
 						// Set chat bubble duration.
 						var bubbleDuration = 3; // magic numbers are bad!
-
 						// Spawn a chat bubble at the sign.
 						ig.game.spawnEntity(EntityBubble, signs[i].pos.x, signs[i].pos.y, {
-							
+
 							// Pass in sign message to chat bubble.
 							msg: signs[i].msg,
 
@@ -156,20 +146,19 @@ ig.module(
 
 			// Get all NPC's.
 			var npcs = ig.game.getEntitiesByType(EntityNpc);
-			
+
 			// Check that at least one NPC exists.
 			if (npcs) {
 				for (var i = 0; i < npcs.length; i++) {
-					
+
 					// Check if the NPC is located at the faced tile.
 					if ((npcs[i].pos.x == position.x) && (npcs[i].pos.y == position.y)) {
-						
+
 						// Set chat bubble duration.
 						var bubbleDuration = 3; // magic numbers are bad!
-
 						// Spawn a chat bubble at the NPC.
 						ig.game.spawnEntity(EntityBubble, npcs[i].pos.x, npcs[i].pos.y, {
-							
+
 							// Pass in NPC message to chat bubble.
 							msg: npcs[i].msg,
 
@@ -184,11 +173,10 @@ ig.module(
 						npcs[i].moveTimer.set(bubbleDuration + 1);
 
 						// Get NPC's name entity.
-						var nameEntity = ig.game.getEntityByName(npcs[i].name+"NameEntity");
- 						
+						var nameEntity = ig.game.getEntityByName(npcs[i].name + "NameEntity");
+
 						// Check if name entity was found.
- 						if(nameEntity!=undefined) 
-						{
+						if (nameEntity != undefined) {
 							// Hide name for duration of chat bubble.
 							nameEntity.hideTimer.set(bubbleDuration);
 						}
@@ -201,21 +189,20 @@ ig.module(
 		},
 
 		// Returns the exit entity if found at the faced tile, else returns false.
-		facingExit: function()
-		{
+		facingExit: function() {
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
 			// Get all door entities.
 			var doors = ig.game.getEntitiesByType(EntityExit);
-			
+
 			// Check that at least one door was found.
 			if (doors) {
 				for (var i = 0; i < doors.length; i++) {
-					
+
 					// Check that door location is the same as the faced tile.
 					if (doors[i].pos.x == position.x && doors[i].pos.y == position.y) {
-						
+
 						// Found an exit entity at the faced tile.
 						return doors[i];
 					}
@@ -227,18 +214,17 @@ ig.module(
 		},
 
 		// Returns the exit entity if found at players location, else returns false.
-		overExit: function()
-		{
+		overExit: function() {
 			// Get all exit entities.
 			var exits = ig.game.getEntitiesByType(EntityExit);
 
 			// Check that at least one was returned.
 			if (exits) {
 				for (var i = 0; i < exits.length; i++) {
-					
+
 					// Check that exit shares the same position as the player.
 					if (exits[i].pos.x == this.pos.x && exits[i].pos.y == this.pos.y && exits[i].type != 'door') {
-						
+
 						// Found a matching exit entity.
 						return exits[i];
 					}
@@ -251,13 +237,13 @@ ig.module(
 
 		// Checks for faced and stood-on exits before each more and calls startMove if none are found.
 		preStartMove: function() {
-			
+
 			// Check if player is over a "floor" style exit.
 			var exit = this.overExit();
 
 			// Check if players faced direction will trigger a zone change.
 			if (exit && this.facing == exit.direction) {
-				
+
 				// Trigger a zone change.
 				exit.trigger();
 
@@ -267,9 +253,9 @@ ig.module(
 
 			// Check if player is facing a "door" style exit.
 			var exit = this.facingExit();
-			
+
 			if (exit) {
-				
+
 				// Make sure that faced exit is a door type.
 				if (exit.type == 'door') {
 
@@ -278,7 +264,7 @@ ig.module(
 
 					// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
 					this.moveWhen = 336.7 + new Date().getTime();
-					
+
 					// Tell player to wait before moving through door.
 					this.waitingToMove = true;
 
@@ -287,14 +273,11 @@ ig.module(
 
 					// Do not trigger a regular move.
 					return;
-				}
-				
-				else  // The exit must be a "floor" style exit.
+				} else // The exit must be a "floor" style exit.
 				{
-					
+
 					// Check if floor exit arrow should be turned on.
-					if (this.facing == exit.direction) 
-					{
+					if (this.facing == exit.direction) {
 						// Turn on blinking arrow animation.
 						exit.startAnim();
 					}
@@ -357,7 +340,7 @@ ig.module(
 			{
 				// if player changed faced direction
 				if (this.facing != this.lastFacing) {
-					
+
 					// Tell other players that we changed our faced direction.
 					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 					this.lastFacing = this.facing; // so we don't inform them again
@@ -415,15 +398,14 @@ ig.module(
 		},
 
 		startMove: function() {
-			
-			if(this.canSwim()) // Water
+
+			if (this.canSwim()) // Water
 			{
 				// Set movement speed on water.
 				this.moveState = 'swim';
 				this.speed = this.swimSpeed;
 
-				if(!this.swimming) 
-				{
+				if (!this.swimming) {
 					// Reset hop-on-to-surf-entity animation.
 					this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)].rewind();
 
@@ -433,8 +415,7 @@ ig.module(
 					// Play is no longer on land.
 					this.swimming = true;
 				}
-			}
-			else // Land
+			} else // Land
 			{
 				// It's difficult to swim on land.
 				this.swimming = false;
@@ -539,7 +520,7 @@ ig.module(
 				}
 			}
 		}
-		
+
 	});
 
 })
