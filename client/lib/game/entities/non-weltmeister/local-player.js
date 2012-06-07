@@ -226,58 +226,83 @@ ig.module(
 			return false;
 		},
 
+		// Returns the exit entity if found at players location, else returns false.
 		overExit: function()
-		// returns the exit entity that the local player is
-		// standing on, returns false if none
 		{
-			// check for collision against an exit entity
+			// Get all exit entities.
 			var exits = ig.game.getEntitiesByType(EntityExit);
+
+			// Check that at least one was returned.
 			if (exits) {
 				for (var i = 0; i < exits.length; i++) {
+					
+					// Check that exit shares the same position as the player.
 					if (exits[i].pos.x == this.pos.x && exits[i].pos.y == this.pos.y && exits[i].type != 'door') {
+						
+						// Found a matching exit entity.
 						return exits[i];
 					}
 				}
 			}
+
+			// Found no matching entity.
 			return false;
 		},
 
-		// Checks for exits before each move.
-		// If none exist, it calls startMove().
+		// Checks for faced and stood-on exits before each more and calls startMove if none are found.
 		preStartMove: function() {
-			var cancelMove = false;
-
-			// handle floor-exit zoning
+			
+			// Check if player is over a "floor" style exit.
 			var exit = this.overExit();
+
+			// Check if players faced direction will trigger a zone change.
 			if (exit && this.facing == exit.direction) {
-				exit.trigger(); // zone
-				cancelMove = true;
+				
+				// Trigger a zone change.
+				exit.trigger();
+
+				// Do not trigger a regular move.
+				return;
 			}
 
-			if (!cancelMove) {
-				// facing an exit
-				var exit = this.facingExit();
-				if (exit) {
-					// check if going through a door
-					if (exit.type == 'door') {
+			// Check if player is facing a "door" style exit.
+			var exit = this.facingExit();
+			
+			if (exit) {
+				
+				// Make sure that faced exit is a door type.
+				if (exit.type == 'door') {
+
+					// Play the door opening animation.
+					exit.startAnim();
+
+					// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
+					this.moveWhen = 336.7 + new Date().getTime();
+					
+					// Tell player to wait before moving through door.
+					this.waitingToMove = true;
+
+					// Tell player what exit to trigger after he moves.
+					this.moveDoor = exit;
+
+					// Do not trigger a regular move.
+					return;
+				}
+				
+				else  // The exit must be a "floor" style exit.
+				{
+					
+					// Check if floor exit arrow should be turned on.
+					if (this.facing == exit.direction) 
+					{
+						// Turn on blinking arrow animation.
 						exit.startAnim();
-						// 22 frame wait @ 60 frames per second = 22/60 = 0.36666..sec
-						this.moveWhen = 336.7 + new Date().getTime();
-						this.waitingToMove = true;
-						this.moveDoor = exit;
-						cancelMove = true; // prevent player from starting to move too soon
 					}
-					// not a door
-					else {
-						if (this.facing == exit.direction) exit.startAnim(); // approaching floor exit
-					}
-				}
-
-				// if no exits have taken place, move
-				if (!cancelMove) {
-					this.startMove();
 				}
 			}
+
+			// Start moving player.
+			this.startMove();
 		},
 
 		movePressed: function() {
