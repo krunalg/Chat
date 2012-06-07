@@ -40,19 +40,22 @@ ig.module(
 		// Used to reset time before committing if direction changes.
 		moveCommitDirection: '',
 
+		// Tell server where in the world the player is and what he looks like.
 		netInit: function() {
 			socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);
 		},
 
+		// Tell server that the player just jumped.
 		emitJump: function(x, y, direction) {
 			socket.emit('receiveJump', x, y, direction);
 		},
 
+		// Tell server that the player just changes his movement state.
 		emitUpdateMoveState: function(x, y, direction, state) {
 			socket.emit('receiveUpdateMoveState', x, y, direction, state);
 		},
 
-		// determines if player will continue moving or stop
+		// Determine if player should continue moving or stop.
 		goAgain: function() {
 			var keepMoving = true;
 
