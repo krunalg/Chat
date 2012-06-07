@@ -22,6 +22,13 @@ jQuery
 http://jquery.com/
 
 
+Change-Log:
+----------------------------
+- Grass entities spawn only as needed and self-prune after use. (Completed June 2, 2012)
+- Repeating borders update according to player's position in the world. (Completed June 2, 2012)
+- Player can surf/travel over water. (Completed June 3, 2012)
+
+
 To-do:
 ----------------------------
 
@@ -29,14 +36,12 @@ Camera:
 - Ability to restrict certain areas of map from being displayed on screen.
 
 Player system:
-- Spawns grass entities as needed, and only when walking on a grass tile.
-- Surfing/travelling over water.
 - "Ash" grass entity.
 - Biking.
 - Water reflections.
 - Standing "shallow-water" effect.
 - "Deep sand" effect w/ footprints.
-- Smashable rocks, and cuttable tress (low priority).
+- Smashable rocks, and cuttable trees (low priority).
 - A* pathfinding for movement (low priority).
 
 Chat system:
