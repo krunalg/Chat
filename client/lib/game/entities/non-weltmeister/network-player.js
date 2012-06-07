@@ -69,7 +69,7 @@ ig.module(
 
 		},
 
-		goAgain: function()
+		continueOrStop: function()
 		// determines if player will continue moving or stop
 		{
 			if (this.moveState == 'idle') {

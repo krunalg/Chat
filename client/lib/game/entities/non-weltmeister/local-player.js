@@ -56,7 +56,7 @@ ig.module(
 		},
 
 		// Determine if player should continue moving or stop.
-		goAgain: function() {
+		continueOrStop: function() {
 			
 			// Assume we will keep moving unless told otherwise.
 			var keepMoving = true;

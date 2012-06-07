@@ -709,7 +709,7 @@ ig.module(
 				this.vel.x = this.vel.y = 0;
 
 				// Assess whether to try moving again or rest.
-				this.goAgain();
+				this.continueOrStop();
 
 				// Check if player is a local human player.
 				if (this.controlledByLocalKeyboard) {
