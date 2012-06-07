@@ -117,17 +117,26 @@ ig.module(
 			}
 		},
 
+		// Initiate a jump.
 		startJump: function() {
-			// determine speed
-			this.moveState = 'jump';
-			this.speed = this.jumpSpeed;
-
+			
+			// Determine movement speed.
+			this.setMoveState('jump');
+			
+			// Player is jumping.
 			this.isJump = true;
+
+			// Used for animating player entity.
 			this.jumpStart = new ig.Timer();
+
+			// Spawn shadow under the player.
 			this.spawnShadow();
+
+			// Calculate player destination.
 			this.setMoveDestination();
 
-			this.moveAnimStart();
+			// Change animation from idle.
+			this.moveAnimStart(true);
 		},
 
 		update: function() {
