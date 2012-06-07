@@ -31,7 +31,14 @@ ig.module('game.chat-log')
 
 		},
 
+		/*
+		 * Adds a new message to the end of the log.
+		 *
+		 * @param  html string    HTML formatted message.   
+		 * @return      undefined
+		 */
 		push: function(html) {
+			
 			// Add new content to the log.
 			$('#' + $htmlLogId).append(html);
 		},
