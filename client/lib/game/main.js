@@ -315,10 +315,10 @@ ig.module('game.main')
 				lifespan: 2
 			});
 		},
-		chatInputOff: function(game) {
+		chatInputOff: function() {
 			
 			// Get any content from the input element.
-			var inputVal = $('#' + game.inputFieldId).val();
+			var inputVal = $('#' + this.inputFieldId).val();
 
 			// Check if user has typed something.
 			if (inputVal != '') {
@@ -397,13 +397,13 @@ ig.module('game.main')
 			}
 
 			// Blank the input field.
-			$('#' + game.inputFieldId).val('');
+			$('#' + this.inputFieldId).val('');
 
 			// Hide the input field.
-			$('#' + game.inputFieldId).hide();
+			$('#' + this.inputFieldId).hide();
 
 			// Disable input.
-			game.inputActive = false;
+			this.inputActive = false;
 		},
 
 
