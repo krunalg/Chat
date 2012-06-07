@@ -513,18 +513,31 @@ ig.module(
 			this.lastFacing = this.facing;
 		},
 
+		// Initiate a jump.
 		startJump: function() {
-			// determine speed
-			this.moveState = 'jump';
-			this.speed = this.jumpSpeed;
+			
+			// Determine movement speed.
+			this.setMoveState('jump');
 
+			// Player is jumping.
 			this.isJump = true;
+
+			// Used for animating player entity.
 			this.jumpStart = new ig.Timer();
+
+			// Spawn shadow under the player.
 			this.spawnShadow();
+
+			// Calculate player destination.
 			this.setMoveDestination();
 
+			// Change animation from idle.
 			this.moveAnimStart(true);
+
+			// Tell other players about this jump.
 			this.emitJump(this.pos.x, this.pos.y, this.facing);
+
+			// To prevent unnessesary network traffic.
 			this.lastFacing = this.facing;
 		},
 
