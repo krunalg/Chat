@@ -607,8 +607,8 @@ ig.module('game.main')
 			for (var i = 0; i < this.events.length; i++) {
 				
 				// Add new lines.
-				if (i == 0) var space = '';
-				else var space = "\n";
+				var space = (i==0 ? '' : "\n");
+
 				printEvents += space + this.events[i];
 			}
 			this.whiteFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
