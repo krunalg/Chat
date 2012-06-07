@@ -413,12 +413,19 @@ ig.module(
 			}
 		},
 
+		// Stops all exit entity animations.
 		turnOffExitAnimations: function()
-		// turn off all exit animations
 		{
+			// Get all exit entities.
 			var exits = ig.game.getEntitiesByType(EntityExit);
+			
+			// Make sure at least one exists.
 			if (exits) {
+				
+				// Loop through all entities.
 				for (var i = 0; i < exits.length; i++) {
+					
+					// Stop animation.
 					exits[i].stopAnim();
 				}
 			}
