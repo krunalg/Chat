@@ -34,10 +34,20 @@ html,body {
         width: 300px;
 }
 
+.say, .tell {
+        text-shadow: 0 0 0.2em black;
+}
+
 .say {
         color: white;
 }
 
 .tell {
         color: #E774E0;
+}
+
+#log {
+        position: absolute;
+        left: 50%;
+        top: 50%;
 }
