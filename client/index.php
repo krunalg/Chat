@@ -20,6 +20,9 @@
 		  <div>
 			   <input type="text" id="input" autocomplete="off"></input>
 		  </div>
+		  <div>
+			   <div id="log"></div>
+		  </div>
 	</div>
 </body>
 </html>

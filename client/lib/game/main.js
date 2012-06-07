@@ -6,6 +6,9 @@ ig.module('game.main')
 
 'impact.font',
 
+// Chat log
+'game.chat-log',
+
 'game.background-animations',
 
 'game.position-dependent-animation',
