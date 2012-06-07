@@ -374,11 +374,17 @@ ig.module('game.main')
 						// Get skin name from input.
 						var skin = explodeInput[1];
 						
-						this.emitReskin(skin);
+						// Set new skin.
 						player.skin = skin;
-						player.reskin();
-						game.lastSkin = skin;
 
+						// Load new skin.
+						player.reskin();
+
+						// Store skin for rebuilding player.
+						this.lastSkin = skin;
+
+						// Tell server about skin change.
+						this.emitReskin(skin);
 					}
 				} 
 				// Assume it's a /say
@@ -389,11 +395,14 @@ ig.module('game.main')
 
 
 			}
-			$('#' + game.inputFieldId).val(''); // reset
+
+			// Blank the input field.
+			$('#' + game.inputFieldId).val('');
+
+			// Hide the input field.
 			$('#' + game.inputFieldId).hide();
-			//$('#canvas').focus();
-			//game.lastInput = new Date().getTime();
-			//game.allowInput = false;
+
+			// Disable input.
 			game.inputActive = false;
 		},
 
