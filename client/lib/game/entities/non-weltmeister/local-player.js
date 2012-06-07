@@ -325,8 +325,6 @@ ig.module(
 				// Reset commitment process for next time.
 				this.moveCommitPending = false;
 				this.moveCommitWhen = 0;
-				
-				this.turnOffExitAnimations();
 
 				if (this.canJump()) {
 					this.startJump();
