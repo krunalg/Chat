@@ -291,7 +291,7 @@ ig.module(
 		// Adds initial delay before player movement so he can change direction without 
 		// moving. Then starts move if possible, otherwise starts a slow-walk effect.
 		movePressed: function() {
-			
+
 			// Reset the commit process if new direction is detected.
 			if (this.moveCommitDirection != this.facing) {
 				this.moveCommitPending = false;
@@ -304,24 +304,21 @@ ig.module(
 				this.moveCommitDirection = this.facing;
 
 				// Check if the player has changed his direction.
-				if (this.lastFacing == this.facing) 
-				{
+				if (this.lastFacing == this.facing) {
 					// Skip delay when already facing direction.
 					var delay = 0;
-				}
-				else 
-				{
+				} else {
 					// Add slight delay before commiting to moves.
 					var delay = 80;
 				}
-				
+
 				// Set the time when the move will be committed.
 				this.moveCommitWhen = new Date().getTime() + delay;
 			}
 
 			// Check if player has committed to trying to move.
 			if (new Date().getTime() - this.moveCommitWhen >= 0) {
-				
+
 				// Reset commitment process for next time.
 				this.moveCommitPending = false;
 				this.moveCommitWhen = 0;
@@ -332,7 +329,7 @@ ig.module(
 					// Jump.
 					this.startJump();
 
-				} else 
+				} else
 				// Chec if player can move regularly.
 				if (this.canMove()) {
 
@@ -361,8 +358,7 @@ ig.module(
 				}
 			}
 			// Player is not yet committed. 
-			else
-			{
+			else {
 				// Check if player has changed faced directions.
 				if (this.facing != this.lastFacing) {
 
@@ -382,13 +378,10 @@ ig.module(
 					if (exit) {
 
 						// Check if arrow animation needs to be turned on.
-						if (this.facing == exit.direction) 
-						{
+						if (this.facing == exit.direction) {
 							// Turn on arrows.
 							exit.startAnim();
-						}
-						else 
-						{
+						} else {
 							// Turn off arrows if facing wrong direction.
 							exit.stopAnim();
 						}
@@ -403,7 +396,7 @@ ig.module(
 
 				// Check if waiting is over.
 				if (new Date().getTime() - this.moveWhen >= 0) {
-					
+
 					// Start move.
 					this.startMove();
 
@@ -414,17 +407,16 @@ ig.module(
 		},
 
 		// Stops all exit entity animations.
-		turnOffExitAnimations: function()
-		{
+		turnOffExitAnimations: function() {
 			// Get all exit entities.
 			var exits = ig.game.getEntitiesByType(EntityExit);
-			
+
 			// Make sure at least one exists.
 			if (exits) {
-				
+
 				// Loop through all entities.
 				for (var i = 0; i < exits.length; i++) {
-					
+
 					// Stop animation.
 					exits[i].stopAnim();
 				}
@@ -432,8 +424,7 @@ ig.module(
 		},
 
 		// Returns true if move key for direction is down, else returns false.
-		moveKeyDown: function(facing)
-		{
+		moveKeyDown: function(facing) {
 			switch (facing) {
 			case 'left':
 				return (ig.input.state('left') && !ig.input.state('right'))
@@ -501,10 +492,10 @@ ig.module(
 
 			// Check if the players state is different than it was.
 			if (this.lastFacing != this.facing || this.lastState != this.moveState) {
-				
+
 				// Tell other players about this move.
 				this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-				
+
 				// To prevent sending the same update twice.
 				this.lastState = this.moveState;
 			}
@@ -515,7 +506,7 @@ ig.module(
 
 		// Initiate a jump.
 		startJump: function() {
-			
+
 			// Determine movement speed.
 			this.setMoveState('jump');
 
@@ -553,38 +544,38 @@ ig.module(
 
 			// Check for actions, like reading signs, or talking to NPC's.
 			if (ig.input.pressed('action') && !this.isMove) {
-				
+
 				// Action key was pressed.
 				this.action(this);
 			}
 
 			// Player just entered a door but has not yet changed zones.
 			if (this.moveDoor && !this.waitingToMove && !this.isMove) {
-				
+
 				// Change zones.
 				this.moveDoor.trigger();
 
-			} 
+			}
 			// Handle movements.
 			else {
-			
+
 				// Check if waiting to walk through a door.
 				if (this.waitingToMove) {
-					
+
 					// Debug message.
 					console.debug("Waiting to move...");
 
 					// Waiting to move.
 					this.moveWait();
 
-				} 
+				}
 				// Check if currently jumping or moving.
 				else if (this.isJump || this.isMove) {
-					
+
 					// Finish the current move.
 					this.finishMove();
 
-				} 
+				}
 				// Check if trying to start a new move.
 				else if (this.moveKeyDown('left')) {
 					this.facing = 'left';
@@ -598,7 +589,7 @@ ig.module(
 				} else if (this.moveKeyDown('down')) {
 					this.facing = 'down';
 					this.movePressed();
-				} 
+				}
 				// Player is not trying to move.
 				else {
 
