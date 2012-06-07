@@ -56,6 +56,20 @@ ig.module('game.chat-log')
 
 			// Add new content to the log.
 			$('#' + this.htmlLogId).append(html);
+
+			// Scroll the log.
+			this.scroll();
+		},
+
+		/*
+		 * Scrolls the chat log to the bottom.
+		 *
+		 * @return undefined
+		 */
+		scroll: function()
+		{
+			// Animate the scroll.
+			$('#' + this.htmlLogId).animate({scrollTop:$('#' + this.htmlLogId)[0].scrollHeight}, 1000);
 		},
 
 		/*
