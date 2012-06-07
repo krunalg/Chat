@@ -26,8 +26,17 @@ socket.on('newMsg', function(from, msg) {
 
 });
 
+// Receive /tell message from server.
 socket.on('incomingTell', function(from, msg) {
+	
+	// Add message to game events.
 	ig.game.events.push("Msg from " + from + ": " + msg);
+
+	// HTML for chat log.
+	var html = '<div><span class="name">[' + from + ']</span> whispers: ' + msg + '</div>';
+	
+	// Write to chat log.
+	ig.game.chatLog.push(html);
 });
 
 socket.on('welcome', function(msg) {
