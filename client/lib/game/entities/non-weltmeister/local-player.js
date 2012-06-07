@@ -72,21 +72,47 @@ ig.module(
 				keepMoving = false;
 			}
 
-			
-			if (keepMoving && this.canJump()) {
-				this.isMove = false; // will use isJump instead
-				this.startJump();
-			} else if (keepMoving && this.canMove()) this.preStartMove();
-			else {
-				// stop the player
-				this.isMove = false;
-				this.isJump = false;
-				this.moveState = 'idle';
-				this.lastState = 'idle';
-				this.moveAnimStop();
-				// tell other players we've stopped
-				this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+			// Try to keep moving.
+			if (keepMoving) {
+
+				if(this.canJump())
+				{
+					this.isMove = false; // will use isJump instead
+					this.startJump();	
+				}
+				else if(this.canMove())
+				{
+					this.preStartMove();
+				}
+				else
+				{
+					// Stop player.
+					this.stopMoving();
+				}
 			}
+			else
+			{
+				// Stop player.
+				this.stopMoving();
+			}
+		},
+
+		stopMoving: function()
+		{
+			// Player is not moving.
+			this.isMove = false;
+
+			// Player is not jumping.
+			this.isJump = false;
+			
+			// Set move state.
+			this.moveState = this.lastState = 'idle';
+			
+			// Stop the movement animation.
+			this.moveAnimStop();
+			
+			// Tell other players we've stopped.
+			this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 		},
 
 		action: function() {
