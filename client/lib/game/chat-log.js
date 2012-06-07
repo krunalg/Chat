@@ -29,18 +29,29 @@ ig.module('game.chat-log')
 			// Set element to hold messages.
 			this.htmlLogId = logId;
 
+			// Create log HTML element.
+			$('body').append($('<div id="' + this.htmlLogId + '"/>'));
+
+			// Set log width.
+			$('#' + this.htmlLogId).width(this.width);
+
+			// Set log height.
+			$('#' + this.htmlLogId).height(this.height);
+
+			// Set a red border for debugging.
+			$('#' + this.htmlLogId).css("border", "2px solid red");
 		},
 
 		/*
 		 * Adds a new message to the end of the log.
 		 *
-		 * @param  html string    HTML formatted message.   
+		 * @param  html string    HTML formatted message.
 		 * @return      undefined
 		 */
 		push: function(html) {
-			
+
 			// Add new content to the log.
-			$('#' + $htmlLogId).append(html);
+			$('#' + $this.htmlLogId).append(html);
 		},
 
 		/*
@@ -49,20 +60,18 @@ ig.module('game.chat-log')
 		 * @return undefined
 		 */
 		prune: function() {
-			
+
 			// Get number of messages in log.
-			var messageCount = $('#' + htmlLogId' > div').length;
+			var messageCount = $('#' + this.htmlLogId + ' > div').length;
 
 			// Check if there are too many messages.
-			if (messageCount > this.buffer) 
-			{
+			if (messageCount > this.buffer) {
 				// How many messages to remove.
 				var removeCount = messageCount - this.buffer;
 
-				for(var i=0; i<removeCount; i++)
-				{
+				for (var i = 0; i < removeCount; i++) {
 					// Remove oldest entry.
-					$('#' + $htmlLogId + ' :first-child').remove();
+					$('#' + this.htmlLogId + ' :first-child').remove();
 				}
 			}
 		}
