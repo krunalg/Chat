@@ -441,9 +441,6 @@ ig.module('game.main')
 
 				// Message.
 				msg: message,
-
-				// Show for this length.
-				lifespan: 2
 			});
 		},
 
