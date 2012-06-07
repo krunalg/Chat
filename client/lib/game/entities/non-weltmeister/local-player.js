@@ -42,16 +42,22 @@ ig.module(
 
 		// Tell server where in the world the player is and what he looks like.
 		netInit: function() {
+
+			// Emit socket.
 			socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);
 		},
 
 		// Tell server that the player just jumped.
 		emitJump: function(x, y, direction) {
+
+			// Emit socket.
 			socket.emit('receiveJump', x, y, direction);
 		},
 
 		// Tell server that the player just changes his movement state.
 		emitUpdateMoveState: function(x, y, direction, state) {
+
+			// Emit socket.
 			socket.emit('receiveUpdateMoveState', x, y, direction, state);
 		},
 
