@@ -33,3 +33,11 @@ html,body {
         top: 100px;
         width: 300px;
 }
+
+.say {
+        color: white;
+}
+
+.tell {
+        color: #E774E0;
+}
