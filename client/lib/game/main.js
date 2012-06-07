@@ -365,7 +365,7 @@ ig.module('game.main')
 						}
 						
 						// Send message to server.
-						this.chatSendMessage(this.player.name, inputVal);
+						this.chatSendMessage(player.name, inputVal);
 
 					} 
 					// Check for command: /skin
@@ -374,7 +374,7 @@ ig.module('game.main')
 						// Get skin name from input.
 						var skin = explodeInput[1];
 						
-						game.emitReskin(skin);
+						this.emitReskin(skin);
 						player.skin = skin;
 						player.reskin();
 						game.lastSkin = skin;
@@ -384,7 +384,7 @@ ig.module('game.main')
 				// Assume it's a /say
 				else {
 					// Send message to server.
-					this.chatSendMessage(this.player.name, inputVal);
+					this.chatSendMessage(player.name, inputVal);
 				}
 
 
