@@ -498,31 +498,11 @@ ig.module('game.main')
 			if (player) {
 				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
 				this.screen.y = player.pos.y - ig.system.height / 2;
-				/*
-			// Prevent player from seeing beyond the end of the world.
-			if(ig.system.width / this.collisionMap.tilesize <= this.collisionMap.width)
-			{
-				var howCloseLeft = 7; // how close player can go to left of map without seeing past
-				if(player.pos.x <= (howCloseLeft*16)) this.screen.x = 0;
-				if(player.pos.x >= this.collisionMap.width * this.collisionMap.tilesize - (howCloseLeft+1)*this.collisionMap.tilesize )
-					this.screen.x = this.collisionMap.width * this.collisionMap.tilesize - ig.system.width;
-			}
-			if(ig.system.height / this.collisionMap.tilesize <= this.collisionMap.width)
-			{
-				var howCloseTop = 5; // how close player can get to top of map without seeing past
-				if(player.pos.y <= (howCloseTop*16)) this.screen.y = 0; 
-				if(player.pos.y >= this.collisionMap.height * this.collisionMap.tilesize - howCloseTop*this.collisionMap.tilesize )
-					this.screen.y = this.collisionMap.height * this.collisionMap.tilesize - ig.system.height;
-			}
-			*/
 			}
 
 			// Check for player wanting to chat
 			if (ig.input.pressed('chatToggle')) {
-				//if(new Date().getTime() - this.lastInput > 200) this.allowInput = true;
-				//this.allowInput = true;
 				if (!this.inputActive)
-				//if(!$('#input').is(":visible") && this.allowInput)
 				// if input is hidden and allowed to open chat
 				{
 
@@ -531,14 +511,6 @@ ig.module('game.main')
 					//this.lastInput = new Date().getTime();
 					this.inputActive = true;
 				}
-				/*
-			else
-			//else if($('#input').is(":visible") && this.allowInput)
-			// while its showing and allowed to close chat
-			{
-				this.chatInputOff(this);
-			}
-			*/
 			}
 
 			// prune the events array
