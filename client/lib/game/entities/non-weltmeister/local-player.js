@@ -450,8 +450,7 @@ ig.module(
 			if (this.canSwim()) // Water
 			{
 				// Set movement speed on water.
-				this.moveState = 'swim';
-				this.speed = this.swimSpeed;
+				this.setMoveState('swim');
 
 				if (!this.swimming) {
 					// Reset hop-on-to-surf-entity animation.
