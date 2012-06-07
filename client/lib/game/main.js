@@ -324,11 +324,25 @@ ig.module('game.main')
 
 						// Send message to server.
 						this.emitTell(to, msg);
+
+					} 
+					// Check for commands: /say or /s
+					else if (explodeInput[0] == '/say' || explodeInput[0] == '/s') {
+
+						// Check if command is: /say 
+						if (inputVal.substr(0, 4) == '/say') 
+						{
+							// Strip command and first space from input.
+							inputVal = inputVal.substr(5, inputVal.length - 5);
+						}
+						// Check if command is: /s
+						else if (inputVal.substr(0, 2) == '/s')
+						{
+							// Strip command and first space from input.
+							inputVal = inputVal.substr(3, inputVal.length - 3);
+						}
 						
-					} else if (explodeInput[0] == '/say' || explodeInput[0] == '/s') {
-						// strip away the command and space
-						if (inputVal.substr(0, 4) == '/say') inputVal = inputVal.substr(5, inputVal.length - 5); // either remove '/say '
-						else inputVal = inputVal.substr(3, inputVal.length - 3); // or remove '/s '
+						// Send message to server.
 						this.emitSay(player.name, inputVal); // send message to other players
 						// display message locally
 						ig.game.spawnEntity(
@@ -346,19 +360,6 @@ ig.module('game.main')
 						game.lastSkin = skin;
 
 					}
-
-					// regular message /say or /s
-				} else // assume it's a /say
-				{
-					this.emitSay(player.name, inputVal); // send message to other players
-					// display message locally
-					ig.game.spawnEntity(
-					EntityBubble, player.pos.x, player.pos.y, {
-						follow: player,
-						msg: inputVal,
-						lifespan: 2
-					});
-				}
 
 
 			}
