@@ -277,11 +277,13 @@ ig.module('game.main')
 		 * Chat system
 		 */
 		// html elements
+		
+		// ID of HTML input element.
 		inputFieldId: 'input',
-		// id of HTML element
-		//allowInput: true,
+
+		// Input in use or not.
 		inputActive: false,
-		//lastInput: new Date().getTime(),
+
 		emitSay: function(client, msg) {
 			socket.emit('receiveSay', client, msg);
 		},
@@ -292,22 +294,37 @@ ig.module('game.main')
 			socket.emit('receiveReskin', skin);
 		},
 		chatInputOff: function(game) {
-			// check if anything has been typed
+			
+			// Get any content from the input element.
 			var inputVal = $('#' + game.inputFieldId).val();
+
+			// Check if user has typed something.
 			if (inputVal != '') {
-				// if so
+				
+				// Get the local player entity.
 				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 
-				// check for command flag
+				// Check first character to see if input is command.
 				if (inputVal.substr(0, 1) == '/') {
+
+					// Break the input string by spaces.
 					var explodeInput = inputVal.split(' ');
 
-					// check for private message /tell or /t
+					// Check for commands: /tell or /t
 					if (explodeInput[0] == '/tell' || explodeInput[0] == '/t') {
-						var to = explodeInput[1]; // send to who
-						var msg = ''; // message to send
+
+						// Get recipient of message.
+						var to = explodeInput[1];
+
+						// Will store message in this variable.
+						var msg = '';
+
+						// Reconstruct message.
 						for (i = 2; i < explodeInput.length; i++) msg += explodeInput[i];
-						game.emitTell(to, msg); // send message to other players
+
+						// Send message to server.
+						this.emitTell(to, msg);
+						
 					} else if (explodeInput[0] == '/say' || explodeInput[0] == '/s') {
 						// strip away the command and space
 						if (inputVal.substr(0, 4) == '/say') inputVal = inputVal.substr(5, inputVal.length - 5); // either remove '/say '
