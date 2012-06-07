@@ -447,13 +447,13 @@ ig.module(
 			case 'down':
 				return (ig.input.state('down') && !ig.input.state('up'))
 				break;
-
 			}
 
 			// Key is not down.
 			return false;
 		},
 
+		// Handles exactly how a move takes place (speed, effects, etc.)
 		startMove: function() {
 
 			if (this.canSwim()) // Water
@@ -490,17 +490,26 @@ ig.module(
 				if (oldGrass) oldGrass.markForDeath();
 			}
 
+			// Not idle.
 			this.isMove = true;
+
+			// Calculate where player is going.
 			this.setMoveDestination();
 
+			// Beging animating.
 			this.moveAnimStart(true);
 
-			// send movement update only when change occurs
+			// Check if the players state is different than it was.
 			if (this.lastFacing != this.facing || this.lastState != this.moveState) {
+				
+				// Tell other players about this move.
 				this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+				
+				// To prevent sending the same update twice.
 				this.lastState = this.moveState;
 			}
 
+			// Update last faced direction.
 			this.lastFacing = this.facing;
 		},
 
