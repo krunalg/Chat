@@ -64,16 +64,29 @@ ig.module(
 
 		},
 
-		continueOrStop: function()
-		// determines if player will continue moving or stop
-		{
+		// Determine if player should continue moving or stop.
+		continueOrStop: function() {
+			// Check if player should stop.
 			if (this.moveState == 'idle') {
-				// stop
+
+				// Not moving.
 				this.isMove = false;
+
+				// Not jumping.
 				this.isJump = false;
+
+				// Set idle animation.
 				this.moveAnimStop();
-			} else {
-				if (this.canMove()) this.startMove();
+
+			}
+			// Player has not stopped.
+			else {
+				// Check if move is possible.
+				if (this.canMove()) {
+
+					// Move player.
+					this.startMove();
+				}
 			}
 		},
 
