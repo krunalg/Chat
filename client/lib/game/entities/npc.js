@@ -84,23 +84,27 @@ ig.module(
 			this.moveTimer.set(this.moveDelay);
 		},
 
-		
+
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
+			// Create timer to move the player.
 			this.moveTimer = new ig.Timer();
-			this.moveTimer.set(Math.random() * 3); // desync NPC's from each other
+
+			// Add some randomness to deyncronize all NPC's.
+			this.moveTimer.set(Math.random() * 3);
+
+			// Set movement pattern according to Weltmeister values.
 			if (this.behaviour == 'a') {
+
+				// Move pattern A.
 				this.movePattern = ['up', 'down', 'up', 'right', 'down', 'down', 'left', 'left', 'left', 'right', 'right', 'left', 'up', 'right'];
+
 			} else if (this.behaviour == 'b') {
+
+				// Move pattern B.
 				this.movePattern = ['down', 'left', 'right', 'left', 'right', 'up'];
 			}
-
-			// weltmeister icon
-			this.addAnim('weltmeister', 0.1, [1]);
-			this.currentAnim = this.anims.weltmeister;
-
-			this.reskin();
 		},
 
 		ready: function() {
