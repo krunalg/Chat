@@ -64,7 +64,16 @@ ig.module('game.main')
 
 	MyGame = ig.Game.extend({
 
+		/*
+		 * Returns the argument string with first character converted to a capital.
+		 *
+		 * @param  string string Text to alter the first character of.
+		 * @return        string Text which has had it's first character changed
+		 *                       to an upper case letter.
+		 */
 		capitaliseFirstLetter: function(string) {
+
+			// Return the word with it's first character upper case'd.
 			return string.charAt(0).toUpperCase() + string.slice(1);
 		},
 
@@ -97,51 +106,70 @@ ig.module('game.main')
 						}
 				}
 			}
-			
+
 			// No matches.
 			return false;
 		},
 
+		// Keep resorting entities.
 		autoSort: true,
 
+		// The font used for the game text.
 		whiteFont: new ig.Font('media/font.white.with.shadow.png'),
 
-		// contains game events such as player entering area
+		// And array of game events such as players joining.
 		events: new Array(),
 
-		// max events to display on screen
+		// Maximum amount of events to display on screen.
 		eventsMax: 4,
 
-		// used for pruning old events
+		// Used for pruning old events.
 		eventsTimer: null,
 
-		// time in seconds before clearing event
+		// Time in seconds before clearing an event.
 		eventsLifespan: 2,
 
-		defaultLevel: LevelTest,
+		// First level to load.
+		defaultLevel: LevelTown,
 
+		// Starting position X.
 		defaultXStart: 256,
 
+		// Starting position Y.
 		defaultYStart: 256,
 
+		// Starting faced direction.
 		defaultFacing: 'down',
 
-		// used when rebuilding the player
+		// Used to rebuild the player after zoning.
 		lastSkin: 'boy',
 
-		// used to know where to place player when zoning
+		// Used to know where to place player when zoning.
 		goTo: null,
 
-		// must capitalize first letter
+		// Name of the current map.
 		mapName: 'Town',
-
-		//playerFirstBuild: true, // false after initial position is read from database
-		zone: function(map, goTo) // used to change maps
+		
+		/*
+		 * Changes the current map.
+		 *
+		 * @param  map  string Name of the map to load.
+		 * @param  goTo int    ID of exit to start player at.
+		 * @return      undefined
+		 */
+		zone: function(map, goTo)
 		{
+			// Used to find where player starts in next map.
 			this.goTo = goTo;
-			this.mapName = map;
+
+			// Name of map.
+			this.mapName = this.capitaliseFirstLetter(map);
+
+			// Tell other players that we left.
 			this.leaveZone();
-			this.loadLevelDeferred(ig.global['Level' + map]);
+
+			// Change areas.
+			this.loadLevelDeferred(ig.global['Level' + this.mapName]);
 		},
 
 		leaveZone: function() {
@@ -473,7 +501,7 @@ ig.module('game.main')
 
 			if (username == "Joncom") {
 				this.debugDisplay.draw(
-				['ig.game.screen.x = ' + ig.game.screen.x, 'ig.game.screen.y = ' + ig.game.screen.y], // will display each array element on a new line
+				[this.mapName], // will display each array element on a new line
 				true, // true or false to either show the FPS
 				false, // true or false to show the average FPS over a period of time
 				10000, // amount of of time between samples. defaults to 10000 (10 seconds)
