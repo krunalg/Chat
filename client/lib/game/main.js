@@ -600,9 +600,13 @@ ig.module('game.main')
 				}
 			}
 
-			// write game events to screen
+			// Add game events to this variable.
 			var printEvents = '';
+
+			// Traverse all game events.
 			for (var i = 0; i < this.events.length; i++) {
+				
+				// Add new lines.
 				if (i == 0) var space = '';
 				else var space = "\n";
 				printEvents += space + this.events[i];
