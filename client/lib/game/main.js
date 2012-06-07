@@ -79,19 +79,26 @@ ig.module('game.main')
 		 * @return bool	 true if tile is queried type, else false.
 		 */
 		isSpecialTile: function(x, y, tiles, layer) {
-			// Search all map layers.
-			for (var i = 0; i < this.backgroundMaps.length; i++) {
+			
+			// Get map by name.
+			var map = this.getMapByName(layer);
 
-				// Find the layer with the correct name.
-				if (this.backgroundMaps[i].name == layer) {
-
-					// Try all tiles for a match.
-					for (var j = 0; j < tiles.length; j++) {
-						if (tiles[j] == this.backgroundMaps[i]['data'][y][x]) return true;
-					}
-					break; // No need to search further.
+			// Map found.
+			if(map)
+			{
+				// Try all tiles for a match.
+				for (var j = 0; j < tiles.length; j++) {
+					
+					// Check if current match the one in the map.
+					if (tiles[j] == map['data'][y][x]) 
+						{
+							// Match found.
+							return true;
+						}
 				}
 			}
+			
+			// No matches.
 			return false;
 		},
 
