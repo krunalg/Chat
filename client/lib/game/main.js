@@ -567,19 +567,35 @@ ig.module('game.main')
 		//	 |_____/|_|  \_\/_/    \_\/  \/    
 		//	                                   
 		draw: function() {
+			
 			// Draw all entities and backgroundMaps
 			this.parent();
 
-			// draw these certain entities above any and all map layers
+			
+			// Get all name entities.
 			var names = this.getEntitiesByType(EntityName);
+			
+			// Names exist.
 			if (names) {
+				
+				// Draw each name entities above all map layers.
 				for (var i = 0; i < names.length; i++) {
+					
+					// Draw name.
 					names[i].draw(true);
 				}
 			}
+
+			// Get all chat bubble entities.
 			var bubbles = this.getEntitiesByType(EntityBubble);
+			
+			// Bubbles exist.
 			if (bubbles) {
+
+				// Draw each name entities above all map layers.
 				for (var i = 0; i < bubbles.length; i++) {
+					
+					// Draw chat bubble.
 					bubbles[i].draw(true);
 				}
 			}
