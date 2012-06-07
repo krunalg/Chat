@@ -288,7 +288,10 @@ ig.module(
 			this.startMove();
 		},
 
+		// Adds initial delay before player movement so he can change direction without 
+		// moving. Then starts move if possible, otherwise starts a slow-walk effect.
 		movePressed: function() {
+			
 			// Reset the commit process if new direction is detected.
 			if (this.moveCommitDirection != this.facing) {
 				this.moveCommitPending = false;
@@ -300,23 +303,34 @@ ig.module(
 				this.moveCommitPending = true;
 				this.moveCommitDirection = this.facing;
 
-				// next line only runs once per direction, skip delay if facing already
-				if (this.lastFacing == this.facing) var delay = 0;
-				else var delay = 80;
+				// Check if the player has changed his direction.
+				if (this.lastFacing == this.facing) 
+				{
+					// Skip delay when already facing direction.
+					var delay = 0;
+				}
+				else 
+				{
+					// Add slight delay before commiting to moves.
+					var delay = 80;
+				}
+				
+				// Set the time when the move will be committed.
 				this.moveCommitWhen = new Date().getTime() + delay;
 			}
 
-			// player is now committed to (trying to) move
+			// Check if player has committed to trying to move.
 			if (new Date().getTime() - this.moveCommitWhen >= 0) {
-				this.moveCommitPending = false; // happening now, so now reset for next time
-				this.moveCommitWhen = 0; // reset for cleanness
+				
+				// Reset commitment process for next time.
+				this.moveCommitPending = false;
+				this.moveCommitWhen = 0;
+				
 				this.turnOffExitAnimations();
 
 				if (this.canJump()) {
 					this.startJump();
 				} else if (this.canMove()) {
-					//if(this.canSwim()) ;
-					//else 
 					this.preStartMove();
 				} else {
 					console.debug("Trying to set slow walk...");
