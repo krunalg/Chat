@@ -431,9 +431,8 @@ ig.module(
 			}
 		},
 
+		// Returns true if move key for direction is down, else returns false.
 		moveKeyDown: function(facing)
-		// returns true if the supplied param
-		// facing key is currently pressed
 		{
 			switch (facing) {
 			case 'left':
@@ -450,6 +449,8 @@ ig.module(
 				break;
 
 			}
+
+			// Key is not down.
 			return false;
 		},
 
