@@ -4,6 +4,7 @@
 	echo "var socket = io.connect('http://".$socketHost.":".$socketPort."');\n";
 ?>
 
+// Receive /say message from server.
 socket.on('newMsg', function(from, msg) {
 	var showMessageHowLong = 2; // how long to hide name and show message
 	// Get reference to player which name will follow.
@@ -20,10 +21,7 @@ socket.on('newMsg', function(from, msg) {
 			msg: msg,
 			lifespan: showMessageHowLong
 		});
-	} else {
-		console.debug("Received message from non-existent player: " + from);
 	}
-
 });
 
 // Receive /tell message from server.
