@@ -598,11 +598,14 @@ ig.module(
 				} else if (this.moveKeyDown('down')) {
 					this.facing = 'down';
 					this.movePressed();
-				} else {
+				} 
+				// Player is not trying to move.
+				else {
 
-					// if player not trying to move, set to idle
+					// Set player animation to idle.
 					this.moveAnimStop();
-					// keep all slow-walk animations reset
+
+					// Keep slow-walk animations rewound.
 					this.anims.slowLeft.rewind();
 					this.anims.slowRight.rewind();
 					this.anims.slowUp.rewind();
