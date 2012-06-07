@@ -489,7 +489,7 @@ ig.module('game.main')
 
 			// Local player entity does not exist (after map change).
 			if (!this.getEntitiesByType(EntityLocalPlayer)[0]) {
-				
+
 				// Spawn new local player entity.
 				var player = this.buildPlayer();
 
@@ -497,12 +497,11 @@ ig.module('game.main')
 				console.debug("Player does not exist. Adding one.");
 			}
 			// Local player exists.
-			else 
-			{
+			else {
 				// Get local player entity.
-				var player = this.getEntitiesByType(EntityLocalPlayer)[0];	
+				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 			}
-			
+
 			// Player exists.
 			if (player) {
 
@@ -513,10 +512,9 @@ ig.module('game.main')
 
 			// Is player trying to chat?
 			if (ig.input.pressed('chatToggle')) {
-				
+
 				// Make sure chat input isn't already open.
-				if (!this.inputActive)
-				{
+				if (!this.inputActive) {
 
 					// Make input visible.
 					$('#input').fadeIn(100);
@@ -529,21 +527,35 @@ ig.module('game.main')
 				}
 			}
 
-			// prune the events array
+			// Prune the events array.
 			if (this.events.length > 0) {
+
+				// Check if pruning timer exists.
 				if (this.eventsTimer == null) {
+
+					// Create timer.
 					this.eventsTimer = new ig.Timer();
+
+					// Set time until an item will be pruned.
 					this.eventsTimer.set(this.eventsLifespan);
-				} else if (this.eventsTimer.delta() >= 0) {
-					// prune oldest
+				}
+
+				// Check if it's time to prune an item.
+				else if (this.eventsTimer.delta() >= 0) {
+
+					// Remove the oldest event.
 					this.events.splice(0, 1);
+
+					// Remove timer until needed again.
 					this.eventsTimer = null;
 				}
 
-				// if after that the events.length still
-				// exceeds the maximum, prune to size
-				while (this.events.length > this.eventsMax)
-				this.events.splice(0, 1);
+				// Keep events list within the maximum.
+				while (this.events.length > this.eventsMax) {
+
+					// Remove oldest.
+					this.events.splice(0, 1);
+				}
 			}
 		},
 
