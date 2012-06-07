@@ -88,22 +88,20 @@ ig.module('game.main')
 		 * @return bool	 true if tile is queried type, else false.
 		 */
 		isSpecialTile: function(x, y, tiles, layer) {
-			
+
 			// Get map by name.
 			var map = this.getMapByName(layer);
 
 			// Map found.
-			if(map)
-			{
+			if (map) {
 				// Try all tiles for a match.
 				for (var j = 0; j < tiles.length; j++) {
-					
+
 					// Check if current match the one in the map.
-					if (tiles[j] == map['data'][y][x]) 
-						{
-							// Match found.
-							return true;
-						}
+					if (tiles[j] == map['data'][y][x]) {
+						// Match found.
+						return true;
+					}
 				}
 			}
 
@@ -149,7 +147,7 @@ ig.module('game.main')
 
 		// Name of the current map.
 		mapName: 'Town',
-		
+
 		/*
 		 * Changes the current map.
 		 *
@@ -157,8 +155,7 @@ ig.module('game.main')
 		 * @param  goTo int    ID of exit to start player at.
 		 * @return      undefined
 		 */
-		zone: function(map, goTo)
-		{
+		zone: function(map, goTo) {
 			// Used to find where player starts in next map.
 			this.goTo = goTo;
 
@@ -172,45 +169,92 @@ ig.module('game.main')
 			this.loadLevelDeferred(ig.global['Level' + this.mapName]);
 		},
 
+		/*
+		 * Tell the server that we have left the area.
+		 *
+		 * @return      undefined
+		 */
 		leaveZone: function() {
+
+			// Send to socket.
 			socket.emit('playerLeaveZone');
 		},
 
+		/*
+		 * Spawns a local-player entity.
+		 *
+		 * @return      undefined
+		 */
 		buildPlayer: function() {
-			var x = 0
-			var y = 0
 
-			// should never stay this way in-game
-			var direction = 'right';
+			// Initialize a couple variables.
+			var x = 0;
+			var y = 0;
+			var direction = '';
 
+			// "Walk out a door" animation.
 			var exitAnimation = false;
 
+			// Check if there is someplace to put the player.
 			if (this.goTo == null) {
+
+				// Debug message.
 				console.debug("First time building player.");
-				// first time drawing player, use defaults
+
+				// Use default X.
 				x = this.defaultXStart;
+
+				// Use default Y.
 				y = this.defaultYStart;
+
+				// Use default direction.
 				direction = this.defaultFacing;
-			} else {
+			}
+			// Found a place to start the player.
+			else {
+
+				// Debug message.
 				console.debug("Rebuilding player using map exit values.");
-				// find coordinates from goTo
+
+				// Get all exit entities.
 				var exits = ig.game.getEntitiesByType(EntityExit);
+				
+				// Found exit entities.
 				if (EntityExit) {
 					for (var i = 0; i < exits.length; i++) {
+						
+						// Check for correct ID.
 						if (exits[i].me == this.goTo) {
+
+							// Check if exit is a door.
 							if (exits[i].type == 'door') {
+								
+								// Enable player door-exit animation.
 								exitAnimation = true;
+
+								// Leaving doors always goes down.
 								direction = 'down';
-							} else direction = 'up';
+
+							} 
+							// Exit must be a floor exit.
+							else {
+								// !! FIX THIS: should be remembered and recalled instead.
+								direction = 'up';
+							}
+
+							// Place player at position of exit.
 							x = exits[i].pos.x;
 							y = exits[i].pos.y;
 						}
 					}
 				}
-				this.goTo = null; // reset
+				
+				// Reset goTo for next map change.
+				this.goTo = null;
 			}
 
-			if (exitAnimation) // walking out the door
+			// Check if player will walk out a door.
+			if (exitAnimation)
 			{
 				return ig.game.spawnEntity(EntityLocalPlayer, x, y, // magic numbers = bad
 				{
@@ -270,9 +314,7 @@ ig.module('game.main')
 						// strip away the command and space
 						if (inputVal.substr(0, 4) == '/say') inputVal = inputVal.substr(5, inputVal.length - 5); // either remove '/say '
 						else inputVal = inputVal.substr(3, inputVal.length - 3); // or remove '/s '
-						
 						this.emitSay(player.name, inputVal); // send message to other players
-						
 						// display message locally
 						ig.game.spawnEntity(
 						EntityBubble, player.pos.x, player.pos.y, {
@@ -294,7 +336,6 @@ ig.module('game.main')
 				} else // assume it's a /say
 				{
 					this.emitSay(player.name, inputVal); // send message to other players
-					
 					// display message locally
 					ig.game.spawnEntity(
 					EntityBubble, player.pos.x, player.pos.y, {
