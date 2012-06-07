@@ -7,7 +7,7 @@ ig.module(
 'game.entities.non-weltmeister.player').defines(function() {
 
 	EntityNetworkPlayer = EntityPlayer.extend({
-		
+
 		// Priority relative to other entities.
 		zPriority: 1,
 
@@ -27,7 +27,7 @@ ig.module(
 				follow: player,
 				color: 'blue'
 			});
-			
+
 			// Some player changed his movement state.
 			socket.on('moveUpdateOtherPlayer-' + this.name, function(x, y, direction, state) {
 				player.vel.x = 0;
@@ -37,11 +37,6 @@ ig.module(
 				player.facing = direction;
 				player.moveState = state;
 				player.startMove();
-			});
-
-			// Some player faced a new direction.
-			socket.on('updateOtherPlayer-' + this.name, function(direction) {
-				player.facing = direction;
 			});
 
 			// A player jumped a ledge.
