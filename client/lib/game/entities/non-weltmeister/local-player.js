@@ -25,18 +25,19 @@ ig.module(
 		// Waiting for a door to open.
 		waitingToMove: false,
 
-		// system time in ms to wait before moving
+		// System time (in miliseconds) to for before moving.
 		moveWhen: 0,
 
-		// contains exit entity to use after moveWhen
+		// Exit entity to trigger after waiting and then moving.
 		moveDoor: false,
 
-		// helps decide whether to move or just change direction
+		// Used to decide if a move or just a direction change occurs.
 		moveCommitPending: false,
 
-		// system time in ms when will commit to a move
+		// System time (in miliseconds) when player will commit to a move.
 		moveCommitWhen: 0,
 
+		// Used to reset time before committing if direction changes.
 		moveCommitDirection: '',
 
 		netInit: function() {
