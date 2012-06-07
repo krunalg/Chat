@@ -442,6 +442,9 @@ ig.module('game.main')
 				// Message.
 				msg: message,
 			});
+
+			// Write to chat log.
+			this.chatLog.push(message);
 		},
 
 		/*

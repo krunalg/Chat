@@ -51,7 +51,7 @@ ig.module('game.chat-log')
 		push: function(html) {
 
 			// Add new content to the log.
-			$('#' + $this.htmlLogId).append(html);
+			$('#' + this.htmlLogId).append(html);
 		},
 
 		/*
