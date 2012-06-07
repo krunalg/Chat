@@ -57,13 +57,15 @@ ig.module(
 
 		// Determine if player should continue moving or stop.
 		goAgain: function() {
+			
+			// Assume we will keep moving unless told otherwise.
 			var keepMoving = true;
 
 			// if key pressed, update direction and proceed with move
-			if (this.moveStillPressed('left')) this.facing = 'left';
-			else if (this.moveStillPressed('right')) this.facing = 'right';
-			else if (this.moveStillPressed('up')) this.facing = 'up';
-			else if (this.moveStillPressed('down')) this.facing = 'down';
+			if (this.moveKeyDown('left')) this.facing = 'left';
+			else if (this.moveKeyDown('right')) this.facing = 'right';
+			else if (this.moveKeyDown('up')) this.facing = 'up';
+			else if (this.moveKeyDown('down')) this.facing = 'down';
 			else keepMoving = false; // no key pressed, stop moving
 			if (keepMoving && this.canJump()) {
 				this.isMove = false; // will use isJump instead
@@ -310,7 +312,7 @@ ig.module(
 			}
 		},
 
-		moveStillPressed: function(facing)
+		moveKeyDown: function(facing)
 		// returns true if the supplied param
 		// facing key is currently pressed
 		{
