@@ -64,51 +64,6 @@ ig.module('game.main')
 
 	MyGame = ig.Game.extend({
 
-		/*
-		 * Returns the argument string with first character converted to a capital.
-		 *
-		 * @param  string string Text to alter the first character of.
-		 * @return        string Text which has had it's first character changed
-		 *                       to an upper case letter.
-		 */
-		capitaliseFirstLetter: function(string) {
-
-			// Return the word with it's first character upper case'd.
-			return string.charAt(0).toUpperCase() + string.slice(1);
-		},
-
-		/*
-		 * Returns true if any tiles within 'tiles' are found at x, y
-		 * on the map layer named 'layer'.
-		 *
-		 * @param  x     int Position on x-axis in tiles.
-		 * @param  y     int Position on y-axis in tiles.
-		 * @param  tiles array Tiles to check for.
-		 * @param  layer string Name of layer containing tile.
-		 * @return bool	 true if tile is queried type, else false.
-		 */
-		isSpecialTile: function(x, y, tiles, layer) {
-
-			// Get map by name.
-			var map = this.getMapByName(layer);
-
-			// Map found.
-			if (map) {
-				// Try all tiles for a match.
-				for (var j = 0; j < tiles.length; j++) {
-
-					// Check if current match the one in the map.
-					if (tiles[j] == map['data'][y][x]) {
-						// Match found.
-						return true;
-					}
-				}
-			}
-
-			// No matches.
-			return false;
-		},
-
 		// Keep resorting entities.
 		autoSort: true,
 
@@ -149,131 +104,6 @@ ig.module('game.main')
 		mapName: 'Town',
 
 		/*
-		 * Changes the current map.
-		 *
-		 * @param  map  string Name of the map to load.
-		 * @param  goTo int    ID of exit to start player at.
-		 * @return      undefined
-		 */
-		zone: function(map, goTo) {
-			// Used to find where player starts in next map.
-			this.goTo = goTo;
-
-			// Name of map.
-			this.mapName = this.capitaliseFirstLetter(map);
-
-			// Tell other players that we left.
-			this.leaveZone();
-
-			// Change areas.
-			this.loadLevelDeferred(ig.global['Level' + this.mapName]);
-		},
-
-		/*
-		 * Tell the server that we have left the area.
-		 *
-		 * @return      undefined
-		 */
-		leaveZone: function() {
-
-			// Send to socket.
-			socket.emit('playerLeaveZone');
-		},
-
-		/*
-		 * Spawns a local-player entity.
-		 *
-		 * @return      undefined
-		 */
-		buildPlayer: function() {
-
-			// Initialize a couple variables.
-			var x = 0;
-			var y = 0;
-			var direction = '';
-
-			// "Walk out a door" animation.
-			var exitAnimation = false;
-
-			// Check if there is someplace to put the player.
-			if (this.goTo == null) {
-
-				// Debug message.
-				console.debug("First time building player.");
-
-				// Use default X.
-				x = this.defaultXStart;
-
-				// Use default Y.
-				y = this.defaultYStart;
-
-				// Use default direction.
-				direction = this.defaultFacing;
-			}
-			// Found a place to start the player.
-			else {
-
-				// Debug message.
-				console.debug("Rebuilding player using map exit values.");
-
-				// Get all exit entities.
-				var exits = ig.game.getEntitiesByType(EntityExit);
-
-				// Found exit entities.
-				if (EntityExit) {
-					for (var i = 0; i < exits.length; i++) {
-
-						// Check for correct ID.
-						if (exits[i].me == this.goTo) {
-
-							// Check if exit is a door.
-							if (exits[i].type == 'door') {
-
-								// Enable player door-exit animation.
-								exitAnimation = true;
-
-								// Leaving doors always goes down.
-								direction = 'down';
-
-							}
-							// Exit must be a floor exit.
-							else {
-								// !! FIX THIS: should be remembered and recalled instead.
-								direction = 'up';
-							}
-
-							// Place player at position of exit.
-							x = exits[i].pos.x;
-							y = exits[i].pos.y;
-						}
-					}
-				}
-
-				// Reset goTo for next map change.
-				this.goTo = null;
-			}
-
-			// Spawn player.
-			return ig.game.spawnEntity(EntityLocalPlayer, x, y, // magic numbers = bad
-			{
-				// Use username as name.
-				name: username,
-
-				// Set faced direction.
-				facing: direction,
-
-				// Set whether player is waiting to move or not.
-				waitingToMove: exitAnimation,
-
-				// Set when to move (even if player won't actually move).
-				moveWhen: 336.7 + new Date().getTime(),
-
-				// Set appearance.
-				skin: this.lastSkin
-			});
-		},
-
-		/*
 		 * Chat system
 		 */
 
@@ -282,6 +112,267 @@ ig.module('game.main')
 
 		// Input in use or not.
 		inputActive: false,
+
+		//		  _____ _   _ _____ _______ 
+		//		 |_   _| \ | |_   _|__   __|
+		//		   | | |  \| | | |    | |   
+		//		   | | | . ` | | |    | |   
+		//		  _| |_| |\  |_| |_   | |   
+		//		 |_____|_| \_|_____|  |_| 
+		//		 
+		init: function() {
+
+			// Create a DebugDisplay and pass in your font.
+			this.debugDisplay = new DebugDisplay(this.whiteFont);
+
+			// Start a connection with the socket server.
+			socket.emit('init', username);
+
+			// Set up controls.
+			ig.input.bind(ig.KEY.A, 'left');
+			ig.input.bind(ig.KEY.D, 'right');
+			ig.input.bind(ig.KEY.W, 'up');
+			ig.input.bind(ig.KEY.S, 'down');
+			ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
+			ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
+			ig.input.bind(ig.KEY.UP_ARROW, 'up');
+			ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
+			ig.input.bind(ig.KEY.ENTER, 'chatToggle');
+			ig.input.bind(ig.KEY.R, 'chatReply');
+			ig.input.bind(ig.KEY.Z, 'action');
+			ig.input.bind(ig.KEY.X, 'run');
+
+			/*
+			// OLD: Set up map animations.
+			var as = new ig.AnimationSheet('media/bg-flower.png', 16, 16);
+			this.backgroundAnims = {
+				'media/starter-towna.png': {
+					// flower
+					4: new ig.Animation(as, 0.26667, [0, 1, 0, 2]) // 16 frames out of 60 per
+				}
+			};
+			*/
+
+			// Set map animations from generated file.
+			initBackgroundAnimations();
+
+			// Load the level.
+			this.loadLevel(this.defaultLevel);
+
+			// Create the local player.
+			var player = this.buildPlayer();
+
+			// Set the repeating border according to region.
+			updateBorder(player);
+
+			// Add tab index to canvas to ensure it retains focus (Chrome needs this!)
+			$("#canvas").attr("tabindex", "0");
+
+			// Tell the input field how to handle 'enter' keypress.
+			$('#' + this.inputFieldId).bind('keypress', function(e) {
+
+				// Read key code.
+				var code = (e.keyCode ? e.keyCode : e.which);
+
+				// Check for the 'enter' key.
+				if (code == 13) {
+
+					// Submit input.
+					ig.game.chatInputOff();
+
+					// Set focus back to canvas.
+					$('#canvas').focus();
+				}
+			});
+		},
+
+		//	  _    _ _____  _____       _______ ______ 
+		//	 | |  | |  __ \|  __ \   /\|__   __|  ____|
+		//	 | |  | | |__) | |  | | /  \  | |  | |__   
+		//	 | |  | |  ___/| |  | |/ /\ \ | |  |  __|  
+		//	 | |__| | |    | |__| / ____ \| |  | |____ 
+		//	  \____/|_|    |_____/_/    \_\_|  |______|
+		//	                                           	
+		update: function() {
+			// Update all entities and backgroundMaps
+			this.parent();
+
+			// Local player entity does not exist (after map change).
+			if (!this.getEntitiesByType(EntityLocalPlayer)[0]) {
+
+				// Spawn new local player entity.
+				var player = this.buildPlayer();
+
+				// Debug message.
+				console.debug("Player does not exist. Adding one.");
+			}
+			// Local player exists.
+			else {
+				// Get local player entity.
+				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
+			}
+
+			// Player exists.
+			if (player) {
+
+				// Screen centers on player.
+				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
+				this.screen.y = player.pos.y - ig.system.height / 2;
+			}
+
+			// Is player trying to chat?
+			if (ig.input.pressed('chatToggle')) {
+
+				// Make sure chat input isn't already open.
+				if (!this.inputActive) {
+
+					// Make input visible.
+					$('#input').fadeIn(100);
+
+					// Set focus.
+					$('#input').focus();
+
+					// Prevent opening when it's already open.
+					this.inputActive = true;
+				}
+			}
+
+			// Prune the events array.
+			if (this.events.length > 0) {
+
+				// Check if pruning timer exists.
+				if (this.eventsTimer == null) {
+
+					// Create timer.
+					this.eventsTimer = new ig.Timer();
+
+					// Set time until an item will be pruned.
+					this.eventsTimer.set(this.eventsLifespan);
+				}
+
+				// Check if it's time to prune an item.
+				else if (this.eventsTimer.delta() >= 0) {
+
+					// Remove the oldest event.
+					this.events.splice(0, 1);
+
+					// Remove timer until needed again.
+					this.eventsTimer = null;
+				}
+
+				// Keep events list within the maximum.
+				while (this.events.length > this.eventsMax) {
+
+					// Remove oldest.
+					this.events.splice(0, 1);
+				}
+			}
+		},
+
+		//	  _____  _____       __          __
+		//	 |  __ \|  __ \     /\ \        / /
+		//	 | |  | | |__) |   /  \ \  /\  / / 
+		//	 | |  | |  _  /   / /\ \ \/  \/ /  
+		//	 | |__| | | \ \  / ____ \  /\  /   
+		//	 |_____/|_|  \_\/_/    \_\/  \/    
+		//	                                   
+		draw: function() {
+			
+			// Draw all entities and backgroundMaps
+			this.parent();
+
+			// Array of entity types which will be drawn above map layers.
+			var drawEntitiesAbove = new Array();
+
+			// Names will be above map.
+			drawEntitiesAbove.push(EntityName);
+
+			// Chat bubbles will be above map.
+			drawEntitiesAbove.push(EntityBubble);
+
+			// Draw certain entities above all map layers.
+			this.reallyDraw(drawEntitiesAbove);
+
+			// Add game events to this variable.
+			var printEvents = '';
+
+			// Traverse all game events.
+			for (var i = 0; i < this.events.length; i++) {
+				
+				// Add new lines.
+				var space = (i==0 ? '' : "\n");
+
+				// Add event to print.
+				printEvents += space + this.events[i];
+			}
+
+			// Draw game events to screen.
+			this.whiteFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
+
+			// Write controls to screen.
+			this.whiteFont.draw('ARROWS move, Z action, X run, ENTER chat', ig.system.width / 2, ig.system.height - 10, ig.Font.ALIGN.CENTER);
+
+			// Enable extra debugging for just myself.
+			if (username == "Joncom") {
+
+				// Draw debug display.
+				this.debugDisplay.draw(
+				[this.mapName], // will display each array element on a new line
+				true, // true or false to either show the FPS
+				false, // true or false to show the average FPS over a period of time
+				10000, // amount of of time between samples. defaults to 10000 (10 seconds)
+				100 // amount of samples to take over time. defaults to 500
+				);
+
+				// Disable collisions
+				ig.CollisionMap.inject({
+					trace: function(x, y, vx, vy, objectWidth, objectHeight) {
+						// Return a dummy trace result, indicating that the object did not collide.
+						return {
+							collision: {
+								x: false,
+								y: false
+							},
+							pos: {
+								x: x + vx,
+								y: y + vy
+							},
+							tile: {
+								x: 0,
+								y: 0
+							}
+						};
+					}
+				});
+			}
+		},
+
+		/*
+		 * Draws entities that were skipped because they need to be 
+		 * drawn above all map layers.
+		 *
+		 * @param  entityTypes array     Types of entities to drawn.
+		 * @return             undefined
+		 */
+		reallyDraw: function(entityTypes)
+		{
+			for(var i=0; i<entityTypes.length; i++)
+			{
+				// Get all entities of this type.
+				var entities = this.getEntitiesByType(entityTypes[i]);
+
+				// Entities found.
+				if(entities)
+				{
+					// All entities.
+					for(var j=0; j<entities.length; j++)
+					{
+						// Really draw them this time.
+						entities[j].draw(true);
+					}
+				}
+			}
+		},
 
 		/*
 		 * Send a /say message to the server.
@@ -444,266 +535,209 @@ ig.module('game.main')
 			this.inputActive = false;
 		},
 
-		//		  _____ _   _ _____ _______ 
-		//		 |_   _| \ | |_   _|__   __|
-		//		   | | |  \| | | |    | |   
-		//		   | | | . ` | | |    | |   
-		//		  _| |_| |\  |_| |_   | |   
-		//		 |_____|_| \_|_____|  |_| 
-		//		 
-		init: function() {
+		/*
+		 * Changes the current map.
+		 *
+		 * @param  map  string Name of the map to load.
+		 * @param  goTo int    ID of exit to start player at.
+		 * @return      undefined
+		 */
+		zone: function(map, goTo) {
+			// Used to find where player starts in next map.
+			this.goTo = goTo;
 
-			// Create a DebugDisplay and pass in your font.
-			this.debugDisplay = new DebugDisplay(this.whiteFont);
+			// Name of map.
+			this.mapName = this.capitaliseFirstLetter(map);
 
-			// Start a connection with the socket server.
-			socket.emit('init', username);
+			// Tell other players that we left.
+			this.leaveZone();
 
-			// Set up controls.
-			ig.input.bind(ig.KEY.A, 'left');
-			ig.input.bind(ig.KEY.D, 'right');
-			ig.input.bind(ig.KEY.W, 'up');
-			ig.input.bind(ig.KEY.S, 'down');
-			ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
-			ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
-			ig.input.bind(ig.KEY.UP_ARROW, 'up');
-			ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
-			ig.input.bind(ig.KEY.ENTER, 'chatToggle');
-			ig.input.bind(ig.KEY.R, 'chatReply');
-			ig.input.bind(ig.KEY.Z, 'action');
-			ig.input.bind(ig.KEY.X, 'run');
-
-			/*
-			// OLD: Set up map animations.
-			var as = new ig.AnimationSheet('media/bg-flower.png', 16, 16);
-			this.backgroundAnims = {
-				'media/starter-towna.png': {
-					// flower
-					4: new ig.Animation(as, 0.26667, [0, 1, 0, 2]) // 16 frames out of 60 per
-				}
-			};
-			*/
-
-			// Set map animations from generated file.
-			initBackgroundAnimations();
-
-			// Load the level.
-			this.loadLevel(this.defaultLevel);
-
-			// Create the local player.
-			var player = this.buildPlayer();
-
-			// Set the repeating border according to region.
-			updateBorder(player);
-
-			// Add tab index to canvas to ensure it retains focus (Chrome needs this!)
-			$("#canvas").attr("tabindex", "0");
-
-			// Tell the input field how to handle 'enter' keypress.
-			$('#' + this.inputFieldId).bind('keypress', function(e) {
-
-				// Read key code.
-				var code = (e.keyCode ? e.keyCode : e.which);
-
-				// Check for the 'enter' key.
-				if (code == 13) {
-
-					// Submit input.
-					ig.game.chatInputOff();
-
-					// Set focus back to canvas.
-					$('#canvas').focus();
-				}
-			});
-		},
-
-		//	  _    _ _____  _____       _______ ______ 
-		//	 | |  | |  __ \|  __ \   /\|__   __|  ____|
-		//	 | |  | | |__) | |  | | /  \  | |  | |__   
-		//	 | |  | |  ___/| |  | |/ /\ \ | |  |  __|  
-		//	 | |__| | |    | |__| / ____ \| |  | |____ 
-		//	  \____/|_|    |_____/_/    \_\_|  |______|
-		//	                                           	
-		update: function() {
-			// Update all entities and backgroundMaps
-			this.parent();
-
-			// Local player entity does not exist (after map change).
-			if (!this.getEntitiesByType(EntityLocalPlayer)[0]) {
-
-				// Spawn new local player entity.
-				var player = this.buildPlayer();
-
-				// Debug message.
-				console.debug("Player does not exist. Adding one.");
-			}
-			// Local player exists.
-			else {
-				// Get local player entity.
-				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
-			}
-
-			// Player exists.
-			if (player) {
-
-				// Screen centers on player.
-				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
-				this.screen.y = player.pos.y - ig.system.height / 2;
-			}
-
-			// Is player trying to chat?
-			if (ig.input.pressed('chatToggle')) {
-
-				// Make sure chat input isn't already open.
-				if (!this.inputActive) {
-
-					// Make input visible.
-					$('#input').fadeIn(100);
-
-					// Set focus.
-					$('#input').focus();
-
-					// Prevent opening when it's already open.
-					this.inputActive = true;
-				}
-			}
-
-			// Prune the events array.
-			if (this.events.length > 0) {
-
-				// Check if pruning timer exists.
-				if (this.eventsTimer == null) {
-
-					// Create timer.
-					this.eventsTimer = new ig.Timer();
-
-					// Set time until an item will be pruned.
-					this.eventsTimer.set(this.eventsLifespan);
-				}
-
-				// Check if it's time to prune an item.
-				else if (this.eventsTimer.delta() >= 0) {
-
-					// Remove the oldest event.
-					this.events.splice(0, 1);
-
-					// Remove timer until needed again.
-					this.eventsTimer = null;
-				}
-
-				// Keep events list within the maximum.
-				while (this.events.length > this.eventsMax) {
-
-					// Remove oldest.
-					this.events.splice(0, 1);
-				}
-			}
+			// Change areas.
+			this.loadLevelDeferred(ig.global['Level' + this.mapName]);
 		},
 
 		/*
-		 * Draws entities that were skipped because they need to be 
-		 * drawn above all map layers.
+		 * Tell the server that we have left the area.
 		 *
-		 * @param  entityTypes array     Types of entities to drawn.
-		 * @return             undefined
+		 * @return      undefined
 		 */
-		reallyDraw: function(entityTypes)
-		{
-			for(var i=0; i<entityTypes.length; i++)
-			{
-				// Get all entities of this type.
-				var entities = this.getEntitiesByType(entityTypes[i]);
+		leaveZone: function() {
 
-				// Entities found.
-				if(entities)
-				{
-					// All entities.
-					for(var j=0; j<entities.length; j++)
-					{
-						// Really draw them this time.
-						entities[j].draw(true);
+			// Send to socket.
+			socket.emit('playerLeaveZone');
+		},
+
+		/*
+		 * Changes the current map.
+		 *
+		 * @param  map  string Name of the map to load.
+		 * @param  goTo int    ID of exit to start player at.
+		 * @return      undefined
+		 */
+		zone: function(map, goTo) {
+			// Used to find where player starts in next map.
+			this.goTo = goTo;
+
+			// Name of map.
+			this.mapName = this.capitaliseFirstLetter(map);
+
+			// Tell other players that we left.
+			this.leaveZone();
+
+			// Change areas.
+			this.loadLevelDeferred(ig.global['Level' + this.mapName]);
+		},
+
+		/*
+		 * Tell the server that we have left the area.
+		 *
+		 * @return      undefined
+		 */
+		leaveZone: function() {
+
+			// Send to socket.
+			socket.emit('playerLeaveZone');
+		},
+
+		/*
+		 * Returns the argument string with first character converted to a capital.
+		 *
+		 * @param  string string Text to alter the first character of.
+		 * @return        string Text which has had it's first character changed
+		 *                       to an upper case letter.
+		 */
+		capitaliseFirstLetter: function(string) {
+
+			// Return the word with it's first character upper case'd.
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		},
+
+		/*
+		 * Returns true if any tiles within 'tiles' are found at x, y
+		 * on the map layer named 'layer'.
+		 *
+		 * @param  x     int Position on x-axis in tiles.
+		 * @param  y     int Position on y-axis in tiles.
+		 * @param  tiles array Tiles to check for.
+		 * @param  layer string Name of layer containing tile.
+		 * @return bool	 true if tile is queried type, else false.
+		 */
+		isSpecialTile: function(x, y, tiles, layer) {
+
+			// Get map by name.
+			var map = this.getMapByName(layer);
+
+			// Map found.
+			if (map) {
+				// Try all tiles for a match.
+				for (var j = 0; j < tiles.length; j++) {
+
+					// Check if current match the one in the map.
+					if (tiles[j] == map['data'][y][x]) {
+						// Match found.
+						return true;
 					}
 				}
 			}
+
+			// No matches.
+			return false;
 		},
 
-		//	  _____  _____       __          __
-		//	 |  __ \|  __ \     /\ \        / /
-		//	 | |  | | |__) |   /  \ \  /\  / / 
-		//	 | |  | |  _  /   / /\ \ \/  \/ /  
-		//	 | |__| | | \ \  / ____ \  /\  /   
-		//	 |_____/|_|  \_\/_/    \_\/  \/    
-		//	                                   
-		draw: function() {
-			
-			// Draw all entities and backgroundMaps
-			this.parent();
+		/*
+		 * Spawns a local-player entity.
+		 *
+		 * @return      undefined
+		 */
+		buildPlayer: function() {
 
-			// Array of entity types which will be drawn above map layers.
-			var drawEntitiesAbove = new Array();
+			// Initialize a couple variables.
+			var x = 0;
+			var y = 0;
+			var direction = '';
 
-			// Names will be above map.
-			drawEntitiesAbove.push(EntityName);
+			// "Walk out a door" animation.
+			var exitAnimation = false;
 
-			// Chat bubbles will be above map.
-			drawEntitiesAbove.push(EntityBubble);
+			// Check if there is someplace to put the player.
+			if (this.goTo == null) {
 
-			// Draw certain entities above all map layers.
-			this.reallyDraw(drawEntitiesAbove);
+				// Debug message.
+				console.debug("First time building player.");
 
-			// Add game events to this variable.
-			var printEvents = '';
+				// Use default X.
+				x = this.defaultXStart;
 
-			// Traverse all game events.
-			for (var i = 0; i < this.events.length; i++) {
-				
-				// Add new lines.
-				var space = (i==0 ? '' : "\n");
+				// Use default Y.
+				y = this.defaultYStart;
 
-				// Add event to print.
-				printEvents += space + this.events[i];
+				// Use default direction.
+				direction = this.defaultFacing;
 			}
+			// Found a place to start the player.
+			else {
 
-			// Draw game events to screen.
-			this.whiteFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
+				// Debug message.
+				console.debug("Rebuilding player using map exit values.");
 
-			// Write controls to screen.
-			this.whiteFont.draw('ARROWS move, Z action, X run, ENTER chat', ig.system.width / 2, ig.system.height - 10, ig.Font.ALIGN.CENTER);
+				// Get all exit entities.
+				var exits = ig.game.getEntitiesByType(EntityExit);
 
-			// Enable extra debugging for just myself.
-			if (username == "Joncom") {
+				// Found exit entities.
+				if (EntityExit) {
+					for (var i = 0; i < exits.length; i++) {
 
-				// Draw debug display.
-				this.debugDisplay.draw(
-				[this.mapName], // will display each array element on a new line
-				true, // true or false to either show the FPS
-				false, // true or false to show the average FPS over a period of time
-				10000, // amount of of time between samples. defaults to 10000 (10 seconds)
-				100 // amount of samples to take over time. defaults to 500
-				);
+						// Check for correct ID.
+						if (exits[i].me == this.goTo) {
 
-				// Disable collisions
-				ig.CollisionMap.inject({
-					trace: function(x, y, vx, vy, objectWidth, objectHeight) {
-						// Return a dummy trace result, indicating that the object did not collide.
-						return {
-							collision: {
-								x: false,
-								y: false
-							},
-							pos: {
-								x: x + vx,
-								y: y + vy
-							},
-							tile: {
-								x: 0,
-								y: 0
+							// Check if exit is a door.
+							if (exits[i].type == 'door') {
+
+								// Enable player door-exit animation.
+								exitAnimation = true;
+
+								// Leaving doors always goes down.
+								direction = 'down';
+
 							}
-						};
+							// Exit must be a floor exit.
+							else {
+								// !! FIX THIS: should be remembered and recalled instead.
+								direction = 'up';
+							}
+
+							// Place player at position of exit.
+							x = exits[i].pos.x;
+							y = exits[i].pos.y;
+						}
 					}
-				});
+				}
+
+				// Reset goTo for next map change.
+				this.goTo = null;
 			}
+
+			// Spawn player.
+			return ig.game.spawnEntity(EntityLocalPlayer, x, y, // magic numbers = bad
+			{
+				// Use username as name.
+				name: username,
+
+				// Set faced direction.
+				facing: direction,
+
+				// Set whether player is waiting to move or not.
+				waitingToMove: exitAnimation,
+
+				// Set when to move (even if player won't actually move).
+				moveWhen: 336.7 + new Date().getTime(),
+
+				// Set appearance.
+				skin: this.lastSkin
+			});
 		}
+
+		
 	});
 
 	// Start the game.
