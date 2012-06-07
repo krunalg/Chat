@@ -142,11 +142,15 @@ ig.module(
 		update: function() {
 			this.parent();
 
-			// movement
+			// Check if player is moving.
 			if (this.isJump || this.isMove) {
+
+				// Complete the started move.
 				this.finishMove();
+
 			} else {
-				// keep animation consistent with this.facing
+
+				// Set idle animation.
 				this.moveAnimStop();
 			}
 		}
