@@ -326,13 +326,24 @@ ig.module(
 				this.moveCommitPending = false;
 				this.moveCommitWhen = 0;
 
+				// Check if play can jump.
 				if (this.canJump()) {
+
+					// Jump.
 					this.startJump();
-				} else if (this.canMove()) {
+
+				} else 
+				// Chec if player can move regularly.
+				if (this.canMove()) {
+
+					// Being move.
 					this.preStartMove();
 				} else {
+
+					// Debug message.
 					console.debug("Trying to set slow walk...");
-					// can't move, set slow walk animation
+
+					// Cannot move, but trying, so slow-walk instead.
 					switch (this.facing) {
 					case 'left':
 						this.currentAnim = this.anims.slowLeft;
@@ -348,29 +359,55 @@ ig.module(
 						break;
 					}
 				}
-			} else // player has not yet committed to (trying to) move
+			}
+			// Player is not yet committed. 
+			else
 			{
-				// if player changed faced direction
+				// Check if player has changed faced directions.
 				if (this.facing != this.lastFacing) {
 
 					// Tell other players that we changed our faced direction.
 					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-					this.lastFacing = this.facing; // so we don't inform them again
-					this.moveAnimStart(false); // step-animate the change
-					// check if we are on an exit that needs animating
+
+					// So we don't send the same update twice.
+					this.lastFacing = this.facing;
+
+					// Animate the change.
+					this.moveAnimStart(false);
+
+					// Check if we're standing on an exit.
 					var exit = this.overExit(this);
+
+					// Check that an exit was found.
 					if (exit) {
-						if (this.facing == exit.direction) exit.startAnim();
-						else exit.stopAnim();
+
+						// Check if arrow animation needs to be turned on.
+						if (this.facing == exit.direction) 
+						{
+							// Turn on arrows.
+							exit.startAnim();
+						}
+						else 
+						{
+							// Turn off arrows if facing wrong direction.
+							exit.stopAnim();
+						}
 					}
 				}
 			}
 		},
 
+		// Does nothing until wait is over, then starts move.
 		moveWait: function() {
 			if (this.waitingToMove) {
+
+				// Check if waiting is over.
 				if (new Date().getTime() - this.moveWhen >= 0) {
+					
+					// Start move.
 					this.startMove();
+
+					// Allow move to cycle.
 					this.waitingToMove = false;
 				}
 			}
