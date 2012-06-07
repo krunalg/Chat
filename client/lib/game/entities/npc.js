@@ -47,8 +47,10 @@ ig.module(
 			}
 		},
 
+		// Handles exactly how a move takes place (speed, effects, etc.)
 		startMove: function() {
-			// determine speed
+			
+			// Set movement speed.
 			this.setMoveState('walk');
 
 			// Spawn new grass entity if needed.
@@ -59,13 +61,18 @@ ig.module(
 			var oldGrass = this.inGrass();
 			if (oldGrass) oldGrass.markForDeath();
 
+			// Player is moving.
 			this.isMove = true;
+
+			// Set player destination.
 			this.setMoveDestination();
+
+			// Start animations.
 			this.moveAnimStart(true);
 		},
 
+		// Determine if player should continue moving or stop.
 		continueOrStop: function()
-		// determines if player will continue moving or stop
 		{
 			this.isMove = false;
 			this.moveAnimStop();
