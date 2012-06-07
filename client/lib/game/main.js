@@ -559,6 +559,33 @@ ig.module('game.main')
 			}
 		},
 
+		/*
+		 * Draws entities that were skipped because they need to be 
+		 * drawn above all map layers.
+		 *
+		 * @param  entityTypes array     Types of entities to drawn.
+		 * @return             undefined
+		 */
+		reallyDraw: function(entityTypes)
+		{
+			for(var i=0; i<entityTypes.length; i++)
+			{
+				// Get all entities of this type.
+				var entities = this.getEntitiesByType(entityTypes[i]);
+
+				// Entities found.
+				if(entities)
+				{
+					// All entities.
+					for(var j=0; j<entities.length; j++)
+					{
+						// Really draw them this time.
+						entities[j].draw(true);
+					}
+				}
+			}
+		},
+
 		//	  _____  _____       __          __
 		//	 |  __ \|  __ \     /\ \        / /
 		//	 | |  | | |__) |   /  \ \  /\  / / 
@@ -571,34 +598,17 @@ ig.module('game.main')
 			// Draw all entities and backgroundMaps
 			this.parent();
 
-			
-			// Get all name entities.
-			var names = this.getEntitiesByType(EntityName);
-			
-			// Names exist.
-			if (names) {
-				
-				// Draw each name entities above all map layers.
-				for (var i = 0; i < names.length; i++) {
-					
-					// Draw name.
-					names[i].draw(true);
-				}
-			}
+			// Array of entity types which will be drawn above map layers.
+			var drawEntitiesAbove = new Array();
 
-			// Get all chat bubble entities.
-			var bubbles = this.getEntitiesByType(EntityBubble);
-			
-			// Bubbles exist.
-			if (bubbles) {
+			// Names will be above map.
+			drawEntitiesAbove.push(EntityName);
 
-				// Draw each name entities above all map layers.
-				for (var i = 0; i < bubbles.length; i++) {
-					
-					// Draw chat bubble.
-					bubbles[i].draw(true);
-				}
-			}
+			// Chat bubbles will be above map.
+			drawEntitiesAbove.push(EntityBubble);
+
+			// Draw certain entities above all map layers.
+			this.reallyDraw(drawEntitiesAbove);
 
 			// Add game events to this variable.
 			var printEvents = '';
