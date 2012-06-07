@@ -30,8 +30,7 @@ ig.module(
 
 			// Some player changed his movement state.
 			socket.on('moveUpdateOtherPlayer-' + this.name, function(x, y, direction, state) {
-				player.vel.x = 0;
-				player.vel.y = 0;
+				player.vel.x = player.vel.y = 0;
 				player.pos.x = x;
 				player.pos.y = y;
 				player.facing = direction;
@@ -41,8 +40,7 @@ ig.module(
 
 			// A player jumped a ledge.
 			socket.on('otherPlayerJump-' + this.name, function(x, y, direction) {
-				player.vel.x = 0;
-				player.vel.y = 0;
+				player.vel.x = player.vel.y = 0;
 				player.pos.x = x;
 				player.pos.y = y;
 				player.facing = direction;
