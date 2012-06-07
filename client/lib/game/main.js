@@ -283,15 +283,51 @@ ig.module('game.main')
 		// Input in use or not.
 		inputActive: false,
 
+		/*
+		 * Send a /say message to the server.
+		 *
+		 * @param  client string Name of player message is from.
+		 * @param  msg    string The message to send.
+		 * @return        undefined
+		 */
 		emitSay: function(client, msg) {
+
+			// Emit socket.
 			socket.emit('receiveSay', client, msg);
 		},
+
+		/*
+		 * Send a private message to someone.
+		 *
+		 * @param  to  string Recepient of the message.
+		 * @param  msg string Message to send.
+		 * @return     undefined
+		 */
 		emitTell: function(to, msg) {
+			
+			// Emit socket.
 			socket.emit('receiveTell', to, msg);
 		},
+		
+		/*
+		 * Send reskin message to the server.
+		 *
+		 * @param  skin string Name of the skin used.
+		 * @return      undefined
+		 */
 		emitReskin: function(skin) {
+
+			// Emit socket.
 			socket.emit('receiveReskin', skin);
 		},
+		
+		/*
+		 * Send /say message to the server and create a local chat bubble.
+		 *
+		 * @param  playerName string    Name of the player message is from.
+		 * @param  message    string    Message to be send and displayed.
+		 * @return            undefined
+		 */
 		chatSendMessage: function(playerName, message) {
 			// Get the local player entity.
 			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
@@ -314,6 +350,11 @@ ig.module('game.main')
 			});
 		},
 
+		/*
+		 * Processes whatever text has been typed in chat input and disable input.
+		 *
+		 * @return undefined
+		 */
 		chatInputOff: function() {
 
 			// Get any content from the input element.
