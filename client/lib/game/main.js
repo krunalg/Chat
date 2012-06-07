@@ -406,8 +406,6 @@ ig.module('game.main')
 			this.inputActive = false;
 		},
 
-
-
 		//		  _____ _   _ _____ _______ 
 		//		 |_   _| \ | |_   _|__   __|
 		//		   | | |  \| | | |    | |   
@@ -417,13 +415,13 @@ ig.module('game.main')
 		//		 
 		init: function() {
 
-			// create a new DebugDisplay, pass in your font
+			// Create a DebugDisplay and pass in your font.
 			this.debugDisplay = new DebugDisplay(this.whiteFont);
 
-			// start talking with network
+			// Start a connection with the socket server.
 			socket.emit('init', username);
 
-			// controls
+			// Set up controls.
 			ig.input.bind(ig.KEY.A, 'left');
 			ig.input.bind(ig.KEY.D, 'right');
 			ig.input.bind(ig.KEY.W, 'up');
@@ -437,9 +435,8 @@ ig.module('game.main')
 			ig.input.bind(ig.KEY.Z, 'action');
 			ig.input.bind(ig.KEY.X, 'run');
 
-
-			// set up map animations
-			// flower animation from earlier version
+			/*
+			// OLD: Set up map animations.
 			var as = new ig.AnimationSheet('media/bg-flower.png', 16, 16);
 			this.backgroundAnims = {
 				'media/starter-towna.png': {
@@ -447,25 +444,36 @@ ig.module('game.main')
 					4: new ig.Animation(as, 0.26667, [0, 1, 0, 2]) // 16 frames out of 60 per
 				}
 			};
+			*/
 
-			// generated animations from mapper
+			// Set map animations from generated file.
 			initBackgroundAnimations();
 
+			// Load the level.
 			this.loadLevel(this.defaultLevel);
 
-			// build player
+			// Create the local player.
 			var player = this.buildPlayer();
+			
+			// Set the repeating border according to region.
 			updateBorder(player);
 
-			// add tab index to canvas to ensure it
-			// retains focus (needed in Chrome!)
-			$("#canvas").attr("tabindex", "0")
+			// Add tab index to canvas to ensure it retains focus (Chrome needs this!)
+			$("#canvas").attr("tabindex", "0");
 
-			// logic for submitting inputted text
+			// Tell the input field how to handle 'enter' keypress.
 			$('#' + this.inputFieldId).bind('keypress', function(e) {
+				
+				// Read key code.
 				var code = (e.keyCode ? e.keyCode : e.which);
-				if (code == 13) { //Enter keycode
-					ig.game.chatInputOff(ig.game);
+				
+				// Check for the 'enter' key.
+				if (code == 13) {
+					
+					// Submit input.
+					ig.game.chatInputOff();
+
+					// Set focus back to canvas.
 					$('#canvas').focus();
 				}
 			});
