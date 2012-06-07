@@ -90,6 +90,7 @@ ig.module(
 			}
 		},
 
+		// Handles exactly how a move takes place (speed, effects, etc.)
 		startMove: function() {
 			if (this.moveState == 'idle') this.isMove = false;
 			else {
@@ -105,8 +106,13 @@ ig.module(
 				var oldGrass = this.inGrass();
 				if (oldGrass) oldGrass.markForDeath();
 
+				// Player is moving.
 				this.isMove = true;
+
+				// Set destination.
 				this.setMoveDestination();
+
+				// Start animations.
 				this.moveAnimStart(true);
 			}
 		},
