@@ -130,13 +130,27 @@ ig.module(
 		update: function() {
 			this.parent();
 
-			if (this.isMove) {
-				this.finishMove(this);
+			// Check if player is moving.
+			if (this.isJump || this.isMove) {
+
+				// Complete the started move.
+				this.finishMove();
+
 			} else {
+
+				// Check if its time to move again.
 				if (this.moveTimer.delta() >= 0) {
+					
+					// Face next direction.
 					this.faceNextMove();
+
+					// Check if player can move.
 					if (this.canMove()) {
+
+						// Start moving.
 						this.startMove();
+
+						// Queue of next move.
 						this.justMoved();
 					}
 				}
