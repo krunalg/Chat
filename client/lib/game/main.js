@@ -218,24 +218,24 @@ ig.module('game.main')
 
 				// Get all exit entities.
 				var exits = ig.game.getEntitiesByType(EntityExit);
-				
+
 				// Found exit entities.
 				if (EntityExit) {
 					for (var i = 0; i < exits.length; i++) {
-						
+
 						// Check for correct ID.
 						if (exits[i].me == this.goTo) {
 
 							// Check if exit is a door.
 							if (exits[i].type == 'door') {
-								
+
 								// Enable player door-exit animation.
 								exitAnimation = true;
 
 								// Leaving doors always goes down.
 								direction = 'down';
 
-							} 
+							}
 							// Exit must be a floor exit.
 							else {
 								// !! FIX THIS: should be remembered and recalled instead.
@@ -248,7 +248,7 @@ ig.module('game.main')
 						}
 					}
 				}
-				
+
 				// Reset goTo for next map change.
 				this.goTo = null;
 			}
@@ -276,8 +276,7 @@ ig.module('game.main')
 		/*
 		 * Chat system
 		 */
-		// html elements
-		
+
 		// ID of HTML input element.
 		inputFieldId: 'input',
 
@@ -293,8 +292,7 @@ ig.module('game.main')
 		emitReskin: function(skin) {
 			socket.emit('receiveReskin', skin);
 		},
-		chatSendMessage: function(playerName, message)
-		{
+		chatSendMessage: function(playerName, message) {
 			// Get the local player entity.
 			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 
@@ -304,7 +302,7 @@ ig.module('game.main')
 			// Display message locally.
 			ig.game.spawnEntity(
 			EntityBubble, player.pos.x, player.pos.y, {
-				
+
 				// Entity to follow.
 				follow: player,
 
@@ -315,14 +313,15 @@ ig.module('game.main')
 				lifespan: 2
 			});
 		},
+
 		chatInputOff: function() {
-			
+
 			// Get any content from the input element.
 			var inputVal = $('#' + this.inputFieldId).val();
 
 			// Check if user has typed something.
 			if (inputVal != '') {
-				
+
 				// Get the local player entity.
 				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 
@@ -347,33 +346,31 @@ ig.module('game.main')
 						// Send message to server.
 						this.emitTell(to, msg);
 
-					} 
+					}
 					// Check for commands: /say or /s
 					else if (explodeInput[0] == '/say' || explodeInput[0] == '/s') {
 
 						// Check if command is: /say 
-						if (inputVal.substr(0, 4) == '/say') 
-						{
+						if (inputVal.substr(0, 4) == '/say') {
 							// Strip command and first space from input.
 							inputVal = inputVal.substr(5, inputVal.length - 5);
 						}
 						// Check if command is: /s
-						else if (inputVal.substr(0, 2) == '/s')
-						{
+						else if (inputVal.substr(0, 2) == '/s') {
 							// Strip command and first space from input.
 							inputVal = inputVal.substr(3, inputVal.length - 3);
 						}
-						
+
 						// Send message to server.
 						this.chatSendMessage(player.name, inputVal);
 
-					} 
+					}
 					// Check for command: /skin
 					else if (explodeInput[0] == '/skin') {
-						
+
 						// Get skin name from input.
 						var skin = explodeInput[1];
-						
+
 						// Set new skin.
 						player.skin = skin;
 
@@ -386,7 +383,7 @@ ig.module('game.main')
 						// Tell server about skin change.
 						this.emitReskin(skin);
 					}
-				} 
+				}
 				// Assume it's a /say
 				else {
 					// Send message to server.
@@ -454,7 +451,7 @@ ig.module('game.main')
 
 			// Create the local player.
 			var player = this.buildPlayer();
-			
+
 			// Set the repeating border according to region.
 			updateBorder(player);
 
@@ -463,13 +460,13 @@ ig.module('game.main')
 
 			// Tell the input field how to handle 'enter' keypress.
 			$('#' + this.inputFieldId).bind('keypress', function(e) {
-				
+
 				// Read key code.
 				var code = (e.keyCode ? e.keyCode : e.which);
-				
+
 				// Check for the 'enter' key.
 				if (code == 13) {
-					
+
 					// Submit input.
 					ig.game.chatInputOff();
 
