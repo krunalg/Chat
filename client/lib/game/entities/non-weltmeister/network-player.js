@@ -47,7 +47,7 @@ ig.module(
 				player.pos.y = y;
 				player.facing = direction;
 				player.moveState = 'jump';
-				player.netStartJump();
+				player.startJump();
 			});
 
 			// A player set his skin.
@@ -117,7 +117,7 @@ ig.module(
 			}
 		},
 
-		netStartJump: function() {
+		startJump: function() {
 			// determine speed
 			this.moveState = 'jump';
 			this.speed = this.jumpSpeed;
