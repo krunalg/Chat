@@ -293,6 +293,28 @@ ig.module('game.main')
 		emitReskin: function(skin) {
 			socket.emit('receiveReskin', skin);
 		},
+		chatSendMessage: function(playerName, message)
+		{
+			// Get the local player entity.
+			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
+
+			// Send message to server.
+			this.emitSay(playerName, message);
+
+			// Display message locally.
+			ig.game.spawnEntity(
+			EntityBubble, player.pos.x, player.pos.y, {
+				
+				// Entity to follow.
+				follow: player,
+
+				// Message.
+				msg: message,
+
+				// Show for this length.
+				lifespan: 2
+			});
+		}
 		chatInputOff: function(game) {
 			
 			// Get any content from the input element.
@@ -343,23 +365,27 @@ ig.module('game.main')
 						}
 						
 						// Send message to server.
-						this.emitSay(player.name, inputVal); // send message to other players
-						// display message locally
-						ig.game.spawnEntity(
-						EntityBubble, player.pos.x, player.pos.y, {
-							follow: player,
-							msg: inputVal,
-							lifespan: 2
-						});
+						this.chatSendMessage(this.player.name, inputVal);
 
-					} else if (explodeInput[0] == '/skin') {
-						var skin = explodeInput[1]; // name of skin
+					} 
+					// Check for command: /skin
+					else if (explodeInput[0] == '/skin') {
+						
+						// Get skin name from input.
+						var skin = explodeInput[1];
+						
 						game.emitReskin(skin);
 						player.skin = skin;
 						player.reskin();
 						game.lastSkin = skin;
 
 					}
+				} 
+				// Assume it's a /say
+				else {
+					// Send message to server.
+					this.chatSendMessage(this.player.name, inputVal);
+				}
 
 
 			}
