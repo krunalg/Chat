@@ -314,7 +314,7 @@ ig.module('game.main')
 				// Show for this length.
 				lifespan: 2
 			});
-		}
+		},
 		chatInputOff: function(game) {
 			
 			// Get any content from the input element.
