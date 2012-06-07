@@ -253,26 +253,24 @@ ig.module('game.main')
 				this.goTo = null;
 			}
 
-			// Check if player will walk out a door.
-			if (exitAnimation)
+			// Spawn player.
+			return ig.game.spawnEntity(EntityLocalPlayer, x, y, // magic numbers = bad
 			{
-				return ig.game.spawnEntity(EntityLocalPlayer, x, y, // magic numbers = bad
-				{
-					name: username,
-					facing: direction,
-					moveWaiting: true,
-					moveWhen: 336.7 + new Date().getTime(),
-					skin: this.lastSkin
-				});
-			} else {
-				return ig.game.spawnEntity(EntityLocalPlayer, x, y, // magic numbers = bad
-				{
-					name: username,
-					facing: direction,
-					skin: this.lastSkin
-				});
-			}
+				// Use username as name.
+				name: username,
 
+				// Set faced direction.
+				facing: direction,
+
+				// Set whether player is waiting to move or not.
+				waitingToMove: exitAnimation,
+
+				// Set when to move (even if player won't actually move).
+				moveWhen: 336.7 + new Date().getTime(),
+
+				// Set appearance.
+				skin: this.lastSkin
+			});
 		},
 
 		/*
