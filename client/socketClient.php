@@ -56,11 +56,8 @@ socket.on('welcome', function(msg) {
 	} 
 	else 
 	{
-		// HTML for chat log.
-		var html = '<div class="info">' + msg + '</div>';
-		
 		// Write to chat log.
-		ig.game.chatLog.push(html);
+		ig.game.chatLog.push('<div class="info">' + msg + '</div>');
 
 		ig.game.events.push(msg);
 	}
@@ -72,11 +69,8 @@ socket.on('addPlayer', function(user, x, y, direction, skin) {
 	
 	ig.game.events.push(user + " entered the area.");
 
-	// HTML for chat log.
-	var html = '<div class="info"><span class="name">[' + user + ']</span> entered the area.</div>';
-	
 	// Write to chat log.
-	ig.game.chatLog.push(html);
+	ig.game.chatLog.push('<div class="info"><span class="name">[' + user + ']</span> entered the area.</div>');
 
 	ig.game.spawnEntity(EntityNetworkPlayer, x, y, {
 		name: user,
