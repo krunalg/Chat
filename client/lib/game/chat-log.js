@@ -18,6 +18,14 @@ ig.module('game.chat-log')
 		// Height of log in pixels.
 		height: null,
 
+		logCSS: {
+			// No horizontal scrolling.
+			"overflow-x": "hidden",
+
+			// Enable vertical scrolling.
+			"overflow-y": "scroll"
+		},
+
 		init: function(width, height, logId) {
 
 			// Set width in pixels.
@@ -56,9 +64,12 @@ ig.module('game.chat-log')
 			$('#' + this.htmlLogId).css("position", "relative");
 			$('#' + this.htmlLogId).css("top", $('#canvas').height() - this.height);
 
-			// Setting scrolling.
-			$('#' + this.htmlLogId).css("overflow-x", "hidden");
-			$('#' + this.htmlLogId).css("overflow-y", "scroll");
+			// Apply CSS settings to chat log.
+			for(var property in this.logCSS)
+			{
+				$('#' + this.htmlLogId).css( property, this.logCSS[property] );
+			}
+					
 		},
 
 		/*
