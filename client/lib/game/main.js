@@ -450,9 +450,9 @@ ig.module('game.main')
 		/*
 		 * Send /tell message to the server and create a local chat bubble.
 		 *
-		 * @param  playerName string    Name of the player message is from.
-		 * @param  message    string    Message to be send and displayed.
-		 * @return            undefined
+		 * @param  recipient string    To whom the message is being sent.
+		 * @param  message   string    Message to be sent.
+		 * @return           undefined
 		 */
 		chatSendTell: function(recipient, message) {
 			
@@ -464,6 +464,17 @@ ig.module('game.main')
 			
 			// Write to chat log.
 			this.chatLog.push(html);
+		},
+
+		/*
+		 * Begin composing a message with the recipient pre-filled out.
+		 *
+		 * @param  recipient string    Name of the player message is from.
+		 * @return           undefined
+		 */
+		chatStartTell: function(recipient) {
+			
+			
 		},
 
 		/*
