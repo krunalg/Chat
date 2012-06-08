@@ -16,4 +16,7 @@ specialTiles.water.push(441);
 specialTiles.water.push(2456);
 specialTiles.grass = new Array();
 specialTiles.grass.push(2363);
+specialTiles.footprints = new Array();
+specialTiles.footprints.push(747);
+specialTiles.footprints.push(2380);
 })
