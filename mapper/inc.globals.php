@@ -108,10 +108,10 @@ $globalCollisions =
                'mouseoutImg'  => 'images/water.gif',
                'mouseoverImg' => 'images/water-mouseover.png'
         ),
-            'footsteps'    =>
+            'footprints'    =>
         array( 'collision'    => 0,
-               'mouseoutImg'  => 'images/footsteps.gif',
-               'mouseoverImg' => 'images/footsteps-mouseover.png'
+               'mouseoutImg'  => 'images/footprints.gif',
+               'mouseoverImg' => 'images/footprints-mouseover.png'
         )
     );
 
