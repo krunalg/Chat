@@ -33,6 +33,9 @@ socket.on('incomingTell', function(from, msg) {
 	// Add message to game events.
 	ig.game.events.push("Msg from " + from + ": " + msg);
 
+	// Remember the last person who sent us a /tell.
+	ig.game.chatLog.lastTellFrom = from;
+
 	// Write to chat log.
 	ig.game.chatLog.push('<div class="tell">[' + ig.game.chatNameHTML(from) + '] whispers: ' + msg + '</div>');
 });

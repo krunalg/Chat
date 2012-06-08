@@ -243,6 +243,13 @@ ig.module('game.main')
 				}
 			}
 
+			// Is the player trying to reply to someone?
+			else if (ig.input.pressed('chatReply')) {
+
+				// Open input to reply to who last messaged us.
+				this.chatStartTell(ig.game.chatLog.lastTellFrom);
+			}
+
 			// Prune the events array.
 			if (this.events.length > 0) {
 
