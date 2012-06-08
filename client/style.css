@@ -42,6 +42,10 @@ html,body {
         color: #E774E0;
 }
 
-.info {
+.announce {
         color: #FFFF00;
+}
+
+.info {
+        color: #FFC0C0;
 }

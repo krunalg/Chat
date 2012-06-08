@@ -51,7 +51,7 @@ socket.on('welcome', function(msg) {
 	else 
 	{
 		// Write to chat log.
-		ig.game.chatLog.push('<div class="info">' + msg + '</div>');
+		ig.game.chatLog.push('<div class="announce">' + msg + '</div>');
 
 		ig.game.events.push(msg);
 	}
