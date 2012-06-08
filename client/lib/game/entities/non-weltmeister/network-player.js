@@ -56,7 +56,14 @@ ig.module(
 
 			// A player disconnected or left the area.
 			socket.on('dropPlayer-' + this.name, function() {
+				
+				// Write event to screen.
 				ig.game.events.push(player.name + " left the area.");
+
+				// Write to chat log.
+				ig.game.chatLog.push('<div class="info"><span class="name">[' + player.name + ']</span> left the area.</div>');
+
+				// Free resources.
 				player.kill();
 			});
 
