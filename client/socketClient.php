@@ -24,7 +24,7 @@ socket.on('newMsg', function(from, msg) {
 	}
 
 	// Write to chat log.
-	ig.game.chatLog.push('<div class="say">[' + ig.game.chatNameHTML() + '] says: ' + msg + '</div>');
+	ig.game.chatLog.push('<div class="say">[' + ig.game.chatNameHTML(from) + '] says: ' + msg + '</div>');
 });
 
 // Receive /tell message from server.
@@ -34,7 +34,7 @@ socket.on('incomingTell', function(from, msg) {
 	ig.game.events.push("Msg from " + from + ": " + msg);
 
 	// Write to chat log.
-	ig.game.chatLog.push('<div class="tell">[' + ig.game.chatNameHTML() + '] whispers: ' + msg + '</div>');
+	ig.game.chatLog.push('<div class="tell">[' + ig.game.chatNameHTML(from) + '] whispers: ' + msg + '</div>');
 });
 
 // Server welcomed the user, else kill the application.
@@ -64,7 +64,7 @@ socket.on('addPlayer', function(user, x, y, direction, skin) {
 	ig.game.events.push(user + " entered the area.");
 
 	// Write to chat log.
-	ig.game.chatLog.push('<div class="info">[' + ig.game.chatNameHTML() + '] entered the area.</div>');
+	ig.game.chatLog.push('<div class="info">[' + ig.game.chatNameHTML(user) + '] entered the area.</div>');
 
 	ig.game.spawnEntity(EntityNetworkPlayer, x, y, {
 		name: user,
