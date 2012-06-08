@@ -137,21 +137,34 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('receiveSay', function(client, msg) {
-        socket.broadcast.to(socket.roomname).emit('newMsg', client, msg);
-        console.log("[" + socket.roomname + "][" + socket.clientname + "] " + msg);
+        
+        // Checks that message contains non-whitespace.
+        if (msg.trim().length > 0) {
+            
+            socket.broadcast.to(socket.roomname).emit('newMsg', client, msg);
+            console.log("[" + socket.roomname + "][" + socket.clientname + "] " + msg);
+        }
     });
 
     socket.on('receiveTell', function(to, msg) {
-        // find recipients session id
-        for (var i = 0; i < onlinePlayers.length; i++) {
-            if (onlinePlayers[i].name == to) {
-                //console.log("Tell going to: " + to + " has session: " + onlinePlayers[i].session);
-                io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, msg); // send tell
-                console.log("[" + socket.clientname + ">>" + to + "] " + msg);
-                return;
+        
+        // Checks that message contains non-whitespace.
+        if (msg.trim().length > 0) {
+
+            // Debug message.
+            console.log("Contents of tell: '" + msg + "'");
+
+            // find recipients session id
+            for (var i = 0; i < onlinePlayers.length; i++) {
+                if (onlinePlayers[i].name == to) {
+                    //console.log("Tell going to: " + to + " has session: " + onlinePlayers[i].session);
+                    io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, msg); // send tell
+                    console.log("[" + socket.clientname + ">>" + to + "] " + msg);
+                    return;
+                }
             }
+            console.log("** Tell received but recipient does not exist.");
         }
-        console.log("** Tell received but recipient does not exist.");
     });
 
     socket.on('disconnect', function() {
