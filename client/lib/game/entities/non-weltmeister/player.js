@@ -329,6 +329,61 @@ ig.module(
 			});
 		},
 
+		/*
+		 * If the entity type exists already at coordinates, return it.
+		 * Otherwise spawn new entity and return it.
+		 *
+		 * @param  entityType <EntityName>  Name of entity sub-class.
+		 * @param  tileType   string  Name of special tile type (eg. water, grass, sand, etc.)
+		 * @param  position   object  Expects two properties, x and y, with pixel values.
+		 * @param  tiles      array  Tiles to with which a match will mean spawning an entity.
+		 * @return            <EntityName>  if entity exists/is spawned, else return undefined.
+		 */
+		trySpawningEntity: function(entityType, tileType, position, tiles) {
+
+			// Do not spawn entity if one of same type already exists there.
+			var entities = ig.game.getEntitiesByType(entityType);
+			if (entities) {
+				for (var i = 0; i < entities.length; i++) {
+					if (entities[i].pos.x == position.x && entities[i].pos.y == position.y && !entities[i]._killed) {
+
+						// Save from being killed if marked for death.
+						if (entities[i].markedForDeath) entities[i].revive();
+
+						// Return entity.
+						return entities[i];
+					}
+				}
+			}
+
+			// Get map tilesize.
+			var tilesize = ig.game.collisionMap.tilesize;
+
+			// Check if tile is the right type for spawning.
+			if (ig.game.isSpecialTile(
+
+			// X tile position.
+			(position.x / tilesize),
+
+			// Y tile position.
+			(position.y / tilesize),
+
+			// Special tiles which trigger a spawn.
+			specialTiles[tileType],
+
+			// Map layer name to check.
+			'lower'
+
+			)) {
+
+				// Debug message.
+				console.debug("Creating entity at " + tileType + " tile: " + position.x + "," + position.y);
+
+				// Spawn new entity and return it.
+				return ig.game.spawnEntity(entityType, position.x, position.y, { direction: this.facing });
+			}
+		},
+
 		//           tttt                                                      SSSSSSSSSSSSSSS                                                                                                iiii                                               GGGGGGGGGGGGG                                                                     
 		//        ttt:::t                                                    SS:::::::::::::::S                                                                                              i::::i                                           GGG::::::::::::G                                                                     
 		//        t:::::t                                                   S:::::SSSSSS::::::S                                                                                               iiii                                          GG:::::::::::::::G                                                                     
