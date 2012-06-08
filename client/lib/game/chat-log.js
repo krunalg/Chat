@@ -21,6 +21,9 @@ ig.module('game.chat-log')
 		// Height of log in pixels.
 		height: null,
 
+		// Name of player who messaged last.
+		lastTellFrom: '',
+
 		// CSS settings for the log element.
 		logCSS: {
 			
