@@ -56,7 +56,10 @@ ig.module('game.chat-log')
 			"margin-bottom": "7px",
 
 			// Add spacing around log.
-			"padding": "5px",
+			"padding-top": "5px",
+			"padding-bottom": "5px",
+			"padding-left": "20px",
+			"padding-right": "20px",
 
 			// Set position bottom center.
   			"position": "absolute",
