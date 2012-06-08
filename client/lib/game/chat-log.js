@@ -105,12 +105,8 @@ ig.module('game.chat-log')
 			$('#' + this.htmlLogId + '-container').width(this.width);
 			$('#' + this.htmlLogId + '-container').height(this.height);
 
-			// Get CSS settings for log container.
-			for(var property in this.logContainerCSS)
-			{
-				// Apply property.
-				$('#' + this.htmlLogId + '-container').css( property, this.logContainerCSS[property] );
-			}
+			// Apply CSS settings to log container.
+			this.applyCSS(this.logContainerCSS, '#' + this.htmlLogId + '-container');
 
 			/*
 			 *  Log element holds messages.
@@ -120,12 +116,7 @@ ig.module('game.chat-log')
 			$('#' + this.htmlLogId + '-container').append($('<div id="' + this.htmlLogId + '"/>'));
 
 			// Apply CSS settings to chat log.
-			for(var property in this.logCSS)
-			{
-				// Apply property.
-				$('#' + this.htmlLogId).css( property, this.logCSS[property] );
-			}
-					
+			this.applyCSS(this.logCSS, '#' + this.htmlLogId);					
 		},
 
 		/*
