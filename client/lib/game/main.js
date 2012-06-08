@@ -493,8 +493,11 @@ ig.module('game.main')
 			// Make sure chat input isn't already open.
 			if (!this.inputActive) {
 
+				// Add space after name.
+				var spaceAfterName = (recipient!='' ? ' ':'');
+
 				// Set inital message.
-				$('#' + this.inputFieldId).val('/tell ' + recipient + ' ');
+				$('#' + this.inputFieldId).val('/tell ' + recipient + spaceAfterName);
 
 				// Make input visible.
 				$('#input').fadeIn(100);
