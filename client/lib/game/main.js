@@ -478,7 +478,7 @@ ig.module('game.main')
 			if (!this.inputActive) {
 
 				// Set inital message.
-				$('#' + this.inputFieldId).val('/tell ' + recipient);
+				$('#' + this.inputFieldId).val('/tell ' + recipient + ' ');
 
 				// Make input visible.
 				$('#input').fadeIn(100);
