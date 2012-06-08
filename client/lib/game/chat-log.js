@@ -18,7 +18,9 @@ ig.module('game.chat-log')
 		// Height of log in pixels.
 		height: null,
 
+		// CSS settings for the log element.
 		logCSS: {
+			
 			// No horizontal scrolling.
 			"overflow-x": "hidden",
 

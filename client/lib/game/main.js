@@ -315,9 +315,6 @@ ig.module('game.main')
 			// Draw game events to screen.
 			this.whiteFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
 
-			// Write controls to screen.
-			this.whiteFont.draw('ARROWS move, Z action, X run, ENTER chat', ig.system.width / 2, ig.system.height - 10, ig.Font.ALIGN.CENTER);
-
 			// Enable extra debugging for just myself.
 			if (username == "Joncom") {
 
