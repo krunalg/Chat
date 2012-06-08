@@ -66,10 +66,17 @@ socket.on('welcome', function(msg) {
 	}
 });
 
-// the new add player
+// Add a new player to the game.
 socket.on('addPlayer', function(user, x, y, direction, skin) {
 	var player = ig.game.getEntitiesByType(EntityLocalPlayer)[0]; // !! is it needed?
+	
 	ig.game.events.push(user + " entered the area.");
+
+	// HTML for chat log.
+	var html = '<div class="info"><span class="name">[' + user + ']</span> entered the area.</div>';
+	
+	// Write to chat log.
+	ig.game.chatLog.push(html);
 
 	ig.game.spawnEntity(EntityNetworkPlayer, x, y, {
 		name: user,
