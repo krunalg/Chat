@@ -423,28 +423,33 @@ ig.module('game.main')
 		 * @return            undefined
 		 */
 		chatSendSay: function(playerName, message) {
-			// Get the local player entity.
-			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
-
-			// Send message to server.
-			this.emitSay(playerName, message);
-
-			// Display message locally.
-			ig.game.spawnEntity(
-			EntityBubble, player.pos.x, player.pos.y, {
-
-				// Entity to follow.
-				follow: player,
-
-				// Message.
-				msg: message,
-			});
-
-			// HTML for chat log.
-			var html = '<div class="say">[' + ig.game.chatNameHTML(playerName) + '] says: ' + message + '</div>';
 			
-			// Write to chat log.
-			this.chatLog.push(html);
+			// Checks that message contains non-whitespace.
+        	if (message.trim().length > 0) {
+			
+				// Get the local player entity.
+				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
+
+				// Send message to server.
+				this.emitSay(playerName, message);
+
+				// Display message locally.
+				ig.game.spawnEntity(
+				EntityBubble, player.pos.x, player.pos.y, {
+
+					// Entity to follow.
+					follow: player,
+
+					// Message.
+					msg: message,
+				});
+
+				// HTML for chat log.
+				var html = '<div class="say">[' + ig.game.chatNameHTML(playerName) + '] says: ' + message + '</div>';
+				
+				// Write to chat log.
+				this.chatLog.push(html);
+			}
 		},
 
 		/*
@@ -456,14 +461,18 @@ ig.module('game.main')
 		 */
 		chatSendTell: function(recipient, message) {
 			
-			// Send message to server.
-			this.emitTell(recipient, message);
+			// Checks that message contains non-whitespace.
+        	if (message.trim().length > 0) {
 
-			// HTML for chat log.
-			var html = '<div class="tell">To [' + ig.game.chatNameHTML(recipient) + ']: ' + message + '</div>';
-			
-			// Write to chat log.
-			this.chatLog.push(html);
+				// Send message to server.
+				this.emitTell(recipient, message);
+
+				// HTML for chat log.
+				var html = '<div class="tell">To [' + ig.game.chatNameHTML(recipient) + ']: ' + message + '</div>';
+				
+				// Write to chat log.
+				this.chatLog.push(html);
+			}
 		},
 
 		/*
