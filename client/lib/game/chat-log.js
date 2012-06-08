@@ -154,14 +154,23 @@ ig.module('game.chat-log')
 		 */
 		push: function(html) {
 
-			// Pruning BEFORE adding for scroll animation.
-			this.prune();
+			// Get top of scroll position.
+			var scrollTop = $('#' + this.htmlLogId)[0].scrollTop;
 
+			// Get top of scroll position when scrolled to bottom.
+			var scrollTopWhenScrolled = $('#' + this.htmlLogId)[0].scrollHeight - $('#' + this.htmlLogId)[0].offsetHeight;
+
+			// Check if div is currently scrolled or not.
+			var scroll = (scrollTop==scrollTopWhenScrolled ? true:false);
+			
 			// Add new content to the log.
 			$('#' + this.htmlLogId).append(html);
 
+			// Pruning.
+			this.prune();
+
 			// Scroll the log.
-			this.scroll();
+			if(scroll) this.scroll();
 		},
 
 		/*
