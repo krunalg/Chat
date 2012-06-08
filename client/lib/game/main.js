@@ -489,6 +489,51 @@ ig.module('game.main')
 				// Prevent opening when it's already open.
 				this.inputActive = true;
 			}
+
+			// Chat's already open, injecting /tell.
+			else {
+
+				// Get input field content.
+				var input = $('#' + this.inputFieldId).val();
+
+				// Break apart to find commands.
+				var inputParts = input.split(' ');
+
+				// Check if command has been typed.
+				if(inputParts[0].charAt(0)=='/') {
+
+					// Update the command.
+					inputParts[0] = '/tell';
+
+					// Update the name.
+					inputParts[1] = recipient;
+
+					// Rebuild input.
+					var newInput = '';
+					for(var i=0; i<inputParts.length; i++)
+					{
+
+						// Prepend a space except the very first time.
+						if(i!=0) newInput += ' ';
+
+						// Add next word.
+						newInput += inputParts[i];
+					}
+				}
+
+				// No command typed, prepend /tell.
+				else {
+
+					// Determine if space needed after name.
+					var spaceOrNot = (input.charAt(0)==' ' ? '': ' ');
+
+					// Rebuild input.
+					var newInput = '/tell ' + recipient + spaceOrNot + input;
+				}
+
+				// Use new input.
+				$('#' + this.inputFieldId).val(newInput);
+			}
 			
 		},
 
