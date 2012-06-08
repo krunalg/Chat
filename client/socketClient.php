@@ -43,6 +43,7 @@ socket.on('incomingTell', function(from, msg) {
 	ig.game.chatLog.push(html);
 });
 
+// Server welcomed the user, else kill the application.
 socket.on('welcome', function(msg) {
 	if (msg != 'Welcome') {
 		document.body.innerHTML = "";
@@ -52,7 +53,17 @@ socket.on('welcome', function(msg) {
 		}
 		window.alert("Did not receive welcome from server.");
 		throw new Error('Halting game because server did not send welcome message.');
-	} else ig.game.events.push(msg);
+	} 
+	else 
+	{
+		// HTML for chat log.
+		var html = '<div class="info">' + msg + '</div>';
+		
+		// Write to chat log.
+		ig.game.chatLog.push(html);
+
+		ig.game.events.push(msg);
+	}
 });
 
 // the new add player
