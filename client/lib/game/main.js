@@ -598,7 +598,15 @@ ig.module('game.main')
 						var msg = '';
 
 						// Reconstruct message.
-						for (i = 2; i < explodeInput.length; i++) msg += explodeInput[i];
+						for (i = 2; i < explodeInput.length; i++) 
+						{
+							
+							// Prepend space if not the first word.
+							var spaceOrNot = (i==2) ? '':' ';
+
+							// Add next word.
+							msg += spaceOrNot + explodeInput[i];
+						}
 
 						// Send message to server.
 						this.chatSendTell(to, msg);
