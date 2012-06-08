@@ -64,7 +64,7 @@ ig.module(
 					ig.game.events.push(player.name + " left the area.");
 
 					// Write to chat log.
-					ig.game.chatLog.push('<div class="info"><span class="name">[' + player.name + ']</span> left the area.</div>');
+					ig.game.chatLog.push('<div class="info">[' + ig.game.chatNameHTML() + '] left the area.</div>');
 
 					// Free resources.
 					player.kill();
