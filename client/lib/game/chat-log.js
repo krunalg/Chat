@@ -29,8 +29,34 @@ ig.module('game.chat-log')
 			// Set element to hold messages.
 			this.htmlLogId = logId;
 
+			// Create a log container element.
+			$('body').append($('<div id="' + this.htmlLogId + '-container"/>'));
+
+			// Position the container over canvas.
+			$('#' + this.htmlLogId + '-container').css("position", "absolute");
+			$('#' + this.htmlLogId + '-container').css("width", $('#canvas').width());
+			$('#' + this.htmlLogId + '-container').css("height", $('#canvas').height());
+			$('#' + this.htmlLogId + '-container').css("left", 0);
+			$('#' + this.htmlLogId + '-container').css("right", 0);
+			$('#' + this.htmlLogId + '-container').css("top", 0);
+			$('#' + this.htmlLogId + '-container').css("bottom", 0);
+			$('#' + this.htmlLogId + '-container').css("margin", "auto");
+			//$('#' + this.htmlLogId + '-container').css("border", "5px solid green");
+
+
+			/*
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			border: 1px solid #555;
+			outline: none;
+			*/
+
 			// Create log HTML element.
-			$('body').append($('<div id="' + this.htmlLogId + '"/>'));
+			$('#' + this.htmlLogId + '-container').append($('<div id="' + this.htmlLogId + '"/>'));
 
 			// Set log width.
 			$('#' + this.htmlLogId).width(this.width);

@@ -46,9 +46,3 @@ html,body {
 .tell {
         color: #E774E0;
 }
-
-#log {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-}
