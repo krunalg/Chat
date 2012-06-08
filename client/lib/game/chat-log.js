@@ -26,7 +26,10 @@ ig.module('game.chat-log')
 			"overflow-y": "scroll",
 
 			// Set bold fonts.
-			"font-weight": "bold"
+			"font-weight": "bold",
+
+			// Give text a drop shadow.
+			"text-shadow": "0.1em 0.1em 0.2em black"
 		},
 
 		init: function(width, height, logId) {

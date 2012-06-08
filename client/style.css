@@ -34,10 +34,6 @@ html,body {
         width: 300px;
 }
 
-.say, .tell {
-        text-shadow: 0.1em 0.1em 0.2em black;
-}
-
 .say {
         color: white;
 }
