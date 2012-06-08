@@ -23,11 +23,8 @@ socket.on('newMsg', function(from, msg) {
 		});
 	}
 
-	// HTML for chat log.
-	var html = '<div class="say"><span class="name">[' + from + ']</span> says: ' + msg + '</div>';
-	
 	// Write to chat log.
-	ig.game.chatLog.push(html);
+	ig.game.chatLog.push('<div class="say"><span class="name">[' + from + ']</span> says: ' + msg + '</div>');
 });
 
 // Receive /tell message from server.
@@ -36,11 +33,8 @@ socket.on('incomingTell', function(from, msg) {
 	// Add message to game events.
 	ig.game.events.push("Msg from " + from + ": " + msg);
 
-	// HTML for chat log.
-	var html = '<div class="tell"><span class="name">[' + from + ']</span> whispers: ' + msg + '</div>';
-	
 	// Write to chat log.
-	ig.game.chatLog.push(html);
+	ig.game.chatLog.push('<div class="tell"><span class="name">[' + from + ']</span> whispers: ' + msg + '</div>');
 });
 
 // Server welcomed the user, else kill the application.
