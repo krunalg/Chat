@@ -483,9 +483,6 @@ ig.module('game.main')
 				// Make input visible.
 				$('#input').fadeIn(100);
 
-				// Set focus.
-				$('#input').focus();
-
 				// Prevent opening when it's already open.
 				this.inputActive = true;
 			}
@@ -502,11 +499,22 @@ ig.module('game.main')
 				// Check if command has been typed.
 				if(inputParts[0].charAt(0)=='/') {
 
+					// Check if replacing or adding .
+					if(inputParts[0]=='/say' || inputParts[0]=='/s') {
+
+						// No recipient to replace.
+						inputParts.splice(1, 0, recipient);
+					}
+					
+					// Replacing.
+					else {
+						
+						// Replace the recipient.
+						inputParts[1] = recipient;
+					}
+
 					// Update the command.
 					inputParts[0] = '/tell';
-
-					// Update the name.
-					inputParts[1] = recipient;
 
 					// Rebuild input.
 					var newInput = '';
@@ -519,6 +527,12 @@ ig.module('game.main')
 						// Add next word.
 						newInput += inputParts[i];
 					}
+
+					// If name is the last part, space is needed.
+					var spaceOrNot = (inputParts.length<=2 ? ' ':'');
+					
+					// Add space if needed.
+					newInput += spaceOrNot;
 				}
 
 				// No command typed, prepend /tell.
@@ -534,6 +548,9 @@ ig.module('game.main')
 				// Use new input.
 				$('#' + this.inputFieldId).val(newInput);
 			}
+
+			// Set focus.
+			$('#input').focus();
 			
 		},
 
