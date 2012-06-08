@@ -6,6 +6,9 @@ ig.module('game.chat-log')
 
 	ChatLog = ig.Class.extend({
 
+		// ID of element that holds all elements.
+		wrapperId: 'ChatLog',
+
 		// ID of element to hold messages.
 		htmlLogId: null,
 
@@ -28,10 +31,20 @@ ig.module('game.chat-log')
 			"overflow-y": "auto",
 
 			// Set bold fonts.
-			"font-weight": "bold",
+			//"font-weight": "bold",
 
 			// Give text a drop shadow.
-			"text-shadow": "0.1em 0.1em 0.2em black"
+			"text-shadow": "0.1em 0.1em 0.2em black",
+
+			// Font size.
+			"font-size": "10pt"
+		},
+
+		// CSS settings for the log container.
+		logContainerCSS: {
+			"background": "black", 
+
+			"border-radius": "15px"
 		},
 
 		init: function(width, height, logId) {
@@ -45,19 +58,28 @@ ig.module('game.chat-log')
 			// Set element to hold messages.
 			this.htmlLogId = logId;
 
-			// Create a log container element.
-			$('body').append($('<div id="' + this.htmlLogId + '-container"/>'));
+			// Create wrapper element.
+			$('body').append($('<div id="' + this.wrapperId + '"/>'));
 
-			// Position the container over canvas.
-			$('#' + this.htmlLogId + '-container').css("position", "absolute");
-			$('#' + this.htmlLogId + '-container').css("width", $('#canvas').width());
-			$('#' + this.htmlLogId + '-container').css("height", $('#canvas').height());
-			$('#' + this.htmlLogId + '-container').css("left", 0);
-			$('#' + this.htmlLogId + '-container').css("right", 0);
-			$('#' + this.htmlLogId + '-container').css("top", 0);
-			$('#' + this.htmlLogId + '-container').css("bottom", 0);
-			$('#' + this.htmlLogId + '-container').css("margin", "auto");
-			//$('#' + this.htmlLogId + '-container').css("border", "5px solid green");
+			// Position the wrapper over canvas.
+			$('#' + this.wrapperId).css("position", "absolute");
+			$('#' + this.wrapperId).css("width", $('#canvas').width());
+			$('#' + this.wrapperId).css("height", $('#canvas').height());
+			$('#' + this.wrapperId).css("left", 0);
+			$('#' + this.wrapperId).css("right", 0);
+			$('#' + this.wrapperId).css("top", 0);
+			$('#' + this.wrapperId).css("bottom", 0);
+			$('#' + this.wrapperId).css("margin", "auto");
+			//$('#' + this.wrapperId).css("border", "5px solid green");
+
+			// Create a log container.
+			$('#' + this.wrapperId).append($('<div id="' + this.htmlLogId + '-container"/>'));
+
+			// Apply CSS settings to chat log container.
+			for(var property in this.logContainerCSS)
+			{
+				$('#' + this.htmlLogId).css( property, this.logContainerCSS[property] );
+			}
 
 			// Create log HTML element.
 			$('#' + this.htmlLogId + '-container').append($('<div id="' + this.htmlLogId + '"/>'));
