@@ -74,7 +74,7 @@ socket.on('addPlayer', function(user, x, y, direction, skin) {
 	});
 });
 
-// consider merging this whole thing with playerPositions
+// Spawns entities for all players in the area.
 socket.on('addAllPlayers', function(players) {
 	var localPlayer = ig.game.getEntitiesByType(EntityLocalPlayer)[0];
 
@@ -94,12 +94,21 @@ socket.on('playerPositions', function(players)
 // updates all **currently existing**
 // Otherplayer entity positions and directions
 {
+	// Debug message.
+	console.debug("Socket event: playerPositions was called.");
+
+	// Debug counter.
+	var countWork = 0;
 	var netplayers = ig.game.getEntitiesByType(EntityNetworkPlayer);
 	if (netplayers) {
 		for (var i = 0; i < netplayers.length; i++) {
 			for (var j in players) {
 				// if names match, update position
 				if (netplayers[i].name == players[j].name) {
+
+					// Record that we've done work.
+					countWork++;
+
 					netplayers[i].pos.x = players[j].pos.x;
 					netplayers[i].pos.y = players[j].pos.y;
 					var sw = players[j].facing;
@@ -121,4 +130,5 @@ socket.on('playerPositions', function(players)
 			}
 		}
 	}
+	console.debug("Work was done " + countWork + " times.");
 });
