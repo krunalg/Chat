@@ -126,7 +126,7 @@ ig.module('game.main')
 		init: function() {
 
 			// Create the chat log.
-			this.chatLog = new ChatLog(600, 80, 'log');
+			this.chatLog = new ChatLog(360, 80, 'log');
 
 			// Create a DebugDisplay and pass in your font.
 			this.debugDisplay = new DebugDisplay(this.whiteFont);
