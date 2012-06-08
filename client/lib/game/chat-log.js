@@ -13,7 +13,7 @@ ig.module('game.chat-log')
 		htmlLogId: null,
 
 		// Maximum messages to keep in log.
-		buffer: 100,
+		buffer: 50,
 
 		// Width of log in pixels.
 		width: null,
@@ -151,6 +151,9 @@ ig.module('game.chat-log')
 		 */
 		push: function(html) {
 
+			// Pruning BEFORE adding for scroll animation.
+			this.prune();
+
 			// Add new content to the log.
 			$('#' + this.htmlLogId).append(html);
 
@@ -181,12 +184,15 @@ ig.module('game.chat-log')
 
 			// Check if there are too many messages.
 			if (messageCount > this.buffer) {
+				
 				// How many messages to remove.
 				var removeCount = messageCount - this.buffer;
 
 				for (var i = 0; i < removeCount; i++) {
+					
 					// Remove oldest entry.
-					$('#' + this.htmlLogId + ' :first-child').remove();
+					$('#' + this.htmlLogId + ' div:first').remove();
+					
 				}
 			}
 		}
