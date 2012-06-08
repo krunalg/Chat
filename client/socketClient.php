@@ -34,7 +34,7 @@ socket.on('incomingTell', function(from, msg) {
 	ig.game.events.push("Msg from " + from + ": " + msg);
 
 	// Write to chat log.
-	ig.game.chatLog.push('<div class="tell">[<a onclick="ig.game.chatStartTell(\'' + from + '\');">' + from + '</a>] whispers: ' + msg + '</div>');
+	ig.game.chatLog.push('<div class="tell">[' + ig.game.chatNameHTML() + '] whispers: ' + msg + '</div>');
 });
 
 // Server welcomed the user, else kill the application.

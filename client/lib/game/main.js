@@ -469,7 +469,7 @@ ig.module('game.main')
 		/*
 		 * Begin composing a message with the recipient pre-filled out.
 		 *
-		 * @param  recipient string    Name of the player message is from.
+		 * @param  recipient string    Name of player to write to.
 		 * @return           undefined
 		 */
 		chatStartTell: function(recipient) {
@@ -490,6 +490,18 @@ ig.module('game.main')
 				this.inputActive = true;
 			}
 			
+		},
+
+		/*
+		 * Return a HTML clickable name for fast-replying.
+		 *
+		 * @param  name string    Name of player.
+		 * @return      undefined
+		 */
+		chatNameHTML: function(name) {
+
+			// Clickable name.
+			return '<a onclick="ig.game.chatStartTell(\'' + name + '\');">' + name + '</a>';
 		},
 
 		/*
