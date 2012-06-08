@@ -171,8 +171,8 @@ ig.module('game.chat-log')
 		 */
 		scroll: function()
 		{
-			// Animate the scroll.
-			$('#' + this.htmlLogId).animate({scrollTop:$('#' + this.htmlLogId)[0].scrollHeight}, 1000);
+			// Instantly animate the scroll (not actually animated).
+			$('#' + this.htmlLogId).animate({scrollTop:$('#' + this.htmlLogId)[0].scrollHeight}, 0);
 		},
 
 		/*
