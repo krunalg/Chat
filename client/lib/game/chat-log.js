@@ -52,16 +52,19 @@ ig.module('game.chat-log')
 			// Round the corners.
 			"border-radius": "10px",
 
-			// Move away from corner.
-			"margin": "5px",
+			// Move away from edge.
+			"margin-bottom": "7px",
 
 			// Add spacing around log.
 			"padding": "5px",
 
-			// Set position bottom left.
+			// Set position bottom center.
   			"position": "absolute",
   			"bottom": "0px",
-  			"left": "0px"
+  			"right": "0",
+  			"left": "0",
+  			"margin-left": "auto",
+			"margin-right": "auto",
 
 		},
 
