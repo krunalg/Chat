@@ -43,18 +43,6 @@ ig.module('game.chat-log')
 			$('#' + this.htmlLogId + '-container').css("margin", "auto");
 			//$('#' + this.htmlLogId + '-container').css("border", "5px solid green");
 
-
-			/*
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			margin: auto;
-			border: 1px solid #555;
-			outline: none;
-			*/
-
 			// Create log HTML element.
 			$('#' + this.htmlLogId + '-container').append($('<div id="' + this.htmlLogId + '"/>'));
 
@@ -64,8 +52,9 @@ ig.module('game.chat-log')
 			// Set log height.
 			$('#' + this.htmlLogId).height(this.height);
 
-			// Set a red border for debugging.
-			$('#' + this.htmlLogId).css("border", "2px solid red");
+			// Place log at bottom of canvas.
+			$('#' + this.htmlLogId).css("position", "relative");
+			$('#' + this.htmlLogId).css("top", $('#canvas').height() - this.height);
 
 			// Setting scrolling.
 			$('#' + this.htmlLogId).css("overflow-x", "hidden");
