@@ -129,6 +129,27 @@ ig.module('game.chat-log')
 		},
 
 		/*
+		 * Applies one or more CSS settings to an element.
+		 *
+		 * @param  css     object    Contains CSS properties and their values.
+		 * @param  element string    Name of element to alter using jQuery.
+		 * @return         undefined
+		 */
+		applyCSS: function(css, element)
+		{
+
+			// Select element using jQuery.
+			var elementToUse = $(element);
+
+			// Get CSS settings
+			for(var property in css)
+			{
+				// Apply property.
+				elementToUse.css( property, css[property] );
+			}
+		},
+
+		/*
 		 * Adds a new message to the end of the log.
 		 *
 		 * @param  html string    HTML formatted message.
