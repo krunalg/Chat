@@ -441,7 +441,7 @@ ig.module('game.main')
 			});
 
 			// HTML for chat log.
-			var html = '<div class="say">[' + ig.game.chatNameHTML(recipient) + '] says: ' + message + '</div>';
+			var html = '<div class="say">[' + ig.game.chatNameHTML(playerName) + '] says: ' + message + '</div>';
 			
 			// Write to chat log.
 			this.chatLog.push(html);
