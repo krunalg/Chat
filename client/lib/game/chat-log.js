@@ -23,7 +23,10 @@ ig.module('game.chat-log')
 			"overflow-x": "hidden",
 
 			// Enable vertical scrolling.
-			"overflow-y": "scroll"
+			"overflow-y": "scroll",
+
+			// Set bold fonts.
+			"font-weight": "bold"
 		},
 
 		init: function(width, height, logId) {

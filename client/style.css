@@ -36,7 +36,6 @@ html,body {
 
 .say, .tell {
         text-shadow: 0.1em 0.1em 0.2em black;
-        font-weight: bold;
 }
 
 .say {
