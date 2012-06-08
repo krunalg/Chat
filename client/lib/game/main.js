@@ -474,6 +474,21 @@ ig.module('game.main')
 		 */
 		chatStartTell: function(recipient) {
 			
+			// Make sure chat input isn't already open.
+			if (!this.inputActive) {
+
+				// Set inital message.
+				$('#' + this.inputFieldId).val('/tell ' + recipient);
+
+				// Make input visible.
+				$('#input').fadeIn(100);
+
+				// Set focus.
+				$('#input').focus();
+
+				// Prevent opening when it's already open.
+				this.inputActive = true;
+			}
 			
 		},
 
