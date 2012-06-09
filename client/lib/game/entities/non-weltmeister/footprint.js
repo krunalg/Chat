@@ -21,7 +21,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 			this.parent(x, y, settings);
 
 			// Create left animation.
-			this.addAnim('left', 0.1667, 
+			this.addAnim('left', 0.01667, 
 				[
 					1,1,1,1,1,1,1,1,
 					1,1,1,1,1,1,1,1,
@@ -33,7 +33,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 				], true);
 
 			// Create Right animation.
-			this.addAnim('right', 0.1667, 
+			this.addAnim('right', 0.01667, 
 				[
 					1,1,1,1,1,1,1,1,
 					1,1,1,1,1,1,1,1,
@@ -45,7 +45,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 				], true);
 
 			// Create up animation.
-			this.addAnim('up', 0.1667, 
+			this.addAnim('up', 0.01667, 
 				[
 					0,0,0,0,0,0,0,0,
 					0,0,0,0,0,0,0,0,
@@ -57,7 +57,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 				], true);
 
 			// Create down animation.
-			this.addAnim('down', 0.1667, 
+			this.addAnim('down', 0.01667, 
 				[
 					0,0,0,0,0,0,0,0,
 					0,0,0,0,0,0,0,0,
