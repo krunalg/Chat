@@ -33,6 +33,9 @@ ig.module('game.entities.non-weltmeister.reflection')
 				// Copy animation of player.
 				this.currentAnim = this.follow.currentAnim;
 
+				// Flip vertically.
+				this.currentAnim.flip.y = true;
+
 			}
 			
 			// Remove reflection if the player does not exist.
@@ -47,6 +50,9 @@ ig.module('game.entities.non-weltmeister.reflection')
 
 			// Parent call.
 			this.parent();
+
+			// Restore vertical flip.
+			this.currentAnim.flip.y = false;
 		},
 
 		update: function() {
