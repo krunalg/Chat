@@ -11,6 +11,9 @@ ig.module('game.entities.non-weltmeister.footprint')
 			y: 16
 		},
 
+		// Entity will not persist without intervention.
+		markedForDeath: true,
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.footprint.png', 16, 16),
 		
@@ -81,6 +84,12 @@ ig.module('game.entities.non-weltmeister.footprint')
 				throw new Error("Footprint entity was spawned without the 'facing' property.");
 			}
 		},
+
+		revive: function() {
+
+			// Rewind animation.
+			this.currentAnim.rewind();
+		}
 
 		update: function() {
 			

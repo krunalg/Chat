@@ -334,12 +334,11 @@ ig.module(
 		 * Otherwise spawn new entity and return it.
 		 *
 		 * @param  entityType <EntityName>  Name of entity sub-class.
-		 * @param  tileType   string  Name of special tile type (eg. water, grass, sand, etc.)
 		 * @param  position   object  Expects two properties, x and y, with pixel values.
 		 * @param  tiles      array  Tiles to with which a match will mean spawning an entity.
 		 * @return            <EntityName>  if entity exists/is spawned, else return undefined.
 		 */
-		trySpawningEntity: function(entityType, tileType, position, tiles) {
+		trySpawningEntity: function(entityType, position, tiles) {
 
 			// Do not spawn entity if one of same type already exists there.
 			var entities = ig.game.getEntitiesByType(entityType);
@@ -369,10 +368,10 @@ ig.module(
 			(position.y / tilesize),
 
 			// Special tiles which trigger a spawn.
-			specialTiles[tileType],
+			tiles,
 
 			// Map layer name to check.
-			'lower'
+			ig.game.primaryMapLayer
 
 			)) {
 
@@ -380,7 +379,7 @@ ig.module(
 				console.debug("Creating entity at " + tileType + " tile: " + position.x + "," + position.y);
 
 				// Spawn new entity and return it.
-				return ig.game.spawnEntity(entityType, position.x, position.y, { direction: this.facing });
+				return ig.game.spawnEntity(entityType, position.x, position.y, { facing: this.facing });
 			}
 		},
 

@@ -484,6 +484,9 @@ ig.module(
 				// Remove old grass entity if leaving one.
 				var oldGrass = this.inGrass();
 				if (oldGrass) oldGrass.markForDeath();
+
+				// Spawn footprint if needed.
+				this.trySpawningEntity(EntityFootprint, 'footprints', this.pos, specialTiles['footprints']);
 			}
 
 			// Not idle.
