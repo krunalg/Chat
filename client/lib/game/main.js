@@ -756,6 +756,31 @@ ig.module('game.main')
 		},
 
 		/*
+		 * Same thing as spawnEntity() but adds new entity to top of array, not the end.
+		 *
+		 * @param  type     string/entityClass Name of entity sub class.
+		 * @param  x        integer Pixel position on x-axis.
+		 * @param  y        integer Pixel position on y-axis.
+		 * @param  settings object Initial variables.
+		 * @return          entityClass on success, undefined otherwise.
+		 */
+		spawnEntityBelow: function( type, x, y, settings ) {
+			var entityClass = typeof(type) === 'string'
+				? ig.global[type]
+				: type;
+				
+			if( !entityClass ) {
+				throw("Can't spawn entity of type " + type);
+			}
+			var ent = new (entityClass)( x, y, settings || {} );
+			this.entities.splice( 0, 0, ent );
+			if( ent.name ) {
+				this.namedEntities[ent.name] = ent;
+			}
+			return ent;
+		},
+
+		/*
 		 * Returns the argument string with first character converted to a capital.
 		 *
 		 * @param  string string Text to alter the first character of.
