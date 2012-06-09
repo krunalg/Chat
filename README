@@ -26,12 +26,15 @@ Change-Log:
 ----------------------------
 - Grass entities spawn only as needed and self-prune after use. (Completed June 2, 2012)
 - Repeating borders update according to player's position in the world. (Completed June 2, 2012)
-- Player can surf/travel over water. (Completed June 3, 2012)
+- Player can travel over water. (Completed June 3, 2012)
 - Chat log with auto-scrolling text, multi-colored messages, and clicking names or pressing R to private message. (Completed June 7, 2012)
 
 
 To-do:
 ----------------------------
+
+World:
+- Sand tiles need collision update for 'footprint' effect and movement.
 
 Camera:
 - Ability to restrict certain areas of map from being displayed on screen.
@@ -51,6 +54,7 @@ Chat system:
 - Chat bubble repositions itself to be on-screen if it is not (low priority).
 
 Animations: 
+- Swimming requires "bobbing" animation as well as initial hop.
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
 - Overhead smoke-effect in LAVARIDGE TOWN.
 - Weather effects: rain in ROUTE 119, sandstorm in ROUTE 111, ash in ROUTE 113.
