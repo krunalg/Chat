@@ -86,7 +86,7 @@ ig.module('game.main')
 		eventsLifespan: 2,
 
 		// First level to load.
-		defaultLevel: LevelTown,
+		defaultLevel: LevelTest,
 
 		// Starting position X.
 		defaultXStart: 256,
@@ -105,6 +105,9 @@ ig.module('game.main')
 
 		// Name of the current map.
 		mapName: 'Town',
+
+		// Name of may layer where checking for special tiles is done.
+		primaryMapLayer: 'lower',
 
 		/*
 		 * Chat system
