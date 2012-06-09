@@ -319,7 +319,7 @@ ig.module(
 			var player = this;
 
 			// Spawn a surf entity.
-			ig.game.spawnEntity(EntitySurf, position.x, position.y, {
+			ig.game.spawnEntityBelow(EntitySurf, position.x, position.y, {
 
 				// Use players faced direction.
 				facing: this.facing,
