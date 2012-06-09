@@ -51,6 +51,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.footprint',
 
+'game.entities.non-weltmeister.reflection',
+
 'game.entities.non-weltmeister.bubble',
 
 'game.entities.non-weltmeister.name',
@@ -219,6 +221,12 @@ ig.module('game.main')
 
 				// Debug message.
 				console.debug("Player does not exist. Adding one.");
+			}
+
+			if(!player.reflection) {
+
+				//  Spawn a reflection
+				player.reflection = ig.game.spawnEntity(EntityReflection, player.pos.x, player.pos.y, { follow: player } );
 			}
 
 			// Player exists.

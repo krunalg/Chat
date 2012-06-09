@@ -1,10 +1,10 @@
-ig.module('game.entities.non-weltmeister.surf')
+ig.module('game.entities.non-weltmeister.reflection')
 
 .requires('impact.entity')
 
 .defines(function() {
 
-	EntitySurf = ig.Entity.extend({
+	EntityReflection = ig.Entity.extend({
 
 		size: {
 			x: 16,
