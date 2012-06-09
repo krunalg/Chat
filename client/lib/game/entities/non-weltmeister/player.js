@@ -347,7 +347,7 @@ ig.module(
 					if (entities[i].pos.x == position.x && entities[i].pos.y == position.y && !entities[i]._killed) {
 
 						// Save from being killed if marked for death.
-						if (entities[i].markedForDeath) entities[i].revive();
+						if (entities[i].markedForDeath) entities[i].revive(this);
 
 						// Return entity.
 						return entities[i];

@@ -20,8 +20,10 @@ ig.module('game.entities.non-weltmeister.footprint')
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
+			var animSpeedMultiplier = 1.5;
+
 			// Create left animation.
-			this.addAnim('left', 0.01667*1.5, 
+			this.addAnim('left', 0.01667*animSpeedMultiplier, 
 				[
 					1,1,1,1,1,1,1,1,
 					1,1,1,1,1,1,1,1,
@@ -33,7 +35,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 				], true);
 
 			// Create Right animation.
-			this.addAnim('right', 0.01667*1.5, 
+			this.addAnim('right', 0.01667*animSpeedMultiplier, 
 				[
 					1,1,1,1,1,1,1,1,
 					1,1,1,1,1,1,1,1,
@@ -45,7 +47,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 				], true);
 
 			// Create up animation.
-			this.addAnim('up', 0.01667*1.5, 
+			this.addAnim('up', 0.01667*animSpeedMultiplier, 
 				[
 					0,0,0,0,0,0,0,0,
 					0,0,0,0,0,0,0,0,
@@ -57,7 +59,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 				], true);
 
 			// Create down animation.
-			this.addAnim('down', 0.01667*1.5, 
+			this.addAnim('down', 0.01667*animSpeedMultiplier, 
 				[
 					0,0,0,0,0,0,0,0,
 					0,0,0,0,0,0,0,0,
@@ -85,7 +87,10 @@ ig.module('game.entities.non-weltmeister.footprint')
 			}
 		},
 
-		revive: function() {
+		revive: function(player) {
+
+			// Set animation in case of change.
+			this.currentAnim = this.anims[player.facing];
 
 			// Rewind animation.
 			this.currentAnim.rewind();
