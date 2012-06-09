@@ -72,6 +72,16 @@ ig.module('game.chat-log')
   			"margin-left": "auto",
 			"margin-right": "auto",
 
+			// Inner shadow.
+			"-moz-box-shadow":    "inset 0 0 10px red",
+   			"-webkit-box-shadow": "inset 0 0 10px red",
+   			"box-shadow":         "inset 0 0 10px red",
+
+   			// Box shadow.
+   			//"-moz-box-shadow":    "3px 3px 5px 6px black",
+  			//"-webkit-box-shadow": "3px 3px 5px 6px black",
+  			//"box-shadow":         "3px 3px 5px 6px black",
+
 		},
 
 		init: function(width, height, logId) {
