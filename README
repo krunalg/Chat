@@ -52,6 +52,7 @@ Chat system:
 - Prevent multiple chat bubbles from one source from existing at the same time.
 - Server sends a failure notice upon non-delivery of a private message.
 - Chat bubble repositions itself to be on-screen if it is not (low priority).
+- Invalid commands are reported to use as such.
 
 Animations: 
 - Swimming requires "bobbing" animation as well as initial hop.
