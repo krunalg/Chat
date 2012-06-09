@@ -12,7 +12,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 		},
 		offset: {
 			x: 8,
-			y: 8
+			y: -15
 		},
 
 		// Entity to follow.
