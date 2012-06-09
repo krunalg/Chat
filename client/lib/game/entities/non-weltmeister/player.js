@@ -376,7 +376,7 @@ ig.module(
 			)) {
 
 				// Debug message.
-				console.debug("Creating entity at " + tileType + " tile: " + position.x + "," + position.y);
+				console.debug("Spawning entity at: " + position.x + "," + position.y);
 
 				// Spawn new entity and return it.
 				return ig.game.spawnEntity(entityType, position.x, position.y, { facing: this.facing });
