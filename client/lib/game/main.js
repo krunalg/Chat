@@ -208,19 +208,17 @@ ig.module('game.main')
 			// Update all entities and backgroundMaps
 			this.parent();
 
+			// Get local player entity.
+			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
+
 			// Local player entity does not exist (after map change).
-			if (!this.getEntitiesByType(EntityLocalPlayer)[0]) {
+			if (!player) {
 
 				// Spawn new local player entity.
-				var player = this.buildPlayer();
+				player = this.buildPlayer();
 
 				// Debug message.
 				console.debug("Player does not exist. Adding one.");
-			}
-			// Local player exists.
-			else {
-				// Get local player entity.
-				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 			}
 
 			// Player exists.
