@@ -89,7 +89,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 
 			// Rewind animation.
 			this.currentAnim.rewind();
-		}
+		},
 
 		update: function() {
 			

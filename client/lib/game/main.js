@@ -49,6 +49,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.network-player',
 
+'game.entities.non-weltmeister.footprint',
+
 'game.entities.non-weltmeister.bubble',
 
 'game.entities.non-weltmeister.name',
