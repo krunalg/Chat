@@ -74,6 +74,9 @@ ig.module(
 		// Movement destination (either on x or y axis).
 		destination: 0,
 
+		// Reflection entity.
+		reflection: null,
+
 		//    iiii                     iiii          tttt          
 		//   i::::i                   i::::i      ttt:::t          
 		//    iiii                     iiii       t:::::t          
