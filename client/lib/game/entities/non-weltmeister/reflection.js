@@ -15,14 +15,17 @@ ig.module('game.entities.non-weltmeister.reflection')
 			y: -15
 		},
 
-		// Used to animate distortion effect.
-		distortionTimer: null,
+		// Used to calculate frames.
+		timer: null,
 
-		// Current state of distortion (0-2).
+		// Current position in sequence.
 		frame: 0,
 
 		// Order of distortion animation.
-		sequence: [0,1,0,2],
+		sequence: [0,0,0,1,1,1,1,1,0,0,0,2,2,2,2,2],
+
+		// How long each frame lasts.
+		frameTime: 0.05,
 
 		// Entity to follow.
 		follow: null,
@@ -30,7 +33,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			this.distortionTimer = new ig.Timer();
+			this.timer = new ig.Timer();
 
 			// Adds the flipX and flipY parameters to ig.Image.draw()
 			ig.Image.inject({
@@ -106,7 +109,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 				var flipX = this.currentAnim.flip.x;
 				var flipY = this.currentAnim.flip.y;
 
-				switch (this.frame) {
+				switch (this.state) {
 
 				// Draw normal.
 				case 0:
@@ -144,9 +147,14 @@ ig.module('game.entities.non-weltmeister.reflection')
 			// Kill this entity if player no longer exists.
 			if (this.follow._killed) this.kill();
 
-			// Update distortion effect.
-			//this.frame = Math.floor(this.distortionTimer.delta()) %3;
-			this.frame = 2;
+			// Get total frames elapsed.
+			var frameTotal = Math.floor(this.timer.delta() / this.frameTime);
+			
+			// Where in the sequence are we?
+			this.frame = frameTotal % this.sequence.length;
+			
+			// Get distortion state from sequence.
+			this.state = this.sequence[ this.frame ];
 
 			// Parent call.
 			this.parent();
