@@ -29,6 +29,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 
 			this.distortionTimer = new ig.Timer();
 
+			// /*
 			// Inject custom draw function into image class.
 			ig.Image.inject({
 				draw: function( targetX, targetY, sourceX, sourceY, width, height, flipX, flipY ) {
@@ -56,10 +57,15 @@ ig.module('game.entities.non-weltmeister.reflection')
 						ig.system.getDrawPos(targetY) * scaleY - (flipY ? height : 0),
 						width, height
 					);
+
+					if( flipX || flipY ) {
+						ig.system.context.restore();
+					}
 					
 					ig.Image.drawCount++;
 				},
 			});
+			// */
 		},
 
 		draw: function() {
@@ -138,6 +144,8 @@ ig.module('game.entities.non-weltmeister.reflection')
 							flipX,
 							flipY
 						);
+
+						break;
 				}
 				
 			}
