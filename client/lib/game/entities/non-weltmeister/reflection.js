@@ -19,7 +19,10 @@ ig.module('game.entities.non-weltmeister.reflection')
 		distortionTimer: null,
 
 		// Current state of distortion (0-2).
-		distortionFrame: 0,
+		frame: 0,
+
+		// Order of distortion animation.
+		sequence: [0,1,0,2];
 
 		// Entity to follow.
 		follow: null,
@@ -103,7 +106,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 				var flipX = this.currentAnim.flip.x;
 				var flipY = this.currentAnim.flip.y;
 
-				switch (this.distortionFrame) {
+				switch (this.frame) {
 
 				// Draw normal.
 				case 0:
@@ -142,8 +145,8 @@ ig.module('game.entities.non-weltmeister.reflection')
 			if (this.follow._killed) this.kill();
 
 			// Update distortion effect.
-			//this.distortionFrame = Math.floor(this.distortionTimer.delta()) %3;
-			this.distortionFrame = 2;
+			//this.frame = Math.floor(this.distortionTimer.delta()) %3;
+			this.frame = 2;
 
 			// Parent call.
 			this.parent();
