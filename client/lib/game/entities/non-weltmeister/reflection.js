@@ -22,7 +22,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 		frame: 0,
 
 		// Order of distortion animation.
-		sequence: [0,1,0,2];
+		sequence: [0,1,0,2],
 
 		// Entity to follow.
 		follow: null,
