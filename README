@@ -28,6 +28,7 @@ Change-Log:
 - Repeating borders update according to player's position in the world. (Completed June 2, 2012)
 - Player can travel over water. (Completed June 3, 2012)
 - Chat log with auto-scrolling text, multi-colored messages, and clicking names or pressing R to private message. (Completed June 7, 2012)
+- As the player walks over sand tiles, foot prints are left behind him. (Completed June 8, 2012)
 
 
 To-do:
@@ -44,7 +45,7 @@ Player system:
 - Biking.
 - Water reflections.
 - Standing "shallow-water" effect.
-- "Deep sand" effect w/ footprints.
+- "Deep sand" effect.
 - Smashable rocks, and cuttable trees (low priority).
 - A* pathfinding for movement (low priority).
 
