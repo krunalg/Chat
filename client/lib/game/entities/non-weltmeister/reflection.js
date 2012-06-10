@@ -95,20 +95,18 @@ ig.module('game.entities.non-weltmeister.reflection')
 			// Draw entity.
 			if( this.currentAnim ) {
 				
-				var sheetWidth = this.currentAnim.sheet.image.width;
-				var sheetHeight = this.currentAnim.sheet.image.height;
+				var tile = this.currentAnim.tile;
 				var tileWidth = this.currentAnim.sheet.width;
 				var tileHeight = this.currentAnim.sheet.height;
-				var tile = this.currentAnim.tile;
+				var sheetWidth = this.currentAnim.sheet.image.width;
+				var sheetHeight = this.currentAnim.sheet.image.height;
+				var targetX = this.pos.x - this.offset.x - ig.game._rscreen.x;
+				var targetY = this.pos.y - this.offset.y - ig.game._rscreen.y;
 				var sourceX = (tile * tileWidth) % sheetWidth;
 				var sourceY = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
-				var drawX = this.pos.x - this.offset.x - ig.game._rscreen.x;
-				var drawY = this.pos.y - this.offset.y - ig.game._rscreen.y;
 				var flipX = this.currentAnim.flip.x;
 				var flipY = this.currentAnim.flip.y;
-				var width = this.currentAnim.sheet.width;
-				var height = this.currentAnim.sheet.height;
-
+				
 				switch(this.distortionFrame) {
 					
 					// Draw normal.
@@ -122,23 +120,23 @@ ig.module('game.entities.non-weltmeister.reflection')
 					// Shift right-half to the right.
 					case 1:
 						this.currentAnim.sheet.image.draw(
-							(flipX ? drawX + (width / 2) : drawX),
-							drawY,
+							(flipX ? targetX + (tileWidth / 2) : targetX),
+							targetY,
 							sourceX,
 							sourceY,
-							(width / 2) + 1,
-							height,
+							(tileWidth / 2) + 1,
+							tileHeight,
 							flipX,
 							flipY
 						);
 
 						this.currentAnim.sheet.image.draw(
-							(flipX ? drawX : drawX + (width / 2) + 1 ),
-							drawY,
-							sourceX + (width / 2),
+							(flipX ? targetX : targetX + (tileWidth / 2) + 1 ),
+							targetY,
+							sourceX + (tileWidth / 2),
 							sourceY,
-							width / 2,
-							height,
+							tileWidth / 2,
+							tileHeight,
 							flipX,
 							flipY
 						);
@@ -147,23 +145,23 @@ ig.module('game.entities.non-weltmeister.reflection')
 					// Shift left-half to the right.
 					case 2:
 						this.currentAnim.sheet.image.draw(
-							(flipX ? drawX + (width / 2) : drawX + 1),
-							drawY,
+							(flipX ? targetX + (tileWidth / 2) : targetX + 1),
+							targetY,
 							sourceX,
 							sourceY,
-							width / 2,
-							height,
+							tileWidth / 2,
+							tileHeight,
 							flipX,
 							flipY
 						);
 
 						this.currentAnim.sheet.image.draw(
-							(flipX ? drawX : drawX + (width / 2) ),
-							drawY,
-							sourceX + (width / 2),
+							(flipX ? targetX : targetX + (tileWidth / 2) ),
+							targetY,
+							sourceX + (tileWidth / 2),
 							sourceY,
-							width / 2,
-							height,
+							tileWidth / 2,
+							tileHeight,
 							flipX,
 							flipY
 						);
