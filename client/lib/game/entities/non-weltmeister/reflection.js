@@ -112,8 +112,8 @@ ig.module('game.entities.non-weltmeister.reflection')
 					// Draw normal.
 					case 0:
 						this.currentAnim.draw(
-							this.pos.x - this.offset.x - ig.game._rscreen.x,
-							this.pos.y - this.offset.y - ig.game._rscreen.y
+							targetX,
+							targetY
 						);
 						break;
 
