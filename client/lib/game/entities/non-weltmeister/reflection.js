@@ -146,10 +146,28 @@ ig.module('game.entities.non-weltmeister.reflection')
 
 					// Shift left-half to the right.
 					case 2:
+						this.currentAnim.sheet.image.draw(
+							(flipX ? drawX + (width / 2) : drawX + 1),
+							drawY,
+							sourceX,
+							sourceY,
+							width / 2,
+							height,
+							flipX,
+							flipY
+						);
 
-						break;
-						
-						
+						this.currentAnim.sheet.image.draw(
+							(flipX ? drawX : drawX + (width / 2) ),
+							drawY,
+							sourceX + (width / 2),
+							sourceY,
+							width / 2,
+							height,
+							flipX,
+							flipY
+						);
+						break;						
 				}
 				
 			}
@@ -165,7 +183,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 
 			// Update distortion effect.
 			//this.distortionFrame = Math.floor(this.distortionTimer.delta()) %3;
-			this.distortionFrame = 1;
+			this.distortionFrame = 2;
 
 			// Parent call.
 			this.parent();
