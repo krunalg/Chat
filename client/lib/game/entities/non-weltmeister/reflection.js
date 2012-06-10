@@ -95,6 +95,20 @@ ig.module('game.entities.non-weltmeister.reflection')
 			// Draw entity.
 			if( this.currentAnim ) {
 				
+				var sheetWidth = this.currentAnim.sheet.image.width;
+				var sheetHeight = this.currentAnim.sheet.image.height;
+				var tileWidth = this.currentAnim.sheet.width;
+				var tileHeight = this.currentAnim.sheet.height;
+				var tile = this.currentAnim.tile;
+				var sourceX = (tile * tileWidth) % sheetWidth;
+				var sourceY = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
+				var drawX = this.pos.x - this.offset.x - ig.game._rscreen.x;
+				var drawY = this.pos.y - this.offset.y - ig.game._rscreen.y;
+				var flipX = this.currentAnim.flip.x;
+				var flipY = this.currentAnim.flip.y;
+				var width = this.currentAnim.sheet.width;
+				var height = this.currentAnim.sheet.height;
+
 				switch(this.distortionFrame) {
 					
 					// Draw normal.
@@ -107,20 +121,6 @@ ig.module('game.entities.non-weltmeister.reflection')
 
 					// Shift right-half to the right.
 					case 1:
-						var sheetWidth = this.currentAnim.sheet.image.width;
-						var sheetHeight = this.currentAnim.sheet.image.height;
-						var tileWidth = this.currentAnim.sheet.width;
-						var tileHeight = this.currentAnim.sheet.height;
-						var tile = this.currentAnim.tile;
-						var sourceX = (tile * tileWidth) % sheetWidth;
-						var sourceY = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
-						var drawX = this.pos.x - this.offset.x - ig.game._rscreen.x;
-						var drawY = this.pos.y - this.offset.y - ig.game._rscreen.y;
-						var flipX = this.currentAnim.flip.x;
-						var flipY = this.currentAnim.flip.y;
-						var width = this.currentAnim.sheet.width;
-						var height = this.currentAnim.sheet.height;
-
 						this.currentAnim.sheet.image.draw(
 							(flipX ? drawX + (width / 2) : drawX),
 							drawY,
@@ -142,8 +142,14 @@ ig.module('game.entities.non-weltmeister.reflection')
 							flipX,
 							flipY
 						);
+						break;
+
+					// Shift left-half to the right.
+					case 2:
 
 						break;
+						
+						
 				}
 				
 			}
