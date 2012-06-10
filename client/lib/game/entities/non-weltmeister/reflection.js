@@ -121,8 +121,6 @@ ig.module('game.entities.non-weltmeister.reflection')
 						var width = this.currentAnim.sheet.width;
 						var height = this.currentAnim.sheet.height;
 
-						firstHalfWidth = (this.currentAnim.sheet.width/2) + 1;
-
 						this.currentAnim.sheet.image.draw(
 							(flipX ? drawX + (width / 2) : drawX),
 							drawY,
