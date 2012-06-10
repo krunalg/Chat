@@ -51,8 +51,6 @@ ig.module('game.entities.non-weltmeister.reflection')
 					
 					ig.system.context.drawImage( 
 						this.data, sourceX, sourceY, width, height,
-						//ig.system.getDrawPos(targetX), 
-						//ig.system.getDrawPos(targetY),
 						ig.system.getDrawPos(targetX) * scaleX - (flipX ? width : 0), 
 						ig.system.getDrawPos(targetY) * scaleY - (flipY ? height : 0),
 						width, height
@@ -114,33 +112,35 @@ ig.module('game.entities.non-weltmeister.reflection')
 						var tileWidth = this.currentAnim.sheet.width;
 						var tileHeight = this.currentAnim.sheet.height;
 						var tile = this.currentAnim.tile;
-						var tileXinTilesheet =            (tile * tileWidth) % sheetWidth;
-						var tileYinTilesheet = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
+						var sourceX = (tile * tileWidth) % sheetWidth;
+						var sourceY = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
 						var drawX = this.pos.x - this.offset.x - ig.game._rscreen.x;
 						var drawY = this.pos.y - this.offset.y - ig.game._rscreen.y;
 						var flipX = this.currentAnim.flip.x;
 						var flipY = this.currentAnim.flip.y;
+						var width = this.currentAnim.sheet.width;
+						var height = this.currentAnim.sheet.height;
 
 						firstHalfWidth = (this.currentAnim.sheet.width/2) + 1;
 
 						this.currentAnim.sheet.image.draw(
-							drawX,
+							(flipX ? drawX + (width / 2) : drawX),
 							drawY,
-							tileXinTilesheet,
-							tileYinTilesheet,
-							firstHalfWidth,
-							this.currentAnim.sheet.height,
+							sourceX,
+							sourceY,
+							(width / 2) + 1,
+							height,
 							flipX,
 							flipY
 						);
 
 						this.currentAnim.sheet.image.draw(
-							drawX + firstHalfWidth,
+							(flipX ? drawX : drawX + (width / 2) + 1 ),
 							drawY,
-							tileXinTilesheet + firstHalfWidth - 1,
-							tileYinTilesheet,
-							this.currentAnim.sheet.width/2,
-							this.currentAnim.sheet.height,
+							sourceX + (width / 2),
+							sourceY,
+							width / 2,
+							height,
 							flipX,
 							flipY
 						);
