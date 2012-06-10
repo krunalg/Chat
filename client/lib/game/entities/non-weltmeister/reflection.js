@@ -29,8 +29,7 @@ ig.module('game.entities.non-weltmeister.reflection')
 
 			this.distortionTimer = new ig.Timer();
 
-			// /*
-			// Inject custom draw function into image class.
+			// Adds the flipX and flipY parameters to ig.Image.draw()
 			ig.Image.inject({
 				draw: function( targetX, targetY, sourceX, sourceY, width, height, flipX, flipY ) {
 					if( !this.loaded ) { return; }
@@ -63,7 +62,6 @@ ig.module('game.entities.non-weltmeister.reflection')
 					ig.Image.drawCount++;
 				},
 			});
-			// */
 		},
 
 		draw: function() {
