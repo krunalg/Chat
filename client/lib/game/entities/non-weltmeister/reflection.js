@@ -28,6 +28,38 @@ ig.module('game.entities.non-weltmeister.reflection')
 			this.parent(x, y, settings);
 
 			this.distortionTimer = new ig.Timer();
+
+			// Inject custom draw function into image class.
+			ig.Image.inject({
+				draw: function( targetX, targetY, sourceX, sourceY, width, height, flipX, flipY ) {
+					if( !this.loaded ) { return; }
+					
+					var scale = ig.system.scale;
+					sourceX = sourceX ? sourceX * scale : 0;
+					sourceY = sourceY ? sourceY * scale : 0;
+					width = (width ? width : this.width) * scale;
+					height = (height ? height : this.height) * scale;
+					
+					var scaleX = flipX ? -1 : 1;
+					var scaleY = flipY ? -1 : 1;
+					
+					if( flipX || flipY ) {
+						ig.system.context.save();
+						ig.system.context.scale( scaleX, scaleY );
+					}
+					
+					ig.system.context.drawImage( 
+						this.data, sourceX, sourceY, width, height,
+						//ig.system.getDrawPos(targetX), 
+						//ig.system.getDrawPos(targetY),
+						ig.system.getDrawPos(targetX) * scaleX - (flipX ? width : 0), 
+						ig.system.getDrawPos(targetY) * scaleY - (flipY ? height : 0),
+						width, height
+					);
+					
+					ig.Image.drawCount++;
+				},
+			});
 		},
 
 		draw: function() {
@@ -71,13 +103,17 @@ ig.module('game.entities.non-weltmeister.reflection')
 
 					// Shift right-half to the right.
 					case 1:
-						var tilesheetWidth = this.currentAnim.sheet.image.width;
-						var tilesheetHeight = this.currentAnim.sheet.image.height;
-						var tileXinTilesheet =            (this.currentAnim.tile * this.currentAnim.sheet.width) % this.currentAnim.sheet.image.width;
-						var tileYinTilesheet = Math.floor( (this.currentAnim.tile * this.currentAnim.sheet.width) / this.currentAnim.sheet.image.width) * this.currentAnim.sheet.height;
-
+						var sheetWidth = this.currentAnim.sheet.image.width;
+						var sheetHeight = this.currentAnim.sheet.image.height;
+						var tileWidth = this.currentAnim.sheet.width;
+						var tileHeight = this.currentAnim.sheet.height;
+						var tile = this.currentAnim.tile;
+						var tileXinTilesheet =            (tile * tileWidth) % sheetWidth;
+						var tileYinTilesheet = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
 						var drawX = this.pos.x - this.offset.x - ig.game._rscreen.x;
 						var drawY = this.pos.y - this.offset.y - ig.game._rscreen.y;
+						var flipX = this.currentAnim.flip.x;
+						var flipY = this.currentAnim.flip.y;
 
 						firstHalfWidth = (this.currentAnim.sheet.width/2) + 1;
 
@@ -87,7 +123,9 @@ ig.module('game.entities.non-weltmeister.reflection')
 							tileXinTilesheet,
 							tileYinTilesheet,
 							firstHalfWidth,
-							this.currentAnim.sheet.height
+							this.currentAnim.sheet.height,
+							flipX,
+							flipY
 						);
 
 						this.currentAnim.sheet.image.draw(
@@ -96,7 +134,9 @@ ig.module('game.entities.non-weltmeister.reflection')
 							tileXinTilesheet + firstHalfWidth - 1,
 							tileYinTilesheet,
 							this.currentAnim.sheet.width/2,
-							this.currentAnim.sheet.height
+							this.currentAnim.sheet.height,
+							flipX,
+							flipY
 						);
 				}
 				
