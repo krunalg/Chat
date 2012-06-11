@@ -145,7 +145,8 @@ else if( isset($_POST['generate']) )
             $export .=
             "{".
                 "\"entities\": [";
-                
+                    
+                    /*
                     // generate grass entities
                     $mapTilesIndex = 0; // used to traverse all tiles in map
                     $firstGrass = true;
@@ -176,6 +177,7 @@ else if( isset($_POST['generate']) )
                             $mapTilesIndex++;
                         }
                     }
+                    */
                                 
                 $export .= "],". // close off entities
                 
