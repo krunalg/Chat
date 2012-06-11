@@ -259,6 +259,9 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
                                 ' from map px position x: '. $sourceX .
                                 ' y: ' . $sourecY .'.');
                         
+                        // Create folder if doesn't exist.
+                        createDirIfNotExist($directory);
+
                         // write file to disk
                         if(!is_dir($globalAboveDumpDir)) mkdir($globalAboveDumpDir);
                         if(!imagepng($newTileImage, $newTilePath))
