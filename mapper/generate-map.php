@@ -80,8 +80,7 @@ else if( isset($_POST['generate']) )
             $indexOfCollision = array(); // holds special cases
             foreach($globalCollisions as $index => $collision)
             {
-                if($index=='above' || $index=='grass')
-                    $indexOfCollision[$index] = $collisionIndex;
+                $indexOfCollision[$index] = $collisionIndex;
                 $collisionIndex++;
             }
             
@@ -89,6 +88,7 @@ else if( isset($_POST['generate']) )
             // above the player so that we can add the upper layer
             // or if tile is grass, so we can add an entity
             $abovePlayerTiles = array();
+            $belowPlayerTiles = array();
             $grassTiles = array();
             foreach($collisions as $hash => $collision)
             {
@@ -99,7 +99,13 @@ else if( isset($_POST['generate']) )
                                                   // is isset()
                 }
                 else if($collision == $indexOfCollision['grass'])
+                {
                     $grassTiles[$hash] = 1;       // here too
+                }
+                else if($collision == $indexOfCollision['reflection'])
+                {
+                    $belowPlayerTiles[$hash] = 1;
+                }
             }   
             
             // map specific data
@@ -191,6 +197,49 @@ else if( isset($_POST['generate']) )
             $export .=  "] ".
                     "}, ".
                     "{".
+                        "\"name\": \"lowest\", ".
+                        "\"width\": ".$mapWidth.", ".
+                        "\"height\": ".$mapHeight.", ".
+                        "\"linkWithCollision\": false, ".
+                        "\"visible\": 1, ".
+                        "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
+                        "\"repeat\": false, ".
+                        "\"preRender\": false, ".
+                        "\"distance\": \"1\", ".
+                        "\"tilesize\": ".$globalTilesize.", ".
+                        "\"foreground\": false, ".
+                        "\"data\": [ ";
+                        
+                        $mapTilesIndex = 0; // used to traverse all tiles in map
+                        for($y=0; $y<$mapHeight; $y++)
+                        {
+                            $export .= "[ ";
+                            for($x=0; $x<$mapWidth; $x++)
+                            {
+                                $currTileHash = $mapTiles[$mapTilesIndex];
+                                
+                                // use no tile (which is 0 in weltmeister)
+                                // when no found in "above" player tiles array
+                                if(!isset($belowPlayerTiles[$currTileHash]))
+                                    $currTilePosInTilesheet = 0;
+                                else
+                                {
+                                    $currTilePosInTilesheet =
+                                        // Note this index is not md5'd.
+                                        $masterTilesheetByHash[$currTileHash];
+                                        $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
+                                }
+                                
+                                $export .= $currTilePosInTilesheet;
+                                if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
+                                $mapTilesIndex++; // next tile in the map
+                            }
+                            if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
+                        }
+                
+            $export .=  "] ". // close off data
+                    "}, ".
+                    "{".
                         "\"name\": \"lower\", ".
                         "\"width\": ".$mapWidth.", ".
                         "\"height\": ".$mapHeight.", ".
@@ -218,6 +267,10 @@ else if( isset($_POST['generate']) )
                                     $currTilePosInTilesheet = 0;
                                 else
                                 {
+                                    // Determine if we should MD5 the hash.
+                                    if(isset($belowPlayerTiles[$currTileHash])) $currTileHash = md5($currTileHash);
+                                    
+                                    // Get tile position in tilesheet.
                                     $currTilePosInTilesheet =
                                         $masterTilesheetByHash[$currTileHash];
                                         $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
