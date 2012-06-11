@@ -24,7 +24,6 @@ $globalAnimationsDir =
     
 // FILE NAMES
 $globalCollisionsFile = 'collisions.txt';
-$globalAbovePlayerFile = 'above-player.txt';
 $globalTilesheetFile = 'tilesheet.png';
 $globalMapFilename = 'map.png';
 $globalMapJSON = 'map.js';
