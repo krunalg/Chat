@@ -224,16 +224,20 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
         {
             $fileDump = $fileDump . $hash . ':' . $index . "\n";
             
-            // export 'above-player' tiles to a special folder
-            if($index==$indexOfCollision['above'])
+            // Identify special-case tiles to rip.
+            if($index==$indexOfCollision['above'] || $index==$indexOfCollision['reflection'])
             {
+                // Set folder where to rip tiles to.
+                if($index==$indexOfCollision['above']) $directory = $globalAboveDumpDir;
+                else if($index==$indexOfCollision['reflection']) $directory = $globalBelowDumpDir;
+
                 // we only want to try ripping an 'above-tile' from the map
                 // if its part of the current map (ie. not previously saved)
                 if(isset($posOfTileInMap[$hash]))
                 {
                     $currentTilePos = $posOfTileInMap[$hash];
                     $newTileFile = md5($hash) . '.png';
-                    $newTilePath = $globalAboveDumpDir .
+                    $newTilePath = $directory .
                         DIRECTORY_SEPARATOR . $newTileFile;
                     if(!file_exists($newTilePath))
                     {
