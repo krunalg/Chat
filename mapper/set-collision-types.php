@@ -172,8 +172,7 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
     $indexOfCollision = array(); // holds special cases
     foreach($globalCollisions as $index => $collision)
     {
-        if($index=='walkable' || $index=='above')
-            $indexOfCollision[$index] = $collisionIndex;
+        $indexOfCollision[$index] = $collisionIndex;
         $collisionIndex++;
     }
     
