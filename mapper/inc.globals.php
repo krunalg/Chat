@@ -18,6 +18,9 @@ $globalTileDumpDir =
 $globalAboveDumpDir =
     "." . DIRECTORY_SEPARATOR .
     "above-tiles";
+$globalBelowDumpDir =
+    "." . DIRECTORY_SEPARATOR .
+    "below-tiles";
 $globalAnimationsDir =
     "." . DIRECTORY_SEPARATOR .
     "animations";
