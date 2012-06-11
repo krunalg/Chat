@@ -31,7 +31,7 @@ if( !isset($_POST['build']) )
     
     // report
     echo 'Found <b>'.count($tiles).'</b> tiles in '.$globalTileDumpDir.'...<br>';
-    echo 'To-do: also list how many "above-player" tiles will be included...<br>';
+    echo 'To-do: also list how many "above" and "below" tiles will be included...<br>';
     
     if(count($tiles)>=2) // only offer to merge if some exist
     {
@@ -66,23 +66,27 @@ else if( isset($_POST['build']) && $_POST['build']=='all' )
         $indexOfCollision = array(); // holds special cases
         foreach($globalCollisions as $index => $collision)
         {
-            if($index=='above')
-                $indexOfCollision[$index] = $collisionIndex;
+            $indexOfCollision[$index] = $collisionIndex;
             $collisionIndex++;
         }
         
         // we need to open the tile states file and find out which
-        // tiles have been marked as "above" the player
+        // tiles have been marked as special
         $savedCollisions = getCollisionsFromFile($globalCollisionsFile);
         $savedCollisions = buildHashIndexCollisions($savedCollisions);
         foreach($savedCollisions as $hash => $collision)
         {
-            if($collision == $indexOfCollision['above'])
+            // Identify special-case tiles.
+            if($collision==$indexOfCollision['above'] || $collision==$indexOfCollision['reflection'])
             {
-                // remember that we md5 the name of the "above" tile because
+                // Set folder where to rip tiles to.
+                if($collision==$indexOfCollision['above']) $directory = $globalAboveDumpDir;
+                else if($collision==$indexOfCollision['reflection']) $directory = $globalBelowDumpDir;
+
+                // remember that we md5 the name of the special tile because
                 // it has to be a different name than the original tile,
                 // and still be easily findable.
-                $collisionTilePath = $globalAboveDumpDir .
+                $collisionTilePath = $directory .
                     DIRECTORY_SEPARATOR . md5($hash) . '.png';
                 array_push($tiles, $collisionTilePath);
             }
