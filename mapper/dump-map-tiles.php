@@ -113,17 +113,8 @@ else if(isset($_POST['dump']))
                         )) die( "".$map[$i].' <b>failed</b>. '.
                                 'Could not copy tile: '.$x.','.$y   );
 
-                        // create folder if does not exist
-                        if(!is_dir($globalTileDumpDir))
-                        {
-                            if(mkdir($globalTileDumpDir)) // try creating it
-                                echo $globalTileDumpDir. // success
-                                     " did not exist. <b>Created</b>.".
-                                     "<br><br>\n\n";
-                            else
-                                die( "Could not create directory ". // fail
-                                    $globalTileDumpDir );
-                        }
+                        // Create folder if doesn't exist.
+                        createDirIfNotExist($globalTileDumpDir);
                             
                         // attempt to write new tile to disk
                         if(!imagepng($newimg, $tileDestination))

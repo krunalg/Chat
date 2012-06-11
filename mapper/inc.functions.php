@@ -18,6 +18,27 @@ function writeTextToFile($filepath, $text)
 }
 
 /**
+ * Creates a directory if one doesn't exist.
+ *
+ * @param   $path Path of directory.
+ * @return  null
+ */
+function createDirIfNotExist($path)
+{
+    if(!is_dir($path))
+    {
+        if(mkdir($path)) // try creating it
+            echo $path. // success
+                 " did not exist. <b>Created</b>.".
+                 "<br><br>\n\n";
+        else
+            die( "Could not create directory ". // fail
+                $path );
+    }
+    return null;
+}
+
+/**
  * Loads an image to be further used in PHP.
  *
  * @param   $image Path to image file.
