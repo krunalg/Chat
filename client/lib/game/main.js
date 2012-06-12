@@ -198,63 +198,60 @@ ig.module('game.main')
 				}
 			});
 
-			// 
-ig.Game.inject({
-	draw: function(){
-		if( this.clearColor ) {
-			ig.system.clear( this.clearColor );
-		}
-		
-		// This is a bit of a circle jerk. Entities reference game._rscreen 
-		// instead of game.screen when drawing themselfs in order to be 
-		// "synchronized" to the rounded(?) screen position
-		this._rscreen.x = ig.system.getDrawPos(this.screen.x)/ig.system.scale;
-		this._rscreen.y = ig.system.getDrawPos(this.screen.y)/ig.system.scale;
-		
-		
-		var mapIndex;
-		for( mapIndex = 0; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
-			var map = this.backgroundMaps[mapIndex];
-			if( map.name == ig.game.primaryMapLayer ) {
-				// Need to draw special "below" entities, ie. reflections.
-				break;
-			}
-			map.setScreenPos( this.screen.x, this.screen.y );
-			map.draw();
-		}
+			// Custom ig.game.draw() function that draws reflections under the primary map layer.
+			ig.Game.inject({
+				draw: function(){
+					if( this.clearColor ) {
+						ig.system.clear( this.clearColor );
+					}
+					
+					// This is a bit of a circle jerk. Entities reference game._rscreen 
+					// instead of game.screen when drawing themselfs in order to be 
+					// "synchronized" to the rounded(?) screen position
+					this._rscreen.x = ig.system.getDrawPos(this.screen.x)/ig.system.scale;
+					this._rscreen.y = ig.system.getDrawPos(this.screen.y)/ig.system.scale;
+						
+					var mapIndex;
+					for( mapIndex = 0; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
+						var map = this.backgroundMaps[mapIndex];
+						if( map.name == ig.game.primaryMapLayer ) {
+							// Need to draw special "below" entities, ie. reflections.
+							break;
+						}
+						map.setScreenPos( this.screen.x, this.screen.y );
+						map.draw();
+					}
 
+					var reflections = this.getEntitiesByType(EntityReflection);
+					if(reflections)
+					{
+						for( var i=0; i<reflections.length; i++ )
+						{
+							// Draw with true to really draw.
+							reflections[i].draw(true);
+						}
+					}
 
-		var reflections = this.getEntitiesByType(EntityReflection);
-		if(reflections)
-		{
-			for( var i=0; i<reflections.length; i++ )
-			{
-				// Draw with true to really draw.
-				reflections[i].draw(true);
-			}
-		}
-
-		for( mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
-			var map = this.backgroundMaps[mapIndex];
-			if( map.foreground ) {
-				// All foreground layers are drawn after the entities
-				break;
-			}
-			map.setScreenPos( this.screen.x, this.screen.y );
-			map.draw();
-		}
-		
-		
-		this.drawEntities();
-		
-		
-		for( mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
-			var map = this.backgroundMaps[mapIndex];
-			map.setScreenPos( this.screen.x, this.screen.y );
-			map.draw();
-		}
-	}
-});
+					for( mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
+						var map = this.backgroundMaps[mapIndex];
+						if( map.foreground ) {
+							// All foreground layers are drawn after the entities
+							break;
+						}
+						map.setScreenPos( this.screen.x, this.screen.y );
+						map.draw();
+					}
+						
+					this.drawEntities();
+					
+					
+					for( mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
+						var map = this.backgroundMaps[mapIndex];
+						map.setScreenPos( this.screen.x, this.screen.y );
+						map.draw();
+					}
+				}
+			});
 		},
 
 		//	  _    _ _____  _____       _______ ______ 
