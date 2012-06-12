@@ -453,8 +453,9 @@ ig.module(
 		// Handles exactly how a move takes place (speed, effects, etc.)
 		startMove: function() {
 
-			if (this.canSwim()) // Water
-			{
+			// Water
+			if (this.canSwim()) {
+
 				// Set movement speed on water.
 				this.setMoveState('swim');
 
@@ -468,8 +469,11 @@ ig.module(
 					// Play is no longer on land.
 					this.swimming = true;
 				}
-			} else // Land
-			{
+			}
+
+			// Land
+			else {
+
 				// It's difficult to swim on land.
 				this.swimming = false;
 
@@ -489,8 +493,7 @@ ig.module(
 				var tilesize = this.getTilesize();
 
 				// Spawn footprint if needed.
-				if (ig.game.isSpecialTile( (this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['footprints'], ig.game.primaryMapLayer ))
-				{
+				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['footprints'], ig.game.primaryMapLayer)) {
 					this.trySpawningEntity(EntityFootprint, this.pos);
 				}
 
@@ -500,34 +503,35 @@ ig.module(
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
 
 				// If old reflection has been killed, break tie.
-				if(this.reflection!==undefined && this.reflection._killed) this.reflection = undefined;
+				if (this.reflection !== undefined && this.reflection._killed) this.reflection = undefined;
 
-				// Spawn reflection if needed.
-				
 				// Used for cleanup.
 				var needReflection = false;
-				
-				for(var i=0; i<checkTiles.length; i++)
-				{
-					if (ig.game.isSpecialTile( (checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer ))
-					{
-						needReflection = true;
-						if(this.reflection===undefined) 
-						{
+
+				// Spawn reflection if needed.
+				for (var i = 0; i < checkTiles.length; i++) {
+					if (ig.game.isSpecialTile((checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer)) {
+
+						if (this.reflection === undefined) {
+
 							// Save reference to reflection entity.
-							this.reflection = ig.game.spawnEntityBelow(EntityReflection, this.pos.x,this.pos.y, { follow: this });
-						}
-						else
-						{
+							this.reflection = ig.game.spawnEntityBelow(EntityReflection, this.pos.x, this.pos.y, {
+								follow: this
+							});
+
+						} else {
+
 							// Keep if was marked for death.
 							this.reflection.revive();
 						}
+
+						needReflection = true;
 						break;
 					}
 				}
 
 				// Clean up unused reflection entity.
-				if(!needReflection && this.reflection!==undefined) this.reflection.markForDeath();
+				if (!needReflection && this.reflection !== undefined) this.reflection.markForDeath();
 			}
 
 			// Not idle.
