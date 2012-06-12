@@ -494,7 +494,7 @@ ig.module(
 					this.trySpawningEntity(EntityFootprint, this.pos);
 				}
 
-				// Which tiles being reflective will spawn a reflection?
+				// Which tiles to check for reflectivity?
 				checkTiles = new Array();
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + tilesize, this.facing, 1));
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
@@ -503,7 +503,10 @@ ig.module(
 				if(this.reflection!==undefined && this.reflection._killed) this.reflection = undefined;
 
 				// Spawn reflection if needed.
+				
+				// Used for cleanup.
 				var needReflection = false;
+				
 				for(var i=0; i<checkTiles.length; i++)
 				{
 					if (ig.game.isSpecialTile( (checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer ))
@@ -511,6 +514,7 @@ ig.module(
 						needReflection = true;
 						if(this.reflection===undefined) 
 						{
+							// Save reference to reflection entity.
 							this.reflection = ig.game.spawnEntityBelow(EntityReflection, this.pos.x,this.pos.y, { follow: this });
 						}
 						else
