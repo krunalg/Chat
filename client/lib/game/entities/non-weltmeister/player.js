@@ -75,7 +75,7 @@ ig.module(
 		destination: 0,
 
 		// Reflection entity.
-		reflection: null,
+		reflection: undefined,
 
 		//    iiii                     iiii          tttt          
 		//   i::::i                   i::::i      ttt:::t          
