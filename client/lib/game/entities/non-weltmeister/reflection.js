@@ -68,78 +68,84 @@ ig.module('game.entities.non-weltmeister.reflection')
 			});
 		},
 
-		draw: function() {
+		draw: function(reallyDraw) {
 
-			// Check that we have entity to follow.
-			if (this.follow) {
+			// Only draw when the 'reallyDraw' param is true, 
+			// so it ignores the "normal" draw call.
+			// Additionally, draw only if we shouldn't hide instead
+			if (reallyDraw) {
 
-				// Copy coordinates of player.
-				this.pos = this.follow.pos;
+				// Check that we have entity to follow.
+				if (this.follow) {
 
-				// Copy animation of player.
-				this.currentAnim = this.follow.currentAnim;
+					// Copy coordinates of player.
+					this.pos = this.follow.pos;
 
-				// Flip vertically.
-				this.currentAnim.flip.y = true;
+					// Copy animation of player.
+					this.currentAnim = this.follow.currentAnim;
 
-			}
+					// Flip vertically.
+					this.currentAnim.flip.y = true;
 
-			// Remove reflection if the player does not exist.
-			else {
-
-				// Debug message.
-				console.debug("Reflection entity exists but player does not and will now suicide.");
-
-				// Kill entity.
-				this.kill();
-			}
-
-			// Draw entity.
-			if (this.currentAnim) {
-
-				var tile = this.currentAnim.tile;
-				var tileWidth = this.currentAnim.sheet.width;
-				var tileHeight = this.currentAnim.sheet.height;
-				var sheetWidth = this.currentAnim.sheet.image.width;
-				var sheetHeight = this.currentAnim.sheet.image.height;
-				var targetX = this.pos.x - this.offset.x - ig.game._rscreen.x;
-				var targetY = this.pos.y - this.offset.y - ig.game._rscreen.y;
-				var sourceX = (tile * tileWidth) % sheetWidth;
-				var sourceY = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
-				var flipX = this.currentAnim.flip.x;
-				var flipY = this.currentAnim.flip.y;
-
-				switch (this.state) {
-
-				// Draw normal.
-				case 0:
-					this.currentAnim.draw(
-					targetX, targetY);
-					break;
-
-				// Shift right-half to the right.
-				case 1:
-					this.currentAnim.sheet.image.draw(
-					(flipX ? targetX + (tileWidth / 2) : targetX), targetY, sourceX, sourceY, (tileWidth / 2) + 1, tileHeight, flipX, flipY);
-
-					this.currentAnim.sheet.image.draw(
-					(flipX ? targetX : targetX + (tileWidth / 2) + 1), targetY, sourceX + (tileWidth / 2), sourceY, tileWidth / 2, tileHeight, flipX, flipY);
-					break;
-
-				// Shift left-half to the right.
-				case 2:
-					this.currentAnim.sheet.image.draw(
-					(flipX ? targetX + (tileWidth / 2) : targetX + 1), targetY, sourceX, sourceY, tileWidth / 2, tileHeight, flipX, flipY);
-
-					this.currentAnim.sheet.image.draw(
-					(flipX ? targetX : targetX + (tileWidth / 2)), targetY, sourceX + (tileWidth / 2), sourceY, tileWidth / 2, tileHeight, flipX, flipY);
-					break;
 				}
 
-			}
+				// Remove reflection if the player does not exist.
+				else {
 
-			// Restore vertical flip.
-			this.currentAnim.flip.y = false;
+					// Debug message.
+					console.debug("Reflection entity exists but player does not and will now suicide.");
+
+					// Kill entity.
+					this.kill();
+				}
+
+				// Draw entity.
+				if (this.currentAnim) {
+
+					var tile = this.currentAnim.tile;
+					var tileWidth = this.currentAnim.sheet.width;
+					var tileHeight = this.currentAnim.sheet.height;
+					var sheetWidth = this.currentAnim.sheet.image.width;
+					var sheetHeight = this.currentAnim.sheet.image.height;
+					var targetX = this.pos.x - this.offset.x - ig.game._rscreen.x;
+					var targetY = this.pos.y - this.offset.y - ig.game._rscreen.y;
+					var sourceX = (tile * tileWidth) % sheetWidth;
+					var sourceY = Math.floor((tile * tileWidth) / sheetWidth) * tileHeight;
+					var flipX = this.currentAnim.flip.x;
+					var flipY = this.currentAnim.flip.y;
+
+					switch (this.state) {
+
+					// Draw normal.
+					case 0:
+						this.currentAnim.draw(
+						targetX, targetY);
+						break;
+
+					// Shift right-half to the right.
+					case 1:
+						this.currentAnim.sheet.image.draw(
+						(flipX ? targetX + (tileWidth / 2) : targetX), targetY, sourceX, sourceY, (tileWidth / 2) + 1, tileHeight, flipX, flipY);
+
+						this.currentAnim.sheet.image.draw(
+						(flipX ? targetX : targetX + (tileWidth / 2) + 1), targetY, sourceX + (tileWidth / 2), sourceY, tileWidth / 2, tileHeight, flipX, flipY);
+						break;
+
+					// Shift left-half to the right.
+					case 2:
+						this.currentAnim.sheet.image.draw(
+						(flipX ? targetX + (tileWidth / 2) : targetX + 1), targetY, sourceX, sourceY, tileWidth / 2, tileHeight, flipX, flipY);
+
+						this.currentAnim.sheet.image.draw(
+						(flipX ? targetX : targetX + (tileWidth / 2)), targetY, sourceX + (tileWidth / 2), sourceY, tileWidth / 2, tileHeight, flipX, flipY);
+						break;
+					}
+
+				}
+
+				// Restore vertical flip.
+				this.currentAnim.flip.y = false;
+			}
 		},
 
 		update: function() {
