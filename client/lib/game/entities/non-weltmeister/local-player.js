@@ -500,12 +500,14 @@ ig.module(
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
 
 				// Spawn reflection if needed.
-				for(var i=0; i<checkTiles.length; i++)
-				{
-					if (ig.game.isSpecialTile( (checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer ))
+				if(this.reflection===null) {
+					for(var i=0; i<checkTiles.length; i++)
 					{
-						if(!this.reflection!=null) this.trySpawningEntity(EntityReflection, this.pos);
-						break;
+						if (ig.game.isSpecialTile( (checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer ))
+						{
+							this.reflection = this.trySpawningEntity(EntityReflection, this.pos);
+							break;
+						}
 					}
 				}
 			}
