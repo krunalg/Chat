@@ -499,17 +499,22 @@ ig.module(
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + tilesize, this.facing, 1));
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
 
+				// If old reflection has been killed, break tie.
+				if(this.reflection!==null && this.reflection._killed) this.reflection = null;
+
 				// Spawn reflection if needed.
-				if(this.reflection===null) {
-					for(var i=0; i<checkTiles.length; i++)
+				var needReflection = false;
+				for(var i=0; i<checkTiles.length; i++)
+				{
+					if (ig.game.isSpecialTile( (checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer ))
 					{
-						if (ig.game.isSpecialTile( (checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer ))
-						{
-							this.reflection = this.trySpawningEntity(EntityReflection, this.pos);
-							break;
-						}
+						needReflection = true;
+						if(this.reflection===null) this.reflection = this.trySpawningEntity(EntityReflection, this.pos);
+						break;
 					}
 				}
+
+				if(!needReflection && this.reflection!==null) this.reflection.markForDeath();
 			}
 
 			// Not idle.
