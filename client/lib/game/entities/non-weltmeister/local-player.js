@@ -485,14 +485,28 @@ ig.module(
 				var oldGrass = this.inGrass();
 				if (oldGrass) oldGrass.markForDeath();
 
-				
-				// Get map tilesize.
-				var tilesize = ig.game.collisionMap.tilesize;
+				// Get game tilesize.
+				var tilesize = this.getTilesize();
 
 				// Spawn footprint if needed.
 				if (ig.game.isSpecialTile( (this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['footprints'], ig.game.primaryMapLayer ))
 				{
 					this.trySpawningEntity(EntityFootprint, this.pos);
+				}
+
+				// Which tiles being reflective will spawn a reflection?
+				checkTiles = new Array();
+				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + tilesize, this.facing, 1));
+				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
+
+				// Spawn reflection if needed.
+				for(var i=0; i<checkTiles.length; i++)
+				{
+					if (ig.game.isSpecialTile( (checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer ))
+					{
+						if(!this.reflection!=null) this.trySpawningEntity(EntityReflection, this.pos);
+						break;
+					}
 				}
 			}
 

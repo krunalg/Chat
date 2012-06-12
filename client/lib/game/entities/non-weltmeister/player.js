@@ -360,7 +360,7 @@ ig.module(
 			console.debug("Spawning entity at: " + position.x + "," + position.y);
 
 			// Spawn new entity and return it.
-			return ig.game.spawnEntityBelow(entityType, position.x, position.y, { facing: this.facing });
+			return ig.game.spawnEntityBelow(entityType, position.x, position.y, { facing: this.facing, follow: this });
 		},
 
 		//           tttt                                                      SSSSSSSSSSSSSSS                                                                                                iiii                                               GGGGGGGGGGGGG                                                                     

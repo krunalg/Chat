@@ -278,12 +278,6 @@ ig.module('game.main')
 				console.debug("Player does not exist. Adding one.");
 			}
 
-			if(!player.reflection) {
-
-				//  Spawn a reflection
-				player.reflection = ig.game.spawnEntity(EntityReflection, player.pos.x, player.pos.y, { follow: player } );
-			}
-
 			// Player exists.
 			if (player) {
 
