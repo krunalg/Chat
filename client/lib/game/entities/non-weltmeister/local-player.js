@@ -485,8 +485,15 @@ ig.module(
 				var oldGrass = this.inGrass();
 				if (oldGrass) oldGrass.markForDeath();
 
+				
+				// Get map tilesize.
+				var tilesize = ig.game.collisionMap.tilesize;
+
 				// Spawn footprint if needed.
-				this.trySpawningEntity(EntityFootprint, this.pos, specialTiles['footprints']);
+				if (ig.game.isSpecialTile( (this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['footprints'], ig.game.primaryMapLayer ))
+				{
+					this.trySpawningEntity(EntityFootprint, this.pos);
+				}
 			}
 
 			// Not idle.

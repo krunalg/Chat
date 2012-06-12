@@ -333,17 +333,15 @@ ig.module(
 		},
 
 		/*
-		 * If the entity type exists already at coordinates, return it.
-		 * Otherwise spawn new entity and return it.
+		 * Return an existing entity or return a new one.
 		 *
 		 * @param  entityType <EntityName>  Name of entity sub-class.
 		 * @param  position   object  Expects two properties, x and y, with pixel values.
-		 * @param  tiles      array  Tiles to with which a match will mean spawning an entity.
 		 * @return            <EntityName>  if entity exists/is spawned, else return undefined.
 		 */
-		trySpawningEntity: function(entityType, position, tiles) {
+		trySpawningEntity: function(entityType, position) {
 
-			// Do not spawn entity if one of same type already exists there.
+			// Return existing entity if one exists.
 			var entities = ig.game.getEntitiesByType(entityType);
 			if (entities) {
 				for (var i = 0; i < entities.length; i++) {
@@ -358,32 +356,11 @@ ig.module(
 				}
 			}
 
-			// Get map tilesize.
-			var tilesize = ig.game.collisionMap.tilesize;
+			// Debug message.
+			console.debug("Spawning entity at: " + position.x + "," + position.y);
 
-			// Check if tile is the right type for spawning.
-			if (ig.game.isSpecialTile(
-
-			// X tile position.
-			(position.x / tilesize),
-
-			// Y tile position.
-			(position.y / tilesize),
-
-			// Special tiles which trigger a spawn.
-			tiles,
-
-			// Map layer name to check.
-			ig.game.primaryMapLayer
-
-			)) {
-
-				// Debug message.
-				console.debug("Spawning entity at: " + position.x + "," + position.y);
-
-				// Spawn new entity and return it.
-				return ig.game.spawnEntityBelow(entityType, position.x, position.y, { facing: this.facing });
-			}
+			// Spawn new entity and return it.
+			return ig.game.spawnEntityBelow(entityType, position.x, position.y, { facing: this.facing });
 		},
 
 		//           tttt                                                      SSSSSSSSSSSSSSS                                                                                                iiii                                               GGGGGGGGGGGGG                                                                     
