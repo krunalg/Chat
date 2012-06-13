@@ -24,8 +24,8 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			this.currentAnim = this.anims.rain;
 
 			// Set velocity.
-			this.vel.x = -13 * 30;
-			this.vel.y = 26 * 30;
+			this.maxVel.x = this.vel.x = -13 * 30;
+			this.maxVel.y = this.vel.y = 26 * 30;
 		},
 
 		handleMovementTrace: function(res) {
