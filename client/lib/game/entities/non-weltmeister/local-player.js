@@ -81,7 +81,7 @@ ig.module(
 			if (keepMoving) {
 
 				if (this.canJump()) {
-					this.moving = false; // will use isJump instead
+					this.moving = false; // will use jumping instead
 					this.startJump();
 				} else if (this.canMove()) {
 					this.preStartMove();
@@ -555,7 +555,7 @@ ig.module(
 			this.setMoveState('jump');
 
 			// Player is jumping.
-			this.isJump = true;
+			this.jumping = true;
 
 			// Used for animating player entity.
 			this.jumpStart = new ig.Timer();
@@ -621,7 +621,7 @@ ig.module(
 
 				}
 				// Check if currently jumping or moving.
-				else if (this.isJump || this.moving) {
+				else if (this.jumping || this.moving) {
 
 					// Finish the current move.
 					this.finishMove();

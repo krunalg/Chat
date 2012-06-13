@@ -56,7 +56,7 @@ ig.module(
 		moving: false,
 
 		// Used to know when to move extra distance.
-		isJump: false,
+		jumping: false,
 
 		// Player is on bike.
 		onBike: false,
@@ -424,7 +424,7 @@ ig.module(
 		finishMove: function() {
 
 			// Animate the players vertical offset to simulate jumping.
-			if (this.isJump) {
+			if (this.jumping) {
 
 				// Get how much time into the jump has elapsed.
 				var jumpTime = this.jumpStart.delta();
@@ -449,7 +449,7 @@ ig.module(
 			// Check if player has reached his destination.
 			if (this.destinationReached()) {
 				// Player is not jumping.
-				this.isJump = false;
+				this.jumping = false;
 
 				// Snap player to legal destination coordinates.
 				this.alignToGrid();
@@ -505,7 +505,7 @@ ig.module(
 		setMoveDestination: function() {
 
 			// Specify distance based on move type.
-			if (this.isJump) var distance = 2;
+			if (this.jumping) var distance = 2;
 			else var distance = 1;
 
 			// Get destination position.
@@ -660,7 +660,7 @@ ig.module(
 			this.moving = false;
 
 			// Player is not jumping.
-			this.isJump = false;
+			this.jumping = false;
 
 			// Set move state.
 			var newState = 'idle';

@@ -131,7 +131,7 @@ ig.module(
 			this.parent();
 
 			// Check if player is moving.
-			if (this.isJump || this.moving) {
+			if (this.jumping || this.moving) {
 
 				// Complete the started move.
 				this.finishMove();

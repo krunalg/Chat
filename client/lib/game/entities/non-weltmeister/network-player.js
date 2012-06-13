@@ -82,7 +82,7 @@ ig.module(
 				this.moving = false;
 
 				// Not jumping.
-				this.isJump = false;
+				this.jumping = false;
 
 				// Set idle animation.
 				this.moveAnimStop();
@@ -127,7 +127,7 @@ ig.module(
 		startJump: function() {
 			
 			// Player is jumping.
-			this.isJump = true;
+			this.jumping = true;
 
 			// Used for animating player entity.
 			this.jumpStart = new ig.Timer();
@@ -146,7 +146,7 @@ ig.module(
 			this.parent();
 
 			// Check if player is moving.
-			if (this.isJump || this.moving) {
+			if (this.jumping || this.moving) {
 
 				// Complete the started move.
 				this.finishMove();
