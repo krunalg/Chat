@@ -416,6 +416,11 @@ ig.module(
 			return false;
 		},
 
+		/*
+		 * Sets the player in motion with the appropriate speed, animation, and spawned entities.
+		 *
+		 * @return undefined
+		 */
 		startMove: function()
 		{
 			// Could I remove this whole block?

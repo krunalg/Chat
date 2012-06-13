@@ -545,7 +545,7 @@ ig.module(
 				// Player is not trying to move.
 				else {
 
-					// Set player animation to idle.
+					// Set animation.
 					this.moveAnimStop();
 
 					// Keep slow-walk animations rewound.
