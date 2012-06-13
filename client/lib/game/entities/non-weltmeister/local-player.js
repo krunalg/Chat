@@ -86,7 +86,7 @@ ig.module(
 				} else if (this.canMove()) {
 					this.preStartMove();
 				} else {
-					
+
 					// Stop player.
 					this.doneMove();
 
@@ -94,7 +94,7 @@ ig.module(
 					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 				}
 			} else {
-				
+
 				// Stop player.
 				this.doneMove();
 
@@ -454,7 +454,7 @@ ig.module(
 			else {
 
 				// Determine movement speed on land.
-				if(this.onBike) this.setMoveState('bike');
+				if (this.onBike) this.setMoveState('bike');
 				else if (this.jumping) this.setMoveState('jump');
 				else if (ig.input.state('run')) this.setMoveState('run');
 				else this.setMoveState('walk');
@@ -557,6 +557,6 @@ ig.module(
 			}
 		}
 
-	});
 
+	});
 })
