@@ -668,9 +668,6 @@ ig.module(
 			if(this.onBike) newState = newState + 'Bike';
 			else if(this.swimming) newState = newState + 'Swim';
 			this.moveState = this.lastState = newState;
-
-			// Set animation.
-			this.moveAnimStop();
 		},
 
 		/*
