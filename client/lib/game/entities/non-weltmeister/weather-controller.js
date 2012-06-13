@@ -12,6 +12,9 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 		update: function() {
 
+			// Spawn a raindrop.
+			ig.game.spawnEntity(EntityRaindrop, this.pos.x, this.pos.y, {});
+
 			// Call parent.
 			this.parent();
 		}
