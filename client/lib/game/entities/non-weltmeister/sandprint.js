@@ -1,10 +1,10 @@
-ig.module('game.entities.non-weltmeister.footprint')
+ig.module('game.entities.non-weltmeister.sandprint')
 
 .requires('impact.entity')
 
 .defines(function() {
 
-	EntityFootprint = ig.Entity.extend({
+	EntitySandprint = ig.Entity.extend({
 		
 		size: {
 			x: 16,
@@ -15,7 +15,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 		markedForDeath: true,
 
 		// Load image resource.
-		animSheet: new ig.AnimationSheet('media/rs.footprint.png', 16, 16),
+		animSheet: new ig.AnimationSheet('media/rs.sandprint.png', 16, 16),
 		
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
@@ -83,7 +83,7 @@ ig.module('game.entities.non-weltmeister.footprint')
 			default:
 
 				// Error if no direction supplied.
-				throw new Error("Footprint entity was spawned without the 'facing' property.");
+				throw new Error("Sandprint entity was spawned without the 'facing' property.");
 			}
 		},
 

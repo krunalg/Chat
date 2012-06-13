@@ -456,9 +456,9 @@ ig.module(
 				// Get game tilesize.
 				var tilesize = this.getTilesize();
 
-				// Spawn footprint if needed.
-				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['footprints'], ig.game.primaryMapLayer)) {
-					this.trySpawningEntity(EntityFootprint, this.pos);
+				// Spawn sandprint if needed.
+				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandprints'], ig.game.primaryMapLayer)) {
+					this.trySpawningEntity(EntitySandprint, this.pos);
 				}
 
 				// Which tiles to check for reflectivity?

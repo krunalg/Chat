@@ -49,7 +49,7 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.network-player',
 
-'game.entities.non-weltmeister.footprint',
+'game.entities.non-weltmeister.sandprint',
 
 'game.entities.non-weltmeister.reflection',
 
