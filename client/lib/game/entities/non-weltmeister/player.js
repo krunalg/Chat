@@ -730,7 +730,7 @@ ig.module(
 				this.currentAnim = this.anims[state + ig.game.capitaliseFirstLetter(this.facing) + foot];
 
 				// Debug animation.
-				console.debug('Current animation: ' + state + ig.game.capitaliseFirstLetter(this.facing) + foot);
+				// console.debug('Current animation: ' + state + ig.game.capitaliseFirstLetter(this.facing) + foot);
 
 				// Play from first frame.
 				this.currentAnim.rewind();
