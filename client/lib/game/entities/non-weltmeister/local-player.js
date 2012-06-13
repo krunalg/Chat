@@ -595,6 +595,16 @@ ig.module(
 		update: function() {
 			this.parent();
 
+			// Check for bike toggle.
+			if (ig.input.pressed('bike') && !this.swimming) {
+				
+				// Toggle bike.
+				this.onBike = !this.onBike;
+
+				// Refresh current animation.
+				this.moveAnimStop();
+			}
+
 			// Check for actions, like reading signs, or talking to NPC's.
 			if (ig.input.pressed('action') && !this.isMove) {
 

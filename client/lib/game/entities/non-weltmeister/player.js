@@ -593,20 +593,24 @@ ig.module(
 			// State to use for animation.
 			var state = this.moveState;
 
-			if (this.swimming) // Water
+			// Water
+			if (this.swimming) 
 			{
 				// Set current animation.
 				this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
 
 				// Debug animation.
 				console.debug('Current animation: ' + 'swim' + ig.game.capitaliseFirstLetter(this.facing));
-			} else // Land
-			{
+			} 
+
+			// Land
+			else {
+
 				// Determine which foot to put forward.
 				var foot = '';
 				if (state != 'idle') foot = this.leftFoot ? 'A' : 'B';
 
-				// Over-ride jump to share same animation as walk.
+				// Jump uses the walking animation.
 				if (state == 'jump') state = 'walk';
 
 				// Set current animation.
@@ -640,7 +644,11 @@ ig.module(
 				if (this.swimming) this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
 
 				// Land idle.
-				else this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
+				else {
+					
+					if(this.onBike) this.currentAnim = this.anims['idleBike' + ig.game.capitaliseFirstLetter(this.facing)];
+					else this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
+				}
 
 				break;
 			};
@@ -733,6 +741,10 @@ ig.module(
 			this.addAnim('idleDown', idleFrameTime, [2], true);
 			this.addAnim('idleLeft', idleFrameTime, [1], true);
 			this.addAnim('idleRight', idleFrameTime, [1], true);
+			this.addAnim('idleBikeUp', idleFrameTime, [24], true);
+			this.addAnim('idleBikeDown', idleFrameTime, [26], true);
+			this.addAnim('idleBikeLeft', idleFrameTime, [25], true);
+			this.addAnim('idleBikeRight', idleFrameTime, [25], true);
 
 			// Right-side animations are simply a mirror of the left.
 			this.anims.walkRightA.flip.x = true;
@@ -744,6 +756,7 @@ ig.module(
 			this.anims.slowRight.flip.x = true;
 			this.anims.swimRight.flip.x = true;
 			this.anims.idleRight.flip.x = true;
+			this.anims.idleBikeRight.flip.x = true;
 
 			// Set current animation.
 			this.moveAnimStop();
