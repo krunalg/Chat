@@ -5,7 +5,7 @@ ig.module('game.entities.non-weltmeister.sandprint')
 .defines(function() {
 
 	EntitySandprint = ig.Entity.extend({
-		
+
 		size: {
 			x: 16,
 			y: 16
@@ -16,66 +16,69 @@ ig.module('game.entities.non-weltmeister.sandprint')
 
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.sandprint.png', 16, 16),
-		
+
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
+			// Are these tire tracks?
+			this.isFootprint = !this.follow.onBike;
+
+			// Break tie with player entity.
+			this.follow = undefined;
+
+			this.setAnimation();
+		},
+
+		setAnimation: function() {
+
 			var animSpeedMultiplier = 1.5;
 
-			// Create left animation.
-			this.addAnim('left', 0.01667*animSpeedMultiplier, 
-				[
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,2,1,2,1,2,1,2,
-					1,2,1,2,1,2,1,2
-				], true);
+			// Footsteps
+			if (this.isFootprint) {
 
-			// Create Right animation.
-			this.addAnim('right', 0.01667*animSpeedMultiplier, 
-				[
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,1,1,1,1,1,1,1,
-					1,2,1,2,1,2,1,2,
-					1,2,1,2,1,2,1,2
-				], true);
+				// Create left animation.
+				this.addAnim('left', 0.01667 * animSpeedMultiplier, [
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777], true);
 
-			// Create up animation.
-			this.addAnim('up', 0.01667*animSpeedMultiplier, 
-				[
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,2,0,2,0,2,0,2,
-					0,2,0,2,0,2,0,2
-				], true);
+				// Create Right animation.
+				this.addAnim('right', 0.01667 * animSpeedMultiplier, [
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777, 1, 777], true);
 
-			// Create down animation.
-			this.addAnim('down', 0.01667*animSpeedMultiplier, 
-				[
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,
-					0,2,0,2,0,2,0,2,
-					0,2,0,2,0,2,0,2
-				], true);
+				// Create up animation.
+				this.addAnim('up', 0.01667 * animSpeedMultiplier, [
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777], true);
+
+				// Create down animation.
+				this.addAnim('down', 0.01667 * animSpeedMultiplier, [
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777, 0, 777], true);			
+			}
+
+			// Tiretracks
+			else {
+
+				// Create left animation.
+				this.addAnim('left', 0.01667 * animSpeedMultiplier, [
+				3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777], true);
+
+				// Create Right animation.
+				this.addAnim('right', 0.01667 * animSpeedMultiplier, [
+				3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777, 3, 777], true);
+
+				// Create up animation.
+				this.addAnim('up', 0.01667 * animSpeedMultiplier, [
+				4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777], true);
+
+				// Create down animation.
+				this.addAnim('down', 0.01667 * animSpeedMultiplier, [
+				4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777, 4, 777], true);			
+			}
 
 			switch (this.facing) {
 			case 'left':
 			case 'right':
 			case 'up':
 			case 'down':
-				
+
 				// Set current animation.
 				this.currentAnim = this.anims[this.facing];
 				break;
@@ -97,13 +100,12 @@ ig.module('game.entities.non-weltmeister.sandprint')
 		},
 
 		update: function() {
-			
+
 			// Update animations.
 			if (this.currentAnim != null) this.currentAnim.update();
-			
+
 			// Check if animation has finished.
-			if (this.currentAnim.loopCount >= 1) 
-			{
+			if (this.currentAnim.loopCount >= 1) {
 				// Free up resources.
 				this.kill();
 			}
