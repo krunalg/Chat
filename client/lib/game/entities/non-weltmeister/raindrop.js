@@ -21,7 +21,7 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			this.vel.y = 26 * 20;
 		},
 
-		.handleMovementTrace( res ) {
+		handleMovementTrace: function(res) {
 
 			// Do not collide with collisionMap.
 			return;
