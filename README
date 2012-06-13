@@ -30,37 +30,44 @@ Change-Log:
 - Chat log with auto-scrolling text, multi-colored messages, and clicking names or pressing R to private message. (Completed June 7, 2012)
 - As the player walks over sand tiles, foot prints are left behind him. (Completed June 8, 2012)
 - Player reflection is shown with animation in certain types of water. (Completed June 11, 2012)
+- Player can now ride a bicycle by pressing C. The bicycle leaves tracks in sand tiles. (Completed June 12, 2012)
 
 
 To-do:
 ----------------------------
 
-World:
-- Sand tiles need collision update for 'footprint' effect and movement.
-
 Camera:
 - Ability to restrict certain areas of map from being displayed on screen.
 
-Player system:
+Effects:
 - "Ash" grass entity.
-- Biking.
-- Standing "shallow-water" effect.
+- Fix reflection not animating properly when facing 'right'.
+- Add brightness or 'fading' effect to reflections.
+- "Shallow-water" feet effect.
 - "Deep sand" effect.
+- Swim "bobbing" animation as well as initial hop.
+- Overhead smoke-effect in LAVARIDGE TOWN.
+- Weather effects: rain in ROUTE 119, sandstorm in ROUTE 111, ash in ROUTE 113.
 - Smashable rocks, and cuttable trees (low priority).
-- A* pathfinding for movement (low priority).
+- Sinking logs in PACIFIDLOG TOWN (low priority).
+
+Movement:
+- Disable walking outside of known regions.
+- A* pathfinding (low priority).
+
+Bicycle:
+- Add 'curvy' tire tracks when turning corners in sand.
+- Add 'Mach' bicycle which has variable speed (low priority).
 
 Chat system:
 - Prevent multiple chat bubbles from one source from existing at the same time.
 - Server sends a failure notice upon non-delivery of a private message.
 - Chat bubble repositions itself to be on-screen if it is not (low priority).
 - Invalid commands are reported to use as such.
+- Remove extra pixel between letters in chat-bubbles.
 
-Animations: 
-- Swimming requires "bobbing" animation as well as initial hop.
+Maps:
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
-- Overhead smoke-effect in LAVARIDGE TOWN.
-- Weather effects: rain in ROUTE 119, sandstorm in ROUTE 111, ash in ROUTE 113.
-- Sinking logs in PACIFIDLOG TOWN (low priority).
 
 
 Known Issues:
@@ -69,4 +76,10 @@ Known Issues:
 - Network players can trigger grass to 'rustle' on other players screens by
   running up to one and stopping just before it.
 
+- Network players will appear to teleport slightly when they stop or change
+  directions if their framerate and yours differ significantly.
+
 - Chat system does not support accented characters.
+
+- Currently a player can walk through a door, and keep going without being 
+  zoned until they let go of the movement key.
