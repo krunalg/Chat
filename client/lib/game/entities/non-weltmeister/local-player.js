@@ -307,71 +307,77 @@ ig.module(
 				// Reset commitment process for next time.
 				this.moveCommitPending = false;
 
-				// Check if play can jump.
-				if (this.canJump()) {
+				// Commit to move.
+				if (this.moveKeyDown(this.moveCommitDirection)) {
 
-					// Jump.
-					this.startJump();
+					// Check if play can jump.
+					if (this.canJump()) {
 
-				} else
-				// Chec if player can move regularly.
-				if (this.canMove()) {
+						// Jump.
+						this.startJump();
+					} 
 
-					// Being move.
-					this.preStartMove();
-				} else {
+					// Check if player can move normal.
+					else if (this.canMove()) {
 
-					// Debug message.
-					console.debug("Trying to set slow walk...");
+						// Being move.
+						this.preStartMove();
 
-					// Cannot move, but trying, so slow-walk instead.
-					switch (this.facing) {
-					case 'left':
-						this.currentAnim = this.anims.slowLeft;
-						break;
-					case 'right':
-						this.currentAnim = this.anims.slowRight;
-						break;
-					case 'up':
-						this.currentAnim = this.anims.slowUp;
-						break;
-					case 'down':
-						this.currentAnim = this.anims.slowDown;
-						break;
-					}
-				}
-			}
+					} else {
 
-			// Player is not yet committed. 
-			else {
-				// Check if player has changed faced directions.
-				if (this.facing != this.lastFacing) {
+						// Debug message.
+						console.debug("Trying to set slow walk...");
 
-					// Tell other players that we changed our faced direction.
-					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
-
-					// So we don't send the same update twice.
-					this.lastFacing = this.facing;
-
-					// Animate the change.
-					this.moveAnimStart(false);
-
-					// Check if we're standing on an exit.
-					var exit = this.overExit(this);
-
-					// Check that an exit was found.
-					if (exit) {
-
-						// Check if arrow animation needs to be turned on.
-						if (this.facing == exit.direction) {
-							// Turn on arrows.
-							exit.startAnim();
-						} else {
-							// Turn off arrows if facing wrong direction.
-							exit.stopAnim();
+						// Cannot move, but trying, so slow-walk instead.
+						switch (this.facing) {
+						case 'left':
+							this.currentAnim = this.anims.slowLeft;
+							break;
+						case 'right':
+							this.currentAnim = this.anims.slowRight;
+							break;
+						case 'up':
+							this.currentAnim = this.anims.slowUp;
+							break;
+						case 'down':
+							this.currentAnim = this.anims.slowDown;
+							break;
 						}
 					}
 				}
+
+				// Not committed to move.
+				else {
+					
+					// Check if player has changed faced directions.
+					if (this.facing != this.lastFacing) {
+
+						// Tell other players that we changed our faced direction.
+						this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
+
+						// So we don't send the same update twice.
+						this.lastFacing = this.facing;
+
+						// Animate the change.
+						this.moveAnimStart(false);
+
+						// Check if we're standing on an exit.
+						var exit = this.overExit(this);
+
+						// Check that an exit was found.
+						if (exit) {
+
+							// Check if arrow animation needs to be turned on.
+							if (this.facing == exit.direction) {
+								// Turn on arrows.
+								exit.startAnim();
+							} else {
+								// Turn off arrows if facing wrong direction.
+								exit.stopAnim();
+							}
+						}
+					}
+				}	
 			}
 		},
 
@@ -479,8 +485,11 @@ ig.module(
 		update: function() {
 			this.parent();
 
+			// Finish movement attempts.
+			if (this.moveCommitPending) this.tryCommit();
+
 			// Check for bike toggle.
-			if (ig.input.pressed('bike') && !this.swimming) {
+			else if (ig.input.pressed('bike') && !this.swimming) {
 
 				// Toggle bike.
 				this.onBike = !this.onBike;
@@ -492,20 +501,21 @@ ig.module(
 				this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 			}
 
-			// Check for actions, like reading signs, or talking to NPC's.
-			if (ig.input.pressed('action') && !this.moving) {
-
-				// Action key was pressed.
-				this.action(this);
-			}
-
 			// Player just entered a door but has not yet changed zones.
-			if (this.moveDoor && !this.waitingToMove && !this.moving) {
+			else if (this.moveDoor && !this.waitingToMove && !this.moving) {
 
 				// Change zones.
 				this.moveDoor.trigger();
 
 			}
+
+			// Check for actions, like reading signs, or talking to NPC's.
+			else if (ig.input.pressed('action') && !this.moving) {
+
+				// Action key was pressed.
+				this.action(this);
+			}
+
 			// Handle movements.
 			else {
 
