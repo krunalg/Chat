@@ -493,6 +493,12 @@ ig.module(
 
 				// Toggle bike.
 				this.onBike = !this.onBike;
+
+				// Update state.
+				this.setIdle();
+
+				// Tell the world.
+				this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 			}
 
 			// Check for actions, like reading signs, or talking to NPC's.

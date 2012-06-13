@@ -760,9 +760,8 @@ ig.module(
 			};
 		},
 
-		// 
 		/*
-		 * Sets player to idle state.
+		 * Sets player in his non-moving state.
 		 *
 		 * @return undefined
 		 */
@@ -774,10 +773,22 @@ ig.module(
 			// Player is not jumping.
 			this.jumping = false;
 
-			// Set move state.
+			// Update move state.
+			this.setIdle();
+		},
+
+		/*
+		 * Sets player to idle state.
+		 *
+		 * @return undefined
+		 */
+		setIdle: function() {
+
 			var newState = 'idle';
 			if(this.onBike) newState = newState + 'Bike';
 			else if(this.swimming) newState = newState + 'Swim';
+			
+			// Set move state.
 			this.moveState = this.lastState = newState;
 		},
 
