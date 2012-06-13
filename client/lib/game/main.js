@@ -63,6 +63,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.raindrop',
 
+'game.entities.non-weltmeister.weather-controller',
+
 //debug
 'impact.debug.debug',
 
