@@ -163,14 +163,13 @@ ig.module(
 
 				// Set player speed.
 				this.speed = this[state + 'Speed'];
-
-				// Update player movement state.
-				this.moveState = state;
-
 			}
 
-			// Throw an error if unexpected input.
-			else throw "No speed value set for for state: " + state;
+			// Idle.
+			else this.speed = 0;
+
+			// Update player movement state.
+			this.moveState = state;
 		},
 
 		// Spawns a surf entity on the tile currently faced.

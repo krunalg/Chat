@@ -34,7 +34,7 @@ ig.module(
 				player.pos.x = x;
 				player.pos.y = y;
 				player.facing = direction;
-				player.moveState = state;
+				player.setMoveState(state);
 				player.startMove();
 			});
 
@@ -44,7 +44,7 @@ ig.module(
 				player.pos.x = x;
 				player.pos.y = y;
 				player.facing = direction;
-				player.moveState = 'jump';
+				player.setMoveState('jump');
 				player.startJump();
 			});
 
@@ -101,11 +101,8 @@ ig.module(
 
 		// Handles exactly how a move takes place (speed, effects, etc.)
 		startMove: function() {
-			if (this.moveState == 'idle') this.isMove = false;
+			if (this.moveState == 'idle') this.doneMove();
 			else {
-				// determine speed
-				if (this.moveState == 'run') this.speed = this.runSpeed;
-				else if (this.moveState == 'walk') this.speed = this.walkSpeed;
 
 				// Spawn new grass entity if needed.
 				var newGrass = this.trySpawningGrass();
@@ -128,9 +125,6 @@ ig.module(
 
 		// Initiate a jump.
 		startJump: function() {
-			
-			// Determine movement speed.
-			this.setMoveState('jump');
 			
 			// Player is jumping.
 			this.isJump = true;
