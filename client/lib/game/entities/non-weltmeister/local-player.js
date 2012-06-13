@@ -40,6 +40,12 @@ ig.module(
 		// Used to reset time before committing if direction changes.
 		moveCommitDirection: '',
 
+		// Used for delay a new move.
+		commitTimer: null,
+
+		// Delay in seconds before committing to a move.
+		commitDelay: 0.08,
+
 		// Tell server where in the world the player is and what he looks like.
 		netInit: function() {
 
@@ -479,6 +485,9 @@ ig.module(
 
 			// Tell the world all about this player.
 			this.netInit();
+
+			// Create timer for delaying new moves.
+			this.commitTimer = new ig.Timer();
 		},
 
 		update: function() {
