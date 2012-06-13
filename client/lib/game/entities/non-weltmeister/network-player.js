@@ -35,6 +35,35 @@ ig.module(
 				player.pos.y = y;
 				player.facing = direction;
 				player.setMoveState(state);
+				
+				if(state=='bike') 
+				{
+					player.onBike = true; 
+					player.swimming = false;
+					player.jumping = false;
+				}
+				
+				if(state=='walk'||'run') 
+				{
+					player.onBike = false;
+					player.swimming = false;
+					player.jumping = false;
+				}
+				
+				if(state=='jump') 
+				{
+					// => Can jump on/off of bike.
+					player.jumping = true;
+					player.swimming = false;
+				}
+				
+				if(state=='swim') 
+				{
+					player.swimming = true;
+					player.jumping = false;
+					player.onBike = false;
+				}
+
 				player.startMove();
 			});
 

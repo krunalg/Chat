@@ -448,92 +448,20 @@ ig.module(
 
 				// Set movement speed on water.
 				this.setMoveState('swim');
-
-				if (!this.swimming) {
-					// Reset hop-on-to-surf-entity animation.
-					this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)].rewind();
-
-					// Spawn a surf entity.
-					this.spawnSurf();
-
-					// Play is no longer on land.
-					this.swimming = true;
-				}
 			}
 
 			// Land
 			else {
-
-				// It's difficult to swim on land.
-				this.swimming = false;
 
 				// Determine movement speed on land.
 				if(this.onBike) this.setMoveState('bike');
 				else if (this.jumping) this.setMoveState('jump');
 				else if (ig.input.state('run')) this.setMoveState('run');
 				else this.setMoveState('walk');
-
-				// Spawn new grass entity if needed.
-				var newGrass = this.trySpawningGrass();
-				if (newGrass) newGrass.play();
-
-				// Remove old grass entity if leaving one.
-				var oldGrass = this.inGrass();
-				if (oldGrass) oldGrass.markForDeath();
-
-				// Get game tilesize.
-				var tilesize = this.getTilesize();
-
-				// Spawn footprint if needed.
-				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['footprints'], ig.game.primaryMapLayer)) {
-					this.trySpawningEntity(EntityFootprint, this.pos);
-				}
-
-				// Which tiles to check for reflectivity?
-				checkTiles = new Array();
-				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + tilesize, this.facing, 1));
-				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
-
-				// If old reflection has been killed, break tie.
-				if (this.reflection !== undefined && this.reflection._killed) this.reflection = undefined;
-
-				// Used for cleanup.
-				var needReflection = false;
-
-				// Spawn reflection if needed.
-				for (var i = 0; i < checkTiles.length; i++) {
-					if (ig.game.isSpecialTile((checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer)) {
-
-						if (this.reflection === undefined) {
-
-							// Save reference to reflection entity.
-							this.reflection = ig.game.spawnEntityBelow(EntityReflection, this.pos.x, this.pos.y, {
-								follow: this
-							});
-
-						} else {
-
-							// Keep if was marked for death.
-							this.reflection.revive();
-						}
-
-						needReflection = true;
-						break;
-					}
-				}
-
-				// Clean up unused reflection entity.
-				if (!needReflection && this.reflection !== undefined) this.reflection.markForDeath();
 			}
 
-			// Not idle.
-			this.moving = true;
-
-			// Calculate where player is going.
-			this.setMoveDestination();
-
-			// Beging animating.
-			this.moveAnimStart(true);
+			// Call parent.
+			this.parent();
 
 			// Check if the players state is different than it was.
 			if (this.lastFacing != this.facing || this.lastState != this.moveState) {
