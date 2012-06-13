@@ -606,9 +606,8 @@ ig.module(
 			// Land
 			else {
 
-				// Determine which foot to put forward.
-				var foot = '';
-				if (state.substring(0,4) != 'idle') foot = this.leftFoot ? 'A' : 'B';
+				// Foot is A or B when state is not idle.
+				var foot = ( (state.substring(0,4) != 'idle') ? (this.leftFoot ? 'A':'B') : '' );
 
 				// Jump uses the walking animation.
 				if (state == 'jump') state = 'walk';
