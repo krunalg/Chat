@@ -478,7 +478,8 @@ ig.module(
 				this.swimming = false;
 
 				// Determine movement speed on land.
-				if (ig.input.state('run')) this.setMoveState('run');
+				if(this.onBike) this.setMoveState('bike');
+				else if (ig.input.state('run')) this.setMoveState('run');
 				else this.setMoveState('walk');
 
 				// Spawn new grass entity if needed.
