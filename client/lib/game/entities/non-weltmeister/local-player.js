@@ -34,9 +34,6 @@ ig.module(
 		// Used to decide if a move or just a direction change occurs.
 		moveCommitPending: false,
 
-		// System time (in miliseconds) when player will commit to a move.
-		moveCommitWhen: 0,
-
 		// Used to reset time before committing if direction changes.
 		moveCommitDirection: '',
 
@@ -293,7 +290,6 @@ ig.module(
 			// Reset the commit process if new direction is detected.
 			if (this.moveCommitDirection != this.facing) {
 				this.moveCommitPending = false;
-				this.moveCommitWhen = 0;
 			}
 
 			// Start new commit process if one does not exist.
@@ -307,19 +303,18 @@ ig.module(
 					var delay = 0;
 				} else {
 					// Add slight delay before commiting to moves.
-					var delay = 80;
+					var delay = this.commitDelay;
 				}
 
 				// Set the time when the move will be committed.
-				this.moveCommitWhen = new Date().getTime() + delay;
+				this.commitTimer.set(delay);
 			}
 
 			// Check if player has committed to trying to move.
-			if (new Date().getTime() - this.moveCommitWhen >= 0) {
+			if (this.commitTimer.delta() >= 0) {
 
 				// Reset commitment process for next time.
 				this.moveCommitPending = false;
-				this.moveCommitWhen = 0;
 
 				// Check if play can jump.
 				if (this.canJump()) {
