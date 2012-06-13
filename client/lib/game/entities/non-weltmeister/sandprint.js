@@ -19,14 +19,6 @@ ig.module('game.entities.non-weltmeister.sandprint')
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
-
-			// Are these tire tracks?
-			this.isFootprint = !this.follow.onBike;
-
-			// Break tie with player entity.
-			this.follow = undefined;
-
-			this.setAnimation();
 		},
 
 		setAnimation: function() {

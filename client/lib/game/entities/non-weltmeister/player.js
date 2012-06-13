@@ -220,10 +220,7 @@ ig.module(
 			console.debug("Spawning entity at: " + position.x + "," + position.y);
 
 			// Spawn new entity and return it.
-			return ig.game.spawnEntityBelow(entityType, position.x, position.y, {
-				facing: this.facing,
-				follow: this
-			});
+			return ig.game.spawnEntityBelow(entityType, position.x, position.y, {});
 		},
 
 		/*
@@ -459,7 +456,12 @@ ig.module(
 				// Spawn sandprint if needed.
 				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandprints'], ig.game.primaryMapLayer)) {
 					var sandprint = this.trySpawningEntity(EntitySandprint, this.pos);
-					if (sandprint) sandprint.setAnimation();
+					if (sandprint) 
+					{
+						sandprint.facing = this.facing;
+						sandprint.isFootprint = !this.onBike;
+						sandprint.setAnimation();
+					}
 				}
 
 				// Which tiles to check for reflectivity?
