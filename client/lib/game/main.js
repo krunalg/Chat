@@ -386,9 +386,11 @@ ig.module('game.main')
 			// Enable extra debugging for just myself.
 			if (username == "Joncom") {
 
+				var player = ig.game.getEntitiesByType(EntityLocalPlayer)[0];
+
 				// Draw debug display.
 				this.debugDisplay.draw(
-				[ig.game.getEntityByName("Joncom").moveState], // will display each array element on a new line
+				[player.moveState, player.facing], // will display each array element on a new line
 				true, // true or false to either show the FPS
 				false, // true or false to show the average FPS over a period of time
 				10000, // amount of of time between samples. defaults to 10000 (10 seconds)

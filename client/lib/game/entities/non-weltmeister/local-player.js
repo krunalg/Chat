@@ -97,6 +97,7 @@ ig.module(
 
 		// Sets player to idle state and notifies the server.
 		stopMoving: function() {
+			
 			// Player is not moving.
 			this.isMove = false;
 
@@ -601,12 +602,9 @@ ig.module(
 
 			// Check for bike toggle.
 			if (ig.input.pressed('bike') && !this.swimming) {
-				
+
 				// Toggle bike.
 				this.onBike = !this.onBike;
-
-				// Refresh current animation.
-				this.moveAnimStop();
 			}
 
 			// Check for actions, like reading signs, or talking to NPC's.
