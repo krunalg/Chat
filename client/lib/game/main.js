@@ -154,6 +154,7 @@ ig.module('game.main')
 			ig.input.bind(ig.KEY.R, 'chatReply');
 			ig.input.bind(ig.KEY.Z, 'action');
 			ig.input.bind(ig.KEY.X, 'run');
+			ig.input.bind(ig.KEY.C, 'bike');
 
 			/*
 			// OLD: Set up map animations.

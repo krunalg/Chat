@@ -40,6 +40,9 @@ ig.module(
 		// Speed when swimming.
 		swimSpeed: 138,
 
+		// Speed when biking.
+		bikeSpeed: 160,
+
 		// Direction player is currently facing.
 		facing: 'down',
 
@@ -54,6 +57,9 @@ ig.module(
 
 		// Used to know when to move extra distance.
 		isJump: false,
+
+		// Player is on bike.
+		onBike: false,
 
 		// Used to alternate between step animations.
 		leftFoot: true,
