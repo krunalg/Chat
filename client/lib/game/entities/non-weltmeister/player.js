@@ -417,6 +417,26 @@ ig.module(
 		},
 
 		/*
+		 * Initiates a jump and calls startMove().
+		 *
+		 * @return undefined
+		 */
+		startJump: function()
+		{
+			// Player is jumping.
+			this.jumping = true;
+
+			// Used for animating player entity.
+			this.jumpStart = new ig.Timer();
+
+			// Spawn shadow under the player.
+			this.spawnShadow();
+
+			// Move player.
+			this.startMove();
+		},	
+
+		/*
 		 * Stops player if he has reached his destination or move him if he has not.
 		 *
 		 * @return undefined

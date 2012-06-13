@@ -123,25 +123,6 @@ ig.module(
 			}
 		},
 
-		// Initiate a jump.
-		startJump: function() {
-			
-			// Player is jumping.
-			this.jumping = true;
-
-			// Used for animating player entity.
-			this.jumpStart = new ig.Timer();
-
-			// Spawn shadow under the player.
-			this.spawnShadow();
-
-			// Calculate player destination.
-			this.setMoveDestination();
-
-			// Change animation from idle.
-			this.moveAnimStart(true);
-		},
-
 		update: function() {
 			this.parent();
 
