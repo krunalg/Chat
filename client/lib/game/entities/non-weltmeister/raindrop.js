@@ -17,7 +17,8 @@ ig.module('game.entities.non-weltmeister.raindrop')
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			this.vel.x = 
+			this.vel.x = -13 * 20;
+			this.vel.y = 26 * 20;
 		},
 
 		.handleMovementTrace( res ) {

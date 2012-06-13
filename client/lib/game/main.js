@@ -61,6 +61,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.surf',
 
+'game.entities.non-weltmeister.raindrop',
+
 //debug
 'impact.debug.debug',
 
