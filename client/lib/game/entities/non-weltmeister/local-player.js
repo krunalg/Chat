@@ -81,7 +81,7 @@ ig.module(
 			if (keepMoving) {
 
 				if (this.canJump()) {
-					this.isMove = false; // will use isJump instead
+					this.moving = false; // will use isJump instead
 					this.startJump();
 				} else if (this.canMove()) {
 					this.preStartMove();
@@ -526,7 +526,7 @@ ig.module(
 			}
 
 			// Not idle.
-			this.isMove = true;
+			this.moving = true;
 
 			// Calculate where player is going.
 			this.setMoveDestination();
@@ -594,14 +594,14 @@ ig.module(
 			}
 
 			// Check for actions, like reading signs, or talking to NPC's.
-			if (ig.input.pressed('action') && !this.isMove) {
+			if (ig.input.pressed('action') && !this.moving) {
 
 				// Action key was pressed.
 				this.action(this);
 			}
 
 			// Player just entered a door but has not yet changed zones.
-			if (this.moveDoor && !this.waitingToMove && !this.isMove) {
+			if (this.moveDoor && !this.waitingToMove && !this.moving) {
 
 				// Change zones.
 				this.moveDoor.trigger();
@@ -621,7 +621,7 @@ ig.module(
 
 				}
 				// Check if currently jumping or moving.
-				else if (this.isJump || this.isMove) {
+				else if (this.isJump || this.moving) {
 
 					// Finish the current move.
 					this.finishMove();

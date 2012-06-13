@@ -79,7 +79,7 @@ ig.module(
 			if (this.moveState == 'idle') {
 
 				// Not moving.
-				this.isMove = false;
+				this.moving = false;
 
 				// Not jumping.
 				this.isJump = false;
@@ -113,7 +113,7 @@ ig.module(
 				if (oldGrass) oldGrass.markForDeath();
 
 				// Player is moving.
-				this.isMove = true;
+				this.moving = true;
 
 				// Set destination.
 				this.setMoveDestination();
@@ -146,7 +146,7 @@ ig.module(
 			this.parent();
 
 			// Check if player is moving.
-			if (this.isJump || this.isMove) {
+			if (this.isJump || this.moving) {
 
 				// Complete the started move.
 				this.finishMove();

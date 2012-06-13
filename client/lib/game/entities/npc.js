@@ -62,7 +62,7 @@ ig.module(
 			if (oldGrass) oldGrass.markForDeath();
 
 			// Player is moving.
-			this.isMove = true;
+			this.moving = true;
 
 			// Set player destination.
 			this.setMoveDestination();
@@ -75,7 +75,7 @@ ig.module(
 		continueOrStop: function()
 		{
 			// Not moving.
-			this.isMove = false;
+			this.moving = false;
 
 			// Set idle animation.
 			this.moveAnimStop();
@@ -131,7 +131,7 @@ ig.module(
 			this.parent();
 
 			// Check if player is moving.
-			if (this.isJump || this.isMove) {
+			if (this.isJump || this.moving) {
 
 				// Complete the started move.
 				this.finishMove();

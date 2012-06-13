@@ -53,7 +53,7 @@ ig.module(
 		animSheet: new ig.AnimationSheet('media/entity-icons.png', 16, 16),
 
 		// Is the player moving or not.
-		isMove: false,
+		moving: false,
 
 		// Used to know when to move extra distance.
 		isJump: false,
@@ -657,7 +657,7 @@ ig.module(
 		doneMove: function() {
 			
 			// Player is not moving.
-			this.isMove = false;
+			this.moving = false;
 
 			// Player is not jumping.
 			this.isJump = false;
