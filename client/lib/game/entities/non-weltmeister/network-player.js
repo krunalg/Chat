@@ -64,7 +64,8 @@ ig.module(
 					player.onBike = false;
 				}
 
-				player.startMove();
+				if(state=='jump') 	player.startJump(); 
+				else 				player.startMove();
 			});
 
 			// A player jumped a ledge.

@@ -477,16 +477,6 @@ ig.module(
 			this.lastFacing = this.facing;
 		},
 
-		// Initiate a jump.
-		startJump: function() {
-
-			// Tell other players about this jump.
-			this.emitJump(this.pos.x, this.pos.y, this.facing);
-
-			// Call parent.
-			this.parent();
-		},
-
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
