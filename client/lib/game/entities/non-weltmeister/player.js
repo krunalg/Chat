@@ -608,7 +608,7 @@ ig.module(
 
 				// Determine which foot to put forward.
 				var foot = '';
-				if (state != 'idle') foot = this.leftFoot ? 'A' : 'B';
+				if (state.substring(0,4) != 'idle') foot = this.leftFoot ? 'A' : 'B';
 
 				// Jump uses the walking animation.
 				if (state == 'jump') state = 'walk';
@@ -644,11 +644,7 @@ ig.module(
 				if (this.swimming) this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
 
 				// Land idle.
-				else {
-					
-					if(this.onBike) this.currentAnim = this.anims['idleBike' + ig.game.capitaliseFirstLetter(this.facing)];
-					else this.currentAnim = this.anims['idle' + ig.game.capitaliseFirstLetter(this.facing)];
-				}
+				else this.currentAnim = this.anims[this.moveState + ig.game.capitaliseFirstLetter(this.facing)];
 
 				break;
 			};

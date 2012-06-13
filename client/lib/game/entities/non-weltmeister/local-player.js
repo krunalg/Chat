@@ -104,7 +104,10 @@ ig.module(
 			this.isJump = false;
 
 			// Set move state.
-			this.moveState = this.lastState = 'idle';
+			var newState = 'idle';
+			if(this.onBike) newState = newState + 'Bike';
+			else if(this.swimming) newState = newState + 'Swim';
+			this.moveState = this.lastState = newState;
 
 			// Stop the movement animation.
 			this.moveAnimStop();
