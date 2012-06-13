@@ -353,6 +353,7 @@ ig.module(
 					}
 				}
 			}
+
 			// Player is not yet committed. 
 			else {
 				// Check if player has changed faced directions.
@@ -454,8 +455,8 @@ ig.module(
 			else {
 
 				// Determine movement speed on land.
-				if (this.onBike) this.setMoveState('bike');
-				else if (this.jumping) this.setMoveState('jump');
+				if (this.jumping) this.setMoveState('jump');
+				else if (this.onBike) this.setMoveState('bike');
 				else if (ig.input.state('run')) this.setMoveState('run');
 				else this.setMoveState('walk');
 			}

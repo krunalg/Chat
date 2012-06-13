@@ -720,8 +720,8 @@ ig.module(
 				// Foot is A or B when state is not idle.
 				var foot = ( (state.substring(0,4) != 'idle') ? (this.leftFoot ? 'A':'B') : '' );
 
-				// Jump uses the walking animation.
-				if (state == 'jump') state = 'walk';
+				// Which jump animation to use?
+				if (state == 'jump') state = (this.onBike ? 'bike' : 'walk');
 
 				// Set current animation.
 				this.currentAnim = this.anims[state + ig.game.capitaliseFirstLetter(this.facing) + foot];
