@@ -69,7 +69,7 @@ ig.module(
 
 		// Reflection entity.
 		reflection: undefined,
-                                            
+
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
@@ -79,7 +79,7 @@ ig.module(
 			// Set max velocity equal to run speed.
 			this.maxVel.x = this.maxVel.y = this.runSpeed;
 		},
-                                                                                   
+
 		update: function() {
 
 			// Set zIndex dynamically using Y position and priority.
@@ -221,7 +221,10 @@ ig.module(
 			console.debug("Spawning entity at: " + position.x + "," + position.y);
 
 			// Spawn new entity and return it.
-			return ig.game.spawnEntityBelow(entityType, position.x, position.y, { facing: this.facing, follow: this });
+			return ig.game.spawnEntityBelow(entityType, position.x, position.y, {
+				facing: this.facing,
+				follow: this
+			});
 		},
 
 		/*
@@ -270,8 +273,7 @@ ig.module(
 		 *
 		 * @return EntityGrass if one exists, else return undefined.
 		 */
-		inGrass: function()
-		{
+		inGrass: function() {
 			// Search all grass entities for one that shares the players position.
 			var allGrass = ig.game.getEntitiesByType(EntityGrass);
 			if (allGrass) {
@@ -686,41 +688,59 @@ ig.module(
 			// Load skin image resource.
 			this.animSheet = new ig.AnimationSheet('media/people/rs.' + this.skin + '.png', 32, 32);
 
+			// Duration of each frame.
+			walkFrameTime = 0.13333;
+			runFrameTime = 0.08333;
+			bikeFrameTime = 0.03333;
+			slowFrameTime = 0.26667;
+			swimFrameTime = 0.53333;
+			idleFrameTime = 1;
+
 			// Add movement animations.
-			this.addAnim('walkUpA', 0.13333, [3, 0], true);
-			this.addAnim('walkUpB', 0.13333, [6, 0], true);
-			this.addAnim('walkDownA', 0.13333, [5, 2], true);
-			this.addAnim('walkDownB', 0.13333, [8, 2], true);
-			this.addAnim('walkLeftA', 0.13333, [4, 1], true);
-			this.addAnim('walkLeftB', 0.13333, [7, 1], true);
-			this.addAnim('walkRightA', 0.13333, [4, 1], true);
-			this.addAnim('walkRightB', 0.13333, [7, 1], true);
-			this.addAnim('runUpA', 0.08333, [12, 9], true);
-			this.addAnim('runUpB', 0.08333, [15, 9], true);
-			this.addAnim('runDownA', 0.08333, [14, 11], true);
-			this.addAnim('runDownB', 0.08333, [17, 11], true);
-			this.addAnim('runLeftA', 0.08333, [13, 10], true);
-			this.addAnim('runLeftB', 0.08333, [16, 10], true);
-			this.addAnim('runRightA', 0.08333, [16, 10], true);
-			this.addAnim('runRightB', 0.08333, [13, 10], true);
-			this.addAnim('slowUp', 0.26667, [3, 0, 6, 0]);
-			this.addAnim('slowDown', 0.26667, [5, 2, 8, 2]);
-			this.addAnim('slowLeft', 0.26667, [4, 1, 7, 1]);
-			this.addAnim('slowRight', 0.26667, [7, 1, 4, 1]);
-			this.addAnim('swimUp', 0.53333, [18, 21], true);
-			this.addAnim('swimDown', 0.53333, [20, 23], true);
-			this.addAnim('swimLeft', 0.53333, [19, 22], true);
-			this.addAnim('swimRight', 0.53333, [19, 22], true);
-			this.addAnim('idleUp', 0.1, [0], true);
-			this.addAnim('idleDown', 0.1, [2], true);
-			this.addAnim('idleLeft', 0.1, [1], true);
-			this.addAnim('idleRight', 0.1, [1], true);
+			this.addAnim('walkUpA', walkFrameTime, [3, 0], true);
+			this.addAnim('walkUpB', walkFrameTime, [6, 0], true);
+			this.addAnim('walkDownA', walkFrameTime, [5, 2], true);
+			this.addAnim('walkDownB', walkFrameTime, [8, 2], true);
+			this.addAnim('walkLeftA', walkFrameTime, [4, 1], true);
+			this.addAnim('walkLeftB', walkFrameTime, [7, 1], true);
+			this.addAnim('walkRightA', walkFrameTime, [4, 1], true);
+			this.addAnim('walkRightB', walkFrameTime, [7, 1], true);
+			this.addAnim('runUpA', runFrameTime, [12, 9], true);
+			this.addAnim('runUpB', runFrameTime, [15, 9], true);
+			this.addAnim('runDownA', runFrameTime, [14, 11], true);
+			this.addAnim('runDownB', runFrameTime, [17, 11], true);
+			this.addAnim('runLeftA', runFrameTime, [13, 10], true);
+			this.addAnim('runLeftB', runFrameTime, [16, 10], true);
+			this.addAnim('runRightA', runFrameTime, [16, 10], true);
+			this.addAnim('runRightB', runFrameTime, [13, 10], true);
+			this.addAnim('bikeUpA', bikeFrameTime, [27, 27, 24], true);
+			this.addAnim('bikeUpB', bikeFrameTime, [30, 30, 24], true);
+			this.addAnim('bikeDownA', bikeFrameTime, [29, 29, 26], true);
+			this.addAnim('bikeDownB', bikeFrameTime, [32, 32, 26], true);
+			this.addAnim('bikeLeftA', bikeFrameTime, [28, 28, 25], true);
+			this.addAnim('bikeLeftB', bikeFrameTime, [31, 31, 25], true);
+			this.addAnim('bikeRightA', bikeFrameTime, [31, 31, 25], true);
+			this.addAnim('bikeRightB', bikeFrameTime, [28, 28, 25], true);
+			this.addAnim('slowUp', slowFrameTime, [3, 0, 6, 0]);
+			this.addAnim('slowDown', slowFrameTime, [5, 2, 8, 2]);
+			this.addAnim('slowLeft', slowFrameTime, [4, 1, 7, 1]);
+			this.addAnim('slowRight', slowFrameTime, [7, 1, 4, 1]);
+			this.addAnim('swimUp', swimFrameTime, [18, 21], true);
+			this.addAnim('swimDown', swimFrameTime, [20, 23], true);
+			this.addAnim('swimLeft', swimFrameTime, [19, 22], true);
+			this.addAnim('swimRight', swimFrameTime, [19, 22], true);
+			this.addAnim('idleUp', idleFrameTime, [0], true);
+			this.addAnim('idleDown', idleFrameTime, [2], true);
+			this.addAnim('idleLeft', idleFrameTime, [1], true);
+			this.addAnim('idleRight', idleFrameTime, [1], true);
 
 			// Right-side animations are simply a mirror of the left.
 			this.anims.walkRightA.flip.x = true;
 			this.anims.walkRightB.flip.x = true;
 			this.anims.runRightA.flip.x = true;
 			this.anims.runRightB.flip.x = true;
+			this.anims.bikeRightA.flip.x = true;
+			this.anims.bikeRightB.flip.x = true;
 			this.anims.slowRight.flip.x = true;
 			this.anims.swimRight.flip.x = true;
 			this.anims.idleRight.flip.x = true;
