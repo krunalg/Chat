@@ -17,26 +17,34 @@ ig.module('game.entities.non-weltmeister.raindrop')
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			this.vel.x = -13 * 20;
-			this.vel.y = 26 * 20;
+			// Set up animation.
+			this.addAnim('rain', 1, [0,0,0,1,2,3], true);
+
+			// Set current animation.
+			this.currentAnim = this.anims.rain;
+
+			// Set velocity.
+			this.vel.x = -13 * 30;
+			this.vel.y = 26 * 30;
 		},
 
 		handleMovementTrace: function(res) {
-
-			// Do not collide with collisionMap.
-			return;
+			// This completely ignores the trace result (res) and always
+		    // moves the entity according to its velocity
+		    this.pos.x += this.vel.x * ig.system.tick;
+		    this.pos.y += this.vel.y * ig.system.tick;
 		},
 
 		update: function() {
-
-			// Update animations.
-			if (this.currentAnim != null) this.currentAnim.update();
 
 			// Check if animation has finished.
 			if (this.currentAnim.loopCount >= 1) {
 				// Free up resources.
 				this.kill();
 			}
+
+			// Call parent.
+			this.parent();
 		}
 
 	});
