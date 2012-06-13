@@ -714,7 +714,7 @@ ig.module(
 				this.currentAnim = this.anims['swim' + ig.game.capitaliseFirstLetter(this.facing)];
 
 				// Debug animation.
-				console.debug('Current animation: ' + 'swim' + ig.game.capitaliseFirstLetter(this.facing));
+				// console.debug('Current animation: ' + 'swim' + ig.game.capitaliseFirstLetter(this.facing));
 			} 
 
 			// Land
