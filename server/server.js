@@ -132,10 +132,6 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    socket.on('receiveJump', function(x, y, direction) {
-        socket.broadcast.to(socket.roomname).emit('otherPlayerJump-' + socket.clientname, x, y, direction);
-    });
-
     socket.on('receiveSay', function(client, msg) {
         
         // Checks that message contains non-whitespace.

@@ -68,16 +68,6 @@ ig.module(
 				else 				player.startMove();
 			});
 
-			// A player jumped a ledge.
-			socket.on('otherPlayerJump-' + this.name, function(x, y, direction) {
-				player.vel.x = player.vel.y = 0;
-				player.pos.x = x;
-				player.pos.y = y;
-				player.facing = direction;
-				player.setMoveState('jump');
-				player.startJump();
-			});
-
 			// A player set his skin.
 			socket.on('reskinOtherPlayer-' + this.name, function(skin) {
 				player.skin = skin;
