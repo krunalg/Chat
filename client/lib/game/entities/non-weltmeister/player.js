@@ -418,6 +418,13 @@ ig.module(
 
 		startMove: function()
 		{
+			// Could I remove this whole block?
+			if (this.moveState.substring(0, 4) == 'idle') 
+			{
+				this.doneMove();
+				return;
+			}
+
 			// Water
 			if (this.canSwim()) {
 
