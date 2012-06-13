@@ -649,6 +649,30 @@ ig.module(
 			};
 		},
 
+		// 
+		/*
+		 * Sets player to idle state.
+		 *
+		 * @return undefined
+		 */
+		doneMove: function() {
+			
+			// Player is not moving.
+			this.isMove = false;
+
+			// Player is not jumping.
+			this.isJump = false;
+
+			// Set move state.
+			var newState = 'idle';
+			if(this.onBike) newState = newState + 'Bike';
+			else if(this.swimming) newState = newState + 'Swim';
+			this.moveState = this.lastState = newState;
+
+			// Set animation.
+			this.moveAnimStop();
+		},
+
 		/*
 		 * Loads and sets players current skin.
 		 *

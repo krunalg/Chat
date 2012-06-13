@@ -86,35 +86,21 @@ ig.module(
 				} else if (this.canMove()) {
 					this.preStartMove();
 				} else {
+					
 					// Stop player.
-					this.stopMoving();
+					this.doneMove();
+
+					// Tell other players we've stopped.
+					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 				}
 			} else {
+				
 				// Stop player.
-				this.stopMoving();
+				this.doneMove();
+
+				// Tell other players we've stopped.
+				this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 			}
-		},
-
-		// Sets player to idle state and notifies the server.
-		stopMoving: function() {
-			
-			// Player is not moving.
-			this.isMove = false;
-
-			// Player is not jumping.
-			this.isJump = false;
-
-			// Set move state.
-			var newState = 'idle';
-			if(this.onBike) newState = newState + 'Bike';
-			else if(this.swimming) newState = newState + 'Swim';
-			this.moveState = this.lastState = newState;
-
-			// Stop the movement animation.
-			this.moveAnimStop();
-
-			// Tell other players we've stopped.
-			this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 		},
 
 		// Tries interacted with the faced tile.
