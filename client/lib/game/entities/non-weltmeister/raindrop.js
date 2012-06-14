@@ -25,8 +25,12 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			this.currentAnim = this.anims.fall;
 
 			// Set velocity.
+
+			// Move 6.5 pixels 60 times per second.
 			this.maxVel.x = this.vel.x = -13 * 30;
-			this.maxVel.y = this.vel.y = 26 * 30;
+
+			// Move 13 pixels 60 times per second.
+			this.maxVel.y = this.vel.y = 13 * 60;
 
 			// Moment that entity goes off-screen.
 			this.maxTimeX = (ig.game.screen.x - this.pos.x) / this.vel.x
@@ -77,7 +81,7 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			// Call parent.
 			this.parent();
 		}
-		
+
 
 	});
 });
