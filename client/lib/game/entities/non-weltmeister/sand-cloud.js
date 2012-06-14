@@ -45,12 +45,9 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		},
 
 		draw: function() {
-
-			var pos = this.circularPath(this.timer.delta() * this.rotationRate, this.pos.x, this.pos.y);
-
 			if (this.currentAnim) {
 				this.currentAnim.draw(
-				pos.x - this.offset.x - ig.game._rscreen.x, pos.y - this.offset.y - ig.game._rscreen.y);
+				this.newPos.x - this.offset.x - ig.game._rscreen.x, this.newPos.y - this.offset.y - ig.game._rscreen.y);
 			}
 		},
 
@@ -64,7 +61,7 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		 * @return      object contains two properties, the new x and y.
 		 */
 		circularPath: function(rate, cx, cy) {
-			var theta = -1 * rate * 360; // +ve angles are cw
+			var theta = -1 * rate * 360; // +angles are cw
 			var newX = cx + this.radius * Math.cos(theta * Math.PI / 180);
 			var newY = cy + this.radius * Math.sin(theta * Math.PI / 180);
 
@@ -75,6 +72,9 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		},
 
 		update: function() {
+
+			// Move along circular path.
+			this.newPos = this.circularPath(this.timer.delta() * this.rotationRate, this.pos.x, this.pos.y);
 
 			// Call parent.
 			this.parent();
