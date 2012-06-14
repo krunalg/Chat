@@ -45,7 +45,7 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			}
 		},
 
-		cicularPath: function(index) {
+		circularPath: function(index) {
 			var radius = 80;
 			var cx = 120;
 			var cy = 120;
