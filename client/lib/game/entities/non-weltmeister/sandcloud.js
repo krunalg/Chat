@@ -22,6 +22,9 @@ ig.module('game.entities.non-weltmeister.sandcloud')
 
 			// Set current animation.
 			this.currentAnim = this.anims['static'];
+
+			// Timer used to move along path.
+			this.timer = new ig.Timer();
 		},
 
 		handleMovementTrace: function(res) {
@@ -32,12 +35,38 @@ ig.module('game.entities.non-weltmeister.sandcloud')
 			this.pos.y += this.vel.y * ig.system.tick;
 		},
 
+		draw: function() {
+			
+			var pos = this.circularPath(this.timer);
+
+			if (this.currentAnim) {
+				this.currentAnim.draw(
+				pos.x + this.pos.x - this.offset.x - ig.game._rscreen.x, pos.y + this.pos.y - this.offset.y - ig.game._rscreen.y);
+			}
+		},
+
+		cicularPath: function(index) {
+			var radius = 80;
+			var cx = 120;
+			var cy = 120;
+			var aStep = 3; // 3 degrees per step
+			var theta = index * aStep; // +ve angles are cw
+			var newX = cx + radius * Math.cos(theta * Math.PI / 180);
+			var newY = cy + radius * Math.sin(theta * Math.PI / 180);
+
+			// return an object defining state that can be understood by drawFn
+			return {
+				x: newX,
+				y: newY
+			};
+		},
+
 		update: function() {
 
 			// Call parent.
 			this.parent();
 		}
-		
+
 
 	});
 });
