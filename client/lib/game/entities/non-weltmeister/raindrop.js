@@ -24,8 +24,6 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			// Set current animation.
 			this.currentAnim = this.anims.fall;
 
-			// Set velocity.
-
 			// Move 6.5 pixels 60 times per second.
 			this.maxVel.x = this.vel.x = -13 * 30;
 
