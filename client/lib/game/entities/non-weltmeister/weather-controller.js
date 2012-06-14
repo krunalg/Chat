@@ -12,11 +12,23 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 		// Max sand-cloud entities on screen at once.
 		maxSand: 8,
 
+		// How many sand clouds to spawn per second.
+		sandRate: 2,
+
+		// Timer for spawning entities.
+		timer: null,
+
+		// Used to know if a spawn is new or old.
+		lastSpawned: -1,
+
 		// Type of weather effect.
 		weather: null,
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
+
+			// Start spawn timer.
+			this.timer = new ig.Timer();
 
 			// Start sandstorm.
 			if (this.weather=='sandstorm') {
@@ -54,11 +66,14 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 				// Start below screen.
 				var y = ig.game.screen.y + ig.system.height;
 
-				// Never exceed maximum.
-				if (ig.game.getEntitiesByType(EntitySandCloud).length < this.maxSand) {
+				var frame = Math.floor(this.timer.delta() * this.sandRate);
+
+				if( frame != this.lastSpawned ) {
 
 					// Spawn a raindrop.
 					ig.game.spawnEntity(EntitySandCloud, x, y, {});
+
+					this.lastSpawned = frame;
 				}
 			}
 				
