@@ -19,7 +19,7 @@ ig.module('game.entities.non-weltmeister.raindrop')
 
 			// Set up animation.
 			this.addAnim('fall', 1, [0], true);
-			this.addAnim('hitGround', (1 / 60), [1, 1, 1, 2, 2, 3, 3, 3], true);
+			this.addAnim('hit', (1 / 60), [1, 1, 1, 2, 2, 3, 3, 3], true);
 
 			// Set current animation.
 			this.currentAnim = this.anims.fall;
@@ -35,12 +35,16 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			// Which happens sooner?
 			this.maxTime = (this.maxTimeX > this.maxTimeY ? this.maxTimeY : this.maxTimeX);
 
+			// For knowing when rain hits the ground.
 			this.hitTimer = new ig.Timer();
+
+			// Random time between start and max allowable time.
 			this.hitTimer.set( Math.random() * this.maxTime );
 			
 		},
 
 		handleMovementTrace: function(res) {
+			
 			// This completely ignores the trace result (res) and always
 			// moves the entity according to its velocity
 			this.pos.x += this.vel.x * ig.system.tick;
@@ -51,15 +55,21 @@ ig.module('game.entities.non-weltmeister.raindrop')
 
 			if( this.hitTimer.delta() >= 0 && this.currentAnim == this.anims.fall)
 			{
+				// Stop moving.
 				this.vel.x = this.vel.y = 0;
-				this.currentAnim = this.anims.hitGround;
+
+				// New animation.
+				this.currentAnim = this.anims.hit;
+
+				// First frame.
 				this.currentAnim.rewind();
 			} 
 
-			else if ( this.currentAnim == this.anims.hitGround )
+			else if ( this.currentAnim == this.anims.hit )
 			{
 				// Check if animation has finished.
 				if (this.currentAnim.loopCount >= 1) {
+					
 					// Free up resources.
 					this.kill();
 				}
