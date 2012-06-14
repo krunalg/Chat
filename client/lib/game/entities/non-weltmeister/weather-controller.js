@@ -6,8 +6,8 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 	EntityWeatherController = ig.Entity.extend({
 
-		// Entities per second.
-		spawnRate: 5,
+		// Max rain entities on screen at once.
+		maxRain: 16,
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
@@ -21,8 +21,13 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 			// Random distance above top of screen.
 			var y = ig.game.screen.y - Math.floor(Math.random() * 16) - 32;
 
-			// Spawn a raindrop.
-			ig.game.spawnEntity(EntityRaindrop, x, y, {});
+			// Never exceed maximum.
+			if( ig.game.getEntitiesByType(EntityRaindrop).length < this.maxRain) {
+
+				// Spawn a raindrop.
+				ig.game.spawnEntity(EntityRaindrop, x, y, {});	
+			}
+			
 
 			// Call parent.
 			this.parent();
