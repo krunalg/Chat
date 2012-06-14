@@ -15,10 +15,10 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 		update: function() {
 
-			// Random distance ledge screen edge.
+			// Random distance from left of screen.
 			var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ((1 / 3) * ig.system.height) - 30) ) + 30;
 
-			// Random y.
+			// Random distance above top of screen.
 			var y = ig.game.screen.y - Math.floor(Math.random() * 16) - 32;
 
 			// Spawn a raindrop.
