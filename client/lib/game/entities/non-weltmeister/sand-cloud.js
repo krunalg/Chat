@@ -21,7 +21,7 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		timer: null,
 
 		// Load image resource.
-		animSheet: new ig.AnimationSheet('media/rs.sandcloud.png', 32, 32),
+		animSheet: new ig.AnimationSheet('media/rs.sand-cloud.png', 32, 32),
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
