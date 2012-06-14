@@ -11,6 +11,15 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			y: 32
 		},
 
+		vel: {
+			
+			// No horizontal movement.
+			x: 0,
+
+			// Move 1 pixel 60 times per second.
+			y: 60
+		},
+
 		// Rotations per second.
 		rotationRate: (1 / 0.45),
 
@@ -34,6 +43,10 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 
 			// Start the timer.
 			this.timer = new ig.Timer();
+
+			// Prevent speed capping.
+			this.maxVel.x = this.vel.x;
+			this.maxVel.y = this.vel.y;
 		},
 
 		handleMovementTrace: function(res) {
