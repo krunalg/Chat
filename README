@@ -69,6 +69,10 @@ Chat system:
 Maps:
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
 
+Code:
+- Replace 'magic' numbers in weather-controller.generatePos() function with
+  actual references to raindrop and sand-cloud entities.
+
 
 Known Issues:
 ----------------------------
