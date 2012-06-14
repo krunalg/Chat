@@ -33,22 +33,20 @@ ig.module('game.entities.non-weltmeister.sand-screen')
 			this.startPos = new Object();
 
 			// Number of tiles to cover horizontal.
-			this.tilesX = Math.ceil(ig.system.width/this.size.x)+1;
+			this.tilesX = Math.ceil(ig.system.width / this.size.x) + 1;
 
 			// Number of tiles to cover vertical.
-			this.tilesY = Math.ceil(ig.system.height/this.size.y)+1;
+			this.tilesY = Math.ceil(ig.system.height / this.size.y) + 1;
 		},
 
 		draw: function() {
-			
+
 			// Repeat tiles to cover entire screen.
-			if( this.currentAnim ) {
-				for(var y=0; y<this.tilesY; y++) {
-					for(var x=0; x<this.tilesX; x++) {
+			if (this.currentAnim) {
+				for (var y = 0; y < this.tilesY; y++) {
+					for (var x = 0; x < this.tilesX; x++) {
 						this.currentAnim.draw(
-							this.startPos.x + (x * this.size.x) - this.offset.x,
-							this.startPos.y + (y * this.size.y) - this.offset.y
-						);
+						this.startPos.x + (x * this.size.x) - this.offset.x, this.startPos.y + (y * this.size.y) - this.offset.y);
 					}
 				}
 			}
@@ -69,8 +67,8 @@ ig.module('game.entities.non-weltmeister.sand-screen')
 			this.startPos.y = Math.floor(this.pos.y % this.size.y);
 
 			// Adjust non-negative x or y values.
-			if(this.startPos.x>0) this.startPos.x = this.startPos.x - this.size.x;
-			if(this.startPos.y>0) this.startPos.y = this.startPos.y - this.size.y;
+			if (this.startPos.x > 0) this.startPos.x = this.startPos.x - this.size.x;
+			if (this.startPos.y > 0) this.startPos.y = this.startPos.y - this.size.y;
 
 			// Call parent.
 			this.parent();
