@@ -25,6 +25,9 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 
 			// Timer used to move along path.
 			this.timer = new ig.Timer();
+
+			// Start at zero.
+			this.timer.set(0);
 		},
 
 		handleMovementTrace: function(res) {
@@ -37,18 +40,19 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 
 		draw: function() {
 			
-			var pos = this.circularPath(this.timer);
+			var pos = this.circularPath(this.timer.delta(), this.pos.x, this.pos.y);
+			//var pos = {x:0,y:0}
 
 			if (this.currentAnim) {
 				this.currentAnim.draw(
-				pos.x + this.pos.x - this.offset.x - ig.game._rscreen.x, pos.y + this.pos.y - this.offset.y - ig.game._rscreen.y);
+				pos.x - this.offset.x - ig.game._rscreen.x, pos.y - this.offset.y - ig.game._rscreen.y);
 			}
 		},
 
-		circularPath: function(index) {
-			var radius = 80;
-			var cx = 120;
-			var cy = 120;
+		circularPath: function(index, cx, cy) {
+			var radius = 64;
+			//var cx = 120;
+			//var cy = 120;
 			var aStep = 3; // 3 degrees per step
 			var theta = index * aStep; // +ve angles are cw
 			var newX = cx + radius * Math.cos(theta * Math.PI / 180);
