@@ -89,6 +89,8 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			// Move along circular path.
 			this.newPos = this.circularPath(this.timer.delta() * this.rotationRate, this.pos.x, this.pos.y);
 
+			if( (this.pos.y - this.offset.y) < ig.game._rscreen.y - this.size.y - this.radius ) this.kill();
+
 			// Call parent.
 			this.parent();
 		}
