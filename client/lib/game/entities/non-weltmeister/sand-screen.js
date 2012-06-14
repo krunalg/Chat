@@ -30,6 +30,21 @@ ig.module('game.entities.non-weltmeister.sand-screen')
 			this.maxVel.y = this.vel.y = -1 * 60;
 		},
 
+		draw: function() {
+
+			if( this.currentAnim ) {
+
+				for(var y=0; y<Math.ceil(ig.system.height/this.size.y); y++) {
+					for(var x=0; x<Math.ceil(ig.system.width/this.size.x); x++) {
+						this.currentAnim.draw(
+							this.pos.x + (x * this.size.x) - this.offset.x - ig.game._rscreen.x,
+							this.pos.y + (y * this.size.y) - this.offset.y - ig.game._rscreen.y
+						);
+					}
+				}
+			}
+		},
+
 		handleMovementTrace: function(res) {
 
 			// This completely ignores the trace result (res) and always
