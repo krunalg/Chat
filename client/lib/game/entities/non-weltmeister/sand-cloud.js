@@ -11,6 +11,9 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			y: 32
 		},
 
+		// Rotations per second.
+		rotationRate: (1 / 0.45),
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.sandcloud.png', 32, 32),
 
@@ -25,9 +28,6 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 
 			// Timer used to move along path.
 			this.timer = new ig.Timer();
-
-			// Start at zero.
-			this.timer.set(0);
 		},
 
 		handleMovementTrace: function(res) {
@@ -39,9 +39,8 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		},
 
 		draw: function() {
-			
-			var pos = this.circularPath(this.timer.delta()*16, this.pos.x, this.pos.y);
-			//var pos = {x:0,y:0}
+
+			var pos = this.circularPath(this.timer.delta() * this.rotationRate, this.pos.x, this.pos.y);
 
 			if (this.currentAnim) {
 				this.currentAnim.draw(
@@ -50,15 +49,11 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		},
 
 		circularPath: function(index, cx, cy) {
-			var radius = 32;
-			//var cx = 120;
-			//var cy = 120;
-			var aStep = 30; // 3 degrees per step
-			var theta = index * aStep; // +ve angles are cw
+			var radius = 16;
+			var theta = index * 360; // +ve angles are cw
 			var newX = cx + radius * Math.cos(theta * Math.PI / 180);
 			var newY = cy + radius * Math.sin(theta * Math.PI / 180);
 
-			// return an object defining state that can be understood by drawFn
 			return {
 				x: newX,
 				y: newY
