@@ -16,18 +16,17 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 		update: function() {
 
 			// Random distance from left of screen.
-			var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ((1 / 3) * ig.system.height) - 30) ) + 30;
+			var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ((1 / 3) * ig.system.height) - 30)) + 30;
 
 			// Random distance above top of screen.
 			var y = ig.game.screen.y - Math.floor(Math.random() * 16) - 32;
 
 			// Never exceed maximum.
-			if( ig.game.getEntitiesByType(EntityRaindrop).length < this.maxRain) {
+			if (ig.game.getEntitiesByType(EntityRaindrop).length < this.maxRain) {
 
 				// Spawn a raindrop.
-				ig.game.spawnEntity(EntityRaindrop, x, y, {});	
+				ig.game.spawnEntity(EntityRaindrop, x, y, {});
 			}
-			
 
 			// Call parent.
 			this.parent();
