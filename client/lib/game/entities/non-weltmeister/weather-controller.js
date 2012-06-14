@@ -59,7 +59,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 				var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width - 32));
 
 				// Start below screen.
-				var y = ig.game.screen.y + ig.system.height + radius;
+				var y = ig.game.screen.y + ig.system.height;
 
 				break;
 			}
@@ -98,7 +98,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 				// Make up for missed spawns if too many frames passed.
 				for (var i = 0; i < (spawnCount - this.lastSpawned); i++) {
 
-					var position = generatePos();
+					var position = this.generatePos();
 
 					// Spawn entity.
 					ig.game.spawnEntity(entityType, position.x, position.y, {});
