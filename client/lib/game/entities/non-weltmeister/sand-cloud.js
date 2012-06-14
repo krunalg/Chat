@@ -50,7 +50,7 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 
 		circularPath: function(index, cx, cy) {
 			var radius = 16;
-			var theta = index * 360; // +ve angles are cw
+			var theta = -1 * index * 360; // +ve angles are cw
 			var newX = cx + radius * Math.cos(theta * Math.PI / 180);
 			var newY = cy + radius * Math.sin(theta * Math.PI / 180);
 
