@@ -1,10 +1,10 @@
-ig.module('game.entities.non-weltmeister.sandcloud')
+ig.module('game.entities.non-weltmeister.sand-cloud')
 
 .requires('impact.entity')
 
 .defines(function() {
 
-	EntitySandcloud = ig.Entity.extend({
+	EntitySandCloud = ig.Entity.extend({
 
 		size: {
 			x: 32,
