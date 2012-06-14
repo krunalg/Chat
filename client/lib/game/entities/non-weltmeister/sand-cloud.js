@@ -14,6 +14,12 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		// Rotations per second.
 		rotationRate: (1 / 0.45),
 
+		// Radius of circular path.
+		radius: 16,
+
+		// Timer used to move entity along path.
+		timer: null,
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.sandcloud.png', 32, 32),
 
@@ -26,7 +32,7 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			// Set current animation.
 			this.currentAnim = this.anims['static'];
 
-			// Timer used to move along path.
+			// Start the timer.
 			this.timer = new ig.Timer();
 		},
 
@@ -48,11 +54,19 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			}
 		},
 
-		circularPath: function(index, cx, cy) {
-			var radius = 16;
-			var theta = -1 * index * 360; // +ve angles are cw
-			var newX = cx + radius * Math.cos(theta * Math.PI / 180);
-			var newY = cy + radius * Math.sin(theta * Math.PI / 180);
+		/*
+		 * Returns new x and y positions of circular path centered on the original position.
+		 * (Adaptated from similar function found at: http://arc.id.au/JsAnimation.html)
+		 *
+		 * @param  rate float Number of rotations per second.
+		 * @param  cx   integer Center position x in pixels.
+		 * @param  cy   integer Center position y in pixels.
+		 * @return      object contains two properties, the new x and y.
+		 */
+		circularPath: function(rate, cx, cy) {
+			var theta = -1 * rate * 360; // +ve angles are cw
+			var newX = cx + this.radius * Math.cos(theta * Math.PI / 180);
+			var newY = cy + this.radius * Math.sin(theta * Math.PI / 180);
 
 			return {
 				x: newX,
