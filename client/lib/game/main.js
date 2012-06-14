@@ -398,7 +398,7 @@ ig.module('game.main')
 
 				// Draw debug display.
 				this.debugDisplay.draw(
-				['moveState: ' + player.moveState, 'facing: ' + player.facing, 'lastFacing: ' + player.lastFacing, 'startX: ' + ig.game.getEntitiesByType(EntitySandScreen)[0].startPos.x], // will display each array element on a new line
+				['moveState: ' + player.moveState, 'facing: ' + player.facing, 'lastFacing: ' + player.lastFacing], // will display each array element on a new line
 				true, // true or false to either show the FPS
 				false, // true or false to show the average FPS over a period of time
 				10000, // amount of of time between samples. defaults to 10000 (10 seconds)
