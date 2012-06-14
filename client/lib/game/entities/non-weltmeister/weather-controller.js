@@ -72,6 +72,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 		update: function() {
 
+			// Determine spawn rate.
 			if (this.weather == 'sandstorm') rate = this.sandRate;
 			else if (this.weather == 'rain') rate = this.rainRate;
 
@@ -104,6 +105,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 				}
 
+				// Keep track of spawn count.
 				this.lastSpawned = spawnCount;
 			}
 
