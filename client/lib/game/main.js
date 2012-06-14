@@ -875,6 +875,9 @@ ig.module('game.main')
 				// Try all tiles for a match.
 				for (var j = 0; j < tiles.length; j++) {
 
+					// Outside of map.
+					if (typeof map['data'][y] == 'undefined') return false;
+
 					// Check if current match the one in the map.
 					if (tiles[j] == map['data'][y][x]) {
 						// Match found.
