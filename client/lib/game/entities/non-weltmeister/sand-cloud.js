@@ -40,7 +40,7 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 
 		draw: function() {
 			
-			var pos = this.circularPath(this.timer.delta(), this.pos.x, this.pos.y);
+			var pos = this.circularPath(this.timer.delta()*16, this.pos.x, this.pos.y);
 			//var pos = {x:0,y:0}
 
 			if (this.currentAnim) {
@@ -50,10 +50,10 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 		},
 
 		circularPath: function(index, cx, cy) {
-			var radius = 64;
+			var radius = 32;
 			//var cx = 120;
 			//var cy = 120;
-			var aStep = 3; // 3 degrees per step
+			var aStep = 30; // 3 degrees per step
 			var theta = index * aStep; // +ve angles are cw
 			var newX = cx + radius * Math.cos(theta * Math.PI / 180);
 			var newY = cy + radius * Math.sin(theta * Math.PI / 180);
