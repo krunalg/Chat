@@ -17,7 +17,7 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			x: 0,
 
 			// Move 1 pixel 60 times per second.
-			y: 60
+			y: -60
 		},
 
 		// Rotations per second.
