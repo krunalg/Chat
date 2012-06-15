@@ -45,8 +45,8 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 			this.timer = new ig.Timer();
 
 			// Prevent speed capping.
-			this.maxVel.x = this.vel.x;
-			this.maxVel.y = this.vel.y;
+			this.maxVel.x = Math.abs(this.vel.x);
+			this.maxVel.y = Math.abs(this.vel.y);
 		},
 
 		handleMovementTrace: function(res) {
