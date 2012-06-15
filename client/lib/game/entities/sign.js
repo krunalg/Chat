@@ -33,7 +33,7 @@ ig.module(
 
 		ready: function() {
 
-			// Make sign entities invisible in game.
+			// Make sign entity invisible in-game.
 			delete this.currentAnim;
 		},
 
