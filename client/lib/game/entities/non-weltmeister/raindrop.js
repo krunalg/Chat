@@ -34,8 +34,8 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			this.currentAnim = this.anims.fall;
 
 			// Prevent speed capping.
-			this.maxVel.x = this.vel.x;
-			this.maxVel.y = this.vel.y;
+			this.maxVel.x = Math.abs(this.vel.x);
+			this.maxVel.y = Math.abs(this.vel.y);
 
 			// Moment that entity goes off-screen.
 			this.maxTimeX = (ig.game.screen.x - this.pos.x) / this.vel.x
