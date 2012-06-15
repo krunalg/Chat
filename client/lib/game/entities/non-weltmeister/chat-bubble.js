@@ -159,6 +159,11 @@ ig.module('game.entities.non-weltmeister.chat-bubble')
 
 			// Start count-down to this entity's death.
 			this.timer.set(this.lifespan);
+
+			// Remove the default 1px between each character.
+			ig.Font.inject({
+				letterSpacing: 0
+			});
 		},
 
 		draw: function(reallyDraw) {
