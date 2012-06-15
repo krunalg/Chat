@@ -48,8 +48,9 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 				// Random distance from left of screen.
 				var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ((1 / 3) * ig.system.height) - 30)) + 30;
 
-				// Random distance above top of screen.
-				var y = ig.game.screen.y - Math.floor(Math.random() * 16) - 32;
+				// Random distance - between 0 and half of rainHeight - above screen.
+				var rainHeight = EntityRaindrop.prototype.size.y;
+				var y = ig.game.screen.y - Math.floor(Math.random() * (rainHeight/2)) - rainHeight;
 
 				break;
 
