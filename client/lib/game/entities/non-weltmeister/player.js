@@ -453,14 +453,14 @@ ig.module(
 				// Get game tilesize.
 				var tilesize = this.getTilesize();
 
-				// Spawn sandprint if needed.
-				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandprints'], ig.game.primaryMapLayer)) {
-					var sandprint = this.trySpawningEntity(EntitySandprint, this.pos);
-					if (sandprint) 
+				// Spawn sand-track if needed.
+				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandtracks'], ig.game.primaryMapLayer)) {
+					var sandtrack = this.trySpawningEntity(EntitySandTrack, this.pos);
+					if (sandtrack) 
 					{
-						sandprint.facing = this.facing;
-						sandprint.isFootprint = !this.onBike;
-						sandprint.setAnimation();
+						sandtrack.facing = this.facing;
+						sandtrack.isFootprint = !this.onBike;
+						sandtrack.setAnimation();
 					}
 				}
 

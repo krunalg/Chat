@@ -1,10 +1,10 @@
-ig.module('game.entities.non-weltmeister.sandprint')
+ig.module('game.entities.non-weltmeister.sand-track')
 
 .requires('impact.entity')
 
 .defines(function() {
 
-	EntitySandprint = ig.Entity.extend({
+	EntitySandTrack = ig.Entity.extend({
 
 		size: {
 			x: 16,
@@ -15,7 +15,7 @@ ig.module('game.entities.non-weltmeister.sandprint')
 		markedForDeath: true,
 
 		// Load image resource.
-		animSheet: new ig.AnimationSheet('media/rs.sandprint.png', 16, 16),
+		animSheet: new ig.AnimationSheet('media/rs.sand-track.png', 16, 16),
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
@@ -78,7 +78,7 @@ ig.module('game.entities.non-weltmeister.sandprint')
 			default:
 
 				// Error if no direction supplied.
-				throw new Error("Sandprint entity was spawned without the 'facing' property.");
+				throw new Error("SandTrack entity was spawned without the 'facing' property.");
 			}
 		},
 
