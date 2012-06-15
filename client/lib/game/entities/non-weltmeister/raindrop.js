@@ -18,7 +18,7 @@ ig.module('game.entities.non-weltmeister.raindrop')
 
 			// Move 13 pixels 60 times per second.
 			y: (13 * 60)
-		}
+		},
 
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.raindrop.png', 16, 32),
