@@ -31,6 +31,7 @@ Change-Log:
 - As the player walks over sand tiles, foot prints are left behind him. (Completed June 8, 2012)
 - Player reflection is shown with animation in certain types of water. (Completed June 11, 2012)
 - Player can now ride a bicycle by pressing C. The bicycle leaves tracks in sand tiles. (Completed June 12, 2012)
+- Weather effects for 'raining', 'sandstorm' and 'falling ashes' can be spawned using the weather-controller entity. (Completed June 14, 2012) 
 
 
 To-do:
@@ -47,7 +48,7 @@ Effects:
 - "Deep sand" effect.
 - Swim "bobbing" animation as well as initial hop.
 - Overhead smoke-effect in LAVARIDGE TOWN.
-- Weather effects: rain in ROUTE 119, sandstorm in ROUTE 111, ash in ROUTE 113.
+- Weather effects to be triggered by player.
 - Smashable rocks, and cuttable trees (low priority).
 - Sinking logs in PACIFIDLOG TOWN (low priority).
 
