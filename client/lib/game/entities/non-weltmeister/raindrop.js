@@ -11,6 +11,15 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			y: 32
 		},
 
+		vel: {
+			
+			// Move 6.5 pixels 60 times per second.
+			x: (-13 * 30),
+
+			// Move 13 pixels 60 times per second.
+			y: (13 * 60)
+		}
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.raindrop.png', 16, 32),
 
@@ -24,11 +33,9 @@ ig.module('game.entities.non-weltmeister.raindrop')
 			// Set current animation.
 			this.currentAnim = this.anims.fall;
 
-			// Move 6.5 pixels 60 times per second.
-			this.maxVel.x = this.vel.x = -13 * 30;
-
-			// Move 13 pixels 60 times per second.
-			this.maxVel.y = this.vel.y = 13 * 60;
+			// Prevent speed capping.
+			this.maxVel.x = this.vel.x;
+			this.maxVel.y = this.vel.y;
 
 			// Moment that entity goes off-screen.
 			this.maxTimeX = (ig.game.screen.x - this.pos.x) / this.vel.x
