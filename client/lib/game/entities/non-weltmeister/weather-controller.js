@@ -39,8 +39,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 				// Start sand-screen.
 				this.screenEntity = ig.game.spawnEntity(EntitySandScreen, 0, 0, {});
-			}
-			else if (this.weather=='ashes') {
+			} else if (this.weather == 'ashes') {
 
 				// Start falling ashes.
 				this.screenEntity = ig.game.spawnEntity(EntityAshScreen, 0, 0, {});
@@ -59,16 +58,16 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 				// Random x value between "rainWidth" and "screen-top + screen-right - rainHeight".
 				var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ig.system.height - rainHeight - rainWidth)) + rainWidth;
-				
+
 				// Random y value - between 0 and half of rainHeight - above screen.
-				var y = ig.game.screen.y - Math.floor(Math.random() * (rainHeight/2)) - rainHeight;
+				var y = ig.game.screen.y - Math.floor(Math.random() * (rainHeight / 2)) - rainHeight;
 
 				// Wrap x into the y axis.
-				if(x> ig.game.screen.x + ig.system.width) {
+				if (x > ig.game.screen.x + ig.system.width) {
 
 					// The distance beyond right edge of screen.
 					offsetY = x - ig.system.width - ig.game.screen.x;
-					
+
 					// Set x to right screen edge.
 					x = x - offsetY;
 
