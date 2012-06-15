@@ -6,9 +6,6 @@ ig.module('game.entities.non-weltmeister.raindrop')
 
 	EntityRaindrop = ig.Entity.extend({
 
-		// Above players.
-		zPriority: 10,
-
 		size: {
 			x: 16,
 			y: 32
