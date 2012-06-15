@@ -67,6 +67,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.sand-screen',
 
+'game.entities.non-weltmeister.ash-screen',
+
 'game.entities.non-weltmeister.weather-controller',
 
 //debug
