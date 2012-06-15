@@ -454,7 +454,7 @@ ig.module(
 				var tilesize = this.getTilesize();
 
 				// Spawn sand-track if needed.
-				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandtracks'], ig.game.primaryMapLayer)) {
+				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandtrack'], ig.game.primaryMapLayer)) {
 					var sandtrack = this.trySpawningEntity(EntitySandTrack, this.pos);
 					if (sandtrack) 
 					{
