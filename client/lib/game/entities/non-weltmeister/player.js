@@ -35,7 +35,7 @@ ig.module(
 		jumpSpeed: 69,
 
 		// Speed when running.
-		runSpeed: (138 * 8),
+		runSpeed: 138,
 
 		// Speed when swimming.
 		swimSpeed: 138,
