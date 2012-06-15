@@ -11,6 +11,15 @@ ig.module('game.entities.non-weltmeister.sand-screen')
 			y: 64
 		},
 
+		vel: {
+			
+			// Move 4 pixels 60 times per second.
+			x: (-4 * 60),
+
+			// Move 1 pixel 60 times per second.
+			y: (-1 * 60)
+		}
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.sand-screen.png', 64, 64),
 
@@ -23,11 +32,9 @@ ig.module('game.entities.non-weltmeister.sand-screen')
 			// Set current animation.
 			this.currentAnim = this.anims['static'];
 
-			// Move 4 pixels 60 times per second.
-			this.maxVel.x = this.vel.x = -4 * 60;
-
-			// Move 1 pixel 60 times per second.
-			this.maxVel.y = this.vel.y = -1 * 60;
+			// Prevent speed capping.
+			this.maxVel.x = Math.abs(this.vel.x);
+			this.maxVel.y = Math.abs(this.vel.y);
 
 			// Used to know where to start draw-tiling.
 			this.startPos = new Object();
