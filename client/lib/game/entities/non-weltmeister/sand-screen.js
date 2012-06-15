@@ -18,10 +18,10 @@ ig.module('game.entities.non-weltmeister.sand-screen')
 
 			// Move 1 pixel 60 times per second.
 			y: (-1 * 60)
-		}
+		},
 
 		// Load image resource.
-		animSheet: new ig.AnimationSheet('media/rs.sand-screen.png', 64, 64),
+		animSheet: new ig.AnimationSheet('media/rs.ash-screen.png', 64, 64),
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
