@@ -118,8 +118,6 @@ ig.module(
 					// Check if the tile is located at the faced tile.
 					if ((signs[i].pos.x == position.x) && (signs[i].pos.y == position.y)) {
 
-						// Set chat-bubble duration.
-						var chatBubbleDuration = 3; // magic numbers are bad!
 						// Spawn a chat-bubble at the sign.
 						ig.game.spawnEntity(EntityChatBubble, signs[i].pos.x, signs[i].pos.y, {
 
@@ -128,9 +126,6 @@ ig.module(
 
 							// Entity to follow.
 							follow: signs[i],
-
-							// Life of chat-bubble.
-							lifespan: chatBubbleDuration
 						});
 
 						// Shouldn't be more than one interactable object per tile.
@@ -149,23 +144,18 @@ ig.module(
 					// Check if the NPC is located at the faced tile.
 					if ((npcs[i].pos.x == position.x) && (npcs[i].pos.y == position.y)) {
 
-						// Set chat-bubble duration.
-						var chatBubbleDuration = 3; // magic numbers are bad!
 						// Spawn a chat-bubble at the NPC.
-						ig.game.spawnEntity(EntityChatBubble, npcs[i].pos.x, npcs[i].pos.y, {
+						var chatBubble = ig.game.spawnEntity(EntityChatBubble, npcs[i].pos.x, npcs[i].pos.y, {
 
 							// Pass in NPC message to chat-bubble.
 							msg: npcs[i].msg,
 
 							// Entity to follow.
 							follow: npcs[i],
-
-							// Life of chat-bubble.
-							lifespan: chatBubbleDuration // magic numbers are bad!
 						});
 
 						// Delay NPC's movement.
-						npcs[i].moveTimer.set(chatBubbleDuration + 1);
+						npcs[i].moveTimer.set(chatBubble.lifespan + 1);
 
 						// Get NPC's name entity.
 						var nameEntity = ig.game.getEntityByName(npcs[i].name + "NameEntity");
@@ -173,7 +163,7 @@ ig.module(
 						// Check if name entity was found.
 						if (nameEntity != undefined) {
 							// Hide name for duration of chat-bubble.
-							nameEntity.hideTimer.set(chatBubbleDuration);
+							nameEntity.hideTimer.set(chatBubble.lifespan);
 						}
 
 						// Shouldn't be more than one interactable object per tile.

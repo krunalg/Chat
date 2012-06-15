@@ -18,15 +18,15 @@ socket.on('newMsg', function(from, msg) {
 
 	// Does the player who sent us a message exist?
 	if (player) {
-		// hide name briefly
-		var nameEntity = ig.game.getEntityByName(from + "NameEntity");
-		if (nameEntity != undefined) nameEntity.hideTimer.set(showMessageHowLong);
-
-		ig.game.spawnEntity(EntityChatBubble, 0, 0, {
+		
+		var chatBubble = ig.game.spawnEntity(EntityChatBubble, 0, 0, {
 			follow: player,
 			msg: msg,
-			lifespan: showMessageHowLong
 		});
+
+		// hide name briefly
+		var nameEntity = ig.game.getEntityByName(from + "NameEntity");
+		if (nameEntity != undefined) nameEntity.hideTimer.set(chatBubble.lifespan);
 	}
 
 	// Write to chat log.
