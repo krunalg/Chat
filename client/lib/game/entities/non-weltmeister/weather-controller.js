@@ -105,7 +105,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 			// Call parent.
 			this.parent();
-		}
+		},
 
 		update: function() {
 
