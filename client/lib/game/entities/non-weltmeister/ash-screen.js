@@ -6,16 +6,13 @@ ig.module('game.entities.non-weltmeister.ash-screen')
 
 	EntityAshScreen = EntityScreen.extend({
 
-		/*
 		vel: {
 			
-			// Move 4 pixels 60 times per second.
-			x: (-4 * 60),
+			x: 0,
 
-			// Move 1 pixel 60 times per second.
-			y: (-1 * 60)
+			// Move 1 pixel per 6 frames at 60 FPS.
+			y: 10
 		}
-		*/
 
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.ash-screen.png', 64, 64),
