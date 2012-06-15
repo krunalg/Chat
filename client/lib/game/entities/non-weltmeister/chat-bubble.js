@@ -38,6 +38,15 @@ ig.module('game.entities.non-weltmeister.chat-bubble')
 		// Time in seconds before entity is killed.
 		lifespan: 3,
 
+		// This number of seconds per character.
+		wordDuration: 1,
+
+		// Min lifespan.
+		lifeMinimum: 1.5,
+
+		// Max allowable lifespan.
+		lifeMaximum: 5,
+
 		// This value is calculated later.
 		heightOfMessage: 0,
 
@@ -52,6 +61,9 @@ ig.module('game.entities.non-weltmeister.chat-bubble')
 
 			// Break into individual words.
 			var words = this.msg.split(' ');
+
+			// Record word count.
+			this.wordCount = words.length;
 
 			// Create an array where we'll store our <=msgMaxWidth lines.
 			var lines = new Array();
@@ -137,11 +149,16 @@ ig.module('game.entities.non-weltmeister.chat-bubble')
 			// Create timer for death count-down.
 			this.timer = new ig.Timer();
 
-			// Start count-down to this entity's death.
-			this.timer.set(this.lifespan);
-
 			// Prepare the message before it can be drawn.
 			this.process();
+
+			// Calculate lifespan.
+			this.lifespan = this.wordCount * this.wordDuration;
+			if(this.lifespan<this.lifeMinimum) this.lifespan = this.lifeMinimum;
+			else if(this.lifespan>this.lifeMaximum) this.lifespan = this.lifeMaximum;
+
+			// Start count-down to this entity's death.
+			this.timer.set(this.lifespan);
 		},
 
 		draw: function(reallyDraw) {
