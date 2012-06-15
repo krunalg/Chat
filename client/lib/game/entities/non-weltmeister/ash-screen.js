@@ -12,7 +12,7 @@ ig.module('game.entities.non-weltmeister.ash-screen')
 
 			// Move 1 pixel per 6 frames at 60 FPS.
 			y: 10
-		}
+		},
 
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.ash-screen.png', 64, 64),
