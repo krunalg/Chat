@@ -105,10 +105,10 @@ ig.module('game.main')
 		defaultLevel: LevelTest,
 
 		// Starting position X.
-		defaultXStart: 256,
+		defaultXStart: 2176,
 
 		// Starting position Y.
-		defaultYStart: 256,
+		defaultYStart: 4720,
 
 		// Starting faced direction.
 		defaultFacing: 'down',
