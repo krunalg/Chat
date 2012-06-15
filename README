@@ -31,7 +31,8 @@ Change-Log:
 - As the player walks over sand tiles, foot prints are left behind him. (Completed June 8, 2012)
 - Player reflection is shown with animation in certain types of water. (Completed June 11, 2012)
 - Player can now ride a bicycle by pressing C. The bicycle leaves tracks in sand tiles. (Completed June 12, 2012)
-- Weather effects for 'raining', 'sandstorm' and 'falling ashes' can be spawned using the weather-controller entity. (Completed June 14, 2012) 
+- Weather effects for 'raining', 'sandstorm' and 'falling ashes' can be spawned using the weather-controller entity. (Completed June 14, 2012)
+- Auto-generated map borders on no longer walkable. (Completed June 15, 2012)
 
 
 To-do:
@@ -58,7 +59,6 @@ Effects:
 - Sinking logs in PACIFIDLOG TOWN (low priority).
 
 Movement:
-- Disable walking outside of known regions.
 - A* pathfinding (low priority).
 
 Bicycle:
