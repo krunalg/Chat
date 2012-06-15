@@ -71,7 +71,7 @@ Maps:
 
 Code:
 - Replace 'magic' numbers in weather-controller.generatePos() function with
-  actual references to raindrop and sand-cloud entities.
+  actual references to rain-drop and sand-cloud entities.
 
 
 Known Issues:

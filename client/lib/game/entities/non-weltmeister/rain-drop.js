@@ -1,10 +1,10 @@
-ig.module('game.entities.non-weltmeister.raindrop')
+ig.module('game.entities.non-weltmeister.rain-drop')
 
 .requires('impact.entity')
 
 .defines(function() {
 
-	EntityRaindrop = ig.Entity.extend({
+	EntityRainDrop = ig.Entity.extend({
 
 		size: {
 			x: 16,
@@ -21,7 +21,7 @@ ig.module('game.entities.non-weltmeister.raindrop')
 		},
 
 		// Load image resource.
-		animSheet: new ig.AnimationSheet('media/rs.raindrop.png', 16, 32),
+		animSheet: new ig.AnimationSheet('media/rs.rain-drop.png', 16, 32),
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);

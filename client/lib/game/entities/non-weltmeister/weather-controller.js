@@ -10,7 +10,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 		// How many sand clouds to spawn per second.
 		sandRate: 2,
 
-		// How many raindrops to spawn per second.
+		// How many rain drops to spawn per second.
 		rainRate: 100,
 
 		// Used to accomodate rate changes.
@@ -46,8 +46,8 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 			case 'rain':
 
 				// Entity size.
-				var rainWidth = EntityRaindrop.prototype.size.x;
-				var rainHeight = EntityRaindrop.prototype.size.y;
+				var rainWidth = EntityRainDrop.prototype.size.x;
+				var rainHeight = EntityRainDrop.prototype.size.y;
 
 				// Random x value between "rainWidth" and "screen-top + screen-right - rainHeight".
 				var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ig.system.height - rainHeight - rainWidth)) + rainWidth;
@@ -107,7 +107,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 			var spawnCount = Math.floor(this.timer.delta() * rate);
 
 			// Type of entity to spawn.
-			var entityType = (this.weather == 'rain' ? EntityRaindrop : EntitySandCloud);
+			var entityType = (this.weather == 'rain' ? EntityRainDrop : EntitySandCloud);
 
 			// New entities need spawning?
 			if (spawnCount != this.lastSpawned) {

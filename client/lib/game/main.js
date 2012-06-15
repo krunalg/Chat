@@ -61,7 +61,7 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.surf',
 
-'game.entities.non-weltmeister.raindrop',
+'game.entities.non-weltmeister.rain-drop',
 
 'game.entities.non-weltmeister.sand-cloud',
 
