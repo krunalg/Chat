@@ -40,7 +40,7 @@ specialTiles.reflection.push(2894);
 specialTiles.reflection.push(2895);
 specialTiles.grass = new Array();
 specialTiles.grass.push(2363);
-specialTiles.sandprints = new Array();
-specialTiles.sandprints.push(747);
-specialTiles.sandprints.push(2380);
+specialTiles.sandtrack = new Array();
+specialTiles.sandtrack.push(747);
+specialTiles.sandtrack.push(2380);
 })

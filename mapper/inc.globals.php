@@ -110,10 +110,10 @@ $globalCollisions =
                'mouseoutImg'  => 'images/water.gif',
                'mouseoverImg' => 'images/water-mouseover.png'
         ),
-            'sandprints'    =>
+            'sandtrack'    =>
         array( 'collision'    => 0,
-               'mouseoutImg'  => 'images/sandprints.gif',
-               'mouseoverImg' => 'images/sandprints-mouseover.png'
+               'mouseoutImg'  => 'images/sand-track.gif',
+               'mouseoverImg' => 'images/sand-track-mouseover.png'
         ),
             'reflection'    =>
         array( 'collision'    => 0,
