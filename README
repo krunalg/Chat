@@ -44,13 +44,16 @@ Reflections:
 - Fix reflection not animating properly when facing 'right'.
 - Add brightness or 'fading' effect to reflections.
 
+Weather:
+- Triggered by player walking in certain areas.
+- Sand-screen and ash-screen don't follow the player as he moves.
+
 Effects:
 - "Ash" grass entity.
 - "Shallow-water" feet effect.
 - "Deep sand" effect.
 - Swim "bobbing" animation as well as initial hop.
 - Overhead smoke-effect in LAVARIDGE TOWN.
-- Weather effects to be triggered by player.
 - Smashable rocks, and cuttable trees (low priority).
 - Sinking logs in PACIFIDLOG TOWN (low priority).
 
