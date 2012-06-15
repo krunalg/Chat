@@ -40,10 +40,12 @@ To-do:
 Camera:
 - Ability to restrict certain areas of map from being displayed on screen.
 
-Effects:
-- "Ash" grass entity.
+Reflections:
 - Fix reflection not animating properly when facing 'right'.
 - Add brightness or 'fading' effect to reflections.
+
+Effects:
+- "Ash" grass entity.
 - "Shallow-water" feet effect.
 - "Deep sand" effect.
 - Swim "bobbing" animation as well as initial hop.
@@ -62,10 +64,11 @@ Bicycle:
 
 Chat system:
 - Prevent multiple chat bubbles from one source from existing at the same time.
+- Chat bubbles time-to-live is based on message length.
 - Server sends a failure notice upon non-delivery of a private message.
-- Chat bubble repositions itself to be on-screen if it is not (low priority).
 - Invalid commands are reported to use as such.
 - Remove extra pixel between letters in chat-bubbles.
+- Chat bubble repositions itself to be on-screen if it is not (low priority).
 
 Maps:
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
