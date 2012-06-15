@@ -45,12 +45,21 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 			case 'rain':
 
-				// Random distance from left of screen.
-				var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ((1 / 3) * ig.system.height) - 30)) + 30;
-
-				// Random distance - between 0 and half of rainHeight - above screen.
+				var rainWidth = EntityRaindrop.prototype.size.x;
 				var rainHeight = EntityRaindrop.prototype.size.y;
+
+				// Random x value between "rainWidth" and "screen-top + screen-right - rainHeight".
+				var x = ig.game.screen.x + Math.floor(Math.random() * (ig.system.width + ig.system.height - rainHeight - rainWidth)) + rainWidth;
+				
+				// Random y value - between 0 and half of rainHeight - above screen.
 				var y = ig.game.screen.y - Math.floor(Math.random() * (rainHeight/2)) - rainHeight;
+
+				if(x>ig.system.width) {
+
+					offsetY = x - ig.system.width - ig.game.screen.x;
+					x = x - offsetY;
+					y = y + offsetY;
+				}
 
 				break;
 
