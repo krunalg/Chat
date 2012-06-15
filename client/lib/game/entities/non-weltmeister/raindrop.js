@@ -6,6 +6,9 @@ ig.module('game.entities.non-weltmeister.raindrop')
 
 	EntityRaindrop = ig.Entity.extend({
 
+		// Above players.
+		zPriority: 10,
+
 		size: {
 			x: 16,
 			y: 32
@@ -49,6 +52,9 @@ ig.module('game.entities.non-weltmeister.raindrop')
 
 			// Random time between start and max allowable time.
 			this.hitTimer.set(Math.random() * this.maxTime);
+
+			// Set zIndex above all player.
+			this.zIndex = this.pos.y + ig.system.height;
 
 		},
 
