@@ -1,4 +1,10 @@
 <?php
+
+/*
+ *  This whole file is kind of stupid. Consider reworking its contents into other
+ *  class files, even main.js would be better.
+ */    
+
     header("Content-type: text/javascript");
     include('connection.php');
 	echo "var socket = io.connect('http://".$socketHost.":".$socketPort."');\n";
