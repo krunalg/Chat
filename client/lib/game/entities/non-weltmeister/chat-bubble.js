@@ -1,10 +1,10 @@
-ig.module('game.entities.non-weltmeister.bubble')
+ig.module('game.entities.non-weltmeister.chat-bubble')
 
 .requires('impact.entity', 'impact.font')
 
 .defines(function() {
 
-	EntityBubble = ig.Entity.extend({
+	EntityChatBubble = ig.Entity.extend({
 
 		size: {
 			x: 16,
@@ -32,7 +32,7 @@ ig.module('game.entities.non-weltmeister.bubble')
 		// Maximum width in pixels for text.
 		msgMaxWidth: 100,
 
-		// Used to kill() old bubbles.
+		// Used to kill() old chat-bubbles.
 		timer: null,
 
 		// Time in seconds before entity is killed.
@@ -157,7 +157,7 @@ ig.module('game.entities.non-weltmeister.bubble')
 					this.pos = this.follow.pos;
 				}
 
-				// Position bubble not to hide target/source.
+				// Position chat-bubble not to hide target/source.
 				var x = this.pos.x - ig.game.screen.x + this.size.x / 2;
 				var y = this.pos.y - ig.game.screen.y - this.size.y - this.heightOfMessage + 2;
 

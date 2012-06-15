@@ -53,7 +53,7 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.reflection',
 
-'game.entities.non-weltmeister.bubble',
+'game.entities.non-weltmeister.chat-bubble',
 
 'game.entities.non-weltmeister.name',
 
@@ -373,8 +373,8 @@ ig.module('game.main')
 			// Names will be above map.
 			drawEntitiesAbove.push(EntityName);
 
-			// Chat bubbles will be above map.
-			drawEntitiesAbove.push(EntityBubble);
+			// Chat-bubbles will be above map.
+			drawEntitiesAbove.push(EntityChatBubble);
 
 			// Draw certain entities above all map layers.
 			this.reallyDraw(drawEntitiesAbove);
@@ -498,7 +498,7 @@ ig.module('game.main')
 		},
 		
 		/*
-		 * Send /say message to the server and create a local chat bubble.
+		 * Send /say message to the server and create a local chat-bubble.
 		 *
 		 * @param  playerName string    Name of the player message is from.
 		 * @param  message    string    Message to be send and displayed.
@@ -517,7 +517,7 @@ ig.module('game.main')
 
 				// Display message locally.
 				ig.game.spawnEntity(
-				EntityBubble, player.pos.x, player.pos.y, {
+				EntityChatBubble, player.pos.x, player.pos.y, {
 
 					// Entity to follow.
 					follow: player,
@@ -535,7 +535,7 @@ ig.module('game.main')
 		},
 
 		/*
-		 * Send /tell message to the server and create a local chat bubble.
+		 * Send /tell message to the server and create a local chat-bubble.
 		 *
 		 * @param  recipient string    To whom the message is being sent.
 		 * @param  message   string    Message to be sent.
