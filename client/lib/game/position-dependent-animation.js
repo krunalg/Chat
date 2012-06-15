@@ -1,5 +1,7 @@
 ig.module ('game.position-dependent-animation')
+
 .requires('impact.animation')
+
 .defines(function(){
 
 	ig.PositionDependantAnimation = ig.Animation.extend({
@@ -15,21 +17,21 @@ ig.module ('game.position-dependent-animation')
 			// How many tiles are above since last 'base animation'?
 			var frameOffsetY = (posInMapY/ig.game.collisionMap.tilesize) % (this.sequence.length - 1);
 			
-			// As frameOffsetY increases, shift animation right
+			// As frameOffsetY increases, shift animation right.
 			var frameOffset = frameOffsetX - frameOffsetY;
 			if(frameOffset<0) frameOffset = (this.sequence.length - 1) + frameOffset;
 			
-			// Add slight delay so tiles don't all update at the same time
-			var delay = 0.01 / this.frameTime; // smallest number possible that 
-											   // still causes desynchronization
+			// Add slight delay so tiles don't all update at the same time.
+			// Use the smallest number possible that still causes de-sync.
+			var delay = 0.01 / this.frameTime; 
 
-			// Make the frame dependant on the world position (add frame offset)
+			// Make the frame dependant on the world position (add frame offset).
 	        var f = (this.timer.delta() / this.frameTime) + frameOffset + (frameOffset * delay);
 	        
 	        // Select the tile, wrap for sequence.length
 	        this.tile = this.sequence[ Math.floor(f) % this.sequence.length ];
 	        
-	        // Call original draw function
+	        // Call parent.
 	        this.parent( x, y );
 	    }
 	});
