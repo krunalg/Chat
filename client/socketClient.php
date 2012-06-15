@@ -22,7 +22,7 @@ socket.on('newMsg', function(from, msg) {
 		var nameEntity = ig.game.getEntityByName(from + "NameEntity");
 		if (nameEntity != undefined) nameEntity.hideTimer.set(showMessageHowLong);
 
-		ig.game.spawnEntity(EntityBubble, 0, 0, {
+		ig.game.spawnEntity(EntityChatBubble, 0, 0, {
 			follow: player,
 			msg: msg,
 			lifespan: showMessageHowLong
