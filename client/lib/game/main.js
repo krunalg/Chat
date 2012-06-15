@@ -65,6 +65,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.sand-cloud',
 
+'game.entities.non-weltmeister.screen',
+
 'game.entities.non-weltmeister.sand-screen',
 
 'game.entities.non-weltmeister.ash-screen',
