@@ -25,6 +25,9 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 		// Type of weather effect.
 		weather: null,
 
+		// Reference to entity.
+		screenEntity: undefined,
+
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
@@ -35,7 +38,12 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 			if (this.weather == 'sandstorm') {
 
 				// Start sand-screen.
-				this.sandscreen = ig.game.spawnEntity(EntitySandScreen, 0, 0, {});
+				this.screenEntity = ig.game.spawnEntity(EntitySandScreen, 0, 0, {});
+			}
+			else if (this.weather=='ashes') {
+
+				// Start falling ashes.
+				this.screenEntity = ig.game.spawnEntity(EntityAshScreen, 0, 0, {});
 			}
 		},
 
@@ -87,45 +95,59 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 			};
 		},
 
+		kill: function() {
+
+			// Entity needs removal?
+			if (typeof this.screenEntity != 'undefined') {
+
+				// Remove sceen entity.
+				this.screenEntity.kill();
+			}
+
+			// Call parent.
+			this.parent();
+		}
+
 		update: function() {
 
-			// Determine spawn rate.
-			if (this.weather == 'sandstorm') rate = this.sandRate;
-			else if (this.weather == 'rain') rate = this.rainRate;
+			if (this.weather == 'rain' || this.weather == 'sandstorm') {
 
-			// Smoothly handle changes to rate.
-			if (this.rate != rate) {
+				// Determine spawn rate.
+				var rate = (this.weather == 'rain' ? this.rainRate : this.sandRate);
 
-				// Reset timer.
-				this.timer.set(0);
+				// Type of entity to spawn.
+				var entityType = (this.weather == 'rain' ? EntityRainDrop : EntitySandCloud);
 
-				// Remember new rate.
-				this.rate = rate;
-			}
+				// Smoothly handle changes to rate.
+				if (this.rate != rate) {
 
-			// How many should be spawned this very moment?
-			var spawnCount = Math.floor(this.timer.delta() * rate);
+					// Reset timer.
+					this.timer.set(0);
 
-			// Type of entity to spawn.
-			var entityType = (this.weather == 'rain' ? EntityRainDrop : EntitySandCloud);
-
-			// New entities need spawning?
-			if (spawnCount != this.lastSpawned) {
-
-				// Make up for missed spawns if too many frames passed.
-				for (var i = 0; i < (spawnCount - this.lastSpawned); i++) {
-
-					var position = this.generatePos();
-
-					// Spawn entity.
-					ig.game.spawnEntity(entityType, position.x, position.y, {});
-
+					// Remember new rate.
+					this.rate = rate;
 				}
 
-				// Keep track of spawn count.
-				this.lastSpawned = spawnCount;
-			}
+				// How many should be spawned this very moment?
+				var spawnCount = Math.floor(this.timer.delta() * rate);
 
+				// New entities need spawning?
+				if (spawnCount != this.lastSpawned) {
+
+					// Make up for missed spawns if too many frames passed.
+					for (var i = 0; i < (spawnCount - this.lastSpawned); i++) {
+
+						var position = this.generatePos();
+
+						// Spawn entity.
+						ig.game.spawnEntity(entityType, position.x, position.y, {});
+
+					}
+
+					// Keep track of spawn count.
+					this.lastSpawned = spawnCount;
+				}
+			}
 
 			// Call parent.
 			this.parent();
