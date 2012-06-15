@@ -26,6 +26,9 @@ ig.module('game.entities.non-weltmeister.screen')
 
 			// Number of tiles to cover vertical.
 			this.tilesY = Math.ceil(ig.system.height / this.size.y) + 1;
+
+			// Set zIndex above all entities.
+			this.zIndex = ig.game.collisionMap.height * ig.game.collisionMap.tilesize;
 		},
 
 		draw: function() {
