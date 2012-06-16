@@ -12,6 +12,9 @@ client/media/2-8.png
 client/lib/game/background-animations.js
 client/media/
 
+# Ignore baked files.
+game.min.6.15.12.js
+
 #ignore these duplicates
 special-tiles.js
 
