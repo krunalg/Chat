@@ -24,11 +24,21 @@ var playersReport = function() {
 }
 
 // Records the most users seen online.
-function mostOnline() {
+function recordMostOnline() {
 
     var currentOnline = onlinePlayers.length;
 
     if(currentOnline > mostOnline) mostOnline = currentOnline;
+}
+
+// Get the time as a string.
+function getTime() {
+
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    var amOrPm = (hours > 11 ? 'PM':'AM');
+    return hours + ':' + minutes + amOrPm;
 }
 
 function handler(req, res) {
@@ -74,7 +84,7 @@ io.sockets.on('connection', function(socket) {
 
         // set up new player
         if (welcome == 'Welcome') {
-            console.log("ADDING " + user);
+            console.log(getTime() + "ADDING " + user);
             socket.clientname = user;
 
             // set up user info object with defaults
@@ -94,21 +104,21 @@ io.sockets.on('connection', function(socket) {
         socket.emit('welcome', welcome);
 
         if (welcome == 'NameTaken') {
-            console.log("DROPPING " + user + "FOR NAME INFRINGEMENT");
+            console.log(getTime() + "DROPPING " + user + "FOR NAME INFRINGEMENT");
             socket.disconnect();
         }
 
         playersReport();
 
         // Update most seen.
-        mostOnline();
+        recordMostOnline();
 
     });
 
     socket.on('hereIAm', function(x, y, direction, mapname, skin) {
         socket.roomname = mapname;
         socket.join(socket.roomname);
-        console.log(socket.clientname + " ENTERED " + socket.roomname);
+        console.log(getTime() + socket.clientname + " ENTERED " + socket.roomname);
 
         for (var i = 0; i < onlinePlayers.length; i++) {
             if (onlinePlayers[i].name == socket.clientname) {
@@ -142,7 +152,7 @@ io.sockets.on('connection', function(socket) {
 
 
     socket.on('receiveReskin', function(skin) {
-        console.log("Player " + socket.clientname + " changed skin: " + skin);
+        console.log(getTime() + "Player " + socket.clientname + " changed skin: " + skin);
         socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-' + socket.clientname, skin);
         for (var i = 0; i < onlinePlayers.length; i++) {
             if (onlinePlayers[i].name == socket.clientname) {
@@ -173,7 +183,7 @@ io.sockets.on('connection', function(socket) {
         if (msg.trim().length > 0) {
             
             socket.broadcast.to(socket.roomname).emit('newMsg', client, cleanMessage(msg));
-            console.log("[" + socket.roomname + "][" + socket.clientname + "] " + msg);
+            console.log(getTime() + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
         }
     });
 
@@ -183,7 +193,7 @@ io.sockets.on('connection', function(socket) {
         if (msg.trim().length > 0) {
 
             // Debug message.
-            console.log("Contents of tell: '" + msg + "'");
+            console.log(getTime() + "Contents of tell: '" + msg + "'");
 
             // find recipients session id
             for (var i = 0; i < onlinePlayers.length; i++) {
@@ -194,12 +204,12 @@ io.sockets.on('connection', function(socket) {
                     return;
                 }
             }
-            console.log("** Tell received but recipient does not exist.");
+            console.log(getTime() + "** Tell received but recipient does not exist.");
         }
     });
 
     socket.on('disconnect', function() {
-        console.log(socket.clientname + " DISCONNECTED");
+        console.log(getTime() + socket.clientname + " DISCONNECTED");
 
         // remove client from onlinePlayers array
         for (var i = 0; i < onlinePlayers.length; i++) {
