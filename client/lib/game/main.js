@@ -515,8 +515,14 @@ ig.module('game.main')
 				// Send message to server.
 				this.emitSay(playerName, message);
 
-				// Display message locally.
-				ig.game.spawnEntity(
+				// Kill existing chat bubble.
+				if(typeof player.chatBubble != 'undefined') {
+					player.chatBubble.kill();
+					player.chatBubble = undefined;
+				}
+
+				// Display new local chat bubble.
+				player.chatBubble = ig.game.spawnEntity(
 				EntityChatBubble, player.pos.x, player.pos.y, {
 
 					// Entity to follow.
