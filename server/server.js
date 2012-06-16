@@ -40,6 +40,20 @@ io.sockets.on('connection', function(socket) {
     socket.on('init', function(user) {
         var welcome = 'Welcome';
 
+        var maxNameLength = 20;
+
+        // check that username is not too long
+        if(user.length > maxNameLength) {
+
+            // Request user to drop from game.
+            socket.emit('error', 'Your name cannot be greater than ' + maxNameLength + ' characters.');
+            
+            // Disconnect user.
+            socket.disconnect();
+            
+            return;
+        }
+
         // check if username is already taken
         for (var i = 0; i < onlinePlayers.length; i++) {
             if (onlinePlayers[i].name == user) welcome = 'NameTaken';
