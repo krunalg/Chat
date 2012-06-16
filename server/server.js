@@ -9,14 +9,14 @@ var onlinePlayers = new Array(); // an array of objects
 io.set('log level', 3);
 
 var playersReport = function() {
-        var players = '';
-        for (var i = 0; i < onlinePlayers.length; i++) {
-            //if(i!=0) players += "\n";
-            players += "\n-- " + onlinePlayers[i].name;
-        }
-        if (players == '') console.log("\nWHO IS ONLINE: \n--\n");
-        else console.log("\nWHO IS ONLINE: " + players + "\n");
-    };
+    var players = '';
+    for (var i = 0; i < onlinePlayers.length; i++) {
+        //if(i!=0) players += "\n";
+        players += "\n-- " + onlinePlayers[i].name;
+    }
+    if (players == '') console.log("\nWHO IS ONLINE: \n--\n");
+    else console.log("\nWHO IS ONLINE: " + players + "\n");
+}
 
 function handler(req, res) {
     fs.readFile(__dirname + '/index.html', function(err, data) {
@@ -28,6 +28,11 @@ function handler(req, res) {
         res.writeHead(200);
         res.end(data);
     });
+}
+
+
+function cleanMessage(message) {
+    return message.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 }
 
 io.sockets.on('connection', function(socket) {
@@ -137,7 +142,7 @@ io.sockets.on('connection', function(socket) {
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
             
-            socket.broadcast.to(socket.roomname).emit('newMsg', client, msg);
+            socket.broadcast.to(socket.roomname).emit('newMsg', client, cleanMessage(msg));
             console.log("[" + socket.roomname + "][" + socket.clientname + "] " + msg);
         }
     });
@@ -154,7 +159,7 @@ io.sockets.on('connection', function(socket) {
             for (var i = 0; i < onlinePlayers.length; i++) {
                 if (onlinePlayers[i].name == to) {
                     //console.log("Tell going to: " + to + " has session: " + onlinePlayers[i].session);
-                    io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, msg); // send tell
+                    io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, cleanMessage(msg)); // send tell
                     console.log("[" + socket.clientname + ">>" + to + "] " + msg);
                     return;
                 }
