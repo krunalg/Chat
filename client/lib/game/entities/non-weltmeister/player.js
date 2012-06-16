@@ -70,6 +70,9 @@ ig.module(
 		// Reflection entity.
 		reflection: undefined,
 
+		// Chat-bubble entity; used to prevent overlapping bubbles.
+		chatBubble: undefined,
+
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 

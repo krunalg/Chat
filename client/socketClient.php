@@ -19,7 +19,14 @@ socket.on('newMsg', function(from, msg) {
 	// Does the player who sent us a message exist?
 	if (player) {
 		
-		var chatBubble = ig.game.spawnEntity(EntityChatBubble, 0, 0, {
+		// Kill existing chat bubble.
+		if(typeof player.chatBubble != 'undefined') {
+			player.chatBubble.kill();
+			player.chatBubble = undefined;
+		}
+
+		// Create new chat bubble.
+		player.chatBubble = chatBubble = ig.game.spawnEntity(EntityChatBubble, 0, 0, {
 			follow: player,
 			msg: msg,
 		});
