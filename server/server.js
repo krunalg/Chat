@@ -6,7 +6,7 @@ var server = require('http').createServer(handler),
     server.listen(9090);
 
 var onlinePlayers = new Array(); // an array of objects
-io.set('log level', 3);
+io.set('log level', 1);
 
 var playersReport = function() {
     var players = '';
@@ -30,9 +30,9 @@ function handler(req, res) {
     });
 }
 
-
+// Removes HTML characters from messages that could allow players to phish.
 function cleanMessage(message) {
-    return message.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    return message.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;");
 }
 
 io.sockets.on('connection', function(socket) {
