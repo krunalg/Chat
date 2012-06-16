@@ -6,6 +6,10 @@ var server = require('http').createServer(handler),
     server.listen(9090);
 
 var onlinePlayers = new Array(); // an array of objects
+
+// Most users seen online since server started.
+var mostOnline = 0;
+
 io.set('log level', 1);
 
 var playersReport = function() {
@@ -16,6 +20,15 @@ var playersReport = function() {
     }
     if (players == '') console.log("\nWHO IS ONLINE: \n--\n");
     else console.log("\nWHO IS ONLINE: " + players + "\n");
+    console.log("MOST SEEN ONLINE: " + mostOnline);
+}
+
+// Records the most users seen online.
+function mostOnline() {
+
+    var currentOnline = onlinePlayers.length;
+
+    if(currentOnline > mostOnline) mostOnline = currentOnline;
 }
 
 function handler(req, res) {
@@ -86,6 +99,9 @@ io.sockets.on('connection', function(socket) {
         }
 
         playersReport();
+
+        // Update most seen.
+        mostOnline();
 
     });
 
