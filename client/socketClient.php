@@ -43,6 +43,26 @@ socket.on('incomingTell', function(from, msg) {
 	ig.game.chatLog.push('<div class="tell">[' + ig.game.chatNameHTML(from) + '] whispers: ' + msg + '</div>');
 });
 
+// Define ThrowError, which shuts down the game and alerts the player.
+function ThrowError(message) {
+	
+	// Erase game content.
+	document.body.innerHTML = "";
+
+	// Alert the player.
+	window.alert('Server reported the following error: ' + message);
+
+	// Write console message.
+	throw new Error('Server reported the following error: ' + message);
+}
+
+// Receive error message from the server.
+socket.on('error', function(message) {
+	
+	// End the game.
+	ThrowError(message);
+});
+
 // Server welcomed the user, else kill the application.
 socket.on('welcome', function(msg) {
 	if (msg != 'Welcome') {
