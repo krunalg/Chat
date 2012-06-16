@@ -720,8 +720,8 @@ ig.module(
 			// Land
 			else {
 
-				// Foot is A or B when state is not idle.
-				var foot = ( (state.substring(0,4) != 'idle') ? (this.leftFoot ? 'A':'B') : '' );
+				// Foot is A or B when state is not idle or swim.
+				var foot = ( (state.substring(0,4) != 'idle' && state!='swim') ? (this.leftFoot ? 'A':'B') : '' );
 
 				// Which jump animation to use?
 				if (state == 'jump') state = (this.onBike ? 'bike' : 'walk');
