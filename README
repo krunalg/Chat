@@ -19,6 +19,9 @@ Change-Log:
 - Auto-generated map borders on no longer walkable. (Completed June 15, 2012)
 - Duration which a chat bubbles lives for is based on message length. (Completed June 15, 2012)
 - Removed extra pixel between character in chat bubbles. (Completed June 15, 2012)
+- Server will no longer accept names longer than 20 characters. (Completed June 15, 2012)
+- Server converts special HTML characters in messages to safe strings. (Completed June 15, 2012)
+- Players can no longer have more than one chat bubble visible at any given moment. (Completed June 16, 2012)
 
 
 To-do:
@@ -28,37 +31,63 @@ Camera:
 - Ability to restrict certain areas of map from being displayed on screen.
 
 Reflections:
-- Fix reflection not animating properly when facing 'right'.
+- Fix: not animating properly when facing right.
 - Add brightness or 'fading' effect to reflections.
+- Fix: Tree-tips over reflective water hide reflection.
 
 Weather:
 - Triggered by player walking in certain areas.
 - Sand-screen and ash-screen don't follow the player as he moves.
 
+Ledges:
+- Fix: Can be walked over if approached from the side.
+
+Controls:
+- Fix: Pressing up/down has precedence over left/right.
+
+Water:
+- Add: 'shallow' water splash effect.
+- Fix: Player does 'slow-walk' animation trying to swim against a wall.
+- Add: Player shows 'bobbing' animation when swimming.
+- Add: Player does an initial hop onto the surf entity.
+
+Grass:
+- Fix: not all grass entities spawned by network players disappear.
+- Add: 'ash' grass entity.
+- Add: 'tall' grass entity.
+
 Effects:
-- "Ash" grass entity.
-- "Shallow-water" feet effect.
 - "Deep sand" effect.
-- Swim "bobbing" animation as well as initial hop.
 - Overhead smoke-effect in LAVARIDGE TOWN.
 - Smashable rocks, and cuttable trees (low priority).
 - Sinking logs in PACIFIDLOG TOWN (low priority).
 
-Movement:
-- A* pathfinding (low priority).
+Server:
+- Disconnect any user that tries emitting without being authenticated.
 
 Bicycle:
 - Add 'curvy' tire tracks when turning corners in sand.
 - Add 'Mach' bicycle which has variable speed (low priority).
+- Add bike sprites for MAY (girl).
+- Fix: network players show wrong animation while jumping ledges with a bike.
+- Fix: network players on bike leave the wrong kind of track in sand.
 
 Chat system:
-- Prevent multiple chat bubbles from one source from existing at the same time.
+- Name changing using the /name command.
+- Prohibit the use of certain characters in names.
+- Restrict message length.
 - Server sends a failure notice upon non-delivery of a private message.
-- Invalid commands are reported to use as such.
-- Chat bubble repositions itself to be on-screen if it is not (low priority).
+- Invalid commands are reported to user as such.
 
 Maps:
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
+- LAVENDER TOWN overhead banner is not overhead.
+- Fix: Fence in the 'flower' town is walkable from above.
+- Fix: Maintain tops can be walked on to from above.
+
+Movement:
+- Reflective water should be swimmable intead of walkable.
+- A* pathfinding (low priority).
 
 
 Known Issues:
@@ -72,8 +101,16 @@ Known Issues:
 
 - Chat system does not support accented characters.
 
-- Currently a player can walk through a door, and keep going without being 
+- Player can walk through a door, and keep going without being 
   zoned until they let go of the movement key.
+
+- Minimizing the game and coming back to it after some time will spawn all at 
+  once every chat bubble that had been missed.
+
+- Player appears to run faster on sand-tiles than on regular land tiles.
+
+- It is possible to get from a high to a low point or vice versa in some areas,
+  such as from below a bridge to being on the bridge, by walking over certain tiles.
 
 
 Additional Information
