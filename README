@@ -17,6 +17,8 @@ Change-Log:
 - Player can now ride a bicycle by pressing C. The bicycle leaves tracks in sand tiles. (Completed June 12, 2012)
 - Weather effects for 'raining', 'sandstorm' and 'falling ashes' can be spawned using the weather-controller entity. (Completed June 14, 2012)
 - Auto-generated map borders on no longer walkable. (Completed June 15, 2012)
+- Duration which a chat bubbles lives for is based on message length. (Completed June 15, 2012)
+- Removed extra pixel between character in chat bubbles. (Completed June 15, 2012)
 
 
 To-do:
@@ -51,10 +53,8 @@ Bicycle:
 
 Chat system:
 - Prevent multiple chat bubbles from one source from existing at the same time.
-- Chat bubbles time-to-live is based on message length.
 - Server sends a failure notice upon non-delivery of a private message.
 - Invalid commands are reported to use as such.
-- Remove extra pixel between letters in chat-bubbles.
 - Chat bubble repositions itself to be on-screen if it is not (low priority).
 
 Maps:
