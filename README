@@ -1,25 +1,9 @@
 This is an experimental game/chat I created entirely in HTML5 and JavaScript
 using the ImpactJS framework, with Socket.IO and NodeJS for the network
-component, and a little bit of jQuery for the chat input.
-
-The game can currently be played at this URL:
-http://commins.ca/fs/
+component, and a little bit of jQuery for the chat.
 
 To run the server yourself, you must have NodeJS installed. If server.bat does
 not work, you can drag server.js onto node.exe instead (does the same thing).
-
-NodeJS
-http://nodejs.org/
-
-Socket.IO
-http://socket.io/
-https://github.com/LearnBoost/socket.io/blob/master/Readme.md
-
-ImpactJS
-http://impactjs.com/
-
-jQuery
-http://jquery.com/
 
 
 Change-Log:
@@ -90,3 +74,20 @@ Known Issues:
 
 - Currently a player can walk through a door, and keep going without being 
   zoned until they let go of the movement key.
+
+
+Additional Information
+----------------------------
+
+NodeJS
+http://nodejs.org/
+
+Socket.IO
+http://socket.io/
+https://github.com/LearnBoost/socket.io/blob/master/Readme.md
+
+ImpactJS
+http://impactjs.com/
+
+jQuery
+http://jquery.com/
