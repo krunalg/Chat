@@ -35,9 +35,6 @@ socket.on('newMsg', function(from, msg) {
 
 // Receive /tell message from server.
 socket.on('incomingTell', function(from, msg) {
-	
-	// Add message to game events.
-	ig.game.events.push("Msg from " + from + ": " + msg);
 
 	// Remember the last person who sent us a /tell.
 	ig.game.chatLog.lastTellFrom = from;
@@ -70,8 +67,6 @@ socket.on('welcome', function(msg) {
 socket.on('addPlayer', function(user, x, y, direction, skin) {
 	var player = ig.game.getEntitiesByType(EntityLocalPlayer)[0]; // !! is it needed?
 	
-	ig.game.events.push(user + " entered the area.");
-
 	// Write to chat log.
 	ig.game.chatLog.push('<div class="info">[' + ig.game.chatNameHTML(user) + '] entered the area.</div>');
 

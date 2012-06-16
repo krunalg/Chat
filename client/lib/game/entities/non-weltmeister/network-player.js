@@ -80,9 +80,6 @@ ig.module(
 				// Prevent multiple drop announcements.
 				if(!player._killed)
 				{
-					// Write event to screen.
-					ig.game.events.push(player.name + " left the area.");
-
 					// Write to chat log.
 					ig.game.chatLog.push('<div class="info">[' + ig.game.chatNameHTML(player.name) + '] left the area.</div>');
 
