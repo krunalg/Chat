@@ -726,14 +726,24 @@ ig.module(
 				// Which jump animation to use?
 				if (state == 'jump') state = (this.onBike ? 'bike' : 'walk');
 
+				var animationName = state + ig.game.capitaliseFirstLetter(this.facing) + foot;
+
 				// Set current animation.
-				this.currentAnim = this.anims[state + ig.game.capitaliseFirstLetter(this.facing) + foot];
+				this.currentAnim = this.anims[animationName];
 
 				// Debug animation.
 				// console.debug('Current animation: ' + state + ig.game.capitaliseFirstLetter(this.facing) + foot);
 
-				// Play from first frame.
-				this.currentAnim.rewind();
+				if (typeof this.currentAnim != 'undefined') {
+				
+					// Play from first frame.
+					this.currentAnim.rewind();
+				
+				} else {
+
+					// Error.
+					throw new Error('Tried to rewind player non-existant animation: ' + animationName);
+				}
 
 				// Switch foot for next time.
 				if (alternateFeet) this.leftFoot = !this.leftFoot;
@@ -878,6 +888,10 @@ ig.module(
 			this.addAnim('swimDown', swimFrameTime, [20, 23], true);
 			this.addAnim('swimLeft', swimFrameTime, [19, 22], true);
 			this.addAnim('swimRight', swimFrameTime, [19, 22], true);
+			this.addAnim('idleSwimUp', swimFrameTime, [21], true);
+			this.addAnim('idleSwimDown', swimFrameTime, [23], true);
+			this.addAnim('idleSwimLeft', swimFrameTime, [22], true);
+			this.addAnim('idleSwimRight', swimFrameTime, [22], true);
 			this.addAnim('idleUp', idleFrameTime, [0], true);
 			this.addAnim('idleDown', idleFrameTime, [2], true);
 			this.addAnim('idleLeft', idleFrameTime, [1], true);
@@ -896,6 +910,7 @@ ig.module(
 			this.anims.bikeRightB.flip.x = true;
 			this.anims.slowRight.flip.x = true;
 			this.anims.swimRight.flip.x = true;
+			this.anims.idleSwimRight.flip.x = true;
 			this.anims.idleRight.flip.x = true;
 			this.anims.idleBikeRight.flip.x = true;
 
