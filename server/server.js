@@ -84,7 +84,7 @@ io.sockets.on('connection', function(socket) {
 
         // set up new player
         if (welcome == 'Welcome') {
-            console.log(getTime() + "ADDING " + user);
+            console.log(getTime() + ' ' + "ADDING " + user);
             socket.clientname = user;
 
             // set up user info object with defaults
@@ -104,7 +104,7 @@ io.sockets.on('connection', function(socket) {
         socket.emit('welcome', welcome);
 
         if (welcome == 'NameTaken') {
-            console.log(getTime() + "DROPPING " + user + "FOR NAME INFRINGEMENT");
+            console.log(getTime() + ' ' + "DROPPING " + user + "FOR NAME INFRINGEMENT");
             socket.disconnect();
         }
 
@@ -118,7 +118,7 @@ io.sockets.on('connection', function(socket) {
     socket.on('hereIAm', function(x, y, direction, mapname, skin) {
         socket.roomname = mapname;
         socket.join(socket.roomname);
-        console.log(getTime() + socket.clientname + " ENTERED " + socket.roomname);
+        console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
 
         for (var i = 0; i < onlinePlayers.length; i++) {
             if (onlinePlayers[i].name == socket.clientname) {
@@ -152,7 +152,7 @@ io.sockets.on('connection', function(socket) {
 
 
     socket.on('receiveReskin', function(skin) {
-        console.log(getTime() + "Player " + socket.clientname + " changed skin: " + skin);
+        console.log(getTime() + ' ' + "Player " + socket.clientname + " changed skin: " + skin);
         socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-' + socket.clientname, skin);
         for (var i = 0; i < onlinePlayers.length; i++) {
             if (onlinePlayers[i].name == socket.clientname) {
@@ -183,7 +183,7 @@ io.sockets.on('connection', function(socket) {
         if (msg.trim().length > 0) {
             
             socket.broadcast.to(socket.roomname).emit('newMsg', client, cleanMessage(msg));
-            console.log(getTime() + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
+            console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
         }
     });
 
@@ -193,7 +193,7 @@ io.sockets.on('connection', function(socket) {
         if (msg.trim().length > 0) {
 
             // Debug message.
-            console.log(getTime() + "Contents of tell: '" + msg + "'");
+            console.log(getTime() + ' ' + "Contents of tell: '" + msg + "'");
 
             // find recipients session id
             for (var i = 0; i < onlinePlayers.length; i++) {
@@ -204,12 +204,12 @@ io.sockets.on('connection', function(socket) {
                     return;
                 }
             }
-            console.log(getTime() + "** Tell received but recipient does not exist.");
+            console.log(getTime() + ' ' + "** Tell received but recipient does not exist.");
         }
     });
 
     socket.on('disconnect', function() {
-        console.log(getTime() + socket.clientname + " DISCONNECTED");
+        console.log(getTime() + ' ' + socket.clientname + " DISCONNECTED");
 
         // remove client from onlinePlayers array
         for (var i = 0; i < onlinePlayers.length; i++) {
