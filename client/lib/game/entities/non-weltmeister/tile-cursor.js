@@ -8,23 +8,24 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 
 		lineWidth: 2,
 
-		lineColor: '#f00',
+		lineColor: '#fff',
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
 			// Game tilesize.
-			var tilesize = ig.game.collisionMap.tilesize;
+			this.tilesize = ig.game.collisionMap.tilesize;
 
 			// Set cursor size.
-			this.size.x = this.size.y = tilesize;
+			this.size.x = this.size.y = this.tilesize;
 		},
 
 		update: function() {
 
-			// Set to mouse position.
-			this.pos.x = ig.input.mouse.x + ig.game.screen.x;
-			this.pos.y = ig.input.mouse.y + ig.game.screen.y;
+			// Match position to tile mouse is over.
+			this.pos.x = Math.floor((ig.input.mouse.x + ig.game.screen.x ) / this.tilesize) * this.tilesize;
+			this.pos.y = Math.floor((ig.input.mouse.y + ig.game.screen.y ) / this.tilesize) * this.tilesize;
+
 		},
 
 		draw: function() {
