@@ -16,7 +16,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			y: undefined
 		},
 
-		this.ajaxURL = 'http://127.0.0.1/pokemon-chat/mapper/camera-dodge.php',
+		ajaxURL: 'http://127.0.0.1/pokemon-chat/mapper/camera-dodge.php',
 
 		// Possible camera restrictions.
 		states: ['left', 'up', 'right', 'down'],
@@ -51,7 +51,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			  	data: {action: action, x : this.pos.x, y: this.pos.y, state: this.states[this['index]']]},
 			  	dataType: "html"
 			});
-		}
+		},
 
 		// Change to next possible state and return current state.
 		next: function() {
@@ -98,7 +98,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			this.ajax('delete');
 
 			this.parent();
-		}
+		},
 
 		draw: function() {
 
