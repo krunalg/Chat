@@ -73,6 +73,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.weather-controller',
 
+'game.entities.non-weltmeister.tile-cursor',
+
 //debug
 'impact.debug.debug',
 
