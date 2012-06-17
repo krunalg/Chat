@@ -303,6 +303,59 @@ ig.module('game.main')
 				// Screen centers on player.
 				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
 				this.screen.y = player.pos.y - ig.system.height / 2;
+
+				// Find out how far the player can see in each direction.
+				this.visibleUp = player.pos.y - this.screen.y;
+				this.visibleDown = this.screen.y + ig.system.height - player.pos.y - player.size.y;
+				this.visibleLeft = player.pos.x - this.screen.x;
+				this.visibleRight = this.screen.x + ig.system.width - player.pos.x - player.size.x;
+
+				// Get all camera dodges.				
+				var cameraDodges = ig.game.getEntitiesByType(EntityCameraDodge);
+
+				if(this.cameraDodging && cameraDodges) {
+
+					for(var i=0; i<cameraDodges.length; i++) {
+
+						var x = cameraDodges[i].pos.x;
+						var y = cameraDodges[i].pos.y;
+						var width = cameraDodges[i].size.x;
+						var height = cameraDodges[i].size.y;
+
+						// Camera dodge within screen bounds? 
+						if( (x >= this.screen.x) && 
+								(x < this.screen.x + ig.system.width) &&
+								(y >= this.screen.y) &&
+								(y < this.screen.y + ig.system.height) ) {
+
+							// Adjust screen using limit.
+							switch(cameraDodges[i].limit) {
+
+								case 'up':
+
+									this.screen.y = cameraDodges[i].pos.y - ig.system.height;
+									break;
+
+								case 'down':
+
+									this.screen.y = cameraDodges[i].pos.y + cameraDodges[i].size.y;
+									break;
+									
+								case 'left':
+
+									this.screen.x = cameraDodges[i].pos.x - ig.system.width;
+									break;
+								
+								case 'right':
+
+									this.screen.x = cameraDodges[i].pos.x + cameraDodges[i].size.x;
+									break;
+								
+							}
+						}
+					}
+					
+				}
 			}
 
 			// Is player trying to chat?
@@ -413,7 +466,12 @@ ig.module('game.main')
 				'facing: ' + player.facing, 
 				'lastFacing: ' + player.lastFacing,
 				'mouse-x: ' + ig.input.mouse.x,
-				'mouse-y: ' + ig.input.mouse.y
+				'mouse-y: ' + ig.input.mouse.y,
+				'vis-up: ' + this.visibleUp,
+				'vis-down: ' + this.visibleDown,
+				'vis-left: ' + this.visibleLeft,
+				'vis-right: ' + this.visibleRight,
+
 				], // will display each array element on a new line
 				true, // true or false to either show the FPS
 				false, // true or false to show the average FPS over a period of time
