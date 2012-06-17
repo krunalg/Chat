@@ -473,14 +473,13 @@ ig.module('game.main')
 		/*
 		 * Send a /say message to the server.
 		 *
-		 * @param  client string Name of player message is from.
 		 * @param  msg    string The message to send.
 		 * @return        undefined
 		 */
-		emitSay: function(client, msg) {
+		emitSay: function(msg) {
 
 			// Emit socket.
-			socket.emit('receiveSay', client, msg);
+			socket.emit('receiveSay', msg);
 		},
 
 		/*
@@ -524,7 +523,7 @@ ig.module('game.main')
 				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 
 				// Send message to server.
-				this.emitSay(playerName, message);
+				this.emitSay(message);
 
 				// Kill existing chat bubble.
 				if(typeof player.chatBubble != 'undefined') {

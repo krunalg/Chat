@@ -177,12 +177,12 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    socket.on('receiveSay', function(client, msg) {
+    socket.on('receiveSay', function(msg) {
         
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
             
-            socket.broadcast.to(socket.roomname).emit('newMsg', client, cleanMessage(msg));
+            socket.broadcast.to(socket.roomname).emit('newMsg', socket.clientname, cleanMessage(msg));
             console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
         }
     });
