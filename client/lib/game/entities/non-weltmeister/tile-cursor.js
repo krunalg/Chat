@@ -26,6 +26,11 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 			this.pos.x = Math.floor((ig.input.mouse.x + ig.game.screen.x ) / this.tilesize) * this.tilesize;
 			this.pos.y = Math.floor((ig.input.mouse.y + ig.game.screen.y ) / this.tilesize) * this.tilesize;
 
+			// Mouse click?
+			if( ig.input.pressed('mouse1') ) {
+
+				// Spawn camera restrictor.
+			}
 		},
 
 		draw: function() {
