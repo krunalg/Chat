@@ -14,7 +14,7 @@ echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used
 <a href="javascript:post_to_url( 'camera-dodge.php',
         { 
             'action': 'write',
-            'x': 256,
+            'x': 128,
             'y': 1024,
             'state': 'left'
         } );" >Try writing 1.</a><br>
@@ -23,14 +23,14 @@ echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used
         { 
             'action': 'write',
             'x': 256,
-            'y': 512,
+            'y': 1024,
             'state': 'right'
         } );" >Try writing 2.</a><br>
 
 <a href="javascript:post_to_url( 'camera-dodge.php',
         { 
-            'action': 'delete',
-            'x': 128,
+            'action': 'write',
+            'x': 512,
             'y': 1024,
             'state': 'down'
         } );" >Try writing 3.</a><br>
