@@ -75,6 +75,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.tile-cursor',
 
+'game.entities.non-weltmeister.camera-dodge',
+
 //debug
 'impact.debug.debug',
 
