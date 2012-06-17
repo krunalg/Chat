@@ -8,6 +8,24 @@ include('inc.globals.php');
 require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
+function jsonToArray($filepath) {
+
+    $file_contents = file_get_contents($filepath);
+    $file_as_object = json_decode($file_contents);
+
+    $tiles = array();
+
+    // Convert into 2D array.
+    foreach ($file_as_object as $currentX => $object) {
+        foreach ($object as $currentY => $state) {
+            $tiles[$currentX][$currentY] = $state;
+        }
+    }
+
+    return $tiles;
+}
+
+
 // Get all camera-dodges.
 if($_POST['action']=='read') {
 
@@ -34,15 +52,7 @@ else if($_POST['action']=='write') {
 
     if(file_exists($globalCameraDodgeJSON)) {
 
-        $file_contents = file_get_contents($globalCameraDodgeJSON);
-        $file_as_object = json_decode($file_contents);
-
-        // Convert into 2D array.
-        foreach ($file_as_object as $currentX => $object) {
-            foreach ($object as $currentY => $state) {
-                $tiles[$currentX][$currentY] = $state;
-            }
-        }
+        $tiles = jsonToArray($globalCameraDodgeJSON);
     }
 
     // Add new state.
@@ -64,15 +74,21 @@ else if($_POST['action']=='delete') {
 
     if(file_exists($globalCameraDodgeJSON)) {
 
-        $file_contents = file_get_contents($globalCameraDodgeJSON);
-        $file_as_object = json_decode($file_contents);
-
-        unset ($file_as_object[$x][$y]);
-
-        // Write new JSON.
-        $new_file_contents = json_encode($file_as_object);
-        writeTextToFile($globalCameraDodgeJSON, $new_file_contents);
+        $tiles = jsonToArray($globalCameraDodgeJSON);
     }
+
+    // Remove state from array.
+    if(isset($tiles[$x])) {
+
+        unset ($tiles[$x][$y]);
+
+        // Prune empty arrays.
+        if(count($tiles[$x])==0) unset($tiles[$x]);
+    }
+
+    // Write new JSON.
+    $new_file_contents = json_encode($tiles);
+    writeTextToFile($globalCameraDodgeJSON, $new_file_contents);
 }
 
 // Invalid selection.
