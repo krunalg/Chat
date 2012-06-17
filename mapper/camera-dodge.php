@@ -45,13 +45,8 @@ else if($_POST['action']=='write') {
         }    
     }
 
-    else {
-
-        // Create new 2D array.
-        $tiles = array();
-        $tiles[$x] = array();
-        $tiles[$x][$y] = $state;
-    }
+    // Add new state.
+    $tiles[$x][$y] = $state;
 
     // Write new JSON.
     $new_file_contents = json_encode($tiles);
