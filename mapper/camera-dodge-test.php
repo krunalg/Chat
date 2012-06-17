@@ -25,8 +25,6 @@ $tests = array(
     ),
 );
 
-
-$testCount = 3;
 $testTypes = array('write', 'delete');
 
 for($t=0; $t<count($testTypes); $t++) {
