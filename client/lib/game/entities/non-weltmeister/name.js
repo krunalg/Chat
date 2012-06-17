@@ -1,4 +1,8 @@
-ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impact.font').defines(function() {
+ig.module('game.entities.non-weltmeister.name')
+
+.requires('impact.entity', 'impact.font')
+
+.defines(function() {
 
 	EntityName = ig.Entity.extend({
 
@@ -32,7 +36,7 @@ ig.module('game.entities.non-weltmeister.name').requires('impact.entity', 'impac
 		update: function() {
 
 			// Kill name entity if player no longer exists.
-			if(this.follow._killed) this.kill();
+			if (this.follow._killed) this.kill();
 
 			// Call parent.
 			this.parent();
