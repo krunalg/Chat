@@ -6,6 +6,10 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 
 	EntityTileCursor = ig.Entity.extend({
 
+		lineWidth: 2,
+
+		lineColor: '#f00',
+
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
@@ -19,19 +23,19 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 		update: function() {
 
 			// Set to mouse position.
-			this.pos.x = ig.input.mouse.x;
-			this.pos.y = ig.input.mouse.y;
+			this.pos.x = ig.input.mouse.x + ig.game.screen.x;
+			this.pos.y = ig.input.mouse.y + ig.game.screen.y;
 		},
 
 		draw: function() {
 
-			ig.system.context.strokeStyle = '#f00';
-			ig.system.context.lineWidth = 1.0;
+			ig.system.context.strokeStyle = this.lineColor;
+			ig.system.context.lineWidth = this.lineWidth;
 			ig.system.context.strokeRect(	
-				ig.system.getDrawPos(this.pos.x.round() - ig.game.screen.x) - 0.5,
-				ig.system.getDrawPos(this.pos.y.round() - ig.game.screen.y) - 0.5,
-				this.size.x * ig.system.scale,
-				this.size.y * ig.system.scale
+				ig.system.getDrawPos(this.pos.x.round() - ig.game.screen.x) - (this.lineWidth/2),
+				ig.system.getDrawPos(this.pos.y.round() - ig.game.screen.y) - (this.lineWidth/2),
+				(this.size.x + (this.lineWidth/2)) * ig.system.scale,
+				(this.size.y + (this.lineWidth/2)) * ig.system.scale
 			);
 		}
 
