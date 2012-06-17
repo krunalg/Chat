@@ -37,13 +37,25 @@ else if($_POST['action']=='write') {
         $file_contents = file_get_contents($globalCameraDodgeJSON);
         $file_as_object = json_decode($file_contents);
 
-        // Add new information.
-        $file_as_object[$x][$y] = $state;
-
-        // Write new JSON.
-        $new_file_contents = json_encode($file_as_object);
-        writeTextToFile($globalCameraDodgeJSON, $new_file_contents);
+        // Convert into 2D array.
+        foreach ($file_as_object as $x => $array) {
+            foreach ($array as $y => $state) {
+                $tiles[$x][$y] = $state;
+            }
+        }    
     }
+
+    else {
+
+        // Create new 2D array.
+        $tiles = array();
+        $tiles[$x] = array();
+        $tiles[$x][$y] = $state;
+    }
+
+    // Write new JSON.
+    $new_file_contents = json_encode($tiles);
+    writeTextToFile($globalCameraDodgeJSON, $new_file_contents);
 }
 
 // Remove a camera dodge.
