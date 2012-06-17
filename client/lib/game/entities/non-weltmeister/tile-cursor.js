@@ -21,7 +21,7 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 			// Set to mouse position.
 			this.pos.x = ig.input.mouse.x;
 			this.pos.y = ig.input.mouse.y;
-		}
+		},
 
 		draw: function() {
 
