@@ -223,54 +223,52 @@ ig.module('game.main')
 
 			// Custom ig.game.draw() function that draws reflections under the primary map layer.
 			ig.Game.inject({
-				draw: function(){
-					if( this.clearColor ) {
-						ig.system.clear( this.clearColor );
+				draw: function() {
+					if (this.clearColor) {
+						ig.system.clear(this.clearColor);
 					}
-					
+
 					// This is a bit of a circle jerk. Entities reference game._rscreen 
 					// instead of game.screen when drawing themselfs in order to be 
 					// "synchronized" to the rounded(?) screen position
-					this._rscreen.x = ig.system.getDrawPos(this.screen.x)/ig.system.scale;
-					this._rscreen.y = ig.system.getDrawPos(this.screen.y)/ig.system.scale;
-						
+					this._rscreen.x = ig.system.getDrawPos(this.screen.x) / ig.system.scale;
+					this._rscreen.y = ig.system.getDrawPos(this.screen.y) / ig.system.scale;
+
 					var mapIndex;
-					for( mapIndex = 0; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
+					for (mapIndex = 0; mapIndex < this.backgroundMaps.length; mapIndex++) {
 						var map = this.backgroundMaps[mapIndex];
-						if( map.name == ig.game.primaryMapLayer ) {
+						if (map.name == ig.game.primaryMapLayer) {
 							// Need to draw special "below" entities, ie. reflections.
 							break;
 						}
-						map.setScreenPos( this.screen.x, this.screen.y );
+						map.setScreenPos(this.screen.x, this.screen.y);
 						map.draw();
 					}
 
 					var reflections = this.getEntitiesByType(EntityReflection);
-					if(reflections)
-					{
-						for( var i=0; i<reflections.length; i++ )
-						{
+					if (reflections) {
+						for (var i = 0; i < reflections.length; i++) {
 							// Draw with true to really draw.
 							reflections[i].draw(true);
 						}
 					}
 
-					for( mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
+					for (mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++) {
 						var map = this.backgroundMaps[mapIndex];
-						if( map.foreground ) {
+						if (map.foreground) {
 							// All foreground layers are drawn after the entities
 							break;
 						}
-						map.setScreenPos( this.screen.x, this.screen.y );
+						map.setScreenPos(this.screen.x, this.screen.y);
 						map.draw();
 					}
-						
+
 					this.drawEntities();
-					
-					
-					for( mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++ ) {
+
+
+					for (mapIndex; mapIndex < this.backgroundMaps.length; mapIndex++) {
 						var map = this.backgroundMaps[mapIndex];
-						map.setScreenPos( this.screen.x, this.screen.y );
+						map.setScreenPos(this.screen.x, this.screen.y);
 						map.draw();
 					}
 				}
@@ -285,9 +283,9 @@ ig.module('game.main')
 		//	  \____/|_|    |_____/_/    \_\_|  |______|
 		//	                                           	
 		update: function() {
-			
+
 			// Toggle camera dodging.
-			if(ig.input.pressed('cameraDodging')) this.cameraDodging = !this.cameraDodging;
+			if (ig.input.pressed('cameraDodging')) this.cameraDodging = !this.cameraDodging;
 
 			// Update all entities and backgroundMaps
 			this.parent();
@@ -316,17 +314,20 @@ ig.module('game.main')
 				var cameraDodges = this.getDodges();
 
 				// Camera dodging is enabled and there's at least one on screen.
-				if(this.cameraDodging && typeof cameraDodges != 'undefined') {
+				if (this.cameraDodging && typeof cameraDodges != 'undefined') {
 
-					var closest = { index: undefined, distance: undefined };
+					var closest = {
+						index: undefined,
+						distance: undefined
+					};
 
-					for(var i=0; i<cameraDodges.length; i++) {
+					for (var i = 0; i < cameraDodges.length; i++) {
 
 						// Get distance from player to camera dodge.
 						var distance = player.distanceTo(cameraDodges[i]);
-						
+
 						// Is this the closest camera dodge so far?
-						if(i==0 || distance < closest.distance) {
+						if (i == 0 || distance < closest.distance) {
 
 							// Record closest camera dodge.
 							closest.distance = distance;
@@ -335,14 +336,14 @@ ig.module('game.main')
 					}
 
 					// Index of camera dodge entity?
-					if(typeof closest['index'] != 'undefined') {
+					if (typeof closest['index'] != 'undefined') {
 
 						var limitX = cameraDodges[closest['index']].limit.x;
 						var limitY = cameraDodges[closest['index']].limit.y;
 
-						if(typeof limitX != 'undefined') this.screen.x = limitX;
-						if(typeof limitY != 'undefined') this.screen.y = limitY;
-					}		
+						if (typeof limitX != 'undefined') this.screen.x = limitX;
+						if (typeof limitY != 'undefined') this.screen.y = limitY;
+					}
 				}
 			}
 
@@ -410,7 +411,7 @@ ig.module('game.main')
 		//	 |_____/|_|  \_\/_/    \_\/  \/    
 		//	                                   
 		draw: function() {
-			
+
 			// Draw all entities and backgroundMaps
 			this.parent();
 
@@ -431,9 +432,9 @@ ig.module('game.main')
 
 			// Traverse all game events.
 			for (var i = 0; i < this.events.length; i++) {
-				
+
 				// Add new lines.
-				var space = (i==0 ? '' : "\n");
+				var space = (i == 0 ? '' : "\n");
 
 				// Add event to print.
 				printEvents += space + this.events[i];
@@ -449,13 +450,7 @@ ig.module('game.main')
 
 				// Draw debug display.
 				this.debugDisplay.draw(
-				[
-				'moveState: ' + player.moveState, 
-				'facing: ' + player.facing, 
-				'lastFacing: ' + player.lastFacing,
-				'mouse-x: ' + ig.input.mouse.x,
-				'mouse-y: ' + ig.input.mouse.y
-				], // will display each array element on a new line
+				['moveState: ' + player.moveState, 'facing: ' + player.facing, 'lastFacing: ' + player.lastFacing, 'mouse-x: ' + ig.input.mouse.x, 'mouse-y: ' + ig.input.mouse.y], // will display each array element on a new line
 				true, // true or false to either show the FPS
 				false, // true or false to show the average FPS over a period of time
 				10000, // amount of of time between samples. defaults to 10000 (10 seconds)
@@ -500,7 +495,7 @@ ig.module('game.main')
 			// Store matches here.
 			var onScreen = new Array();
 
-			for(var i=0; i<cameraDodges.length; i++) {
+			for (var i = 0; i < cameraDodges.length; i++) {
 
 				var x = cameraDodges[i].pos.x;
 				var y = cameraDodges[i].pos.y;
@@ -508,10 +503,7 @@ ig.module('game.main')
 				var height = cameraDodges[i].size.y;
 
 				// Is any part visible?
-				if(  x >= this.screen.x && 
-					(x + width) < (this.screen.x + ig.system.width) &&
-					 y >= this.screen.y &&
-					(y + height) < (this.screen.y + ig.system.height) ) {
+				if (x >= this.screen.x && (x + width) < (this.screen.x + ig.system.width) && y >= this.screen.y && (y + height) < (this.screen.y + ig.system.height)) {
 
 					// Add to visible entities.
 					onScreen.push(cameraDodges[i]);
@@ -523,25 +515,21 @@ ig.module('game.main')
 		},
 
 		/*
-		 * Draws entities that were skipped because they need to be 
+		 * Draws entities that were skipped because they need to be
 		 * drawn above all map layers.
 		 *
 		 * @param  entityTypes array     Types of entities to drawn.
 		 * @return             undefined
 		 */
-		reallyDraw: function(entityTypes)
-		{
-			for(var i=0; i<entityTypes.length; i++)
-			{
+		reallyDraw: function(entityTypes) {
+			for (var i = 0; i < entityTypes.length; i++) {
 				// Get all entities of this type.
 				var entities = this.getEntitiesByType(entityTypes[i]);
 
 				// Entities found.
-				if(entities)
-				{
+				if (entities) {
 					// All entities.
-					for(var j=0; j<entities.length; j++)
-					{
+					for (var j = 0; j < entities.length; j++) {
 						// Really draw them this time.
 						entities[j].draw(true);
 					}
@@ -569,11 +557,11 @@ ig.module('game.main')
 		 * @return     undefined
 		 */
 		emitTell: function(to, msg) {
-			
+
 			// Emit socket.
 			socket.emit('receiveTell', to, msg);
 		},
-		
+
 		/*
 		 * Send reskin message to the server.
 		 *
@@ -585,7 +573,7 @@ ig.module('game.main')
 			// Emit socket.
 			socket.emit('receiveReskin', skin);
 		},
-		
+
 		/*
 		 * Send /say message to the server and create a local chat-bubble.
 		 *
@@ -594,10 +582,10 @@ ig.module('game.main')
 		 * @return            undefined
 		 */
 		chatSendSay: function(playerName, message) {
-			
+
 			// Checks that message contains non-whitespace.
-        	if (message.trim().length > 0) {
-			
+			if (message.trim().length > 0) {
+
 				// Get the local player entity.
 				var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 
@@ -605,7 +593,7 @@ ig.module('game.main')
 				this.emitSay(message);
 
 				// Kill existing chat bubble.
-				if(typeof player.chatBubble != 'undefined') {
+				if (typeof player.chatBubble != 'undefined') {
 					player.chatBubble.kill();
 					player.chatBubble = undefined;
 				}
@@ -623,7 +611,7 @@ ig.module('game.main')
 
 				// HTML for chat log.
 				var html = '<div class="say">[' + ig.game.chatNameHTML(playerName) + '] says: ' + message + '</div>';
-				
+
 				// Write to chat log.
 				this.chatLog.push(html);
 			}
@@ -637,16 +625,16 @@ ig.module('game.main')
 		 * @return           undefined
 		 */
 		chatSendTell: function(recipient, message) {
-			
+
 			// Checks that message contains non-whitespace.
-        	if (message.trim().length > 0) {
+			if (message.trim().length > 0) {
 
 				// Send message to server.
 				this.emitTell(recipient, message);
 
 				// HTML for chat log.
 				var html = '<div class="tell">To [' + ig.game.chatNameHTML(recipient) + ']: ' + message + '</div>';
-				
+
 				// Write to chat log.
 				this.chatLog.push(html);
 			}
@@ -659,12 +647,12 @@ ig.module('game.main')
 		 * @return           undefined
 		 */
 		chatStartTell: function(recipient) {
-			
+
 			// Make sure chat input isn't already open.
 			if (!this.inputActive) {
 
 				// Add space after name.
-				var spaceAfterName = (recipient!='' ? ' ':'');
+				var spaceAfterName = (recipient != '' ? ' ' : '');
 
 				// Set inital message.
 				$('#' + this.inputFieldId).val('/tell ' + recipient + spaceAfterName);
@@ -686,18 +674,18 @@ ig.module('game.main')
 				var inputParts = input.split(' ');
 
 				// Check if command has been typed.
-				if(inputParts[0].charAt(0)=='/') {
+				if (inputParts[0].charAt(0) == '/') {
 
 					// Check if replacing or adding .
-					if(inputParts[0]=='/say' || inputParts[0]=='/s') {
+					if (inputParts[0] == '/say' || inputParts[0] == '/s') {
 
 						// No recipient to replace.
 						inputParts.splice(1, 0, recipient);
 					}
-					
+
 					// Replacing.
 					else {
-						
+
 						// Replace the recipient.
 						inputParts[1] = recipient;
 					}
@@ -707,19 +695,18 @@ ig.module('game.main')
 
 					// Rebuild input.
 					var newInput = '';
-					for(var i=0; i<inputParts.length; i++)
-					{
+					for (var i = 0; i < inputParts.length; i++) {
 
 						// Prepend a space except the very first time.
-						if(i!=0) newInput += ' ';
+						if (i != 0) newInput += ' ';
 
 						// Add next word.
 						newInput += inputParts[i];
 					}
 
 					// If name is the last part, space is needed.
-					var spaceOrNot = (inputParts.length<=2 ? ' ':'');
-					
+					var spaceOrNot = (inputParts.length <= 2 ? ' ' : '');
+
 					// Add space if needed.
 					newInput += spaceOrNot;
 				}
@@ -728,7 +715,7 @@ ig.module('game.main')
 				else {
 
 					// Determine if space needed after name.
-					var spaceOrNot = (input.charAt(0)==' ' ? '': ' ');
+					var spaceOrNot = (input.charAt(0) == ' ' ? '' : ' ');
 
 					// Rebuild input.
 					var newInput = '/tell ' + recipient + spaceOrNot + input;
@@ -740,7 +727,7 @@ ig.module('game.main')
 
 			// Set focus.
 			$('#input').focus();
-			
+
 		},
 
 		/*
@@ -787,11 +774,10 @@ ig.module('game.main')
 						var msg = '';
 
 						// Reconstruct message.
-						for (i = 2; i < explodeInput.length; i++) 
-						{
-							
+						for (i = 2; i < explodeInput.length; i++) {
+
 							// Prepend space if not the first word.
-							var spaceOrNot = (i==2) ? '':' ';
+							var spaceOrNot = (i == 2) ? '' : ' ';
 
 							// Add next word.
 							msg += spaceOrNot + explodeInput[i];
@@ -929,17 +915,15 @@ ig.module('game.main')
 		 * @param  settings object Initial variables.
 		 * @return          entityClass on success, undefined otherwise.
 		 */
-		spawnEntityBelow: function( type, x, y, settings ) {
-			var entityClass = typeof(type) === 'string'
-				? ig.global[type]
-				: type;
-				
-			if( !entityClass ) {
-				throw("Can't spawn entity of type " + type);
+		spawnEntityBelow: function(type, x, y, settings) {
+			var entityClass = typeof(type) === 'string' ? ig.global[type] : type;
+
+			if (!entityClass) {
+				throw ("Can't spawn entity of type " + type);
 			}
-			var ent = new (entityClass)( x, y, settings || {} );
-			this.entities.splice( 0, 0, ent );
-			if( ent.name ) {
+			var ent = new(entityClass)(x, y, settings || {});
+			this.entities.splice(0, 0, ent);
+			if (ent.name) {
 				this.namedEntities[ent.name] = ent;
 			}
 			return ent;
@@ -1086,7 +1070,7 @@ ig.module('game.main')
 			});
 		}
 
-		
+
 	});
 
 	// Start the game.
