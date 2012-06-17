@@ -515,6 +515,8 @@ ig.module('game.main')
 
 		/*
 		 * Returns all the camera-dodge entities that are visible on screen.
+		 * Note that it's important that ig.game.screen.x/y be centered over
+		 * the player before calling this.
 		 *
 		 * @return array of entities if some are found, else return undefined.
 		 */
