@@ -312,10 +312,10 @@ ig.module('game.main')
 				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
 				this.screen.y = player.pos.y - ig.system.height / 2;
 
-				// Get all camera dodges.				
-				cameraDodges = ig.game.getEntitiesByType(EntityCameraDodge);
+				// Get all camera dodges that are visible.
+				var cameraDodges = this.getDodges();
 
-				if(this.cameraDodging && cameraDodges.length>=1) {
+				if(this.cameraDodging && typeof cameraDodges != 'undefined') {
 
 					var closest = { index: undefined, distance: undefined };
 
@@ -511,6 +511,37 @@ ig.module('game.main')
 					}
 				});
 			}
+		},
+
+		/*
+		 * Returns all the camera-dodge entities that are visible on screen.
+		 *
+		 * @return array of entities if some are found, else return undefined.
+		 */
+		getDodges: function() {
+
+			var cameraDodges = ig.game.getEntitiesByType(EntityCameraDodge);
+
+			var onScreen = new Array();
+
+			for(var i=0; i<cameraDodges.length; i++) {
+
+				var x = cameraDodges[i].pos.x;
+				var y = cameraDodges[i].pos.y;
+				var width = cameraDodges[i].size.x;
+				var height = cameraDodges[i].size.y;
+
+				if( (x + width) >= this.screen.x && 
+					 x < (this.screen.x + ig.system.width) &&
+					(y + height) >= this.screen.y &&
+					 y < (this.screen.y + ig.system.height) ) {
+
+					onScreen.push(cameraDodges[i]);
+				}
+			}
+
+			// Return a populated array or undefined.
+			return (onScreen.length == 0 ? undefined : onScreen);
 		},
 
 		/*
