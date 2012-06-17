@@ -63,7 +63,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 
 			case 'right':
 
-				this.limit.x = this.pos.x + this.size.x;
+				this.limit.x = this.pos.x + this.size.x - ig.system.width;
 				this.limit.y = undefined;
 				break;
 			}
