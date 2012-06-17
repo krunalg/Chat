@@ -36,6 +36,7 @@ $globalMasterTilesheetJSON = 'master.js';
 $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
 $globalSpecialTilesJSON = 'special-tiles.js';
+$globalCameraDodgeJSON = 'camera-dodge.js';
 
 
 
