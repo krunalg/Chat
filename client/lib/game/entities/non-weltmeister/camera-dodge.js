@@ -35,12 +35,6 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			this.next();
 		},
 
-		// Returns the current state.
-		current: function() {
-
-			return this.states[this['index']];
-		},
-
 		// Change to next possible state and return current state.
 		next: function() {
 
