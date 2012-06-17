@@ -315,6 +315,8 @@ ig.module('game.main')
 
 				if(this.cameraDodging && cameraDodges) {
 
+					var closest = { index: undefined, distance: undefined };
+
 					for(var i=0; i<cameraDodges.length; i++) {
 
 						var x = cameraDodges[i].pos.x;
@@ -328,33 +330,44 @@ ig.module('game.main')
 								(y + height >= this.screen.y) &&
 								(y < this.screen.y + ig.system.height) ) {
 
-							// Adjust screen using limit.
-							switch(cameraDodges[i].limit) {
+							// Record closest camera dodge.
+							var distance = player.distanceTo(cameraDodges[i]);
+							if(i==0 || closest.distance > distance) {
 
-								case 'up':
-
-									this.screen.y = cameraDodges[i].pos.y - ig.system.height;
-									break;
-
-								case 'down':
-
-									this.screen.y = cameraDodges[i].pos.y + cameraDodges[i].size.y;
-									break;
-									
-								case 'left':
-
-									this.screen.x = cameraDodges[i].pos.x - ig.system.width;
-									break;
-								
-								case 'right':
-
-									this.screen.x = cameraDodges[i].pos.x + cameraDodges[i].size.x;
-									break;
-								
+								closest.distance = distance;
+								closest.index = i;
 							}
 						}
 					}
-					
+
+					// Have a limit to use?
+					if(typeof closest.index != 'undefined') {
+
+						// Adjust screen using limit.
+						switch(cameraDodges[closest.index].limit) {
+
+							case 'up':
+
+								this.screen.y = cameraDodges[closest.index].pos.y - ig.system.height;
+								break;
+
+							case 'down':
+
+								this.screen.y = cameraDodges[closest.index].pos.y + cameraDodges[closest.index].size.y;
+								break;
+								
+							case 'left':
+
+								this.screen.x  = cameraDodges[closest.index].pos.x - ig.system.width;
+								break;
+							
+							case 'right':
+
+								this.screen.x  = cameraDodges[closest.index].pos.x + cameraDodges[closest.index].size.x;
+								break;
+							
+						}
+					}				
 				}
 			}
 
