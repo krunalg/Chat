@@ -76,7 +76,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 
 		draw: function() {
 
-			switch (this.states[this['limit']]) {
+			switch (this.states[this['index']]) {
 
 			case 'left':
 
