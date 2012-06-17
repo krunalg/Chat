@@ -305,7 +305,7 @@ ig.module('game.main')
 				console.debug("Player does not exist. Adding one.");
 			}
 
-			// Player exists.
+			// Player exists; Control the camera.
 			if (player) {
 
 				// Screen centers on player.
@@ -315,31 +315,23 @@ ig.module('game.main')
 				// Get all camera dodges that are visible.
 				var cameraDodges = this.getDodges();
 
+				// Camera dodging is enabled and there's at least one on screen.
 				if(this.cameraDodging && typeof cameraDodges != 'undefined') {
 
 					var closest = { index: undefined, distance: undefined };
 
 					for(var i=0; i<cameraDodges.length; i++) {
 
-						var x = cameraDodges[i].pos.x;
-						var y = cameraDodges[i].pos.y;
-						var width = cameraDodges[i].size.x;
-						var height = cameraDodges[i].size.y;
-
-						// Camera dodge within screen bounds? 
-						if( (x + width) >= this.screen.x && 
-								x < (this.screen.x + ig.system.width) &&
-								(y + height) >= this.screen.y &&
-								y < (this.screen.y + ig.system.height) ) {
+						// Get distance from player to camera dodge.
+						var distance = player.distanceTo(cameraDodges[i]);
+						
+						// Is this the closest camera dodge so far?
+						if(i==0 || distance < closest.distance) {
 
 							// Record closest camera dodge.
-							var distance = player.distanceTo(cameraDodges[i]);
-							if(i==0 || distance < closest.distance) {
-
-								closest.distance = distance;
-								closest['index'] = i;
-							}
-						}	
+							closest.distance = distance;
+							closest['index'] = i;
+						}
 					}
 
 					// Have a limit to use?
@@ -522,8 +514,10 @@ ig.module('game.main')
 		 */
 		getDodges: function() {
 
+			// Get all camera dodges.
 			var cameraDodges = ig.game.getEntitiesByType(EntityCameraDodge);
 
+			// Store matches here.
 			var onScreen = new Array();
 
 			for(var i=0; i<cameraDodges.length; i++) {
@@ -533,11 +527,13 @@ ig.module('game.main')
 				var width = cameraDodges[i].size.x;
 				var height = cameraDodges[i].size.y;
 
+				// Is any part visible?
 				if( (x + width) >= this.screen.x && 
 					 x < (this.screen.x + ig.system.width) &&
 					(y + height) >= this.screen.y &&
 					 y < (this.screen.y + ig.system.height) ) {
 
+					// Add to visible entities.
 					onScreen.push(cameraDodges[i]);
 				}
 			}
