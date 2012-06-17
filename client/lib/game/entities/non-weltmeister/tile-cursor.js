@@ -39,7 +39,7 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 				if(typeof cameraDodge != 'undefined') {
 
 					// Change limit.
-					cameraDodge.next();
+					var state = cameraDodge.next();
 				
 				} else {
 
