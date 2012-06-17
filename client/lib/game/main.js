@@ -323,9 +323,9 @@ ig.module('game.main')
 						var height = cameraDodges[i].size.y;
 
 						// Camera dodge within screen bounds? 
-						if( (x >= this.screen.x) && 
+						if( (x + width >= this.screen.x) && 
 								(x < this.screen.x + ig.system.width) &&
-								(y >= this.screen.y) &&
+								(y + height >= this.screen.y) &&
 								(y < this.screen.y + ig.system.height) ) {
 
 							// Adjust screen using limit.
