@@ -25,9 +25,12 @@ function jsonToArray($filepath) {
     return $tiles;
 }
 
+$action = $_POST['action'];
+$addAction = 'write';
+$removeAction = 'delete';
 
-// Get all camera-dodges.
-if($_POST['action']=='read') {
+// Read all tiles.
+if($action=='read') {
 
     if(file_exists($globalCameraDodgeJSON)) {
 
@@ -39,53 +42,42 @@ if($_POST['action']=='read') {
     else die('{}');
 }
 
-// Save new state.
-else if($_POST['action']=='write') {
+// Add or remove tile.
+else if($action=='delete' || $action=='write') {
 
     $x = $_POST['x'];
     $y = $_POST['y'];
-    $state =  strtolower( trim( $_POST['state'] ) );
+    $state = strtolower( trim( $_POST['state'] ) );
 
     // Validate data.
     if(!is_numeric($x) || !is_numeric($y)) die('X and Y must both be numerical.');
-    if($state!='left' && $state!='up' && $state!='right' && $state!='down') die('Not a valid state.');
-
-    if(file_exists($globalCameraDodgeJSON)) {
-
-        $tiles = jsonToArray($globalCameraDodgeJSON);
+    if($action==$removeAction) {
+        if($state!='left' && $state!='up' && $state!='right' && $state!='down') {
+            die('Not a valid state.');
+        }
     }
 
-    // Add new state.
-    $tiles[$x][$y] = $state;
+    // Get existing tiles.
+    if(file_exists($globalCameraDodgeJSON)) $tiles = jsonToArray($globalCameraDodgeJSON);
 
-    // Write new JSON.
-    $new_file_contents = json_encode($tiles);
-    writeTextToFile($globalCameraDodgeJSON, $new_file_contents);
-}
+    if($action==$addAction) {
 
-// Remove a camera dodge.
-else if($_POST['action']=='delete') {
-
-    $x = $_POST['x'];
-    $y = $_POST['y'];
-
-    // Validate data.
-    if(!is_numeric($x) || !is_numeric($y)) die('X and Y must both be numerical.');
-
-    if(file_exists($globalCameraDodgeJSON)) {
-
-        $tiles = jsonToArray($globalCameraDodgeJSON);
+        // Add new state.
+        $tiles[$x][$y] = $state;
     }
 
-    // Remove state from array.
-    if(isset($tiles[$x])) {
+    else if($action==$removeAction) {
 
-        unset ($tiles[$x][$y]);
+        // Remove state from array.
+        if(isset($tiles[$x])) {
 
-        // Prune empty arrays.
-        if(count($tiles[$x])==0) unset($tiles[$x]);
+            unset ($tiles[$x][$y]);
+
+            // Prune empty arrays.
+            if(count($tiles[$x])==0) unset($tiles[$x]);
+        }
     }
-
+        
     // Write new JSON.
     $new_file_contents = json_encode($tiles);
     writeTextToFile($globalCameraDodgeJSON, $new_file_contents);
