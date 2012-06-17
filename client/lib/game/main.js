@@ -508,10 +508,10 @@ ig.module('game.main')
 				var height = cameraDodges[i].size.y;
 
 				// Is any part visible?
-				if( (x + width) >= this.screen.x && 
-					 x < (this.screen.x + ig.system.width) &&
-					(y + height) >= this.screen.y &&
-					 y < (this.screen.y + ig.system.height) ) {
+				if(  x >= this.screen.x && 
+					(x + width) < (this.screen.x + ig.system.width) &&
+					 y >= this.screen.y &&
+					(y + height) < (this.screen.y + ig.system.height) ) {
 
 					// Add to visible entities.
 					onScreen.push(cameraDodges[i]);
