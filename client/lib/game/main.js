@@ -173,6 +173,10 @@ ig.module('game.main')
 			ig.input.bind(ig.KEY.C, 'bike');
 			ig.input.bind(ig.KEY.MOUSE1, 'mouse1');
 			ig.input.bind(ig.KEY.MOUSE2, 'mouse2');
+			ig.input.bind(ig.KEY.Q, 'cameraDodging');
+
+			// Start with camera dodging disabled.
+			this.cameraDodging = false;
 
 			/*
 			// OLD: Set up map animations.
@@ -281,6 +285,10 @@ ig.module('game.main')
 		//	  \____/|_|    |_____/_/    \_\_|  |______|
 		//	                                           	
 		update: function() {
+			
+			// Toggle camera dodging.
+			if(ig.input.pressed('cameraDodging')) this.cameraDodging = !this.cameraDodging;
+
 			// Update all entities and backgroundMaps
 			this.parent();
 
@@ -304,16 +312,10 @@ ig.module('game.main')
 				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
 				this.screen.y = player.pos.y - ig.system.height / 2;
 
-				// Find out how far the player can see in each direction.
-				this.visibleUp = player.pos.y - this.screen.y;
-				this.visibleDown = this.screen.y + ig.system.height - player.pos.y - player.size.y;
-				this.visibleLeft = player.pos.x - this.screen.x;
-				this.visibleRight = this.screen.x + ig.system.width - player.pos.x - player.size.x;
-
 				// Get all camera dodges.				
-				var cameraDodges = ig.game.getEntitiesByType(EntityCameraDodge);
+				cameraDodges = ig.game.getEntitiesByType(EntityCameraDodge);
 
-				if(this.cameraDodging && cameraDodges) {
+				if(this.cameraDodging && cameraDodges.length>=1) {
 
 					var closest = { index: undefined, distance: undefined };
 
@@ -325,49 +327,50 @@ ig.module('game.main')
 						var height = cameraDodges[i].size.y;
 
 						// Camera dodge within screen bounds? 
-						if( (x + width >= this.screen.x) && 
-								(x < this.screen.x + ig.system.width) &&
-								(y + height >= this.screen.y) &&
-								(y < this.screen.y + ig.system.height) ) {
+						if( (x + width) >= this.screen.x && 
+								x < (this.screen.x + ig.system.width) &&
+								(y + height) >= this.screen.y &&
+								y < (this.screen.y + ig.system.height) ) {
 
 							// Record closest camera dodge.
 							var distance = player.distanceTo(cameraDodges[i]);
-							if(i==0 || closest.distance > distance) {
+							if(i==0 || distance < closest.distance) {
 
 								closest.distance = distance;
-								closest.index = i;
+								closest['index'] = i;
 							}
-						}
+						}	
 					}
 
 					// Have a limit to use?
-					if(typeof closest.index != 'undefined') {
+					if(typeof closest['index'] != 'undefined') {
 
 						// Adjust screen using limit.
-						switch(cameraDodges[closest.index].limit) {
+						switch(cameraDodges[closest['index']].limit) {
 
 							case 'up':
 
-								this.screen.y = cameraDodges[closest.index].pos.y - ig.system.height;
+								this.screen.y = cameraDodges[closest['index']].pos.y - ig.system.height;
 								break;
 
 							case 'down':
 
-								this.screen.y = cameraDodges[closest.index].pos.y + cameraDodges[closest.index].size.y;
+								this.screen.y = cameraDodges[closest['index']].pos.y + cameraDodges[closest['index']].size.y;
 								break;
 								
 							case 'left':
 
-								this.screen.x  = cameraDodges[closest.index].pos.x - ig.system.width;
+								this.screen.x  = cameraDodges[closest['index']].pos.x - ig.system.width;
 								break;
 							
 							case 'right':
 
-								this.screen.x  = cameraDodges[closest.index].pos.x + cameraDodges[closest.index].size.x;
+								this.screen.x  = cameraDodges[closest['index']].pos.x + cameraDodges[closest['index']].size.x;
 								break;
 							
 						}
-					}				
+					}
+					this.closest = closest;			
 				}
 			}
 
@@ -479,12 +482,7 @@ ig.module('game.main')
 				'facing: ' + player.facing, 
 				'lastFacing: ' + player.lastFacing,
 				'mouse-x: ' + ig.input.mouse.x,
-				'mouse-y: ' + ig.input.mouse.y,
-				'vis-up: ' + this.visibleUp,
-				'vis-down: ' + this.visibleDown,
-				'vis-left: ' + this.visibleLeft,
-				'vis-right: ' + this.visibleRight,
-
+				'mouse-y: ' + ig.input.mouse.y
 				], // will display each array element on a new line
 				true, // true or false to either show the FPS
 				false, // true or false to show the average FPS over a period of time
