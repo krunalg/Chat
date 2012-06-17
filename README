@@ -53,6 +53,7 @@ Water:
 
 Grass:
 - Fix: not all grass entities spawned by network players disappear.
+- Fix: grass doesn't despawn if tile is left with a ledge-hop.
 - Add: 'ash' grass entity.
 - Add: 'tall' grass entity.
 
@@ -88,6 +89,9 @@ Maps:
 Movement:
 - Reflective water should be swimmable intead of walkable.
 - A* pathfinding (low priority).
+
+Optimizations:
+- Boost FPS by not drawing repeating border in regions where it will be covered up.
 
 
 Known Issues:
