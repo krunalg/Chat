@@ -33,7 +33,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 		next: function() {
 
 			// Index of current limit.
-			var index = this.states.indexOf[this.limit];
+			var index = this.states.indexOf(this.limit);
 
 			// Select next limit.
 			this.limit = ( index == this.states.length-1 ? this.states[0] : this.states[index + 1] );
