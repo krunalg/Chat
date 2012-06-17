@@ -51,7 +51,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 
 			case 'down':
 
-				this.limit.y = this.pos.y + this.size.y;
+				this.limit.y = this.pos.y + this.size.y - ig.system.height;
 				this.limit.x = undefined;
 				break;
 
