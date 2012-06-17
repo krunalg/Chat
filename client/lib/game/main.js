@@ -172,6 +172,7 @@ ig.module('game.main')
 			ig.input.bind(ig.KEY.X, 'run');
 			ig.input.bind(ig.KEY.C, 'bike');
 			ig.input.bind(ig.KEY.MOUSE1, 'mouse1');
+			ig.input.bind(ig.KEY.MOUSE2, 'mouse2');
 
 			/*
 			// OLD: Set up map animations.
