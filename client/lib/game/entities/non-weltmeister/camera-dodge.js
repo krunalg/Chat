@@ -48,7 +48,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			  	type: "POST",
 			  	
 			  	// Send states always, even though it's only needed for writes.
-			  	data: {action: action, x : this.pos.x, y: this.pos.y, state: this.states[this['index]']]},
+			  	data: {action: action, x : this.pos.x, y: this.pos.y, state: this.states[this['index']]},
 			  	dataType: "html"
 			});
 		},
