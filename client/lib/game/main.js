@@ -169,9 +169,7 @@ ig.module('game.main')
 			ig.input.bind(ig.KEY.Z, 'action');
 			ig.input.bind(ig.KEY.X, 'run');
 			ig.input.bind(ig.KEY.C, 'bike');
-
-			// Start tracking mouse position.
-			ig.input.initMouse();
+			ig.input.bind(ig.KEY.MOUSE1, 'mouse1');
 
 			/*
 			// OLD: Set up map animations.
