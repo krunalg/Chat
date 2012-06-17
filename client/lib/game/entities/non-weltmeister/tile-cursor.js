@@ -29,7 +29,21 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 			// Mouse click?
 			if( ig.input.pressed('mouse1') ) {
 
-				// Spawn camera restrictor.
+				// Name to give camera dodge.
+				var name = 'CD.' + this.pos.x + '.' + this.pos.y;
+
+				// Entity by that name exists?
+				var cameraDodge = ig.game.getEntityByName(name);
+
+				if(typeof cameraDodge != 'undefined') {
+
+					cameraDodge.next();
+				
+				} else {
+
+					// Spawn camera-dodge entity.
+					ig.game.spawnEntity(EntityCameraDodge, this.pos.x, this.pos.y, {name: name});	
+				}
 			}
 		},
 
