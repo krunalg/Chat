@@ -24,7 +24,7 @@ echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used
             'action': 'write',
             'x': 256,
             'y': 512,
-            'state': 'left'
+            'state': 'right'
         } );" >Try writing 2.</a>
 
 <a href="javascript:post_to_url( 'camera-dodge.php',
@@ -32,5 +32,5 @@ echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used
             'action': 'write',
             'x': 128,
             'y': 1024,
-            'state': 'left'
+            'state': 'down'
         } );" >Try writing 3.</a>
