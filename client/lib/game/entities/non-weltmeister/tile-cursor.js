@@ -44,8 +44,27 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 				} else {
 
 					// Spawn camera-dodge entity.
-					ig.game.spawnEntity(EntityCameraDodge, this.pos.x, this.pos.y, {name: name});	
+					cameraDodge = ig.game.spawnEntity(EntityCameraDodge, this.pos.x, this.pos.y, {name: name});	
+
+					var state = cameraDodge.current();
 				}
+
+				// Write data to server.
+				var request = $.ajax({
+				  url: "http://127.0.0.1/pokemon-chat/mapper/camera-dodge.php",
+				  type: "POST",
+				  data: {action: 'write', x : cameraDodge.pos.x, y: cameraDodge.pos.y, state: state},
+				  dataType: "html"
+				});
+
+				request.done(function(msg) {
+				  console.log('AJAX DONE: ' + msg)
+				});
+
+				request.fail(function(jqXHR, textStatus) {
+				  console.log('AJAX FAILED: ' + textStatus)
+				});
+
 			} 
 
 			// Remove a camera dodge.
@@ -56,6 +75,8 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 
 					// Kill it.
 					cameraDodge.kill();
+
+					// Delete from server.
 				
 				}
 			}
