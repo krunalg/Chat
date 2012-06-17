@@ -39,7 +39,7 @@ for($t=0; $t<count($testTypes); $t++) {
                 'x': " . $tests[$i]['x'] .",
                 'y': " . $tests[$i]['y'] .",
                 'state': '" . $tests[$i]['state'] ."'
-            } );\" >Try writing $i</a><br>";        
+            } );\" >Try to " . $testTypes[$t] . " " . $i ."</a><br>";        
     }
 
     echo "<br>";
