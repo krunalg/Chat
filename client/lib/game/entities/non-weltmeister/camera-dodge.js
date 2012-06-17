@@ -39,7 +39,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 		next: function() {
 
 			// Select next state.
-			this['index'] = ((this['index'] == this.states.length - 1) ? 0 : this['index'] + 1;
+			this['index'] = ( (this['index'] == this.states.length - 1) ? 0 : this['index'] + 1 );
 
 			switch (this.states[this['index']]) {
 
