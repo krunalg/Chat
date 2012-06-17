@@ -38,11 +38,11 @@ else if($_POST['action']=='write') {
         $file_as_object = json_decode($file_contents);
 
         // Convert into 2D array.
-        foreach ($file_as_object as $x => $array) {
-            foreach ($array as $y => $state) {
-                $tiles[$x][$y] = $state;
+        foreach ($file_as_object as $currentX => $object) {
+            foreach ($object as $currentY => $state) {
+                $tiles[$currentX][$currentY] = $state;
             }
-        }    
+        }
     }
 
     // Add new state.
