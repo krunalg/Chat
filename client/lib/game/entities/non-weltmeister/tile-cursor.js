@@ -7,13 +7,13 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 	EntityTileCursor = ig.Entity.extend({
 
 		lineWidth: 2,
-
+		
 		lineColor: '#fff',
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// Game tilesize.
+			// Get game tilesize.
 			this.tilesize = ig.game.collisionMap.tilesize;
 
 			// Set cursor size.
@@ -32,6 +32,8 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 
 			ig.system.context.strokeStyle = this.lineColor;
 			ig.system.context.lineWidth = this.lineWidth;
+			
+			// Draw rectangle around tile.
 			ig.system.context.strokeRect(	
 				ig.system.getDrawPos(this.pos.x.round() - ig.game.screen.x) - (this.lineWidth/2),
 				ig.system.getDrawPos(this.pos.y.round() - ig.game.screen.y) - (this.lineWidth/2),
