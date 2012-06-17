@@ -37,6 +37,11 @@ echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used
 
 <br>
 
+
+
+
+
+
 <a href="javascript:post_to_url( 'camera-dodge.php',
         { 
             'action': 'delete',
