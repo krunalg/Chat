@@ -334,35 +334,15 @@ ig.module('game.main')
 						}
 					}
 
-					// Have a limit to use?
+					// Index of camera dodge entity?
 					if(typeof closest['index'] != 'undefined') {
 
-						// Adjust screen using limit.
-						switch(cameraDodges[closest['index']].limit) {
+						var limitX = cameraDodges[closest['index']].limit.x;
+						var limitY = cameraDodges[closest['index']].limit.y;
 
-							case 'up':
-
-								this.screen.y = cameraDodges[closest['index']].pos.y - ig.system.height;
-								break;
-
-							case 'down':
-
-								this.screen.y = cameraDodges[closest['index']].pos.y + cameraDodges[closest['index']].size.y;
-								break;
-								
-							case 'left':
-
-								this.screen.x  = cameraDodges[closest['index']].pos.x - ig.system.width;
-								break;
-							
-							case 'right':
-
-								this.screen.x  = cameraDodges[closest['index']].pos.x + cameraDodges[closest['index']].size.x;
-								break;
-							
-						}
-					}
-					this.closest = closest;			
+						if(typeof limitX != 'undefined') this.screen.x = limitX;
+						if(typeof limitY != 'undefined') this.screen.y = limitY;
+					}		
 				}
 			}
 
