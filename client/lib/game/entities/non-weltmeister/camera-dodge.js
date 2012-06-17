@@ -84,6 +84,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			ig.system.context.strokeStyle = this.lineColor;
 			ig.system.context.lineWidth = this.lineWidth;
 
+			// Begin drawing line along limit edge.
 			ig.system.context.beginPath();
 			ig.system.context.moveTo( 
 				ig.system.getDrawPos(startX - ig.game.screen.x),
