@@ -25,6 +25,7 @@ Change-Log:
 - Walking in shallow water produced a splash effect at the players feet. (Completed June 17, 2012)
 - Walking through ash-covered grass spawns a cloud/puff of ash and the grass turns (and then stays) green. (Completed June 17, 2012)
 - Fixed: Ash puff only spawn if persistent-grass has not yet spawned. (Completed June 18, 2012)
+- Fixed: Grass entities spawned along-side persistent grass entities now self-despawn. (Completely June 18, 2012)
 
 
 To-do:
@@ -58,7 +59,6 @@ Grass:
 - Fix: Grass doesn't despawn if tile is left with a ledge-hop.
 - Add: 'tall' grass entity.
 - Add: Despawning of persistent-grass entities when off-screen.
-- Fix: Regular grass entity spawned along with persistent-grass not despawning.
 
 Effects:
 - "Deep sand" effect.

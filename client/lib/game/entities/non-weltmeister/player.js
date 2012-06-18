@@ -232,9 +232,12 @@ ig.module(
 		/*
 		 * Return the grass entity located at the tile where the player is.
 		 *
-		 * @return EntityGrass if one exists, else return undefined.
+		 * @return an array of entities.
 		 */
 		inGrass: function() {
+			
+			var result = new Array();
+
 			// Search all grass entities for one that shares the players position.
 			var allGrass = ig.game.getEntitiesByType(EntityGrass);
 			if (allGrass) {
@@ -243,11 +246,11 @@ ig.module(
 					// Compare grass entity position to the player's.
 					if (allGrass[i].pos.x == this.pos.x && allGrass[i].pos.y == this.pos.y) {
 
-						// Return matching grass entity.
-						return allGrass[i];
+						result.push(allGrass[i]);
 					}
 				}
 			}
+			return result;
 		},
 
 		/*
@@ -453,7 +456,7 @@ ig.module(
 
 				// Remove old grass entity if leaving one.
 				var oldGrass = this.inGrass();
-				if (oldGrass) oldGrass.markForDeath();
+				for(var i=0; i<oldGrass.length; i++) oldGrass[i].markForDeath();
 
 				// Spawn sand-track if needed.
 				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandtrack'], ig.game.primaryMapLayer)) {
