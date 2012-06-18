@@ -26,6 +26,7 @@ Change-Log:
 - Walking through ash-covered grass spawns a cloud/puff of ash and the grass turns (and then stays) green. (Completed June 17, 2012)
 - Fixed: Ash puff only spawn if persistent-grass has not yet spawned. (Completed June 18, 2012)
 - Fixed: Grass entities spawned along-side persistent grass entities now self-despawn. (Completely June 18, 2012)
+- Added tall-grass with animations. (Completed June 18, 2012)
 
 
 To-do:
@@ -57,7 +58,6 @@ Water:
 Grass:
 - Fix: Not all grass entities spawned by network players disappear.
 - Fix: Grass doesn't despawn if tile is left with a ledge-hop.
-- Add: 'tall' grass entity.
 - Add: Despawning of persistent-grass entities when off-screen.
 
 Effects:
@@ -118,6 +118,8 @@ Known Issues:
 
 - It is possible to get from a high to a low point or vice versa in some areas,
   such as from below a bridge to being on the bridge, by walking over certain tiles.
+
+- Tall-grass entities appear darker than they should be.
 
 
 Additional Information
