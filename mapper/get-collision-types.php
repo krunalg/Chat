@@ -15,7 +15,7 @@ require('inc.functions.php');
      *
      */
     
-    $interestedIn = array('grass', 'water', 'sandtrack', 'reflection', 'splash', 'ashgrass', 'tallgrass');
+    $notInterestedIn = array('nowalk', 'left', 'right', 'up', 'down', 'above');
 
     // we'll need master tilesheet info to translate hashes into tile positions
     $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
@@ -40,7 +40,7 @@ require('inc.functions.php');
     foreach($collisions as $tileHash => $collisionType)
     {
         $currentCollisionName = $nameOfCollisionByIndex[$collisionType];
-        if(in_array($currentCollisionName, $interestedIn))
+        if(!in_array($currentCollisionName, $notInterestedIn))
         {
             if( !isset( $tilesByCollisionType[ $currentCollisionName ] ))
             {
