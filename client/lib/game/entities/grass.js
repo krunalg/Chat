@@ -49,7 +49,7 @@ ig.module('game.entities.grass')
 
 			// Create animation.
 			this.addAnim('rustle', 0.1667, [0, 1, 2, 3, 4], true); // 10 frames of 60 per
-			this.addAnim('static', 1, [5], true);
+			this.addAnim('static', 1, [0], true);
 
 			this.currentAnim = this.anims['static'];
 		},
