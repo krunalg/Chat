@@ -27,6 +27,15 @@ ig.module('game.entities.non-weltmeister.ash-puff')
 			this.currentAnim = this.anims.puff;
 
 			this.zIndex = this.zPriority + this.pos.y;
+		},
+
+		update: function() {
+
+			// Update animation frames.
+			if (this.currentAnim != null) this.currentAnim.update();
+
+			// Remove entity after animation finishes.
+			if (this.currentAnim.loopCount >= 1) this.kill();
 		}
 
 	});
