@@ -18,7 +18,7 @@ ig.module('game.entities.non-weltmeister.ash-puff')
 			this.parent(x, y, settings);
 
 			// Define animation sequence.
-			this.addAnim('puff', (2 / 60), [0, 1]);
+			this.addAnim('puff', (1 / 60), [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], true);
 
 			// Set current animation.
 			this.currentAnim = this.anims.puff;
