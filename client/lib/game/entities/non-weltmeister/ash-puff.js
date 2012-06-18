@@ -20,8 +20,9 @@ ig.module('game.entities.non-weltmeister.ash-puff')
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// Define animation sequence.
-			this.addAnim('puff', (1 / 60), [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], true);
+			// Tile 5 does not exist and so is used to add a few blank frames
+			// to the start of the animation.
+			this.addAnim('puff', (1 / 60), [5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], true);
 
 			// Set current animation.
 			this.currentAnim = this.anims.puff;
