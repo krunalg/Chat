@@ -470,10 +470,12 @@ ig.module(
 					}
 				}
 
+				var facedTile = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+
 				// Kill any splash entity that is following player if not in shallow water.
 				if (typeof this.followers.splash != 'undefined') {
 
-					if (!ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
+					if (!ig.game.isSpecialTile((facedTile.x / tilesize), (facedTile.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
 
 						this.followers.splash.kill();
 						this.followers.splash = undefined;
