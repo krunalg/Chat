@@ -230,47 +230,6 @@ ig.module(
 		},
 
 		/*
-		 * Return the grass entity (if it exists) at the tile faced by the player. If it
-		 * does not exist and the tile is of grass type, spawn a grass entity and return it.
-		 *
-		 * @return EntityGrass if one exists or is spawned, else return undefined.
-		 */
-		trySpawningGrass: function() {
-
-			// Get position of faced tile.
-			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
-
-			// Get map tilesize.
-			var tilesize = ig.game.collisionMap.tilesize;
-
-			// Do not spawn a grass entity if one already exists there.
-			var allGrass = ig.game.getEntitiesByType(EntityGrass);
-			if (allGrass) {
-				for (var i = 0; i < allGrass.length; i++) {
-					if (allGrass[i].pos.x == position.x && allGrass[i].pos.y == position.y && !allGrass[i]._killed) {
-
-						// Save from being killed if marked for death.
-						if (allGrass[i].markedForDeath) allGrass[i].revive();
-
-						// Return grass entity.
-						return allGrass[i];
-					}
-				}
-			}
-
-			// Check if the faced tile is grass.
-			if (ig.game.isSpecialTile(
-			(position.x / tilesize), (position.y / tilesize), specialTiles['grass'], 'lower')) {
-
-				// Debug message.
-				console.debug("Creating grass entity at: " + position.x + "," + position.y);
-
-				// Spawn new grass entity and return it.
-				return ig.game.spawnEntity(EntityGrass, position.x, position.y, {});
-			}
-		},
-
-		/*
 		 * Return the grass entity located at the tile where the player is.
 		 *
 		 * @return EntityGrass if one exists, else return undefined.
@@ -464,8 +423,10 @@ ig.module(
 				this.swimming = false;
 
 				// Spawn new grass entity if needed.
-				var newGrass = this.trySpawningGrass();
-				if (newGrass) newGrass.play();
+				if (ig.game.isSpecialTile( facedTile.x / tilesize, facedTile.y / tilesize, specialTiles['grass'], ig.game.primaryMapLayer)) {
+					var newGrass = this.trySpawningEntity(EntityGrass, facedTile);
+					if(newGrass) newGrass.play();
+				}
 
 				// Remove old grass entity if leaving one.
 				var oldGrass = this.inGrass();
