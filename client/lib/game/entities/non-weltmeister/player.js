@@ -590,9 +590,6 @@ ig.module(
 				// Prevent Impact from moving the player further.
 				this.vel.x = this.vel.y = 0;
 
-				// Assess whether to try moving again or rest.
-				this.continueOrStop();
-
 				var tilesize = this.getTilesize();
 
 				// Standing in shallow water?
@@ -604,6 +601,9 @@ ig.module(
 						this.followers.splash = ig.game.spawnEntity(EntitySplash, this.pos.x, this.pos.y, {player: player} );
 					}
 				}
+
+				// Assess whether to try moving again or rest.
+				this.continueOrStop();
 
 				// Update repeating border by region if local player.
 				if (this.controlledByLocalKeyboard) updateBorder(this);
