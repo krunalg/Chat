@@ -37,6 +37,14 @@ ig.module('game.entities.non-weltmeister.splash')
 			this.currentAnim = this.anims.spritz;
 		},
 
+		kill: function() {
+
+			// Break tie with player so that garbage collector will pick this up.
+			this.player = undefined;
+
+			this.parent();
+		},
+
 		update: function() {
 
 			this.zIndex = this.zPriority + this.pos.y;

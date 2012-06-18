@@ -73,6 +73,9 @@ ig.module(
 		// Chat-bubble entity; used to prevent overlapping bubbles.
 		chatBubble: undefined,
 
+		// Object containing other entities.
+		followers: {},
+
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
@@ -578,12 +581,38 @@ ig.module(
 				// Assess whether to try moving again or rest.
 				this.continueOrStop();
 
-				// Check if player is a local human player.
-				if (this.controlledByLocalKeyboard) {
-					// Update repeating border to reflect current location.
-					updateBorder(this);
+				var tilesize = this.getTilesize();
+
+				// Standing in shallow water?
+				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
+					
+					console.debug("Standing in shallow water...");
+
+					if (typeof this.followers.splash == 'undefined') {
+
+						console.debug("Adding splash which will follow the player.");
+
+						var player = this;
+						this.followers.splash = ig.game.spawnEntity(EntitySplash, this.pos.x, this.pos.y, {player: player} );
+					}
+
+				} else {
+
+					console.debug("Not standing in shallow water...");
+
+					if (typeof this.followers.splash != 'undefined') {
+
+						console.debug("Found a splash entity that will be removed now.");
+						this.followers.splash.kill();
+						this.followers.splash = undefined;
+					}
 				}
+
+				// Update repeating border by region if local player.
+				if (this.controlledByLocalKeyboard) updateBorder(this);
+
 			} else {
+
 				// Have not reached destination, keep moving.
 				this.setVelocity(this.speed);
 			}
