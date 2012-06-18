@@ -596,7 +596,7 @@ ig.module(
 				// Standing in shallow water?
 				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
 
-					if (typeof this.followers.splash != 'undefined') {
+					if (typeof this.followers.splash == 'undefined') {
 
 						var player = this;
 						this.followers.splash = ig.game.spawnEntity(EntitySplash, this.pos.x, this.pos.y, {player: player} );
