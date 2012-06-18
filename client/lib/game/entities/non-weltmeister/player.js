@@ -443,6 +443,14 @@ ig.module(
 					}
 				}
 
+				// Spawn tall grass entity if needed.
+				else if (ig.game.isSpecialTile( facedTile.x / tilesize, facedTile.y / tilesize, specialTiles['tallgrass'], ig.game.primaryMapLayer)) {
+					
+					var tallGrass = this.trySpawningEntity(EntityTallGrass, facedTile);
+					tallGrass.play();
+
+				}
+
 				// Remove old grass entity if leaving one.
 				var oldGrass = this.inGrass();
 				if (oldGrass) oldGrass.markForDeath();

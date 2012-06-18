@@ -39,6 +39,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.persistent-grass',
 
+'game.entities.non-weltmeister.tall-grass',
+
 'game.entities.exit',
 
 'game.entities.npc',
