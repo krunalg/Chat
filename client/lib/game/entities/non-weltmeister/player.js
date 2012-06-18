@@ -583,14 +583,13 @@ ig.module(
 
 				var tilesize = this.getTilesize();
 
+				// Is there a splash entity currently following the player?
+				var splashExists = (typeof this.followers.splash != 'undefined');
+
 				// Standing in shallow water?
 				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
-					
-					console.debug("Standing in shallow water...");
 
-					if (typeof this.followers.splash == 'undefined') {
-
-						console.debug("Adding splash which will follow the player.");
+					if (!splashExists) {
 
 						var player = this;
 						this.followers.splash = ig.game.spawnEntity(EntitySplash, this.pos.x, this.pos.y, {player: player} );
@@ -598,11 +597,8 @@ ig.module(
 
 				} else {
 
-					console.debug("Not standing in shallow water...");
+					if (splashExists) {
 
-					if (typeof this.followers.splash != 'undefined') {
-
-						console.debug("Found a splash entity that will be removed now.");
 						this.followers.splash.kill();
 						this.followers.splash = undefined;
 					}
