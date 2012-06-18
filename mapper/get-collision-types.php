@@ -15,7 +15,7 @@ require('inc.functions.php');
      *
      */
     
-    $interestedIn = array('grass', 'water', 'sandtrack', 'reflection', 'splash', 'ashgrass');
+    $interestedIn = array('grass', 'water', 'sandtrack', 'reflection', 'splash', 'ashgrass', 'tallgrass');
 
     // we'll need master tilesheet info to translate hashes into tile positions
     $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);

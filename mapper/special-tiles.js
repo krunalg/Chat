@@ -147,4 +147,6 @@ specialTiles.splash.push(1536);
 specialTiles.splash.push(2553);
 specialTiles.ashgrass = new Array();
 specialTiles.ashgrass.push(19);
+specialTiles.tallgrass = new Array();
+specialTiles.tallgrass.push(2224);
 })
