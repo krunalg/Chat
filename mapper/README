@@ -60,3 +60,10 @@ border-change.php
 animations.php
 -   Outputs a bunch of JavaScript which is used to define which tiles
     in the master tilesheet are to be animated, and how.
+
+camera-dodge.php
+-   Called by the game client using AJAX. Used for writing camera-dodge entities
+    to a JSON file (also deleting).
+
+camera-dodge-test.php
+-   Contains tests to make sure that camera-dodge.php is functioning properly.
