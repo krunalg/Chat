@@ -132,4 +132,17 @@ specialTiles.sandtrack.push(47);
 specialTiles.sandtrack.push(495);
 specialTiles.sandtrack.push(1041);
 specialTiles.sandtrack.push(1779);
+specialTiles.splash = new Array();
+specialTiles.splash.push(1796);
+specialTiles.splash.push(2423);
+specialTiles.splash.push(2361);
+specialTiles.splash.push(2432);
+specialTiles.splash.push(739);
+specialTiles.splash.push(1388);
+specialTiles.splash.push(1569);
+specialTiles.splash.push(2089);
+specialTiles.splash.push(1382);
+specialTiles.splash.push(626);
+specialTiles.splash.push(1536);
+specialTiles.splash.push(2553);
 })
