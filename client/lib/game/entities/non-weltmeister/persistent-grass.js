@@ -13,14 +13,18 @@ ig.module('game.entities.non-weltmeister.persistent-grass')
 			
 			this.parent(x, y, settings);
 
-			// Create animation.
-			this.addAnim('static', 1, [5], true);
+			// The number 6 does not exist in the sprite sheet and is used as a 'blank'.
+			this.addAnim('static', (4/60), [6, 5], true);
 
 			this.currentAnim = this.anims['static'];
 		},
 
 		// Overwrite the update function so entity does not despawn itself.
-		update: function() {}
+		update: function() {
+
+			// Update animations.
+			if (this.currentAnim != null) this.currentAnim.update();
+		}
 
 	});
 });

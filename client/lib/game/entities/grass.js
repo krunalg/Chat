@@ -52,8 +52,13 @@ ig.module('game.entities.grass')
 			// Set zIndex.
 			this.zIndex = this.zPriority + this.pos.y,
 
-			// Create animation.
-			this.addAnim('rustle', 0.1667, [0, 1, 2, 3, 4], true); // 10 frames of 60 per
+			// The number 6 does not exist in the sprite sheet and is used as a 'blank'.
+			this.addAnim('rustle', (2/60), [6, 6,
+											0, 0, 0, 0, 0,
+											1, 1, 1, 1, 1, 
+											2, 2, 2, 2, 2, 
+											3, 3, 3, 3, 3, 
+											4, 4, 4, 4, 4], true); // 10 frames of 60 per
 			this.addAnim('static', 1, [4], true);
 
 			this.currentAnim = this.anims['static'];
