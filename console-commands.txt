@@ -1,3 +1,7 @@
 // Teleport to ash grass.
 ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 2624;
 ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 144;
+
+// Teleport to tall grass.
+ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 4640;
+ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 1072;
