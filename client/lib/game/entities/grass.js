@@ -15,7 +15,7 @@ ig.module('game.entities.grass')
 		zPriority: 4,
 
 		// Load image resource.
-		animSheet: new ig.AnimationSheet('media/grass-animation.png', 16, 16),
+		animSheet: new ig.AnimationSheet('media/rs.grass.png', 16, 16),
 
 		// Used to keep entity alive briefly before killing.
 		killTimer: null,
