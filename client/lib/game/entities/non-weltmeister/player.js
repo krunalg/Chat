@@ -422,10 +422,21 @@ ig.module(
 				// It's difficult to swim on land.
 				this.swimming = false;
 
-				// Spawn new grass entity if needed.
+				// Spawn normal grass entity if needed.
 				if (ig.game.isSpecialTile( facedTile.x / tilesize, facedTile.y / tilesize, specialTiles['grass'], ig.game.primaryMapLayer)) {
+					
 					var newGrass = this.trySpawningEntity(EntityGrass, facedTile);
 					if(newGrass) newGrass.play();
+				}
+
+				// Spawn ash grass entities if needed.
+				else if (ig.game.isSpecialTile( facedTile.x / tilesize, facedTile.y / tilesize, specialTiles['ashgrass'], ig.game.primaryMapLayer)) {
+					
+					var newGrass = this.trySpawningEntity(EntityGrass, facedTile);
+					if(newGrass) newGrass.play();
+
+					// Spawn an ash puff above player and grass entities.
+					ig.game.spawnEntity(EntityAshPuff, facedTile.x, facedTile.y, {} );
 				}
 
 				// Remove old grass entity if leaving one.
@@ -434,6 +445,7 @@ ig.module(
 
 				// Spawn sand-track if needed.
 				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandtrack'], ig.game.primaryMapLayer)) {
+					
 					var sandtrack = this.trySpawningEntity(EntitySandTrack, this.pos);
 					if (sandtrack) 
 					{
