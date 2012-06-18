@@ -22,6 +22,7 @@ Change-Log:
 - Server will no longer accept names longer than 20 characters. (Completed June 15, 2012)
 - Server converts special HTML characters in messages to safe strings. (Completed June 15, 2012)
 - Players can no longer have more than one chat bubble visible at any given moment. (Completed June 16, 2012)
+- Walking in shallow water produced a splash effect at the players feet. (Completed June 17, 2012)
 
 
 To-do:
@@ -46,7 +47,6 @@ Controls:
 - Fix: Pressing up/down has precedence over left/right.
 
 Water:
-- Add: 'shallow' water splash effect.
 - Fix: Player does 'slow-walk' animation trying to swim against a wall.
 - Add: Player shows 'bobbing' animation when swimming.
 - Add: Player does an initial hop onto the surf entity.
