@@ -23,6 +23,7 @@ Change-Log:
 - Server converts special HTML characters in messages to safe strings. (Completed June 15, 2012)
 - Players can no longer have more than one chat bubble visible at any given moment. (Completed June 16, 2012)
 - Walking in shallow water produced a splash effect at the players feet. (Completed June 17, 2012)
+- Walking through ash-covered grass spawns a cloud/puff of ash and the grass turns (and then stays) green. (Completed June 17, 2012)
 
 
 To-do:
@@ -32,7 +33,7 @@ Camera:
 - Ability to restrict certain areas of map from being displayed on screen.
 
 Reflections:
-- Fix: not animating properly when facing right.
+- Fix: Not animating properly when facing right.
 - Add brightness or 'fading' effect to reflections.
 - Fix: Tree-tips over reflective water hide reflection.
 
@@ -41,7 +42,7 @@ Weather:
 - Sand-screen and ash-screen don't follow the player as he moves.
 
 Ledges:
-- Fix: Can be walked over if approached from the side.
+- Fix: Can be walked along if approached from the side.
 
 Controls:
 - Fix: Pressing up/down has precedence over left/right.
@@ -52,10 +53,11 @@ Water:
 - Add: Player does an initial hop onto the surf entity.
 
 Grass:
-- Fix: not all grass entities spawned by network players disappear.
-- Fix: grass doesn't despawn if tile is left with a ledge-hop.
-- Add: 'ash' grass entity.
+- Fix: Not all grass entities spawned by network players disappear.
+- Fix: Grass doesn't despawn if tile is left with a ledge-hop.
 - Add: 'tall' grass entity.
+- Add: Despawning of persistent-grass entities when off-screen.
+- Fix: Regular grass entity spawned along with persistent-grass not despawning.
 
 Effects:
 - "Deep sand" effect.
