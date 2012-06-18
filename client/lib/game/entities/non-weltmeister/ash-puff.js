@@ -11,6 +11,9 @@ ig.module('game.entities.non-weltmeister.ash-puff')
 			y: 16
 		},
 
+		// Should be higher than players and grass entities.
+		zPriority: 7,
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.ash-puff.png', 16, 16),
 
