@@ -135,6 +135,11 @@ $globalCollisions =
         array( 'collision'    => 0,
                'mouseoutImg'  => 'images/tall-grass.gif',
                'mouseoverImg' => 'images/tall-grass-mouseover.png'
+        ),
+        'deepsand'    =>
+        array( 'collision'    => 0,
+               'mouseoutImg'  => 'images/deep-sand.gif',
+               'mouseoverImg' => 'images/deep-sand-mouseover.png'
         )
     );
 
