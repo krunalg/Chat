@@ -79,6 +79,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.splash',
 
+'game.entities.non-weltmeister.ash-puff',
+
 //debug
 'impact.debug.debug',
 
