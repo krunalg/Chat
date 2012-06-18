@@ -470,6 +470,16 @@ ig.module(
 					}
 				}
 
+				// Kill any splash entity that is following player if not in shallow water.
+				if (typeof this.followers.splash != 'undefined') {
+
+					if (!ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
+
+						this.followers.splash.kill();
+						this.followers.splash = undefined;
+					}
+				}
+
 				// Which tiles to check for reflectivity?
 				checkTiles = new Array();
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + tilesize, this.facing, 1));
@@ -583,24 +593,13 @@ ig.module(
 
 				var tilesize = this.getTilesize();
 
-				// Is there a splash entity currently following the player?
-				var splashExists = (typeof this.followers.splash != 'undefined');
-
 				// Standing in shallow water?
 				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
 
-					if (!splashExists) {
+					if (typeof this.followers.splash != 'undefined') {
 
 						var player = this;
 						this.followers.splash = ig.game.spawnEntity(EntitySplash, this.pos.x, this.pos.y, {player: player} );
-					}
-
-				} else {
-
-					if (splashExists) {
-
-						this.followers.splash.kill();
-						this.followers.splash = undefined;
 					}
 				}
 
