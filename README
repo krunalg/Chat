@@ -38,8 +38,8 @@ Reflections:
 - Fix: Tree-tips over reflective water hide reflection.
 
 Weather:
-- Triggered by player walking in certain areas.
-- Sand-screen and ash-screen don't follow the player as he moves.
+- Add: Triggered by player walking in certain areas.
+- Fix: Sand-screen and ash-screen follow the player as he moves.
 
 Ledges:
 - Fix: Can be walked along if approached from the side.
