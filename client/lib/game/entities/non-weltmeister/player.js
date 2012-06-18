@@ -427,6 +427,21 @@ ig.module(
 		startMove: function()
 		{
 
+			// Get game tilesize.
+			var tilesize = this.getTilesize();
+
+			var facedTile = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+
+			// Kill any splash entity that is following player if not in shallow water.
+			if (typeof this.followers.splash != 'undefined') {
+
+				if (!ig.game.isSpecialTile((facedTile.x / tilesize), (facedTile.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
+
+					this.followers.splash.kill();
+					this.followers.splash = undefined;
+				}
+			}
+
 			// Water
 			if (this.canSwim()) {
 
@@ -456,9 +471,6 @@ ig.module(
 				var oldGrass = this.inGrass();
 				if (oldGrass) oldGrass.markForDeath();
 
-				// Get game tilesize.
-				var tilesize = this.getTilesize();
-
 				// Spawn sand-track if needed.
 				if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['sandtrack'], ig.game.primaryMapLayer)) {
 					var sandtrack = this.trySpawningEntity(EntitySandTrack, this.pos);
@@ -467,18 +479,6 @@ ig.module(
 						sandtrack.facing = this.facing;
 						sandtrack.isFootprint = !this.onBike;
 						sandtrack.setAnimation();
-					}
-				}
-
-				var facedTile = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
-
-				// Kill any splash entity that is following player if not in shallow water.
-				if (typeof this.followers.splash != 'undefined') {
-
-					if (!ig.game.isSpecialTile((facedTile.x / tilesize), (facedTile.y / tilesize), specialTiles['splash'], ig.game.primaryMapLayer)) {
-
-						this.followers.splash.kill();
-						this.followers.splash = undefined;
 					}
 				}
 
