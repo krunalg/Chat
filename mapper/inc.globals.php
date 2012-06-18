@@ -51,75 +51,80 @@ $globalCollisions =
                'mouseoutImg'  => 'images/spacer.png',
                'mouseoverImg' => 'images/mouseover.png'
         ),
-           'nowalk'   => 
+        'nowalk'   => 
         array( 'collision'    => 1,
                'mouseoutImg'  => 'images/solid.gif',
                'mouseoverImg' => 'images/solid-mouseover.png'
         ),
-           'left'     => 
+        'left'     => 
         array( 'collision'    => 45,
                'mouseoutImg'  => 'images/left.gif',
                'mouseoverImg' => 'images/left-mouseover.png'
         ),
-           'right'    => 
+        'right'    => 
         array( 'collision'    => 34,
                'mouseoutImg'  => 'images/right.gif',
                'mouseoverImg' => 'images/right-mouseover.png'
         ),
-           'up'       => 
+        'up'       => 
         array( 'collision'    => 12,
                'mouseoutImg'  => 'images/up.gif',
                'mouseoverImg' => 'images/up-mouseover.png'
         ),
-           'down'     => 
+        'down'     => 
         array( 'collision'    => 23,
                'mouseoutImg'  => 'images/down.gif',
                'mouseoverImg' => 'images/down-mouseover.png'
         ),
-           'noleft'   => 
+        'noleft'   => 
         array( 'collision'    => 999,
                'mouseoutImg'  => 'images/noleft.gif',
                'mouseoverImg' => 'images/noleft-mouseover.png'
         ),
-           'noright'  => 
+        'noright'  => 
         array( 'collision'    => 999,
                'mouseoutImg'  => 'images/noright.gif',
                'mouseoverImg' => 'images/noright-mouseover.png'
         ),
-           'noup'     => 
+        'noup'     => 
         array( 'collision'    => 999,
                'mouseoutImg'  => 'images/noup.gif',
                'mouseoverImg' => 'images/noup-mouseover.png'
         ),
-           'nodown'   => 
+        'nodown'   => 
         array( 'collision'    => 999,
                'mouseoutImg'  => 'images/nodown.gif',
                'mouseoverImg' => 'images/nodown-mouseover.png'
         ),
-           'above'    =>
+        'above'    =>
         array( 'collision'    => 0,
                'mouseoutImg'  => 'images/above-player.gif',
                'mouseoverImg' => 'images/above-player-mouseover.png'
         ),
-           'grass'    =>
+        'grass'    =>
         array( 'collision'    => 0,
                'mouseoutImg'  => 'images/grass.gif',
                'mouseoverImg' => 'images/grass-mouseover.png'
         ),
-            'water'    =>
+        'water'    =>
         array( 'collision'    => 0,
                'mouseoutImg'  => 'images/water.gif',
                'mouseoverImg' => 'images/water-mouseover.png'
         ),
-            'sandtrack'    =>
+        'sandtrack'    =>
         array( 'collision'    => 0,
                'mouseoutImg'  => 'images/sand-track.gif',
                'mouseoverImg' => 'images/sand-track-mouseover.png'
         ),
-            'reflection'    =>
+        'reflection'    =>
         array( 'collision'    => 0,
                'mouseoutImg'  => 'images/reflection.gif',
                'mouseoverImg' => 'images/reflection-mouseover.png'
+        ),
+        'splash'    =>
+        array( 'collision'    => 0,
+               'mouseoutImg'  => 'images/splash.gif',
+               'mouseoverImg' => 'images/splash-mouseover.png'
         )
     );
 
