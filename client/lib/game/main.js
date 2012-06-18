@@ -77,6 +77,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.camera-dodge',
 
+'game.entities.non-weltmeister.splash',
+
 //debug
 'impact.debug.debug',
 
