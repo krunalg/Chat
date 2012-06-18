@@ -35,12 +35,12 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 
 			// Set first limit.
 			this.next();
-
-			// Send state to server.
-			this.ajax('write');
 		},
 
 		ajax: function(action) {
+
+			var x = this.pos.x;
+			var y = this.pos.y;
 
 			var request = $.ajax({
 			  	
@@ -48,8 +48,16 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			  	type: "POST",
 			  	
 			  	// Send states always, even though it's only needed for writes.
-			  	data: {action: action, x : this.pos.x, y: this.pos.y, state: this.states[this['index']]},
+			  	data: {action: action, x : x, y: y, state: this.states[this['index']]},
 			  	dataType: "html"
+			});
+
+			request.done(function(msg) {
+			  	console.log('camera-dodge.ajax(): ' + action + ' success at: ' + x + ', ' + y);
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+			  	console.log('camera-dodge.ajax(): ' + action + ' FAILED at: ' + x + ', ' + y + '... ' + textStatus);
 			});
 		},
 
