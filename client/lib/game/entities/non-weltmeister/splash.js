@@ -18,6 +18,9 @@ ig.module('game.entities.non-weltmeister.splash')
 			y: -8
 		},
 
+		// Should be higher than players.
+		zPriority: 7,
+
 		// Used for fetching position.
 		player: null,
 
@@ -32,6 +35,13 @@ ig.module('game.entities.non-weltmeister.splash')
 
 			// Set current animation.
 			this.currentAnim = this.anims.spritz;
+		},
+
+		update: function() {
+
+			this.zIndex = this.zPriority + this.pos.y;
+
+			this.parent();
 		},
 
 		draw: function() {
