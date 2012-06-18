@@ -14,6 +14,9 @@ ig.module('game.entities.grass')
 		// Should be above player entities zPriority.
 		zPriority: 4,
 
+		// Used simply to tell how long entity has existed.
+		timer: undefined,
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.grass.png', 16, 16),
 
@@ -40,6 +43,8 @@ ig.module('game.entities.grass')
 
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
+
+			this.timer = new ig.Timer();
 
 			// Create timer to count-down to entity's death.
 			this.killTimer = new ig.Timer();

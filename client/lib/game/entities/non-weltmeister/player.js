@@ -433,10 +433,14 @@ ig.module(
 				else if (ig.game.isSpecialTile( facedTile.x / tilesize, facedTile.y / tilesize, specialTiles['ashgrass'], ig.game.primaryMapLayer)) {
 					
 					this.trySpawningEntity(EntityGrass, facedTile);
-					this.trySpawningEntity(EntityPersistentGrass, facedTile);
+					
+					var pGrass = this.trySpawningEntity(EntityPersistentGrass, facedTile);
 
-					// Spawn an ash puff above player and grass entities.
-					ig.game.spawnEntity(EntityAshPuff, facedTile.x, facedTile.y, {} );
+					// Is persistent entity brand new?
+					if(!(pGrass.timer.delta()>=0.5)) {
+
+						ig.game.spawnEntity(EntityAshPuff, facedTile.x, facedTile.y, {} );
+					}
 				}
 
 				// Remove old grass entity if leaving one.

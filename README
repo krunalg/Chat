@@ -24,6 +24,7 @@ Change-Log:
 - Players can no longer have more than one chat bubble visible at any given moment. (Completed June 16, 2012)
 - Walking in shallow water produced a splash effect at the players feet. (Completed June 17, 2012)
 - Walking through ash-covered grass spawns a cloud/puff of ash and the grass turns (and then stays) green. (Completed June 17, 2012)
+- Fixed: Ash puff only spawn if persistent-grass has not yet spawned. (Completed June 18, 2012)
 
 
 To-do:
