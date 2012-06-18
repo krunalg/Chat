@@ -10,6 +10,7 @@ ig.module('game.entities.non-weltmeister.persistent-grass')
 		zPriority: 0,
 
 		init: function(x, y, settings) {
+			
 			this.parent(x, y, settings);
 
 			// Create animation.

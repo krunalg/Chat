@@ -432,7 +432,8 @@ ig.module(
 				// Spawn ash grass entities if needed.
 				else if (ig.game.isSpecialTile( facedTile.x / tilesize, facedTile.y / tilesize, specialTiles['ashgrass'], ig.game.primaryMapLayer)) {
 					
-					var newGrass = this.trySpawningEntity(EntityGrass, facedTile);
+					this.trySpawningEntity(EntityGrass, facedTile);
+					this.trySpawningEntity(EntityPersistentGrass, facedTile);
 
 					// Spawn an ash puff above player and grass entities.
 					ig.game.spawnEntity(EntityAshPuff, facedTile.x, facedTile.y, {} );
