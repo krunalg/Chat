@@ -404,6 +404,21 @@ ig.module(
 				}
 			}
 
+			// Kill any deep-sand entity that is following player if not in deep sand.
+			else if (typeof this.followers.deepsand != 'undefined') {
+
+				if (!ig.game.isSpecialTile((facedTile.x / tilesize), (facedTile.y / tilesize), specialTiles['deepsand'], ig.game.primaryMapLayer)) {
+
+					this.followers.deepsand.kill();
+					this.followers.deepsand = undefined;
+				}
+
+				else {
+
+					this.followers.deepsand.currentAnim.rewind();
+				}
+			}
+
 			// Water
 			if (this.canSwim()) {
 
@@ -587,6 +602,16 @@ ig.module(
 
 						var player = this;
 						this.followers.splash = ig.game.spawnEntity(EntitySplash, this.pos.x, this.pos.y, {player: player} );
+					}
+				}
+
+				// Standing in deep sand?
+				else if (ig.game.isSpecialTile((this.pos.x / tilesize), (this.pos.y / tilesize), specialTiles['deepsand'], ig.game.primaryMapLayer)) {
+
+					if (typeof this.followers.deepsand == 'undefined') {
+
+						var player = this;
+						this.followers.deepsand = ig.game.spawnEntity(EntityDeepSand, this.pos.x, this.pos.y, {player: player} );
 					}
 				}
 
