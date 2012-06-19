@@ -72,7 +72,6 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
     $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
     
     $mapImageResources = array(); // array of image resources
-    $mapBorderImageResources = array(); // array of border image resources
     $mapImageInfo = array(); // array of image dimensions and position
     $countMaps = 0; // increases as we decide to use more maps
     
@@ -83,8 +82,6 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
         $dirName = dirname($maps[$i]);
         $pathToPlacementFile =
             $dirName . DIRECTORY_SEPARATOR . $globalPlacementFile;
-        $pathToBorderFile =
-            $dirName . DIRECTORY_SEPARATOR . $globalBorderFile;
         
         // only deal with maps that have placement data
         if(file_exists($pathToPlacementFile))
@@ -98,20 +95,10 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
             // load map
             $map = LoadPNG($maps[$i]);
             
-            // load border
-            if(!file_exists($pathToBorderFile))
-                die($pathToBorderFile . " not found.");
-            $border = LoadPNG($pathToBorderFile);
-            
             // get map dimensions
             $mapSize = getimagesize($maps[$i]);
             $mapWidth = $mapSize[0];
             $mapHeight = $mapSize[1];
-            
-            // get border dimensions
-            $borderSize = getimagesize($pathToBorderFile);
-            $borderWidth = $borderSize[0];
-            $borderHeight = $borderSize[1];
             
             // push map stuff to arrays
             $mapInfo = array();
@@ -119,11 +106,8 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
             $mapInfo['y'] = $placementY;
             $mapInfo['width'] = $mapWidth;
             $mapInfo['height'] = $mapHeight;
-            $mapInfo['borderWidth'] = $borderWidth;
-            $mapInfo['borderHeight'] = $borderHeight;
             array_push($mapImageInfo, $mapInfo);
             array_push($mapImageResources, $map);
-            array_push($mapBorderImageResources, $border);
             
             $countMaps++;
         }
@@ -140,62 +124,16 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
         // the furthest point that a map extends over the x-axis
         // after accounting for the border on left and right side
         $extendsX = $mapImageInfo[$i]['x'] +
-                    $mapImageInfo[$i]['width'] +
-                    ($mapImageInfo[$i]['borderWidth'] * $globalBorderRepeatX * 2);
+                    $mapImageInfo[$i]['width'];
         $extendsY = $mapImageInfo[$i]['y'] +
-                    $mapImageInfo[$i]['height'] +
-                    ($mapImageInfo[$i]['borderHeight'] * $globalBorderRepeatY * 2);
+                    $mapImageInfo[$i]['height'];
                     
         if($extendsX > $maxWidth) $maxWidth = $extendsX;
         if($extendsY > $maxHeight) $maxHeight = $extendsY;
-        
-        // and update each maps position to account for its border
-        $mapImageInfo[$i]['x'] +=
-            $mapImageInfo[$i]['borderWidth'] * $globalBorderRepeatX;
-        $mapImageInfo[$i]['y'] +=
-            $mapImageInfo[$i]['borderHeight'] * $globalBorderRepeatY;
     }
     
     // now that we know how big the entire map is, let's create it
     $finalMapImage = imagecreatetruecolor($maxWidth, $maxHeight);
-
-    // now we can begin adding the borders
-    for($i=0; $i<$countMaps; $i++)
-    {
-        $xStart =           $mapImageInfo[$i]['x'] -
-                            ($mapImageInfo[$i]['borderWidth'] *
-                            $globalBorderRepeatX);
-        $yStart =           $mapImageInfo[$i]['y'] -
-                            ($mapImageInfo[$i]['borderHeight'] *
-                            $globalBorderRepeatY);
-        $borderFillWidth =  $mapImageInfo[$i]['width'] +
-                            ($mapImageInfo[$i]['borderWidth'] *
-                            $globalBorderRepeatX * 2);
-        $borderFillHeight = $mapImageInfo[$i]['height'] +
-                            ($mapImageInfo[$i]['borderHeight'] *
-                            $globalBorderRepeatY * 2);
-           
-        // tile the border to fill the area
-        $borderFillWidthInChunks = $borderFillWidth / $mapImageInfo[$i]['borderWidth'];
-        $borderFillHeightInChunks = $borderFillHeight / $mapImageInfo[$i]['borderHeight'];
-        for($y=0; $y<$borderFillHeightInChunks; $y++)
-        {
-            for($x=0; $x<$borderFillWidthInChunks; $x++)
-            {
-                if(!imagecopy( 
-                    $finalMapImage, // destination image
-                    $mapBorderImageResources[$i], // source image
-                    $xStart + ( $x * $mapImageInfo[$i]['borderWidth'] ), // x destination
-                    $yStart + ( $y * $mapImageInfo[$i]['borderHeight'] ), // and y
-                    0, 0, // x, y source
-                    $mapImageInfo[$i]['borderWidth'], // copy width
-                    $mapImageInfo[$i]['borderHeight'] // copy height
-                )) die( "Writing of border in map ".$i.
-                        ' <b style="color: red">failed</b>. '.
-                        'Could not copy tile: '.$x.','.$y   );
-            }
-        }
-    }
     
     // and finally we can add the maps themselves
     for($i=0; $i<$countMaps; $i++)
