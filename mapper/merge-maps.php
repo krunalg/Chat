@@ -210,12 +210,21 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
             $mapImageInfo[$i]['height'] // copy height
         )) die( "Writing of map ".$i.
                 ' <b style="color: red">failed</b>. ');
+
+        // frees image from memory
+        imagedestroy($mapImageResources[$i]);
     }
     
     if(!imagepng($finalMapImage, '.'.DIRECTORY_SEPARATOR.'test-merge.png' ))
         die( 'Write attempt <b style="color:red">failed</b>. '.
              'Could not write final map.');
-    else echo "<b>Successfully</b> wrote test-merge.png... Pick a better name.";
+    else {
+
+        echo "<b>Successfully</b> wrote test-merge.png... Pick a better name.";
+
+        // frees image from memory
+        imagedestroy($finalMapImage);
+    }
 
     
 }
