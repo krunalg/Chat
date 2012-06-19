@@ -53,11 +53,11 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 			});
 
 			request.done(function(msg) {
-			  	console.log('camera-dodge.ajax(): ' + action + ' success at: ' + x + ', ' + y);
+			  	// Do nothing.
 			});
 
 			request.fail(function(jqXHR, textStatus) {
-			  	console.log('camera-dodge.ajax(): ' + action + ' failed at: ' + x + ', ' + y + '... ' + textStatus);
+			  	console.debug('Failure to ' + action + ' camera-dodge at: ' + x + ', ' + y + '... ' + textStatus);
 			});
 		},
 
