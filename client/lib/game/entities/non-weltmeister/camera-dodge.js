@@ -10,18 +10,15 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 
 		lineColor: '#f00',
 
-		// Currently selected state.
 		limit: {
 			x: undefined,
 			y: undefined
 		},
 
-		ajaxURL: 'http://127.0.0.1/pokemon-chat/mapper/camera-dodge.php',
-
-		// Possible camera restrictions.
+		// Limit to which direction?
 		states: ['left', 'up', 'right', 'down'],
 
-		// Index of current state.
+		// Index of state.
 		index: 0,
 
 		init: function(x, y, settings) {
@@ -33,39 +30,35 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			// Set cursor size.
 			this.size.x = this.size.y = this.tilesize;
 
-			// Set first limit.
-			this.next();
+			// Calculate default limit.
+			this.recalculate();
 		},
 
-		ajax: function(action) {
-
-			var x = this.pos.x;
-			var y = this.pos.y;
-
-			var request = $.ajax({
-			  	
-			  	url: this.ajaxURL,
-			  	type: "POST",
-			  	
-			  	// Send states always, even though it's only needed for writes.
-			  	data: {action: action, x : x, y: y, state: this.states[this['index']]},
-			  	dataType: "html"
-			});
-
-			request.done(function(msg) {
-			  	console.log('camera-dodge.ajax(): ' + action + ' success at: ' + x + ', ' + y);
-			});
-
-			request.fail(function(jqXHR, textStatus) {
-			  	console.log('camera-dodge.ajax(): ' + action + ' FAILED at: ' + x + ', ' + y + '... ' + textStatus);
-			});
-		},
-
-		// Change to next possible state and return current state.
+		// Select next state.
 		next: function() {
 
-			// Select next state.
 			this['index'] = ((this['index'] == this.states.length - 1) ? 0 : this['index'] + 1);
+			this.recalculate();
+			return this;
+		},
+
+		// Sets index to that of the matching state.
+		set: function(state) {
+
+			var newIndex = this.states.indexOf(state);
+			
+			if (newIndex != -1) {
+
+				this['index'] = newIndex;
+				this.recalculate();
+				return true;
+			}
+
+			else return false;
+		}
+		
+		// Re-calculate limits based on current state.
+		recalculate: function() {
 
 			switch (this.states[this['index']]) {
 
@@ -93,19 +86,6 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 				this.limit.y = undefined;
 				break;
 			}
-
-			// Update state on server.
-			this.ajax('write');
-
-			return this.states[this['index']];
-		},
-
-		kill: function() {
-
-			// Remove record from server.
-			this.ajax('delete');
-
-			this.parent();
 		},
 
 		draw: function() {
