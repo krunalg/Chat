@@ -55,7 +55,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			}
 
 			else return false;
-		}
+		},
 		
 		// Re-calculate limits based on current state.
 		recalculate: function() {
