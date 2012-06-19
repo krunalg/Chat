@@ -183,6 +183,7 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
     $mapJSON = json_decode($mapJSONContents);
     foreach($mapJSON as $key => $value)
     {
+        // Validate data.
         if($key=='width') $mapWidthInTiles = $value;
         else if($key=='height') $mapHeightInTiles = $value;
         else if(    $key=='tiles' && is_array($value)
