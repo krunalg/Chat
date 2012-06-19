@@ -123,12 +123,29 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 				var y = entities[i].pos.y;
 				var width = entities[i].size.x;
 				var height = entities[i].size.y;
+				var state = entities[i].getState();
 
-				// Is any part visible?
-				if (x + width - 1 >= ig.game.screen.x && x < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
+				switch(state) {
 
-					// Add to visible entities.
-					onScreen.push(entities[i]);
+					case 'left':
+					case 'right':
+
+						// If limit edge is visible.
+						if (x >= ig.game.screen.x && x + width < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
+
+							onScreen.push(entities[i]);
+						}
+						break;
+
+					case 'up':
+					case 'down':
+
+						// If ANY part of entity is visible.
+						if (x + width - 1 >= ig.game.screen.x && x < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
+
+							onScreen.push(entities[i]);
+						}
+						break;
 				}
 			}
 
