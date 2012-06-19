@@ -7,7 +7,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 	EntityCameraDodgeFactory = ig.Entity.extend({
 
 		// Where to read, write, and delete camera dodge info via AJAX.
-		ajaxURL: 'http://127.0.0.1/pokemon-chat/mapper/camera-dodge.php',
+		ajaxURL: 'lib/game/saved-camera-dodges.js',
 
 		// 2D array populated via Ajax.
 		buildMe: undefined,
