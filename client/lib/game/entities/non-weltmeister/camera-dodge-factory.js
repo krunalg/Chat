@@ -125,7 +125,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 				var height = entities[i].size.y;
 
 				// Is any part visible?
-				if (x >= this.screen.x && (x + width) < (this.screen.x + ig.system.width) && y >= this.screen.y && (y + height) < (this.screen.y + ig.system.height)) {
+				if (x >= ig.game.screen.x && (x + width) < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
 
 					// Add to visible entities.
 					onScreen.push(entities[i]);
