@@ -214,7 +214,7 @@ ig.module(
 					if (entities[i].pos.x == position.x && entities[i].pos.y == position.y && !entities[i]._killed) {
 
 						// Save from being killed if marked for death.
-						if (entities[i].markedForDeath) entities[i].revive();
+						if (entities[i].markedForDeath) entities[i].revive(this);
 
 						// Return entity.
 						return entities[i];
@@ -416,7 +416,7 @@ ig.module(
 				// Replay the animation
 				else {
 
-					this.followers.deepsand.currentAnim.rewind();
+					this.followers.deepsand.currentAnim.gotoFrame(0);
 				}
 			}
 
