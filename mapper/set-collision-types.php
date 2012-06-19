@@ -231,7 +231,7 @@ else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
                 if($index==$indexOfCollision['above']) $directory = $globalAboveDumpDir;
                 else if($index==$indexOfCollision['reflection']) $directory = $globalBelowDumpDir;
 
-                // we only want to try ripping an 'above-tile' from the map
+                // we only want to try ripping certain types of tiles from the map
                 // if its part of the current map (ie. not previously saved)
                 if(isset($posOfTileInMap[$hash]))
                 {
