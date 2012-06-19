@@ -18,6 +18,9 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
+			// Nessesary to pass this entity into AJAX events.
+			var factory = this;
+
 			// Get existing camera dodges.
 			var request = $.ajax({
 			  	url: this.ajaxURL,
@@ -27,13 +30,12 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 			});
 
 			request.done(function(json) {
-			  	ig.game.cdFactory.buildMe = json;
-			  	console.log('Ajax successful: camera-dodge-factory init()');
+			  	factory.buildMe = json;
 			});
 
 			request.fail(function(jqXHR, textStatus) {
-				console.log('Ajax failed: camera-dodge-factory init() ' + textStatus);
-				this.kill();
+				console.log('Failed AJAX read of camera-dodge entities. Status: ' + textStatus);
+				factory.kill();
 			});
 		},
 
@@ -125,6 +127,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 					}
 				}
 
+				this.buildMe = undefined;
 				this.built = true;
 			}
 		}
