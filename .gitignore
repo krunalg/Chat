@@ -20,7 +20,7 @@ game.min.6.15.12.js
 special-tiles.js
 
 # Mapper stuff
-generated-content/
+build/
 
 # Other Folders
 baked/
