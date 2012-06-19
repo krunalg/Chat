@@ -105,14 +105,23 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 
 			this.parent();
 
+			// Perform first time build of AJAX-retrieved entities.
 			if(!this.built && typeof this.buildMe != 'undefined') {
 				
 				for(var x in this.buildMe) {
 				
 					for(var y in this.buildMe[x]) {
 
-						var cameraDodge = ig.game.spawnEntity(EntityCameraDodge, parseInt(x), parseInt(y), {});
-						cameraDodge['index'] = cameraDodge.states.indexOf(this.buildMe[x][y]);
+						var numericX = parseInt(x);
+						
+						var numericY = parseInt(y);
+						
+						var entityName = this.generateName(numericX, numericY);
+						
+						var cameraDodge = ig.game.spawnEntity(EntityCameraDodge, numericX, numericY, {name: entityName});
+						
+						// Set state.
+						cameraDodge.set(this.buildMe[x][y]);
 					}
 				}
 
