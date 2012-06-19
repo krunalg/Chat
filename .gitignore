@@ -19,6 +19,8 @@ game.min.6.15.12.js
 #ignore these duplicates
 special-tiles.js
 
+# Mapper stuff
+generated-content/
 
 # Other Folders
 baked/
