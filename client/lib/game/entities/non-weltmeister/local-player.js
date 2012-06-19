@@ -54,7 +54,7 @@ ig.module(
 		emitUpdateMoveState: function(x, y, direction, state) {
 
 			// Debug message.
-			console.debug('Sending move-update... x: ' + x + ', y: ' + y + ', direction: ' + direction + ', state: ' + state);
+			//console.debug('Sending move-update... x: ' + x + ', y: ' + y + ', direction: ' + direction + ', state: ' + state);
 
 			// Emit socket.
 			socket.emit('receiveUpdateMoveState', x, y, direction, state);
