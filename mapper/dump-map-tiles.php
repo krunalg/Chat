@@ -123,6 +123,9 @@ else if(isset($_POST['dump']) || $automate)
                             die( "".$map[$i].' <b>failed</b>. '.
                                 'Could not write tile ('.$x.','.$y.') to: '.
                                 $tileDestination );
+
+                        // frees image from memory
+                        imagedestroy($newimg);
                         
                         $dumped++; // successfully dumped a tile
                     }
