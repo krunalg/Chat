@@ -37,4 +37,9 @@ for($t=0; $t<count($testTypes); $t++) {
     echo "<br>";
 }   
 
+echo "<a href=\"javascript:post_to_url( 'camera-dodge.php',
+{ 
+    'action': 'read'
+} );\" >Try to read.</a><br>";
+
 ?>
