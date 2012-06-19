@@ -19,7 +19,7 @@ $automate = true;
 if(is_dir($buildDir)) rrmdir($buildDir);
 mkdir($buildDir);
 
-include('dump-map-tiles.php');
+require('dump-map-tiles.php');
 
 
 ?>
