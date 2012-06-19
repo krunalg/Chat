@@ -149,4 +149,14 @@ specialTiles.ashgrass = new Array();
 specialTiles.ashgrass.push(19);
 specialTiles.tallgrass = new Array();
 specialTiles.tallgrass.push(2224);
+specialTiles.deepsand = new Array();
+specialTiles.deepsand.push(2520);
+specialTiles.deepsand.push(14);
+specialTiles.deepsand.push(2017);
+specialTiles.deepsand.push(1331);
+specialTiles.deepsand.push(2508);
+specialTiles.deepsand.push(954);
+specialTiles.deepsand.push(1662);
+specialTiles.deepsand.push(783);
+specialTiles.deepsand.push(1496);
 })
