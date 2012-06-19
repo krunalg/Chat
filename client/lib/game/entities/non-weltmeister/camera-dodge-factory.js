@@ -37,6 +37,30 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 			});
 		},
 
+		ajax: function(action, entity) {
+
+			var x = entity.pos.x;
+			var y = entity.pos.y;
+
+			var request = $.ajax({
+			  	
+			  	url: this.ajaxURL,
+			  	type: "POST",
+			  	
+			  	// Send states always, even though it's only needed for writes.
+			  	data: {action: action, x : x, y: y, state: entity.states[entity['index']]},
+			  	dataType: "html"
+			});
+
+			request.done(function(msg) {
+			  	console.log('camera-dodge.ajax(): ' + action + ' success at: ' + x + ', ' + y);
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+			  	console.log('camera-dodge.ajax(): ' + action + ' failed at: ' + x + ', ' + y + '... ' + textStatus);
+			});
+		},
+
 		update: function() {
 
 			this.parent();
