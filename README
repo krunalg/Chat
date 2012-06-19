@@ -28,13 +28,11 @@ Change-Log:
 - Fixed: Grass entities spawned along-side persistent grass entities now self-despawn. (Completely June 18, 2012)
 - Added tall-grass with animations. (Completed June 18, 2012)
 - Added deep-sand effect which covers players feet in sand in certain areas. (Completed June 18, 2012)
+- Camera restrictions can be added to prevent unsightly areas from being seen by the player. (Completed June 18, 2012)
 
 
 To-do:
 ----------------------------
-
-Camera:
-- Ability to restrict certain areas of map from being displayed on screen.
 
 Reflections:
 - Fix: Not animating properly when facing right.
@@ -95,11 +93,11 @@ Movement:
 
 Optimizations:
 - Boost FPS by not drawing repeating border in regions where it will be covered up.
-- Add all entities that follow player into player.followers (such as chat bubble, name, etc.)
 
 Code Improvements:
-- Have camera-dodge-factory load in starting entities from a module, instead of 
-  using AJAX (low priority).
+- Splash, jump, and deep-sand entities can all likely share a single parent class.
+- Have the initial camera-dodge-factory load entities from a module, not AJAX (low priority).
+- Add all entities that follow player into player.followers (such as chat bubble, name, etc.)
 
 
 Known Issues:
