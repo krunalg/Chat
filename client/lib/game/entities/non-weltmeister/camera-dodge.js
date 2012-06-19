@@ -149,7 +149,33 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			ig.system.context.strokeStyle = this.lineColor;
 			ig.system.context.lineWidth = this.lineWidth;
 
-			// Begin drawing line along limit edge.
+			// Draw line on edge limit.
+			ig.system.context.beginPath();
+			ig.system.context.moveTo(
+			ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
+			ig.system.context.lineTo(
+			ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
+			ig.system.context.stroke();
+			ig.system.context.closePath();
+
+			// Draw first line to make a cross.
+			startX = this.pos.x + (this.size.x / 4);
+			startY = this.pos.y + (this.size.y / 4)
+			endX = this.pos.x + this.size.x - (this.size.x / 4);
+			endY = this.pos.y + this.size.y - (this.size.y / 4);
+			ig.system.context.beginPath();
+			ig.system.context.moveTo(
+			ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
+			ig.system.context.lineTo(
+			ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
+			ig.system.context.stroke();
+			ig.system.context.closePath();
+
+			// Draw second line to complete cross.
+			startX = this.pos.x + (this.size.x / 4);
+			startY = this.pos.y + this.size.y - (this.size.y / 4);
+			endX = this.pos.x + this.size.x - (this.size.x / 4);
+			endY = this.pos.y + (this.size.y / 4);
 			ig.system.context.beginPath();
 			ig.system.context.moveTo(
 			ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
