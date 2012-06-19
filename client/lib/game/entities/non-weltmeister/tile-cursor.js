@@ -26,9 +26,11 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 			this.pos.x = Math.floor((ig.input.mouse.x + ig.game.screen.x ) / this.tilesize) * this.tilesize;
 			this.pos.y = Math.floor((ig.input.mouse.y + ig.game.screen.y ) / this.tilesize) * this.tilesize;
 
+			var factory = ig.game.getEntitiesByType(EntityCameraDodgeFactory)[0];
+
 			// Handle input.
-			if( ig.input.pressed('mouse1') ) ig.game.cdFactory.click(this.pos.x, this.pos.y);
-			else if (ig.input.pressed('mouse2') ) ig.game.cdFactory.remove(this.pos.x, this.pos.y);
+			if( ig.input.pressed('mouse1') ) factory.click(this.pos.x, this.pos.y);
+			else if (ig.input.pressed('mouse2') ) factory.remove(this.pos.x, this.pos.y);
 		},
 
 

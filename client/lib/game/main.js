@@ -187,9 +187,6 @@ ig.module('game.main')
 			ig.input.bind(ig.KEY.MOUSE2, 'mouse2');
 			ig.input.bind(ig.KEY.Q, 'cameraDodging');
 
-			// Start with camera dodging disabled.
-			this.cameraDodging = false;
-
 			// Set map animations from generated file.
 			initBackgroundAnimations();
 
@@ -202,8 +199,9 @@ ig.module('game.main')
 			// Set the repeating border according to region.
 			updateBorder(player);
 
-			// Set up camera dodging.
-			this.cdFactory = ig.game.spawnEntity(EntityCameraDodgeFactory);
+			// Add camera dodging.
+			ig.game.spawnEntity(EntityCameraDodgeFactory);
+			this.cameraDodging = true;
 
 			// Add tab index to canvas to ensure it retains focus.
 			// Chrome needs this in order to focus on canvas after sending a message.
