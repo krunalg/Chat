@@ -81,6 +81,8 @@ ig.module('game.main')
 
 'game.entities.non-weltmeister.camera-dodge',
 
+'game.entities.non-weltmeister.camera-dodge-factory',
+
 'game.entities.non-weltmeister.splash',
 
 'game.entities.non-weltmeister.deep-sand',
