@@ -12,8 +12,7 @@ $buildDir = './build/';
 $globalTileDumpDir = $buildDir . 'original-tiles';
 $globalMapDir =
     "." . DIRECTORY_SEPARATOR .
-    "maps" . DIRECTORY_SEPARATOR .
-    "rs-hoenn-outside";
+    "maps";
 
 $globalAboveDumpDir =
     "." . DIRECTORY_SEPARATOR .
