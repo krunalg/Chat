@@ -190,17 +190,6 @@ ig.module('game.main')
 			// Start with camera dodging disabled.
 			this.cameraDodging = false;
 
-			/*
-			// OLD: Set up map animations.
-			var as = new ig.AnimationSheet('media/bg-flower.png', 16, 16);
-			this.backgroundAnims = {
-				'media/starter-towna.png': {
-					// flower
-					4: new ig.Animation(as, 0.26667, [0, 1, 0, 2]) // 16 frames out of 60 per
-				}
-			};
-			*/
-
 			// Set map animations from generated file.
 			initBackgroundAnimations();
 
