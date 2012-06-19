@@ -67,7 +67,7 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 			ig.system.context.strokeStyle = this.lineColor;
 			ig.system.context.lineWidth = this.lineWidth;
 			
-			// Draw rectangle around tile.
+			// Draw box around tile.
 			ig.system.context.strokeRect(	
 				ig.system.getDrawPos(this.pos.x.round() - ig.game.screen.x) - (this.lineWidth/2),
 				ig.system.getDrawPos(this.pos.y.round() - ig.game.screen.y) - (this.lineWidth/2),
