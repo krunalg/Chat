@@ -10,16 +10,18 @@ $Start = getTime();
 
 <?php
 
-set_time_limit(300);
-ini_set('memory_limit','512M'); // and use a lot of memory
+set_time_limit(900);
+ini_set('memory_limit','1024M'); // and use a lot of memory
 
 
 include('inc.globals.php');
 require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
+if(!isset($automate)) $automate = false;
 
-if( !isset($_POST['dump']) )
+
+if( !isset($_POST['dump']) && !$automate)
 {
     /*
      * First Page: Display all maps in the maps folder
@@ -54,7 +56,7 @@ if( !isset($_POST['dump']) )
                    '} );"/> ';
     }
 }
-else if(isset($_POST['dump']))
+else if(isset($_POST['dump']) || $automate)
 {
     /*
      * Second Page: dump one or all of maps tiles into the dump directory
@@ -64,7 +66,7 @@ else if(isset($_POST['dump']))
     $maps = array();
     
     // dump them all if process=='all'
-    if(isset($_POST['dump']) && $_POST['dump']=='all')
+    if( (isset($_POST['dump']) && $_POST['dump']=='all') || $automate)
         $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
     // or just do one map if one is specified
     else if(isset($_POST['dump']))
