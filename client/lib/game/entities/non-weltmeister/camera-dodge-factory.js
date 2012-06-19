@@ -71,7 +71,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 				
 					for(var y in this.buildMe[x]) {
 
-						var cameraDodge = ig.game.spawnEntity(EntityCameraDodge, x, y);
+						var cameraDodge = ig.game.spawnEntity(EntityCameraDodge, parseInt(x), parseInt(y), {});
 						cameraDodge['index'] = cameraDodge.states.indexOf(this.buildMe[x][y]);
 					}
 				}
