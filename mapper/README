@@ -10,48 +10,36 @@ inc.functions.php
 
 
 
+Miscellaneous:
 
-set-collision-types.php - requires map images in the maps folder.
--   Use this to manage what collision type a tile will be, add grass 
-    entities, or set tiles "above player".
+camera-dodge.php
+-   Called by the game client using AJAX. Used for writing camera-dodge entities
+    to a JSON file (also deleting).
 
-get-collision-types.php
--   Creates an ImpactJS style module file, defining var specialTiles. This
-    var tells the client which tiles are to be treated as water, or as grass.
+camera-dodge-test.php
+-   Contains tests to make sure that camera-dodge.php is functioning properly.
 
-process-map.php
--   Use this to generate a map JSON file, containing map width, height,
-    and hashes for all its tiles (requires map.png file in maps directory).
-    NOTICE: can be time consuming with large maps (Hoenn takes about 12 min).
 
-dump-map-tiles.php  - requires map image be in the maps folder.
--   Rip tiles directly from a source map image into a folder.
-    NOTICE: can be time consuming with multiple maps.
-    
-merge-map-tiles.php - requires all tiles to be inluded are dumped.
--   Combines all dumped tiles into single "master" tilesheet. Generates an image
-    and a JSON file containing hash information.
+
+
+Manual Processes:
+
+Step 1
 
 map-placement.php
--   Use this to manage how maps are placed with relation to each other (if
-    they are to be joined into one).
-    
-merge-maps.php
--   Reads all maps that have placement data and combines them according to
-    placement data, creating a single map that contains them all. It also
-    adds borders to each individual map, closing it off.
-
-map-placement.php
--   Use this to assign x and y position values to specific maps that you
+-   Use this to assign relative x and y position values to specific maps that you
     wish to merge into one large map.
 
-merge-maps.php
--   Use this to merge all maps which have been assigned x and y values into 
-    a single map. Uses border.png image to pad each map.
+Step 2: 
 
-generate-map.php
--   Outputs a Weltmeister readable map file complete with collision map, 
-    lower layer, above layer, and entities.
+set-collision-types.php - requires maps be processed.
+-   Uses map images to manage what collision type a tile will be, add grass 
+    entities, or set tiles "above player".
+
+
+
+
+!! To be made automated !!
 
 border-change.php
 -   Outputs a series of if-statements used by the player to determine if 
@@ -61,9 +49,42 @@ animations.php
 -   Outputs a bunch of JavaScript which is used to define which tiles
     in the master tilesheet are to be animated, and how.
 
-camera-dodge.php
--   Called by the game client using AJAX. Used for writing camera-dodge entities
-    to a JSON file (also deleting).
 
-camera-dodge-test.php
--   Contains tests to make sure that camera-dodge.php is functioning properly.
+
+
+Automated processes:
+
+Step 1:
+
+dump-map-tiles.php  - requires map image be in the maps folder.
+-   Rip tiles directly from a source map image into a folder.
+    NOTICE: can be time consuming with multiple maps.
+
+Step 2:
+
+merge-maps.php
+-   Reads maps which have been assigned relative x and y values, and combines 
+    them them together into a larger map.
+
+Step 3:
+
+process-map.php
+-   Generates a JSON file for each map, containing map width, height, and tile hashes.
+    NOTICE: can be time consuming with large maps (Hoenn takes about 12 min).
+
+Step 4:
+
+get-collision-types.php
+-   Creates an ImpactJS module file, defining which tiles are "special". 
+    (Ie. Which tiles are water, grass, reflective, etc.)
+
+Step 5:
+
+merge-map-tiles.php
+-   Combines all dumped tiles, and manually editted tiles into a single "master" 
+    tilesheet. Generates an image and a JSON file containing hash information.
+
+Step 6:
+
+generate-map.php
+-   Outputs a Weltmeister map file with all map layers, including a collision map.
