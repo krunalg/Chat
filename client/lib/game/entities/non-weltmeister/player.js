@@ -413,6 +413,7 @@ ig.module(
 					this.followers.deepsand = undefined;
 				}
 
+				// Replay the animation
 				else {
 
 					this.followers.deepsand.currentAnim.rewind();

@@ -6,6 +6,11 @@ ig.module('game.entities.non-weltmeister.deep-sand')
 
 	EntityDeepSand = EntitySplash.extend({
 
+		offset: {
+			x: 0,
+			y: -10
+		},
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.deep-sand.png', 16, 8),
 
