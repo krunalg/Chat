@@ -313,8 +313,10 @@ ig.module('game.main')
 				this.screen.x = player.pos.x - ig.system.width / 2 + player.size.x / 2;
 				this.screen.y = player.pos.y - ig.system.height / 2;
 
+				var factory = ig.game.getEntitiesByType(EntityCameraDodgeFactory)[0];
+
 				// Get all camera dodges that are visible.
-				var cameraDodges = this.getDodges();
+				var cameraDodges = factory.getDodges();
 
 				// Camera dodging is enabled and there's at least one on screen.
 				if (this.cameraDodging && typeof cameraDodges != 'undefined') {
@@ -481,40 +483,6 @@ ig.module('game.main')
 					}
 				});
 			}
-		},
-
-		/*
-		 * Returns all the camera-dodge entities that are visible on screen.
-		 * Note that it's important that ig.game.screen.x/y be centered over
-		 * the player before calling this.
-		 *
-		 * @return array of entities if some are found, else return undefined.
-		 */
-		getDodges: function() {
-
-			// Get all camera dodges.
-			var cameraDodges = ig.game.getEntitiesByType(EntityCameraDodge);
-
-			// Store matches here.
-			var onScreen = new Array();
-
-			for (var i = 0; i < cameraDodges.length; i++) {
-
-				var x = cameraDodges[i].pos.x;
-				var y = cameraDodges[i].pos.y;
-				var width = cameraDodges[i].size.x;
-				var height = cameraDodges[i].size.y;
-
-				// Is any part visible?
-				if (x >= this.screen.x && (x + width) < (this.screen.x + ig.system.width) && y >= this.screen.y && (y + height) < (this.screen.y + ig.system.height)) {
-
-					// Add to visible entities.
-					onScreen.push(cameraDodges[i]);
-				}
-			}
-
-			// Return a populated array or undefined.
-			return (onScreen.length == 0 ? undefined : onScreen);
 		},
 
 		/*
