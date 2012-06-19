@@ -5,3 +5,7 @@ ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 144;
 // Teleport to tall grass.
 ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 4640;
 ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 1072;
+
+// Teleport to shallow water.
+ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 10528;
+ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 1296;
