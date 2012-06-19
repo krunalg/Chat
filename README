@@ -95,6 +95,7 @@ Movement:
 
 Optimizations:
 - Boost FPS by not drawing repeating border in regions where it will be covered up.
+- Add all entities that follow player into player.followers (such as chat bubble, name, etc.)
 
 
 Known Issues:
