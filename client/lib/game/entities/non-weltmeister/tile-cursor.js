@@ -26,38 +26,9 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 			this.pos.x = Math.floor((ig.input.mouse.x + ig.game.screen.x ) / this.tilesize) * this.tilesize;
 			this.pos.y = Math.floor((ig.input.mouse.y + ig.game.screen.y ) / this.tilesize) * this.tilesize;
 
-			// Get the would be name of a camera-dodge entity if it exists at this location.
-			var name = 'CD.' + this.pos.x + '.' + this.pos.y;
-
-			// Entity by that name exists?
-			var cameraDodge = ig.game.getEntityByName(name);
-
-			// Add or alter a camera dodge.
-			if( ig.input.pressed('mouse1') ) {
-
-				// Entity exists?
-				if(typeof cameraDodge != 'undefined') {
-
-					// Change limit.
-					cameraDodge.next();
-				
-				} else {
-
-					// Spawn camera-dodge entity.
-					cameraDodge = ig.game.spawnEntity(EntityCameraDodge, this.pos.x, this.pos.y, {name: name});	
-				}
-			} 
-
-			// Remove a camera dodge.
-			else if (ig.input.pressed('mouse2') ) {
-				
-				// Entity exists?
-				if(typeof cameraDodge != 'undefined') {
-
-					// Kill it.
-					cameraDodge.kill();
-				}
-			}
+			// Handle input.
+			if( ig.input.pressed('mouse1') ) ig.game.cdFactory.click(this.pos.x, this.pos.y);
+			else if (ig.input.pressed('mouse2') ) ig.game.cdFactory.remove(this.pos.x, this.pos.y);
 		},
 
 

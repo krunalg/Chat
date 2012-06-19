@@ -61,6 +61,46 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 			});
 		},
 
+		// Added a new entity or if one exists, change its state.
+		click: function(x, y) {
+
+			var action = 'write';
+
+			var entityName = this.generateName(x, y);
+
+			var entity = ig.game.getEntityByName(entityName);
+
+			if(typeof entity != 'undefined') {
+
+				this.ajax(action, entity.next());
+
+			} else {
+				
+				this.ajax(action, ig.game.spawnEntity(EntityCameraDodge, x, y, {name: entityName}));
+			}
+		},
+
+		remove: function(x, y) {
+
+			var action = 'delete';
+
+			var entityName = this.generateName(x, y);
+
+			var entity = ig.game.getEntityByName(entityName);
+
+			if(typeof entity != 'undefined') {
+
+				this.ajax(action, entity);
+				entity.kill();
+
+			}
+		},
+
+		generateName: function(x, y) {
+
+			return 'CameraDodgeX' + x + 'Y' + y;
+		},
+
 		update: function() {
 
 			this.parent();
