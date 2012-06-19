@@ -20,8 +20,11 @@ game.min.6.15.12.js
 special-tiles.js
 
 
-# Folders
+# Other Folders
 baked/
+backup/
+
+# Licensed ImpactJS Files
 impact/
 weltmeister/
 tools/
