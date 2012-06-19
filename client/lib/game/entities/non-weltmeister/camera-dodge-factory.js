@@ -130,22 +130,23 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 					case 'left':
 					case 'right':
 
-						// If limit edge is visible.
-						if (x >= ig.game.screen.x && x + width < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
-
-							onScreen.push(entities[i]);
-						}
+						// Limit edge is visible.
+						startX = x;
+						endX   = x + width;
 						break;
 
 					case 'up':
 					case 'down':
 
-						// If ANY part of entity is visible.
-						if (x + width - 1 >= ig.game.screen.x && x < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
-
-							onScreen.push(entities[i]);
-						}
+						// ANY part of entity is visible.
+						startX = x + width - 1;
+						endX   = x;
 						break;
+				}
+				
+				if (startX >= ig.game.screen.x && endX < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
+
+					onScreen.push(entities[i]);
 				}
 			}
 
