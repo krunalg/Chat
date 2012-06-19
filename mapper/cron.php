@@ -15,13 +15,11 @@ function rrmdir($dir) {
 
 $automate = true;
 
-// Clear build directory.
+// Empty the build directory.
 if(is_dir($buildDir)) rrmdir($buildDir);
-
-// Create new build directory.
 mkdir($buildDir);
 
-//include('dump-map-tiles.php');
+include('dump-map-tiles.php');
 
 
 ?>
