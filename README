@@ -97,6 +97,10 @@ Optimizations:
 - Boost FPS by not drawing repeating border in regions where it will be covered up.
 - Add all entities that follow player into player.followers (such as chat bubble, name, etc.)
 
+Code Improvements:
+- Have camera-dodge-factory load in starting entities from a module, instead of 
+  using AJAX (low priority).
+
 
 Known Issues:
 ----------------------------
