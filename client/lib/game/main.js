@@ -202,7 +202,8 @@ ig.module('game.main')
 			// Set the repeating border according to region.
 			updateBorder(player);
 
-			// Add tab index to canvas to ensure it retains focus (Chrome needs this!)
+			// Add tab index to canvas to ensure it retains focus.
+			// Chrome needs this in order to focus on canvas after sending a message.
 			$("#canvas").attr("tabindex", "0");
 
 			// Tell the input field how to handle 'enter' keypress.
