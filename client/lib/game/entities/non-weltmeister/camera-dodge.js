@@ -37,7 +37,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 		getState: function() {
 
 			return this.states[this['index']];
-		}
+		},
 
 		// Select next state.
 		next: function() {
