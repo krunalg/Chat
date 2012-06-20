@@ -98,53 +98,52 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
     for($i=0; $i<count($mapPaths); $i++)
     {
         // check that map exists
-        if(file_exists($mapPaths[$i]))
+        if(!file_exists($mapPaths[$i])) die( "" . $mapPaths[$i] . " does not exist.");
+        
+        $reconstructedPath = removeFilenameFromPath($mapPaths[$i]);
+        $mapName = basename($reconstructedPath);
+        $jsonDir = $processedMapDir . DIRECTORY_SEPARATOR . $mapName;
+        $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON; 
+        
+        // if a JSON file is present, the map has been processed
+        if(!file_exists($jsonPath))
         {
-            $reconstructedPath = removeFilenameFromPath($mapPaths[$i]);
-            $mapName = basename($reconstructedPath);
-            $jsonDir = $processedMapDir . DIRECTORY_SEPARATOR . $mapName;
-            $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON; 
+            // load map
+            $mapSize = getimagesize($mapPaths[$i]);
+            $mapWidth = $mapSize[0];
+            $mapHeight = $mapSize[1];
+            $map = LoadPNG($mapPaths[$i]);
             
-            // if a JSON file is present, the map has been processed
-            if(!file_exists($jsonPath))
-            {
-                // load map
-                $mapSize = getimagesize($mapPaths[$i]);
-                $mapWidth = $mapSize[0];
-                $mapHeight = $mapSize[1];
-                $map = LoadPNG($mapPaths[$i]);
-                
-                // build array of hashes from tiles
-                $hashes = buildHashTableFromImage($map, $mapWidth, $mapHeight, $globalTilesize);
+            // build array of hashes from tiles
+            $hashes = buildHashTableFromImage($map, $mapWidth, $mapHeight, $globalTilesize);
 
-                // frees image from memory
-                imagedestroy($map); 
-                
-                // build JSON
-                $mapWidthInTiles = $mapWidth/$globalTilesize;
-                $mapHeightInTiles = $mapHeight/$globalTilesize;
-                $beforeJSON = array (
-                                'width' => $mapWidthInTiles,
-                                'height' => $mapHeightInTiles,
-                                'tiles' => $hashes
-                              );
-                $afterJSON = json_encode($beforeJSON);
-                $prettyJSON = json_format($afterJSON);
-                
-                // Make sure directories exist before writing.
-                if(!is_dir($buildDir)) mkdir($buildDir);
-                if(!is_dir($processedMapDir)) mkdir($processedMapDir);
-                if(!is_dir($jsonDir)) mkdir($jsonDir);
-
-                // write to file
-                writeTextToFile($jsonPath, $prettyJSON);
-            }
+            // frees image from memory
+            imagedestroy($map); 
             
-            // JSON file exists
-            else echo "" . $mapPaths[$i] . " has already been processed. " .
-                      "Skipping...";    
+            // build JSON
+            $mapWidthInTiles = $mapWidth/$globalTilesize;
+            $mapHeightInTiles = $mapHeight/$globalTilesize;
+            $beforeJSON = array (
+                            'width' => $mapWidthInTiles,
+                            'height' => $mapHeightInTiles,
+                            'tiles' => $hashes
+                          );
+            $afterJSON = json_encode($beforeJSON);
+            $prettyJSON = json_format($afterJSON);
+            
+            // Make sure directories exist before writing.
+            if(!is_dir($buildDir)) mkdir($buildDir);
+            if(!is_dir($processedMapDir)) mkdir($processedMapDir);
+            if(!is_dir($jsonDir)) mkdir($jsonDir);
+
+            // write to file
+            writeTextToFile($jsonPath, $prettyJSON);
         }
-        else die( "" . $mapPaths[$i] . " does not exist.");
+        
+        // JSON file exists
+        else echo "" . $mapPaths[$i] . " has already been processed. " .
+                  "Skipping...";    
+
         echo "<br>\n"; // new line between each process attempt
     }
 }
