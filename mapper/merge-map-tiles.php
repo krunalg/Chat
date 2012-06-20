@@ -18,12 +18,15 @@ if( !isset($_POST['build']) )
     
     // get a list of all dumped tiles
     $tiles = scanFileNameRecursivly($globalTileDumpDir);
+    $aboveTiles = scanFileNameRecursivly($globalAboveDumpDir);
+    $belowTiles = scanFileNameRecursivly($globalBelowDumpDir);
     
     // report
-    echo 'Found <b>'.count($tiles).'</b> tiles in '.$globalTileDumpDir.'...<br>';
-    echo 'To-do: also list how many "above" and "below" tiles will be included...<br>';
+    echo 'Found <b>'.count($tiles).'</b> dumped tiles in '.$globalTileDumpDir.'...<br>';
+    echo 'Found <b>'.count($aboveTiles).'</b> tiles in '.$globalAboveDumpDir.'...<br>';
+    echo 'Found <b>'.count($belowTiles).'</b> tiles in '.$globalBelowDumpDir.'...<br>';
     
-    if(count($tiles)>=2) // only offer to merge if some exist
+    if(count($tiles) + count($aboveTiles) + count($belowTiles) >=2) // only offer to merge if some exist
     {
         echo "<br>\n\n";
         echo '<input type="button" '.
