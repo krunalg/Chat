@@ -71,9 +71,7 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
     // get a list of all maps
     $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
     
-    $mapImageResources = array(); // array of image resources
     $mapImageInfo = array(); // array of image dimensions and position
-    $countMaps = 0; // increases as we decide to use more maps
     
     // populate the above arrays with map image information and resouces
     for($i=0; $i<count($maps); $i++)
@@ -91,6 +89,7 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
             $placementDataParts = explode(':', $placementData);
             $placementX = trim($placementDataParts[0]);
             $placementY = trim($placementDataParts[1]);
+            $mapName    = trim($placementDataParts[2]);
             
             // load map
             $map = LoadPNG($maps[$i]);
@@ -106,65 +105,70 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
             $mapInfo['y'] = $placementY;
             $mapInfo['width'] = $mapWidth;
             $mapInfo['height'] = $mapHeight;
-            array_push($mapImageInfo, $mapInfo);
-            array_push($mapImageResources, $map);
-            
-            $countMaps++;
+            $mapInfo['image'] = $map;
+
+            if(!isset($mapImageInfo[$mapName])) $mapImageInfo[$mapName] = array();
+            array_push($mapImageInfo[$mapName], $mapInfo);
         }
     }
     
     // now that we have all we need to know about the maps
     // let's find start putting them all together
     
-    //  first we'll find the absolute width and height
-    $maxWidth = 0;
-    $maxHeight = 0;
-    for($i=0; $i<$countMaps; $i++)
-    {
-        // the furthest point that a map extends over the x-axis
-        // after accounting for the border on left and right side
-        $extendsX = $mapImageInfo[$i]['x'] +
-                    $mapImageInfo[$i]['width'];
-        $extendsY = $mapImageInfo[$i]['y'] +
-                    $mapImageInfo[$i]['height'];
-                    
-        if($extendsX > $maxWidth) $maxWidth = $extendsX;
-        if($extendsY > $maxHeight) $maxHeight = $extendsY;
-    }
-    
-    // now that we know how big the entire map is, let's create it
-    $finalMapImage = imagecreatetruecolor($maxWidth, $maxHeight);
-    
-    // and finally we can add the maps themselves
-    for($i=0; $i<$countMaps; $i++)
-    {
-        if(!imagecopy( 
-            $finalMapImage, // destination image
-            $mapImageResources[$i], // source image
-            $mapImageInfo[$i]['x'], // x destination
-            $mapImageInfo[$i]['y'], // and y
-            0, 0, // x, y source
-            $mapImageInfo[$i]['width'], // copy width
-            $mapImageInfo[$i]['height'] // copy height
-        )) die( "Writing of map ".$i.
-                ' <b style="color: red">failed</b>. ');
+    foreach($mapImageInfo as $mapName => $mapChunks) {
 
-        // frees image from memory
-        imagedestroy($mapImageResources[$i]);
-    }
-    
-    if(!imagepng($finalMapImage, '.'.DIRECTORY_SEPARATOR.'test-merge.png' ))
-        die( 'Write attempt <b style="color:red">failed</b>. '.
-             'Could not write final map.');
-    else {
+        //  first we'll find the absolute width and height
+        $maxWidth = 0;
+        $maxHeight = 0;
+        for($i=0; $i<count($mapChunks); $i++)
+        {
+            // the furthest point that a map extends over the x-axis
+            // after accounting for the border on left and right side
+            $extendsX = $mapChunks[$i]['x'] +
+                        $mapChunks[$i]['width'];
+            $extendsY = $mapChunks[$i]['y'] +
+                        $mapChunks[$i]['height'];
+                        
+            if($extendsX > $maxWidth) $maxWidth = $extendsX;
+            if($extendsY > $maxHeight) $maxHeight = $extendsY;
+        }
+        
+        // now that we know how big the entire map is, let's create it
+        $finalMapImage = imagecreatetruecolor($maxWidth, $maxHeight);
+        
+        // and finally we can add the maps themselves
+        for($i=0; $i<count($mapChunks); $i++)
+        {
+            if(!imagecopy( 
+                $finalMapImage, // destination image
+                $mapChunks[$i]['image'], // source image
+                $mapChunks[$i]['x'], // x destination
+                $mapChunks[$i]['y'], // and y
+                0, 0, // x, y source
+                $mapChunks[$i]['width'], // copy width
+                $mapChunks[$i]['height'] // copy height
+            )) die( "Writing of map ".$i.
+                    ' <b style="color: red">failed</b>. ');
 
-        echo "<b>Successfully</b> wrote test-merge.png... Pick a better name.";
+            // frees image from memory
+            imagedestroy($mapChunks[$i]['image']);
+        }
+        
+        $file_dir = '.' . DIRECTORY_SEPARATOR;
+        $file_name = $mapName . '.png';
+        $write_path = $file_dir . $file_name;
 
-        // frees image from memory
-        imagedestroy($finalMapImage);
-    }
+        if(!imagepng($finalMapImage, $write_path ))
+            die( 'Write attempt <b style="color:red">failed</b>. '.
+                 'Could not write final map.');
+        else {
 
-    
+            echo "<b>Successfully</b> wrote $write_path...<br>\n";
+
+            // frees image from memory
+            imagedestroy($finalMapImage);
+        }
+    }  
 }
 else
 {
