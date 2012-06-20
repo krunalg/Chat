@@ -9,7 +9,10 @@ require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
 
-if( !isset($_POST['mapPath']) && !isset($_POST['process']) )
+if(!isset($automate)) $automate = false;
+
+
+if( (!isset($_POST['mapPath']) && !isset($_POST['process'])) && !$automate )
 {
     /*
      * First Page: Display status of maps, whether they are processed or not
@@ -65,7 +68,7 @@ if( !isset($_POST['mapPath']) && !isset($_POST['process']) )
                '} );"/> ';
     }
 }
-else if( isset($_POST['mapPath']) || isset($_POST['process']) )
+else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
 {
     /*
      * Second Page: Process an unprocessed map
@@ -75,13 +78,13 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
     $mapPaths = array();
     
     // Only process one map.
-    if(isset($_POST['mapPath'])) {
+    if(isset($_POST['mapPath']) && !$automate) {
 
         array_push($mapPaths, $_POST['mapPath']);
     }
     
     // Process all maps.
-    else if(isset($_POST['process']) && $_POST['process']=='all') {
+    else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate ) {
 
         $mapPaths = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
 
