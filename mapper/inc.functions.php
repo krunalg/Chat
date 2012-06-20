@@ -491,7 +491,6 @@ function removeFilenameFromPath($path)
     return $reconstructedPath;
 }
 
-// we can now use a hash to find where in the tilesheet any tile is
 /**
  * Builds an array containing all positions of tiles within the a 
  * tilesheet, with hashes for indexes.
