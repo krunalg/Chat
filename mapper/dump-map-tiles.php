@@ -122,6 +122,10 @@ else if(isset($_POST['dump']) || $automate)
                     else $skipped++; // not dumping existing tile
                 }
             }
+
+            // frees image from memory
+            imagedestroy($map);
+
             // reporting before possible next map
             echo "Done dumping ".$maps[$i].
                  " (<b>skipped ".$skipped."</b> existing tiles".
