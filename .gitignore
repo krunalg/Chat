@@ -9,7 +9,7 @@ client/media/
 
 # Generated content
 special-tiles.js
-border-controller.js
+border-check.js
 master.png
 levels/
 build/
