@@ -8,8 +8,9 @@ require('inc.globals.php');
 require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
+if(!isset($automate)) $automate = false;
 
-if( !isset($_POST['build']) )
+if( !isset($_POST['build']) && !$automate)
 {
     /*
      * First Page: Displays statistics and offer to merge
@@ -40,7 +41,7 @@ if( !isset($_POST['build']) )
     die(); // prevent execution time from displaying
     
 }
-else if( isset($_POST['build']) && $_POST['build']=='all' )
+else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
 {
     /*
      * Second Page: Merges all tiles in dumped tiles folder into one image
