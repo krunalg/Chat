@@ -20,6 +20,10 @@ if( !isset($_POST['mapPath']) && !isset($_POST['process']) )
     
     // get a list of all maps
     $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
+
+    // also get merged maps
+    $mergedMaps = scanFileNameRecursivly($mergedMapDir, $globalMapFilename);
+    for($i=0; $i<count($mergedMaps); $i++) array_push($maps, $mergedMaps[$i]);
     
     echo "\n\n";
     
@@ -80,6 +84,10 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
     else if(isset($_POST['process']) && $_POST['process']=='all') {
 
         $mapPaths = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
+
+        // also get merged maps
+        $mergedMaps = scanFileNameRecursivly($mergedMapDir, $globalMapFilename);
+        for($i=0; $i<count($mergedMaps); $i++) array_push($mapPaths, $mergedMaps[$i]);
     }
         
     echo 'Will now process ' . count($mapPaths) . ' maps...<br><br>'."\n\n";
