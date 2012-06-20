@@ -1,6 +1,4 @@
 # Temp ignore while developing mapper
-master.png
-master.js
 test.js
 animations.js
 client/media/8-16.png
@@ -11,9 +9,8 @@ client/media/
 
 #Generated content
 special-tiles.js
-
-# Mapper stuff
 build/
+master.png
 
 # Other Folders
 baked/
