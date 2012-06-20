@@ -41,10 +41,6 @@ set-collision-types.php - requires maps be processed.
 
 !! To be made automated !!
 
-border-change.php - Requires master tilesheet JSON.
--   Outputs a series of if-statements used by the player to determine if 
-    a change in the repeated-background-border layer should be changed.
-
 animations.php
 -   Outputs a bunch of JavaScript which is used to define which tiles
     in the master tilesheet are to be animated, and how.
@@ -88,3 +84,9 @@ Step 6:
 
 generate-map.php
 -   Outputs a Weltmeister map file with all map layers, including a collision map.
+
+Step 7:
+
+border-change.php - Requires master tilesheet JSON.
+-   Outputs an Impact format moduel file containing a check method which updates
+    the games repeating border layer.
