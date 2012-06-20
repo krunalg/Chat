@@ -154,9 +154,10 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
         array_push($justHashes, $justHash);
     }
     $afterJSON = json_encode($justHashes); // need to save this
+    $prettyJSON = json_format($afterJSON);
     
     // write to file
-    if(!file_put_contents($globalMasterTilesheetJSON, $afterJSON))
+    if(!file_put_contents($globalMasterTilesheetJSON, $prettyJSON))
         die( '<b style="color:red">Failed</b> writing file: '.
              $globalMasterTilesheetJSON );
     else
