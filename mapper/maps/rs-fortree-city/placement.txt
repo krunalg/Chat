@@ -1,1 +1,1 @@
-5120:0:outside
+5120:0:rs-world
