@@ -38,19 +38,22 @@ if( !isset($_POST['save']) )
             $dirName . DIRECTORY_SEPARATOR . $globalPlacementFile;
         
         // read old values into form inputs
-        $x = $y = '';
+        $x = $y = $mapName = '';
         if(file_exists($pathToPlacementFile))
         {
             $placementFileData = file_get_contents($pathToPlacementFile);
             $placementDataParts = explode(':', $placementFileData);
             $x = trim($placementDataParts[0]);
             $y = trim($placementDataParts[1]);
+            $mapName = trim($placementDataParts[2]);
         }
         
         echo $pathToPlacementFile . "... X: ";
         echo '<input id="x-'.$i.'" type="text" value="'.$x.'" />';
         echo 'Y: ';
         echo '<input id="y-'.$i.'" type="text" value="'.$y.'" />';
+        echo 'Map: ';
+        echo '<input id="map-'.$i.'" type="text" value="'.$mapName.'" />';
         echo "<br>\n\n";  
         
     }
@@ -92,6 +95,7 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
         $placementByMap[$i] = array();
         $placementByMap[$i]['x'] = $placementParts[1];
         $placementByMap[$i]['y'] = $placementParts[2];
+        $placementByMap[$i]['map'] = $placementParts[3];
     }
     
     // write files
@@ -106,8 +110,8 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
         {
             // write file paying no regard to
             // whether it exists already or not
-            $xAndY = $placementByMap[$i]['x'] . ':' . $placementByMap[$i]['y'];
-            if(!file_put_contents($pathToPlacementFile, $xAndY))
+            $file_contents = $placementByMap[$i]['x'] . ':' . $placementByMap[$i]['y'] . ':' . $placementByMap[$i]['map'];
+            if(!file_put_contents($pathToPlacementFile, $file_contents))
                 die( '<b style="color:red">Failed</b> writing file: ' .
                      $pathToPlacementFile);
             else
@@ -151,8 +155,9 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
         {
             var x = $('#x-'+i).val();
             var y = $('#y-'+i).val();
+            var mapName = $('#map-'+i).val();
             if(i!=0) var divider = ';'; else var divider = '';
-            result = '' + result + divider + i + ':' + x + ":" + y;
+            result = '' + result + divider + i + ':' + x + ":" + y + ':' + mapName;
         }
         
         post_to_url( '',  // post to same file ''
