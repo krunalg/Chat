@@ -16,7 +16,7 @@ if( !isset($_POST['generate']) )
      *
      */
     
-    $maps = scanFileNameRecursivly($globalMapDir, $globalMapJSON);
+    $maps = scanFileNameRecursivly($processedMapDir, $globalMapJSON);
     
     echo "\n\n";
     
@@ -53,7 +53,7 @@ else if( isset($_POST['generate']) )
     
     // do them all if process=='all'
     if(isset($_POST['generate']) && $_POST['generate']=='all')
-        $jsonMapPaths = scanFileNameRecursivly($globalMapDir, $globalMapJSON);
+        $jsonMapPaths = scanFileNameRecursivly($processedMapDir, $globalMapJSON);
     // just do one map if one is specified
     else if(isset($_POST['generate'])) array_push($jsonMapPaths, $_POST['generate']);
     // otherwise leave array empty
