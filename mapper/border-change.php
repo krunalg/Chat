@@ -7,8 +7,9 @@ ini_set('memory_limit','1024M'); // 512M was not enough
 require_once('inc.globals.php');
 require_once('inc.functions.php');
 
+if(!isset($automate)) $automate = false;
 
-if( !isset($_GET['build']) )
+if( !isset($_GET['build']) && !$automate)
 {
     /*
      * First Page: Display maps which have placement data and confirm
@@ -49,7 +50,7 @@ if( !isset($_GET['build']) )
                '}, \'get\' );"/> ';
     }
 }
-else if( isset($_GET['build']) && ($_GET['build']=='yes') )
+else if( (isset($_GET['build']) && ($_GET['build']=='yes')) || $automate)
 {
     /*
      * Second Page: Build a series of if statements
