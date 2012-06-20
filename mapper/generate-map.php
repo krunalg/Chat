@@ -8,8 +8,9 @@ require_once('inc.globals.php');
 require_once('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
+if(!isset($automate)) $automate = false;
 
-if( !isset($_POST['generate']) )
+if( !isset($_POST['generate']) && !$automate )
 {
     /*
      * First Page: List all maps which have JSON files
@@ -42,7 +43,7 @@ if( !isset($_POST['generate']) )
                '} );"/> ';
     }
 }
-else if( isset($_POST['generate']) )
+else if( isset($_POST['generate']) || $automate )
 {
     /*
      * Second Page: Generate map(s) from JSON files using master tilesheet
@@ -52,7 +53,7 @@ else if( isset($_POST['generate']) )
     $jsonMapPaths = array();
     
     // do them all if process=='all'
-    if(isset($_POST['generate']) && $_POST['generate']=='all') {
+    if( (isset($_POST['generate']) && $_POST['generate']=='all') || $automate ) {
 
         $jsonMapPaths = scanFileNameRecursivly($processedMapDir, $globalMapJSON);
     }
