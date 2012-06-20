@@ -166,11 +166,7 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
     $prettyJSON = json_format($afterJSON);
     
     // write to file
-    if(!file_put_contents($globalMasterTilesheetJSON, $prettyJSON))
-        die( '<b style="color:red">Failed</b> writing file: '.
-             $globalMasterTilesheetJSON );
-    else
-        echo "<b>Success</b> writing file: " . $globalMasterTilesheetJSON;
+    writeTextToFile($globalMasterTilesheetJSON, $prettyJSON);
     
 }
 
