@@ -39,7 +39,7 @@ $globalMasterTilesheetJSON = $buildDir . 'master-tilesheet.js';
 $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
 $globalSpecialTilesJSON = 'special-tiles.js';
-$globalCameraDodgeJSON = '../client/lib/game/saved-camera-dodges.js';
+$globalCameraDodgeJSON = $impactLibDir . 'saved-camera-dodges.js';
 
 
 
