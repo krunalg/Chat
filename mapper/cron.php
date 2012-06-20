@@ -63,6 +63,11 @@ require('generate-map.php');
 $End = getTime(); 
 echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
 
+$Start = getTime();
+require('border-change.php');
+$End = getTime(); 
+echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
+
 
 
 $EndTotal = getTime(); 
