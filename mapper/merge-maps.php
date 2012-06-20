@@ -154,9 +154,13 @@ else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
             imagedestroy($mapChunks[$i]['image']);
         }
         
-        $file_dir = '.' . DIRECTORY_SEPARATOR;
-        $file_name = $mapName . '.png';
-        $write_path = $file_dir . $file_name;
+        // Where to write new map file to?
+        $file_dir = $mergedMapDir . DIRECTORY_SEPARATOR . $mapName;
+        $write_path = $file_dir . DIRECTORY_SEPARATOR . $globalMapFilename;
+
+        if(!is_dir($buildDir)) mkdir($buildDir);
+        if(!is_dir($mergedMapDir)) mkdir($mergedMapDir);
+        if(!is_dir($file_dir)) mkdir($file_dir);
 
         if(!imagepng($finalMapImage, $write_path ))
             die( 'Write attempt <b style="color:red">failed</b>. '.
