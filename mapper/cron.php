@@ -44,5 +44,9 @@ require('process-map.php');
 $End = getTime(); 
 echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
 
+$Start = getTime();
+require('get-collision-types.php');
+$End = getTime(); 
+echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
 
 ?>
