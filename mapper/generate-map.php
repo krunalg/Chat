@@ -75,9 +75,36 @@ else if( isset($_POST['generate']) )
     $collisions = getCollisionsFromFile($globalCollisionsFile); // read from file
     $collisions = buildHashIndexCollisions($collisions); // use hashes as indexes
     
+    // We to need to know which maps have placement data because we are skipping those
+    // since we will still be generating the larger maps they merged into.
+    
+    $placementPaths = scanFileNameRecursivly($globalMapDir, $globalPlacementFile);
+
+    $mapHasPlacement = array();
+
+    for($i=0; $i<count($placementPaths); $i++) {
+
+        // get map name
+        $reconstructedPath = removeFilenameFromPath($placementPaths[$i]);
+        $mapName = basename($reconstructedPath);
+        $mapNameWeltmeister = weltmeisterName($mapName);
+        $mapHasPlacement[$mapNameWeltmeister] = true;
+    }
+
     for($i=0; $i<count($jsonMapPaths); $i++)
     {
         if(!file_exists($jsonMapPaths[$i])) die("".$jsonMapPaths[$i]." does not exist.");
+
+        // get map name
+        $reconstructedPath = removeFilenameFromPath($jsonMapPaths[$i]);
+        $mapName = basename($reconstructedPath);
+        $mapNameWeltmeister = weltmeisterName($mapName);
+
+        if($mapHasPlacement[$mapNameWeltmeister]) {
+
+            echo '<b>Skipping</b> '.$jsonMapPaths[$i].' because it is part of a larger map.<br>';
+            continue; 
+        }
 
         // build array of important collision types
         // for special cases such as tiles which need to be above player
@@ -113,13 +140,6 @@ else if( isset($_POST['generate']) )
             }
         }   
         
-        // get map name
-        $reconstructedPath = removeFilenameFromPath($jsonMapPaths[$i]);
-        $mapName = basename($reconstructedPath);
-
-        // create weltmeister-friendly name
-        $mapNameWeltmeister = weltmeisterName($mapName);
-
         // map specific data
         $mapJSON = $jsonMapPaths[$i];
         $mapJSON = file_get_contents($mapJSON);
