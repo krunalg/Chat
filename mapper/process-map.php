@@ -137,10 +137,7 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
                 if(!is_dir($jsonDir)) mkdir($jsonDir);
 
                 // write to file
-                if(!file_put_contents($jsonPath, $prettyJSON))
-                    die( '<b style="color:red">Failed writing file: ' . $jsonPath);
-                else
-                    echo "<b>Success</b> writing file: " . $jsonPath;
+                writeTextToFile($jsonPath, $prettyJSON);
             }
             
             // JSON file exists
