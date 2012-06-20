@@ -158,7 +158,7 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 
 			this.parent();
 
-			this.visible = ig.game.cameraDodging;
+			this.visible = !ig.game.cameraDodging;
 
 			// Perform first time build of AJAX-retrieved entities.
 			if(!this.built && typeof this.buildMe != 'undefined') {
