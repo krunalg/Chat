@@ -3,8 +3,9 @@
 require('inc.globals.php');
 require('inc.functions.php');
 
+if(!isset($automate)) $automate = false;
 
-if(!isset($_GET['go']))
+if(!isset($_GET['go']) && !$automate)
 {
     echo 'Click <a href="?go=true">here</a> to write special tiles file.';
     die();
