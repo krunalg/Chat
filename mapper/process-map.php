@@ -87,9 +87,12 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
         if(file_exists($mapPaths[$i]))
         {
             $reconstructedPath = removeFilenameFromPath($mapPaths[$i]);
+            $mapName = basename($reconstructedPath);
+            $jsonDir = $processedMapDir . DIRECTORY_SEPARATOR . $mapName;
+            $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON; 
             
             // if a JSON file is present, the map has been processed
-            if(!file_exists($reconstructedPath . $globalMapJSON))
+            if(!file_exists($jsonPath))
             {
                 // load map
                 $mapSize = getimagesize($mapPaths[$i]);
@@ -110,12 +113,16 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
                               );
                 $afterJSON = json_encode($beforeJSON);
                 
+                // Make sure directories exist before writing.
+                if(!is_dir($buildDir)) mkdir($buildDir);
+                if(!is_dir($processedMapDir)) mkdir($processedMapDir);
+                if(!is_dir($jsonDir)) mkdir($jsonDir);
+
                 // write to file
-                if(!file_put_contents($reconstructedPath.$globalMapJSON, $afterJSON))
-                    die( '<b style="color:red">Failed writing file: ' .
-                         $reconstructedPath.$globalMapJSON);
+                if(!file_put_contents($jsonPath, $afterJSON))
+                    die( '<b style="color:red">Failed writing file: ' . $jsonPath);
                 else
-                    echo "<b>Success</b> writing file: " . $reconstructedPath.$globalMapJSON;
+                    echo "<b>Success</b> writing file: " . $jsonPath;
             }
             
             // JSON file exists
