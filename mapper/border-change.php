@@ -63,7 +63,14 @@ else if( (isset($_GET['build']) && ($_GET['build']=='yes')) || $automate)
     $mapImageInfo = array(); // array of image dimensions and position
     
     // get master tilesheet info
-    $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
+    if(file_exists($globalMasterTilesheetJSON)) {
+
+        $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);    
+    
+    } else {
+
+        die("Master tilesheet not found.");
+    }
 
     // populate the above arrays with map image information and resouces
     for($i=0; $i<count($maps); $i++)
