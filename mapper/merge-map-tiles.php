@@ -127,6 +127,9 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
                 $globalTilesize // copy height
             )) die( "".$tiles[$nextTile].' <b>failed</b>. '.
                     'Could not copy tile.'  );
+
+            // frees image from memory
+            imagedestroy($tile);
             
             // stop copy tiles when there are none left to write
             if($nextTile==count($tiles)-1)
@@ -141,9 +144,13 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
     if(!imagepng($newimg, $globalMasterTilesheetFile))
         die( '<b style="color:red">Failed</b> writing file: '.
              $globalMasterTilesheetFile );
-    else
+    else {
+
         echo "<b>Success</b> writing file: ".$globalMasterTilesheetFile."<br>\n";
+    }
         
+    // frees image from memory
+    imagedestroy($newimg); 
     
     $justHashes = array();
     for($i=0; $i<count($tiles); $i++)
