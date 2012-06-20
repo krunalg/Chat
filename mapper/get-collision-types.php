@@ -1,7 +1,7 @@
 <?php
 
-require('inc.globals.php');
-require('inc.functions.php');
+require_once('inc.globals.php');
+require_once('inc.functions.php');
 
 if(!isset($automate)) $automate = false;
 

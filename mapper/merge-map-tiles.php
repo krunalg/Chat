@@ -4,8 +4,8 @@ set_time_limit(30); // should only take a few seconds
 ini_set('memory_limit','512M'); // and use a lot of memory
 
 
-require('inc.globals.php');
-require('inc.functions.php');
+require_once('inc.globals.php');
+require_once('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
 if(!isset($automate)) $automate = false;

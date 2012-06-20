@@ -2,8 +2,8 @@
 
 set_time_limit(60);
 
-require('inc.globals.php');
-require('inc.functions.php');
+require_once('inc.globals.php');
+require_once('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 echo '<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js" ></script>';
 

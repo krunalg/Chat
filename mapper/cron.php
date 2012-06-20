@@ -1,6 +1,6 @@
 <?php
 
-require('inc.globals.php');
+require_once('inc.globals.php');
 
 # recursively remove a directory
 function rrmdir($dir) {
