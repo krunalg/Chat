@@ -108,6 +108,9 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
                         $globalTilesize, $x, $y);
                 }
             }
+
+            // frees image from memory
+            imagedestroy($border);
             
             // push map stuff to arrays
             $mapInfo = array();
