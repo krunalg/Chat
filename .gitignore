@@ -7,10 +7,11 @@ client/media/2-8.png
 client/lib/game/background-animations.js
 client/media/
 
-#Generated content
+# Generated content
 special-tiles.js
-build/
 master.png
+levels/
+build/
 
 # Other Folders
 baked/
