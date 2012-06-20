@@ -100,11 +100,7 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
             // write file paying no regard to
             // whether it exists already or not
             $file_contents = $placementByMap[$i]['x'] . ':' . $placementByMap[$i]['y'] . ':' . $placementByMap[$i]['map'];
-            if(!file_put_contents($pathToPlacementFile, $file_contents))
-                die( '<b style="color:red">Failed</b> writing file: ' .
-                     $pathToPlacementFile);
-            else
-                echo "<b>Success</b> writing file: " . $pathToPlacementFile;
+            writeTextToFile($pathToPlacementFile, $file_contents);
         }
         else
         {
