@@ -1,9 +1,6 @@
 # Temp ignore while developing mapper
-map.js
 master.png
 master.js
-dumped-tiles/
-rs-hoenn/
 test.js
 animations.js
 client/media/8-16.png
@@ -11,10 +8,6 @@ client/media/2-8.png
 32-8.png
 client/lib/game/background-animations.js
 client/media/
-mapper/camera-dodge.js
-
-# Ignore baked files.
-game.min.6.15.12.js
 
 #ignore these duplicates
 special-tiles.js
@@ -30,14 +23,10 @@ backup/
 impact/
 weltmeister/
 tools/
+weltmeister.html
 
 # Files
-hoenn_world_map.png
-map.js
-to-do.txt
-weltmeister.html
 how-to-use-git.txt
-challenges.rtf
 time.txt
 pokemon-chat.sublime-project
 pokemon-chat.sublime-workspace
