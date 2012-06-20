@@ -74,15 +74,15 @@ process-map.php
 
 Step 4:
 
-get-collision-types.php
--   Creates an ImpactJS module file, defining which tiles are "special". 
-    (Ie. Which tiles are water, grass, reflective, etc.)
-
-Step 5:
-
 merge-map-tiles.php
 -   Combines all dumped tiles, and manually editted tiles into a single "master" 
     tilesheet. Generates an image and a JSON file containing hash information.
+
+Step 5:
+
+get-collision-types.php - requires master tilesheet be made.
+-   Creates an ImpactJS module file, defining which tiles are "special". 
+    (Ie. Which tiles are water, grass, reflective, etc.)
 
 Step 6:
 
