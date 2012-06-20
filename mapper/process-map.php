@@ -29,10 +29,13 @@ if( !isset($_POST['mapPath']) && !isset($_POST['process']) )
         $reconstructedPath = removeFilenameFromPath($maps[$i]);
         
         // if a JSON file is present, the map has been processed
-        if(file_exists($reconstructedPath . $globalMapJSON))
+        if(file_exists($reconstructedPath . $globalMapJSON)) {
+
             echo $maps[$i]." has been processed... <br>\n\n";
-        else
-        {
+        }
+            
+        else {
+            
             $processingNeeded = true; // only needed once to activate
             $postSafeMapPath = str_replace('\\', "\\\\", $maps[$i]); // needed to not lose slashes on next page
             echo $maps[$i].' <b style="color: red">requires processing</b>...';
@@ -63,13 +66,19 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
      */
     
     $mapPaths = array();
-    // just do one map if one is specified
-    if(isset($_POST['mapPath'])) array_push($mapPaths, $_POST['mapPath']);
-    // or do them all if process=='all'
-    else if(isset($_POST['process']) && $_POST['process']=='all')
-        $mapPaths = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
-    // otherwise leave array empty
     
+    // Only process one map.
+    if(isset($_POST['mapPath'])) {
+
+        array_push($mapPaths, $_POST['mapPath']);
+    }
+    
+    // Process all maps.
+    else if(isset($_POST['process']) && $_POST['process']=='all') {
+
+        $mapPaths = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
+    }
+        
     echo 'Will now process ' . count($mapPaths) . ' maps...<br><br>'."\n\n";
     
     for($i=0; $i<count($mapPaths); $i++)
@@ -78,6 +87,7 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
         if(file_exists($mapPaths[$i]))
         {
             $reconstructedPath = removeFilenameFromPath($mapPaths[$i]);
+            
             // if a JSON file is present, the map has been processed
             if(!file_exists($reconstructedPath . $globalMapJSON))
             {
@@ -107,6 +117,7 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
                 else
                     echo "<b>Success</b> writing file: " . $reconstructedPath.$globalMapJSON;
             }
+            
             // JSON file exists
             else echo "" . $mapPaths[$i] . " has already been processed. " .
                       "Skipping...";    
@@ -115,8 +126,6 @@ else if( isset($_POST['mapPath']) || isset($_POST['process']) )
         echo "<br>\n"; // new line between each process attempt
     }
 }
-
-
 
 
 ?>
