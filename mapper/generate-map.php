@@ -117,6 +117,14 @@ else if( isset($_POST['generate']) )
             $reconstructedPath = removeFilenameFromPath($jsonMapPaths[$i]);
             $mapName = basename($reconstructedPath);
 
+            // create weltmeister-friendly name
+            $mapNameWeltmeister = '';
+            $mapNameParts = explode('-', $mapName);
+            for($word=0; $word<count($mapNameParts); $word++) {
+
+                $mapNameWeltmeister .= ucfirst($mapNameParts[$word]);
+            }
+
             // map specific data
             $mapJSON = $jsonMapPaths[$i];
             $mapJSON = file_get_contents($mapJSON);
@@ -146,7 +154,7 @@ else if( isset($_POST['generate']) )
             $export .= "ig.module( 'game.levels.".$mapName."' )\n".
                       ".requires('impact.image')\n".
                       ".defines(function(){\n".
-                      "Level".ucfirst($mapName)."=/*JSON[*/";
+                      "Level".ucfirst($mapNameWeltmeister)."=/*JSON[*/";
             
             // JSON HERE
             $export .=
