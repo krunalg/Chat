@@ -116,6 +116,9 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
                 
                 // build array of hashes from tiles
                 $hashes = buildHashTableFromImage($map, $mapWidth, $mapHeight, $globalTilesize);
+
+                // frees image from memory
+                imagedestroy($map); 
                 
                 // build JSON
                 $mapWidthInTiles = $mapWidth/$globalTilesize;
