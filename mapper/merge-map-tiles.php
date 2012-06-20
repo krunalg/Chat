@@ -52,7 +52,10 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
     $tiles = scanFileNameRecursivly($globalTileDumpDir);
     
     // only perform a merge if there is more than one file
-    if(count($tiles<=1)) die("Not enough tiles to perform a merge.");
+    if(count($tiles) + count($aboveTiles) + count($belowTiles) <= 1) {
+
+        die("Not enough tiles to perform a merge.");
+    }
 
     // build array of important collision types
     // for special cases such as tiles which need to be above player
