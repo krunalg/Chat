@@ -52,11 +52,16 @@ else if( isset($_POST['generate']) )
     $jsonMapPaths = array();
     
     // do them all if process=='all'
-    if(isset($_POST['generate']) && $_POST['generate']=='all')
+    if(isset($_POST['generate']) && $_POST['generate']=='all') {
+
         $jsonMapPaths = scanFileNameRecursivly($processedMapDir, $globalMapJSON);
+    }
+        
     // just do one map if one is specified
-    else if(isset($_POST['generate'])) array_push($jsonMapPaths, $_POST['generate']);
-    // otherwise leave array empty
+    else if(isset($_POST['generate'])) {
+     
+        array_push($jsonMapPaths, $_POST['generate']);
+    }
     
     echo 'Will now generate ' . count($jsonMapPaths) . ' maps...<br><br>'."\n\n";
     
