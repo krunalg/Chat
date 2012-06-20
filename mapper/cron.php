@@ -45,6 +45,11 @@ $End = getTime();
 echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
 
 $Start = getTime();
+require('merge-map-tiles.php');
+$End = getTime(); 
+echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
+
+$Start = getTime();
 require('get-collision-types.php');
 $End = getTime(); 
 echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
