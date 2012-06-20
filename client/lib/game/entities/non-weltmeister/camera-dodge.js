@@ -93,81 +93,102 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 			}
 		},
 
-		draw: function() {
+		update: function() {
 
-			switch (this.states[this['index']]) {
+			if(typeof this.factory == 'undefined') {
 
-			case 'left':
-
-				var startX = this.pos.x;
-				var startY = this.pos.y;
-				var endX = startX;
-				var endY = startY + this.size.y;
-				break;
-
-			case 'right':
-
-				var startX = this.pos.x + this.size.x;
-				var startY = this.pos.y;
-				var endX = startX;
-				var endY = startY + this.size.y;
-				break;
-
-			case 'up':
-
-				var startX = this.pos.x;
-				var startY = this.pos.y;
-				var endX = startX + this.size.x;
-				var endY = startY;
-				break;
-
-			case 'down':
-
-				var startX = this.pos.x;
-				var startY = this.pos.y + this.size.y;
-				var endX = startX + this.size.x;
-				var endY = startY;
-				break;
+				this.factory = ig.game.getEntitiesByType(EntityCameraDodgeFactory)[0];
 			}
 
-			// Set line characteristics.
-			ig.system.context.strokeStyle = this.lineColor;
-			ig.system.context.lineWidth = this.lineWidth;
+			else {
 
-			// Draw line on edge limit.
-			ig.system.context.beginPath();
-			ig.system.context.moveTo(
-			ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
-			ig.system.context.lineTo(
-			ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
-			ig.system.context.stroke();
-			ig.system.context.closePath();
+				if(this.factory._killed) this.kill();
 
-			// Draw first line to make a cross.
-			startX = this.pos.x + (this.size.x / 4);
-			startY = this.pos.y + (this.size.y / 4)
-			endX = this.pos.x + this.size.x - (this.size.x / 4);
-			endY = this.pos.y + this.size.y - (this.size.y / 4);
-			ig.system.context.beginPath();
-			ig.system.context.moveTo(
-			ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
-			ig.system.context.lineTo(
-			ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
-			ig.system.context.stroke();
-			ig.system.context.closePath();
+				this.visible = this.factory.visible;
 
-			// Draw second line to complete cross.
-			startX = this.pos.x + (this.size.x / 4);
-			startY = this.pos.y + this.size.y - (this.size.y / 4);
-			endX = this.pos.x + this.size.x - (this.size.x / 4);
-			endY = this.pos.y + (this.size.y / 4);
-			ig.system.context.beginPath();
-			ig.system.context.moveTo(
-			ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
-			ig.system.context.lineTo(
-			ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
-			ig.system.context.stroke();
-			ig.system.context.closePath();
+			}
+
+			this.parent();
+		},
+
+		draw: function() {
+
+			if(this.visible) {
+
+				switch (this.states[this['index']]) {
+
+				case 'left':
+
+					var startX = this.pos.x;
+					var startY = this.pos.y;
+					var endX = startX;
+					var endY = startY + this.size.y;
+					break;
+
+				case 'right':
+
+					var startX = this.pos.x + this.size.x;
+					var startY = this.pos.y;
+					var endX = startX;
+					var endY = startY + this.size.y;
+					break;
+
+				case 'up':
+
+					var startX = this.pos.x;
+					var startY = this.pos.y;
+					var endX = startX + this.size.x;
+					var endY = startY;
+					break;
+
+				case 'down':
+
+					var startX = this.pos.x;
+					var startY = this.pos.y + this.size.y;
+					var endX = startX + this.size.x;
+					var endY = startY;
+					break;
+				}
+
+				// Set line characteristics.
+				ig.system.context.strokeStyle = this.lineColor;
+				ig.system.context.lineWidth = this.lineWidth;
+
+				// Draw line on edge limit.
+				ig.system.context.beginPath();
+				ig.system.context.moveTo(
+				ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
+				ig.system.context.lineTo(
+				ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
+				ig.system.context.stroke();
+				ig.system.context.closePath();
+
+				// Draw first line to make a cross.
+				startX = this.pos.x + (this.size.x / 4);
+				startY = this.pos.y + (this.size.y / 4)
+				endX = this.pos.x + this.size.x - (this.size.x / 4);
+				endY = this.pos.y + this.size.y - (this.size.y / 4);
+				ig.system.context.beginPath();
+				ig.system.context.moveTo(
+				ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
+				ig.system.context.lineTo(
+				ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
+				ig.system.context.stroke();
+				ig.system.context.closePath();
+
+				// Draw second line to complete cross.
+				startX = this.pos.x + (this.size.x / 4);
+				startY = this.pos.y + this.size.y - (this.size.y / 4);
+				endX = this.pos.x + this.size.x - (this.size.x / 4);
+				endY = this.pos.y + (this.size.y / 4);
+				ig.system.context.beginPath();
+				ig.system.context.moveTo(
+				ig.system.getDrawPos(startX - ig.game.screen.x), ig.system.getDrawPos(startY - ig.game.screen.y));
+				ig.system.context.lineTo(
+				ig.system.getDrawPos(endX - ig.game.screen.x), ig.system.getDrawPos(endY - ig.game.screen.y));
+				ig.system.context.stroke();
+				ig.system.context.closePath();
+			}
 		}
 
 
