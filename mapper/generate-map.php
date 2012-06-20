@@ -101,7 +101,7 @@ else if( isset($_POST['generate']) || $automate )
         $mapName = basename($reconstructedPath);
         $mapNameWeltmeister = weltmeisterName($mapName);
 
-        if($mapHasPlacement[$mapNameWeltmeister]) {
+        if(isset($mapHasPlacement[$mapNameWeltmeister])) {
 
             echo '<b>Skipping</b> '.$jsonMapPaths[$i].' because it is part of a larger map.<br>';
             continue; 
