@@ -430,10 +430,7 @@ else if( isset($_POST['generate']) || $automate )
         $putDir = $impactLevelDir;
         $putFile = $mapName.".js";
         $putPath = $putDir.DIRECTORY_SEPARATOR.$putFile;
-        if(!file_put_contents($putPath, $export))
-            die("Failed writing file: " . $putPath);
-        else
-            echo "Success writing file: " . $putPath;
+        writeTextToFile($putPath, $export);
 
         // new line between each attempt
         echo "<br>\n"; 
