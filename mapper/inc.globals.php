@@ -33,7 +33,6 @@ $globalCollisionsFile = 'collisions.txt';
 $globalTilesheetFile = 'tilesheet.png';
 $globalMapFilename = 'map.png';
 $globalMapJSON = 'map.js';
-$globalUsedTilesFile = 'used-tiles.js';
 $globalMasterTilesheetFile = $impactMediaDir . 'master.png';
 $globalMasterTilesheetJSON = $buildDir . 'master-tilesheet.js';
 $globalPlacementFile = 'placement.txt';
