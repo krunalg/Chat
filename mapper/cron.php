@@ -39,5 +39,10 @@ require('merge-maps.php');
 $End = getTime(); 
 echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
 
+$Start = getTime();
+require('process-map.php');
+$End = getTime(); 
+echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
+
 
 ?>
