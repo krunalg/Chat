@@ -29,6 +29,10 @@ $automate = true;
 if(is_dir($buildDir)) rrmdir($buildDir);
 mkdir($buildDir);
 
+$StartTotal = $Start = getTime();
+
+
+
 $Start = getTime();
 require('dump-map-tiles.php');
 $End = getTime(); 
@@ -58,6 +62,11 @@ $Start = getTime();
 require('generate-map.php');
 $End = getTime(); 
 echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs";
+
+
+
+$EndTotal = getTime(); 
+echo "<script>alert('Success! Total time taken = ".number_format(($EndTotal - $StartTotal),2)." secs');</script>";
 
 
 ?>
