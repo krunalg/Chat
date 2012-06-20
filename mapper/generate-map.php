@@ -118,12 +118,7 @@ else if( isset($_POST['generate']) )
         $mapName = basename($reconstructedPath);
 
         // create weltmeister-friendly name
-        $mapNameWeltmeister = '';
-        $mapNameParts = explode('-', $mapName);
-        for($word=0; $word<count($mapNameParts); $word++) {
-
-            $mapNameWeltmeister .= ucfirst($mapNameParts[$word]);
-        }
+        $mapNameWeltmeister = weltmeisterName($mapName);
 
         // map specific data
         $mapJSON = $jsonMapPaths[$i];
