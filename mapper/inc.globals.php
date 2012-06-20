@@ -13,6 +13,7 @@ $mergedMapDir = $buildDir . 'merged-maps/';
 $processedMapDir = $buildDir . 'processed-maps/';
 $impactLibDir = '../client/lib/game/';
 $impactMediaDir = '../client/media/';
+$impactLevelDir = '../client/lib/game/levels/';
 $globalTileDumpDir = $buildDir . 'original-tiles/';
 $globalMapDir =
     "." . DIRECTORY_SEPARATOR .
