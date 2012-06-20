@@ -416,7 +416,7 @@ else if( isset($_POST['generate']) )
             
             
             // attempt to write weltmeister map
-            $putDir = dirname($jsonMapPaths[$i]);
+            $putDir = $impactLevelDir;
             $putFile = $mapName.".js";
             $putPath = $putDir.DIRECTORY_SEPARATOR.$putFile;
             if(!file_put_contents($putPath, $export))
