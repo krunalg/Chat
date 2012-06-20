@@ -30,14 +30,16 @@ $globalAnimationsDir =
     "animations";
     
 // FILE NAMES
-$globalCollisionsFile = 'collisions.txt';
-$globalTilesheetFile = 'tilesheet.png';
+
+// (don't prefix the first few with paths because they are used as search terms)
 $globalMapFilename = 'map.png';
 $globalMapJSON = 'map.js';
-$globalMasterTilesheetFile = $impactMediaDir . 'master.png';
-$globalMasterTilesheetJSON = $buildDir . 'master-tilesheet.js';
 $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
+
+$globalCollisionsFile = 'collisions.txt';
+$globalMasterTilesheetFile = $impactMediaDir . 'master.png';
+$globalMasterTilesheetJSON = $buildDir . 'master-tilesheet.js';
 $globalSpecialTilesJSON = 'special-tiles.js';
 $globalCameraDodgeJSON = $impactLibDir . 'saved-camera-dodges.js';
 
