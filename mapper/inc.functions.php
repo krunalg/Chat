@@ -511,6 +511,27 @@ function getTilesheetHashTable($json)
 }
 
 /**
+ * Removes the dashes in a name and upper cases the first letter of each
+ * word that was dash-seperated.
+ *
+ * @param   name String to process.
+ * @return  string with new name.
+ */
+function weltmeisterName($name) {
+    
+    $result = '';
+    
+    $nameParts = explode('-', $name);
+    
+    for($word=0; $word<count($nameParts); $word++) {
+
+        $result .= ucfirst($nameParts[$word]);
+    }
+
+    return $result;
+}
+    
+/**
  * Pretty print some JSON.
  *
  * @param   $json Raw JSON.
