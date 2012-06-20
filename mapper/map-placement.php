@@ -1,13 +1,3 @@
-<?php 
-function getTime() 
-    { 
-    $a = explode (' ',microtime()); 
-    return(double) $a[0] + $a[1]; 
-    } 
-$Start = getTime(); 
-?>
-
-
 <?php
 
 set_time_limit(900); // because processing maps can take a while
@@ -169,9 +159,3 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
         
     }
 </script>
-
-
-<?php 
-$End = getTime(); 
-echo "<br><br>Time taken = ".number_format(($End - $Start),2)." secs"; 
-?>
