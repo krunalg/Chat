@@ -41,7 +41,7 @@ set-collision-types.php - requires maps be processed.
 
 !! To be made automated !!
 
-border-change.php
+border-change.php - Requires master tilesheet JSON.
 -   Outputs a series of if-statements used by the player to determine if 
     a change in the repeated-background-border layer should be changed.
 
