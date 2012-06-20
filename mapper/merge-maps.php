@@ -10,7 +10,7 @@ $Start = getTime();
 
 <?php
 
-set_time_limit(900); // because processing maps can take a while
+set_time_limit(300);
 ini_set('memory_limit','1024M'); // 512M was not enough
 
 
@@ -19,7 +19,10 @@ require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
 
-if( !isset($_GET['merge']) )
+if(!isset($automate)) $automate = false;
+
+
+if( !isset($_GET['merge']) && !$automate )
 {
     /*
      * First Page: Display maps which have placement data and confirm
@@ -61,7 +64,7 @@ if( !isset($_GET['merge']) )
                '}, \'get\' );"/> ';
     }
 }
-else if( isset($_GET['merge']) && ($_GET['merge']=='yes') )
+else if( (isset($_GET['merge']) && ($_GET['merge']=='yes')) || $automate)
 {
     /*
      * Second Page: Merge maps, adding borders
