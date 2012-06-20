@@ -126,6 +126,7 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
     
     $module = 'game.border-controller';
     $moduleName = 'BorderController';
+    $filename = 'border-controller.js';
 
     // Output collision checks for each map
     $export = "ig.module('".$module."')\n\n.requires()\n\n.defines(function() {\n\n" .
@@ -164,7 +165,8 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
 
     $export .= "        }\n\n    });\n\n})";
 
-    echo $export;
+    // write to file
+    writeTextToFile(($impactLibDir . $filename), $export);
     
 }
 else
