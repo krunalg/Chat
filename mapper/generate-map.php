@@ -154,7 +154,7 @@ else if( isset($_POST['generate']) )
             $export .= "ig.module( 'game.levels.".$mapName."' )\n".
                       ".requires('impact.image')\n".
                       ".defines(function(){\n".
-                      "Level".ucfirst($mapNameWeltmeister)."=/*JSON[*/";
+                      "Level".$mapNameWeltmeister."=/*JSON[*/";
             
             // JSON HERE
             $export .=
@@ -203,7 +203,7 @@ else if( isset($_POST['generate']) )
                         "\"height\": ".(2).", ".
                         "\"linkWithCollision\": false, ".
                         "\"visible\": 1, ".
-                        "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
+                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
                         "\"repeat\": true, ".
                         "\"preRender\": false, ".
                         "\"distance\": \"1\", ".
@@ -219,7 +219,7 @@ else if( isset($_POST['generate']) )
                         "\"height\": ".$mapHeight.", ".
                         "\"linkWithCollision\": false, ".
                         "\"visible\": 1, ".
-                        "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
+                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
                         "\"repeat\": false, ".
                         "\"preRender\": false, ".
                         "\"distance\": \"1\", ".
@@ -262,7 +262,7 @@ else if( isset($_POST['generate']) )
                         "\"height\": ".$mapHeight.", ".
                         "\"linkWithCollision\": false, ".
                         "\"visible\": 1, ".
-                        "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
+                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
                         "\"repeat\": false, ".
                         "\"preRender\": false, ".
                         "\"distance\": \"1\", ".
@@ -308,7 +308,7 @@ else if( isset($_POST['generate']) )
                         "\"height\": ".$mapHeight.", ".
                         "\"linkWithCollision\": false, ".
                         "\"visible\": 1, ".
-                        "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
+                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
                         "\"repeat\": false, ".
                         "\"preRender\": false, ".
                         "\"distance\": \"1\", ".
@@ -407,7 +407,7 @@ else if( isset($_POST['generate']) )
             // END JSON
             
             $export .= "/*]JSON*/;\n";
-            $export .= "Level".ucfirst($mapName)."Resources=[new ig.Image('media/".$globalMasterTilesheetFile."')];\n";
+            $export .= "Level".$mapNameWeltmeister."Resources=[new ig.Image('".$globalMasterTilesheetFile."')];\n";
             $export .= "});";
 
             
