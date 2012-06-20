@@ -9,7 +9,7 @@ client/media/2-8.png
 client/lib/game/background-animations.js
 client/media/
 
-#ignore these duplicates
+#Generated content
 special-tiles.js
 
 # Mapper stuff
