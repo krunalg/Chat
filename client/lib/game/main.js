@@ -6,14 +6,16 @@ ig.module('game.main')
 
 'impact.font',
 
-// Chat log
-'game.chat-log',
-
+// Animations
 'game.background-animations',
 
 'game.position-dependent-animation',
 
-'game.update-border',
+// Chat log
+'game.chat-log',
+
+// Generated content
+'game.border-controller',
 
 'game.special-tiles',
 
@@ -197,7 +199,7 @@ ig.module('game.main')
 			var player = this.buildPlayer();
 
 			// Set the repeating border according to region.
-			updateBorder(player);
+			BorderController.prototype.check(player);
 
 			// Add camera dodging.
 			ig.game.spawnEntity(EntityCameraDodgeFactory);
