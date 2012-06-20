@@ -77,7 +77,9 @@ $export =  'ig.module(\'game.special-tiles\')' . "\n" .
     }
 $export .=  '})'; // close JavaScript output
 
+$write_path = $impactLibDir . DIRECTORY_SEPARATOR . $globalSpecialTilesJSON;
+
 // Write output to a file.
-writeTextToFile($globalSpecialTilesJSON, $export);
+writeTextToFile($write_path, $export);
     
 ?>
