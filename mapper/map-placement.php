@@ -95,7 +95,7 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
         $placementByMap[$i] = array();
         $placementByMap[$i]['x'] = $placementParts[1];
         $placementByMap[$i]['y'] = $placementParts[2];
-        $placementByMap[$i]['map'] = $placementParts[3];
+        $placementByMap[$i]['map'] = trim($placementParts[3]);
     }
     
     // write files
@@ -106,7 +106,8 @@ else if( isset($_POST['save']) && $_POST['save']=='all' )
             $dirName . DIRECTORY_SEPARATOR . $globalPlacementFile;
          
         if( is_numeric($placementByMap[$i]['x']) &&
-                    is_numeric($placementByMap[$i]['y']) )
+                    is_numeric($placementByMap[$i]['y']) &&
+                    ($placementByMap[$i]['map']!='') )
         {
             // write file paying no regard to
             // whether it exists already or not
