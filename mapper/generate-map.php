@@ -151,7 +151,7 @@ else if( isset($_POST['generate']) )
              */
             
             $export = ''; // file contents of map file readable by weltmeister
-            $export .= "ig.module( 'game.levels.".$mapName."' )\n".
+            $export .= "ig.module('game.levels.".$mapName."')\n".
                       ".requires('impact.image')\n".
                       ".defines(function(){\n".
                       "Level".$mapNameWeltmeister."=/*JSON[*/";
