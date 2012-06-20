@@ -4,7 +4,7 @@ set_time_limit(300); // 5 minutes
 ini_set('memory_limit','512M'); 
 
 
-include('inc.globals.php');
+require('inc.globals.php');
 require('inc.functions.php');
 
 function jsonToArray($filepath) {

@@ -14,7 +14,7 @@ set_time_limit(900); // because processing maps can take a while
 ini_set('memory_limit','1024M'); // 512M was not enough
 
 
-include('inc.globals.php');
+require('inc.globals.php');
 require('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
