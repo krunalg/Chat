@@ -93,6 +93,7 @@ Movement:
 
 Optimizations:
 - Boost FPS by not drawing repeating border in regions where it will be covered up.
+- When processing a merged map, don't process the areas known to be black empty space.
 
 Code Improvements:
 - Splash, jump, and deep-sand entities can all likely share a single parent class.
