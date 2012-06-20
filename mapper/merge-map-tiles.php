@@ -50,6 +50,8 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
     
     // get a list of all dumped tiles
     $tiles = scanFileNameRecursivly($globalTileDumpDir);
+    $aboveTiles = scanFileNameRecursivly($globalAboveDumpDir);
+    $belowTiles = scanFileNameRecursivly($globalBelowDumpDir);
     
     // only perform a merge if there is more than one file
     if(count($tiles) + count($aboveTiles) + count($belowTiles) <= 1) {
