@@ -10,6 +10,7 @@ $globalWMTileOffset = 1; // because Weltmeister considers 1, not 0 to be the fir
 // DIRECTORIES
 $buildDir = './build/';
 $mergedMapDir = $buildDir . 'merged-maps/';
+$processedMapDir = $buildDir . 'processed-maps/';
 $globalTileDumpDir = $buildDir . 'original-tiles';
 $globalMapDir =
     "." . DIRECTORY_SEPARATOR .
