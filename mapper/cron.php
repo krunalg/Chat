@@ -20,6 +20,7 @@ if(is_dir($buildDir)) rrmdir($buildDir);
 mkdir($buildDir);
 
 require('dump-map-tiles.php');
+require('merge-maps.php');
 
 
 ?>
