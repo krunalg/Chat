@@ -77,355 +77,350 @@ else if( isset($_POST['generate']) )
     
     for($i=0; $i<count($jsonMapPaths); $i++)
     {
-        if(file_exists($jsonMapPaths[$i]))
+        if(!file_exists($jsonMapPaths[$i])) die("".$jsonMapPaths[$i]." does not exist.");
+
+        // build array of important collision types
+        // for special cases such as tiles which need to be above player
+        $collisionIndex = 0;
+        $indexOfCollision = array(); // holds special cases
+        foreach($globalCollisions as $index => $collision)
         {
-            // build array of important collision types
-            // for special cases such as tiles which need to be above player
-            $collisionIndex = 0;
-            $indexOfCollision = array(); // holds special cases
-            foreach($globalCollisions as $index => $collision)
+            $indexOfCollision[$index] = $collisionIndex;
+            $collisionIndex++;
+        }
+        
+        // we need to know all the tiles which will be placed
+        // above the player so that we can add the upper layer
+        // or if tile is grass, so we can add an entity
+        $abovePlayerTiles = array();
+        $belowPlayerTiles = array();
+        $grassTiles = array();
+        foreach($collisions as $hash => $collision)
+        {
+            if($collision == $indexOfCollision['above'])
             {
-                $indexOfCollision[$index] = $collisionIndex;
-                $collisionIndex++;
+                $abovePlayerTiles[$hash] = 1; // note any value works,
+                                              // all we are checking for
+                                              // is isset()
             }
-            
-            // we need to know all the tiles which will be placed
-            // above the player so that we can add the upper layer
-            // or if tile is grass, so we can add an entity
-            $abovePlayerTiles = array();
-            $belowPlayerTiles = array();
-            $grassTiles = array();
-            foreach($collisions as $hash => $collision)
+            else if($collision == $indexOfCollision['grass'])
             {
-                if($collision == $indexOfCollision['above'])
-                {
-                    $abovePlayerTiles[$hash] = 1; // note any value works,
-                                                  // all we are checking for
-                                                  // is isset()
-                }
-                else if($collision == $indexOfCollision['grass'])
-                {
-                    $grassTiles[$hash] = 1;       // here too
-                }
-                else if($collision == $indexOfCollision['reflection'])
-                {
-                    $belowPlayerTiles[$hash] = 1;
-                }
-            }   
-            
-            // get map name
-            $reconstructedPath = removeFilenameFromPath($jsonMapPaths[$i]);
-            $mapName = basename($reconstructedPath);
-
-            // create weltmeister-friendly name
-            $mapNameWeltmeister = '';
-            $mapNameParts = explode('-', $mapName);
-            for($word=0; $word<count($mapNameParts); $word++) {
-
-                $mapNameWeltmeister .= ucfirst($mapNameParts[$word]);
+                $grassTiles[$hash] = 1;       // here too
             }
-
-            // map specific data
-            $mapJSON = $jsonMapPaths[$i];
-            $mapJSON = file_get_contents($mapJSON);
-            $mapJSON = json_decode($mapJSON);
-            $mapTiles = array(); // a bunch of hashes
-            foreach($mapJSON as $key => $value)
+            else if($collision == $indexOfCollision['reflection'])
             {
-                if($key=='width') $mapWidth = $value;
-                else if($key=='height') $mapHeight = $value;
-                else if($key=='tiles' && is_array($value))
-                {
-                    for($tileIndex=0; $tileIndex<count($value); $tileIndex++)
-                        array_push($mapTiles, $value[$tileIndex]);
-                }
+                $belowPlayerTiles[$hash] = 1;
             }
-            
-         
-         
-         
-         
-            /*
-             * Building Weltmeister compatible level 
-             *
-             */
-            
-            $export = ''; // file contents of map file readable by weltmeister
-            $export .= "ig.module('game.levels.".$mapName."')\n".
-                      ".requires('impact.image')\n".
-                      ".defines(function(){\n".
-                      "Level".$mapNameWeltmeister."=/*JSON[*/";
-            
-            // JSON HERE
-            $export .=
-            "{".
-                "\"entities\": [";
+        }   
+        
+        // get map name
+        $reconstructedPath = removeFilenameFromPath($jsonMapPaths[$i]);
+        $mapName = basename($reconstructedPath);
+
+        // create weltmeister-friendly name
+        $mapNameWeltmeister = '';
+        $mapNameParts = explode('-', $mapName);
+        for($word=0; $word<count($mapNameParts); $word++) {
+
+            $mapNameWeltmeister .= ucfirst($mapNameParts[$word]);
+        }
+
+        // map specific data
+        $mapJSON = $jsonMapPaths[$i];
+        $mapJSON = file_get_contents($mapJSON);
+        $mapJSON = json_decode($mapJSON);
+        $mapTiles = array(); // a bunch of hashes
+        foreach($mapJSON as $key => $value)
+        {
+            if($key=='width') $mapWidth = $value;
+            else if($key=='height') $mapHeight = $value;
+            else if($key=='tiles' && is_array($value))
+            {
+                for($tileIndex=0; $tileIndex<count($value); $tileIndex++)
+                    array_push($mapTiles, $value[$tileIndex]);
+            }
+        }
+        
+     
+     
+     
+     
+        /*
+         * Building Weltmeister compatible level 
+         *
+         */
+        
+        $export = ''; // file contents of map file readable by weltmeister
+        $export .= "ig.module('game.levels.".$mapName."')\n".
+                  ".requires('impact.image')\n".
+                  ".defines(function(){\n".
+                  "Level".$mapNameWeltmeister."=/*JSON[*/";
+        
+        // JSON HERE
+        $export .=
+        "{".
+            "\"entities\": [";
+                
+                /*
+                // generate grass entities
+                $mapTilesIndex = 0; // used to traverse all tiles in map
+                $firstGrass = true;
+                for($y=0; $y<$mapHeight; $y++)
+                {
+                    for($x=0; $x<$mapWidth; $x++)
+                    {
+                        $currTileHash = $mapTiles[$mapTilesIndex];
+                        
+                        //echo "Current hash is $currTileHash ... grass should be ";
+                        //print_r($grassTiles);
+                        //echo "<br><br>\n\n\n";
                     
-                    /*
-                    // generate grass entities
+                        // only add entity if tile is grass
+                        if(isset($grassTiles[$currTileHash]))
+                        {
+                            if(!$firstGrass) $export .= ',';
+                            else $firstGrass = false;
+                            $export .= ''.
+                            '{ '.
+                                '"type": "EntityGrass", '.
+                                '"x": '.($x*$globalTilesize).', '.
+                                '"y": '.($y*$globalTilesize).', '.
+                                '"settings": {} '.
+                            '}';
+                        }
+                        
+                        $mapTilesIndex++;
+                    }
+                }
+                */
+                            
+            $export .= "],". // close off entities
+            
+            "\"layer\": [ ".
+                "{".
+                    "\"name\": \"border\", ".
+                    "\"width\": ".(2).", ".
+                    "\"height\": ".(2).", ".
+                    "\"linkWithCollision\": false, ".
+                    "\"visible\": 1, ".
+                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"repeat\": true, ".
+                    "\"preRender\": false, ".
+                    "\"distance\": \"1\", ".
+                    "\"tilesize\": ".$globalTilesize.", ".
+                    "\"foreground\": false, ".
+                    "\"data\": [ " .
+                        "[ 0, 0 ], [ 0, 0 ]";
+        $export .=  "] ".
+                "}, ".
+                "{".
+                    "\"name\": \"lowest\", ".
+                    "\"width\": ".$mapWidth.", ".
+                    "\"height\": ".$mapHeight.", ".
+                    "\"linkWithCollision\": false, ".
+                    "\"visible\": 1, ".
+                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"repeat\": false, ".
+                    "\"preRender\": false, ".
+                    "\"distance\": \"1\", ".
+                    "\"tilesize\": ".$globalTilesize.", ".
+                    "\"foreground\": false, ".
+                    "\"data\": [ ";
+                    
                     $mapTilesIndex = 0; // used to traverse all tiles in map
-                    $firstGrass = true;
                     for($y=0; $y<$mapHeight; $y++)
                     {
+                        $export .= "[ ";
                         for($x=0; $x<$mapWidth; $x++)
                         {
                             $currTileHash = $mapTiles[$mapTilesIndex];
                             
-                            //echo "Current hash is $currTileHash ... grass should be ";
-                            //print_r($grassTiles);
-                            //echo "<br><br>\n\n\n";
-                        
-                            // only add entity if tile is grass
-                            if(isset($grassTiles[$currTileHash]))
+                            // use no tile (which is 0 in weltmeister)
+                            // when no found in "above" player tiles array
+                            if(!isset($belowPlayerTiles[$currTileHash]))
+                                $currTilePosInTilesheet = 0;
+                            else
                             {
-                                if(!$firstGrass) $export .= ',';
-                                else $firstGrass = false;
-                                $export .= ''.
-                                '{ '.
-                                    '"type": "EntityGrass", '.
-                                    '"x": '.($x*$globalTilesize).', '.
-                                    '"y": '.($y*$globalTilesize).', '.
-                                    '"settings": {} '.
-                                '}';
+                                $currTilePosInTilesheet =
+                                    // Note this index is not md5'd.
+                                    $masterTilesheetByHash[$currTileHash];
+                                    $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
                             }
                             
-                            $mapTilesIndex++;
+                            $export .= $currTilePosInTilesheet;
+                            if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
+                            $mapTilesIndex++; // next tile in the map
                         }
+                        if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
                     }
-                    */
-                                
-                $export .= "],". // close off entities
-                
-                "\"layer\": [ ".
-                    "{".
-                        "\"name\": \"border\", ".
-                        "\"width\": ".(2).", ".
-                        "\"height\": ".(2).", ".
-                        "\"linkWithCollision\": false, ".
-                        "\"visible\": 1, ".
-                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
-                        "\"repeat\": true, ".
-                        "\"preRender\": false, ".
-                        "\"distance\": \"1\", ".
-                        "\"tilesize\": ".$globalTilesize.", ".
-                        "\"foreground\": false, ".
-                        "\"data\": [ " .
-                            "[ 0, 0 ], [ 0, 0 ]";
-            $export .=  "] ".
-                    "}, ".
-                    "{".
-                        "\"name\": \"lowest\", ".
-                        "\"width\": ".$mapWidth.", ".
-                        "\"height\": ".$mapHeight.", ".
-                        "\"linkWithCollision\": false, ".
-                        "\"visible\": 1, ".
-                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
-                        "\"repeat\": false, ".
-                        "\"preRender\": false, ".
-                        "\"distance\": \"1\", ".
-                        "\"tilesize\": ".$globalTilesize.", ".
-                        "\"foreground\": false, ".
-                        "\"data\": [ ";
-                        
-                        $mapTilesIndex = 0; // used to traverse all tiles in map
-                        for($y=0; $y<$mapHeight; $y++)
+            
+        $export .=  "] ". // close off data
+                "}, ".
+                "{".
+                    "\"name\": \"lower\", ".
+                    "\"width\": ".$mapWidth.", ".
+                    "\"height\": ".$mapHeight.", ".
+                    "\"linkWithCollision\": false, ".
+                    "\"visible\": 1, ".
+                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"repeat\": false, ".
+                    "\"preRender\": false, ".
+                    "\"distance\": \"1\", ".
+                    "\"tilesize\": ".$globalTilesize.", ".
+                    "\"foreground\": false, ".
+                    "\"data\": [ ";
+                    
+                    $mapTilesIndex = 0; // used to traverse all tiles in map
+                    for($y=0; $y<$mapHeight; $y++)
+                    {
+                        $export .= "[ ";
+                        for($x=0; $x<$mapWidth; $x++)
                         {
-                            $export .= "[ ";
-                            for($x=0; $x<$mapWidth; $x++)
+                            $currTileHash = $mapTiles[$mapTilesIndex];
+                            
+                            // use no tile (which is 0 in weltmeister)
+                            // when tile can't be found in tilesheet
+                            if(!isset($masterTilesheetByHash[$currTileHash]))
+                                $currTilePosInTilesheet = 0;
+                            else
                             {
-                                $currTileHash = $mapTiles[$mapTilesIndex];
+                                // Determine if we should MD5 the hash.
+                                if(isset($belowPlayerTiles[$currTileHash])) $currTileHash = md5($currTileHash);
                                 
-                                // use no tile (which is 0 in weltmeister)
-                                // when no found in "above" player tiles array
-                                if(!isset($belowPlayerTiles[$currTileHash]))
-                                    $currTilePosInTilesheet = 0;
-                                else
-                                {
-                                    $currTilePosInTilesheet =
-                                        // Note this index is not md5'd.
-                                        $masterTilesheetByHash[$currTileHash];
-                                        $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
-                                }
-                                
-                                $export .= $currTilePosInTilesheet;
-                                if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
-                                $mapTilesIndex++; // next tile in the map
+                                // Get tile position in tilesheet.
+                                $currTilePosInTilesheet =
+                                    $masterTilesheetByHash[$currTileHash];
+                                    $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
                             }
-                            if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
+                            
+                            $export .= $currTilePosInTilesheet;
+                            if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
+                            $mapTilesIndex++; // next tile in the map
                         }
-                
-            $export .=  "] ". // close off data
-                    "}, ".
-                    "{".
-                        "\"name\": \"lower\", ".
-                        "\"width\": ".$mapWidth.", ".
-                        "\"height\": ".$mapHeight.", ".
-                        "\"linkWithCollision\": false, ".
-                        "\"visible\": 1, ".
-                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
-                        "\"repeat\": false, ".
-                        "\"preRender\": false, ".
-                        "\"distance\": \"1\", ".
-                        "\"tilesize\": ".$globalTilesize.", ".
-                        "\"foreground\": false, ".
-                        "\"data\": [ ";
-                        
-                        $mapTilesIndex = 0; // used to traverse all tiles in map
-                        for($y=0; $y<$mapHeight; $y++)
+                        if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
+                    } 
+            
+        $export .=  "] ". // close off data
+                "}, ".
+                "{".
+                    "\"name\": \"upper\", ".
+                    "\"width\": ".$mapWidth.", ".
+                    "\"height\": ".$mapHeight.", ".
+                    "\"linkWithCollision\": false, ".
+                    "\"visible\": 1, ".
+                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"repeat\": false, ".
+                    "\"preRender\": false, ".
+                    "\"distance\": \"1\", ".
+                    "\"tilesize\": ".$globalTilesize.", ".
+                    "\"foreground\": true, ".
+                    "\"data\": [ ";
+                    
+                    $mapTilesIndex = 0; // used to traverse all tiles in map
+                    for($y=0; $y<$mapHeight; $y++)
+                    {
+                        $export .= "[ ";
+                        for($x=0; $x<$mapWidth; $x++)
                         {
-                            $export .= "[ ";
-                            for($x=0; $x<$mapWidth; $x++)
+                            $currTileHash = $mapTiles[$mapTilesIndex];
+                            
+                            // use no tile (which is 0 in weltmeister)
+                            // when no found in "above" player tiles array
+                            if(!isset($abovePlayerTiles[$currTileHash]))
+                                $currTilePosInTilesheet = 0;
+                            else
                             {
-                                $currTileHash = $mapTiles[$mapTilesIndex];
-                                
-                                // use no tile (which is 0 in weltmeister)
-                                // when tile can't be found in tilesheet
-                                if(!isset($masterTilesheetByHash[$currTileHash]))
-                                    $currTilePosInTilesheet = 0;
-                                else
-                                {
-                                    // Determine if we should MD5 the hash.
-                                    if(isset($belowPlayerTiles[$currTileHash])) $currTileHash = md5($currTileHash);
-                                    
-                                    // Get tile position in tilesheet.
-                                    $currTilePosInTilesheet =
-                                        $masterTilesheetByHash[$currTileHash];
-                                        $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
-                                }
-                                
-                                $export .= $currTilePosInTilesheet;
-                                if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
-                                $mapTilesIndex++; // next tile in the map
+                                $currTilePosInTilesheet =
+                                    $masterTilesheetByHash[md5($currTileHash)];
+                                    $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
                             }
-                            if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
-                        } 
-                
-            $export .=  "] ". // close off data
-                    "}, ".
-                    "{".
-                        "\"name\": \"upper\", ".
-                        "\"width\": ".$mapWidth.", ".
-                        "\"height\": ".$mapHeight.", ".
-                        "\"linkWithCollision\": false, ".
-                        "\"visible\": 1, ".
-                        "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
-                        "\"repeat\": false, ".
-                        "\"preRender\": false, ".
-                        "\"distance\": \"1\", ".
-                        "\"tilesize\": ".$globalTilesize.", ".
-                        "\"foreground\": true, ".
-                        "\"data\": [ ";
-                        
-                        $mapTilesIndex = 0; // used to traverse all tiles in map
-                        for($y=0; $y<$mapHeight; $y++)
+                            
+                            $export .= $currTilePosInTilesheet;
+                            if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
+                            $mapTilesIndex++; // next tile in the map
+                        }
+                        if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
+                    } 
+            
+        $export .=  "] ".
+                "}, ".
+                "{".
+                    "\"name\": \"collision\", ".
+                    "\"width\": ".$mapWidth.", ".
+                    "\"height\": ".$mapHeight.", ".
+                    "\"linkWithCollision\": false, ".
+                    "\"visible\": 0, ".
+                    "\"tilesetName\": \"\", ".
+                    "\"repeat\": false, ".
+                    "\"preRender\": false, ".
+                    "\"distance\": \"1\", ".
+                    "\"tilesize\": ".$globalTilesize.", ".
+                    "\"foreground\": true, ".
+                    "\"data\": [ ";
+                    
+                    $mapTilesIndex = 0; // used to traverse all tiles in map
+                    for($y=0; $y<$mapHeight; $y++)
+                    {
+                        $export .= "[ ";
+                        for($x=0; $x<$mapWidth; $x++)
                         {
-                            $export .= "[ ";
-                            for($x=0; $x<$mapWidth; $x++)
+                            if(isset($currTileCollision)) unset($currTileCollision);
+                            if(isset($collisions[$mapTiles[$mapTilesIndex]]))
                             {
-                                $currTileHash = $mapTiles[$mapTilesIndex];
-                                
-                                // use no tile (which is 0 in weltmeister)
-                                // when no found in "above" player tiles array
-                                if(!isset($abovePlayerTiles[$currTileHash]))
-                                    $currTilePosInTilesheet = 0;
-                                else
-                                {
-                                    $currTilePosInTilesheet =
-                                        $masterTilesheetByHash[md5($currTileHash)];
-                                        $currTilePosInTilesheet++; // weltmeister starts at 1, not 0
-                                }
-                                
-                                $export .= $currTilePosInTilesheet;
-                                if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
-                                $mapTilesIndex++; // next tile in the map
+                                $currTileCollision = // set preference
+                                    $collisions[$mapTiles[$mapTilesIndex]];
                             }
-                            if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
-                        } 
-                
-            $export .=  "] ".
-                    "}, ".
-                    "{".
-                        "\"name\": \"collision\", ".
-                        "\"width\": ".$mapWidth.", ".
-                        "\"height\": ".$mapHeight.", ".
-                        "\"linkWithCollision\": false, ".
-                        "\"visible\": 0, ".
-                        "\"tilesetName\": \"\", ".
-                        "\"repeat\": false, ".
-                        "\"preRender\": false, ".
-                        "\"distance\": \"1\", ".
-                        "\"tilesize\": ".$globalTilesize.", ".
-                        "\"foreground\": true, ".
-                        "\"data\": [ ";
-                        
-                        $mapTilesIndex = 0; // used to traverse all tiles in map
-                        for($y=0; $y<$mapHeight; $y++)
-                        {
-                            $export .= "[ ";
-                            for($x=0; $x<$mapWidth; $x++)
-                            {
-                                if(isset($currTileCollision)) unset($currTileCollision);
-                                if(isset($collisions[$mapTiles[$mapTilesIndex]]))
-                                {
-                                    $currTileCollision = // set preference
-                                        $collisions[$mapTiles[$mapTilesIndex]];
-                                }
+                            
+                            $currTileCollisionWM =
+                                $globalCollisions['walkable']['collision']; // default
                                 
-                                $currTileCollisionWM =
-                                    $globalCollisions['walkable']['collision']; // default
-                                    
-                                // if there's a collision preference, find out
-                                // what it in in terms of weltmeister
-                                if(isset($currTileCollision)) 
+                            // if there's a collision preference, find out
+                            // what it in in terms of weltmeister
+                            if(isset($currTileCollision)) 
+                            {
+                                $collisionIndex = 0; // position in master collisions array
+                                foreach($globalCollisions as $collision)
                                 {
-                                    $collisionIndex = 0; // position in master collisions array
-                                    foreach($globalCollisions as $collision)
+                                    if($collisionIndex==$currTileCollision)
                                     {
-                                        if($collisionIndex==$currTileCollision)
-                                        {
-                                            $currTileCollisionWM = $collision['collision'];
-                                            break;
-                                        }
-                                        $collisionIndex++;
+                                        $currTileCollisionWM = $collision['collision'];
+                                        break;
                                     }
+                                    $collisionIndex++;
                                 }
-                                
-                                $export .= $currTileCollisionWM;
-                                if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
-                                
-                                $mapTilesIndex++; // next tile in the map
                             }
-                            if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
-                        } 
-                
-            $export .=        "] ".
-                    "}";
+                            
+                            $export .= $currTileCollisionWM;
+                            if($x!=$mapWidth-1) $export .= ", "; else $export .= " ";
+                            
+                            $mapTilesIndex++; // next tile in the map
+                        }
+                        if($y==$mapHeight-1) $export .= "] "; else $export .= "], ";
+                    } 
             
-            $export .=
-                "] ".
-            "} ";
-            // END JSON
-            
-            $export .= "/*]JSON*/;\n";
-            $export .= "Level".$mapNameWeltmeister."Resources=[new ig.Image('".$globalMasterTilesheetFile."')];\n";
-            $export .= "});";
+        $export .=        "] ".
+                "}";
+        
+        $export .=
+            "] ".
+        "} ";
+        // END JSON
+        
+        $export .= "/*]JSON*/;\n";
+        $export .= "Level".$mapNameWeltmeister."Resources=[new ig.Image('".$globalMasterTilesheetFile."')];\n";
+        $export .= "});";
+        
+        // attempt to write weltmeister map
+        $putDir = $impactLevelDir;
+        $putFile = $mapName.".js";
+        $putPath = $putDir.DIRECTORY_SEPARATOR.$putFile;
+        if(!file_put_contents($putPath, $export))
+            die("Failed writing file: " . $putPath);
+        else
+            echo "Success writing file: " . $putPath;
 
-            
-            
-            
-            
-            
-            // attempt to write weltmeister map
-            $putDir = $impactLevelDir;
-            $putFile = $mapName.".js";
-            $putPath = $putDir.DIRECTORY_SEPARATOR.$putFile;
-            if(!file_put_contents($putPath, $export))
-                die("Failed writing file: " . $putPath);
-            else
-                echo "Success writing file: " . $putPath;
-        }
-        else die( "" . $jsonMapPaths[$i] . " does not exist.");
-        echo "<br>\n"; // new line between each attempt
+        // new line between each attempt
+        echo "<br>\n"; 
     }
 }
 
