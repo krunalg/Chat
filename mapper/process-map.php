@@ -27,9 +27,12 @@ if( !isset($_POST['mapPath']) && !isset($_POST['process']) )
     for($i=0; $i<count($maps); $i++)
     {
         $reconstructedPath = removeFilenameFromPath($maps[$i]);
-        
+        $mapName = basename($reconstructedPath);
+        $jsonDir = $processedMapDir . DIRECTORY_SEPARATOR . $mapName;
+        $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON; 
+
         // if a JSON file is present, the map has been processed
-        if(file_exists($reconstructedPath . $globalMapJSON)) {
+        if(file_exists($jsonPath)) {
 
             echo $maps[$i]." has been processed... <br>\n\n";
         }
