@@ -6,7 +6,6 @@ ini_set('memory_limit','1024M'); // 512M was not enough
 
 require_once('inc.globals.php');
 require_once('inc.functions.php');
-echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
 
 if( !isset($_GET['build']) )
@@ -125,37 +124,47 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
         }
     }
     
+    $module = 'game.border-controller';
+    $moduleName = 'BorderController';
+
     // Output collision checks for each map
+    $export = "ig.module('".$module."')\n\n.requires()\n\n.defines(function() {\n\n" .
+              "    ".$moduleName." = ig.Class.extend({\n\n" . 
+              "        check: function(player) {\n\n";
+    $tab = '            ';
+
+
     for($i=0; $i<count($mapImageInfo); $i++)
     {
         $mapWidthInTiles = $mapImageInfo[$i]['width'] / $globalTilesize;
         $mapHeightInTiles = $mapImageInfo[$i]['height'] / $globalTilesize;
         $borderWidthInTiles = $mapImageInfo[$i]['borderWidth'] / $globalTilesize;
         $borderHeightInTiles = $mapImageInfo[$i]['borderHeight'] / $globalTilesize;
-        if($i!=0) echo 'else ';
-        echo 
-            'if( player.pos.x >= ' . $mapImageInfo[$i]['x'] . ' && ' . 
+        $export .= 
+            $tab . ($i!=0 ? 'else ':'') . 'if( player.pos.x >= ' . $mapImageInfo[$i]['x'] . ' && ' . 
                 'player.pos.x <  ' . ($mapImageInfo[$i]['x'] + $mapImageInfo[$i]['width']) . ' && ' . 
                 'player.pos.y <  ' . ($mapImageInfo[$i]['y'] + $mapImageInfo[$i]['height']) . ' && ' .
                 'player.pos.y >= ' . $mapImageInfo[$i]['y'] . ' ) ';
-        echo // issue new border graphics
-            "{ <br>\n";
+        $export.= // issue new border graphics
+            "{ \n";
             for($y=0; $y<$borderHeightInTiles; $y++)
             {
                 for($x=0; $x<$borderWidthInTiles; $x++)
                 {
                     $currentHash = $mapImageInfo[$i]['borderTiles'][$x][$y];
                     $currentTile = $masterTilesheetByHash[$currentHash] + 1; // +1 for weltmeister
-                    echo "ig.game.backgroundMaps[0]['data'][".$y."][".$x."] = " . $currentTile . "; <br>\n";
+                    $export .= $tab . "    ig.game.backgroundMaps[0]['data'][".$y."][".$x."] = " . $currentTile . "; \n";
                 }
             }
 
 
-        echo // end issue command
-            "} <br><br>\n\n";
+        $export .= // end issue command
+            $tab . "}\n\n";
     }
 
-    die();
+    $export .= "        }\n\n    });\n\n})";
+
+    echo $export;
     
 }
 else
