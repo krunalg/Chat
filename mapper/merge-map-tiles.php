@@ -50,6 +50,8 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
     
     // get a list of all dumped tiles
     $tiles = scanFileNameRecursivly($globalTileDumpDir);
+    
+    // these two are used only for counting, not for ripping
     $aboveTiles = scanFileNameRecursivly($globalAboveDumpDir);
     $belowTiles = scanFileNameRecursivly($globalBelowDumpDir);
     
