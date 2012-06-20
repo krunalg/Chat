@@ -60,10 +60,7 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
     // get a list of all maps
     $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
     
-    $mapImageResources = array(); // array of image resources
-    $mapBorderImageResources = array(); // array of border image resources
     $mapImageInfo = array(); // array of image dimensions and position
-    $countMaps = 0; // increases as we decide to use more maps
     
     // get master tilesheet info
     $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
@@ -86,9 +83,6 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
             $placementDataParts = explode(':', $placementData);
             $placementX = trim($placementDataParts[0]);
             $placementY = trim($placementDataParts[1]);
-            
-            // load map
-            $map = LoadPNG($maps[$i]);
             
             // load border
             if(!file_exists($pathToBorderFile))
@@ -125,15 +119,11 @@ else if( isset($_GET['build']) && ($_GET['build']=='yes') )
             $mapInfo['borderHeight'] = $borderHeight;
             $mapInfo['borderTiles'] = $borderTiles;
             array_push($mapImageInfo, $mapInfo);
-            array_push($mapImageResources, $map);
-            array_push($mapBorderImageResources, $border);
-            
-            $countMaps++;
         }
     }
     
     // Output collision checks for each map
-    for($i=0; $i<$countMaps; $i++)
+    for($i=0; $i<count($mapImageInfo); $i++)
     {
         $mapWidthInTiles = $mapImageInfo[$i]['width'] / $globalTilesize;
         $mapHeightInTiles = $mapImageInfo[$i]['height'] / $globalTilesize;
