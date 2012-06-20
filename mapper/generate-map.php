@@ -113,9 +113,11 @@ else if( isset($_POST['generate']) )
                 }
             }   
             
+            // get map name
+            $reconstructedPath = removeFilenameFromPath($jsonMapPaths[$i]);
+            $mapName = basename($reconstructedPath);
+
             // map specific data
-            $mapName = dirname($jsonMapPaths[$i]);
-                $mapName = 'test';
             $mapJSON = $jsonMapPaths[$i];
             $mapJSON = file_get_contents($mapJSON);
             $mapJSON = json_decode($mapJSON);
