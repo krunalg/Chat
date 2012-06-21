@@ -36,7 +36,7 @@ $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
 
 $globalCollisionsFile = 'collisions.txt';
-$globalMasterTilesheetFile = $impactMediaDir . 'master.png';
+$globalMasterTilesheetFile = 'master.png';
 $globalMasterTilesheetJSON = $buildDir . 'master-tilesheet.js';
 $globalSpecialTilesJSON = 'special-tiles.js';
 $globalCameraDodgeJSON = $impactLibDir . 'saved-camera-dodges.js';
