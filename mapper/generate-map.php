@@ -219,7 +219,7 @@ else if( isset($_POST['generate']) || $automate )
                     "\"height\": ".(2).", ".
                     "\"linkWithCollision\": false, ".
                     "\"visible\": 1, ".
-                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
                     "\"repeat\": true, ".
                     "\"preRender\": false, ".
                     "\"distance\": \"1\", ".
@@ -235,7 +235,7 @@ else if( isset($_POST['generate']) || $automate )
                     "\"height\": ".$mapHeight.", ".
                     "\"linkWithCollision\": false, ".
                     "\"visible\": 1, ".
-                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
                     "\"repeat\": false, ".
                     "\"preRender\": false, ".
                     "\"distance\": \"1\", ".
@@ -278,7 +278,7 @@ else if( isset($_POST['generate']) || $automate )
                     "\"height\": ".$mapHeight.", ".
                     "\"linkWithCollision\": false, ".
                     "\"visible\": 1, ".
-                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
                     "\"repeat\": false, ".
                     "\"preRender\": false, ".
                     "\"distance\": \"1\", ".
@@ -324,7 +324,7 @@ else if( isset($_POST['generate']) || $automate )
                     "\"height\": ".$mapHeight.", ".
                     "\"linkWithCollision\": false, ".
                     "\"visible\": 1, ".
-                    "\"tilesetName\": \"".$globalMasterTilesheetFile."\", ".
+                    "\"tilesetName\": \"media/".$globalMasterTilesheetFile."\", ".
                     "\"repeat\": false, ".
                     "\"preRender\": false, ".
                     "\"distance\": \"1\", ".
@@ -423,7 +423,7 @@ else if( isset($_POST['generate']) || $automate )
         // END JSON
         
         $export .= "/*]JSON*/;\n";
-        $export .= "Level".$mapNameWeltmeister."Resources=[new ig.Image('".$globalMasterTilesheetFile."')];\n";
+        $export .= "Level".$mapNameWeltmeister."Resources=[new ig.Image('media/".$globalMasterTilesheetFile."')];\n";
         $export .= "});";
         
         // attempt to write weltmeister map
