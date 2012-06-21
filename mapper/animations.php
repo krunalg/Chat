@@ -92,8 +92,8 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
     {
         // we are going to need to look up certain tile positions
         // within the master tilesheet so lets build the lookup array
-        $tilesheetJSON = $globalMasterTilesheetJSON;
-        $tilesheetJSON = file_get_contents($tilesheetJSON);
+        if(!file_exists($globalMasterTilesheetJSON)) die("No tilesheet found.");     
+        $tilesheetJSON = file_get_contents($globalMasterTilesheetJSON);
         $tilesheetJSON = json_decode($tilesheetJSON);
         $masterTilesheetByHash = array();
         foreach($tilesheetJSON as $key => $hash)
