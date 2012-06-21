@@ -39,14 +39,6 @@ set-collision-types.php - requires maps be processed.
 
 
 
-!! To be made automated !!
-
-animations.php
--   Outputs a bunch of JavaScript which is used to define which tiles
-    in the master tilesheet are to be animated, and how.
-
-
-
 
 Automated processes:
 
@@ -88,5 +80,11 @@ generate-map.php
 Step 7:
 
 border-change.php - Requires master tilesheet JSON.
--   Outputs an Impact format moduel file containing a check method which updates
+-   Outputs an Impact format module file containing a check method which updates
     the games repeating border layer.
+
+Step 8:
+
+animations.php
+-   Outputs an Impact format module file which defines all background map animations.
+    Also copies all animation images to the client media folder.
