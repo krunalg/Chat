@@ -142,13 +142,15 @@ else if( (isset($_POST['build']) && $_POST['build']=='all') || $automate )
         }
     }
     
+    $write_path = $impactMediaDir . DIRECTORY_SEPARATOR . $globalMasterTilesheetFile;
+
     // attempt to write master tilesheet to disk
-    if(!imagepng($newimg, $globalMasterTilesheetFile))
+    if(!imagepng($newimg, $write_path))
         die( '<b style="color:red">Failed</b> writing file: '.
-             $globalMasterTilesheetFile );
+             $write_path );
     else {
 
-        echo "<b>Success</b> writing file: ".$globalMasterTilesheetFile."<br>\n";
+        echo "<b>Success</b> writing file: ".$write_path."<br>\n";
     }
         
     // frees image from memory
