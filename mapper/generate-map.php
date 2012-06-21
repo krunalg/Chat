@@ -296,7 +296,8 @@ else if( isset($_POST['generate']) || $automate )
                             
                             // use no tile (which is 0 in weltmeister)
                             // when tile can't be found in tilesheet
-                            if(!isset($masterTilesheetByHash[$currTileHash]))
+                            // or tile hash is of a solid black tile.
+                            if(!isset($masterTilesheetByHash[$currTileHash]) || $currTileHash=="5b85554da1606b2582ebe938a45dd3bd")
                                 $currTilePosInTilesheet = 0;
                             else
                             {
