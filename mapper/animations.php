@@ -52,7 +52,7 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
     // Empty the client animations folder.
     if(is_dir($impactAnimationDir)) rrmdir($impactAnimationDir);
     mkdir($impactAnimationDir);
-    echo "Emptied ".$impactAnimationDir."\n";
+    echo "Emptied ".$impactAnimationDir."<br>\n";
         
     // reads in all images from the animations directory and 
     // make a record of the first tile in every row, also 
