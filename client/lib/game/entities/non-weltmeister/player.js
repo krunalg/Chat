@@ -620,7 +620,7 @@ ig.module(
 				this.continueOrStop();
 
 				// Update repeating border by region if local player.
-				if (this.controlledByLocalKeyboard) BorderController.prototype.check(this);
+				if (this.controlledByLocalKeyboard) BorderCheck(this);
 
 			} else {
 

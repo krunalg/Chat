@@ -15,7 +15,7 @@ ig.module('game.main')
 'game.chat-log',
 
 // Generated content
-'game.border-controller',
+'game.border-check',
 
 'game.special-tiles',
 
@@ -199,7 +199,7 @@ ig.module('game.main')
 			var player = this.buildPlayer();
 
 			// Set the repeating border according to region.
-			BorderController.prototype.check(player);
+			BorderCheck(player);
 
 			// Add camera dodging.
 			ig.game.spawnEntity(EntityCameraDodgeFactory);
