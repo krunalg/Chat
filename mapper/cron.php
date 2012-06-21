@@ -2,17 +2,6 @@
 
 require_once('inc.globals.php');
 
-# recursively remove a directory
-function rrmdir($dir) {
-    foreach(glob($dir . '/*') as $file) {
-        if(is_dir($file))
-            rrmdir($file);
-        else
-            unlink($file);
-    }
-    rmdir($dir);
-}
-
 # used to calculate time elapsed
 function getTime() { 
 	$a = explode (' ',microtime()); 

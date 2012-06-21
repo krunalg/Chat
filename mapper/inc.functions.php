@@ -1,6 +1,22 @@
 <?php
 
 /**
+ * Recursively remove a directory.
+ *
+ * @param   $dir Directory to perform recursive call on.
+ * @return  bool true on success, false on failure.
+ */
+function rrmdir($dir) {
+    foreach(glob($dir . '/*') as $file) {
+        if(is_dir($file))
+            rrmdir($file);
+        else
+            unlink($file);
+    }
+    rmdir($dir);
+}
+
+/**
  * Write text to a file and echo its success or die
  * on failure.
  *
