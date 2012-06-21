@@ -24,9 +24,7 @@ $globalAboveDumpDir =
 $globalBelowDumpDir =
     "." . DIRECTORY_SEPARATOR .
     "below-tiles";
-$globalAnimationsDir =
-    "." . DIRECTORY_SEPARATOR .
-    "animations";
+$globalAnimationsDir = "./anims/";
     
 // FILE NAMES
 
