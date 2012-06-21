@@ -8,8 +8,9 @@ require_once('inc.globals.php');
 require_once('inc.functions.php');
 echo '<script type="text/javascript" src="inc.functions.js" ></script>'; // used for submitting forms
 
+if(!isset($automate)) $automate = false;
 
-if( !isset($_POST['process']) )
+if( !isset($_POST['process']) && !$automate)
 {
     /*
      * First Page: List the animation files found
@@ -37,7 +38,7 @@ if( !isset($_POST['process']) )
         echo "<br>\n\n";
     }
 }
-else if( isset($_POST['process']) && $_POST['process']=='all')
+else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
 {
     /*
      * Second Page: 
