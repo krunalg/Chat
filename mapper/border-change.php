@@ -170,7 +170,7 @@ else if( (isset($_GET['build']) && ($_GET['build']=='yes')) || $automate)
             $tab . "}\n\n";
     }
 
-    $export .= "    });\n\n})";
+    $export .= "    }\n\n})";
 
     // write to file
     writeTextToFile(($impactLibDir . $filename), $export);
