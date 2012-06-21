@@ -48,6 +48,11 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
     $imagesInDir = scanFileNameRecursivly($globalAnimationsDir);
     $animationExists = array();
     $fileWidthInTiles = array();
+
+    // Empty the client animations folder.
+    if(is_dir($impactAnimationDir)) rrmdir($impactAnimationDir);
+    mkdir($impactAnimationDir);
+    echo "Emptied ".$impactAnimationDir."\n";
         
     // reads in all images from the animations directory and 
     // make a record of the first tile in every row, also 
