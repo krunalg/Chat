@@ -11,6 +11,7 @@ $mergedMapDir = $buildDir . 'merged-maps/';
 $processedMapDir = $buildDir . 'processed-maps/';
 $impactLibDir = '../client/lib/game/';
 $impactMediaDir = '../client/media/';
+$impactAnimationDir = $impactMediaDir . 'animations/';
 $impactLevelDir = '../client/lib/game/levels/';
 $globalTileDumpDir = $buildDir . 'original-tiles/';
 $globalMapDir =
