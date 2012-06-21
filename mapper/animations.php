@@ -55,31 +55,30 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
     // do print_r($animationExists) for more info.
     for($i=0; $i<count($imagesInDir); $i++)
     {
-        if(file_exists($imagesInDir[$i]))
+        if(!file_exists($imagesInDir[$i])) die("".$imagesInDir[$i]." does not exist.");
+        
+        // load image
+        $imageSize = getimagesize($imagesInDir[$i]);
+        $imageWidth = $imageSize[0];
+        $imageHeight = $imageSize[1];
+        $image = LoadPNG($imagesInDir[$i]);
+
+        $path_parts = pathinfo($imagesInDir[$i]);
+        $filename = $path_parts['basename'];
+
+        // store filename widths-in-tiles for later
+        $fileWidthInTiles[$filename] = $imageWidth/$globalTilesize;
+        
+        for($y=0; $y<$imageHeight/$globalTilesize; $y++)
         {
-            // load image
-            $imageSize = getimagesize($imagesInDir[$i]);
-            $imageWidth = $imageSize[0];
-            $imageHeight = $imageSize[1];
-            $image = LoadPNG($imagesInDir[$i]);
-
-            $path_parts = pathinfo($imagesInDir[$i]);
-            $filename = $path_parts['basename'];
-
-            // store filename widths-in-tiles for later
-            $fileWidthInTiles[$filename] = $imageWidth/$globalTilesize;
+            $x = 0;
+            $tileHash = getTile($image, $globalTilesize, $x, $y);
+            if(!isset($animationExists[$filename]))
+                $animationExists[$filename] = array();
             
-            for($y=0; $y<$imageHeight/$globalTilesize; $y++)
-            {
-                $x = 0;
-                $tileHash = getTile($image, $globalTilesize, $x, $y);
-                if(!isset($animationExists[$filename]))
-                    $animationExists[$filename] = array();
-                
-                $animationExists[$filename][$tileHash] = $y;
-            }
+            $animationExists[$filename][$tileHash] = $y;
         }
-        else die( "" . $imagesInDir[$i] . " does not exist.");
+        
     }
 
     if(count($animationExists)>=1)
