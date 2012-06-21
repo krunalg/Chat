@@ -99,16 +99,26 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
         $export = '';
         $fileCount = 0;
         $animationSheetName = "animationSheet";
+
+        $module = 'game.background-animations';
+        $functionName = 'initBackgroundAnimations';
+
+        $export .= "ig.module('".$module."')\n\n.requires()\n\n.defines(function() {\n\n" .
+                   "    ".$functionName." = function() {\n\n";
+        $tab = "        ";
+
+
+
         foreach($animationExists as $filename => $tiles)
         {
-            $export .=  "var " . $animationSheetName . $fileCount . 
+            $export .= $tab . "var " . $animationSheetName . $fileCount . 
                         " = new ig.AnimationSheet( ".
-                            "'media/" . $filename . "', " . $globalTilesize . 
+                            "'media/animations/" . $filename . "', " . $globalTilesize . 
                             ", " . $globalTilesize . 
-                        " );<br>";
+                        " );\n";
             $fileCount++;
         }
-        $export .=  "ig.game.backgroundAnims = { " .
+        $export .=  $tab . "ig.game.backgroundAnims = { " .
                         "'media/".$globalMasterTilesheetFile."': {";
         
         $fileCount = 0;
@@ -144,8 +154,8 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
                 }
                 else
                 {
-                    $export .=  $skipCommaFirstTime . "<br>" .
-                        ( $masterTilesheetByHash[$hash] ) . 
+                    $export .=  $skipCommaFirstTime . "\n" .
+                                $tab . "    " . ( $masterTilesheetByHash[$hash] ) . 
                     // new ig.Animation(
                     ": new ".$animationType."( " . $animationSheetName . $fileCount .
                     ", ".$timePerFrame.", " .
@@ -166,8 +176,9 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
             $fileCount++;
         }
         
-        $export .=      "<br>} " .
-                    "}; ";
+        $export .=  "\n" . $tab ."} };\n\n";
+
+        $export .= "    }\n\n})";
 
         //echo "Use the following code in Impact to set up animations:<br><br>\n\n";
         echo $export;
