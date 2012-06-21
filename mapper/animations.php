@@ -89,7 +89,7 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
 
         // Let's also copy each image into the animations folder 
         // in the client directory.
-        $destination = $impactMediaDir . 'animations/' . $filename;
+        $destination = $impactAnimationDir . $filename;
         copy($imagesInDir[$i], $destination);
     }
 
