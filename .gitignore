@@ -6,6 +6,7 @@ master.png
 levels/
 animations/
 build/
+game.min.js
 
 # Other Folders
 baked/
