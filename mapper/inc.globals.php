@@ -29,14 +29,17 @@ $globalAnimationsDir =
     
 // FILE NAMES
 
-// (don't prefix the first few with paths because they are used as search terms)
+/* Don't prefix the first few with paths because they are either:
+    - used as search terms when scanning folders
+    - used to create relative paths that differ between mapper and client
+*/
 $globalMapFilename = 'map.png';
 $globalMapJSON = 'map.js';
 $globalPlacementFile = 'placement.txt';
 $globalBorderFile = 'border.png';
+$globalMasterTilesheetFile = 'master.png';
 
 $globalCollisionsFile = 'collisions.txt';
-$globalMasterTilesheetFile = 'master.png';
 $globalMasterTilesheetJSON = $buildDir . 'master-tilesheet.js';
 $globalSpecialTilesJSON = 'special-tiles.js';
 $globalCameraDodgeJSON = $impactLibDir . 'saved-camera-dodges.js';
