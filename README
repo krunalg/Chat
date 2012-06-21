@@ -37,7 +37,7 @@ To-do:
 
 Reflections:
 - Fix: Not animating properly when facing right.
-- Add brightness or 'fading' effect to reflections.
+- Add: brightness/fading effect to reflections.
 - Fix: Tree-tips over reflective water hide reflection.
 
 Weather:
@@ -53,7 +53,9 @@ Controls:
 Water:
 - Fix: Player does 'slow-walk' animation trying to swim against a wall.
 - Add: Player shows 'bobbing' animation when swimming.
-- Add: Player does an initial hop onto the surf entity.
+- Add: Initial hop on to surf-entity animation.
+- Add: Water ripple effect.
+
 
 Grass:
 - Fix: Not all grass entities spawned by network players disappear.
@@ -69,9 +71,9 @@ Server:
 - Disconnect any user that tries emitting without being authenticated.
 
 Bicycle:
-- Add 'curvy' tire tracks when turning corners in sand.
-- Add 'Mach' bicycle which has variable speed (low priority).
-- Add bike sprites for MAY (girl).
+- Add: 'curvy' tire tracks when turning corners in sand.
+- Add: 'Mach' bicycle which has variable speed (low priority).
+- Add: bike sprites for MAY (girl).
 - Fix: network players show wrong animation while jumping ledges with a bike.
 - Fix: network players on bike leave the wrong kind of track in sand.
 
