@@ -78,7 +78,9 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
             
             $animationExists[$filename][$tileHash] = $y;
         }
-        
+
+        // frees image from memory
+        imagedestroy($image);
     }
 
     if(count($animationExists)>=1)
