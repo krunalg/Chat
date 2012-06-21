@@ -29,6 +29,7 @@ Change-Log:
 - Added tall-grass with animations. (Completed June 18, 2012)
 - Added deep-sand effect which covers players feet in sand in certain areas. (Completed June 18, 2012)
 - Camera restrictions can be added to prevent unsightly areas from being seen by the player. (Completed June 18, 2012)
+- Automated generation of levels from image sources; just run cron.php (Completed June 20, 2012)
 
 
 To-do:
