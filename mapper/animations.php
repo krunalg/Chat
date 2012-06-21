@@ -102,6 +102,7 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
 
         $module = 'game.background-animations';
         $functionName = 'initBackgroundAnimations';
+        $moduleFilename = 'background-animations.js';
 
         $export .= "ig.module('".$module."')\n\n.requires()\n\n.defines(function() {\n\n" .
                    "    ".$functionName." = function() {\n\n";
@@ -180,12 +181,10 @@ else if( isset($_POST['process']) && $_POST['process']=='all')
 
         $export .= "    }\n\n})";
 
-        //echo "Use the following code in Impact to set up animations:<br><br>\n\n";
-        echo $export;
-        die();
-        //echo "\n\n<br><br>";
-        //echo "And make sure you copy the files in " . $globalAnimationsDir .
-        //     " to the media directory.";
+        $write_path = $impactLibDir . $moduleFilename;
+
+        // write to file
+        writeTextToFile($write_path, $export);
 
     }
 }
