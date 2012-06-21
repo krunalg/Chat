@@ -81,6 +81,11 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
 
         // frees image from memory
         imagedestroy($image);
+
+        // Let's also copy each image into the animations folder 
+        // in the client directory.
+        $destination = $impactMediaDir . 'animations/' . $filename;
+        copy($imagesInDir[$i], $destination);
     }
 
     if(count($animationExists)>=1)
