@@ -91,6 +91,7 @@ else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate )
         // in the client directory.
         $destination = $impactAnimationDir . $filename;
         copy($imagesInDir[$i], $destination);
+        echo "Copied to ".$destination."<br>\n";
     }
 
     if(count($animationExists)>=1)
