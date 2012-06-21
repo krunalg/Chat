@@ -40,7 +40,7 @@ set-collision-types.php - requires maps be processed.
 
 
 
-Automated processes:
+Automated processes (called by running cron.php):
 
 Step 1:
 
