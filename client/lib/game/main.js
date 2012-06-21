@@ -317,7 +317,7 @@ ig.module('game.main')
 				var factory = ig.game.getEntitiesByType(EntityCameraDodgeFactory)[0];
 
 				// Get all camera dodges that are visible.
-				var cameraDodges = factory.getDodges();
+				if(typeof factory != 'undefined') var cameraDodges = factory.getDodges();
 
 				// Camera dodging is enabled and there's at least one on screen.
 				if (this.cameraDodging && typeof cameraDodges != 'undefined') {
