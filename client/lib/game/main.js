@@ -20,7 +20,7 @@ ig.module('game.main')
 'game.special-tiles',
 
 // Levels
-'game.levels.test',
+'game.levels.rs-world',
 
 'game.levels.town',
 
@@ -120,7 +120,7 @@ ig.module('game.main')
 		eventsLifespan: 2,
 
 		// First level to load.
-		defaultLevel: LevelTest,
+		defaultLevel: LevelRsWorld,
 
 		// Starting position X.
 		defaultXStart: 2176,
