@@ -6,9 +6,6 @@ ig.module('game.main')
 
 'impact.font',
 
-// Animations
-'game.background-animations',
-
 'game.position-dependent-animation',
 
 // Chat log
@@ -18,6 +15,8 @@ ig.module('game.main')
 'game.border-check',
 
 'game.special-tiles',
+
+'game.background-animations',
 
 // Levels
 'game.levels.rs-world',
