@@ -1,6 +1,7 @@
 <?php
 
 require_once('inc.globals.php');
+require_once('inc.functions.php');
 
 # used to calculate time elapsed
 function getTime() { 
