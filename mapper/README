@@ -44,37 +44,37 @@ Automated processes (called by running cron.php):
 
 Step 1:
 
-dump-map-tiles.php  - requires map image be in the maps folder.
+dump-map-tiles.php - Requires map images.
 -   Rip tiles directly from a source map image into a folder.
     NOTICE: can be time consuming with multiple maps.
 
 Step 2:
 
-merge-maps.php
+merge-maps.php - Require map placement data.
 -   Reads maps which have been assigned relative x and y values, and combines 
     them them together into a larger map.
 
 Step 3:
 
-process-map.php
+process-map.php - Requires map images.
 -   Generates a JSON file for each map, containing map width, height, and tile hashes.
     NOTICE: can be time consuming with large maps (Hoenn takes about 12 min).
 
 Step 4:
 
-merge-map-tiles.php
+merge-map-tiles.php - Requires individually dumped tiles.
 -   Combines all dumped tiles, and manually editted tiles into a single "master" 
     tilesheet. Generates an image and a JSON file containing hash information.
 
 Step 5:
 
-get-collision-types.php - requires master tilesheet be made.
+get-collision-types.php - Requires master tilesheet JSON.
 -   Creates an ImpactJS module file, defining which tiles are "special". 
     (Ie. Which tiles are water, grass, reflective, etc.)
 
 Step 6:
 
-generate-map.php
+generate-map.php - Requires master tilesheet JSON, map JSON's, and collision data.
 -   Outputs a Weltmeister map file with all map layers, including a collision map.
 
 Step 7:
@@ -85,6 +85,6 @@ border-change.php - Requires master tilesheet JSON.
 
 Step 8:
 
-animations.php
+animations.php - Requires master tilesheet JSON, and animation images.
 -   Outputs an Impact format module file which defines all background map animations.
     Also copies all animation images to the client media folder.
