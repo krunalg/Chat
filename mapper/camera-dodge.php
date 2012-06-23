@@ -79,7 +79,8 @@ else if($action=='delete' || $action=='write') {
         
     // Write new JSON.
     $new_file_contents = json_encode($tiles);
-    writeTextToFile($globalCameraDodgeJSON, $new_file_contents);
+    $pretty_json = json_format($new_file_contents);
+    writeTextToFile($globalCameraDodgeJSON, $pretty_json);
 }
 
 // Invalid selection.
