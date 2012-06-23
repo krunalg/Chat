@@ -88,3 +88,8 @@ Step 8:
 animations.php - Requires master tilesheet JSON, and animation images.
 -   Outputs an Impact format module file which defines all background map animations.
     Also copies all animation images to the client media folder.
+
+Step 9:
+
+require-maps.php - Requires maps be generated.
+-   Creates an Impact module which requires all maps in the Impact levels directory.
