@@ -2,28 +2,27 @@
 background-animations.js
 special-tiles.js
 border-check.js
+game.min.js
+animations/
 master.png
 levels/
-animations/
 build/
-game.min.js
-baked.php
 
-# Other Folders
-baked/
+# Misc.
+baked.php
 backup/
+baked/
 
 # Licensed ImpactJS Files
-impact/
-weltmeister/
-tools/
 weltmeister.html
+weltmeister/
+impact/
+tools/
 
 # Files
-how-to-use-git.txt
-pokemon-chat.sublime-project
 pokemon-chat.sublime-workspace
-
+pokemon-chat.sublime-project
+how-to-use-git.txt
 
 # Compiled source #
 ###################
