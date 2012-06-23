@@ -10,6 +10,7 @@ $buildDir = './build/';
 $mergedMapDir = $buildDir . 'merged-maps/';
 $processedMapDir = $buildDir . 'processed-maps/';
 $impactLibDir = '../client/lib/game/';
+$impactLevelDir = $impactLibDir . 'levels/';
 $impactMediaDir = '../client/media/';
 $impactAnimationDir = $impactMediaDir . 'animations/';
 $impactLevelDir = '../client/lib/game/levels/';
