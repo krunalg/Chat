@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.name')
 
 	EntityName = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		// Load font resources.
 		white: new ig.Font('media/font.white.with.shadow.png'),
 		blue: new ig.Font('media/font.blue.with.shadow.png'),

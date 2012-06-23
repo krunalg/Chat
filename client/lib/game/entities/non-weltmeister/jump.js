@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.jump')
 
 	EntityJump = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		// Should be the same as player walk speed.
 		speed: 69,
 

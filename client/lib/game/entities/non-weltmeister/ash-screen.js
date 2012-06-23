@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.ash-screen')
 
 	EntityAshScreen = EntityScreen.extend({
 
+		_wmIgnore: true,
+
 		vel: {
 			
 			x: 0,

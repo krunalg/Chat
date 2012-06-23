@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.rain-drop')
 
 	EntityRainDrop = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		size: {
 			x: 16,
 			y: 32

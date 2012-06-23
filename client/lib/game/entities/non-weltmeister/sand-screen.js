@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.sand-screen')
 
 	EntitySandScreen = EntityScreen.extend({
 
+		_wmIgnore: true,
+
 		vel: {
 			
 			// Move 4 pixels 60 times per second.

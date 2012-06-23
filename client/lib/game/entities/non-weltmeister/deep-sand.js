@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.deep-sand')
 
 	EntityDeepSand = EntitySplash.extend({
 
+		_wmIgnore: true,
+
 		offset: {
 			x: 0,
 			y: -10

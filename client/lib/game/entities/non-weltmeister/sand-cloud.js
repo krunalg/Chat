@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.sand-cloud')
 
 	EntitySandCloud = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		size: {
 			x: 32,
 			y: 32

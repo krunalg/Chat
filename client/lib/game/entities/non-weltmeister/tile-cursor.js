@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.tile-cursor')
 
 	EntityTileCursor = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		lineWidth: 2,
 		
 		lineColor: '#fff',

@@ -10,6 +10,8 @@ ig.module(
 
 	EntityPlayer = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		// Size of collision box.
 		size: {
 			x: 16,

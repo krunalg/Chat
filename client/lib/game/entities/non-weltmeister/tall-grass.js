@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.tall-grass')
 
 	EntityTallGrass = EntityGrass.extend({
 
+		_wmIgnore: true,
+
 		// Load image resource.
 		animSheet: new ig.AnimationSheet('media/rs.tall-grass.png', 16, 16),
 

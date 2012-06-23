@@ -10,6 +10,8 @@ ig.module(
 
 	EntityLocalPlayer = EntityPlayer.extend({
 
+		_wmIgnore: true,
+
 		// Layering priority relative to other entities.
 		zPriority: 3,
 

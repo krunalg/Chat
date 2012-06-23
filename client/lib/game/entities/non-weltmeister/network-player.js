@@ -8,6 +8,8 @@ ig.module(
 
 	EntityNetworkPlayer = EntityPlayer.extend({
 
+		_wmIgnore: true,
+
 		// Priority relative to other entities.
 		zPriority: 1,
 

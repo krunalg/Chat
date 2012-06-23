@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.camera-dodge')
 
 	EntityCameraDodge = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		lineWidth: 4,
 
 		lineColor: '#f00',

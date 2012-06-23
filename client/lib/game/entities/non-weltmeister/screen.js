@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.screen')
 
 	EntityScreen = ig.Entity.extend({
 
+		_wmIgnore: true,
+
 		size: {
 			x: 64,
 			y: 64

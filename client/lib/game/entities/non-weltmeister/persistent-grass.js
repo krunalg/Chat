@@ -6,6 +6,8 @@ ig.module('game.entities.non-weltmeister.persistent-grass')
 
 	EntityPersistentGrass = EntityGrass.extend({
 
+		_wmIgnore: true,
+
 		// Below players.
 		zPriority: 0,
 

@@ -6,6 +6,7 @@ ig.module('game.entities.non-weltmeister.weather-controller')
 
 	EntityWeatherController = ig.Entity.extend({
 
+		_wmIgnore: true,
 
 		// How many sand clouds to spawn per second.
 		sandRate: 2,
