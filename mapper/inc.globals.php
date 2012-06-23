@@ -5,6 +5,9 @@ $globalTilesize = 16;
 $globalMasterTilesheetWidth = 256;
 $globalWMTileOffset = 1; // because Weltmeister considers 1, not 0 to be the first tile
 
+// IMPACT MODULE NAMES
+$impactLevelModule = 'game.levels.';
+
 // DIRECTORIES
 $buildDir = './build/';
 $mergedMapDir = $buildDir . 'merged-maps/';
