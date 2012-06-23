@@ -1,6 +1,6 @@
 /* Do the splash and jump entities share enough in common to share a single parent entity? */
 
-ig.module('game.entities.non-weltmeister.splash')
+ig.module('game.entities.splash')
 
 .requires('impact.entity')
 

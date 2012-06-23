@@ -38,9 +38,9 @@ ig.module('game.main')
 // Entities
 'game.entities.grass',
 
-'game.entities.non-weltmeister.persistent-grass',
+'game.entities.persistent-grass',
 
-'game.entities.non-weltmeister.tall-grass',
+'game.entities.tall-grass',
 
 'game.entities.exit',
 
@@ -48,47 +48,47 @@ ig.module('game.main')
 
 'game.entities.sign',
 
-'game.entities.non-weltmeister.player',
+'game.entities.player',
 
-'game.entities.non-weltmeister.local-player',
+'game.entities.local-player',
 
-'game.entities.non-weltmeister.network-player',
+'game.entities.network-player',
 
-'game.entities.non-weltmeister.sand-track',
+'game.entities.sand-track',
 
-'game.entities.non-weltmeister.reflection',
+'game.entities.reflection',
 
-'game.entities.non-weltmeister.chat-bubble',
+'game.entities.chat-bubble',
 
-'game.entities.non-weltmeister.name',
+'game.entities.name',
 
-'game.entities.non-weltmeister.jump',
+'game.entities.jump',
 
-'game.entities.non-weltmeister.surf',
+'game.entities.surf',
 
-'game.entities.non-weltmeister.rain-drop',
+'game.entities.rain-drop',
 
-'game.entities.non-weltmeister.sand-cloud',
+'game.entities.sand-cloud',
 
-'game.entities.non-weltmeister.screen',
+'game.entities.screen',
 
-'game.entities.non-weltmeister.sand-screen',
+'game.entities.sand-screen',
 
-'game.entities.non-weltmeister.ash-screen',
+'game.entities.ash-screen',
 
-'game.entities.non-weltmeister.weather-controller',
+'game.entities.weather-controller',
 
-'game.entities.non-weltmeister.tile-cursor',
+'game.entities.tile-cursor',
 
-'game.entities.non-weltmeister.camera-dodge',
+'game.entities.camera-dodge',
 
-'game.entities.non-weltmeister.camera-dodge-factory',
+'game.entities.camera-dodge-factory',
 
-'game.entities.non-weltmeister.splash',
+'game.entities.splash',
 
-'game.entities.non-weltmeister.deep-sand',
+'game.entities.deep-sand',
 
-'game.entities.non-weltmeister.ash-puff',
+'game.entities.ash-puff',
 
 //debug
 'impact.debug.debug',

@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.screen')
+ig.module('game.entities.screen')
 
 .requires('impact.entity')
 

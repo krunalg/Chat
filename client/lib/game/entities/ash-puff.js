@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.ash-puff')
+ig.module('game.entities.ash-puff')
 
 .requires('impact.entity')
 

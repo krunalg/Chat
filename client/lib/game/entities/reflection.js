@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.reflection')
+ig.module('game.entities.reflection')
 
 .requires('impact.entity')
 

@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.surf')
+ig.module('game.entities.surf')
 
 .requires('impact.entity')
 

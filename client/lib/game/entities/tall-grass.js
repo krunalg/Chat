@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.tall-grass')
+ig.module('game.entities.tall-grass')
 
 .requires('game.entities.grass')
 

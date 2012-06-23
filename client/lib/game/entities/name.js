@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.name')
+ig.module('game.entities.name')
 
 .requires('impact.entity', 'impact.font')
 

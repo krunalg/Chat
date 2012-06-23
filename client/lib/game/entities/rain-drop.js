@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.rain-drop')
+ig.module('game.entities.rain-drop')
 
 .requires('impact.entity')
 

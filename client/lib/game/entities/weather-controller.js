@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.weather-controller')
+ig.module('game.entities.weather-controller')
 
 .requires('impact.entity')
 

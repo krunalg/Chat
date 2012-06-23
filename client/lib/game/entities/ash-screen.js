@@ -1,6 +1,6 @@
-ig.module('game.entities.non-weltmeister.ash-screen')
+ig.module('game.entities.ash-screen')
 
-.requires('game.entities.non-weltmeister.screen')
+.requires('game.entities.screen')
 
 .defines(function() {
 

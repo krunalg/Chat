@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.jump')
+ig.module('game.entities.jump')
 
 .requires('impact.entity')
 

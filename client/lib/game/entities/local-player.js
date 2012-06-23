@@ -1,10 +1,10 @@
 ig.module(
 
-'game.entities.non-weltmeister.local-player')
+'game.entities.local-player')
 
 .requires(
 
-'game.entities.non-weltmeister.player')
+'game.entities.player')
 
 .defines(function() {
 

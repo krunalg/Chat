@@ -1,6 +1,6 @@
 ig.module(
 
-'game.entities.non-weltmeister.player')
+'game.entities.player')
 
 .requires(
 

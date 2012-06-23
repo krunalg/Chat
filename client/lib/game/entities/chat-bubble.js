@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.chat-bubble')
+ig.module('game.entities.chat-bubble')
 
 .requires('impact.entity', 'impact.font')
 

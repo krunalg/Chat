@@ -1,5 +1,5 @@
 
-ig.module('game.entities.non-weltmeister.camera-dodge-factory')
+ig.module('game.entities.camera-dodge-factory')
 
 .requires('impact.entity')
 

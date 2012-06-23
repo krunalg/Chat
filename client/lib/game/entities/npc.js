@@ -4,7 +4,7 @@ ig.module(
 
 .requires(
 
-'game.entities.non-weltmeister.player').defines(function() {
+'game.entities.player').defines(function() {
 
 	EntityNpc = EntityPlayer.extend({
 

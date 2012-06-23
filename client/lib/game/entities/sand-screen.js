@@ -1,6 +1,6 @@
-ig.module('game.entities.non-weltmeister.sand-screen')
+ig.module('game.entities.sand-screen')
 
-.requires('game.entities.non-weltmeister.screen')
+.requires('game.entities.screen')
 
 .defines(function() {
 

@@ -1,6 +1,6 @@
-ig.module('game.entities.non-weltmeister.deep-sand')
+ig.module('game.entities.deep-sand')
 
-.requires('game.entities.non-weltmeister.splash')
+.requires('game.entities.splash')
 
 .defines(function() {
 

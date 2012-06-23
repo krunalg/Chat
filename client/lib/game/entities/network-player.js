@@ -1,10 +1,10 @@
 ig.module(
 
-'game.entities.non-weltmeister.network-player')
+'game.entities.network-player')
 
 .requires(
 
-'game.entities.non-weltmeister.player').defines(function() {
+'game.entities.player').defines(function() {
 
 	EntityNetworkPlayer = EntityPlayer.extend({
 

@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.sand-cloud')
+ig.module('game.entities.sand-cloud')
 
 .requires('impact.entity')
 

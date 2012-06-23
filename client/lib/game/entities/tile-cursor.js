@@ -1,4 +1,4 @@
-ig.module('game.entities.non-weltmeister.tile-cursor')
+ig.module('game.entities.tile-cursor')
 
 .requires('impact.entity')
 
