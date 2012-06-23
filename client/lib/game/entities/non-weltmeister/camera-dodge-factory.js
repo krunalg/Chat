@@ -133,6 +133,10 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 						// Limit edge is visible.
 						startX = x;
 						endX   = x + width;
+
+						// ANY part is visible.
+						startY = y + height - 1;
+						endY   = y;
 						break;
 
 					case 'up':
@@ -141,10 +145,14 @@ ig.module('game.entities.non-weltmeister.camera-dodge-factory')
 						// ANY part of entity is visible.
 						startX = x + width - 1;
 						endX   = x;
+
+						// Limit edge is visible.
+						startY = y;
+						endY   = y + height;
 						break;
 				}
 				
-				if (startX >= ig.game.screen.x && endX < (ig.game.screen.x + ig.system.width) && y >= ig.game.screen.y && (y + height) < (ig.game.screen.y + ig.system.height)) {
+				if (startX >= ig.game.screen.x && endX < (ig.game.screen.x + ig.system.width) && startY >= ig.game.screen.y && endY < (ig.game.screen.y + ig.system.height)) {
 
 					onScreen.push(entities[i]);
 				}
