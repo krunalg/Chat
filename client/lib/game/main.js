@@ -142,6 +142,9 @@ ig.module('game.main')
 		// Name of may layer where checking for special tiles is done.
 		primaryMapLayer: 'lower',
 
+		// Walk through walls.
+		noclip: false,
+
 		/*
 		 * Chat system
 		 */
@@ -187,6 +190,7 @@ ig.module('game.main')
 			ig.input.bind(ig.KEY.MOUSE1, 'mouse1');
 			ig.input.bind(ig.KEY.MOUSE2, 'mouse2');
 			ig.input.bind(ig.KEY.Q, 'cameraDodging');
+			ig.input.bind(ig.KEY.N, 'noclip');
 
 			// Set map animations from generated file.
 			initBackgroundAnimations();
@@ -290,6 +294,78 @@ ig.module('game.main')
 
 			// Toggle camera dodging.
 			if (ig.input.pressed('cameraDodging')) this.cameraDodging = !this.cameraDodging;
+
+			// Toggle no-clip.
+			if (ig.input.pressed('noclip')) {
+
+				this.noclip = !this.noclip;
+
+				if(this.noclip) {
+
+					console.log("No-clip ON.");
+
+					// Disable collisions.
+					ig.CollisionMap.inject({
+						trace: function(x, y, vx, vy, objectWidth, objectHeight) {
+							// Return a dummy trace result, indicating that the object did not collide.
+							return {
+								collision: {
+									x: false,
+									y: false
+								},
+								pos: {
+									x: x + vx,
+									y: y + vy
+								},
+								tile: {
+									x: 0,
+									y: 0
+								}
+							};
+						}
+					});
+
+				} else {
+
+					console.log("No-clip OFF.");
+
+					// Enable collisions.
+					ig.CollisionMap.inject({
+						trace: function( x, y, vx, vy, objectWidth, objectHeight ) {
+							// Set up the trace-result
+							var res = {
+								collision: {x: false, y: false, slope: false},
+								pos: {x: x, y: y},
+								tile: {x: 0, y: 0}
+							};
+							
+							// Break the trace down into smaller steps if necessary
+							var steps = Math.ceil(Math.max(Math.abs(vx), Math.abs(vy)) / this.tilesize);
+							if( steps > 1 ) {
+								var sx = vx / steps;
+								var sy = vy / steps;
+								
+								for( var i = 0; i < steps && (sx || sy); i++ ) {
+									this._traceStep( res, x, y, sx, sy, objectWidth, objectHeight, vx, vy, i );
+									
+									x = res.pos.x;
+									y = res.pos.y;
+									if( res.collision.x ) {	sx = 0; vx = 0; }
+									if( res.collision.y ) {	sy = 0;	vy = 0; }
+									if( res.collision.slope ) { break; }
+								}
+							}
+							
+							// Just one step
+							else {
+								this._traceStep( res, x, y, vx, vy, objectWidth, objectHeight, vx, vy, 0 );
+							}
+							
+							return res;
+						}
+					});
+				}
+			}
 
 			// Update all entities and backgroundMaps
 			this.parent();
@@ -462,27 +538,6 @@ ig.module('game.main')
 				10000, // amount of of time between samples. defaults to 10000 (10 seconds)
 				100 // amount of samples to take over time. defaults to 500
 				);
-
-				// Disable collisions
-				ig.CollisionMap.inject({
-					trace: function(x, y, vx, vy, objectWidth, objectHeight) {
-						// Return a dummy trace result, indicating that the object did not collide.
-						return {
-							collision: {
-								x: false,
-								y: false
-							},
-							pos: {
-								x: x + vx,
-								y: y + vy
-							},
-							tile: {
-								x: 0,
-								y: 0
-							}
-						};
-					}
-				});
 			}
 		},
 
