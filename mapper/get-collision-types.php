@@ -16,7 +16,7 @@ if(!isset($_GET['go']) && !$automate)
  *
  */
 
-$notInterestedIn = array('nowalk', 'left', 'right', 'up', 'down', 'above');
+$notInterestedIn = array('nowalk', 'above');
 
 // we'll need master tilesheet info to translate hashes into tile positions
 $masterTilesheetByHash = getTilesheetHashTable($globalMasterTilesheetJSON);
