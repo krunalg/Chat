@@ -13,3 +13,7 @@ ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 1296;
 // Deep-sand
 ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 3600;
 ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 944;
+
+// Reflections
+ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 416;
+ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 2960;
