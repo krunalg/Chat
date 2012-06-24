@@ -69,6 +69,7 @@ Effects:
 
 Server:
 - Disconnect any user that tries emitting without being authenticated.
+- Remembers players position and map.
 
 Bicycle:
 - Add: 'curvy' tire tracks when turning corners in sand.
