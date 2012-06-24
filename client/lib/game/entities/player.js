@@ -87,6 +87,9 @@ ig.module(
 
 		update: function() {
 
+			// Break ties with entities to save memory.
+			if (this.followers.reflection !== undefined && this.followers.reflection._killed) this.followers.reflection = undefined;
+
 			// Set zIndex dynamically using Y position and priority.
 			this.zIndex = this.pos.y + this.zPriority;
 
@@ -490,12 +493,6 @@ ig.module(
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + tilesize, this.facing, 1));
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
 
-				// If old reflection has been killed, break tie.
-				if (this.followers.reflection !== undefined && this.followers.reflection._killed) this.followers.reflection = undefined;
-
-				// Used for cleanup.
-				var needReflection = false;
-
 				// Spawn reflection if needed.
 				for (var i = 0; i < checkTiles.length; i++) {
 					if (ig.game.isSpecialTile((checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer)) {
@@ -512,14 +509,9 @@ ig.module(
 							// Keep if was marked for death.
 							this.followers.reflection.revive();
 						}
-
-						needReflection = true;
 						break;
 					}
 				}
-
-				// Clean up unused reflection entity.
-				if (!needReflection && this.followers.reflection !== undefined) this.followers.reflection.markForDeath();
 			}
 
 			// Not idle.
@@ -614,6 +606,22 @@ ig.module(
 						this.followers.deepsand = ig.game.spawnEntity(EntityDeepSand, this.pos.x, this.pos.y, {player: player} );
 					}
 				}
+
+				// Which tiles to check for reflectivity?
+				checkTiles = new Array();
+				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + tilesize, this.facing, 0));
+				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 0));
+
+				var reflectionNeeded = false;
+				for (var i = 0; i < checkTiles.length; i++) {
+					if (ig.game.isSpecialTile((checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer)) {
+						reflectionNeeded = true;
+						break;
+					}
+				}
+
+				// Clean up unused reflection entity.
+				if (!reflectionNeeded && this.followers.reflection !== undefined) this.followers.reflection.markForDeath();
 
 				// Assess whether to try moving again or rest.
 				this.continueOrStop();
