@@ -33,6 +33,7 @@ Change-Log:
 - Added 319 maps (all areas and interiors). (Completed June 23, 2012)
 - Fixed bug where player reflections could sometimes be see over trees. (Completed June 24, 2012)
 - Fixed bug causing reflection animation to not fully animate when facing right. (Completed June 24, 2012)
+- Fixed bug that allowed players to walk along a ledge if approached from the side. (Completed June 24, 2012)
 
 
 To-do:
@@ -46,9 +47,6 @@ Weather:
 - Add: Triggered by player walking in certain areas.
 - Fix: Sand-screen and ash-screen follow the player as he moves.
 
-Ledges:
-- Fix: Can be walked along if approached from the side.
-
 Controls:
 - Fix: Pressing up/down has precedence over left/right.
 
@@ -57,7 +55,6 @@ Water:
 - Add: Player shows 'bobbing' animation when swimming.
 - Add: Initial hop on to surf-entity animation.
 - Add: Water ripple effect.
-
 
 Grass:
 - Fix: Not all grass entities spawned by network players disappear.
