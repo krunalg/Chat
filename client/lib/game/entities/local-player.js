@@ -475,8 +475,7 @@ ig.module(
 		},
 
 		update: function() {
-			this.parent();
-
+			
 			// Finish movement attempts.
 			if (this.moveCommitPending) this.tryCommit();
 
@@ -508,8 +507,7 @@ ig.module(
 				this.action(this);
 			}
 
-			// Handle movements.
-			else {
+			if (!this.moving) {
 
 				// Check if waiting to walk through a door.
 				if (this.waitingToMove) {
@@ -522,12 +520,6 @@ ig.module(
 
 				}
 
-				else if (this.moving) {
-
-					// Finish the current move.
-					this.finishMove();
-
-				}
 				// Check if trying to start a new move.
 				else if (this.moveKeyDown('up')) {
 					this.facing = 'up';
@@ -542,6 +534,7 @@ ig.module(
 					this.facing = 'right';
 					this.tryCommit();
 				}
+				
 				// Player is not trying to move.
 				else {
 
@@ -555,6 +548,8 @@ ig.module(
 					this.anims.slowDown.rewind();
 				}
 			}
+
+			this.parent();
 		}
 
 
