@@ -140,7 +140,7 @@ ig.module('game.entities.reflection')
 						(flipX ? targetX + (tileWidth / 2) : targetX + 1), targetY, sourceX, sourceY, tileWidth / 2, tileHeight, flipX, flipY);
 
 						this.currentAnim.sheet.image.draw(
-						(flipX ? targetX : targetX + (tileWidth / 2)), targetY, sourceX + (tileWidth / 2), sourceY, tileWidth / 2, tileHeight, flipX, flipY);
+						(flipX ? targetX + 1 : targetX + (tileWidth / 2)), targetY, sourceX + (tileWidth / 2), sourceY, tileWidth / 2, tileHeight, flipX, flipY);
 						break;
 					}
 
