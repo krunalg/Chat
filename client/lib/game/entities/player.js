@@ -69,9 +69,6 @@ ig.module(
 		// Movement destination (either on x or y axis).
 		destination: 0,
 
-		// Reflection entity.
-		reflection: undefined,
-
 		// Chat-bubble entity; used to prevent overlapping bubbles.
 		chatBubble: undefined,
 
@@ -494,7 +491,7 @@ ig.module(
 				checkTiles.push(this.getTilePos(this.pos.x, this.pos.y + (2 * tilesize), this.facing, 1));
 
 				// If old reflection has been killed, break tie.
-				if (this.reflection !== undefined && this.reflection._killed) this.reflection = undefined;
+				if (this.followers.reflection !== undefined && this.followers.reflection._killed) this.followers.reflection = undefined;
 
 				// Used for cleanup.
 				var needReflection = false;
@@ -503,17 +500,17 @@ ig.module(
 				for (var i = 0; i < checkTiles.length; i++) {
 					if (ig.game.isSpecialTile((checkTiles[i].x / tilesize), (checkTiles[i].y / tilesize), specialTiles['reflection'], ig.game.primaryMapLayer)) {
 
-						if (this.reflection === undefined) {
+						if (this.followers.reflection === undefined) {
 
 							// Save reference to reflection entity.
-							this.reflection = ig.game.spawnEntityBelow(EntityReflection, this.pos.x, this.pos.y, {
+							this.followers.reflection = ig.game.spawnEntityBelow(EntityReflection, this.pos.x, this.pos.y, {
 								follow: this
 							});
 
 						} else {
 
 							// Keep if was marked for death.
-							this.reflection.revive();
+							this.followers.reflection.revive();
 						}
 
 						needReflection = true;
@@ -522,7 +519,7 @@ ig.module(
 				}
 
 				// Clean up unused reflection entity.
-				if (!needReflection && this.reflection !== undefined) this.reflection.markForDeath();
+				if (!needReflection && this.followers.reflection !== undefined) this.followers.reflection.markForDeath();
 			}
 
 			// Not idle.
