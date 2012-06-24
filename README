@@ -101,8 +101,8 @@ Optimizations:
 
 Code Improvements:
 - Splash, jump, and deep-sand entities can all likely share a single parent class.
-- Have the initial camera-dodge-factory load entities from a module, not AJAX (low priority).
 - Add all entities that follow player into player.followers (such as chat bubble, name, etc.)
+- Have the initial camera-dodge-factory load entities from a module, not AJAX (low priority).
 
 
 Known Issues:
