@@ -84,7 +84,7 @@ ig.module('game.entities.reflection')
 		markForDeath: function() {
 			
 			// Set the timer.
-			this.killTimer.set(3);
+			this.killTimer.set(0);
 
 			// Allow removal of entity.
 			this.markedForDeath = true;
