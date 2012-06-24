@@ -966,21 +966,25 @@ ig.module('game.main')
 		 */
 		isSpecialTile: function(x, y, tiles, layer) {
 
-			// Get map by name.
-			var map = this.getMapByName(layer);
+			if(typeof tiles !== 'undefined') {
 
-			// Map found.
-			if (map) {
-				// Try all tiles for a match.
-				for (var j = 0; j < tiles.length; j++) {
+				// Get map by name.
+				var map = this.getMapByName(layer);
 
-					// Outside of map.
-					if (typeof map['data'][y] == 'undefined') return false;
+				// Map found.
+				if (map) {
 
-					// Check if current match the one in the map.
-					if (tiles[j] == map['data'][y][x]) {
-						// Match found.
-						return true;
+					// Try all tiles for a match.
+					for (var j = 0; j < tiles.length; j++) {
+
+						// Outside of map.
+						if (typeof map['data'][y] == 'undefined') return false;
+
+						// Check if current match the one in the map.
+						if (tiles[j] == map['data'][y][x]) {
+							// Match found.
+							return true;
+						}
 					}
 				}
 			}
