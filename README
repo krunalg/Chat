@@ -34,6 +34,7 @@ Change-Log:
 - Fixed bug where player reflections could sometimes be see over trees. (Completed June 24, 2012)
 - Fixed bug causing reflection animation to not fully animate when facing right. (Completed June 24, 2012)
 - Fixed bug that allowed players to walk along a ledge if approached from the side. (Completed June 24, 2012)
+- Up and down arrows are given precedence over left and right when moving. (Completed June 24, 2012)
 
 
 To-do:
@@ -46,9 +47,6 @@ Reflections:
 Weather:
 - Add: Triggered by player walking in certain areas.
 - Fix: Sand-screen and ash-screen follow the player as he moves.
-
-Controls:
-- Fix: Pressing up/down has precedence over left/right.
 
 Water:
 - Fix: Player does 'slow-walk' animation trying to swim against a wall.
