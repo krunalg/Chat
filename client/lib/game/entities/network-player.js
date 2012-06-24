@@ -16,9 +16,6 @@ ig.module(
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// Set the players skin.
-			this.reskin(this.skin);
-
 			// Needed for passing a persistent reference of self into functions.
 			var player = this;
 
