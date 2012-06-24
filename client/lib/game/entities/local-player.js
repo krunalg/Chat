@@ -81,12 +81,11 @@ ig.module(
 			// Try to keep moving.
 			if (keepMoving) {
 
-				if (this.canJump()) {
-					this.moving = false; // will use jumping instead
-					this.startJump();
-				} else if (this.canMove()) {
-					this.preStartMove();
-				} else {
+				if (this.canJump()) this.startJump();
+				
+				else if (this.canMove()) this.preStartMove();
+
+				else {
 
 					// Stop player.
 					this.doneMove();
@@ -94,6 +93,7 @@ ig.module(
 					// Tell other players we've stopped.
 					this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 				}
+
 			} else {
 
 				// Stop player.
