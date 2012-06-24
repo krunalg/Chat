@@ -65,23 +65,23 @@ $globalCollisions =
                'mouseoutImg'  => 'images/solid.gif',
                'mouseoverImg' => 'images/solid-mouseover.png'
         ),
-        'left'     => 
-        array( 'collision'    => 45,
+        'ledgeLeft'     => 
+        array( 'collision'    => 0,
                'mouseoutImg'  => 'images/left.gif',
                'mouseoverImg' => 'images/left-mouseover.png'
         ),
-        'right'    => 
-        array( 'collision'    => 34,
+        'ledgeRight'    => 
+        array( 'collision'    => 0,
                'mouseoutImg'  => 'images/right.gif',
                'mouseoverImg' => 'images/right-mouseover.png'
         ),
-        'up'       => 
-        array( 'collision'    => 12,
+        'ledgeUp'       => 
+        array( 'collision'    => 0,
                'mouseoutImg'  => 'images/up.gif',
                'mouseoverImg' => 'images/up-mouseover.png'
         ),
-        'down'     => 
-        array( 'collision'    => 23,
+        'ledgeDown'     => 
+        array( 'collision'    => 0,
                'mouseoutImg'  => 'images/down.gif',
                'mouseoverImg' => 'images/down-mouseover.png'
         ),
