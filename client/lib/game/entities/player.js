@@ -504,10 +504,6 @@ ig.module(
 								follow: this
 							});
 
-						} else {
-
-							// Keep if was marked for death.
-							this.followers.reflection.revive();
 						}
 						break;
 					}
@@ -621,7 +617,7 @@ ig.module(
 				}
 
 				// Clean up unused reflection entity.
-				if (!reflectionNeeded && this.followers.reflection !== undefined) this.followers.reflection.markForDeath();
+				if (!reflectionNeeded && this.followers.reflection !== undefined) this.followers.reflection.kill();
 
 				// Assess whether to try moving again or rest.
 				this.continueOrStop();

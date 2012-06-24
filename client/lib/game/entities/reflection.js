@@ -32,20 +32,11 @@ ig.module('game.entities.reflection')
 		// Entity to follow.
 		follow: null,
 
-		// Used to keep entity alive briefly before killing.
-		killTimer: null,
-
-		// Is set to true when markForDeath() is called.
-		markedForDeath: false,
-
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
 			// Create timer for frames.
 			this.timer = new ig.Timer();
-
-			// Create timer for removing entity.
-			this.killTimer = new ig.Timer();
 
 			// Adds the flipX and flipY parameters to ig.Image.draw()
 			ig.Image.inject({
@@ -78,21 +69,6 @@ ig.module('game.entities.reflection')
 					ig.Image.drawCount++;
 				},
 			});
-		},
-
-		// Start count-down until this entity will be killed.
-		markForDeath: function() {
-			
-			// Set the timer.
-			this.killTimer.set(0);
-
-			// Allow removal of entity.
-			this.markedForDeath = true;
-		},
-
-		// Save this entity from being killed.
-		revive: function() {
-			this.markedForDeath = false;
 		},
 
 		draw: function(reallyDraw) {
@@ -177,12 +153,8 @@ ig.module('game.entities.reflection')
 
 		update: function() {
 
-			// Check if entity is no longer needed.
-			if ( (this.markedForDeath && this.killTimer.delta() >= 0) || this.follow._killed) 
-			{
-				// Free up resources.
-				this.kill();
-			}
+			// Not needed if player is gone.
+			if (this.follow._killed) this.kill();
 
 			// Get total frames elapsed.
 			var frameTotal = Math.floor(this.timer.delta() / this.frameTime);
