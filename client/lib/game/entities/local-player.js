@@ -522,7 +522,7 @@ ig.module(
 
 				}
 				// Check if currently jumping or moving.
-				else if (this.jumping || this.moving) {
+				else if (this.moving) {
 
 					// Finish the current move.
 					this.finishMove();
