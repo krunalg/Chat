@@ -90,8 +90,13 @@ ig.module(
 			// Set zIndex dynamically using Y position and priority.
 			this.zIndex = this.pos.y + this.zPriority;
 
-			// Call parent.
+			// Call parent before finishMove so that stepping past
+			// the destination can be corrected before drawing.
 			this.parent();
+
+			if (this.moving) this.finishMove();
+			
+			else this.moveAnimStop();			
 		},
 
 		/*

@@ -128,33 +128,25 @@ ig.module(
 		},
 
 		update: function() {
-			this.parent();
+			
+			// Check if its time to move again.
+			if (this.moveTimer.delta() >= 0) {
+				
+				// Face next direction.
+				this.faceNextMove();
 
-			// Check if player is moving.
-			if (this.moving) {
+				// Check if player can move.
+				if (this.canMove()) {
 
-				// Complete the started move.
-				this.finishMove();
+					// Start moving.
+					this.startMove();
 
-			} else {
-
-				// Check if its time to move again.
-				if (this.moveTimer.delta() >= 0) {
-					
-					// Face next direction.
-					this.faceNextMove();
-
-					// Check if player can move.
-					if (this.canMove()) {
-
-						// Start moving.
-						this.startMove();
-
-						// Queue of next move.
-						this.justMoved();
-					}
+					// Queue up next move.
+					this.justMoved();
 				}
 			}
+
+			this.parent();
 		}
 
 

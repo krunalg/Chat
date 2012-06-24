@@ -113,22 +113,6 @@ ig.module(
 					this.startMove();
 				}
 			}
-		},
-
-		update: function() {
-			this.parent();
-
-			// Check if player is moving.
-			if (this.moving) {
-
-				// Complete the started move.
-				this.finishMove();
-
-			} else {
-
-				// Set idle animation.
-				this.moveAnimStop();
-			}
 		}
 
 
