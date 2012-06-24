@@ -87,9 +87,6 @@ ig.module(
 
 		update: function() {
 
-			// Break ties with entities to save memory.
-			if (this.followers.reflection !== undefined && this.followers.reflection._killed) this.followers.reflection = undefined;
-
 			// Set zIndex dynamically using Y position and priority.
 			this.zIndex = this.pos.y + this.zPriority;
 
@@ -617,7 +614,13 @@ ig.module(
 				}
 
 				// Clean up unused reflection entity.
-				if (!reflectionNeeded && this.followers.reflection !== undefined) this.followers.reflection.kill();
+				if (!reflectionNeeded && this.followers.reflection !== undefined) {
+
+					this.followers.reflection.kill();
+					
+					// Break tie so garbage collector will collect entity.
+					this.followers.reflection = undefined;
+				}
 
 				// Assess whether to try moving again or rest.
 				this.continueOrStop();
