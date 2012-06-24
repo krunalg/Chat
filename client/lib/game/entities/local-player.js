@@ -69,10 +69,10 @@ ig.module(
 			var keepMoving = true;
 
 			// Check if player is pressing down the movement key.
-			if (this.moveKeyDown('left')) this.facing = 'left';
-			else if (this.moveKeyDown('right')) this.facing = 'right';
-			else if (this.moveKeyDown('up')) this.facing = 'up';
+			if (this.moveKeyDown('up')) this.facing = 'up';
 			else if (this.moveKeyDown('down')) this.facing = 'down';
+			else if (this.moveKeyDown('left')) this.facing = 'left';
+			else if (this.moveKeyDown('right')) this.facing = 'right';
 			else {
 				// Player is no longer trying to move.
 				keepMoving = false;
@@ -529,17 +529,17 @@ ig.module(
 
 				}
 				// Check if trying to start a new move.
-				else if (this.moveKeyDown('left')) {
-					this.facing = 'left';
-					this.tryCommit();
-				} else if (this.moveKeyDown('right')) {
-					this.facing = 'right';
-					this.tryCommit();
-				} else if (this.moveKeyDown('up')) {
+				else if (this.moveKeyDown('up')) {
 					this.facing = 'up';
 					this.tryCommit();
 				} else if (this.moveKeyDown('down')) {
 					this.facing = 'down';
+					this.tryCommit();
+				} else if (this.moveKeyDown('left')) {
+					this.facing = 'left';
+					this.tryCommit();
+				} else if (this.moveKeyDown('right')) {
+					this.facing = 'right';
 					this.tryCommit();
 				}
 				// Player is not trying to move.
