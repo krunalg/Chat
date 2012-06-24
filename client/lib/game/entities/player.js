@@ -273,6 +273,9 @@ ig.module(
 		 * @return boolean true if no collision, else false.
 		 */
 		canMove: function() {
+			
+			var tilesize = this.getTilesize();
+
 			// Get position of faced tile.
 			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
@@ -300,6 +303,18 @@ ig.module(
 
 				// Collision occured.
 				return false;
+			}
+
+			// Check for collision against ledge.
+			var directions = ['left', 'right', 'up', 'down'];
+			for(var i=0; i<directions.length; i++) {
+
+				if(this.facing===directions[i]) continue;
+
+				if (ig.game.isSpecialTile((position.x / tilesize), (position.y / tilesize), specialTiles['ledge' + ig.game.capitaliseFirstLetter(directions[i])], ig.game.primaryMapLayer)) {
+				
+					return false;
+				}
 			}
 
 			// Check for collision against an NPC.
@@ -348,31 +363,13 @@ ig.module(
 		 * @return boolean true if jumpable, else false.
 		 */
 		canJump: function() {
-			// Get position of faced tile.
-			var position = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
+			
+			var tilesize = this.getTilesize();
 
-			// Get collision map.
-			var collisionMap = ig.game.collisionMap;
+			var facedTile = this.getTilePos(this.pos.x, this.pos.y, this.facing, 1);
 
-			// Define Weltmeister jump tile values.
-			switch (this.facing) {
-			case 'left':
-				var jumpTile = 45;
-				break;
-			case 'right':
-				var jumpTile = 34;
-				break;
-			case 'up':
-				var jumpTile = 12;
-				break;
-			case 'down':
-				var jumpTile = 23;
-				break;
-			}
-
-			// Check if tile is a jump tile.
-			if (collisionMap.getTile(position.x, position.y) == jumpTile) {
-				// Tile is jumpable.
+			if (ig.game.isSpecialTile((facedTile.x / tilesize), (facedTile.y / tilesize), specialTiles['ledge' + ig.game.capitaliseFirstLetter(this.facing)], ig.game.primaryMapLayer)) {
+				
 				return true;
 			}
 
