@@ -42,7 +42,7 @@ ig.module(
 					player.jumping = false;
 				}
 				
-				if(state=='walk'||'run') 
+				if(state=='walk'||state=='run') 
 				{
 					player.onBike = false;
 					player.swimming = false;
