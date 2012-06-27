@@ -129,6 +129,8 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('hereIAm', function(x, y, direction, mapname, skin) {
+
+        if(bootUnauthorized(socket)) return;
         
         socket.roomname = mapname;
         socket.join(socket.roomname);
@@ -157,6 +159,8 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('playerLeaveZone', function() {
 
+        if(bootUnauthorized(socket)) return;
+
         // instruct others to drop this player
         socket.broadcast.to(socket.roomname).emit('dropPlayer-' + socket.clientname);
         socket.leave(socket.roomname);
@@ -167,6 +171,8 @@ io.sockets.on('connection', function(socket) {
 
 
     socket.on('receiveReskin', function(skin) {
+
+        if(bootUnauthorized(socket)) return;
 
         console.log(getTime() + ' ' + "Player " + socket.clientname + " changed skin: " + skin);
         socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-' + socket.clientname, skin);
