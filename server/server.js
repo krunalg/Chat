@@ -107,7 +107,7 @@ io.sockets.on('connection', function(socket) {
             player.pos.x = 0;
             player.pos.y = 0;
             player.facing = 'down';
-            player.state = 'state'; // every player is idle on first connect
+            player.state = 'idle'; // every player is idle on first connect
             player.skin = 'boy';
             player.session = socket.id;
             player.room = 'limbo';
