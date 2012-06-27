@@ -45,11 +45,10 @@ ig.module(
 		// Delay in seconds before committing to a move.
 		commitDelay: 0.08,
 
-		// Tell server where in the world the player is and what he looks like.
+		// Ask server for details about the player.
 		netInit: function() {
 
-			// Emit socket.
-			socket.emit('hereIAm', this.pos.x, this.pos.y, this.facing, ig.game.mapName, this.skin);
+			socket.emit('playerStart');
 		},
 
 		// Tell server that the player just changes his movement state.
@@ -467,7 +466,19 @@ ig.module(
 		init: function(x, y, settings) {
 			this.parent(x, y, settings);
 
-			// Tell the world all about this player.
+			player = this;
+
+			// Set player details received from server.
+			socket.on('playerStart-' + this.name, function(x, y, facing, state, skin) {
+				player.pos.x = x;
+				player.pos.y = y;
+				player.facing = facing;
+				player.moveState = state;
+				player.skin = skin;
+				player.reskin();
+			});
+
+			// Ask server for player details.
 			this.netInit();
 
 			// Create timer for delaying new moves.

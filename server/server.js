@@ -128,6 +128,29 @@ io.sockets.on('connection', function(socket) {
 
     });
 
+    socket.on('playerStart', function() {
+
+        if(bootUnauthorized(socket)) return;
+
+        for (var i = 0; i < onlinePlayers.length; i++ ) {
+            if (onlinePlayers[i].name == socket.clientname) {
+                
+                var x = onlinePlayers[i].pos.x;
+                var y = onlinePlayers[i].pos.y;
+                var facing = onlinePlayers[i].facing;
+                var skin = onlinePlayers[i].skin;
+                var state = onlinePlayers[i].state;
+
+                socket.emit('playerStart-' + socket.clientname, x, y, facing, state, skin);
+
+                return;
+            }
+        }
+        
+        console.log("  *!*!* A player who is authorized but not in player list request details.");
+        
+    });
+
     socket.on('hereIAm', function(x, y, direction, mapname, skin) {
 
         if(bootUnauthorized(socket)) return;
