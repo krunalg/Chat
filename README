@@ -72,7 +72,6 @@ Server:
 Bicycle:
 - Add: 'curvy' tire tracks when turning corners in sand.
 - Add: bike sprites for MAY (girl).
-- Fix: network players on bike leave the wrong kind of track in sand.
 - Add: 'Mach' bicycle which has variable speed (low priority).
 
 Chat system:
