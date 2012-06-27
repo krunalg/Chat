@@ -231,6 +231,8 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('disconnect', function() {
 
+        if(typeof socket.clientname === 'undefined') return;
+
         console.log(getTime() + ' ' + socket.clientname + " DISCONNECTED");
 
         // remove client from onlinePlayers array
@@ -243,7 +245,7 @@ io.sockets.on('connection', function(socket) {
         socket.broadcast.to(socket.roomname).emit('dropPlayer-' + socket.clientname, socket.clientname);
 
         playersReport();
-
+        
     });
 
 
