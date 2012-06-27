@@ -180,6 +180,8 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('receiveUpdateMoveState', function(x, y, direction, state) {
 
+        if(bootUnauthorized(socket)) return;
+
         socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer-' + socket.clientname, x, y, direction, state);
 
         // update players known info on server
@@ -245,7 +247,7 @@ io.sockets.on('connection', function(socket) {
         socket.broadcast.to(socket.roomname).emit('dropPlayer-' + socket.clientname, socket.clientname);
 
         playersReport();
-        
+
     });
 
 
