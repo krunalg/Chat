@@ -31,6 +31,19 @@ function recordMostOnline() {
     if(currentOnline > mostOnline) mostOnline = currentOnline;
 }
 
+// Boots user with undefined name.
+function bootUnauthorized(socket) {
+
+    if(typeof socket.clientname === 'undefined') {
+
+        socket.emit('error', 'You are not properly authenticated to server. This could happen if the server rebooted.');
+        socket.disconnect();
+        return true;
+    }
+
+    return false;
+}
+
 // Get the time as a string.
 function getTime() {
 
@@ -116,6 +129,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('hereIAm', function(x, y, direction, mapname, skin) {
+        
         socket.roomname = mapname;
         socket.join(socket.roomname);
         console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
@@ -142,6 +156,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('playerLeaveZone', function() {
+
         // instruct others to drop this player
         socket.broadcast.to(socket.roomname).emit('dropPlayer-' + socket.clientname);
         socket.leave(socket.roomname);
@@ -152,6 +167,7 @@ io.sockets.on('connection', function(socket) {
 
 
     socket.on('receiveReskin', function(skin) {
+
         console.log(getTime() + ' ' + "Player " + socket.clientname + " changed skin: " + skin);
         socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-' + socket.clientname, skin);
         for (var i = 0; i < onlinePlayers.length; i++) {
@@ -163,6 +179,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('receiveUpdateMoveState', function(x, y, direction, state) {
+
         socket.broadcast.to(socket.roomname).emit('moveUpdateOtherPlayer-' + socket.clientname, x, y, direction, state);
 
         // update players known info on server
@@ -179,6 +196,8 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('receiveSay', function(msg) {
         
+        if(bootUnauthorized(socket)) return;
+
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
             
@@ -209,6 +228,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('disconnect', function() {
+
         console.log(getTime() + ' ' + socket.clientname + " DISCONNECTED");
 
         // remove client from onlinePlayers array
