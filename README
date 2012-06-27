@@ -36,6 +36,7 @@ Change-Log:
 - Fixed bug that allowed players to walk along a ledge if approached from the side. (Completed June 24, 2012)
 - Up and down arrows are given precedence over left and right when moving. (Completed June 24, 2012)
 - Fixed bug which caused the bike to not show during ledge hops. (Completed June 24, 2012)
+- Server will disconnect any user that tries sending data without being authenticated. (Completed June 27, 2012)
 
 
 To-do:
@@ -66,7 +67,6 @@ Effects:
 - Sinking logs in PACIFIDLOG TOWN (low priority).
 
 Server:
-- Disconnect any user that tries emitting without being authenticated.
 - Remembers players position and map.
 
 Bicycle:
