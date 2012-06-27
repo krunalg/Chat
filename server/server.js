@@ -207,6 +207,8 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('receiveTell', function(to, msg) {
+
+        if(bootUnauthorized(socket)) return;
         
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
