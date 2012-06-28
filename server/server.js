@@ -80,8 +80,8 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
         if (onlinePlayers[i].name === name) {
             
             console.log(getTime() + ' ' + "DROPPING " + name + " FOR USING ALREADY IN-USE NAME.");
-            socket.emit('error', 'The username ' + name + ' is already in use. Please use another.');
-            socket.disconnect();
+            io.sockets.sockets[sessionID].emit('error', 'The username ' + name + ' is already in use. Please use another.');
+            io.sockets.sockets[sessionID].disconnect();
             return;
         }
     }
