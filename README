@@ -85,6 +85,7 @@ Maps:
 - LAVENDER TOWN overhead banner is not overhead.
 - Fix: Fence in the 'flower' town is walkable from above.
 - Fix: Maintain tops can be walked on to from above.
+- Add: Borders to all maps.
 
 Movement:
 - Reflective water should be swimmable intead of walkable.
