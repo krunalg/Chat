@@ -101,7 +101,7 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
     player.room = map;
     onlinePlayers.push(player);
     
-    sendStatusMessage(name, "Welcome.");
+    sendAnnouncement(name, "Welcome.");
     
     joinChatRoom(name, map);
 
@@ -115,14 +115,14 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
 }
 
 // Send a message from the server.
-function sendStatusMessage(username, message) {
+function sendAnnouncement(username, message) {
 
     for(var i = 0; i < onlinePlayers.length; i++) {
 
         if(onlinePlayers[i].name === username) {
 
             var sessionID = onlinePlayers[i].session;
-            io.sockets.sockets[sessionID].emit('welcome', message);
+            io.sockets.sockets[sessionID].emit('announcement', message);
             return;
         }
     }
