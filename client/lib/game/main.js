@@ -384,14 +384,6 @@ ig.module('game.main')
 			// Get local player entity.
 			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
 
-			// Add local player once map is loaded.
-			if ( typeof player === 'undefined' && this.mapLoaded ) {
-
-				console.debug("Adding local player.");
-
-				player = ig.game.spawnEntity(EntityLocalPlayer, 0, 0, {name: username});
-			}
-
 			// Player exists; Control the camera.
 			if (player) {
 
