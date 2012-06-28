@@ -68,6 +68,7 @@ Effects:
 
 Server:
 - Remembers players position and map.
+- Console uses 12-hour clock.
 
 Bicycle:
 - Add: 'curvy' tire tracks when turning corners in sand.
