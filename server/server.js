@@ -17,7 +17,7 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-  console.log('mySQL connection problem (error code: ' + err.code + ' fatal: ' + err.fatal + ').');
+  if(err) console.log('mysql connection problem - error code: ' + err.code + ' fatal: ' + err.fatal);
 });
 
 // I am Chuck Noris:
