@@ -9,6 +9,9 @@ levels.js
 levels/
 build/
 
+# Passwords
+mysql-connection.js
+
 # Misc.
 baked.php
 backup/
