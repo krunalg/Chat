@@ -110,7 +110,7 @@ io.sockets.on('connection', function(socket) {
             player.state = 'idle'; // every player is idle on first connect
             player.skin = 'boy';
             player.session = socket.id;
-            player.room = 'limbo';
+            player.room = 'RsWorld';
             onlinePlayers.push(player);
         }
 
@@ -120,6 +120,11 @@ io.sockets.on('connection', function(socket) {
             console.log(getTime() + ' ' + "DROPPING " + user + "FOR NAME INFRINGEMENT");
             socket.disconnect();
         }
+
+        // User joins chat room.
+        socket.roomname = player.room;
+        socket.join(socket.roomname);
+        console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
 
         playersReport();
 
@@ -154,10 +159,6 @@ io.sockets.on('connection', function(socket) {
     socket.on('hereIAm', function(x, y, direction, mapname, skin) {
 
         if(bootUnauthorized(socket)) return;
-        
-        socket.roomname = mapname;
-        socket.join(socket.roomname);
-        console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
 
         for (var i = 0; i < onlinePlayers.length; i++) {
             if (onlinePlayers[i].name == socket.clientname) {
