@@ -74,18 +74,6 @@ function getTime() {
 
 function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
     
-    // Check that username is not currently in use.
-    for (var i = 0; i < onlinePlayers.length; i++) {
-       
-        if (onlinePlayers[i].name === name) {
-            
-            console.log(getTime() + ' ' + "DROPPING " + name + " FOR USING ALREADY IN-USE NAME.");
-            io.sockets.sockets[sessionID].emit('error', 'The username ' + name + ' is already in use. Please use another.');
-            io.sockets.sockets[sessionID].disconnect();
-            return;
-        }
-    }
-
     console.log(getTime() + " ADDING PLAYER " + name);
 
     // Create live player object.
@@ -199,6 +187,18 @@ io.sockets.on('connection', function(socket) {
     socket.on('init', function(user) {
         
         socket.clientname = user;
+
+        // Check that user not already online.
+        for (var i = 0; i < onlinePlayers.length; i++) {
+           
+            if (onlinePlayers[i].name === socket.clientname) {
+                
+                console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
+                socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
+                socket.disconnect();
+                return;
+            }
+        }
 
         connection.connect();
 
