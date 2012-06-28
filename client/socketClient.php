@@ -63,6 +63,12 @@ function ThrowError(message) {
 	throw new Error('Server reported the following error: ' + message);
 }
 
+// Write an error message to the log.
+socket.on('logError', function(message) {
+	
+	ig.game.chatLog.push('<div class="error">' + message + '</div>');
+});
+
 // Receive error message from the server.
 socket.on('error', function(message) {
 	
