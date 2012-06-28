@@ -237,8 +237,6 @@ io.sockets.on('connection', function(socket) {
                 }
             }   
         });
-
-        //connection.end();
     });
 
     socket.on('getNearbyPlayers', function() {
