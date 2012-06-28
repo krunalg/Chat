@@ -38,7 +38,7 @@ function bootUnauthorized(socket) {
 
     if(typeof socket.clientname === 'undefined') {
 
-        socket.emit('error', 'You are not properly authenticated to server. This could happen if the server rebooted.');
+        socket.emit('error', 'You are not authenticated to the server. The server may have rebooted.');
         socket.disconnect();
         return true;
     }
