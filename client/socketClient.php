@@ -88,7 +88,6 @@ socket.on('addPlayer', function(user, x, y, direction, skin) {
 		name: user,
 		skin: skin,
 		facing: direction,
-		animation: 6
 	});
 });
 
