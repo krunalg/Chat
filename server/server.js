@@ -126,6 +126,9 @@ io.sockets.on('connection', function(socket) {
         socket.join(socket.roomname);
         console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
 
+        // Tell other players about user.
+        socket.broadcast.to(socket.roomname).emit('addPlayer', socket.clientname, player.pos.x, player.pos.y, player.facing, player.skin);
+
         playersReport();
 
         // Update most seen.
@@ -152,11 +155,39 @@ io.sockets.on('connection', function(socket) {
         
     });
 
+    socket.on('getNearbyPlayers', function() {
+
+        if(bootUnauthorized(socket)) return;
+
+        nearbyPlayers = new Array();
+
+        for (var i = 0; i < onlinePlayers.length; i++ ) {
+            
+            if (onlinePlayers[i].room === socket.roomname && onlinePlayers[i].name !== socket.clientname) {
+                
+                var player = new Object();
+                player.name = onlinePlayers[i].name;
+                player.pos = new Object();
+                player.pos.x = onlinePlayers[i].pos.x;
+                player.pos.y = onlinePlayers[i].pos.y;
+                player.facing = onlinePlayers[i].facing;
+                player.skin = onlinePlayers[i].skin;
+                player.moveState = onlinePlayers[i].state;
+
+                nearbyPlayers.push(player);
+            }
+        }
+
+        if( nearbyPlayers.length > 0 ) socket.emit('addNearbyPlayers', nearbyPlayers);
+
+    });
+
     socket.on('playerStart', function() {
 
         if(bootUnauthorized(socket)) return;
 
         for (var i = 0; i < onlinePlayers.length; i++ ) {
+            
             if (onlinePlayers[i].name == socket.clientname) {
                 
                 var x = onlinePlayers[i].pos.x;

@@ -195,9 +195,17 @@ ig.module('game.main')
 			// Load level server says to.
 			socket.on('loadCurrentMap', function(map) {
 				
-				console.log("Server told us to use: " + map);
 				ig.game.mapLoaded = false;
 				ig.game.loadLevelDeferred( ig.global['Level' + map] );
+
+				// Get nearby players.
+				socket.emit('getNearbyPlayers');
+			});
+
+			// Add nearby players to queue.
+			socket.on('addNearbyPlayers', function(nearbyPlayers) {
+				
+				ig.game.playersToAdd = nearbyPlayers;
 			});
 
 			// Create the local player.
@@ -293,6 +301,21 @@ ig.module('game.main')
 		//	  \____/|_|    |_____/_/    \_\_|  |______|
 		//	                                           	
 		update: function() {
+
+			// Add other players to map.
+			if (typeof this.playersToAdd !== 'undefined') {
+
+				for(var i = 0; i < this.playersToAdd.length; i++ ) {
+					ig.game.spawnEntity(EntityNetworkPlayer, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
+						name: this.playersToAdd[i].name,
+						facing: this.playersToAdd[i].facing,
+						skin: this.playersToAdd[i].skin,
+						moveState: this.playersToAdd[i].moveState
+					});
+				}
+				
+				this.playersToAdd = undefined;
+			}
 
 			// Toggle camera dodging.
 			if (ig.input.pressed('cameraDodging')) this.cameraDodging = !this.cameraDodging;
