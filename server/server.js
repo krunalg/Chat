@@ -345,15 +345,19 @@ io.sockets.on('connection', function(socket) {
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
 
-            // find recipients session id
+            // Find recipient.
             for (var i = 0; i < onlinePlayers.length; i++) {
+                
                 if (onlinePlayers[i].name == to) {
-                    //console.log("Tell going to: " + to + " has session: " + onlinePlayers[i].session);
+                    
                     io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, deHTML(msg)); // send tell
+                    
                     console.log(getTime() + " [" + socket.clientname + "][" + to + "] " + msg);
+                    
                     return;
                 }
             }
+            
             console.log(getTime() + ' ' + "** Tell received but recipient does not exist.");
         }
     });
