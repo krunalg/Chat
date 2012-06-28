@@ -71,23 +71,10 @@ socket.on('error', function(message) {
 });
 
 // Server welcomed the user, else kill the application.
-socket.on('welcome', function(msg) {
-	if (msg != 'Welcome') {
-		document.body.innerHTML = "";
-		if (msg == 'NameTaken') {
-			window.alert("That name is currently being used. Please use another.");
-			throw new Error('Halting game due to username being in use.');
-		}
-		window.alert("Did not receive welcome from server.");
-		throw new Error('Halting game because server did not send welcome message.');
-	} 
-	else 
-	{
-		// Write to chat log.
-		ig.game.chatLog.push('<div class="announce">' + msg + '</div>');
+socket.on('announcement', function(message) {
 
-		ig.game.events.push(msg);
-	}
+	// Write to chat log.
+	ig.game.chatLog.push('<div class="announce">' + message + '</div>');
 });
 
 // Add a new player to the game.
