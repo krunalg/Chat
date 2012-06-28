@@ -184,7 +184,7 @@ ig.module('game.main')
 				ig.game.mapLoaded = false;
 				ig.game.loadLevelDeferred( ig.global['Level' + map] );
 
-				// Get nearby players.
+				// Get nearby players including the local player.
 				socket.emit('getNearbyPlayers');
 			});
 
@@ -285,11 +285,14 @@ ig.module('game.main')
 		//	                                           	
 		update: function() {
 
-			// Add other players to map.
-			if (typeof this.playersToAdd !== 'undefined') {
+			// Add players once map is loaded.
+			if (typeof this.playersToAdd !== 'undefined' && this.mapLoaded) {
 
 				for(var i = 0; i < this.playersToAdd.length; i++ ) {
-					ig.game.spawnEntity(EntityNetworkPlayer, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
+					
+					var entityType = (this.playersToAdd[i].name == username ? EntityLocalPlayer : EntityNetworkPlayer);
+
+					ig.game.spawnEntity(entityType, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
 						name: this.playersToAdd[i].name,
 						facing: this.playersToAdd[i].facing,
 						skin: this.playersToAdd[i].skin,
