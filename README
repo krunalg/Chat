@@ -39,6 +39,7 @@ Change-Log:
 - Server will disconnect any user that tries sending data without being authenticated. (Completed June 27, 2012)
 - Server remembers player location, skin, faced direction, state, and map when reconnecting. (Completed June 27, 2012)
 - Server console timestamps everything with a 12-hour clock instead of 24-hour. (Completed June 27, 2012)
+- Server returns an error message to client when client tries messages non-existent player. (Completed June 28, 2012)
 
 
 To-do:
@@ -77,7 +78,6 @@ Chat system:
 - Name changing using the /name command.
 - Prohibit the use of certain characters in names.
 - Restrict message length.
-- Server sends a failure notice upon non-delivery of a private message.
 - Invalid commands are reported to user as such.
 
 Maps:
