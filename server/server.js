@@ -103,7 +103,9 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
     
     sendAnnouncement(name, "Welcome.");
     
-    joinChatRoom(name, map);
+    io.sockets.sockets[sessionID].roomname = map;
+
+    joinChatRoom(name, map); 
 
     introducePlayerToRoom(name, map);
 
