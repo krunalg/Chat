@@ -76,9 +76,14 @@ function cleanMessage(message) {
 io.sockets.on('connection', function(socket) {
 
     socket.on('init', function(user) {
+        
+        var isPreviousUser = false;
+
         var welcome = 'Welcome';
 
         var maxNameLength = 20;
+
+        socket.clientname = user;
 
         // check that username is not too long
         if(user.length > maxNameLength) {
@@ -97,11 +102,30 @@ io.sockets.on('connection', function(socket) {
             if (onlinePlayers[i].name == user) welcome = 'NameTaken';
         }
 
-        // set up new player
-        if (welcome == 'Welcome') {
-            console.log(getTime() + ' ' + "ADDING " + user);
-            socket.clientname = user;
+        // Check if there is existing player data.
+        for (var i = 0; i < offlinePlayers.length; i++) {
+            
+            if (offlinePlayers[i].name === user) {
 
+                console.log(getTime() + ' ' + " OLD ADDING " + user);
+
+                // Update session ID.
+                offlinePlayers[i].session = socket.id;
+
+                // Move from offline to online.
+                onlinePlayers.push(offlinePlayers[i]);
+                offlinePlayers.splice(i, 1);
+
+                var player = onlinePlayers[onlinePlayers.length - 1];
+
+                isPreviousUser = true;
+            }
+        }
+
+        if(!isPreviousUser) {
+
+            console.log(getTime() + ' ' + " NEW ADDING " + user);
+            
             // set up user info object with defaults
             var player = new Object();
             player.name = user;
