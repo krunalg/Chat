@@ -290,7 +290,7 @@ ig.module('game.main')
 
 				for(var i = 0; i < this.playersToAdd.length; i++ ) {
 					
-					var entityType = (this.playersToAdd[i].name == username ? EntityLocalPlayer : EntityNetworkPlayer);
+					var entityType = (this.playersToAdd[i].name.toLowerCase() == username.toLowerCase() ? EntityLocalPlayer : EntityNetworkPlayer);
 
 					ig.game.spawnEntity(entityType, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
 						name: this.playersToAdd[i].name,
