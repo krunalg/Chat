@@ -212,12 +212,6 @@ io.sockets.on('connection', function(socket) {
                 socket.disconnect();
                 return;
 
-            } else if(rows.length >1) {
-
-                socket.emit('error', 'More than one user share that same name.');
-                socket.disconnect();
-                return;
-
             } else {
 
                 // Found user.
