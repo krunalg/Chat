@@ -207,27 +207,33 @@ io.sockets.on('connection', function(socket) {
 
         connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows) {
             
-            if (err) throw err;
+            if (err) {
 
-            if(rows.length==0) { 
-                
-                socket.emit('error', 'No such user in database.');
-                socket.disconnect();
-                return;
-
+                console.log(err.code);
+                console.log(err.fatal);
+            
             } else {
 
-                // Found user.
-                var name   = rows[0].user;
-                var x      = rows[0].x;
-                var y      = rows[0].y;
-                var facing = rows[0].facing;
-                var skin   = rows[0].skin;
-                var state  = rows[0].state;
-                var map    = rows[0].map;
+                if(rows.length==0) {
+                    
+                    socket.emit('error', 'No such user in database.');
+                    socket.disconnect();
+                    return;
 
-                initializePlayer( name, x, y, facing, skin, state, map, socket.id );
-            }
+                } else {
+
+                    // Found user.
+                    var name   = rows[0].user;
+                    var x      = rows[0].x;
+                    var y      = rows[0].y;
+                    var facing = rows[0].facing;
+                    var skin   = rows[0].skin;
+                    var state  = rows[0].state;
+                    var map    = rows[0].map;
+
+                    initializePlayer( name, x, y, facing, skin, state, map, socket.id );
+                }
+            }   
         });
 
         connection.end();
