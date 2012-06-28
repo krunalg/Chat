@@ -206,31 +206,6 @@ io.sockets.on('connection', function(socket) {
         
     });
 
-    socket.on('hereIAm', function(x, y, direction, mapname, skin) {
-
-        if(bootUnauthorized(socket)) return;
-
-        for (var i = 0; i < onlinePlayers.length; i++) {
-            if (onlinePlayers[i].name == socket.clientname) {
-                // update server records
-                onlinePlayers[i].pos.x = x;
-                onlinePlayers[i].pos.y = y;
-                onlinePlayers[i].facing = direction;
-                onlinePlayers[i].skin = skin;
-                onlinePlayers[i].room = socket.roomname;
-                break; // because names are unique
-            }
-        }
-
-        var playersToGiveSocket = new Array();
-        for (var i = 0; i < onlinePlayers.length; i++) {
-            if (onlinePlayers[i].room == mapname && onlinePlayers[i].name != socket.clientname) playersToGiveSocket.push(onlinePlayers[i]);
-        }
-        socket.broadcast.to(mapname).emit('addPlayer', socket.clientname, x, y, direction, skin);
-
-        if (playersToGiveSocket.length >= 1) socket.emit('addAllPlayers', playersToGiveSocket);
-    });
-
     socket.on('playerLeaveZone', function() {
 
         if(bootUnauthorized(socket)) return;
