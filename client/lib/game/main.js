@@ -103,9 +103,6 @@ ig.module('game.main')
 		// Time in seconds before clearing an event.
 		eventsLifespan: 2,
 
-		// First level to load.
-		defaultLevel: LevelRsWorld,
-
 		// Starting position X.
 		defaultXStart: 2176,
 
@@ -186,8 +183,6 @@ ig.module('game.main')
 
 			// Set map animations from generated file.
 			initBackgroundAnimations();
-
-			//this.loadLevel(this.defaultLevel);
 
 			// Ask server what map to load.
 			socket.emit('getCurrentMap');
@@ -313,7 +308,7 @@ ig.module('game.main')
 						moveState: this.playersToAdd[i].moveState
 					});
 				}
-				
+
 				this.playersToAdd = undefined;
 			}
 
