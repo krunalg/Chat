@@ -46,6 +46,10 @@ html,body {
         color: #FFFF00;
 }
 
+.error {
+        color: #FF8282;
+}
+
 .info {
         color: #FFC0C0;
 }
