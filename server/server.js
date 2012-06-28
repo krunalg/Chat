@@ -5,7 +5,9 @@ var server = require('http').createServer(handler),
 
     server.listen(9090);
 
-var onlinePlayers = new Array(); // an array of objects
+// Arrays of player objects.
+var onlinePlayers = new Array();
+var offlinePlayers = new Array();
 
 // Most users seen online since server started.
 var mostOnline = 0;
@@ -294,7 +296,10 @@ io.sockets.on('connection', function(socket) {
 
         // remove client from onlinePlayers array
         for (var i = 0; i < onlinePlayers.length; i++) {
-            if (onlinePlayers[i].name == socket.clientname) {
+            if (onlinePlayers[i].name === socket.clientname) {
+                
+                offlinePlayers.push(onlinePlayers[i]);
+                
                 onlinePlayers.splice(i, 1);
             }
         }
