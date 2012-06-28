@@ -128,6 +128,9 @@ ig.module('game.main')
 		// Input in use or not.
 		inputActive: false,
 
+		// Has the current map finished loading?
+		mapLoaded: false,
+
 		loadLevel: function( data ) { 
 		
 			this.parent(data);
