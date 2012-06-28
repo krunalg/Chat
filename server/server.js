@@ -1,9 +1,21 @@
-var server = require('http').createServer(handler),
-    io = require('socket.io').listen(server),
-    fs = require('fs')
+var server = require('http').createServer(handler);
+var io = require('socket.io').listen(server);
+var fs = require('fs');
+server.listen(9090);
+
+// Set up mySQL connection.
+
+var mysql = require('mysql');
+
+var login = require('./mysql-connection');
+
+var connection = mysql.createConnection({
+  host     : login.hostname(),
+  user     : login.username(),
+  password : login.password(),
+});
 
 
-    server.listen(9090);
 
 // Arrays of player objects.
 var onlinePlayers = new Array();
