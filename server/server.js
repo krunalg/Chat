@@ -13,13 +13,12 @@ var connection = mysql.createConnection({
   host     : login.hostname(),
   user     : login.username(),
   password : login.password(),
+  database : login.database(),
 });
 
 
 
-// Arrays of player objects.
 var onlinePlayers = new Array();
-var offlinePlayers = new Array();
 
 // Most users seen online since server started.
 var mostOnline = 0;
@@ -73,6 +72,68 @@ function getTime() {
     return hours + ':' + minutes + amOrPm;
 }
 
+function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
+    
+    // Check that username is not currently in use.
+    for (var i = 0; i < onlinePlayers.length; i++) {
+       
+        if (onlinePlayers[i].name === socket.clientname) {
+            
+            console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
+            socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
+            socket.disconnect();
+            return;
+        }
+    }
+
+    console.log(getTime() + " ADDING PLAYER " + socket.clientname);
+
+    // Create live player object.
+    var player = new Object();
+    player.name = name;
+    player.pos = new Object();
+    player.pos.x = x;
+    player.pos.y = y;
+    player.facing = facing;
+    player.state = state;
+    player.skin = skin;
+    player.session = sessionID;
+    player.room = map;
+    onlinePlayers.push(player);
+    
+    sendStatusMessage(name, "Welcome.");
+    
+    joinChatRoom(name, map);
+
+    introducePlayerToRoom(name, map);
+
+    // Update most seen.
+    recordMostOnline();
+
+    // List online players.
+    playersReport();
+}
+
+// Send a message from the server.
+function sendStatusMessage(username, message) {
+
+    socket.emit('welcome', message);
+}
+
+// Joins a user to a chat room.
+function joinChatRoom(username, roomname) {
+
+    socket.roomname = player.room;
+    socket.join(socket.roomname);
+    console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
+}
+
+// Tell users in a room to add a new player.
+function introducePlayerToRoom(username, roomname) {
+
+    socket.broadcast.to(socket.roomname).emit('addPlayer', socket.clientname, player.pos.x, player.pos.y, player.facing, player.skin);
+}
+
 function handler(req, res) {
     fs.readFile(__dirname + '/index.html', function(err, data) {
         if (err) {
@@ -92,87 +153,45 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('init', function(user) {
         
-        var isPreviousUser = false;
-
-        var welcomeMessage = 'Welcome';
-
-        var maxNameLength = 20;
-
         socket.clientname = user;
 
-        // Check that username is not too long.
-        if(socket.clientname.length > maxNameLength) {
+        connection.connect();
 
-            socket.emit('error', 'Your name cannot be greater than ' + maxNameLength + ' characters.');
-            socket.disconnect();
-            return;
-        }
+        connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows, fields) {
+            
+            if (err) throw err;
 
-        // Check that username is not currently in use.
-        for (var i = 0; i < onlinePlayers.length; i++) {
-           
-            if (onlinePlayers[i].name === socket.clientname) {
+            if(rows.length==0) { 
                 
-                console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
-                socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
+                socket.emit('error', 'No such user in database.');
                 socket.disconnect();
                 return;
+
+            } else if(rows.length >1) {
+
+                socket.emit('error', 'More than one user share that same name.');
+                socket.disconnect();
+                return;
+
+            } else {
+
+                // Found user.
+                var name   = rows[0].user;
+                var x      = rows[0].x;
+                var y      = rows[0].y;
+                var facing = rows[0].facing;
+                var skin   = rows[0].skin;
+                var state  = rows[0].state;
+                var map    = rows[0].map;
+
+                initializePlayer( name, x, y, facing, skin, state, map, socket.id );
             }
-        }
+        });
 
-        console.log(getTime() + " ADDING PLAYER " + socket.clientname);
-
-        // Check if there is existing player data.
-        for (var i = 0; i < offlinePlayers.length; i++) {
-            
-            if (offlinePlayers[i].name === socket.clientname) {
-
-                // Update session ID.
-                offlinePlayers[i].session = socket.id;
-
-                // Move from offline to online.
-                onlinePlayers.push(offlinePlayers[i]);
-                offlinePlayers.splice(i, 1);
-
-                var player = onlinePlayers[onlinePlayers.length - 1];
-
-                isPreviousUser = true;
-            }
-        }
-
-        if(!isPreviousUser) {
-
-            // Default player values.
-            var player = new Object();
-            player.name = socket.clientname;
-            player.pos = new Object();
-            player.pos.x = 0;
-            player.pos.y = 0;
-            player.facing = 'down';
-            player.state = 'idle';
-            player.skin = 'boy';
-            player.session = socket.id;
-            player.room = 'RsWorld';
-            onlinePlayers.push(player);
-        }
-
-        socket.emit('welcome', welcomeMessage);
-
-        // User joins chat room.
-        socket.roomname = player.room;
-        socket.join(socket.roomname);
-        console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
-
-        // Tell other players about user.
-        socket.broadcast.to(socket.roomname).emit('addPlayer', socket.clientname, player.pos.x, player.pos.y, player.facing, player.skin);
-
-        // Update most seen.
-        recordMostOnline();
-
-        // List online players.
-        playersReport();
-
+        connection.end();
     });
+
+
 
     socket.on('getCurrentMap', function() {
 
@@ -325,9 +344,8 @@ io.sockets.on('connection', function(socket) {
 
         // remove client from onlinePlayers array
         for (var i = 0; i < onlinePlayers.length; i++) {
+            
             if (onlinePlayers[i].name === socket.clientname) {
-                
-                offlinePlayers.push(onlinePlayers[i]);
                 
                 onlinePlayers.splice(i, 1);
             }
