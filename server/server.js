@@ -131,7 +131,7 @@ function sendStatusMessage(username, message) {
 // Joins a user to a chat room.
 function joinChatRoom(username, roomname) {
 
-    for(var i = 0; i < onlinePlayers.length) {
+    for(var i = 0; i < onlinePlayers.length; i++) {
 
         if(onlinePlayers[i].name === username) {
 
@@ -147,7 +147,7 @@ function joinChatRoom(username, roomname) {
 // Tell users in a room to add a new player.
 function introducePlayerToRoom(username, roomname) {
 
-    for(var i = 0; i < onlinePlayers.length) {
+    for(var i = 0; i < onlinePlayers.length; i++) {
 
         if(onlinePlayers[i].name === username) {
 
