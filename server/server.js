@@ -34,14 +34,9 @@ io.set('log level', 1);
 
 // Report how many players online.
 var playersReport = function() {
-    var players = '';
-    for (var i = 0; i < onlinePlayers.length; i++) {
-        //if(i!=0) players += "\n";
-        players += "\n-- " + onlinePlayers[i].name;
-    }
-    if (players == '') console.log("\nWHO IS ONLINE: \n--\n");
-    else console.log("\nWHO IS ONLINE: " + players + "\n");
-    console.log("MOST SEEN ONLINE: " + mostOnline);
+    
+    var online = onlinePlayers.length;
+    console.log(getTime() + " PLAYERS ONLINE: " + online + " MOST ONLINE: " = mostOnline);
 }
 
 // Records the most users seen online.
