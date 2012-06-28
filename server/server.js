@@ -133,6 +133,25 @@ io.sockets.on('connection', function(socket) {
 
     });
 
+    socket.on('getCurrentMap', function() {
+
+        if(bootUnauthorized(socket)) return;
+
+        for (var i = 0; i < onlinePlayers.length; i++ ) {
+            if (onlinePlayers[i].name == socket.clientname) {
+                
+                var map = onlinePlayers[i].room;
+
+                socket.emit('loadCurrentMap', map);
+
+                return;
+            }
+        }
+        
+        console.log("  *!*!* A player who is authorized but not in player list requested current map.");
+        
+    });
+
     socket.on('playerStart', function() {
 
         if(bootUnauthorized(socket)) return;

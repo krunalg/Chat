@@ -140,6 +140,13 @@ ig.module('game.main')
 		// Input in use or not.
 		inputActive: false,
 
+		loadLevel: function( data ) { 
+		
+			this.parent(data);
+
+			this.mapLoaded = true;
+		},
+
 		//		  _____ _   _ _____ _______ 
 		//		 |_   _| \ | |_   _|__   __|
 		//		   | | |  \| | | |    | |   
@@ -180,14 +187,24 @@ ig.module('game.main')
 			// Set map animations from generated file.
 			initBackgroundAnimations();
 
-			// Load the level.
-			this.loadLevel(this.defaultLevel);
+			//this.loadLevel(this.defaultLevel);
+
+			// Ask server what map to load.
+			socket.emit('getCurrentMap');
+
+			// Load level server says to.
+			socket.on('loadCurrentMap', function(map) {
+				
+				console.log("Server told us to use: " + map);
+				ig.game.mapLoaded = false;
+				ig.game.loadLevelDeferred( ig.global['Level' + map] );
+			});
 
 			// Create the local player.
 			var player = this.buildPlayer();
 
 			// Set the repeating border according to region.
-			BorderCheck(player);
+			//BorderCheck(player);
 
 			// Add camera dodging.
 			ig.game.spawnEntity(EntityCameraDodgeFactory);
