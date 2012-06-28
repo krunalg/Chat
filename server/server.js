@@ -36,7 +36,7 @@ io.set('log level', 1);
 var playersReport = function() {
     
     var online = onlinePlayers.length;
-    console.log(getTime() + " PLAYERS ONLINE: " + online + " MOST ONLINE: " = mostOnline);
+    console.log(getTime() + " PLAYERS ONLINE: " + online + " MOST ONLINE: " + mostOnline);
 }
 
 // Records the most users seen online.
