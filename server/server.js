@@ -72,21 +72,21 @@ function getTime() {
     return hours + ':' + minutes + amOrPm;
 }
 
-function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
+function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
     
     // Check that username is not currently in use.
     for (var i = 0; i < onlinePlayers.length; i++) {
        
-        if (onlinePlayers[i].name === socket.clientname) {
+        if (onlinePlayers[i].name === name) {
             
-            console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
-            socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
+            console.log(getTime() + ' ' + "DROPPING " + name + " FOR USING ALREADY IN-USE NAME.");
+            socket.emit('error', 'The username ' + name + ' is already in use. Please use another.');
             socket.disconnect();
             return;
         }
     }
 
-    console.log(getTime() + " ADDING PLAYER " + socket.clientname);
+    console.log(getTime() + " ADDING PLAYER " + name);
 
     // Create live player object.
     var player = new Object();
@@ -117,21 +117,46 @@ function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
 // Send a message from the server.
 function sendStatusMessage(username, message) {
 
-    socket.emit('welcome', message);
+    for(var i = 0; i < onlinePlayers.length) {
+
+        if(onlinePlayers[i].name === username) {
+
+            var sessionID = onlinePlayers[i].session;
+            io.sockets[sessionID].emit('welcome', message);
+            return;
+        }
+    }
 }
 
 // Joins a user to a chat room.
 function joinChatRoom(username, roomname) {
 
-    socket.roomname = player.room;
-    socket.join(socket.roomname);
-    console.log(getTime() + ' ' + socket.clientname + " ENTERED " + socket.roomname);
+    for(var i = 0; i < onlinePlayers.length) {
+
+        if(onlinePlayers[i].name === username) {
+
+            var sessionID = onlinePlayers[i].session;
+            var room = onlinePlayers[i].room;
+
+            io.sockets[sessionID].join(room);
+            console.log(getTime() + ' ' + username + " ENTERED " + room);
+        }
+    }
 }
 
 // Tell users in a room to add a new player.
 function introducePlayerToRoom(username, roomname) {
 
-    socket.broadcast.to(socket.roomname).emit('addPlayer', socket.clientname, player.pos.x, player.pos.y, player.facing, player.skin);
+    for(var i = 0; i < onlinePlayers.length) {
+
+        if(onlinePlayers[i].name === username) {
+
+            var sessionID = onlinePlayers[i].session;
+            var player    = onlinePlayers[i];
+
+            io.sockets[sessionID].broadcast.to(roomname).emit('addPlayer', username, player.pos.x, player.pos.y, player.facing, player.skin);
+        }
+    }
 }
 
 function handler(req, res) {
@@ -190,8 +215,6 @@ io.sockets.on('connection', function(socket) {
 
         connection.end();
     });
-
-
 
     socket.on('getCurrentMap', function() {
 
