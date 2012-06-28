@@ -242,7 +242,7 @@ io.sockets.on('connection', function(socket) {
 
         for (var i = 0; i < onlinePlayers.length; i++ ) {
             
-            if (onlinePlayers[i].room === socket.roomname && onlinePlayers[i].name !== socket.clientname) {
+            if (onlinePlayers[i].room === socket.roomname) {
                 
                 var player = new Object();
                 player.name = onlinePlayers[i].name;
