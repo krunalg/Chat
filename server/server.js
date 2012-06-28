@@ -122,7 +122,7 @@ function sendStatusMessage(username, message) {
         if(onlinePlayers[i].name === username) {
 
             var sessionID = onlinePlayers[i].session;
-            io.sockets[sessionID].emit('welcome', message);
+            io.sockets.sockets[sessionID].emit('welcome', message);
             return;
         }
     }
@@ -138,7 +138,7 @@ function joinChatRoom(username, roomname) {
             var sessionID = onlinePlayers[i].session;
             var room = onlinePlayers[i].room;
 
-            io.sockets[sessionID].join(room);
+            io.sockets.sockets[sessionID].join(room);
             console.log(getTime() + ' ' + username + " ENTERED " + room);
         }
     }
@@ -154,7 +154,7 @@ function introducePlayerToRoom(username, roomname) {
             var sessionID = onlinePlayers[i].session;
             var player    = onlinePlayers[i];
 
-            io.sockets[sessionID].broadcast.to(roomname).emit('addPlayer', username, player.pos.x, player.pos.y, player.facing, player.skin);
+            io.sockets.sockets[sessionID].broadcast.to(roomname).emit('addPlayer', username, player.pos.x, player.pos.y, player.facing, player.skin);
         }
     }
 }
@@ -173,6 +173,16 @@ function handler(req, res) {
 
 // Removes HTML characters from messages that could allow players to phish.
 function deHTML(message) { return message.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;"); }
+
+// Dump the contents of an object.
+function dump(obj) {
+    var out = '';
+    for (var i in obj) {
+        out += i + ": " + obj[i] + "\n";
+    }
+
+    console.log(out);
+}
 
 io.sockets.on('connection', function(socket) {
 
