@@ -79,35 +79,38 @@ io.sockets.on('connection', function(socket) {
         
         var isPreviousUser = false;
 
-        var welcome = 'Welcome';
+        var welcomeMessage = 'Welcome';
 
         var maxNameLength = 20;
 
         socket.clientname = user;
 
-        // check that username is not too long
-        if(user.length > maxNameLength) {
+        // Check that username is not too long.
+        if(socket.clientname.length > maxNameLength) {
 
-            // Request user to drop from game.
             socket.emit('error', 'Your name cannot be greater than ' + maxNameLength + ' characters.');
-            
-            // Disconnect user.
             socket.disconnect();
-            
             return;
         }
 
-        // check if username is already taken
+        // Check that username is not currently in use.
         for (var i = 0; i < onlinePlayers.length; i++) {
-            if (onlinePlayers[i].name == user) welcome = 'NameTaken';
+           
+            if (onlinePlayers[i].name === socket.clientname) {
+                
+                console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
+                socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
+                socket.disconnect();
+                return;
+            }
         }
+
+        console.log(getTime() + " ADDING PLAYER " + socket.clientname);
 
         // Check if there is existing player data.
         for (var i = 0; i < offlinePlayers.length; i++) {
             
-            if (offlinePlayers[i].name === user) {
-
-                console.log(getTime() + ' ' + " OLD ADDING " + user);
+            if (offlinePlayers[i].name === socket.clientname) {
 
                 // Update session ID.
                 offlinePlayers[i].session = socket.id;
@@ -124,28 +127,21 @@ io.sockets.on('connection', function(socket) {
 
         if(!isPreviousUser) {
 
-            console.log(getTime() + ' ' + " NEW ADDING " + user);
-            
-            // set up user info object with defaults
+            // Default player values.
             var player = new Object();
-            player.name = user;
+            player.name = socket.clientname;
             player.pos = new Object();
             player.pos.x = 0;
             player.pos.y = 0;
             player.facing = 'down';
-            player.state = 'idle'; // every player is idle on first connect
+            player.state = 'idle';
             player.skin = 'boy';
             player.session = socket.id;
             player.room = 'RsWorld';
             onlinePlayers.push(player);
         }
 
-        socket.emit('welcome', welcome);
-
-        if (welcome == 'NameTaken') {
-            console.log(getTime() + ' ' + "DROPPING " + user + "FOR NAME INFRINGEMENT");
-            socket.disconnect();
-        }
+        socket.emit('welcome', welcomeMessage);
 
         // User joins chat room.
         socket.roomname = player.room;
@@ -155,10 +151,11 @@ io.sockets.on('connection', function(socket) {
         // Tell other players about user.
         socket.broadcast.to(socket.roomname).emit('addPlayer', socket.clientname, player.pos.x, player.pos.y, player.facing, player.skin);
 
-        playersReport();
-
         // Update most seen.
         recordMostOnline();
+
+        // List online players.
+        playersReport();
 
     });
 
