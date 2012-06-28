@@ -202,6 +202,9 @@ io.sockets.on('connection', function(socket) {
 
         connection.connect();
 
+        // I am Chuck Noris:
+        connection.on('error', function() {});
+
         connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows) {
             
             if (err) throw err;
