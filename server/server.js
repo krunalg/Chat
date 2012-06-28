@@ -358,7 +358,7 @@ io.sockets.on('connection', function(socket) {
                 }
             }
 
-            console.log(getTime() + ' ' + "** Tell received but recipient does not exist.");
+            socket.emit('logError', "Player not found.");
         }
     });
 
