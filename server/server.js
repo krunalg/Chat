@@ -202,7 +202,7 @@ io.sockets.on('connection', function(socket) {
 
         connection.connect();
 
-        connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows, fields) {
+        connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows) {
             
             if (err) throw err;
 
