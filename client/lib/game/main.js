@@ -103,15 +103,6 @@ ig.module('game.main')
 		// Time in seconds before clearing an event.
 		eventsLifespan: 2,
 
-		// Starting position X.
-		defaultXStart: 2176,
-
-		// Starting position Y.
-		defaultYStart: 4720,
-
-		// Starting faced direction.
-		defaultFacing: 'down',
-
 		// Used to rebuild the player after zoning.
 		lastSkin: 'boy',
 
@@ -202,9 +193,6 @@ ig.module('game.main')
 				
 				ig.game.playersToAdd = nearbyPlayers;
 			});
-
-			// Create the local player.
-			var player = this.buildPlayer();
 
 			// Set the repeating border according to region.
 			//BorderCheck(player);
@@ -392,16 +380,6 @@ ig.module('game.main')
 
 			// Get local player entity.
 			var player = this.getEntitiesByType(EntityLocalPlayer)[0];
-
-			// Local player entity does not exist (after map change).
-			if (!player) {
-
-				// Spawn new local player entity.
-				player = this.buildPlayer();
-
-				// Debug message.
-				console.debug("Player does not exist. Adding one.");
-			}
 
 			// Player exists; Control the camera.
 			if (player) {
@@ -1026,101 +1004,7 @@ ig.module('game.main')
 
 			// No matches.
 			return false;
-		},
-
-		/*
-		 * Spawns a local-player entity.
-		 *
-		 * @return      undefined
-		 */
-		buildPlayer: function() {
-
-			// Initialize a couple variables.
-			var x = 0;
-			var y = 0;
-			var direction = '';
-
-			// "Walk out a door" animation.
-			var exitAnimation = false;
-
-			// Check if there is someplace to put the player.
-			if (this.goTo == null) {
-
-				// Debug message.
-				console.debug("First time building player.");
-
-				// Use default X.
-				x = this.defaultXStart;
-
-				// Use default Y.
-				y = this.defaultYStart;
-
-				// Use default direction.
-				direction = this.defaultFacing;
-			}
-			// Found a place to start the player.
-			else {
-
-				// Debug message.
-				console.debug("Rebuilding player using map exit values.");
-
-				// Get all exit entities.
-				var exits = ig.game.getEntitiesByType(EntityExit);
-
-				// Found exit entities.
-				if (EntityExit) {
-					for (var i = 0; i < exits.length; i++) {
-
-						// Check for correct ID.
-						if (exits[i].me == this.goTo) {
-
-							// Check if exit is a door.
-							if (exits[i].type == 'door') {
-
-								// Enable player door-exit animation.
-								exitAnimation = true;
-
-								// Leaving doors always goes down.
-								direction = 'down';
-
-							}
-							// Exit must be a floor exit.
-							else {
-								// !! FIX THIS: should be remembered and recalled instead.
-								direction = 'up';
-							}
-
-							// Place player at position of exit.
-							x = exits[i].pos.x;
-							y = exits[i].pos.y;
-						}
-					}
-				}
-
-				// Reset goTo for next map change.
-				this.goTo = null;
-			}
-
-			// Spawn player.
-			return ig.game.spawnEntity(EntityLocalPlayer, x, y, // magic numbers = bad
-			{
-				// Use username as name.
-				name: username,
-
-				// Set faced direction.
-				facing: direction,
-
-				// Set whether player is waiting to move or not.
-				waitingToMove: exitAnimation,
-
-				// Set when to move (even if player won't actually move).
-				moveWhen: 336.7 + new Date().getTime(),
-
-				// Set appearance.
-				skin: this.lastSkin
-			});
 		}
-
 
 	});
 
