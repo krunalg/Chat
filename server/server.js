@@ -14,6 +14,7 @@ var mostOnline = 0;
 
 io.set('log level', 1);
 
+// Report how many players online.
 var playersReport = function() {
     var players = '';
     for (var i = 0; i < onlinePlayers.length; i++) {
@@ -73,9 +74,7 @@ function handler(req, res) {
 }
 
 // Removes HTML characters from messages that could allow players to phish.
-function cleanMessage(message) {
-    return message.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;");
-}
+function deHTML(message) { return message.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;"); }
 
 io.sockets.on('connection', function(socket) {
 
@@ -176,10 +175,7 @@ io.sockets.on('connection', function(socket) {
 
                 return;
             }
-        }
-        
-        console.log("  *!*!* A player who is authorized but not in player list requested current map.");
-        
+        }        
     });
 
     socket.on('getNearbyPlayers', function() {
@@ -206,7 +202,6 @@ io.sockets.on('connection', function(socket) {
         }
 
         if( nearbyPlayers.length > 0 ) socket.emit('addNearbyPlayers', nearbyPlayers);
-
     });
 
     socket.on('playerStart', function() {
@@ -227,10 +222,7 @@ io.sockets.on('connection', function(socket) {
 
                 return;
             }
-        }
-        
-        console.log("  *!*!* A player who is authorized but not in player list request details.");
-        
+        }        
     });
 
     socket.on('playerLeaveZone', function() {
@@ -285,7 +277,7 @@ io.sockets.on('connection', function(socket) {
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
             
-            socket.broadcast.to(socket.roomname).emit('newMsg', socket.clientname, cleanMessage(msg));
+            socket.broadcast.to(socket.roomname).emit('newMsg', socket.clientname, deHTML(msg));
             console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
         }
     });
@@ -304,7 +296,7 @@ io.sockets.on('connection', function(socket) {
             for (var i = 0; i < onlinePlayers.length; i++) {
                 if (onlinePlayers[i].name == to) {
                     //console.log("Tell going to: " + to + " has session: " + onlinePlayers[i].session);
-                    io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, cleanMessage(msg)); // send tell
+                    io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, deHTML(msg)); // send tell
                     console.log("[" + socket.clientname + ">>" + to + "] " + msg);
                     return;
                 }
