@@ -37,6 +37,7 @@ Change-Log:
 - Up and down arrows are given precedence over left and right when moving. (Completed June 24, 2012)
 - Fixed bug which caused the bike to not show during ledge hops. (Completed June 24, 2012)
 - Server will disconnect any user that tries sending data without being authenticated. (Completed June 27, 2012)
+- Server remembers player location, skin, faced direction, state, and map when reconnecting. (Completed June 27, 2012)
 
 
 To-do:
@@ -67,7 +68,6 @@ Effects:
 - Sinking logs in PACIFIDLOG TOWN (low priority).
 
 Server:
-- Remembers players position and map.
 - Console uses 12-hour clock.
 
 Bicycle:
