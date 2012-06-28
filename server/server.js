@@ -117,7 +117,7 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
 // Send a message from the server.
 function sendStatusMessage(username, message) {
 
-    for(var i = 0; i < onlinePlayers.length) {
+    for(var i = 0; i < onlinePlayers.length; i++) {
 
         if(onlinePlayers[i].name === username) {
 
