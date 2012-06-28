@@ -38,6 +38,7 @@ Change-Log:
 - Fixed bug which caused the bike to not show during ledge hops. (Completed June 24, 2012)
 - Server will disconnect any user that tries sending data without being authenticated. (Completed June 27, 2012)
 - Server remembers player location, skin, faced direction, state, and map when reconnecting. (Completed June 27, 2012)
+- Server console timestamps everything with a 12-hour clock instead of 24-hour. (Completed June 27, 2012)
 
 
 To-do:
@@ -66,9 +67,6 @@ Effects:
 - Overhead smoke-effect in LAVARIDGE TOWN.
 - Smashable rocks, and cuttable trees (low priority).
 - Sinking logs in PACIFIDLOG TOWN (low priority).
-
-Server:
-- Console uses 12-hour clock.
 
 Bicycle:
 - Add: 'curvy' tire tracks when turning corners in sand.
