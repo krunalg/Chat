@@ -16,6 +16,13 @@ var connection = mysql.createConnection({
   database : login.database(),
 });
 
+connection.connect(function(err) {
+  console.log('mySQL connection problem (error code: ' + err.code + ' fatal: ' + err.fatal + ').');
+});
+
+// I am Chuck Noris:
+connection.on('error', function() {});
+
 
 
 var onlinePlayers = new Array();
@@ -199,11 +206,6 @@ io.sockets.on('connection', function(socket) {
                 return;
             }
         }
-
-        connection.connect();
-
-        // I am Chuck Noris:
-        connection.on('error', function() {});
 
         connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows) {
             
