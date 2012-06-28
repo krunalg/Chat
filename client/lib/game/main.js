@@ -153,9 +153,6 @@ ig.module('game.main')
 			// Create a DebugDisplay and pass in your font.
 			this.debugDisplay = new DebugDisplay(this.whiteFont);
 
-			// Start a connection with the socket server.
-			socket.emit('init', username);
-
 			// Set up controls.
 			ig.input.bind(ig.KEY.A, 'left');
 			ig.input.bind(ig.KEY.D, 'right');
@@ -178,11 +175,11 @@ ig.module('game.main')
 			// Set map animations from generated file.
 			initBackgroundAnimations();
 
-			// Ask server what map to load.
-			socket.emit('getCurrentMap');
+			// Authenticate username.
+			socket.emit('init', username);
 
 			// Load level server says to.
-			socket.on('loadCurrentMap', function(map) {
+			socket.on('loadMap', function(map) {
 				
 				ig.game.mapLoaded = false;
 				ig.game.loadLevelDeferred( ig.global['Level' + map] );

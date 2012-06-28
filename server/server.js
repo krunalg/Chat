@@ -107,6 +107,8 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
 
     introducePlayerToRoom(name, map);
 
+    loadMap(sessionID, map);
+
     // Update most seen.
     recordMostOnline();
 
@@ -157,6 +159,12 @@ function introducePlayerToRoom(username, roomname) {
             io.sockets.sockets[sessionID].broadcast.to(roomname).emit('addPlayer', username, player.pos.x, player.pos.y, player.facing, player.skin);
         }
     }
+}
+
+// Instruct client to load a map.
+function loadMap(sessionID, map) {
+
+    io.sockets.sockets[sessionID].emit('loadMap', map);
 }
 
 function handler(req, res) {
@@ -224,22 +232,6 @@ io.sockets.on('connection', function(socket) {
         });
 
         connection.end();
-    });
-
-    socket.on('getCurrentMap', function() {
-
-        if(bootUnauthorized(socket)) return;
-
-        for (var i = 0; i < onlinePlayers.length; i++ ) {
-            if (onlinePlayers[i].name == socket.clientname) {
-                
-                var map = onlinePlayers[i].room;
-
-                socket.emit('loadCurrentMap', map);
-
-                return;
-            }
-        }        
     });
 
     socket.on('getNearbyPlayers', function() {
