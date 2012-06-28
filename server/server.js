@@ -350,14 +350,14 @@ io.sockets.on('connection', function(socket) {
                 
                 if (onlinePlayers[i].name == to) {
                     
-                    io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, deHTML(msg)); // send tell
+                    io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, deHTML(msg));
                     
                     console.log(getTime() + " [" + socket.clientname + "][" + to + "] " + msg);
                     
                     return;
                 }
             }
-            
+
             console.log(getTime() + ' ' + "** Tell received but recipient does not exist.");
         }
     });
