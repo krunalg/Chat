@@ -39,7 +39,7 @@ Change-Log:
 - Server will disconnect any user that tries sending data without being authenticated. (June 27, 2012)
 - Server remembers player location, skin, faced direction, state, and map when reconnecting. (June 27, 2012)
 - Server console timestamps everything with a 12-hour clock instead of 24-hour. (June 27, 2012)
-- Server returns an error message to client when client tries messages non-existent player. (June 28, 2012)
+- Server informs client when his private message goes undelivered. (June 28, 2012)
 - Recipient name when sending a private message is no longer case-sensitive. (June 28, 2012)
 
 To-do:
