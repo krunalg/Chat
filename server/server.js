@@ -68,8 +68,8 @@ function getTime() {
     var minutes = currentTime.getMinutes();
     var amOrPm = (hours > 11 ? 'PM':'AM');
     
-    if(hours===0) hours = 12;
-    if(hours>12)  hours = hours - 12;
+    if( hours===0 )     hours = 12;
+    else if( hours>12 ) hours = hours - 12;
 
     minutes = ( minutes < 10 ? '0' + minutes : minutes );
 
