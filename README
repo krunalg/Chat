@@ -41,6 +41,7 @@ Change-Log:
 - Server console timestamps everything with a 12-hour clock instead of 24-hour. (June 27, 2012)
 - Server informs client when his private message goes undelivered. (June 28, 2012)
 - Recipient name when sending a private message is no longer case-sensitive. (June 28, 2012)
+- User is informed when he types an invalid command. (June 28, 2012)
 
 To-do:
 ----------------------------
@@ -78,7 +79,6 @@ Chat system:
 - Name changing using the /name command.
 - Prohibit the use of certain characters in names.
 - Restrict message length.
-- Invalid commands are reported to user as such.
 
 Maps:
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
