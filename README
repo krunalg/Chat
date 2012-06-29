@@ -76,7 +76,6 @@ Bicycle:
 - Add: 'Mach' bicycle which has variable speed (low priority).
 
 Chat system:
-- Name changing using the /name command.
 - Prohibit the use of certain characters in names.
 - Restrict message length.
 
