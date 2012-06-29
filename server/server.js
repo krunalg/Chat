@@ -350,7 +350,7 @@ io.sockets.on('connection', function(socket) {
             // Find recipient.
             for (var i = 0; i < onlinePlayers.length; i++) {
                 
-                if (onlinePlayers[i].name == to) {
+                if (onlinePlayers[i].name.toLowerCase() == to.toLowerCase()) {
                     
                     io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, deHTML(msg));
                     
