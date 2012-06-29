@@ -71,6 +71,8 @@ function getTime() {
     if(hours===0) hours = 12;
     if(hours>12)  hours = hours - 12;
 
+    minutes = ( minutes < 10 ? '0' + minutes : minutes );
+
     return hours + ':' + minutes + amOrPm;
 }
 
