@@ -856,6 +856,13 @@ ig.module('game.main')
 						// Tell server about skin change.
 						this.emitReskin(skin);
 					}
+					
+					// Invalid command.
+					else {
+
+						ig.game.chatLog.push('<div class="error">' + explodeInput[0] + ' is not a valid command.</div>');
+
+					} 
 				}
 				// Assume it's a /say
 				else {
