@@ -516,7 +516,7 @@ ig.module(
 			this.setMoveDestination();
 
 			// Beging animating.
-			this.moveAnimStart(true);
+			this.moveAnimStart();
 		},
 
 		/*
@@ -754,6 +754,8 @@ ig.module(
 		 * @return undefined
 		 */
 		moveAnimStart: function(alternateFeet) {
+
+			alternateFeet = typeof alternateFeet === 'boolean' ? alternateFeet : true;
 
 			// State to use for animation.
 			var state = this.moveState;

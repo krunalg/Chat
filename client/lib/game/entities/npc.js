@@ -68,7 +68,7 @@ ig.module(
 			this.setMoveDestination();
 
 			// Start animations.
-			this.moveAnimStart(true);
+			this.moveAnimStart();
 		},
 
 		// Determine if player should continue moving or stop.
