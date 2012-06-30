@@ -88,6 +88,7 @@ Maps:
 
 Movement:
 - Reflective water should be swimmable intead of walkable.
+- Changing directions plays a step animation.
 - A* pathfinding (low priority).
 
 Optimizations:
