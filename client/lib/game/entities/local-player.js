@@ -343,6 +343,9 @@ ig.module(
 					// Check if player has changed faced directions.
 					if (this.facing != this.lastFacing) {
 
+						// If the player is going to still animate a step when changing directions
+						// but not moving, this would be the place to start the animation.
+
 						// Tell other players that we changed our faced direction.
 						this.emitUpdateMoveState(this.pos.x, this.pos.y, this.facing, this.moveState);
 
