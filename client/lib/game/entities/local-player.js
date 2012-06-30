@@ -349,9 +349,6 @@ ig.module(
 						// So we don't send the same update twice.
 						this.lastFacing = this.facing;
 
-						// Animate the change.
-						this.moveAnimStart(false);
-
 						// Check if we're standing on an exit.
 						var exit = this.overExit(this);
 
