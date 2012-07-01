@@ -186,7 +186,18 @@ function dump(obj) {
     console.log(out);
 }
 
+function sendHeartbeat(miliseconds){
+    setTimeout(sendHeartbeat, miliseconds);
+    io.sockets.emit('ping', { beat : 1 });
+}
+
+setTimeout(sendHeartbeat, 8000);
+
 io.sockets.on('connection', function(socket) {
+
+    socket.on('pong', function(data){
+        console.log("Pong received from " + socket.clientname);
+    });
 
     socket.on('init', function(user) {
         
