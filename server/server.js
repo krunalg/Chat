@@ -187,12 +187,11 @@ function dump(obj) {
 }
 
 function sendHeartbeat(){
-    setTimeout(sendHeartbeat, 8000);
     io.sockets.emit('ping', { beat : 1 });
     console.log(getTime() + " Pinging all sockets.");
 }
 
-setTimeout(sendHeartbeat, 8000);
+setInterval(sendHeartbeat, 8000);
 
 io.sockets.on('connection', function(socket) {
 
