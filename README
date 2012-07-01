@@ -42,6 +42,8 @@ Change-Log:
 - Server informs client when his private message goes undelivered. (June 28, 2012)
 - Recipient name when sending a private message is no longer case-sensitive. (June 28, 2012)
 - User is informed when he types an invalid command. (June 28, 2012)
+- Added map borders for interiors with repeating backgrounds, such as caves. (June 30, 2012)
+- Server sends heartbeat to keep connection alive when user is idle. (June 30, 2012)
 
 To-do:
 ----------------------------
