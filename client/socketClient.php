@@ -10,6 +10,11 @@
 	echo "var socket = io.connect('http://".$socketHost.":".$socketPort."');\n";
 ?>
 
+// Keep the connection alive when user is idle.
+socket.on('ping', function(data){
+  	socket.emit('pong', {beat: 1});
+});
+
 // Receive /say message from server.
 socket.on('newMsg', function(from, msg) {
 	var showMessageHowLong = 2; // how long to hide name and show message
