@@ -21,7 +21,12 @@ connection.connect(function(err) {
 });
 
 // I am Chuck Noris:
-//connection.on('error', function() {});
+connection.on('error', function(err) {
+    if(err) {
+        console.log(err.code);
+        throw err;
+    }
+});
 
 
 
