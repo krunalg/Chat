@@ -186,7 +186,7 @@ function dump(obj) {
     console.log(out);
 }
 
-function sendHeartbeat(miliseconds){
+function sendHeartbeat(milliseconds){
     setTimeout(sendHeartbeat, miliseconds);
     io.sockets.emit('ping', { beat : 1 });
 }
