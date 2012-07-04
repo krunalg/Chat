@@ -195,7 +195,7 @@ ig.module('game.main')
 			});
 
 			// Set the repeating border according to region.
-			//BorderCheck(player);
+			//BorderCheck(player.pos.x, player.pos.y);
 
 			// Add camera dodging.
 			ig.game.spawnEntity(EntityCameraDodgeFactory);
