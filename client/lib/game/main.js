@@ -285,22 +285,27 @@ ig.module('game.main')
 		//	                                           	
 		update: function() {
 
-			// Add players once map is loaded.
-			if (typeof this.playersToAdd !== 'undefined' && this.mapLoaded) {
+			// Things to do after map is loaded.
+			if(this.mapLoaded) {
 
-				for(var i = 0; i < this.playersToAdd.length; i++ ) {
-					
-					var entityType = (this.playersToAdd[i].name.toLowerCase() == username.toLowerCase() ? EntityLocalPlayer : EntityNetworkPlayer);
+				// Add players.
+				if (typeof this.playersToAdd !== 'undefined') {
 
-					ig.game.spawnEntity(entityType, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
-						name: this.playersToAdd[i].name,
-						facing: this.playersToAdd[i].facing,
-						skin: this.playersToAdd[i].skin,
-						moveState: this.playersToAdd[i].moveState
-					});
+					for(var i = 0; i < this.playersToAdd.length; i++ ) {
+						
+						var entityType = (this.playersToAdd[i].name.toLowerCase() == username.toLowerCase() ? EntityLocalPlayer : EntityNetworkPlayer);
+
+						ig.game.spawnEntity(entityType, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
+							name: this.playersToAdd[i].name,
+							facing: this.playersToAdd[i].facing,
+							skin: this.playersToAdd[i].skin,
+							moveState: this.playersToAdd[i].moveState
+						});
+					}
+
+					this.playersToAdd = undefined;
 				}
 
-				this.playersToAdd = undefined;
 			}
 
 			// Toggle camera dodging.
