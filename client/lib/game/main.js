@@ -306,6 +306,31 @@ ig.module('game.main')
 					this.playersToAdd = undefined;
 				}
 
+				/*
+				// Build borders look-up table for framerate improvement.
+				if(typeof this.borderLookup === 'undefined') {
+
+					// start timer
+
+					this.borderLookup = new Array();
+
+					var width = this.collisionMap.width;
+					var height = this.collisionMap.height;
+					var tilesize = this.collisionMap.tilesize;
+
+					for(var x=0; x<width; x++) {
+						for(var y=0; y<height; y++) {
+
+							xPixels = x * tilesize;
+							yPixels = y * tilesize;
+
+							if(typeof this.borderLookup[x] === 'undefined') this.borderLookup[x] = new Array();
+							this.borderLookup[x][y] = BorderCheck()
+						}
+					}
+
+				}
+				*/
 			}
 
 			// Toggle camera dodging.
