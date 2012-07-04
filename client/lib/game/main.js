@@ -306,11 +306,10 @@ ig.module('game.main')
 					this.playersToAdd = undefined;
 				}
 
-				/*
 				// Build borders look-up table for framerate improvement.
 				if(typeof this.borderLookup === 'undefined') {
 
-					// start timer
+					var buildTimer = new ig.Timer();
 
 					this.borderLookup = new Array();
 
@@ -321,16 +320,18 @@ ig.module('game.main')
 					for(var x=0; x<width; x++) {
 						for(var y=0; y<height; y++) {
 
-							xPixels = x * tilesize;
-							yPixels = y * tilesize;
+							if(typeof this.borderLookup[x] === 'undefined') {
 
-							if(typeof this.borderLookup[x] === 'undefined') this.borderLookup[x] = new Array();
-							this.borderLookup[x][y] = BorderCheck()
+								this.borderLookup[x] = new Array();
+							}
+
+							this.borderLookup[x][y] = BorderCheck(x * tilesize, y * tilesize);
 						}
 					}
 
+					console.log("Built border lookup-table in " + buildTimer.delta() + " seconds.");
 				}
-				*/
+
 			}
 
 			// Toggle camera dodging.
