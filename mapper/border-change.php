@@ -165,6 +165,7 @@ else if( (isset($_GET['build']) && ($_GET['build']=='yes')) || $automate)
                     $export .= $tab . "    ig.game.backgroundMaps[0]['data'][".$y."][".$x."] = " . $currentTile . "; \n";
                 }
             }
+            $export .= $tab . "    return true; \n";
 
 
         $export .= // end issue command
