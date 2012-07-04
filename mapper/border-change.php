@@ -139,7 +139,7 @@ else if( (isset($_GET['build']) && ($_GET['build']=='yes')) || $automate)
 
     // Output collision checks for each map
     $export = "ig.module('".$module."')\n\n.requires()\n\n.defines(function() {\n\n" .
-              "    ".$moduleName." = function(player) {\n\n";
+              "    ".$moduleName." = function(x, y) {\n\n";
     $tab = '        ';
 
 
@@ -150,10 +150,10 @@ else if( (isset($_GET['build']) && ($_GET['build']=='yes')) || $automate)
         $borderWidthInTiles = $mapImageInfo[$i]['borderWidth'] / $globalTilesize;
         $borderHeightInTiles = $mapImageInfo[$i]['borderHeight'] / $globalTilesize;
         $export .= 
-            $tab . ($i!=0 ? 'else ':'') . 'if( player.pos.x >= ' . $mapImageInfo[$i]['x'] . ' && ' . 
-                'player.pos.x <  ' . ($mapImageInfo[$i]['x'] + $mapImageInfo[$i]['width']) . ' && ' . 
-                'player.pos.y <  ' . ($mapImageInfo[$i]['y'] + $mapImageInfo[$i]['height']) . ' && ' .
-                'player.pos.y >= ' . $mapImageInfo[$i]['y'] . ' ) ';
+            $tab . ($i!=0 ? 'else ':'') . 'if( x >= ' . $mapImageInfo[$i]['x'] . ' && ' . 
+                'x <  ' . ($mapImageInfo[$i]['x'] + $mapImageInfo[$i]['width']) . ' && ' . 
+                'y <  ' . ($mapImageInfo[$i]['y'] + $mapImageInfo[$i]['height']) . ' && ' .
+                'y >= ' . $mapImageInfo[$i]['y'] . ' ) ';
         $export.= // issue new border graphics
             "{ \n";
             for($y=0; $y<$borderHeightInTiles; $y++)
