@@ -171,6 +171,8 @@ else if( (isset($_GET['build']) && ($_GET['build']=='yes')) || $automate)
         $export .= // end issue command
             $tab . "}\n\n";
     }
+    
+    $export .= $tab . "return false; \n\n";    
 
     $export .= "    }\n\n})";
 
