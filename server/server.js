@@ -20,11 +20,20 @@ connection.connect(function(err) {
   if(err) console.log('mysql connection problem - error code: ' + err.code + ' fatal: ' + err.fatal);
 });
 
+/*
 // I am Chuck Noris:
 connection.on('error', function(err) {
     if(err) {
         console.log(err.code);
         throw err;
+    }
+});
+*/
+
+connection.on('close', function(err) {
+    if (err) {
+        console.log(getTime() + " MYSQL CONNECTION CLOSED UNEXPECTEDLY. RECONNECTING...");
+        connection = mysql.createConnection(connection.config);
     }
 });
 
