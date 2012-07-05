@@ -93,6 +93,7 @@ Maps:
 - Add: Borders to all maps.
 
 Movement:
+- Fix: NO-CLIP mode doesn't work when walking up ledges.
 - Reflective water should be swimmable intead of walkable.
 - Changing directions plays a step animation.
 - A* pathfinding (low priority).
