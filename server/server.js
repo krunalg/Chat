@@ -202,7 +202,7 @@ function dump(obj) {
 
 function sendHeartbeat(){
     io.sockets.emit('ping', { beat : 1 });
-    console.log(getTime() + " Pinging all sockets.");
+    //console.log(getTime() + " Pinging all sockets.");
 }
 
 setInterval(sendHeartbeat, 8000);
@@ -210,7 +210,7 @@ setInterval(sendHeartbeat, 8000);
 io.sockets.on('connection', function(socket) {
 
     socket.on('pong', function(data){
-        console.log(getTime() + " Pong received from " + socket.clientname);
+        //console.log(getTime() + " Pong received from " + socket.clientname);
     });
 
     socket.on('init', function(user) {
