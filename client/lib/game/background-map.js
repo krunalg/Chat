@@ -1,4 +1,5 @@
-/* Customize repeating border draws to only draw where maps are not already drawn. */
+/*  Minor framerate optimization which customizes the repeating border draws 
+ *  so that only they are only drawn where maps are not already drawn.  */
 
 ig.module('game.background-map')
 
@@ -19,6 +20,10 @@ ig.module('game.background-map')
                 pxMinY = -pxOffsetY - this.tilesize,
                 pxMaxX = ig.system.width + this.tilesize - pxOffsetX,
                 pxMaxY = ig.system.height + this.tilesize - pxOffsetY;
+
+            // Used only for repeating-border draw skipping.
+            var mapWidth = ig.game.collisionMap.width;
+            var mapHeight = ig.game.collisionMap.height;
 
             for (var mapY = -1, pxY = pxMinY; pxY < pxMaxY; mapY++, pxY += this.tilesize) {
                 var tileY = mapY + tileOffsetY;
@@ -45,17 +50,19 @@ ig.module('game.background-map')
                     // Draw!
                     if ((tile = this.data[tileY][tileX])) {
 
-                        // Begin custom code.
-                        if (typeof ig.game.borderLookup !== 'undefined') {
-
-                            if (this.name == 'border') {
+                        // Start custom border draw check.
+                        if (this.name == 'border' && typeof ig.game.borderLookup !== 'undefined') {
 
                                 lookupX = mapX + tileOffsetX;
                                 lookupY = mapY + tileOffsetY;
 
-                                if (lookupX >= 0 && lookupX < ig.game.collisionMap.width && lookupY >= 0 && lookupY < ig.game.collisionMap.height && ig.game.borderLookup[lookupX][lookupY]) continue;
-                            }
-                        } // End custom code.
+                                if (lookupX >= 0 && lookupX < mapWidth && lookupY >= 0 && lookupY < mapHeight && ig.game.borderLookup[lookupX][lookupY]) {
+                                   
+                                    continue;
+                                }
+
+                        } // End custom border draw check.
+
                         if ((anim = this.anims[tile - 1])) {
                             anim.draw(pxX, pxY);
                         } else {
