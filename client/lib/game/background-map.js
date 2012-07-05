@@ -2,7 +2,7 @@
 
 ig.module('game.background-map')
 
-.requires()
+.requires('impact.background-map')
 
 .defines(function() {
 
