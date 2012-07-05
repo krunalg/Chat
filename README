@@ -110,9 +110,6 @@ Code Improvements:
 Known Issues:
 ----------------------------
 
-- If client is connected for a couple hours without sending any data, he drops
-  the connection.
-
 - Network players can trigger grass to 'rustle' on other players screens by
   running up to one and stopping just before it.
 
