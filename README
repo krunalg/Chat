@@ -49,6 +49,9 @@ Change-Log:
 To-do:
 ----------------------------
 
+Server:
+- Handle unexpected mySQL database disconnections gracefully.
+
 Reflections:
 - Add: brightness/fading effect to reflections.
 - Fix: Tree-tips over reflective water hide reflection.
