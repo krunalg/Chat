@@ -327,7 +327,11 @@ ig.module('game.main')
 										lookupX = mapX + tileOffsetX;
 										lookupY = mapY + tileOffsetY;
 
-										if( lookupX >= 0 && lookupY >= 0 && ig.game.borderLookup[ lookupX ][ lookupY ] ) continue;
+										if( lookupX >= 0 && 
+											lookupX < ig.game.collisionMap.width &&
+											lookupY >= 0 && 
+											lookupY < ig.game.collisionMap.height &&
+											ig.game.borderLookup[ lookupX ][ lookupY ] ) continue;
 									}
 								} // End custom code.
 
