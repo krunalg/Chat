@@ -44,6 +44,7 @@ Change-Log:
 - User is informed when he types an invalid command. (June 28, 2012)
 - Added map borders for interiors with repeating backgrounds, such as caves. (June 30, 2012)
 - Server sends heartbeat to keep connection alive when user is idle. (June 30, 2012)
+- Framerate improvement by not drawing repeating border in areas where it will be covered up. (July 4, 2012)
 
 To-do:
 ----------------------------
@@ -94,7 +95,6 @@ Movement:
 - A* pathfinding (low priority).
 
 Optimizations:
-- Boost FPS by not drawing repeating border in regions where it will be covered up.
 - When processing a merged map, don't process the areas known to be black empty space.
 - Integrate animation frames into master tilesheet and drop ID-tiles.
 
