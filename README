@@ -52,9 +52,8 @@ To-do:
 Server:
 - Handle unexpected mySQL database disconnections gracefully.
 
-Reflections:
+Reflection:
 - Add: brightness/fading effect to reflections.
-- Fix: Tree-tips over reflective water hide reflection.
 
 Weather:
 - Add: Triggered by player walking in certain areas.
@@ -65,6 +64,14 @@ Water:
 - Add: Player shows 'bobbing' animation when swimming.
 - Add: Initial hop on to surf-entity animation.
 - Add: Water ripple effect.
+
+World:
+- Fix: Mountain tops can be walked on to from above.
+- Fix: Fence in the 'flower' town is walkable from above.
+- Tree-tip over water just to the right and up from DEWFORD TOWN.
+- Reflective water should be swimmable intead of walkable.
+- Fix: Tree-tips over reflective water hide reflection.
+- LAVENDER TOWN overhead banner is not overhead.
 
 Grass:
 - Fix: Not all grass entities spawned by network players disappear.
@@ -81,19 +88,12 @@ Bicycle:
 - Add: bike sprites for MAY (girl).
 - Add: 'Mach' bicycle which has variable speed (low priority).
 
-Chat system:
+Chat:
 - Prohibit the use of certain characters in names.
 - Restrict message length.
 
-Maps:
-- Tree-tip over water just to the right and up from DEWFORD TOWN.
-- LAVENDER TOWN overhead banner is not overhead.
-- Fix: Fence in the 'flower' town is walkable from above.
-- Fix: Mountain tops can be walked on to from above.
-
 Movement:
 - Fix: NO-CLIP mode doesn't work when walking up ledges.
-- Reflective water should be swimmable intead of walkable.
 - Changing directions plays a step animation.
 - A* pathfinding (low priority).
 
