@@ -90,7 +90,6 @@ Maps:
 - LAVENDER TOWN overhead banner is not overhead.
 - Fix: Fence in the 'flower' town is walkable from above.
 - Fix: Maintain tops can be walked on to from above.
-- Add: Borders to all maps.
 
 Movement:
 - Fix: NO-CLIP mode doesn't work when walking up ledges.
