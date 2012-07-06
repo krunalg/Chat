@@ -75,7 +75,6 @@ World:
 
 Grass:
 - Fix: Not all grass entities spawned by network players disappear.
-- Fix: Grass doesn't despawn if tile is left with a ledge-hop.
 - Add: Despawning of persistent-grass entities when off-screen.
 
 Effects:
