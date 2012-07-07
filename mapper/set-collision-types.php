@@ -95,52 +95,7 @@ else if( isset($_GET['ts']) && !isset($_POST['tiles']) )
     echo '<!-- ending tile hash values -->' ."\n\n";
     
     // create main map div w/ bg
-    echo '<div style="'.
-        'background: url(\''.$ts.'\'); '.
-        'position: absolute; '.
-        'left: 0px; '.
-        'top: 28px; '.
-        'width: '.$width.'px;'.
-        'height: '.$height.'px;'.
-        '">' ."\n";
-    
-        // fill with many tile-sized divs
-        for($y=0; $y<$heightInTiles; $y++)
-        {
-            for($x=0; $x<$widthInTiles; $x++)
-            {
-                echo '<div '.
-                        'style="'.
-                            'background: none; '.
-                            'width: '.$globalTilesize.'px; '.
-                            'height: '.$globalTilesize.'px; '.
-                            'position: absolute; '.
-                            'left: '.($x*$globalTilesize).'px; '.
-                            'top: '.($y*$globalTilesize).'px; '.
-                        
-                        '" id="x'.$x.'y'.$y.'"'.
-                            
-                        /*'" onClick="'.
-                            'window.alert(\'You clicked '.$x.', '.$y.'\');'.*/
-                        
-                        '" onClick="'.
-                            'tileClicked('.$x.','.$y.');'.
-                            
-                        '" onmouseover="'.
-                            'tileOver('.$x.','.$y.');'.
-                            //'$(\'#x'.$x.'y'.$y.'\').css(\'background-image\', \'url(images/mouseover.png)\');'.
-                            
-                        '" onmouseout="'.
-                            'tileOut('.$x.','.$y.');'.
-                            //'$(\'#x'.$x.'y'.$y.'\').css(\'background\', \'none\');'.
-                        
-                        '"></div>' . "\n";
-            }
-        }
-    
-    
-    echo '</div>'; // close main map div
-    
+    MapAndOverlay($ts, $width, $height, $globalTilesize);    
     
 }
 else if( isset($_POST['tiles']) && isset($_POST['mapJSON']) )
