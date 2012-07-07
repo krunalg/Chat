@@ -78,18 +78,10 @@ if( $currentPage === $page2 ) {
     $mapTileHeight = $mapPxHeight / $globalTilesize;
 
     // Create DIV to hold map.
-    echo '<div style="'.
-            "background: url('".$mapPath."'); ".
-            'position: absolute; '.
-            'left: 0px; '.
-            'top: 28px; '.
-            'width: '.$mapPxWidth.'px;'.
-            'height: '.$mapPxHeight.'px;'.
-            '">' ."\n";
-
-    
+    MapAndOverlay();
 
 }
+
 
 ?>
 
