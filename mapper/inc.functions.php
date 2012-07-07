@@ -18,14 +18,14 @@ function MapAndOverlay($mapPath, $mapWidth, $mapHeight, $tilesize) {
             'position: absolute; '.
             'left: 0px; '.
             'top: 28px; '.
-            'width: '.$mapPxWidth.'px;'.
-            'height: '.$mapPxHeight.'px;'.
+            'width: '.$mapWidth.'px;'.
+            'height: '.$mapHeight.'px;'.
             '">' ."\n";
 
     // Fill with many tile-sized DIVs.
-    for($y=0; $y<$heightInTiles; $y++) {
+    for($y=0; $y<$mapHeight/$tilesize; $y++) {
 
-        for($x=0; $x<$widthInTiles; $x++) {
+        for($x=0; $x<$mapWidth/$tilesize; $x++) {
 
             echo '<div style="'.
                         'background: none; '.
