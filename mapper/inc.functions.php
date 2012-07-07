@@ -1,6 +1,57 @@
 <?php
 
 /**
+ * Display map on screen by printing HTML code, and create 
+ * tile sized overlays for individual tile editting.
+ *
+ * @param   $mapPath Path to map image to display.
+ * @param   $mapWidth Pixel width of map image.
+ * @param   $mapHeight Pixel height of map image.
+ * @param   $tilesize Size in pixels of tile.
+ * @return  null
+ */
+function MapAndOverlay($mapPath, $mapWidth, $mapHeight, $tilesize) {
+
+    // Main DIV to hold map.
+    echo '<div style="'.
+            "background: url('".$mapPath."'); ".
+            'position: absolute; '.
+            'left: 0px; '.
+            'top: 28px; '.
+            'width: '.$mapPxWidth.'px;'.
+            'height: '.$mapPxHeight.'px;'.
+            '">' ."\n";
+
+    // Fill with many tile-sized DIVs.
+    for($y=0; $y<$heightInTiles; $y++) {
+
+        for($x=0; $x<$widthInTiles; $x++) {
+
+            echo '<div style="'.
+                        'background: none; '.
+                        'width: '.$tilesize.'px; '.
+                        'height: '.$tilesize.'px; '.
+                        'position: absolute; '.
+                        'left: '.($x*$tilesize).'px; '.
+                        'top: '.($y*$tilesize).'px; '.
+                    
+                    '" id="x'.$x.'y'.$y.'"'.
+                    
+                    '" onClick="tileClicked('.$x.','.$y.');'.
+                        
+                    '" onmouseover="tileOver('.$x.','.$y.');'.
+                        
+                    '" onmouseout="tileOut('.$x.','.$y.');'.
+                    
+                    '"></div>' . "\n";
+        }
+    }
+
+    // Close main DIV.
+    echo '</div>';
+}
+
+/**
  * Recursively remove a directory.
  *
  * @param   $dir Directory to perform recursive call on.
