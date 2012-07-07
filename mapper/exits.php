@@ -13,7 +13,7 @@ require_once('inc.functions.php');
     <body>
      
 
-        
+
 <?php
 
 $currentPage = $_SERVER['QUERY_STRING'];
@@ -42,6 +42,52 @@ if( $currentPage === $page1 ) {
     echo    '</select>' . "\n" . '<br>' . "\n" .
             '<input type="submit">' . "\n" .
         '</form>';
+
+}
+
+// Page 2: Show map to edit.
+if( $currentPage === $page2 ) {
+
+    if(!isset($_POST['map'])) die("No map selected.");
+
+    $map = $_POST['map'];
+
+    // Get list of all maps.
+    $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
+
+    // Find the selected map file.
+    for($i=0; $i<count($maps); $i++)
+    {
+        $dirPath = dirname($maps[$i]);
+        $dirName = basename($dirPath);
+
+        if( $map === $dirName ) {
+            
+            $mapPath = $maps[$i];
+            break;
+        }
+    }
+
+    if( !isset($mapPath) ) die("Map $map not found.");
+
+    // Get map dimensions.
+    $size = getimagesize($mapPath);
+    $mapPxWidth = $size[0];
+    $mapPxHeight = $size[1];
+    $mapTileWidth = $mapPxWidth / $globalTilesize;
+    $mapTileHeight = $mapPxHeight / $globalTilesize;
+
+    // Create DIV to hold map.
+    echo '<div style="'.
+            "background: url('".$mapPath."'); ".
+            'position: absolute; '.
+            'left: 0px; '.
+            'top: 28px; '.
+            'width: '.$mapPxWidth.'px;'.
+            'height: '.$mapPxHeight.'px;'.
+            '">' ."\n";
+
+    
 
 }
 
