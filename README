@@ -117,10 +117,10 @@ Known Issues:
 
 - Chat system does not support accented characters.
 
-- Player can walk through a door, and keep going without being 
+- Player can walk through a door, and keep going without being
   zoned until they let go of the movement key.
 
-- Minimizing the game and coming back to it after some time will spawn all at 
+- Minimizing the game and coming back to it after some time will spawn all at
   once every chat bubble that had been missed.
 
 - Player appears to run faster on sand-tiles than on regular land tiles.
@@ -131,7 +131,7 @@ Known Issues:
 - Tall-grass entities appear darker than they should be.
 
 
-Additional Information
+Links:
 ----------------------------
 
 NodeJS
@@ -149,3 +149,10 @@ http://impactjs.com/
 
 jQuery
 http://jquery.com/
+
+
+Useful Commands:
+----------------------------
+
+// for 20fps
+ig.system.stopRunLoop(); window.setInterval( ig.system.run.bind(ig.system), 1000/20 );
