@@ -154,5 +154,30 @@ http://jquery.com/
 Useful Commands:
 ----------------------------
 
-// for 20fps
-ig.system.stopRunLoop(); window.setInterval( ig.system.run.bind(ig.system), 1000/20 );
+	// for 20fps
+	ig.system.stopRunLoop();
+	window.setInterval( ig.system.run.bind(ig.system), 1000/20 );
+
+	// Ash-grass.
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 2624;
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 144;
+
+	// Tall-grass.
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 4640;
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 1072;
+
+	// Shallow water.
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 10528;
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 1296;
+
+	// Deep-sand
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 3600;
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 944;
+
+	// Reflections
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 416;
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 2960;
+
+	// EVER-GRANDE CITY
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 12448;
+	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 3024;
