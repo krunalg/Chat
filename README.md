@@ -136,26 +136,6 @@ Known Issues:
 - Tall-grass entities appear darker than they should be.
 
 
-Links:
-----------------------------
-
-NodeJS
-http://nodejs.org/
-
-Socket.IO
-http://socket.io/
-https://github.com/LearnBoost/socket.io/blob/master/Readme.md
-
-node-mysql
-https://github.com/felixge/node-mysql
-
-ImpactJS
-http://impactjs.com/
-
-jQuery
-http://jquery.com/
-
-
 Useful Commands:
 ----------------------------
 
@@ -186,3 +166,23 @@ Useful Commands:
 	// EVER-GRANDE CITY
 	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.x = 12448;
 	ig.game.getEntitiesByType(EntityLocalPlayer)[0].pos.y = 3024;
+
+
+Links:
+----------------------------
+
+NodeJS
+http://nodejs.org/
+
+Socket.IO
+http://socket.io/
+https://github.com/LearnBoost/socket.io/blob/master/Readme.md
+
+node-mysql
+https://github.com/felixge/node-mysql
+
+ImpactJS
+http://impactjs.com/
+
+jQuery
+http://jquery.com/
