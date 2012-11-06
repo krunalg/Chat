@@ -171,6 +171,9 @@ Useful Commands:
 Links:
 ----------------------------
 
+ImpactJS
+http://impactjs.com/
+
 NodeJS
 http://nodejs.org/
 
@@ -180,9 +183,6 @@ https://github.com/LearnBoost/socket.io/blob/master/Readme.md
 
 node-mysql
 https://github.com/felixge/node-mysql
-
-ImpactJS
-http://impactjs.com/
 
 jQuery
 http://jquery.com/
