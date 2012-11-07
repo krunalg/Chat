@@ -1,6 +1,6 @@
 <?php
 
-set_time_limit(900);
+set_time_limit(1800);
 ini_set('memory_limit','1024M'); // and use a lot of memory
 
 
