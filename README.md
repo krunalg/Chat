@@ -65,23 +65,23 @@ July
 To-do:
 ----------------------------
 
-Server:
+### Server:
 - Handle unexpected mySQL database disconnections gracefully.
 
-Reflection:
+### Reflection:
 - Add: brightness/fading effect to reflections.
 
-Weather:
+### Weather:
 - Add: Triggered by player walking in certain areas.
 - Fix: Sand-screen and ash-screen follow the player as he moves.
 
-Water:
+### Water:
 - Fix: Player does 'slow-walk' animation trying to swim against a wall.
 - Add: Player shows 'bobbing' animation when swimming.
 - Add: Initial hop on to surf-entity animation.
 - Add: Water ripple effect.
 
-World:
+### World:
 - Fix: Mountain tops can be walked on to from above.
 - Fix: Fence in the 'flower' town is walkable from above.
 - Tree-tip over water just to the right and up from DEWFORD TOWN.
@@ -89,34 +89,34 @@ World:
 - Fix: Tree-tips over reflective water hide reflection.
 - LAVENDER TOWN overhead banner is not overhead.
 
-Grass:
+### Grass:
 - Fix: Not all grass entities spawned by network players disappear.
 - Add: Despawning of persistent-grass entities when off-screen.
 
-Effects:
+### Effects:
 - Overhead smoke-effect in LAVARIDGE TOWN.
 - Smashable rocks, and cuttable trees (low priority).
 - Sinking logs in PACIFIDLOG TOWN (low priority).
 
-Bicycle:
+### Bicycle:
 - Add: 'curvy' tire tracks when turning corners in sand.
 - Add: bike sprites for MAY (girl).
 - Add: 'Mach' bicycle which has variable speed (low priority).
 
-Chat:
+### Chat:
 - Prohibit the use of certain characters in names.
 - Restrict message length.
 
-Movement:
+### Movement:
 - Fix: NO-CLIP mode doesn't work when walking up ledges.
 - Changing directions plays a step animation.
 - A* pathfinding (low priority).
 
-Optimizations:
+### Optimizations:
 - When processing a merged map, don't process the areas known to be black empty space.
 - Integrate animation frames into master tilesheet and drop ID-tiles.
 
-Code Improvements:
+### Code Improvements:
 - Splash, jump, and deep-sand entities can all likely share a single parent class.
 - Add all entities that follow player into player.followers (such as chat bubble, name, etc.)
 - Have the initial camera-dodge-factory load entities from a module, not AJAX (low priority).
