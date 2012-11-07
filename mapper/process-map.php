@@ -18,34 +18,34 @@ if( (!isset($_POST['mapPath']) && !isset($_POST['process'])) && !$automate )
      * First Page: Display status of maps, whether they are processed or not
      *
      */
-    
+
     $processingNeeded = false; // only offer to process if its possible
-    
+
     // get a list of all maps
     $maps = scanFileNameRecursivly($globalMapDir, $globalMapFilename);
 
     // also get merged maps
     $mergedMaps = scanFileNameRecursivly($mergedMapDir, $globalMapFilename);
     for($i=0; $i<count($mergedMaps); $i++) array_push($maps, $mergedMaps[$i]);
-    
+
     echo "\n\n";
-    
+
     // check if the map has been processed yet or not
     for($i=0; $i<count($maps); $i++)
     {
         $reconstructedPath = removeFilenameFromPath($maps[$i]);
         $mapName = basename($reconstructedPath);
         $jsonDir = $processedMapDir . DIRECTORY_SEPARATOR . $mapName;
-        $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON; 
+        $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON;
 
         // if a JSON file is present, the map has been processed
         if(file_exists($jsonPath)) {
 
             echo $maps[$i]." has been processed... <br>\n\n";
         }
-            
+
         else {
-            
+
             $processingNeeded = true; // only needed once to activate
             $postSafeMapPath = str_replace('\\', "\\\\", $maps[$i]); // needed to not lose slashes on next page
             echo $maps[$i].' <b style="color: red">requires processing</b>...';
@@ -58,7 +58,7 @@ if( (!isset($_POST['mapPath']) && !isset($_POST['process'])) && !$automate )
             echo "<br>\n\n";
         }
     }
-    
+
     if($processingNeeded) { // only offer to process if some need processing
         echo '<input type="button" '.
             'value="Process All" '.
@@ -74,15 +74,15 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
      * Second Page: Process an unprocessed map
      *
      */
-    
+
     $mapPaths = array();
-    
+
     // Only process one map.
     if(isset($_POST['mapPath']) && !$automate) {
 
         array_push($mapPaths, $_POST['mapPath']);
     }
-    
+
     // Process all maps.
     else if( (isset($_POST['process']) && $_POST['process']=='all') || $automate ) {
 
@@ -92,19 +92,19 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
         $mergedMaps = scanFileNameRecursivly($mergedMapDir, $globalMapFilename);
         for($i=0; $i<count($mergedMaps); $i++) array_push($mapPaths, $mergedMaps[$i]);
     }
-        
+
     echo 'Will now process ' . count($mapPaths) . ' maps...<br><br>'."\n\n";
-    
+
     for($i=0; $i<count($mapPaths); $i++)
     {
         // check that map exists
         if(!file_exists($mapPaths[$i])) die( "" . $mapPaths[$i] . " does not exist.");
-        
+
         $reconstructedPath = removeFilenameFromPath($mapPaths[$i]);
         $mapName = basename($reconstructedPath);
         $jsonDir = $processedMapDir . DIRECTORY_SEPARATOR . $mapName;
-        $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON; 
-        
+        $jsonPath = $jsonDir . DIRECTORY_SEPARATOR . $globalMapJSON;
+
         // if a JSON file is present, the map has been processed
         if(!file_exists($jsonPath))
         {
@@ -113,13 +113,13 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
             $mapWidth = $mapSize[0];
             $mapHeight = $mapSize[1];
             $map = LoadPNG($mapPaths[$i]);
-            
+
             // build array of hashes from tiles
             $hashes = buildHashTableFromImage($map, $mapWidth, $mapHeight, $globalTilesize);
 
             // frees image from memory
-            imagedestroy($map); 
-            
+            imagedestroy($map);
+
             // build JSON
             $mapWidthInTiles = $mapWidth/$globalTilesize;
             $mapHeightInTiles = $mapHeight/$globalTilesize;
@@ -130,7 +130,7 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
                           );
             $afterJSON = json_encode($beforeJSON);
             $prettyJSON = json_format($afterJSON);
-            
+
             // Make sure directories exist before writing.
             if(!is_dir($buildDir)) mkdir($buildDir);
             if(!is_dir($processedMapDir)) mkdir($processedMapDir);
@@ -139,10 +139,10 @@ else if( (isset($_POST['mapPath']) || isset($_POST['process'])) || $automate )
             // write to file
             writeTextToFile($jsonPath, $prettyJSON);
         }
-        
+
         // JSON file exists
         else echo "" . $mapPaths[$i] . " has already been processed. " .
-                  "Skipping...";    
+                  "Skipping...";
 
         echo "<br>\n"; // new line between each process attempt
     }
