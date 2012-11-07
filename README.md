@@ -14,7 +14,10 @@ Installation:
 3. On the newly created database, run `database.sql`.
 4. Open `mapper/mysql-connection-template.js` and follow instructions.
 5. In a web browser, open `mapper/cron.php` (takes about 30 minutes).
-6. In a web browser, open `client/index.php?user=Joncom` (or any other user in the database).
+
+### Then to play:
+6. Run `server/server.bat`.
+7. In a web browser, open `client/index.php?user=Joncom` (or any other user in the database).
 
 
 Change-Log:
