@@ -9,15 +9,15 @@ not work, you can drag server.js onto node.exe instead (does the same thing).
 Installation:
 ----------------------------
 
-1. Clone/download repository.
+1. Clone or download this repository.
 2. Create a new MySQL database.
 3. On the newly created database, run `database.sql`.
-4. Open `mapper/mysql-connection-template.js` and follow instructions.
-5. In a web browser, open `mapper/cron.php` (takes about 30 minutes).
+4. Open `mapper/mysql-connection-template.js` and follow the instructions.
+5. In a web browser, open `mapper/cron.php`. Be patient (this takes about 30 minutes).
 
 ### Then to play:
 6. Run `server/server.bat`.
-7. In a web browser, open `client/index.php?user=Joncom` (or any other user in the database).
+7. In a web browser, open `client/index.php?user=Joncom`.
 
 
 Change-Log:
