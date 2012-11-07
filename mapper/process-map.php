@@ -1,6 +1,6 @@
 <?php
 
-set_time_limit(1800); // because processing maps can take a while
+set_time_limit(3200); // because processing maps can take a while
 ini_set('memory_limit','1024M'); // 512M was not enough
 
 
