@@ -11,9 +11,9 @@ Installation:
 
 1. Clone/download repository.
 2. Create a new MySQL database.
-3. Open mapper/mysql-connection-template.js and follow instructions.
-4. In a web browser, open mapper/cron.php (takes about 30 minutes).
-5. In a web browser, open client/index.php?user=Joncom (or any other user in the database).
+3. Open `mapper/mysql-connection-template.js` and follow instructions.
+4. In a web browser, open `mapper/cron.php` (takes about 30 minutes).
+5. In a web browser, open `client/index.php?user=Joncom` (or any other user in the database).
 
 
 Change-Log:
