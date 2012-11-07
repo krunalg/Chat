@@ -10,10 +10,12 @@ Installation:
 ----------------------------
 
 1. Clone or download this repository.
-2. Create a new MySQL database.
-3. On the newly created database, run `database.sql`.
-4. Open `mapper/mysql-connection-template.js` and follow the instructions.
-5. In a web browser, open `mapper/cron.php`. Be patient (this takes about 30 minutes).
+2. Extract your licensed ImapctJS files/folders into `client`.
+3. In Git Bash type `git checkout client/lib/game/main.js` and hit enter.
+4. Create a new MySQL database.
+5. On the newly created database, run `database.sql`.
+6. Open `mapper/mysql-connection-template.js` and follow the instructions.
+7. In a web browser, open `mapper/cron.php`. Be patient (this takes about 30 minutes).
 
 ### Then to play:
 6. Run `server/server.bat`.
