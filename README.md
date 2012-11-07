@@ -20,7 +20,7 @@ Installation:
 Change-Log:
 ----------------------------
 
-June
+### June
 - Grass entities spawn only as needed and self-prune after use. (June 2, 2012)
 - Repeating borders update according to player's position in the world. (June 2, 2012)
 - Player can travel over water. (June 3, 2012)
@@ -58,7 +58,7 @@ June
 - Added map borders for interiors with repeating backgrounds, such as caves. (June 30, 2012)
 - Server sends heartbeat to keep connection alive when user is idle. (June 30, 2012)
 
-July
+### July
 - Framerate improvement by not drawing repeating border in areas where it will be covered up. (July 4, 2012)
 
 
