@@ -70,6 +70,15 @@ Change-Log:
 To-do:
 ----------------------------
 
+Day 1 - Select a map; Map shows up
+Day 2 - Click tile and manually specify two fields: map and position.
+Day 3 - Automate two fields by loading second map and clicking tile.
+Day 4 - Generated maps include exit entities.
+Day 5 - Generate server exit-list; server tells player what map to load.
+Day 6 - Water ripple effect.
+Day 7 - Collision editor supports multiple types.
+Day 8 - Single side tile restrictions.
+
 ### Server:
 - Handle unexpected mySQL database disconnections gracefully.
 
