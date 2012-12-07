@@ -133,20 +133,20 @@ ig.module('game.main')
 		// Has the current map finished loading?
 		mapLoaded: false,
 
-		loadLevel: function( data ) { 
-		
+		loadLevel: function( data ) {
+
 			this.parent(data);
 
 			this.mapLoaded = true;
 		},
 
-		//		  _____ _   _ _____ _______ 
+		//		  _____ _   _ _____ _______
 		//		 |_   _| \ | |_   _|__   __|
-		//		   | | |  \| | | |    | |   
-		//		   | | | . ` | | |    | |   
-		//		  _| |_| |\  |_| |_   | |   
-		//		 |_____|_| \_|_____|  |_| 
-		//		 
+		//		   | | |  \| | | |    | |
+		//		   | | | . ` | | |    | |
+		//		  _| |_| |\  |_| |_   | |
+		//		 |_____|_| \_|_____|  |_|
+		//
 		init: function() {
 
 			// Create the chat log.
@@ -182,7 +182,7 @@ ig.module('game.main')
 
 			// Load level server says to.
 			socket.on('loadMap', function(map) {
-				
+
 				ig.game.mapLoaded = false;
 				ig.game.loadLevelDeferred( ig.global['Level' + map] );
 
@@ -192,7 +192,7 @@ ig.module('game.main')
 
 			// Add nearby players to queue.
 			socket.on('addNearbyPlayers', function(nearbyPlayers) {
-				
+
 				ig.game.playersToAdd = nearbyPlayers;
 			});
 
@@ -231,8 +231,8 @@ ig.module('game.main')
 						ig.system.clear(this.clearColor);
 					}
 
-					// This is a bit of a circle jerk. Entities reference game._rscreen 
-					// instead of game.screen when drawing themselfs in order to be 
+					// This is a bit of a circle jerk. Entities reference game._rscreen
+					// instead of game.screen when drawing themselfs in order to be
 					// "synchronized" to the rounded(?) screen position
 					this._rscreen.x = ig.system.getDrawPos(this.screen.x) / ig.system.scale;
 					this._rscreen.y = ig.system.getDrawPos(this.screen.y) / ig.system.scale;
@@ -279,13 +279,13 @@ ig.module('game.main')
 
 		},
 
-		//	  _    _ _____  _____       _______ ______ 
+		//	  _    _ _____  _____       _______ ______
 		//	 | |  | |  __ \|  __ \   /\|__   __|  ____|
-		//	 | |  | | |__) | |  | | /  \  | |  | |__   
-		//	 | |  | |  ___/| |  | |/ /\ \ | |  |  __|  
-		//	 | |__| | |    | |__| / ____ \| |  | |____ 
+		//	 | |  | | |__) | |  | | /  \  | |  | |__
+		//	 | |  | |  ___/| |  | |/ /\ \ | |  |  __|
+		//	 | |__| | |    | |__| / ____ \| |  | |____
 		//	  \____/|_|    |_____/_/    \_\_|  |______|
-		//	                                           	
+		//
 		update: function() {
 
 			// Things to do after map is loaded.
@@ -295,7 +295,7 @@ ig.module('game.main')
 				if (typeof this.playersToAdd !== 'undefined') {
 
 					for(var i = 0; i < this.playersToAdd.length; i++ ) {
-						
+
 						var entityType = (this.playersToAdd[i].name.toLowerCase() == username.toLowerCase() ? EntityLocalPlayer : EntityNetworkPlayer);
 
 						ig.game.spawnEntity(entityType, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
@@ -383,16 +383,16 @@ ig.module('game.main')
 								pos: {x: x, y: y},
 								tile: {x: 0, y: 0}
 							};
-							
+
 							// Break the trace down into smaller steps if necessary
 							var steps = Math.ceil(Math.max(Math.abs(vx), Math.abs(vy)) / this.tilesize);
 							if( steps > 1 ) {
 								var sx = vx / steps;
 								var sy = vy / steps;
-								
+
 								for( var i = 0; i < steps && (sx || sy); i++ ) {
 									this._traceStep( res, x, y, sx, sy, objectWidth, objectHeight, vx, vy, i );
-									
+
 									x = res.pos.x;
 									y = res.pos.y;
 									if( res.collision.x ) {	sx = 0; vx = 0; }
@@ -400,12 +400,12 @@ ig.module('game.main')
 									if( res.collision.slope ) { break; }
 								}
 							}
-							
+
 							// Just one step
 							else {
 								this._traceStep( res, x, y, vx, vy, objectWidth, objectHeight, vx, vy, 0 );
 							}
-							
+
 							return res;
 						}
 					});
@@ -522,11 +522,11 @@ ig.module('game.main')
 
 		//	  _____  _____       __          __
 		//	 |  __ \|  __ \     /\ \        / /
-		//	 | |  | | |__) |   /  \ \  /\  / / 
-		//	 | |  | |  _  /   / /\ \ \/  \/ /  
-		//	 | |__| | | \ \  / ____ \  /\  /   
-		//	 |_____/|_|  \_\/_/    \_\/  \/    
-		//	                                   
+		//	 | |  | | |__) |   /  \ \  /\  / /
+		//	 | |  | |  _  /   / /\ \ \/  \/ /
+		//	 | |__| | | \ \  / ____ \  /\  /
+		//	 |_____/|_|  \_\/_/    \_\/  \/
+		//
 		draw: function() {
 
 			// Draw all entities and backgroundMaps
@@ -568,10 +568,10 @@ ig.module('game.main')
 				// Draw debug display.
 				this.debugDisplay.draw(
 				[
-				//'moveState: ' + player.moveState, 
-				//'facing: ' + player.facing, 
-				//'lastFacing: ' + player.lastFacing, 
-				//'mouse-x: ' + ig.input.mouse.x, 
+				//'moveState: ' + player.moveState,
+				//'facing: ' + player.facing,
+				//'lastFacing: ' + player.lastFacing,
+				//'mouse-x: ' + ig.input.mouse.x,
 				//'mouse-y: ' + ig.input.mouse.y
 				], // will display each array element on a new line
 				true, // true or false to either show the FPS
@@ -857,7 +857,7 @@ ig.module('game.main')
 					// Check for commands: /say or /s
 					else if (explodeInput[0] == '/say' || explodeInput[0] == '/s') {
 
-						// Check if command is: /say 
+						// Check if command is: /say
 						if (inputVal.substr(0, 4) == '/say') {
 							// Strip command and first space from input.
 							inputVal = inputVal.substr(5, inputVal.length - 5);
@@ -890,13 +890,13 @@ ig.module('game.main')
 						// Tell server about skin change.
 						this.emitReskin(skin);
 					}
-					
+
 					// Invalid command.
 					else {
 
 						ig.game.chatLog.push('<div class="error">' + explodeInput[0] + ' is not a valid command.</div>');
 
-					} 
+					}
 				}
 				// Assume it's a /say
 				else {
