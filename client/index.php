@@ -18,17 +18,13 @@ $socketPort = 9090;
 
     <form action="play.php">
 
-        <div>
+        <label for="user">What is your name?</label><br />
 
-            <label for="user">What is your name?</label><br />
+        <input type="text" id="user" name="user" />
 
-            <input type="text" id="user" name="user" />
+        <input type="hidden" id="socketHost" name="socketHost" value="<?php echo $socketHost; ?>" />
 
-            <input type="hidden" id="socketHost" name="socketHost" value="<?php echo $socketHost; ?>" />
-
-            <input type="hidden" id="socketPort" name="socketPort" value="<?php echo $socketPort; ?>" />
-
-        </div>
+        <input type="hidden" id="socketPort" name="socketPort" value="<?php echo $socketPort; ?>" />
 
         <input type="submit" />
 
