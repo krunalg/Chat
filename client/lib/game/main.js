@@ -80,6 +80,9 @@ ig.module('game.main')
 //debug
 'impact.debug.debug',
 
+// A plugin for getting username and other variables from the URL.
+'plugins.url-variables',
+
 // require the debug display plugin
 'plugins.debug_display')
 
