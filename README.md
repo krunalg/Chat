@@ -68,6 +68,7 @@ Change-Log:
 
 ### December
 - Added simple login form. (December 6, 2012)
+- General code tidy. (December 6, 2012)
 
 
 To-do:
