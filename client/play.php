@@ -12,7 +12,7 @@ $socketPort = $_GET['port'];
 	 <script type="text/javascript" src="lib/impact/impact.js"></script>
 	 <script type="text/javascript" src="lib/game/main.js"></script>
 	 <script type="text/javascript">
-	 	var socket = io.connect('http://<?php echo $socketHost . ':' . $socketPort; ?>');
+	 	ig.socket = io.connect('http://<?php echo $socketHost . ':' . $socketPort; ?>');
 	 </script>
 	 <script type="text/javascript" src="socketClient.js"></script>
 

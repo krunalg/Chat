@@ -192,20 +192,20 @@ ig.module('game.main')
             initBackgroundAnimations();
 
             // Authenticate username.
-            socket.emit('init', this.user);
+            ig.socket.emit('init', this.user);
 
             // Load level server says to.
-            socket.on('loadMap', function(map) {
+            ig.socket.on('loadMap', function(map) {
 
                 ig.game.mapLoaded = false;
                 ig.game.loadLevelDeferred( ig.global['Level' + map] );
 
                 // Get nearby players including the local player.
-                socket.emit('getNearbyPlayers');
+                ig.socket.emit('getNearbyPlayers');
             });
 
             // Add nearby players to queue.
-            socket.on('addNearbyPlayers', function(nearbyPlayers) {
+            ig.socket.on('addNearbyPlayers', function(nearbyPlayers) {
 
                 ig.game.playersToAdd = nearbyPlayers;
             });
@@ -627,8 +627,7 @@ ig.module('game.main')
          */
         emitSay: function(msg) {
 
-            // Emit socket.
-            socket.emit('receiveSay', msg);
+            ig.socket.emit('receiveSay', msg);
         },
 
         /*
@@ -640,8 +639,7 @@ ig.module('game.main')
          */
         emitTell: function(to, msg) {
 
-            // Emit socket.
-            socket.emit('receiveTell', to, msg);
+            ig.socket.emit('receiveTell', to, msg);
         },
 
         /*
@@ -652,8 +650,7 @@ ig.module('game.main')
          */
         emitReskin: function(skin) {
 
-            // Emit socket.
-            socket.emit('receiveReskin', skin);
+            ig.socket.emit('receiveReskin', skin);
         },
 
         /*
@@ -959,8 +956,8 @@ ig.module('game.main')
          */
         leaveZone: function() {
 
-            // Send to socket.
-            socket.emit('playerLeaveZone');
+            ig.socket.emit('playerLeaveZone');
+
         },
 
         /*
@@ -991,8 +988,8 @@ ig.module('game.main')
          */
         leaveZone: function() {
 
-            // Send to socket.
-            socket.emit('playerLeaveZone');
+            ig.socket.emit('playerLeaveZone');
+
         },
 
         /*

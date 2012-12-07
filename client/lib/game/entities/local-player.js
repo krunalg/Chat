@@ -48,7 +48,7 @@ ig.module(
 		// Ask server for details about the player.
 		netInit: function() {
 
-			socket.emit('playerStart');
+			ig.socket.emit('playerStart');
 		},
 
 		// Tell server that the player just changes his movement state.
@@ -57,8 +57,7 @@ ig.module(
 			// Debug message.
 			//console.debug('Sending move-update... x: ' + x + ', y: ' + y + ', direction: ' + direction + ', state: ' + state);
 
-			// Emit socket.
-			socket.emit('receiveUpdateMoveState', x, y, direction, state);
+			ig.socket.emit('receiveUpdateMoveState', x, y, direction, state);
 		},
 
 		// Determine if player should continue moving or stop.
@@ -469,7 +468,7 @@ ig.module(
 			player = this;
 
 			// Set player details received from server.
-			socket.on('playerStart-' + this.name, function(x, y, facing, state, skin) {
+			ig.socket.on('playerStart-' + this.name, function(x, y, facing, state, skin) {
 				player.pos.x = x;
 				player.pos.y = y;
 				player.facing = facing;

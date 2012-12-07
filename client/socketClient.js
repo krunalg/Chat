@@ -1,11 +1,11 @@
 
 // Keep the connection alive when user is idle.
-socket.on('ping', function(data){
-  	socket.emit('pong', {beat: 1});
+ig.socket.on('ping', function(data){
+  	ig.socket.emit('pong', {beat: 1});
 });
 
 // Receive /say message from server.
-socket.on('newMsg', function(from, msg) {
+ig.socket.on('newMsg', function(from, msg) {
 	var showMessageHowLong = 2; // how long to hide name and show message
 	// Get reference to player which name will follow.
 	var player = ig.game.getEntityByName(from);
@@ -35,7 +35,7 @@ socket.on('newMsg', function(from, msg) {
 });
 
 // Receive /tell message from server.
-socket.on('incomingTell', function(from, msg) {
+ig.socket.on('incomingTell', function(from, msg) {
 
 	// Remember the last person who sent us a /tell.
 	ig.game.chatLog.lastTellFrom = from;
@@ -58,27 +58,27 @@ function ThrowError(message) {
 }
 
 // Write an error message to the log.
-socket.on('logError', function(message) {
+ig.socket.on('logError', function(message) {
 
 	ig.game.chatLog.push('<div class="error">' + message + '</div>');
 });
 
 // Receive error message from the server.
-socket.on('error', function(message) {
+ig.socket.on('error', function(message) {
 
 	// End the game.
 	ThrowError(message);
 });
 
 // Server welcomed the user, else kill the application.
-socket.on('announcement', function(message) {
+ig.socket.on('announcement', function(message) {
 
 	// Write to chat log.
 	ig.game.chatLog.push('<div class="announce">' + message + '</div>');
 });
 
 // Add a new player to the game.
-socket.on('addPlayer', function(user, x, y, direction, skin) {
+ig.socket.on('addPlayer', function(user, x, y, direction, skin) {
 	var player = ig.game.getEntitiesByType(EntityLocalPlayer)[0]; // !! is it needed?
 
 	// Write to chat log.
@@ -92,7 +92,7 @@ socket.on('addPlayer', function(user, x, y, direction, skin) {
 });
 
 // Spawns entities for all players in the area.
-socket.on('addAllPlayers', function(players) {
+ig.socket.on('addAllPlayers', function(players) {
 	var localPlayer = ig.game.getEntitiesByType(EntityLocalPlayer)[0];
 
 	for (i = 0; i < players.length; i++) {
@@ -107,7 +107,7 @@ socket.on('addAllPlayers', function(players) {
 	}
 });
 
-socket.on('playerPositions', function(players)
+ig.socket.on('playerPositions', function(players)
 // updates all **currently existing**
 // Otherplayer entity positions and directions
 {

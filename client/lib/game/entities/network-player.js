@@ -28,7 +28,7 @@ ig.module(
 			});
 
 			// Some player changed his movement state.
-			socket.on('moveUpdateOtherPlayer-' + this.name, function(x, y, direction, state) {
+			ig.socket.on('moveUpdateOtherPlayer-' + this.name, function(x, y, direction, state) {
 				player.vel.x = player.vel.y = 0;
 				player.pos.x = x;
 				player.pos.y = y;
@@ -68,13 +68,13 @@ ig.module(
 			});
 
 			// A player set his skin.
-			socket.on('reskinOtherPlayer-' + this.name, function(skin) {
+			ig.socket.on('reskinOtherPlayer-' + this.name, function(skin) {
 				player.skin = skin;
 				player.reskin();
 			});
 
 			// A player disconnected or left the area.
-			socket.on('dropPlayer-' + this.name, function() {
+			ig.socket.on('dropPlayer-' + this.name, function() {
 
 				// Prevent multiple drop announcements.
 				if(!player._killed)
