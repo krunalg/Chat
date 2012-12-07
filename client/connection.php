@@ -6,7 +6,7 @@ if( $_SERVER["SERVER_NAME"]!="commins.ca"
 	&& $_SERVER["SERVER_NAME"]!="joncom.no-ip.org"
 	)
 {
-  $socketHost = '192.168.1.65';
+  $socketHost = 'localhost';
   $socketPort = 9090;
 }
 else
