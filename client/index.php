@@ -22,9 +22,9 @@ $socketPort = 9090;
 
         <input type="text" id="user" name="user" />
 
-        <input type="hidden" id="socketHost" name="socketHost" value="<?php echo $socketHost; ?>" />
+        <input type="hidden" name="host" value="<?php echo $socketHost; ?>" />
 
-        <input type="hidden" id="socketPort" name="socketPort" value="<?php echo $socketPort; ?>" />
+        <input type="hidden" name="port" value="<?php echo $socketPort; ?>" />
 
         <input type="submit" />
 
