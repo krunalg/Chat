@@ -11,9 +11,6 @@ $socketPort = $_GET['port'];
 	 <script type="text/javascript" src="http://<?php echo $socketHost . ':' . $socketPort; ?>/socket.io/socket.io.js"></script>
 	 <script type="text/javascript" src="lib/impact/impact.js"></script>
 	 <script type="text/javascript" src="lib/game/main.js"></script>
-	 <script type="text/javascript">
-	 	ig.socket = io.connect('http://<?php echo $socketHost . ':' . $socketPort; ?>');
-	 </script>
 	 <script type="text/javascript" src="socketClient.js"></script>
 
 	 <title>flaming-sansa</title>
