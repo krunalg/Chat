@@ -12,7 +12,7 @@
 
     <form action="play.php">
 
-        <label for="user">What's your username?</label>
+        <label for="user">What is your name?</label>
 
         <input type="text" id="user" name="user" />
 
