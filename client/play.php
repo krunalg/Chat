@@ -2,6 +2,7 @@
 
 $socketHost = $_GET['host'];
 $socketPort = $_GET['port'];
+$user = $_GET['user'];
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@ $socketPort = $_GET['port'];
 
     <script type="text/javascript" src="socketClient.js"></script>
 
-    <title>flaming-sansa</title>
+    <title>Playing as '<?php echo $user; ?>'</title>
 
     <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
 
