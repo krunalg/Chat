@@ -66,6 +66,9 @@ Change-Log:
 ### July
 - Framerate improvement by not drawing repeating border in areas where it will be covered up. (July 4, 2012)
 
+### December
+- Added simple login form. (December 6, 2012)
+
 
 To-do:
 ----------------------------
