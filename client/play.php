@@ -8,7 +8,6 @@ $socketPort = $_GET['port'];
 <html>
 <head>
 	 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
-	 <script type="text/javascript" src="getUsernameFromURL.js" ></script>
 	 <script type="text/javascript" src="http://<?php echo $socketHost . ':' . $socketPort; ?>/socket.io/socket.io.js"></script>
 	 <script type="text/javascript" src="lib/impact/impact.js"></script>
 	 <script type="text/javascript" src="lib/game/main.js"></script>

@@ -152,6 +152,17 @@ ig.module('game.main')
         //
         init: function() {
 
+            // Define user name.
+            if( typeof ig.urlVars.user === "undefined" ) {
+
+                this.user = 'player' + Math.floor(Math.random()*999);
+
+            } else {
+
+                this.user = ig.urlVars.user;
+
+            }
+
             // Create the chat log.
             this.chatLog = new ChatLog(540, 80, 'log');
 
@@ -181,7 +192,7 @@ ig.module('game.main')
             initBackgroundAnimations();
 
             // Authenticate username.
-            socket.emit('init', username);
+            socket.emit('init', this.user);
 
             // Load level server says to.
             socket.on('loadMap', function(map) {
@@ -299,7 +310,7 @@ ig.module('game.main')
 
                     for(var i = 0; i < this.playersToAdd.length; i++ ) {
 
-                        var entityType = (this.playersToAdd[i].name.toLowerCase() == username.toLowerCase() ? EntityLocalPlayer : EntityNetworkPlayer);
+                        var entityType = (this.playersToAdd[i].name.toLowerCase() == this.user.toLowerCase() ? EntityLocalPlayer : EntityNetworkPlayer);
 
                         ig.game.spawnEntity(entityType, this.playersToAdd[i].pos.x, this.playersToAdd[i].pos.y, {
                             name: this.playersToAdd[i].name,
@@ -564,7 +575,7 @@ ig.module('game.main')
             this.whiteFont.draw(printEvents, 3, 3, ig.Font.ALIGN.LEFT);
 
             // Enable extra debugging for just myself.
-            if (username == "Joncom") {
+            if ( this.user == "Joncom") {
 
                 var player = ig.game.getEntitiesByType(EntityLocalPlayer)[0];
 
