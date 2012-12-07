@@ -1,12 +1,3 @@
-<?php
-
-/*
- *  This whole file is kind of stupid. Consider reworking its contents into other
- *  class files, even main.js would be better.
- */
-
-    header("Content-type: text/javascript");
-?>
 
 // Keep the connection alive when user is idle.
 socket.on('ping', function(data){

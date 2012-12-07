@@ -15,7 +15,7 @@ $socketPort = $_GET['port'];
 	 <script type="text/javascript">
 	 	var socket = io.connect('http://<?php echo $socketHost . ':' . $socketPort; ?>');
 	 </script>
-	 <script type="text/javascript" src="socketClient.php"></script>
+	 <script type="text/javascript" src="socketClient.js"></script>
 
 	 <title>flaming-sansa</title>
 	 <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
