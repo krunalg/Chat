@@ -4,12 +4,12 @@ ig.module('plugins.url-variables')
 
 .defines(function() {
 
-    // Returns an array of variables keyed by the name of the variable.
+    // Returns an object of variables keyed by the name of the variable.
     var getUrlVars = function() {
 
-        // Create a global array that will hold the value of each variable,
+        // Create a global object that will hold the value of each variable,
         // keyed by the name of the variable.
-        var GETDATA = new Array();
+        var GETDATA = {};
 
         // Get the string that follows the "?" in the window's location.
         var sGet = window.location.search;
@@ -32,7 +32,7 @@ ig.module('plugins.url-variables')
                 // Split it at the equals sign.
                 var sNV = sNVPairs[i].split("=");
 
-                // Assign the pair to the GETDATA array.
+                // Assign the pair to the GETDATA object.
                 var sName = sNV[0];
                 var sValue = sNV[1];
                 GETDATA[sName] = sValue;
