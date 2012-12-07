@@ -1,16 +1,22 @@
+<?php
+
+$socketHost = $_GET['host'];
+$socketPort = $_GET['port'];
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
 	 <script type="text/javascript" src="getUsernameFromURL.js" ></script>
-	 <?php
-		  include('connection.php');
-		  echo "<script type=\"text/javascript\" src=\"http://".$socketHost.":".$socketPort."/socket.io/socket.io.js\"></script>\n";
-	 ?>
+	 <script type="text/javascript" src="http://<?php echo $socketHost . ':' . $socketPort; ?>/socket.io/socket.io.js"></script>
 	 <script type="text/javascript" src="lib/impact/impact.js"></script>
 	 <script type="text/javascript" src="lib/game/main.js"></script>
+	 <script type="text/javascript">
+	 	var socket = io.connect('http://<?php echo $socketHost . ':' . $socketPort; ?>');
+	 </script>
 	 <script type="text/javascript" src="socketClient.php"></script>
-	 
+
 	 <title>flaming-sansa</title>
 	 <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
 </head>

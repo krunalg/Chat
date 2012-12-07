@@ -3,11 +3,9 @@
 /*
  *  This whole file is kind of stupid. Consider reworking its contents into other
  *  class files, even main.js would be better.
- */    
+ */
 
     header("Content-type: text/javascript");
-    include('connection.php');
-	echo "var socket = io.connect('http://".$socketHost.":".$socketPort."');\n";
 ?>
 
 // Keep the connection alive when user is idle.
@@ -23,7 +21,7 @@ socket.on('newMsg', function(from, msg) {
 
 	// Does the player who sent us a message exist?
 	if (player) {
-		
+
 		// Kill existing chat bubble.
 		if(typeof player.chatBubble != 'undefined') {
 			player.chatBubble.kill();
@@ -57,7 +55,7 @@ socket.on('incomingTell', function(from, msg) {
 
 // Define ThrowError, which shuts down the game and alerts the player.
 function ThrowError(message) {
-	
+
 	// Erase game content.
 	document.body.innerHTML = "";
 
@@ -70,13 +68,13 @@ function ThrowError(message) {
 
 // Write an error message to the log.
 socket.on('logError', function(message) {
-	
+
 	ig.game.chatLog.push('<div class="error">' + message + '</div>');
 });
 
 // Receive error message from the server.
 socket.on('error', function(message) {
-	
+
 	// End the game.
 	ThrowError(message);
 });
@@ -91,7 +89,7 @@ socket.on('announcement', function(message) {
 // Add a new player to the game.
 socket.on('addPlayer', function(user, x, y, direction, skin) {
 	var player = ig.game.getEntitiesByType(EntityLocalPlayer)[0]; // !! is it needed?
-	
+
 	// Write to chat log.
 	ig.game.chatLog.push('<div class="info">[' + ig.game.chatNameHTML(user) + '] entered the area.</div>');
 
