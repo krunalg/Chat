@@ -1,3 +1,9 @@
+<?php
+
+$socketHost = "localhost";
+$socketPort = 9090;
+
+?>
 <!DOCTYPE html>
 
 <html>
@@ -12,9 +18,17 @@
 
     <form action="play.php">
 
-        <label for="user">What is your name?</label>
+        <div>
 
-        <input type="text" id="user" name="user" />
+            <label for="user">What is your name?</label><br />
+
+            <input type="text" id="user" name="user" />
+
+            <input type="hidden" id="socketHost" name="socketHost" value="<?php echo $socketHost; ?>" />
+
+            <input type="hidden" id="socketPort" name="socketPort" value="<?php echo $socketPort; ?>" />
+
+        </div>
 
         <input type="submit" />
 
