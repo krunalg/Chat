@@ -83,6 +83,9 @@ ig.module('game.main')
 // A plugin for getting username and other variables from the URL.
 'plugins.url-variables',
 
+// Set up socket events.
+'game.sockets',
+
 // require the debug display plugin
 'plugins.debug_display')
 

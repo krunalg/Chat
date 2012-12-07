@@ -19,8 +19,6 @@ $user = $_GET['user'];
 
     <script type="text/javascript" src="lib/game/main.js"></script>
 
-    <script type="text/javascript" src="socketClient.js"></script>
-
     <title>Playing as '<?php echo $user; ?>'</title>
 
     <link rel="stylesheet" href="style.css" type="text/css" media="screen" />

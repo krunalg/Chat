@@ -1,6 +1,6 @@
 ig.module('game.sockets')
 
-.requires()
+.requires('plugins.url-variables')
 
 .defines(function() {
 
