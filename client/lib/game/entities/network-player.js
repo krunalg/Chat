@@ -34,36 +34,36 @@ ig.module(
 				player.pos.y = y;
 				player.facing = direction;
 				player.setMoveState(state);
-				
-				if(state=='bike') 
+
+				if(state=='bike')
 				{
-					player.onBike = true; 
+					player.onBike = true;
 					player.swimming = false;
 					player.jumping = false;
 				}
-				
-				if(state=='walk'||state=='run') 
+
+				if(state=='walk'||state=='run')
 				{
 					player.onBike = false;
 					player.swimming = false;
 					player.jumping = false;
 				}
-				
-				if(state=='jump') 
+
+				if(state=='jump')
 				{
 					// => Can jump on/off of bike.
 					player.jumping = true;
 					player.swimming = false;
 				}
-				
-				if(state=='swim') 
+
+				if(state=='swim')
 				{
 					player.swimming = true;
 					player.jumping = false;
 					player.onBike = false;
 				}
 
-				if(state=='jump') 	player.startJump(); 
+				if(state=='jump') 	player.startJump();
 				else 				player.startMove();
 			});
 
@@ -75,7 +75,7 @@ ig.module(
 
 			// A player disconnected or left the area.
 			socket.on('dropPlayer-' + this.name, function() {
-				
+
 				// Prevent multiple drop announcements.
 				if(!player._killed)
 				{

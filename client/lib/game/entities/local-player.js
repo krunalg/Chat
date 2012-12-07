@@ -81,7 +81,7 @@ ig.module(
 			if (keepMoving) {
 
 				if (this.canJump()) this.startJump();
-				
+
 				else if (this.canMove()) this.preStartMove();
 
 				else {
@@ -274,7 +274,7 @@ ig.module(
 			this.startMove();
 		},
 
-		// Adds initial delay before player movement so he can change direction without 
+		// Adds initial delay before player movement so he can change direction without
 		// moving. Then starts move if possible, otherwise starts a slow-walk effect.
 		tryCommit: function() {
 
@@ -306,7 +306,7 @@ ig.module(
 
 						// Jump.
 						this.startJump();
-					} 
+					}
 
 					// Check if player can move normal.
 					else if (this.canMove()) {
@@ -339,7 +339,7 @@ ig.module(
 
 				// Not committed to move.
 				else {
-					
+
 					// Check if player has changed faced directions.
 					if (this.facing != this.lastFacing) {
 
@@ -368,7 +368,7 @@ ig.module(
 							}
 						}
 					}
-				}	
+				}
 			}
 		},
 
@@ -486,7 +486,7 @@ ig.module(
 		},
 
 		update: function() {
-			
+
 			// Finish movement attempts.
 			if (this.moveCommitPending) this.tryCommit();
 
@@ -545,7 +545,7 @@ ig.module(
 					this.facing = 'right';
 					this.tryCommit();
 				}
-				
+
 				// Player is not trying to move.
 				else {
 
