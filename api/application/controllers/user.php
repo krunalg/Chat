@@ -18,7 +18,7 @@ class User extends CI_Controller {
 
 	function add() {
 
-		if( isset( $_POST ) ) {
+		if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 			$this->load->model('User_model');
 
@@ -26,7 +26,7 @@ class User extends CI_Controller {
 
 		} else {
 
-			echo "Must post to add a user.";
+			echo "POST method required.";
 
 		}
 
@@ -41,5 +41,7 @@ class User extends CI_Controller {
 		print_r( $user );
 
 	}
+
 }
+
 ?>
