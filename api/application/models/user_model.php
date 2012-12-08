@@ -28,6 +28,8 @@ class User_model extends CI_Model {
 
     function insert() {
 
+
+
         $this->title   = $_POST['title']; // please read the below note
         $this->content = $_POST['content'];
         $this->date    = time();
@@ -36,13 +38,18 @@ class User_model extends CI_Model {
 
     }
 
-    function update() {
+    function update( $id ) {
 
-        $this->title   = $_POST['title'];
-        $this->content = $_POST['content'];
-        $this->date    = time();
+        $this->id     = $id;
+        $this->user   = $_POST['user'];
+        $this->x      = $_POST['x'];
+        $this->y      = $_POST['y'];
+        $this->facing = $_POST['facing'];
+        $this->skin   = $_POST['skin'];
+        $this->state  = $_POST['state'];
+        $this->map    = $_POST['map'];
 
-        $this->db->update('entries', $this, array('id' => $_POST['id']));
+        $this->db->update( 'users', $this, array('id' => $id) );
 
     }
 
