@@ -36,7 +36,9 @@ class User extends CI_Controller {
 	// create a new user and respond with a status/errors
 	private function _put() {
 
-		echo 'create a new user and respond with a status/errors';
+		$this->load->model('User_model');
+
+		$user = $this->User_model->insert();
 
 	}
 
@@ -53,6 +55,18 @@ class User extends CI_Controller {
 		echo 'delete a user and respond with a status/errors';
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 	function add() {
 
