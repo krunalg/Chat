@@ -33,6 +33,14 @@ class User extends CI_Controller {
 
     }
 
+    // update an existing user and respond with a status/errors
+    private function _post() {
+
+        echo 'update an existing user and respond with a status/errors';
+
+    }
+
+    /*
     // create a new user and respond with a status/errors
     private function _put() {
 
@@ -42,19 +50,13 @@ class User extends CI_Controller {
 
     }
 
-    // update an existing user and respond with a status/errors
-    private function _post() {
-
-        echo 'update an existing user and respond with a status/errors';
-
-    }
-
     // delete a user and respond with a status/errors
     private function _delete() {
 
         echo 'delete a user and respond with a status/errors';
 
     }
+    */
 
 
 
