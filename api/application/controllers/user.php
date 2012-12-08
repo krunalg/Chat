@@ -35,10 +35,10 @@ class User extends CI_Controller {
 
     }
 
-    // update an existing user and respond with a status/errors
+    // Add a new user.
     private function _post() {
 
-        echo 'update an existing user and respond with a status/errors';
+        $user = $this->User_model->insert();
 
     }
 
@@ -65,20 +65,6 @@ class User extends CI_Controller {
         $json = json_encode( $user );
 
         echo $json;
-
-    }
-
-    function add() {
-
-        if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-
-            $user = $this->User_model->insert();
-
-        } else {
-
-            echo "POST method required.";
-
-        }
 
     }
 
