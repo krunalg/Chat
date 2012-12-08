@@ -2,61 +2,59 @@
 
 class User extends CI_Controller {
 
-	function index() {
+    function index() {
 
-		$method = $_SERVER['REQUEST_METHOD'];
+        $method = $_SERVER['REQUEST_METHOD'];
 
-		if( $method === 'GET' ) {
+        if( $method === 'GET' ) {
 
-			$this->_get();
+            $this->_get();
 
-		} else if( $method === 'PUT' ) {
+        } else if( $method === 'PUT' ) {
 
-			$this->_put();
+            $this->_put();
 
-		} else if( $method === 'POST' ) {
+        } else if( $method === 'POST' ) {
 
-			$this->_post();
+            $this->_post();
 
-		} else if( $method === 'DELETE' ) {
+        } else if( $method === 'DELETE' ) {
 
-			$this->_delete();
+            $this->_delete();
 
-		}
+        }
 
-	}
+    }
 
-	// respond with information about a user
-	private function _get() {
+    // respond with information about a user
+    private function _get() {
 
-		echo 'respond with information about a user';
+        echo 'respond with information about a user';
 
-	}
+    }
 
-	// create a new user and respond with a status/errors
-	private function _put() {
+    // create a new user and respond with a status/errors
+    private function _put() {
 
-		$this->load->model('User_model');
+        $this->load->model('User_model');
 
-		$user = $this->User_model->insert();
+        $user = $this->User_model->insert();
 
-	}
+    }
 
-	// update an existing user and respond with a status/errors
-	private function _post() {
+    // update an existing user and respond with a status/errors
+    private function _post() {
 
-		echo 'update an existing user and respond with a status/errors';
+        echo 'update an existing user and respond with a status/errors';
 
-	}
+    }
 
-	// delete a user and respond with a status/errors
-	private function _delete() {
+    // delete a user and respond with a status/errors
+    private function _delete() {
 
-		echo 'delete a user and respond with a status/errors';
+        echo 'delete a user and respond with a status/errors';
 
-	}
-
-
+    }
 
 
 
@@ -68,33 +66,35 @@ class User extends CI_Controller {
 
 
 
-	function add() {
 
-		if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
-			$this->load->model('User_model');
+    function add() {
 
-			$user = $this->User_model->insert();
+        if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
-		} else {
+            $this->load->model('User_model');
 
-			echo "POST method required.";
+            $user = $this->User_model->insert();
 
-		}
+        } else {
 
-	}
+            echo "POST method required.";
 
-	function byId( $id ) {
+        }
 
-		$this->load->model('User_model');
+    }
 
-		$user = $this->User_model->select( $id );
+    function byId( $id ) {
 
-		$json = json_encode( $user );
+        $this->load->model('User_model');
 
-		echo $json;
+        $user = $this->User_model->select( $id );
 
-	}
+        $json = json_encode( $user );
+
+        echo $json;
+
+    }
 
 }
 
