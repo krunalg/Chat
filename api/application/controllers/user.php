@@ -10,26 +10,32 @@ class User extends CI_Controller {
 
             $this->_get();
 
-        } else if( $method === 'PUT' ) {
-
-            $this->_put();
-
         } else if( $method === 'POST' ) {
 
             $this->_post();
+
+        } /*else if( $method === 'PUT' ) {
+
+            $this->_put();
 
         } else if( $method === 'DELETE' ) {
 
             $this->_delete();
 
-        }
+        }*/
 
     }
 
     // respond with information about a user
     private function _get() {
 
-        echo 'respond with information about a user';
+        $this->load->model('User_model');
+
+        $users = $this->User_model->read();
+
+        $json = json_encode( $users );
+
+        echo $json;
 
     }
 

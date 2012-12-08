@@ -26,6 +26,20 @@ class User_model extends CI_Model {
 
     }
 
+    function read() {
+
+        $limit = $this->input->get( 'limit' ) or 10;
+
+        $offset = $this->input->get( 'offset' ) or 0;
+
+        $query = $this->db->get_where( 'users', array(), $limit, $offset );
+
+        $query = $this->db->get( 'users' );
+
+        return $query->result();
+
+    }
+
     function insert() {
 
         $this->user   = $this->input->post('user');
