@@ -26,7 +26,42 @@ class User_model extends CI_Model {
 
     }
 
-    function read( $where, $limit, $offset ) {
+    function read() {
+
+        $limit = 10;
+
+        $offset = 0;
+
+        // returns all GET items with XSS filter
+        $get = $this->input->get(NULL, TRUE);
+
+        if( isset( $get[ 'limit' ] ) ) {
+
+            $limit = $get[ 'limit' ];
+
+            unset( $get[ 'limit' ] );
+
+        }
+
+        if( isset( $get[ 'offset' ] ) ) {
+
+            $offset = $get[ 'offset' ];
+
+            unset( $get[ 'offset' ] );
+
+        }
+
+        $where = array();
+
+        if( $get ) {
+
+            foreach( $get as $key => $value ) {
+
+                $where[ $key ] = $value;
+
+            }
+
+        }
 
         $query = $this->db->get_where( 'users', $where, $limit, $offset );
 
