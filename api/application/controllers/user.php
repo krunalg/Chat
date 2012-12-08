@@ -16,11 +16,11 @@ class User extends CI_Controller {
 
 	}
 
-	function byId() {
+	function byId( $id ) {
 
 		$this->load->model('User_model');
 
-		$user = $this->User_model->select();
+		$user = $this->User_model->select( $id );
 
 		print_r( $user );
 
