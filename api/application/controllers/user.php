@@ -24,6 +24,16 @@ class User extends CI_Controller {
 
     }
 
+    function user_by_id( $id ) {
+
+        $user = $this->User_model->get_user( $id );
+
+        $json = json_encode( $user );
+
+        echo $json;
+
+    }
+
     // respond with a list of users
     private function _get() {
 
@@ -57,16 +67,6 @@ class User extends CI_Controller {
 
     }
     */
-
-    function user_by_id( $id ) {
-
-        $user = $this->User_model->get_user( $id );
-
-        $json = json_encode( $user );
-
-        echo $json;
-
-    }
 
 }
 
