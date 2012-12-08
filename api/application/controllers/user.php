@@ -48,7 +48,7 @@ class User extends CI_Controller {
     // Add a new user.
     private function _post() {
 
-        $user = $this->User_model->insert();
+        $user = $this->User_model->add_user();
 
     }
 

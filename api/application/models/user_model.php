@@ -69,7 +69,7 @@ class User_model extends CI_Model {
 
     }
 
-    function insert() {
+    function add_user() {
 
         $this->user   = $this->input->post('user');
         $this->x      = $this->input->post('x');
