@@ -14,7 +14,7 @@ class Player_model extends CI_Model {
 
     function read() {
 
-        $query = $this->db->get('users', 10);
+        $query = $this->db->get_where('users', array('id' => $id));
         return $query->result();
 
     }
