@@ -58,17 +58,15 @@ class User extends CI_Controller {
     }
     */
 
+    function user_by_id( $id ) {
 
+        $user = $this->User_model->get_user( $id );
 
+        $json = json_encode( $user );
 
+        echo $json;
 
-
-
-
-
-
-
-
+    }
 
     function add() {
 
@@ -81,16 +79,6 @@ class User extends CI_Controller {
             echo "POST method required.";
 
         }
-
-    }
-
-    function user_by_id( $id ) {
-
-        $user = $this->User_model->get_user( $id );
-
-        $json = json_encode( $user );
-
-        echo $json;
 
     }
 
