@@ -2,9 +2,14 @@
 
 class User_model extends CI_Model {
 
-    var $title   = '';
-    var $content = '';
-    var $date    = '';
+    var $id     = '';
+    var $user   = '';
+    var $x      = '';
+    var $y      = '';
+    var $facing = '';
+    var $skin   = '';
+    var $state  = '';
+    var $map    = '';
 
     function __construct() {
 
