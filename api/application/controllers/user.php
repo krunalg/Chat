@@ -86,7 +86,7 @@ class User extends CI_Controller {
 
     function byId( $id ) {
 
-        $user = $this->User_model->select( $id );
+        $user = $this->User_model->get_user( $id );
 
         $json = json_encode( $user );
 
