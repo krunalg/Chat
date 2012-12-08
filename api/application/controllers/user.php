@@ -22,7 +22,7 @@ class User extends CI_Controller {
 
 			$this->load->model('User_model');
 
-			$user = $this->User_model->insert( $id );
+			$user = $this->User_model->insert();
 
 		} else {
 
