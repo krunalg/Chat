@@ -38,6 +38,7 @@
 |
 */
 
+$route['player/:num'] = "user/lookup";
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
