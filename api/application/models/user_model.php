@@ -1,6 +1,6 @@
 <?php
 
-class Player_model extends CI_Model {
+class User_model extends CI_Model {
 
     var $title   = '';
     var $content = '';
