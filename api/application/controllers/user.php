@@ -8,19 +8,19 @@ class User extends CI_Controller {
 
 		if( $method === 'GET' ) {
 
-			echo 'GET';
+			$this->_get();
 
 		} else if( $method === 'PUT' ) {
 
-			echo 'PUT';
+			$this->_put();
 
 		} else if( $method === 'POST' ) {
 
-			echo 'POST';
+			$this->_post();
 
 		} else if( $method === 'DELETE' ) {
 
-			echo 'DELETE';
+			$this->_delete();
 
 		}
 
@@ -29,28 +29,28 @@ class User extends CI_Controller {
 	// respond with information about a user
 	private function _get() {
 
-
+		echo 'respond with information about a user';
 
 	}
 
 	// create a new user and respond with a status/errors
 	private function _put() {
 
-
+		echo 'create a new user and respond with a status/errors';
 
 	}
 
 	// update an existing user and respond with a status/errors
 	private function _post() {
 
-
+		echo 'update an existing user and respond with a status/errors';
 
 	}
 
 	// delete a user and respond with a status/errors
 	private function _delete() {
 
-
+		echo 'delete a user and respond with a status/errors';
 
 	}
 
