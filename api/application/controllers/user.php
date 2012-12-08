@@ -3,7 +3,7 @@ class User extends CI_Controller {
 
 	function index() {
 
-		echo "Users";
+		echo "Please supply a user ID.";
 
 		/*
 		$data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
