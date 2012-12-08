@@ -6,23 +6,13 @@ class User extends CI_Controller {
 
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if( $method === 'GET' ) {
+        if( $method === 'GET' ) $this->_get();
 
-            $this->_get();
+        else if( $method === 'POST' ) $this->_post();
 
-        } else if( $method === 'POST' ) {
+        //else if( $method === 'PUT' ) $this->_put();
 
-            $this->_post();
-
-        } /*else if( $method === 'PUT' ) {
-
-            $this->_put();
-
-        } else if( $method === 'DELETE' ) {
-
-            $this->_delete();
-
-        }*/
+        //else if( $method === 'DELETE' ) $this->_delete();
 
     }
 
