@@ -1,18 +1,44 @@
 <?php
+
 class User extends CI_Controller {
 
 	function index() {
 
-		echo "Please supply a user ID.";
+		if( $_SERVER['REQUEST_METHOD'] === 'POST' ) echo 'POST';
 
-		/*
-		$data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
+		else if( $_SERVER['REQUEST_METHOD'] === 'PUT' ) echo 'PUT';
 
-		$data['title'] = "My Real Title";
-		$data['heading'] = "My Real Heading";
+		else if( $_SERVER['REQUEST_METHOD'] === 'DELETE' ) echo 'DELETE';
 
-		$this->load->view('blogview', $data, true);
-		*/
+		else if( $_SERVER['REQUEST_METHOD'] === 'GET' ) echo 'GET';
+
+	}
+
+	// respond with information about a user
+	private function _get() {
+
+
+
+	}
+
+	// create a new user and respond with a status/errors
+	private function _put() {
+
+
+
+	}
+
+	// update an existing user and respond with a status/errors
+	private function _post() {
+
+
+
+	}
+
+	// delete a user and respond with a status/errors
+	private function _delete() {
+
+
 
 	}
 
