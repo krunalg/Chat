@@ -16,12 +16,12 @@ class User extends CI_Controller {
 
     }
 
-    // respond with information about a user
+    // respond with a list of users
     private function _get() {
 
         $this->load->model('User_model');
 
-        $users = $this->User_model->read();
+        $users = $this->User_model->list_users();
 
         $json = json_encode( $users );
 

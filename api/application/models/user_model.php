@@ -26,7 +26,7 @@ class User_model extends CI_Model {
 
     }
 
-    function read() {
+    function list_users() {
 
         $limit = 10;
 
