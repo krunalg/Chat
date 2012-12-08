@@ -16,6 +16,22 @@ class User extends CI_Controller {
 
 	}
 
+	function add() {
+
+		if( isset( $_POST ) ) {
+
+			$this->load->model('User_model');
+
+			$user = $this->User_model->insert( $id );
+
+		} else {
+
+			echo "Must post to add a user.";
+
+		}
+
+	}
+
 	function byId( $id ) {
 
 		$this->load->model('User_model');
