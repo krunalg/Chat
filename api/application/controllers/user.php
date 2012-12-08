@@ -31,7 +31,11 @@ class User extends CI_Controller {
 
         $this->load->model('User_model');
 
-        $users = $this->User_model->read();
+        $limit = $this->input->get( 'limit' );
+
+        $offset = $this->input->get( 'offset' );
+
+        $users = $this->User_model->read( $limit, $offset );
 
         $json = json_encode( $users );
 
