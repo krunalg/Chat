@@ -36,7 +36,7 @@ class User_model extends CI_Model {
         $this->state  = $this->input->post('state');
         $this->map    = $this->input->post('map');
 
-        $this->db->insert('entries', $this);
+        $this->db->insert('users', $this);
 
     }
 
