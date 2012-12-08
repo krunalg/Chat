@@ -2,6 +2,14 @@
 
 class User extends CI_Controller {
 
+    function __construct() {
+
+        parent::__construct();
+
+        $this->load->model('User_model');
+
+    }
+
     function index() {
 
         $method = $_SERVER['REQUEST_METHOD'];
@@ -18,8 +26,6 @@ class User extends CI_Controller {
 
     // respond with a list of users
     private function _get() {
-
-        $this->load->model('User_model');
 
         $users = $this->User_model->list_users();
 
@@ -39,8 +45,6 @@ class User extends CI_Controller {
     /*
     // create a new user and respond with a status/errors
     private function _put() {
-
-        $this->load->model('User_model');
 
         $user = $this->User_model->insert();
 
@@ -70,8 +74,6 @@ class User extends CI_Controller {
 
         if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
-            $this->load->model('User_model');
-
             $user = $this->User_model->insert();
 
         } else {
@@ -83,8 +85,6 @@ class User extends CI_Controller {
     }
 
     function byId( $id ) {
-
-        $this->load->model('User_model');
 
         $user = $this->User_model->select( $id );
 
