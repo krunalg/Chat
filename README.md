@@ -227,4 +227,8 @@ Useful curl example:
 -H [HEADER] Set a header.
 -I Only display response’s headers.
 
-curl -X POST http://localhost/Chat/api/user/add -d "user=Joncom2" -d "x=0" -d "y=16" -d "facing=left" -d "skin=boy" -d "state=idle" -d "map=RsWorld"
+- Display the output:
+curl -X POST http://localhost/Chat/api/user/ -d "user=Joncom2" -d "x=0" -d "y=16" -d "facing=left" -d "skin=boy" -d "state=idle" -d "map=RsWorld"
+
+- Display just the header information:
+curl -s -X POST -D- http://localhost/Chat/api/user/ -o/dev/null
