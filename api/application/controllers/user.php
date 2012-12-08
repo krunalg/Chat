@@ -22,6 +22,12 @@ class User extends CI_Controller {
 
         //else if( $method === 'DELETE' ) $this->_delete();
 
+        else {
+
+            header('HTTP/1.1 405 Method Not Allowed');
+
+        }
+
     }
 
     function user_by_id( $id ) {
