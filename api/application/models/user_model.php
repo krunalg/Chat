@@ -17,7 +17,7 @@ class User_model extends CI_Model {
 
     }
 
-    function read() {
+    function select() {
 
         $query = $this->db->get_where('users', array('id' => $id));
         return $query->result();

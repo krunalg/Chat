@@ -16,13 +16,13 @@ class User extends CI_Controller {
 
 	}
 
-	function lookup() {
+	function byId() {
 
-		$this->load->model('Player_model');
+		$this->load->model('User_model');
 
-		$player = $this->Player_model->read();
+		$user = $this->User_model->select();
 
-		print_r( $player );
+		print_r( $user );
 
 	}
 }
