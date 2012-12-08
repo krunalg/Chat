@@ -215,3 +215,16 @@ https://github.com/felixge/node-mysql
 
 jQuery
 http://jquery.com/
+
+
+Useful curl example:
+----------------------------
+
+# curl -X PUT http://www.foo.com/bar/1 -d "some=var" -d "other=var2"
+-H "Accept: text/json" -I
+-X [METHOD] Specify the HTTP method.
+-d “name=value” Set a POST/PUT field name and value.
+-H [HEADER] Set a header.
+-I Only display response’s headers.
+
+curl -X POST http://localhost/Chat/api/user/add -d "user=Joncom2" -d "x=0" -d "y=16" -d "facing=left" -d "skin=boy" -d "state=idle" -d "map=RsWorld"
