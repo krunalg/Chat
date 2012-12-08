@@ -26,11 +26,9 @@ class User_model extends CI_Model {
 
     }
 
-    function read( $limit, $offset ) {
+    function read( $where, $limit, $offset ) {
 
-        //$query = $this->db->get_where( 'users', array(), $limit, $offset );
-
-        $query = $this->db->get( 'users', $limit, $offset );
+        $query = $this->db->get_where( 'users', $where, $limit, $offset );
 
         return $query->result();
 

@@ -21,11 +21,34 @@ class User extends CI_Controller {
 
         $this->load->model('User_model');
 
-        $limit = $this->input->get( 'limit' );
+        // returns all GET items with XSS filter
+        $get = $this->input->get(NULL, TRUE);
 
-        $offset = $this->input->get( 'offset' );
+        if( isset( $get[ 'limit' ] ) ) {
 
-        $users = $this->User_model->read( $limit, $offset );
+            $limit = $get[ 'limit' ];
+
+            unset( $get[ 'limit' ] );
+
+        }
+
+        if( isset( $get[ 'offset' ] ) ) {
+
+            $offset = $get[ 'offset' ];
+
+            unset( $get[ 'offset' ] );
+
+        }
+
+        $where = array();
+
+        foreach( $get as $key => $value ) {
+
+            $where[ $key ] = $value;
+
+        }
+
+        $users = $this->User_model->read( $where, $limit, $offset );
 
         $json = json_encode( $users );
 
