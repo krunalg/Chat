@@ -3,11 +3,8 @@ class User extends CI_Controller {
 
 	function index() {
 
-		$this->load->model('User_model');
+		echo "Users";
 
-		$players = $this->User_model->read();
-
-		print_r($players);
 		/*
 		$data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
 
