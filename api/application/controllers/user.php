@@ -4,13 +4,25 @@ class User extends CI_Controller {
 
 	function index() {
 
-		if( $_SERVER['REQUEST_METHOD'] === 'POST' ) echo 'POST';
+		$method = $_SERVER['REQUEST_METHOD'];
 
-		else if( $_SERVER['REQUEST_METHOD'] === 'PUT' ) echo 'PUT';
+		if( $method === 'GET' ) {
 
-		else if( $_SERVER['REQUEST_METHOD'] === 'DELETE' ) echo 'DELETE';
+			echo 'GET';
 
-		else if( $_SERVER['REQUEST_METHOD'] === 'GET' ) echo 'GET';
+		} else if( $method === 'PUT' ) {
+
+			echo 'PUT';
+
+		} else if( $method === 'POST' ) {
+
+			echo 'POST';
+
+		} else if( $method === 'DELETE' ) {
+
+			echo 'DELETE';
+
+		}
 
 	}
 
