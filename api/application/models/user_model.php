@@ -21,19 +21,8 @@ class User_model extends CI_Model {
 
         $query = $this->db->get_where( 'users', array('id' => $id) );
 
-        $result = $query->result();
-        $result = $result[0];
-
-        $this->id     = $id;
-        $this->user   = $result->user;
-        $this->x      = $result->x;
-        $this->y      = $result->y;
-        $this->facing = $result->facing;
-        $this->skin   = $result->skin;
-        $this->state  = $result->state;
-        $this->map    = $result->map;
-
-        return $result;
+        // Return the first in the array.
+        return array_shift( $query->result() );
 
     }
 
