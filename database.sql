@@ -1,18 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 3.4.10.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 07, 2012 at 08:52 PM
--- Server version: 5.5.20
--- PHP Version: 5.3.10
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Database: `flame`
---
+DROP TABLE IF EXISTS `users`;
 
 -- --------------------------------------------------------
 
