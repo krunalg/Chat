@@ -1,5 +1,5 @@
 <?php
-class Player extends CI_Controller {
+class User extends CI_Controller {
 
 	function index() {
 
