@@ -90,7 +90,9 @@ class User extends CI_Controller {
 
 		$user = $this->User_model->select( $id );
 
-		print_r( $user );
+		$json = json_encode( $user );
+
+		echo $json;
 
 	}
 
