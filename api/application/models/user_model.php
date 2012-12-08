@@ -28,13 +28,13 @@ class User_model extends CI_Model {
 
     function insert() {
 
-        $this->user   = $_POST['user'];
-        $this->x      = $_POST['x'];
-        $this->y      = $_POST['y'];
-        $this->facing = $_POST['facing'];
-        $this->skin   = $_POST['skin'];
-        $this->state  = $_POST['state'];
-        $this->map    = $_POST['map'];
+        $this->user   = $this->input->post('user');
+        $this->x      = $this->input->post('x');
+        $this->y      = $this->input->post('y');
+        $this->facing = $this->input->post('facing');
+        $this->skin   = $this->input->post('skin');
+        $this->state  = $this->input->post('state');
+        $this->map    = $this->input->post('map');
 
         $this->db->insert('entries', $this);
 
