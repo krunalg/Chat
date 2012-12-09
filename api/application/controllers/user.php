@@ -60,7 +60,7 @@ class User extends CI_Controller {
 
             header('HTTP/1.1 201 Created');
 
-            header('Location: $user');
+            header("Location: $user");
 
         } else {
 
