@@ -56,6 +56,18 @@ class User extends CI_Controller {
 
         $user = $this->User_model->add_user();
 
+        if( $user ) {
+
+            header('HTTP/1.1 201 Created');
+
+            header('Location: $user');
+
+        } else {
+
+            header('HTTP/1.1 500 Internal Server Error');
+
+        }
+
     }
 
     /*

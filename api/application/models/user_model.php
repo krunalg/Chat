@@ -81,6 +81,12 @@ class User_model extends CI_Model {
 
         $this->db->insert('users', $this);
 
+        $user_id = $this->db->insert_id();
+
+        $resource = 'http://localhost/Chat/api/user/' . $user_id;
+
+        return $resource;
+
     }
 
     function update( $id ) {
