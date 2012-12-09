@@ -73,7 +73,7 @@ class User extends CI_Controller {
 
                     header('HTTP/1.1 500 Internal Server Error');
 
-                    echo _response( 500, "No such column exists in the database: $key" );
+                    echo $this->_response( 500, "No such column exists in the database: $key" );
 
                     return;
 
@@ -95,7 +95,7 @@ class User extends CI_Controller {
 
             header("Location: $location");
 
-            echo _response( 201, "Successfully added user." );
+            echo $this->_response( 201, "Successfully added user." );
 
             return;
 
@@ -105,7 +105,7 @@ class User extends CI_Controller {
 
             header('HTTP/1.1 500 Internal Server Error');
 
-            echo _response( 500, validation_errors() );
+            echo $this->_response( 500, validation_errors() );
 
             return;
 
