@@ -26,7 +26,7 @@ class User extends CI_Controller {
 
             header('HTTP/1.1 405 Method Not Allowed');
 
-            echo $this->_response( 405, "The HTTP method you used is not allowed for this URL.")
+            echo $this->_response( 405, "The HTTP method you used is not allowed for this URL.");
 
             return;
 
