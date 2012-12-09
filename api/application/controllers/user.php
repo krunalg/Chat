@@ -79,7 +79,17 @@ class User extends CI_Controller {
 
                     header('HTTP/1.1 500 Internal Server Error');
 
-                    die("No such field exists '$key'.");
+                    $response = array(
+
+                        'code' => 500,
+
+                        'message' => "No such column exists in the database: $key"
+
+                    );
+
+                    $json = json_encode( $response );
+
+                    die( $json );
 
                 }
 
