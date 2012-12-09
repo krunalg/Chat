@@ -16,7 +16,7 @@ class User extends CI_Controller {
 
         if( $method === 'GET' ) $this->_get();
 
-        else if( $method === 'POST' ) $this->_post();
+        else if( $method === 'POST' ) $this->_add_user();
 
         //else if( $method === 'PUT' ) $this->_put();
 
@@ -52,7 +52,7 @@ class User extends CI_Controller {
     }
 
     // Add a new user.
-    private function _post() {
+    private function _add_user() {
 
         $this->load->library('form_validation');
 
