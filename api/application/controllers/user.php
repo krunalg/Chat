@@ -59,6 +59,7 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
 
             // Problem with submitted data.
+            echo validation_errors();
 
         } else {
 
