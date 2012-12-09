@@ -70,6 +70,9 @@ class User extends CI_Controller {
 
         }
 
+        // Make empty array if no values exist.
+        if( !$GET ) $GET = array();
+
         $users = $this->User_model->list_users( $GET, $limit, $offset );
 
         $json = json_encode( $users );
