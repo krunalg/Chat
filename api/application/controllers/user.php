@@ -47,7 +47,42 @@ class User extends CI_Controller {
     // respond with a list of users
     private function _list_users() {
 
-        $users = $this->User_model->list_users();
+        $limit = 10;
+
+        $offset = 0;
+
+        // returns all GET items with XSS filter.
+        $GET = $this->input->get(NULL, TRUE);
+
+        if( isset( $GET[ 'limit' ] ) ) {
+
+            $limit = $GET[ 'limit' ];
+
+            unset( $GET[ 'limit' ] );
+
+        }
+
+        if( isset( $GET[ 'offset' ] ) ) {
+
+            $offset = $GET[ 'offset' ];
+
+            unset( $GET[ 'offset' ] );
+
+        }
+
+        $where = array();
+
+        if( $GET ) {
+
+            foreach( $GET as $key => $value ) {
+
+                $where[ $key ] = $value;
+
+            }
+
+        }
+
+        $users = $this->User_model->list_users( $where, $limit, $offset );
 
         $json = json_encode( $users );
 
