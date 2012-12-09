@@ -70,6 +70,21 @@ class User extends CI_Controller {
 
         }
 
+        // DUPLICATE!! Ensure each field corresponds to a column.
+        foreach( $GET as $key => $value ) {
+
+            if( !$this->db->field_exists( $key, 'users' ) ) {
+
+                header('HTTP/1.1 500 Internal Server Error');
+
+                echo $this->_response( 500, "No such column exists in the database: $key" );
+
+                return;
+
+            }
+
+        }
+
         // Make empty array if no values exist.
         if( !$GET ) $GET = array();
 
@@ -96,7 +111,7 @@ class User extends CI_Controller {
             // Returns all POST items with XSS filter.
             $PUT = $this->input->post(NULL, TRUE);
 
-            // Ensure each field corresponds to a column.
+            // DUPLICATE!! Ensure each field corresponds to a column.
             foreach( $PUT as $key => $value ) {
 
                 if( !$this->db->field_exists( $key, 'users' ) ) {
