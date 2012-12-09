@@ -99,6 +99,16 @@ class User extends CI_Controller {
 
             header("Location: $location");
 
+            $code = 201;
+
+            $message = "Successfully added user.";
+
+            $response = array( 'code' => $code, 'message' => $message );
+
+            $json = json_encode( $response );
+
+            die( $json );
+
         } else {
 
             // Problem with submitted data.
