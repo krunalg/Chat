@@ -54,17 +54,30 @@ class User extends CI_Controller {
     // Add a new user.
     private function _post() {
 
-        $user = $this->User_model->add_user();
+        $this->load->library('form_validation');
 
-        if( $user ) {
+        if ($this->form_validation->run() == FALSE) {
 
-            header('HTTP/1.1 201 Created');
-
-            header("Location: $user");
+            // Problem with submitted data.
 
         } else {
 
-            header('HTTP/1.1 500 Internal Server Error');
+            // No problem with submitted data.
+            // Add user to database.
+
+            $user = $this->User_model->add_user();
+
+            if( $user ) {
+
+                header('HTTP/1.1 201 Created');
+
+                header("Location: $user");
+
+            } else {
+
+                header('HTTP/1.1 500 Internal Server Error');
+
+            }
 
         }
 
