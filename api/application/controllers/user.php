@@ -70,6 +70,9 @@ class User extends CI_Controller {
 
         }
 
+        // Make empty array if no values exist.
+        if( !$GET ) $GET = array();
+
         // DUPLICATE!! Ensure each field corresponds to a column.
         foreach( $GET as $key => $value ) {
 
@@ -84,9 +87,6 @@ class User extends CI_Controller {
             }
 
         }
-
-        // Make empty array if no values exist.
-        if( !$GET ) $GET = array();
 
         $users = $this->User_model->list_users( $GET, $limit, $offset );
 
