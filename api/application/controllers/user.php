@@ -66,16 +66,10 @@ class User extends CI_Controller {
             // Returns all POST items with XSS filter.
             $PUT = $this->input->post(NULL, TRUE);
 
-            $insert_values = array();
-
             // Ensure each field corresponds to a column.
             foreach( $PUT as $key => $value ) {
 
-                if( $this->db->field_exists( $key, 'users' ) ) {
-
-                    $insert_values[ $key ] = $value;
-
-                } else {
+                if( !$this->db->field_exists( $key, 'users' ) ) {
 
                     header('HTTP/1.1 500 Internal Server Error');
 
@@ -92,7 +86,7 @@ class User extends CI_Controller {
             }
 
             // Add user to database.
-            $this->User_model->insert( $insert_values );
+            $this->User_model->insert( $PUT );
 
             $user_id = $this->db->insert_id();
 
