@@ -56,7 +56,7 @@ class User extends CI_Controller {
 
         $this->load->library('form_validation');
 
-        // Do not encapsulate error message in HTML tags.
+        // Do not encapsulate error messages in HTML tags.
         $this->form_validation->set_error_delimiters('', '');
 
         $this->form_validation->set_rules('user', 'Username', 'required');
