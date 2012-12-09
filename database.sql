@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `skin` varchar(20) NOT NULL,
   `state` varchar(20) NOT NULL,
   `map` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
