@@ -70,19 +70,7 @@ class User extends CI_Controller {
 
         }
 
-        $where = array();
-
-        if( $GET ) {
-
-            foreach( $GET as $key => $value ) {
-
-                $where[ $key ] = $value;
-
-            }
-
-        }
-
-        $users = $this->User_model->list_users( $where, $limit, $offset );
+        $users = $this->User_model->list_users( $GET, $limit, $offset );
 
         $json = json_encode( $users );
 
