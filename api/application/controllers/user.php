@@ -85,19 +85,19 @@ class User extends CI_Controller {
 
             }
 
-            $user = $this->User_model->add_user();
+            // Add user to database.
+            $this->User_model->insert( $data );
 
-            if( $user ) {
+            $user_id = $this->db->insert_id();
 
-                header('HTTP/1.1 201 Created');
+            // Allows us to use base_url().
+            $this->load->helper('url');
 
-                header("Location: $user");
+            $location = base_url() . $user_id;
 
-            } else {
+            header('HTTP/1.1 201 Created');
 
-                header('HTTP/1.1 500 Internal Server Error');
-
-            }
+            header("Location: $location");
 
         } else {
 

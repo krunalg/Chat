@@ -69,25 +69,9 @@ class User_model extends CI_Model {
 
     }
 
-    function add_user() {
+    function insert( $data ) {
 
-        $this->user   = $this->input->post('user');
-        $this->x      = $this->input->post('x');
-        $this->y      = $this->input->post('y');
-        $this->facing = $this->input->post('facing');
-        $this->skin   = $this->input->post('skin');
-        $this->state  = $this->input->post('state');
-        $this->map    = $this->input->post('map');
-
-        $this->db->insert('users', $this);
-
-        $user_id = $this->db->insert_id();
-
-        $this->load->helper('url');
-
-        $resource = base_url() . $user_id;
-
-        return $resource;
+        $this->db->insert( 'users', $data );
 
     }
 
