@@ -62,8 +62,7 @@ class User extends CI_Controller {
 
         if( $this->form_validation->run() ) {
 
-            // No problem with submitted data.
-            // Add user to database.
+            // POST data has been validated.
 
             $user = $this->User_model->add_user();
 
