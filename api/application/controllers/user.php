@@ -60,8 +60,6 @@ class User extends CI_Controller {
 
         $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]|min_length[3]|max_length[12]');
 
-        $this->form_validation->set_rules('skin', 'Skin', 'required|alpha');
-
         if ($this->form_validation->run() == FALSE) {
 
             // Problem with submitted data.
