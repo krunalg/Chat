@@ -56,6 +56,8 @@ class User extends CI_Controller {
 
         $this->load->library('form_validation');
 
+        $this->form_validation->set_rules('user', 'Username', 'required');
+
         if ($this->form_validation->run() == FALSE) {
 
             // Problem with submitted data.
