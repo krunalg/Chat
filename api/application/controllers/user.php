@@ -66,14 +66,14 @@ class User extends CI_Controller {
             // Returns all POST items with XSS filter.
             $PUT = $this->input->post(NULL, TRUE);
 
-            $data = array();
+            $insert_values = array();
 
             // Ensure each field corresponds to a column.
             foreach( $PUT as $key => $value ) {
 
                 if( $this->db->field_exists( $key, 'users' ) ) {
 
-                    $data[ $key ] = $value;
+                    $insert_values[ $key ] = $value;
 
                 } else {
 
@@ -96,7 +96,7 @@ class User extends CI_Controller {
             }
 
             // Add user to database.
-            $this->User_model->insert( $data );
+            $this->User_model->insert( $insert_values );
 
             $user_id = $this->db->insert_id();
 
