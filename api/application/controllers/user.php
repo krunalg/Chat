@@ -79,13 +79,9 @@ class User extends CI_Controller {
 
                     header('HTTP/1.1 500 Internal Server Error');
 
-                    $response = array(
+                    $message = "No such column exists in the database: $key";
 
-                        'code' => 500,
-
-                        'message' => "No such column exists in the database: $key"
-
-                    );
+                    $response = array( 'code' => 500, 'message' => $message );
 
                     $json = json_encode( $response );
 
