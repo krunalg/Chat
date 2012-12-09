@@ -121,6 +121,16 @@ class User extends CI_Controller {
 
     }
 
+    private function _response( $code, $message ) {
+
+        $response = array( 'code' => $code, 'message' => $message );
+
+        $json = json_encode( $response );
+
+        return $json;
+
+    }
+
     /*
     // create a new user and respond with a status/errors
     private function _put() {
