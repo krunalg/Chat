@@ -105,7 +105,9 @@ class User extends CI_Controller {
 
             header('HTTP/1.1 500 Internal Server Error');
 
-            echo validation_errors();
+            echo _response( 500, validation_errors() );
+
+            return;
 
         }
 
