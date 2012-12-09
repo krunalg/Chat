@@ -14,7 +14,7 @@ class User extends CI_Controller {
 
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if( $method === 'GET' ) $this->_get();
+        if( $method === 'GET' ) $this->_list_users();
 
         else if( $method === 'POST' ) $this->_add_user();
 
@@ -41,7 +41,7 @@ class User extends CI_Controller {
     }
 
     // respond with a list of users
-    private function _get() {
+    private function _list_users() {
 
         $users = $this->User_model->list_users();
 
