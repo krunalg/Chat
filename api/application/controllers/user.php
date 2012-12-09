@@ -59,7 +59,7 @@ class User extends CI_Controller {
         // Do not encapsulate error messages in HTML tags.
         $this->form_validation->set_error_delimiters('', '');
 
-        $this->form_validation->set_rules('user', 'Username', 'required');
+        $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]|min_length[3]|max_length[12]');
 
         if ($this->form_validation->run() == FALSE) {
 
