@@ -60,7 +60,7 @@ class User extends CI_Controller {
 
         $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]|min_length[3]|max_length[12]');
 
-        // Does the POST data pass validation?
+        // Does POST data pass validation?
         if( $this->form_validation->run() ) {
 
             // Returns all POST items with XSS filter.
