@@ -66,6 +66,9 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
 
             // Problem with submitted data.
+
+            header('HTTP/1.1 500 Internal Server Error');
+
             echo validation_errors();
 
         } else {
