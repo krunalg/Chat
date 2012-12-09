@@ -60,9 +60,30 @@ class User extends CI_Controller {
 
         $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]|min_length[3]|max_length[12]');
 
+        // Does the POST data pass validation?
         if( $this->form_validation->run() ) {
 
-            // POST data has been validated.
+            // Returns all POST items with XSS filter.
+            $PUT = $this->input->post(NULL, TRUE);
+
+            $data = array();
+
+            // Ensure each field corresponds to a column.
+            foreach( $PUT as $key => $value ) {
+
+                if( $this->db->field_exists( $key, 'users' ) ) {
+
+                    $data[ $key ] = $value;
+
+                } else {
+
+                    header('HTTP/1.1 500 Internal Server Error');
+
+                    die("No such field exists '$key'.");
+
+                }
+
+            }
 
             $user = $this->User_model->add_user();
 
