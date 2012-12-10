@@ -36,6 +36,8 @@ class User extends CI_Controller {
 
         if( $method === 'GET' ) $this->_get_user( $id );
 
+        else if( $method === 'POST' ) $this->_update_user( $id );
+
         else {
 
             header('HTTP/1.1 405 Method Not Allowed');
@@ -57,6 +59,13 @@ class User extends CI_Controller {
 
         echo $json;
 
+
+    }
+
+    // Update a user.
+    private function _update_user( $id ) {
+
+        echo "This is an update call for the user.";
 
     }
 
