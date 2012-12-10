@@ -38,7 +38,7 @@
 |
 */
 
-$route['user/(:num)'] = "user/index_with_id/$1";
+$route['users/(:num)'] = "users/index_with_id/$1";
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
