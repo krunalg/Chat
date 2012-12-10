@@ -18,10 +18,6 @@ class User extends CI_Controller {
 
         else if( $method === 'POST' ) $this->_add_user();
 
-        //else if( $method === 'PUT' ) $this->_put();
-
-        //else if( $method === 'DELETE' ) $this->_delete();
-
         else {
 
             header('HTTP/1.1 405 Method Not Allowed');
@@ -181,22 +177,6 @@ class User extends CI_Controller {
         return $json;
 
     }
-
-    /*
-    // create a new user and respond with a status/errors
-    private function _put() {
-
-        $user = $this->User_model->insert();
-
-    }
-
-    // delete a user and respond with a status/errors
-    private function _delete() {
-
-        echo 'delete a user and respond with a status/errors';
-
-    }
-    */
 
 }
 
