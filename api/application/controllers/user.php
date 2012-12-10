@@ -60,7 +60,7 @@ class User extends CI_Controller {
 
     }
 
-    // respond with a list of users
+    // Respond with a list of users.
     private function _list_users() {
 
         $limit = 10;
