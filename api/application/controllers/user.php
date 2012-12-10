@@ -30,7 +30,7 @@ class User extends CI_Controller {
 
     }
 
-    function user_by_id( $id ) {
+    function index_with_id( $id ) {
 
         $method = $_SERVER['REQUEST_METHOD'];
 
