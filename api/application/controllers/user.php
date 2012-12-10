@@ -34,15 +34,9 @@ class User extends CI_Controller {
 
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if( $method === 'GET' ) {
+        if( $method === 'GET' ) $this->_get_user( $id );
 
-            $user = $this->User_model->get_user( $id );
-
-            $json = json_encode( $user );
-
-            echo $json;
-
-        } else {
+        else {
 
             header('HTTP/1.1 405 Method Not Allowed');
 
@@ -51,6 +45,18 @@ class User extends CI_Controller {
             return;
 
         }
+
+    }
+
+    // Respond with a single user.
+    private function _get_user( $id ) {
+
+        $user = $this->User_model->get_user( $id );
+
+        $json = json_encode( $user );
+
+        echo $json;
+
 
     }
 
