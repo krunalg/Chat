@@ -36,11 +36,25 @@ class User extends CI_Controller {
 
     function user_by_id( $id ) {
 
-        $user = $this->User_model->get_user( $id );
+        $method = $_SERVER['REQUEST_METHOD'];
 
-        $json = json_encode( $user );
+        if( $method === 'GET' ) {
 
-        echo $json;
+            $user = $this->User_model->get_user( $id );
+
+            $json = json_encode( $user );
+
+            echo $json;
+
+        } else {
+
+            header('HTTP/1.1 405 Method Not Allowed');
+
+            echo $this->_response( 405, "The HTTP method you used is not allowed for this URL.");
+
+            return;
+
+        }
 
     }
 
