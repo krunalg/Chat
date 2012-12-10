@@ -113,7 +113,7 @@ class User extends CI_Controller {
 
         }
 
-        $users = $this->User_model->list_users( $GET, $limit, $offset );
+        $users = $this->User_model->get_list( $GET, $limit, $offset );
 
         $json = json_encode( $users );
 

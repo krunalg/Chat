@@ -27,7 +27,7 @@ class User_model extends CI_Model {
 
     }
 
-    function list_users( $criteria, $limit, $offset ) {
+    function get_list( $criteria, $limit, $offset ) {
 
         $query = $this->db->get_where( 'users', $criteria, $limit, $offset );
 
