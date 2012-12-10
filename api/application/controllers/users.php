@@ -38,6 +38,8 @@ class Users extends CI_Controller {
 
         else if( $method === 'POST' ) $this->_update_user( $id );
 
+        else if( $method === 'DELETE' ) $this->_delete_user( $id );
+
         else {
 
             header('HTTP/1.1 405 Method Not Allowed');
@@ -66,6 +68,13 @@ class Users extends CI_Controller {
     private function _update_user( $id ) {
 
         echo "This is an update call for the user.";
+
+    }
+
+    // Update a user.
+    private function _delete_user( $id ) {
+
+        echo "This is a delete call for the user.";
 
     }
 
