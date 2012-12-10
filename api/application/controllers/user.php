@@ -53,7 +53,7 @@ class User extends CI_Controller {
     // Respond with a single user.
     private function _get_user( $id ) {
 
-        $user = $this->User_model->get_user( $id );
+        $user = $this->User_model->get( $id );
 
         $json = json_encode( $user );
 
