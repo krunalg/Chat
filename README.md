@@ -68,7 +68,7 @@ Change-Log:
 
 ### December
 - Added simple login form. (December 6, 2012)
-- General code tidy. (December 6, 2012)
+- Socket server now logs all chat messages to a file. (December 11, 2012)
 
 
 To-do:
