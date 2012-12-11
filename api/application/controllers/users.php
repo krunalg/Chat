@@ -80,7 +80,7 @@ class Users extends CI_Controller {
 
         } else {
 
-            echo $this->_response( 500, "DELETE aborted. No such user exists to remove." );
+            echo $this->_response( 500, "Error: No such user exists." );
 
             return;
 
