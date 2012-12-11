@@ -4,6 +4,15 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class MY_Form_validation extends CI_Form_validation {
 
+    function __construct( $rules = array() ) {
+
+        parent::__construct( $rules );
+
+        // Do not encapsulate errors in HTML tags.
+        $this->set_error_delimiters( '', '' );
+
+    }
+
     /**
 	 * Return TRUE if string is a direction.
 	 * Else return FALSE.
