@@ -43,7 +43,7 @@ class Users extends CI_Controller {
 
             $data = $this->User_model->get( $id );
 
-            echo $this->_response( 200, 'OK', $data );
+            echo $this->_response( 200, 'Showing one user.', $data );
 
         } else {
 
@@ -88,7 +88,9 @@ class Users extends CI_Controller {
 
             $data = $this->User_model->get_list( $GET, $limit, $offset );
 
-            echo $this->_response( 200, 'OK', $data );
+            $user_count = count( $data );
+
+            echo $this->_response( 200, "Showing $user_count users.", $data );
 
         } else {
 
