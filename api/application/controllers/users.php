@@ -49,7 +49,7 @@ class Users extends CI_Controller {
 
         } else {
 
-            echo $this->_response( 404, "No such user exists." );
+            echo $this->_response( 404, "Error: No such user exists." );
 
         }
 
