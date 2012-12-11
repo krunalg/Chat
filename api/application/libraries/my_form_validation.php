@@ -12,7 +12,7 @@ class MY_Form_validation extends CI_Form_validation {
         $this->set_error_delimiters( '', '' );
 
         // Use this custom message for this custom rule.
-        $this->set_message('is_direction', "The %s you provided can only be 'left', 'right', 'up', or 'down'." );
+        $this->set_message('is_direction', "The %s field must be one of the following: 'left', 'right', 'up', or 'down'." );
 
     }
 
