@@ -185,7 +185,7 @@ class Users extends CI_Controller {
 
             header('HTTP/1.1 201 Created');
 
-            header("Location: $location");
+
 
             echo $this->_response( 201, "Successfully added user." );
 
@@ -205,7 +205,19 @@ class Users extends CI_Controller {
 
     }
 
-    private function _response( $code, $message ) {
+    private function _response( $code, $message, $location = '' ) {
+
+        if( $code == 201 ) {
+
+            $this->output->set_header("HTTP/1.1 201 Created");
+
+            $this->output->set_header("Location: $location");
+
+        } else {
+
+            $this->output->set_status_header( $code );
+
+        }
 
         $response = array( 'code' => $code, 'message' => $message );
 
