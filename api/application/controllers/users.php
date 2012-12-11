@@ -106,11 +106,9 @@ class Users extends CI_Controller {
 
         if( $column_chk_result === TRUE ) {
 
-            $users = $this->User_model->get_list( $GET, $limit, $offset );
+            $data = $this->User_model->get_list( $GET, $limit, $offset );
 
-            $json = json_encode( $users );
-
-            echo $json;
+            echo $this->_response( 200, $message, $data );
 
         } else {
 
