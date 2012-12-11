@@ -35,6 +35,7 @@ class User_model extends CI_Model {
 
     }
 
+    // Adds a new user to the database.
     function insert( $data ) {
 
         $this->db->insert( 'users', $data );
