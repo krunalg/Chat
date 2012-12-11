@@ -4,11 +4,11 @@ $config = array(
 
     'update_user' => array(
 
-        /*array(
+        array(
 
             'field' => 'user',
 
-            'label' => 'name of the user',
+            'label' => "username",
 
             'rules' => 'is_unique[users.user]|min_length[3]|max_length[12]'
 
@@ -32,15 +32,45 @@ $config = array(
 
             'rules' => 'integer'
 
-        ),*/
+        ),
 
         array(
 
             'field' => 'facing',
 
-            'label' => 'faced direction',
+            'label' => 'direction faced',
 
             'rules' => 'is_direction'
+
+        ),
+
+        array(
+
+            'field' => 'skin',
+
+            'label' => 'skin',
+
+            'rules' => 'alpha'
+
+        ),
+
+        array(
+
+            'field' => 'state',
+
+            'label' => 'movement state',
+
+            'rules' => 'alpha'
+
+        ),
+
+        array(
+
+            'field' => 'map',
+
+            'label' => 'current zone',
+
+            'rules' => 'alpha'
 
         )
 
