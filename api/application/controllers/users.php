@@ -20,8 +20,6 @@ class Users extends CI_Controller {
 
         else {
 
-            header('HTTP/1.1 405 Method Not Allowed');
-
             echo $this->_response( 405, "The HTTP method you used is not allowed for this URL.");
 
             return;
@@ -41,8 +39,6 @@ class Users extends CI_Controller {
         else if( $method === 'DELETE' ) $this->_delete_user( $id );
 
         else {
-
-            header('HTTP/1.1 405 Method Not Allowed');
 
             echo $this->_response( 405, "The HTTP method you used is not allowed for this URL.");
 
@@ -78,8 +74,6 @@ class Users extends CI_Controller {
         if( $this->User_model->does_exist( $id ) ) {
 
             $user = $this->User_model->get( $id );
-
-
 
         } else {
 
@@ -125,8 +119,6 @@ class Users extends CI_Controller {
 
             if( !$this->db->field_exists( $key, 'users' ) ) {
 
-                header('HTTP/1.1 500 Internal Server Error');
-
                 echo $this->_response( 500, "No such column exists in the database: $key" );
 
                 return;
@@ -163,8 +155,6 @@ class Users extends CI_Controller {
 
                 if( !$this->db->field_exists( $key, 'users' ) ) {
 
-                    header('HTTP/1.1 500 Internal Server Error');
-
                     echo $this->_response( 500, "No such column exists in the database: $key" );
 
                     return;
@@ -183,10 +173,6 @@ class Users extends CI_Controller {
 
             $location = base_url() . $user_id;
 
-            header('HTTP/1.1 201 Created');
-
-
-
             echo $this->_response( 201, "Successfully added user." );
 
             return;
@@ -194,8 +180,6 @@ class Users extends CI_Controller {
         } else {
 
             // Problem with submitted data.
-
-            header('HTTP/1.1 500 Internal Server Error');
 
             echo $this->_response( 500, validation_errors() );
 
