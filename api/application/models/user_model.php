@@ -53,14 +53,6 @@ class User_model extends CI_Model {
 
     }
 
-    // Returns TRUE if there exists a column by that name.
-    // Else returns FALSE.
-    function has_column( $col ) {
-
-        return $this->db->field_exists( $col, 'users' );
-
-    }
-
     // Updates an existing user.
     function update( $id, $data ) {
 
