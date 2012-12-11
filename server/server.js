@@ -44,9 +44,23 @@ var mostOnline = 0;
 
 io.set('log level', 1);
 
+// Log message to file.
+var logToFile = function( message ) {
+
+    //fs = require('fs');
+    fs.writeFile("log.txt", "Hey there!", function(err) {
+
+        if(err) console.log(err);
+
+        else console.log("The file was saved!");
+
+    });
+
+};
+
 // Report how many players online.
 var playersReport = function() {
-    
+
     var online = onlinePlayers.length;
     console.log(getTime() + " PLAYERS ONLINE: " + online + " MOST ONLINE: " + mostOnline);
 }
@@ -79,7 +93,7 @@ function getTime() {
     var hours = currentTime.getHours();
     var minutes = currentTime.getMinutes();
     var amOrPm = (hours > 11 ? 'PM':'AM');
-    
+
     if( hours===0 )     hours = 12;
     else if( hours>12 ) hours = hours - 12;
 
@@ -89,7 +103,7 @@ function getTime() {
 }
 
 function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
-    
+
     console.log(getTime() + " ADDING PLAYER " + name);
 
     // Create live player object.
@@ -104,12 +118,12 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
     player.session = sessionID;
     player.room = map;
     onlinePlayers.push(player);
-    
+
     sendAnnouncement(name, "Welcome.");
-    
+
     io.sockets.sockets[sessionID].roomname = map;
 
-    joinChatRoom(name, map); 
+    joinChatRoom(name, map);
 
     introducePlayerToRoom(name, map);
 
@@ -212,14 +226,14 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('init', function(user) {
-        
+
         socket.clientname = user;
 
         // Check that user not already online.
         for (var i = 0; i < onlinePlayers.length; i++) {
-           
+
             if (onlinePlayers[i].name === socket.clientname) {
-                
+
                 console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
                 socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
                 socket.disconnect();
@@ -228,16 +242,16 @@ io.sockets.on('connection', function(socket) {
         }
 
         connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows) {
-            
+
             if (err) {
 
                 console.log(err.code);
                 console.log(err.fatal);
-            
+
             } else {
 
                 if(rows.length==0) {
-                    
+
                     socket.emit('error', 'No such user in database.');
                     socket.disconnect();
                     return;
@@ -255,7 +269,7 @@ io.sockets.on('connection', function(socket) {
 
                     initializePlayer( name, x, y, facing, skin, state, map, socket.id );
                 }
-            }   
+            }
         });
     });
 
@@ -266,9 +280,9 @@ io.sockets.on('connection', function(socket) {
         nearbyPlayers = new Array();
 
         for (var i = 0; i < onlinePlayers.length; i++ ) {
-            
+
             if (onlinePlayers[i].room === socket.roomname) {
-                
+
                 var player = new Object();
                 player.name = onlinePlayers[i].name;
                 player.pos = new Object();
@@ -290,9 +304,9 @@ io.sockets.on('connection', function(socket) {
         if(bootUnauthorized(socket)) return;
 
         for (var i = 0; i < onlinePlayers.length; i++ ) {
-            
+
             if (onlinePlayers[i].name == socket.clientname) {
-                
+
                 var x = onlinePlayers[i].pos.x;
                 var y = onlinePlayers[i].pos.y;
                 var facing = onlinePlayers[i].facing;
@@ -303,7 +317,7 @@ io.sockets.on('connection', function(socket) {
 
                 return;
             }
-        }        
+        }
     });
 
     socket.on('playerLeaveZone', function() {
@@ -352,12 +366,12 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('receiveSay', function(msg) {
-        
+
         if(bootUnauthorized(socket)) return;
 
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
-            
+
             socket.broadcast.to(socket.roomname).emit('newMsg', socket.clientname, deHTML(msg));
             console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
         }
@@ -366,19 +380,19 @@ io.sockets.on('connection', function(socket) {
     socket.on('receiveTell', function(to, msg) {
 
         if(bootUnauthorized(socket)) return;
-        
+
         // Checks that message contains non-whitespace.
         if (msg.trim().length > 0) {
 
             // Find recipient.
             for (var i = 0; i < onlinePlayers.length; i++) {
-                
+
                 if (onlinePlayers[i].name.toLowerCase() == to.toLowerCase()) {
-                    
+
                     io.sockets.socket(onlinePlayers[i].session).emit('incomingTell', socket.clientname, deHTML(msg));
-                    
+
                     console.log(getTime() + " [" + socket.clientname + "][" + to + "] " + msg);
-                    
+
                     return;
                 }
             }
@@ -395,9 +409,9 @@ io.sockets.on('connection', function(socket) {
 
         // remove client from onlinePlayers array
         for (var i = 0; i < onlinePlayers.length; i++) {
-            
+
             if (onlinePlayers[i].name === socket.clientname) {
-                
+
                 onlinePlayers.splice(i, 1);
             }
         }
