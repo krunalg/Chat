@@ -2,15 +2,6 @@
 
 class User_model extends CI_Model {
 
-    var $id     = '';
-    var $user   = '';
-    var $x      = '';
-    var $y      = '';
-    var $facing = '';
-    var $skin   = '';
-    var $state  = '';
-    var $map    = '';
-
     function __construct() {
 
         parent::__construct();
