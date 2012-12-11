@@ -75,6 +75,8 @@ class Users extends CI_Controller {
 
             $user = $this->User_model->get( $id );
 
+            echo $this->_response( 200, "User was successfully removed." );
+
         } else {
 
             echo $this->_response( 500, "DELETE aborted. No such user exists to remove." );
