@@ -57,7 +57,6 @@ class Users extends CI_Controller {
 
         echo $json;
 
-
     }
 
     // Update a user.
