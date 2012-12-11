@@ -114,24 +114,22 @@ class Users extends CI_Controller {
         // Make empty array if no values exist.
         if( !$GET ) $GET = array();
 
-        // DUPLICATE!! Ensure each field corresponds to a column.
-        foreach( $GET as $key => $value ) {
+        $column_chk_result = $this->_columns_exist( $GET, 'users' );
 
-            if( !$this->db->field_exists( $key, 'users' ) ) {
+        if( $column_chk_result === TRUE ) {
 
-                echo $this->_response( 500, "No such column exists in the database: $key" );
+            $users = $this->User_model->get_list( $GET, $limit, $offset );
 
-                return;
+            $json = json_encode( $users );
 
-            }
+            echo $json;
+
+        } else {
+
+            // A column was supplied that does not exist.
+            echo $this->_response( 500, "Error: No such column $column_chk_result" );
 
         }
-
-        $users = $this->User_model->get_list( $GET, $limit, $offset );
-
-        $json = json_encode( $users );
-
-        echo $json;
 
     }
 
