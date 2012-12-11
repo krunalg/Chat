@@ -196,6 +196,8 @@ class Users extends CI_Controller {
 
         $response = array( 'code' => $code, 'message' => $message );
 
+        $this->output->set_content_type('application/json');
+
         $json = json_encode( $response );
 
         return $json;
