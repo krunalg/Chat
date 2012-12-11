@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
   host     : login.hostname(),
   user     : login.username(),
   password : login.password(),
-  database : login.database(),
+  database : login.database()
 });
 
 connection.connect(function(err) {
@@ -37,7 +37,7 @@ connection.on('close', function(err) {
 
 
 
-var onlinePlayers = new Array();
+var onlinePlayers = [];
 
 // Most users seen online since server started.
 var mostOnline = 0;
@@ -65,7 +65,7 @@ var playersReport = function() {
 
     var online = onlinePlayers.length;
     console.log(getTime() + " PLAYERS ONLINE: " + online + " MOST ONLINE: " + mostOnline);
-}
+};
 
 // Records the most users seen online.
 function recordMostOnline() {
@@ -109,9 +109,9 @@ function initializePlayer( name, x, y, facing, skin, state, map, sessionID ) {
     console.log(getTime() + " ADDING PLAYER " + name);
 
     // Create live player object.
-    var player = new Object();
+    var player = {};
     player.name = name;
-    player.pos = new Object();
+    player.pos = {};
     player.pos.x = x;
     player.pos.y = y;
     player.facing = facing;
@@ -279,15 +279,15 @@ io.sockets.on('connection', function(socket) {
 
         if(bootUnauthorized(socket)) return;
 
-        nearbyPlayers = new Array();
+        nearbyPlayers = [];
 
         for (var i = 0; i < onlinePlayers.length; i++ ) {
 
             if (onlinePlayers[i].room === socket.roomname) {
 
-                var player = new Object();
+                var player = {};
                 player.name = onlinePlayers[i].name;
-                player.pos = new Object();
+                player.pos = {};
                 player.pos.x = onlinePlayers[i].pos.x;
                 player.pos.y = onlinePlayers[i].pos.y;
                 player.facing = onlinePlayers[i].facing;
