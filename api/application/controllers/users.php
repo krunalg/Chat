@@ -55,6 +55,52 @@ class Users extends CI_Controller {
 
     }
 
+    // Respond with a list of users.
+    private function _list_users() {
+
+        $limit = 10;
+
+        $offset = 0;
+
+        // returns all GET items with XSS filter.
+        $GET = $this->input->get(NULL, TRUE);
+
+        if( isset( $GET[ 'limit' ] ) ) {
+
+            $limit = $GET[ 'limit' ];
+
+            unset( $GET[ 'limit' ] );
+
+        }
+
+        if( isset( $GET[ 'offset' ] ) ) {
+
+            $offset = $GET[ 'offset' ];
+
+            unset( $GET[ 'offset' ] );
+
+        }
+
+        // Make empty array if no values exist.
+        if( !$GET ) $GET = array();
+
+        $column_chk_result = $this->_columns_exist( $GET, 'users' );
+
+        if( $column_chk_result === TRUE ) {
+
+            $data = $this->User_model->get_list( $GET, $limit, $offset );
+
+            echo $this->_response( 200, "Success: Query complete.", $data );
+
+        } else {
+
+            // A column was supplied that does not exist.
+            echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+        }
+
+    }
+
     // Update a user.
     private function _update_user( $id ) {
 
@@ -101,52 +147,6 @@ class Users extends CI_Controller {
         } else {
 
             echo $this->_response( 500, "Error: No such user exists." );
-
-        }
-
-    }
-
-    // Respond with a list of users.
-    private function _list_users() {
-
-        $limit = 10;
-
-        $offset = 0;
-
-        // returns all GET items with XSS filter.
-        $GET = $this->input->get(NULL, TRUE);
-
-        if( isset( $GET[ 'limit' ] ) ) {
-
-            $limit = $GET[ 'limit' ];
-
-            unset( $GET[ 'limit' ] );
-
-        }
-
-        if( isset( $GET[ 'offset' ] ) ) {
-
-            $offset = $GET[ 'offset' ];
-
-            unset( $GET[ 'offset' ] );
-
-        }
-
-        // Make empty array if no values exist.
-        if( !$GET ) $GET = array();
-
-        $column_chk_result = $this->_columns_exist( $GET, 'users' );
-
-        if( $column_chk_result === TRUE ) {
-
-            $data = $this->User_model->get_list( $GET, $limit, $offset );
-
-            echo $this->_response( 200, "Success: Query complete.", $data );
-
-        } else {
-
-            // A column was supplied that does not exist.
-            echo $this->_response( 500, "Error: No such column $column_chk_result" );
 
         }
 
