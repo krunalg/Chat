@@ -59,13 +59,13 @@ class Users extends CI_Controller {
     private function _update_user( $id ) {
 
         // Returns all POST items with XSS filter.
-        $PUT = $this->input->post(NULL, TRUE);
+        $data = $this->input->post(NULL, TRUE);
 
-        $column_chk_result = $this->_columns_exist( $PUT, 'users' );
+        $column_chk_result = $this->_columns_exist( $data, 'users' );
 
         if( $column_chk_result === TRUE ) {
 
-           $this->User_model->update( $id );
+           $this->User_model->update( $id, $data );
 
         } else {
 
