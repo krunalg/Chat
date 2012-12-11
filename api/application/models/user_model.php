@@ -56,6 +56,12 @@ class User_model extends CI_Model {
 
     }
 
+    function delete( $id ) {
+
+        $this->db->delete( 'users', array( 'id' => $id ) );
+
+    }
+
     function set_position( $x, $y ) {
 
         $data = array( 'x' => $x,  'y' => $y );
