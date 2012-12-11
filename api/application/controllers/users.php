@@ -107,21 +107,30 @@ class Users extends CI_Controller {
         // Check that user exists.
         if( $this->User_model->does_exist( $id ) ) {
 
-            // Returns all POST items with XSS filter.
-            $data = $this->input->post(NULL, TRUE);
+            $this->load->library('form_validation');
 
-            $column_chk_result = $this->_columns_exist( $data, 'users' );
+            $this->form_validation->set_error_delimiters('', '');
 
-            if( $column_chk_result === TRUE ) {
+            // Does POST data pass validation?
+            if( $this->form_validation->run('update_user') ) {
 
-               $this->User_model->update( $id, $data );
+                // Returns all POST items with XSS filter.
+                $data = $this->input->post(NULL, TRUE);
 
-               echo $this->_response( 200, "Success: User updated." );
+                $column_chk_result = $this->_columns_exist( $data, 'users' );
 
-            } else {
+                if( $column_chk_result === TRUE ) {
 
-                // A column was supplied that does not exist.
-                echo $this->_response( 500, "Error: No such column $column_chk_result" );
+                   $this->User_model->update( $id, $data );
+
+                   echo $this->_response( 200, "Success: User updated." );
+
+                } else {
+
+                    // A column was supplied that does not exist.
+                    echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+                }
 
             }
 
