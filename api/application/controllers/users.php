@@ -108,7 +108,7 @@ class Users extends CI_Controller {
 
             $data = $this->User_model->get_list( $GET, $limit, $offset );
 
-            echo $this->_response( 200, $message, $data );
+            echo $this->_response( 200, "Success: Query complete.", $data );
 
         } else {
 
