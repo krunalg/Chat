@@ -211,6 +211,25 @@ class Users extends CI_Controller {
 
     }
 
+    // Returns TRUE if the array of values supplied
+    // each correspond to a column in the database table.
+    // Else returns FALSE.
+    private function _columns_exist( $columns, $table ) {
+
+        foreach( $columns as $key => $value ) {
+
+            if( !$this->db->field_exists( $key, $table ) ) {
+
+                return FALSE;
+
+            }
+
+        }
+
+        return TRUE;
+
+    }
+
 }
 
 ?>
