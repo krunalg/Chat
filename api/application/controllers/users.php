@@ -115,18 +115,28 @@ class Users extends CI_Controller {
                 // Returns all POST items with XSS filter.
                 $data = $this->input->post(NULL, TRUE);
 
-                $column_chk_result = $this->_columns_exist( $data, 'users' );
+                // Is an attempt being made to change the user ID?
+                if( array_key_exists( 'id', $data ) {
 
-                if( $column_chk_result === TRUE ) {
+                    echo $this->_response( 403, "Error: Changing a user's ID is forbidden." );
 
-                   $this->User_model->update( $id, $data );
+                } else  {
 
-                   echo $this->_response( 200, "Success: User updated." );
+                    $column_chk_result = $this->_columns_exist( $data, 'users' );
 
-                } else {
+                    // Do columns exist for all submitted values?
+                    if( $column_chk_result === TRUE ) {
 
-                    // A column was supplied that does not exist.
-                    echo $this->_response( 500, "Error: No such column $column_chk_result" );
+                       $this->User_model->update( $id, $data );
+
+                       echo $this->_response( 200, "Success: User updated." );
+
+                    } else {
+
+                        // A column was supplied that does not exist.
+                        echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+                    }
 
                 }
 
