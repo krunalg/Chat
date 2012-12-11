@@ -150,40 +150,33 @@ class Users extends CI_Controller {
             // Returns all POST items with XSS filter.
             $PUT = $this->input->post(NULL, TRUE);
 
-            // DUPLICATE!! Ensure each field corresponds to a column.
-            foreach( $PUT as $key => $value ) {
+            $column_chk_result = $this->_columns_exist( $PUT, 'users' );
 
-                if( !$this->db->field_exists( $key, 'users' ) ) {
+            if( $column_chk_result === TRUE ) {
 
-                    echo $this->_response( 500, "No such column exists in the database: $key" );
+                // Add user to database.
+                $this->User_model->insert( $PUT );
 
-                    return;
+                $user_id = $this->db->insert_id();
 
-                }
+                // Allows us to use base_url().
+                $this->load->helper('url');
+
+                $location = base_url() . $user_id;
+
+                echo $this->_response( 201, "Successfully added user." );
+
+            } else {
+
+                // A column was supplied that does not exist.
+                echo $this->_response( 500, "Error: No such column $column_chk_result" );
 
             }
 
-            // Add user to database.
-            $this->User_model->insert( $PUT );
-
-            $user_id = $this->db->insert_id();
-
-            // Allows us to use base_url().
-            $this->load->helper('url');
-
-            $location = base_url() . $user_id;
-
-            echo $this->_response( 201, "Successfully added user." );
-
-            return;
-
         } else {
 
-            // Problem with submitted data.
-
+            // Form validation failed.
             echo $this->_response( 500, validation_errors() );
-
-            return;
 
         }
 
@@ -213,14 +206,14 @@ class Users extends CI_Controller {
 
     // Returns TRUE if the array of values supplied
     // each correspond to a column in the database table.
-    // Else returns FALSE.
+    // Else returns the value of the bad column.
     private function _columns_exist( $columns, $table ) {
 
         foreach( $columns as $key => $value ) {
 
             if( !$this->db->field_exists( $key, $table ) ) {
 
-                return FALSE;
+                return $key;
 
             }
 
