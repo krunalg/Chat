@@ -148,7 +148,7 @@ class Users extends CI_Controller {
                 // Allows us to use base_url().
                 $this->load->helper('url');
 
-                $location = base_url() . $user_id;
+                $location = base_url() . 'users/' . $user_id;
 
                 echo $this->_response( 201, "Success: Added user.", NULL, $location );
 
