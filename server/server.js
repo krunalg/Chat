@@ -399,6 +399,8 @@ io.sockets.on('connection', function(socket) {
 
                     console.log(getTime() + " [" + socket.clientname + "][" + to + "] " + msg);
 
+                    logToFile( "[" + socket.clientname + "][" + to + "] " + msg );
+
                     return;
                 }
             }
