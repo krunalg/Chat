@@ -128,7 +128,7 @@ class Users extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('', '');
 
-        $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]');
+        $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]|min_length[3]|max_length[12]');
 
         // Does POST data pass validation?
         if( $this->form_validation->run() ) {
