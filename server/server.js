@@ -375,10 +375,11 @@ io.sockets.on('connection', function(socket) {
         if (msg.trim().length > 0) {
 
             socket.broadcast.to(socket.roomname).emit('newMsg', socket.clientname, deHTML(msg));
-            console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
-        }
 
-        logToFile( msg );
+            console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
+
+            logToFile( msg );
+        }
 
     });
 
