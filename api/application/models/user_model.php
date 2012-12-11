@@ -41,6 +41,8 @@ class User_model extends CI_Model {
 
     }
 
+    // Returns TRUE if a user with that ID exists.
+    // Else returns FALSE.
     function does_exist( $id ) {
 
         $query = $this->db->get_where( 'users', array('id' => $id) );
