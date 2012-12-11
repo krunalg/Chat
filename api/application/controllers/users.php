@@ -109,8 +109,6 @@ class Users extends CI_Controller {
 
             $this->load->library('form_validation');
 
-            $this->form_validation->set_error_delimiters('', '');
-
             // Does POST data pass validation?
             if( $this->form_validation->run('update_user') ) {
 
@@ -165,8 +163,6 @@ class Users extends CI_Controller {
     private function _add_user() {
 
         $this->load->library('form_validation');
-
-        $this->form_validation->set_error_delimiters('', '');
 
         $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]|min_length[3]|max_length[12]');
 
