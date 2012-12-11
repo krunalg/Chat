@@ -39,11 +39,15 @@ class Users extends CI_Controller {
     // Respond with a single user.
     private function _get_user( $id ) {
 
-        $data = $this->User_model->get( $id );
+        if( $this->User_model->does_exist( $id ) ) {
 
-        $message = "Success: Found user.";
+            $data = $this->User_model->get( $id );
 
-        echo $this->_response( 200, $message, $data );
+            $message = "Success: Found user.";
+
+            echo $this->_response( 200, $message, $data );
+
+        }
 
     }
 
