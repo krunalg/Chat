@@ -166,6 +166,8 @@ class Users extends CI_Controller {
 
     }
 
+    // Sets HTTP headers and generates a JSON response
+    // which can be used for output.
     private function _response( $code, $message, $data = NULL, $location = '' ) {
 
         if( $code == 201 ) {
