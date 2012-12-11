@@ -168,7 +168,7 @@ class Users extends CI_Controller {
 
     }
 
-    private function _response( $code, $message, $data, $location = '' ) {
+    private function _response( $code, $message, $data = NULL, $location = '' ) {
 
         if( $code == 201 ) {
 
