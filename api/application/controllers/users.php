@@ -58,21 +58,30 @@ class Users extends CI_Controller {
     // Update a user.
     private function _update_user( $id ) {
 
-        // Returns all POST items with XSS filter.
-        $data = $this->input->post(NULL, TRUE);
+        // Check that user exists.
+        if( $this->User_model->does_exist( $id ) ) {
 
-        $column_chk_result = $this->_columns_exist( $data, 'users' );
+            // Returns all POST items with XSS filter.
+            $data = $this->input->post(NULL, TRUE);
 
-        if( $column_chk_result === TRUE ) {
+            $column_chk_result = $this->_columns_exist( $data, 'users' );
 
-           $this->User_model->update( $id, $data );
+            if( $column_chk_result === TRUE ) {
 
-           echo $this->_response( 200, "Success: User updated." );
+               $this->User_model->update( $id, $data );
+
+               echo $this->_response( 200, "Success: User updated." );
+
+            } else {
+
+                // A column was supplied that does not exist.
+                echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+            }
 
         } else {
 
-            // A column was supplied that does not exist.
-            echo $this->_response( 500, "Error: No such column $column_chk_result" );
+            echo $this->_response( 404, "Error: No such user exists." );
 
         }
 
