@@ -74,7 +74,20 @@ class Users extends CI_Controller {
     // Delete a user.
     private function _delete_user( $id ) {
 
-        $user = $this->User_model->get( $id );
+        // Check that user exists.
+        if( $this->User_model->does_exist( $id ) ) {
+
+            $user = $this->User_model->get( $id );
+
+
+
+        } else {
+
+            echo $this->_response( 500, "DELETE aborted. No such user exists to remove." );
+
+            return;
+
+        }
 
     }
 
