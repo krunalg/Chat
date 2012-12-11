@@ -378,7 +378,7 @@ io.sockets.on('connection', function(socket) {
 
             console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
 
-            logToFile( msg );
+            logToFile( "[" + socket.roomname + "][" + socket.clientname + "] " + msg );
         }
 
     });
