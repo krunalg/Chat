@@ -68,6 +68,7 @@ class User_model extends CI_Model {
 
     }
 
+    // Removes a user from the database.
     function delete( $id ) {
 
         $this->db->delete( 'users', array( 'id' => $id ) );
