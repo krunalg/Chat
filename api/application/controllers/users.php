@@ -130,6 +130,11 @@ class Users extends CI_Controller {
 
                 }
 
+            }  else {
+
+                // Form validation failed.
+                echo $this->_response( 500, validation_errors() );
+
             }
 
         } else {
