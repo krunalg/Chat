@@ -75,15 +75,6 @@ class User_model extends CI_Model {
 
     }
 
-    function set_position( $x, $y ) {
-
-        $data = array( 'x' => $x,  'y' => $y );
-
-        $this->db->where('id', $id);
-        $this->db->update('users', $data);
-
-    }
-
 }
 
 ?>
