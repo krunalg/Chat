@@ -179,10 +179,8 @@ class Users extends CI_Controller {
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('user', 'Username', 'required|is_unique[users.user]|min_length[3]|max_length[12]');
-
         // Does POST data pass validation?
-        if( $this->form_validation->run() ) {
+        if( $this->form_validation->run('add_user') ) {
 
             // Returns all POST items with XSS filter.
             $PUT = $this->input->post(NULL, TRUE);
