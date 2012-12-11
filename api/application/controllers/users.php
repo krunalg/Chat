@@ -67,6 +67,8 @@ class Users extends CI_Controller {
 
            $this->User_model->update( $id, $data );
 
+           echo $this->_response( 200, "Success: User updated." );
+
         } else {
 
             // A column was supplied that does not exist.
