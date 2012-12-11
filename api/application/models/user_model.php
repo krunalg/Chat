@@ -41,6 +41,14 @@ class User_model extends CI_Model {
 
     }
 
+    function does_exist( $id ) {
+
+        $query = $this->db->get_where( 'users', array('id' => $id) );
+
+        return $query->num_rows() > 0;
+
+    }
+
     function update( $id ) {
 
         $this->id     = $id;
