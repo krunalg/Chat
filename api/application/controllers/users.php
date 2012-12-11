@@ -82,8 +82,6 @@ class Users extends CI_Controller {
 
             echo $this->_response( 500, "Error: No such user exists." );
 
-            return;
-
         }
 
     }
