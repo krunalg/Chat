@@ -74,7 +74,7 @@ class Users extends CI_Controller {
         if( $this->User_model->does_exist( $id ) ) {
 
             // Delete user.
-            $user = $this->User_model->delete( $id );
+            $this->User_model->delete( $id );
 
             echo $this->_response( 200, "User was successfully removed." );
 
