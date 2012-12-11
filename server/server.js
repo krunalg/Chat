@@ -47,7 +47,7 @@ io.set('log level', 1);
 // Log message to file.
 var logToFile = function( message ) {
 
-    var line = getTime() + ' ' + message + "\n";
+    var line = getTime() + ' ' + message + "\r\n";
 
     //fs = require('fs');
     fs.appendFile('chat.log', line, function (err) {
