@@ -39,11 +39,11 @@ class Users extends CI_Controller {
     // Respond with a single user.
     private function _get_user( $id ) {
 
-        $user = $this->User_model->get( $id );
+        $data = $this->User_model->get( $id );
 
-        $json = json_encode( $user );
+        $message = "Success: Found user.";
 
-        echo $json;
+        echo $this->_response( 200, $message, $data );
 
     }
 
@@ -168,7 +168,7 @@ class Users extends CI_Controller {
 
     }
 
-    private function _response( $code, $message, $location = '' ) {
+    private function _response( $code, $message, $data, $location = '' ) {
 
         if( $code == 201 ) {
 
@@ -182,7 +182,11 @@ class Users extends CI_Controller {
 
         }
 
-        $response = array( 'code' => $code, 'message' => $message );
+        // If no data is supplied, leave the field out.
+        if( !isset( $data ) ) $response = array( 'code' => $code, 'message' => $message );
+
+        // But if data is supplied, then add it.
+        else $response = array( 'code' => $code, 'message' => $message, 'data' => $data );
 
         $this->output->set_content_type('application/json');
 
