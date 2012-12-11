@@ -47,8 +47,10 @@ io.set('log level', 1);
 // Log message to file.
 var logToFile = function( message ) {
 
+    var line = getTime() + ' ' + message;
+
     //fs = require('fs');
-    fs.writeFile("log.txt", "Hey there!", function(err) {
+    fs.writeFile("log.txt", line, function(err) {
 
         if(err) console.log(err);
 
@@ -375,6 +377,9 @@ io.sockets.on('connection', function(socket) {
             socket.broadcast.to(socket.roomname).emit('newMsg', socket.clientname, deHTML(msg));
             console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
         }
+
+        logToFile( msg );
+
     });
 
     socket.on('receiveTell', function(to, msg) {
