@@ -116,7 +116,7 @@ class Users extends CI_Controller {
                 $data = $this->input->post(NULL, TRUE);
 
                 // Is an attempt being made to change the user ID?
-                if( array_key_exists( 'id', $data ) {
+                if( array_key_exists( 'id', $data ) ) {
 
                     echo $this->_response( 403, "Error: Changing a user's ID is forbidden." );
 
