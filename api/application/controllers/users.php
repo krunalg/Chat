@@ -150,7 +150,7 @@ class Users extends CI_Controller {
 
                 $location = base_url() . $user_id;
 
-                echo $this->_response( 201, "Success: Added user." );
+                echo $this->_response( 201, "Success: Added user.", NULL, $location );
 
             } else {
 
