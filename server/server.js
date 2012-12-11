@@ -50,7 +50,7 @@ var logToFile = function( message ) {
     var line = getTime() + ' ' + message;
 
     //fs = require('fs');
-    fs.writeFile("log.txt", line, function(err) {
+    fs.writeFile("chat.log", line, function(err) {
 
         if(err) console.log(err);
 
