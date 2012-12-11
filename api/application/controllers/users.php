@@ -71,7 +71,7 @@ class Users extends CI_Controller {
 
     }
 
-    // Update a user.
+    // Delete a user.
     private function _delete_user( $id ) {
 
         echo "This is a delete call for the user.";
