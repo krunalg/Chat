@@ -17,6 +17,16 @@ class User_model extends CI_Model {
 
     }
 
+    // Returns TRUE if a user with that ID exists.
+    // Else returns FALSE.
+    function does_exist( $id ) {
+
+        $query = $this->db->get_where( 'users', array('id' => $id) );
+
+        return $query->num_rows() > 0;
+
+    }
+
     // Returns an array containing info about a specific user.
     function get( $id ) {
 
@@ -40,16 +50,6 @@ class User_model extends CI_Model {
     function insert( $data ) {
 
         $this->db->insert( 'users', $data );
-
-    }
-
-    // Returns TRUE if a user with that ID exists.
-    // Else returns FALSE.
-    function does_exist( $id ) {
-
-        $query = $this->db->get_where( 'users', array('id' => $id) );
-
-        return $query->num_rows() > 0;
 
     }
 
