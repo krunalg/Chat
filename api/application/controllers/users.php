@@ -76,7 +76,7 @@ class Users extends CI_Controller {
             // Delete user.
             $this->User_model->delete( $id );
 
-            echo $this->_response( 200, "User was successfully removed." );
+            echo $this->_response( 200, "Success: User was removed." );
 
         } else {
 
