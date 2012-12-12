@@ -244,6 +244,37 @@ io.sockets.on('connection', function(socket) {
             }
         }
 
+        http.get("http://localhost/Chat/api/users/?user=" + user, function(res) {
+            //console.log('STATUS: ' + res.statusCode);
+            //console.log('HEADERS: ' + JSON.stringify(res.headers));
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+                //console.log('BODY: ' + chunk);
+
+                var jsonObj = JSON.parse( chunk );
+
+                var name   = jsonObj.data[0].user;
+
+                var x      = parseInt( jsonObj.data[0].x );
+
+                var y      = parseInt( jsonObj.data[0].y );
+
+                var facing = jsonObj.data[0].facing;
+
+                var skin   = jsonObj.data[0].skin;
+
+                var state  = jsonObj.data[0].state;
+
+                var map    = jsonObj.data[0].map;
+
+                initializePlayer( name, x, y, facing, skin, state, map, socket.id );
+
+            });
+        }).on('error', function(e) {
+            console.log("Got error: " + e.message);
+        });
+
+        /*
         connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows) {
 
             if (err) {
@@ -274,6 +305,8 @@ io.sockets.on('connection', function(socket) {
                 }
             }
         });
+        */
+
     });
 
     socket.on('getNearbyPlayers', function() {
