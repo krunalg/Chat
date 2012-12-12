@@ -297,15 +297,9 @@ io.sockets.on('connection', function(socket) {
 
         http.get("http://localhost/Chat/api/users/?user=" + user, function(res) {
 
-            //console.log('STATUS: ' + res.statusCode);
-
-            //console.log('HEADERS: ' + JSON.stringify(res.headers));
-
             res.setEncoding('utf8');
 
             res.on('data', function(chunk) {
-
-                //console.log('BODY: ' + chunk);
 
                 var jsonObj = JSON.parse(chunk);
 
