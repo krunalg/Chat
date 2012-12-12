@@ -474,6 +474,58 @@ io.sockets.on('connection', function(socket) {
 
         }
 
+        // update players known info in database
+        var data = 'x=' + x + '&y=' + y + '&facing=' + direction + '&state=' + state;
+
+        var options = {
+
+            hostname: 'localhost',
+
+            port: 80,
+
+            path: '/Chat/api/users/' + onlinePlayers[i].id,
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/x-www-form-urlencoded',
+
+                'Content-Length': data.length
+
+            }
+
+        };
+
+        var req = http.request(options, function(res) {
+
+            console.log('STATUS: ' + res.statusCode);
+
+            console.log('HEADERS: ' + JSON.stringify(res.headers));
+
+            res.setEncoding('utf8');
+
+            res.on('data', function (chunk) {
+
+                console.log('BODY: ' + chunk);
+
+            });
+
+        });
+
+        req.on('error', function(e) {
+
+            console.log('problem with request: ' + e.message);
+
+        });
+
+        // write data to request body
+        req.write(data);
+
+        req.end();
+
+        console.log(data);
+
     });
 
     socket.on('receiveSay', function(msg) {
