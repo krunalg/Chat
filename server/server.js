@@ -499,8 +499,6 @@ io.sockets.on('connection', function(socket) {
 
         var req = http.request(options, function(res) {
 
-            console.log('STATUS: ' + res.statusCode);
-
             res.setEncoding('utf8');
 
             res.on('data', function (chunk) {
