@@ -1,4 +1,3 @@
-
 var http = require('http');
 
 var server = http.createServer(handler);
@@ -97,7 +96,6 @@ function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
     console.log(getTime() + " ADDING PLAYER " + name);
 
     // Create live player object.
-
     var player = {};
 
     player.name = name;
@@ -261,7 +259,6 @@ function sendHeartbeat() {
     });
 
     //console.log(getTime() + " Pinging all sockets.");
-
 }
 
 setInterval(sendHeartbeat, 8000);
@@ -429,7 +426,6 @@ io.sockets.on('connection', function(socket) {
             if(onlinePlayers[i].name == socket.clientname) {
 
                 onlinePlayers[i].skin = skin; // update server record
-
                 break;
 
             }
