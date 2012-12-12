@@ -1,12 +1,38 @@
+/*
+ * Load modules and start server.
+ */
+
 var http = require('http');
 
 var server = http.createServer(handler);
 
-var io = require('socket.io').listen(server);
+function handler(req, res) {
 
-var fs = require('fs');
+    fs.readFile(__dirname + '/index.html', function(err, data) {
+
+        if(err) {
+
+            res.writeHead(500);
+
+            return res.end('Error loading index.html');
+
+        }
+
+        res.writeHead(200);
+
+        res.end(data);
+
+    });
+
+}
 
 server.listen(9090);
+
+var io = require('socket.io');
+
+io.listen(server);
+
+var fs = require('fs');
 
 var onlinePlayers = [];
 
@@ -203,26 +229,6 @@ function introducePlayerToRoom(username, roomname) {
 function loadMap(sessionID, map) {
 
     io.sockets.sockets[sessionID].emit('loadMap', map);
-
-}
-
-function handler(req, res) {
-
-    fs.readFile(__dirname + '/index.html', function(err, data) {
-
-        if(err) {
-
-            res.writeHead(500);
-
-            return res.end('Error loading index.html');
-
-        }
-
-        res.writeHead(200);
-
-        res.end(data);
-
-    });
 
 }
 
