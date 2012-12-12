@@ -474,58 +474,6 @@ io.sockets.on('connection', function(socket) {
 
         }
 
-        // update players known info in database
-        var data = 'x=' + x + '&y=' + y + '&facing=' + direction + '&state=' + state;
-
-        var options = {
-
-            hostname: 'localhost',
-
-            port: 80,
-
-            path: '/Chat/api/users/' + onlinePlayers[i].id,
-
-            method: 'POST',
-
-            headers: {
-
-                'Content-Type': 'application/x-www-form-urlencoded',
-
-                'Content-Length': data.length
-
-            }
-
-        };
-
-        var req = http.request(options, function(res) {
-
-            res.setEncoding('utf8');
-
-            res.on('data', function (chunk) {
-
-                var jsonObj = JSON.parse(chunk);
-
-                if( jsonObj.code != 200 ) {
-
-                    console.log(jsonObj.message);
-
-                }
-
-            });
-
-        });
-
-        req.on('error', function(e) {
-
-            console.log('problem with request: ' + e.message);
-
-        });
-
-        // write data to request body
-        req.write(data);
-
-        req.end();
-
     });
 
     socket.on('receiveSay', function(msg) {
@@ -581,8 +529,75 @@ io.sockets.on('connection', function(socket) {
 
         console.log(getTime() + ' ' + socket.clientname + " DISCONNECTED");
 
-        // remove client from onlinePlayers array
+        // Update player records in database via the API.
+
+        var player = {};
+
+        // First find the player.
         for(var i = 0; i < onlinePlayers.length; i++) {
+
+            if(onlinePlayers[i].name == socket.clientname) {
+
+                player = onlinePlayers[i];
+
+                break;
+
+            }
+
+        }
+
+        // Define POST data to submit.
+        var data = 'x=' + player.pos.x + '&y=' + player.pos.y + '&facing=' + player.facing + '&state=' + player.state;
+
+        console.log(data);
+
+        var options = {
+
+            hostname: 'localhost',
+
+            port: 80,
+
+            path: '/Chat/api/users/' + player.id,
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/x-www-form-urlencoded',
+
+                'Content-Length': data.length
+
+            }
+
+        };
+
+        var req = http.request(options, function(res) {
+
+            res.setEncoding('utf8');
+
+            res.on('data', function (chunk) {
+
+                var jsonObj = JSON.parse(chunk);
+
+                console.log(jsonObj.message);
+
+            });
+
+        });
+
+        req.on('error', function(e) {
+
+            console.log('problem with request: ' + e.message);
+
+        });
+
+        // write data to request body
+        req.write(data);
+
+        req.end();
+
+        // remove client from onlinePlayers array
+        for(i = 0; i < onlinePlayers.length; i++) {
 
             if(onlinePlayers[i].name === socket.clientname) {
 
