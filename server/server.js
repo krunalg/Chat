@@ -253,21 +253,30 @@ io.sockets.on('connection', function(socket) {
 
                 var jsonObj = JSON.parse( chunk );
 
-                var name   = jsonObj.data[0].user;
+                if( jsonObj.data.length > 0 ) {
 
-                var x      = parseInt( jsonObj.data[0].x );
+                    var name   = jsonObj.data[0].user;
 
-                var y      = parseInt( jsonObj.data[0].y );
+                    var x      = parseInt( jsonObj.data[0].x );
 
-                var facing = jsonObj.data[0].facing;
+                    var y      = parseInt( jsonObj.data[0].y );
 
-                var skin   = jsonObj.data[0].skin;
+                    var facing = jsonObj.data[0].facing;
 
-                var state  = jsonObj.data[0].state;
+                    var skin   = jsonObj.data[0].skin;
 
-                var map    = jsonObj.data[0].map;
+                    var state  = jsonObj.data[0].state;
 
-                initializePlayer( name, x, y, facing, skin, state, map, socket.id );
+                    var map    = jsonObj.data[0].map;
+
+                    initializePlayer( name, x, y, facing, skin, state, map, socket.id );
+
+                } else {
+
+                    socket.emit('error', 'No such user in database.');
+                    socket.disconnect();
+
+                }
 
             });
         }).on('error', function(e) {
