@@ -71,6 +71,7 @@ Change-Log:
 - A simple API supports add/remove/update/view functions on users. (December 10, 2012)
 - Socket server now logs all chat messages to a file. (December 11, 2012)
 - Socket server uses API instead of a MySQL module to access the database. (December 11, 2012)
+- Player positions are saved upon disconnect. (December 11, 2012)
 
 
 To-do:
