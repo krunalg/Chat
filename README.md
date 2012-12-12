@@ -68,7 +68,9 @@ Change-Log:
 
 ### December
 - Added simple login form. (December 6, 2012)
+- A simple API supports add/remove/update/view functions on users. (December 10, 2012)
 - Socket server now logs all chat messages to a file. (December 11, 2012)
+- Socket server uses API instead of a MySQL module to access the database. (December 11, 2012)
 
 
 To-do:
