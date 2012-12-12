@@ -122,7 +122,7 @@ function getTime() {
 
 }
 
-function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
+function initializePlayer(id, name, x, y, facing, skin, state, map, sessionID) {
 
     console.log(getTime() + " ADDING PLAYER " + name);
 
