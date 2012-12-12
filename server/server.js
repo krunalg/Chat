@@ -6,6 +6,10 @@ var http = require('http');
 
 var server = http.createServer(handler);
 
+var io = require('socket.io').listen(server);
+
+var fs = require('fs');
+
 function handler(req, res) {
 
     fs.readFile(__dirname + '/index.html', function(err, data) {
@@ -28,11 +32,12 @@ function handler(req, res) {
 
 server.listen(9090);
 
-var io = require('socket.io');
 
-io.listen(server);
 
-var fs = require('fs');
+
+
+
+
 
 var onlinePlayers = [];
 
