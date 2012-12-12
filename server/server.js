@@ -507,7 +507,11 @@ io.sockets.on('connection', function(socket) {
 
                 var jsonObj = JSON.parse(chunk);
 
-                console.log(jsonObj.message);
+                if( jsonObj.code != 200 ) {
+
+                    console.log(jsonObj.message);
+
+                }
 
             });
 
