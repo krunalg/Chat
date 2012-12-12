@@ -269,11 +269,7 @@ setInterval(sendHeartbeat, 8000);
 io.sockets.on('connection', function(socket) {
 
     // The expected response sent from users when "pinged".
-    socket.on('pong', function(data) {
-
-        //console.log(getTime() + " Pong received from " + socket.clientname);
-
-    });
+    socket.on('pong', function(data) {});
 
     socket.on('init', function(user) {
 
