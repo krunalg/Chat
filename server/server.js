@@ -526,8 +526,6 @@ io.sockets.on('connection', function(socket) {
 
         req.end();
 
-        console.log(data);
-
     });
 
     socket.on('receiveSay', function(msg) {
