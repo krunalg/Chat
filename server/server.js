@@ -549,8 +549,6 @@ io.sockets.on('connection', function(socket) {
         // Define POST data to submit.
         var data = 'x=' + player.pos.x + '&y=' + player.pos.y + '&facing=' + player.facing + '&state=' + player.state;
 
-        console.log(data);
-
         var options = {
 
             hostname: 'localhost',
