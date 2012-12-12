@@ -4,40 +4,6 @@ var io = require('socket.io').listen(server);
 var fs = require('fs');
 server.listen(9090);
 
-// Set up mySQL connection.
-
-var mysql = require('mysql');
-
-var login = require('./mysql-connection');
-
-var connection = mysql.createConnection({
-  host     : login.hostname(),
-  user     : login.username(),
-  password : login.password(),
-  database : login.database()
-});
-
-connection.connect(function(err) {
-  if(err) console.log('mysql connection problem - error code: ' + err.code + ' fatal: ' + err.fatal);
-});
-
-// I am Chuck Noris:
-connection.on('error', function(err) {
-    if(err) {
-        console.log(err.code);
-        //throw err;
-    }
-});
-
-connection.on('close', function(err) {
-    if (err) {
-        console.log(getTime() + " MYSQL CONNECTION CLOSED UNEXPECTEDLY. RECONNECTING...");
-        connection = mysql.createConnection(connection.config);
-    }
-});
-
-
-
 var onlinePlayers = [];
 
 // Most users seen online since server started.
@@ -282,39 +248,6 @@ io.sockets.on('connection', function(socket) {
         }).on('error', function(e) {
             console.log("Got error: " + e.message);
         });
-
-        /*
-        connection.query("SELECT * FROM users WHERE user = '" + socket.clientname + "'", function(err, rows) {
-
-            if (err) {
-
-                console.log(err.code);
-                console.log(err.fatal);
-
-            } else {
-
-                if(rows.length==0) {
-
-                    socket.emit('error', 'No such user in database.');
-                    socket.disconnect();
-                    return;
-
-                } else {
-
-                    // Found user.
-                    var name   = rows[0].user;
-                    var x      = rows[0].x;
-                    var y      = rows[0].y;
-                    var facing = rows[0].facing;
-                    var skin   = rows[0].skin;
-                    var state  = rows[0].state;
-                    var map    = rows[0].map;
-
-                    initializePlayer( name, x, y, facing, skin, state, map, socket.id );
-                }
-            }
-        });
-        */
 
     });
 
