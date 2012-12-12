@@ -505,7 +505,9 @@ io.sockets.on('connection', function(socket) {
 
             res.on('data', function (chunk) {
 
-                console.log('BODY: ' + chunk);
+                var jsonObj = JSON.parse(chunk);
+
+                console.log(jsonObj.message);
 
             });
 
