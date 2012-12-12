@@ -124,6 +124,8 @@ function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
     // Create live player object.
     var player = {};
 
+    player.id = id;
+
     player.name = name;
 
     player.pos = {};
@@ -305,6 +307,8 @@ io.sockets.on('connection', function(socket) {
 
                 if(jsonObj.data.length > 0) {
 
+                    var id = parseInt(jsonObj.data[0].id);
+
                     var name = jsonObj.data[0].user;
 
                     var x = parseInt(jsonObj.data[0].x);
@@ -319,7 +323,7 @@ io.sockets.on('connection', function(socket) {
 
                     var map = jsonObj.data[0].map;
 
-                    initializePlayer(name, x, y, facing, skin, state, map, socket.id);
+                    initializePlayer( id, name, x, y, facing, skin, state, map, socket.id );
 
                 } else {
 
