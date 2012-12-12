@@ -1,7 +1,12 @@
+
 var http = require('http');
+
 var server = http.createServer(handler);
+
 var io = require('socket.io').listen(server);
+
 var fs = require('fs');
+
 server.listen(9090);
 
 var onlinePlayers = [];
@@ -12,27 +17,31 @@ var mostOnline = 0;
 io.set('log level', 1);
 
 // Log message to file.
-var logToFile = function(message) {
 
-        var line = getTime() + ' ' + message + "\r\n";
+function logToFile(message) {
 
-        //fs = require('fs');
-        fs.appendFile('chat.log', line, function(err) {
+    var line = getTime() + ' ' + message + "\r\n";
 
-            if(err) console.log(err);
+    //fs = require('fs');
+    fs.appendFile('chat.log', line, function(err) {
 
-            else console.log("The file was saved!");
+        if(err) console.log(err);
 
-        });
+        else console.log("The file was saved!");
 
-    };
+    });
+
+}
 
 // Report how many players online.
-var playersReport = function() {
 
-        var online = onlinePlayers.length;
-        console.log(getTime() + " PLAYERS ONLINE: " + online + " MOST ONLINE: " + mostOnline);
-    };
+function playersReport() {
+
+    var online = onlinePlayers.length;
+
+    console.log(getTime() + " PLAYERS ONLINE: " + online + " MOST ONLINE: " + mostOnline);
+
+}
 
 // Records the most users seen online.
 
@@ -50,11 +59,15 @@ function bootUnauthorized(socket) {
     if(typeof socket.clientname === 'undefined') {
 
         socket.emit('error', 'You are not authenticated to the server. The server may have rebooted.');
+
         socket.disconnect();
+
         return true;
+
     }
 
     return false;
+
 }
 
 // Get the time as a string.
@@ -62,16 +75,21 @@ function bootUnauthorized(socket) {
 function getTime() {
 
     var currentTime = new Date();
+
     var hours = currentTime.getHours();
+
     var minutes = currentTime.getMinutes();
+
     var amOrPm = (hours > 11 ? 'PM' : 'AM');
 
     if(hours === 0) hours = 12;
+
     else if(hours > 12) hours = hours - 12;
 
     minutes = (minutes < 10 ? '0' + minutes : minutes);
 
     return hours + ':' + minutes + amOrPm;
+
 }
 
 function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
@@ -79,16 +97,27 @@ function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
     console.log(getTime() + " ADDING PLAYER " + name);
 
     // Create live player object.
+
     var player = {};
+
     player.name = name;
+
     player.pos = {};
+
     player.pos.x = x;
+
     player.pos.y = y;
+
     player.facing = facing;
+
     player.state = state;
+
     player.skin = skin;
+
     player.session = sessionID;
+
     player.room = map;
+
     onlinePlayers.push(player);
 
     sendAnnouncement(name, "Welcome.");
@@ -106,6 +135,7 @@ function initializePlayer(name, x, y, facing, skin, state, map, sessionID) {
 
     // List online players.
     playersReport();
+
 }
 
 // Send a message from the server.
@@ -117,10 +147,15 @@ function sendAnnouncement(username, message) {
         if(onlinePlayers[i].name === username) {
 
             var sessionID = onlinePlayers[i].session;
+
             io.sockets.sockets[sessionID].emit('announcement', message);
+
             return;
+
         }
+
     }
+
 }
 
 // Joins a user to a chat room.
@@ -132,12 +167,17 @@ function joinChatRoom(username, roomname) {
         if(onlinePlayers[i].name === username) {
 
             var sessionID = onlinePlayers[i].session;
+
             var room = onlinePlayers[i].room;
 
             io.sockets.sockets[sessionID].join(room);
+
             console.log(getTime() + ' ' + username + " ENTERED " + room);
+
         }
+
     }
+
 }
 
 // Tell users in a room to add a new player.
@@ -149,11 +189,15 @@ function introducePlayerToRoom(username, roomname) {
         if(onlinePlayers[i].name === username) {
 
             var sessionID = onlinePlayers[i].session;
+
             var player = onlinePlayers[i];
 
             io.sockets.sockets[sessionID].broadcast.to(roomname).emit('addPlayer', username, player.pos.x, player.pos.y, player.facing, player.skin);
+
         }
+
     }
+
 }
 
 // Instruct client to load a map.
@@ -161,42 +205,63 @@ function introducePlayerToRoom(username, roomname) {
 function loadMap(sessionID, map) {
 
     io.sockets.sockets[sessionID].emit('loadMap', map);
+
 }
 
 function handler(req, res) {
+
     fs.readFile(__dirname + '/index.html', function(err, data) {
+
         if(err) {
+
             res.writeHead(500);
+
             return res.end('Error loading index.html');
+
         }
 
         res.writeHead(200);
+
         res.end(data);
+
     });
+
 }
 
 // Removes HTML characters from messages that could allow players to phish.
 
 function deHTML(message) {
+
     return message.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;");
+
 }
 
 // Dump the contents of an object.
 
 function dump(obj) {
+
     var out = '';
+
     for(var i in obj) {
+
         out += i + ": " + obj[i] + "\n";
+
     }
 
     console.log(out);
+
 }
 
 function sendHeartbeat() {
+
     io.sockets.emit('ping', {
+
         beat: 1
+
     });
+
     //console.log(getTime() + " Pinging all sockets.");
+
 }
 
 setInterval(sendHeartbeat, 8000);
@@ -204,7 +269,9 @@ setInterval(sendHeartbeat, 8000);
 io.sockets.on('connection', function(socket) {
 
     socket.on('pong', function(data) {
+
         //console.log(getTime() + " Pong received from " + socket.clientname);
+
     });
 
     socket.on('init', function(user) {
@@ -217,18 +284,29 @@ io.sockets.on('connection', function(socket) {
             if(onlinePlayers[i].name === socket.clientname) {
 
                 console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
+
                 socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
+
                 socket.disconnect();
+
                 return;
+
             }
+
         }
 
         http.get("http://localhost/Chat/api/users/?user=" + user, function(res) {
+
             //console.log('STATUS: ' + res.statusCode);
+
             //console.log('HEADERS: ' + JSON.stringify(res.headers));
+
             res.setEncoding('utf8');
+
             res.on('data', function(chunk) {
+
                 //console.log('BODY: ' + chunk);
+
                 var jsonObj = JSON.parse(chunk);
 
                 if(jsonObj.data.length > 0) {
@@ -252,13 +330,17 @@ io.sockets.on('connection', function(socket) {
                 } else {
 
                     socket.emit('error', 'No such user in database.');
+
                     socket.disconnect();
 
                 }
 
             });
+
         }).on('error', function(e) {
+
             console.log("Got error: " + e.message);
+
         });
 
     });
@@ -274,19 +356,29 @@ io.sockets.on('connection', function(socket) {
             if(onlinePlayers[i].room === socket.roomname) {
 
                 var player = {};
+
                 player.name = onlinePlayers[i].name;
+
                 player.pos = {};
+
                 player.pos.x = onlinePlayers[i].pos.x;
+
                 player.pos.y = onlinePlayers[i].pos.y;
+
                 player.facing = onlinePlayers[i].facing;
+
                 player.skin = onlinePlayers[i].skin;
+
                 player.moveState = onlinePlayers[i].state;
 
                 nearbyPlayers.push(player);
+
             }
+
         }
 
         if(nearbyPlayers.length > 0) socket.emit('addNearbyPlayers', nearbyPlayers);
+
     });
 
     socket.on('playerStart', function() {
@@ -298,16 +390,23 @@ io.sockets.on('connection', function(socket) {
             if(onlinePlayers[i].name == socket.clientname) {
 
                 var x = onlinePlayers[i].pos.x;
+
                 var y = onlinePlayers[i].pos.y;
+
                 var facing = onlinePlayers[i].facing;
+
                 var skin = onlinePlayers[i].skin;
+
                 var state = onlinePlayers[i].state;
 
                 socket.emit('playerStart-' + socket.clientname, x, y, facing, state, skin);
 
                 return;
+
             }
+
         }
+
     });
 
     socket.on('playerLeaveZone', function() {
@@ -316,25 +415,36 @@ io.sockets.on('connection', function(socket) {
 
         // instruct others to drop this player
         socket.broadcast.to(socket.roomname).emit('dropPlayer-' + socket.clientname);
+
         socket.leave(socket.roomname);
+
         // stop listening
         socket.roomname = 'limbo';
-        socket.join(socket.roomname);
-    });
 
+        socket.join(socket.roomname);
+
+    });
 
     socket.on('receiveReskin', function(skin) {
 
         if(bootUnauthorized(socket)) return;
 
         console.log(getTime() + ' ' + "Player " + socket.clientname + " changed skin: " + skin);
+
         socket.broadcast.to(socket.roomname).emit('reskinOtherPlayer-' + socket.clientname, skin);
+
         for(var i = 0; i < onlinePlayers.length; i++) {
+
             if(onlinePlayers[i].name == socket.clientname) {
+
                 onlinePlayers[i].skin = skin; // update server record
+
                 break;
+
             }
+
         }
+
     });
 
     socket.on('receiveUpdateMoveState', function(x, y, direction, state) {
@@ -345,14 +455,23 @@ io.sockets.on('connection', function(socket) {
 
         // update players known info on server
         for(var i = 0; i < onlinePlayers.length; i++) {
+
             if(onlinePlayers[i].name == socket.clientname) {
+
                 onlinePlayers[i].pos.x = x;
+
                 onlinePlayers[i].pos.y = y;
+
                 onlinePlayers[i].facing = direction;
+
                 onlinePlayers[i].state = state;
+
                 break;
+
             }
+
         }
+
     });
 
     socket.on('receiveSay', function(msg) {
@@ -367,6 +486,7 @@ io.sockets.on('connection', function(socket) {
             console.log(getTime() + ' ' + "[" + socket.roomname + "][" + socket.clientname + "] " + msg);
 
             logToFile("[" + socket.roomname + "][" + socket.clientname + "] " + msg);
+
         }
 
     });
@@ -390,11 +510,15 @@ io.sockets.on('connection', function(socket) {
                     logToFile("[" + socket.clientname + "][" + to + "] " + msg);
 
                     return;
+
                 }
+
             }
 
             socket.emit('logError', "Player not found.");
+
         }
+
     });
 
     socket.on('disconnect', function() {
@@ -409,7 +533,9 @@ io.sockets.on('connection', function(socket) {
             if(onlinePlayers[i].name === socket.clientname) {
 
                 onlinePlayers.splice(i, 1);
+
             }
+
         }
 
         socket.broadcast.to(socket.roomname).emit('dropPlayer-' + socket.clientname, socket.clientname);
