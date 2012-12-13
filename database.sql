@@ -52,6 +52,9 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `base_sp_atk` int(11) NOT NULL COMMENT 'Base Special Attack',
   `base_sp_def` int(11) NOT NULL COMMENT 'Base Special Defense',
   `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
+  CONSTRAINT test FOREIGN KEY (type_1)
+    REFERENCES monster_types(id)
+    ON DELETE CASCADE,
   PRIMARY KEY (`id`),
   KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
