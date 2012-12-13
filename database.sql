@@ -31,35 +31,6 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
 
 --
--- Table structure for table `monsters`
---
-
-CREATE TABLE IF NOT EXISTS `monsters` (
-  `id` smallint(6) NOT NULL COMMENT 'National Number',
-  `hoenn_id` smallint(6) NOT NULL COMMENT 'Hoenn Number',
-  `name` varchar(15) NOT NULL,
-  `percent_male` float NOT NULL,
-  `percent_female` float NOT NULL,
-  `class` int(11) NOT NULL COMMENT 'Classification',
-  `type_1` int(11) NOT NULL,
-  `type_2` int(11) NOT NULL,
-  `height` varchar(15) NOT NULL,
-  `weight` varchar(15) NOT NULL,
-  `colour` varchar(15) NOT NULL COMMENT 'Colour Category',
-  `base_hp` int(11) NOT NULL COMMENT 'Base Hit Points',
-  `base_atk` int(11) NOT NULL COMMENT 'Base Attack',
-  `base_def` int(11) NOT NULL COMMENT 'Base Defense',
-  `base_sp_atk` int(11) NOT NULL COMMENT 'Base Special Attack',
-  `base_sp_def` int(11) NOT NULL COMMENT 'Base Special Defense',
-  `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
-  CONSTRAINT test FOREIGN KEY (type_1)
-    REFERENCES monster_types(id)
-    ON DELETE CASCADE,
-  PRIMARY KEY (`id`),
-  KEY `hoenn_id` (`hoenn_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
 -- Table structure for table `monster_types`
 --
 
@@ -89,3 +60,32 @@ INSERT INTO `monster_types` (`id`) VALUES('psychic');
 INSERT INTO `monster_types` (`id`) VALUES('rock');
 INSERT INTO `monster_types` (`id`) VALUES('steel');
 INSERT INTO `monster_types` (`id`) VALUES('water');
+
+--
+-- Table structure for table `monsters`
+--
+
+CREATE TABLE IF NOT EXISTS `monsters` (
+  `id` smallint(6) NOT NULL COMMENT 'National Number',
+  `hoenn_id` smallint(6) NOT NULL COMMENT 'Hoenn Number',
+  `name` varchar(15) NOT NULL,
+  `percent_male` float NOT NULL,
+  `percent_female` float NOT NULL,
+  `class` int(11) NOT NULL COMMENT 'Classification',
+  `type_1` int(11) NOT NULL,
+  `type_2` int(11) NOT NULL,
+  `height` varchar(15) NOT NULL,
+  `weight` varchar(15) NOT NULL,
+  `colour` varchar(15) NOT NULL COMMENT 'Colour Category',
+  `base_hp` int(11) NOT NULL COMMENT 'Base Hit Points',
+  `base_atk` int(11) NOT NULL COMMENT 'Base Attack',
+  `base_def` int(11) NOT NULL COMMENT 'Base Defense',
+  `base_sp_atk` int(11) NOT NULL COMMENT 'Base Special Attack',
+  `base_sp_def` int(11) NOT NULL COMMENT 'Base Special Defense',
+  `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
+  CONSTRAINT test FOREIGN KEY (type_1)
+    REFERENCES monster_types(id)
+    ON DELETE CASCADE,
+  PRIMARY KEY (`id`),
+  KEY `hoenn_id` (`hoenn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
