@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `map` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- Dumping data for table `users`
@@ -38,7 +38,7 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 CREATE TABLE IF NOT EXISTS `monster_types` (
   `id` varchar(8) NOT NULL COMMENT 'Type Name',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
 -- Dumping data for table `monster_types`
@@ -69,7 +69,7 @@ INSERT INTO `monster_types` (`id`) VALUES('water');
 CREATE TABLE IF NOT EXISTS `monster_exp_groups` (
   `group` varchar(15) NOT NULL,
   PRIMARY KEY (`group`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Experience Groups';
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Groups';
 
 --
 -- Dumping data for table `monster_exp_groups`
@@ -107,4 +107,4 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   FOREIGN KEY (`type_1`) REFERENCES monster_types(`id`),
   FOREIGN KEY (`type_2`) REFERENCES monster_types(`id`),
   UNIQUE KEY `hoenn_id` (`hoenn_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
