@@ -107,9 +107,10 @@ $xp = "0	 0	 0	 0	 0	 0	 1	 15	 6	 8	 9	 10	 4
 
 
 // Replace all multiple spaces with a single space.
-$xp = preg_replace("/[[:blank:]]+/", ' ', $xp);
+$xp = preg_replace( "/[[:blank:]]+/", ' ', $xp );
 
-
+// Split into an array.
+$xp = explode( "\n", $xp );
 
 
 ?>
@@ -117,4 +118,4 @@ $xp = preg_replace("/[[:blank:]]+/", ' ', $xp);
 
 
 
-<pre><?php echo $xp; ?></pre>
+<pre><?php echo print_r( $xp ); ?></pre>
