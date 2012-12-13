@@ -70,20 +70,21 @@ INSERT INTO `attack_types` (`id`) VALUES('water');
 --
 
 CREATE TABLE IF NOT EXISTS `monster_exp_groups` (
-  `group` varchar(15) NOT NULL,
-  PRIMARY KEY (`group`)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Groups';
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Groups' AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `monster_exp_groups`
 --
 
-INSERT INTO `monster_exp_groups` (`group`) VALUES('erratic');
-INSERT INTO `monster_exp_groups` (`group`) VALUES('fast');
-INSERT INTO `monster_exp_groups` (`group`) VALUES('fluctuating');
-INSERT INTO `monster_exp_groups` (`group`) VALUES('medium_fast');
-INSERT INTO `monster_exp_groups` (`group`) VALUES('medium_slow');
-INSERT INTO `monster_exp_groups` (`group`) VALUES('slow');
+INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(1, 'erratic');
+INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(2, 'fast');
+INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(3, 'fluctuating');
+INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(4, 'medium_fast');
+INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(5, 'medium_slow');
+INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(6, 'slow');
 
 --
 -- Table structure for table `monster_exp`
@@ -91,10 +92,10 @@ INSERT INTO `monster_exp_groups` (`group`) VALUES('slow');
 
 CREATE TABLE IF NOT EXISTS `monster_exp` (
   `level` tinyint(4) NOT NULL,
-  `group` varchar(11) NOT NULL,
+  `group_id` tinyint(4) NOT NULL,
   `next_level` mediumint(9) NOT NULL,
   `total` mediumint(9) NOT NULL,
-  FOREIGN KEY (`group`) REFERENCES monster_exp_groups(`group`),
+  FOREIGN KEY (`group_id`) REFERENCES monster_exp_groups(`id`),
   UNIQUE KEY `no_duplicates` (`level`,`group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Table';
 
@@ -761,10 +762,10 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `base_sp_atk` int(11) NOT NULL COMMENT 'Base Special Attack',
   `base_sp_def` int(11) NOT NULL COMMENT 'Base Special Defense',
   `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
-  `exp_group` varchar(11) NOT NULL COMMENT 'Experience Group',
+  `group_id` tinyint(4) NOT NULL COMMENT 'Experience Group',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_1`) REFERENCES attack_types(`id`),
   FOREIGN KEY (`type_2`) REFERENCES attack_types(`id`),
-  FOREIGN KEY (`exp_group`) REFERENCES monster_exp_groups(`group`),
+  FOREIGN KEY (`group_id`) REFERENCES monster_exp_groups(`id`),
   UNIQUE KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
