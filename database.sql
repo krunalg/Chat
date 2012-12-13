@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `monsters`;
+DROP TABLE IF EXISTS `attack_categories`;
 DROP TABLE IF EXISTS `attack_types`;
+DROP TABLE IF EXISTS `attacks`;
 DROP TABLE IF EXISTS `monster_exp`;
 DROP TABLE IF EXISTS `monster_exp_groups`;
 
