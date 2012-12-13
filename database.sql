@@ -713,16 +713,16 @@ CREATE TABLE IF NOT EXISTS `attack_categories` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=UTF8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=UTF8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `attack_categories`
 --
 
 INSERT INTO `attack_categories` (`id`, `name`) VALUES
-(1, 'physical'),
-(2, 'special'),
-(3, 'status');
+(0, 'physical'),
+(1, 'special'),
+(2, 'status');
 
 --
 -- Table structure for table `attacks`
