@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `monsters`;
 
 -- --------------------------------------------------------
 
@@ -27,3 +28,29 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('Jake', 416, 2960, 'up', 'boy', 'idle', 'RsWorld'),
 ('Joncom', 416, 2960, 'up', 'girl', 'idle', 'RsWorld'),
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
+
+--
+-- Table structure for table `monsters`
+--
+
+CREATE TABLE IF NOT EXISTS `monsters` (
+  `id` smallint(6) NOT NULL COMMENT 'National Number',
+  `hoenn_id` smallint(6) NOT NULL COMMENT 'Hoenn Number',
+  `name` varchar(15) NOT NULL,
+  `percent_male` float NOT NULL,
+  `percent_female` float NOT NULL,
+  `class` int(11) NOT NULL COMMENT 'Classification',
+  `type_1` int(11) NOT NULL,
+  `type_2` int(11) NOT NULL,
+  `height` varchar(15) NOT NULL,
+  `weight` varchar(15) NOT NULL,
+  `colour` varchar(15) NOT NULL COMMENT 'Colour Category',
+  `base_hp` int(11) NOT NULL COMMENT 'Base Hit Points',
+  `base_atk` int(11) NOT NULL COMMENT 'Base Attack',
+  `base_def` int(11) NOT NULL COMMENT 'Base Defense',
+  `base_sp_atk` int(11) NOT NULL COMMENT 'Base Special Attack',
+  `base_sp_def` int(11) NOT NULL COMMENT 'Base Special Defense',
+  `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
+  PRIMARY KEY (`id`),
+  KEY `hoenn_id` (`hoenn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
