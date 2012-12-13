@@ -90,7 +90,8 @@ CREATE TABLE IF NOT EXISTS `monster_exp` (
   `level` tinyint(4) NOT NULL,
   `group` varchar(11) NOT NULL,
   `next_level` mediumint(9) NOT NULL,
-  `total` mediumint(9) NOT NULL
+  `total` mediumint(9) NOT NULL,
+  UNIQUE KEY `no_duplicates` (`level`,`group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Table';
 
 --
