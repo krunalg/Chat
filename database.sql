@@ -724,8 +724,10 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `base_sp_atk` int(11) NOT NULL COMMENT 'Base Special Attack',
   `base_sp_def` int(11) NOT NULL COMMENT 'Base Special Defense',
   `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
+  `exp_group` varchar(11) NOT NULL COMMENT 'Experience Group',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_1`) REFERENCES monster_types(`id`),
   FOREIGN KEY (`type_2`) REFERENCES monster_types(`id`),
+  FOREIGN KEY (`exp_group`) REFERENCES monster_exp_groups(`group`),
   UNIQUE KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
