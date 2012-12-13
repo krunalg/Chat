@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `monsters`;
-DROP TABLE IF EXISTS `monster_types`;
+DROP TABLE IF EXISTS `attack_types`;
 DROP TABLE IF EXISTS `monster_exp`;
 DROP TABLE IF EXISTS `monster_exp_groups`;
 
@@ -33,35 +33,35 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
 
 --
--- Table structure for table `monster_types`
+-- Table structure for table `attack_types`
 --
 
-CREATE TABLE IF NOT EXISTS `monster_types` (
+CREATE TABLE IF NOT EXISTS `attack_types` (
   `id` varchar(8) NOT NULL COMMENT 'Type Name',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
--- Dumping data for table `monster_types`
+-- Dumping data for table `attack_types`
 --
 
-INSERT INTO `monster_types` (`id`) VALUES('bug');
-INSERT INTO `monster_types` (`id`) VALUES('dark');
-INSERT INTO `monster_types` (`id`) VALUES('dragon');
-INSERT INTO `monster_types` (`id`) VALUES('electric');
-INSERT INTO `monster_types` (`id`) VALUES('fighting');
-INSERT INTO `monster_types` (`id`) VALUES('fire');
-INSERT INTO `monster_types` (`id`) VALUES('flying');
-INSERT INTO `monster_types` (`id`) VALUES('ghost');
-INSERT INTO `monster_types` (`id`) VALUES('grass');
-INSERT INTO `monster_types` (`id`) VALUES('ground');
-INSERT INTO `monster_types` (`id`) VALUES('ice');
-INSERT INTO `monster_types` (`id`) VALUES('normal');
-INSERT INTO `monster_types` (`id`) VALUES('poison');
-INSERT INTO `monster_types` (`id`) VALUES('psychic');
-INSERT INTO `monster_types` (`id`) VALUES('rock');
-INSERT INTO `monster_types` (`id`) VALUES('steel');
-INSERT INTO `monster_types` (`id`) VALUES('water');
+INSERT INTO `attack_types` (`id`) VALUES('bug');
+INSERT INTO `attack_types` (`id`) VALUES('dark');
+INSERT INTO `attack_types` (`id`) VALUES('dragon');
+INSERT INTO `attack_types` (`id`) VALUES('electric');
+INSERT INTO `attack_types` (`id`) VALUES('fighting');
+INSERT INTO `attack_types` (`id`) VALUES('fire');
+INSERT INTO `attack_types` (`id`) VALUES('flying');
+INSERT INTO `attack_types` (`id`) VALUES('ghost');
+INSERT INTO `attack_types` (`id`) VALUES('grass');
+INSERT INTO `attack_types` (`id`) VALUES('ground');
+INSERT INTO `attack_types` (`id`) VALUES('ice');
+INSERT INTO `attack_types` (`id`) VALUES('normal');
+INSERT INTO `attack_types` (`id`) VALUES('poison');
+INSERT INTO `attack_types` (`id`) VALUES('psychic');
+INSERT INTO `attack_types` (`id`) VALUES('rock');
+INSERT INTO `attack_types` (`id`) VALUES('steel');
+INSERT INTO `attack_types` (`id`) VALUES('water');
 
 --
 -- Table structure for table `monster_exp_groups`
@@ -761,8 +761,8 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
   `exp_group` varchar(11) NOT NULL COMMENT 'Experience Group',
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type_1`) REFERENCES monster_types(`id`),
-  FOREIGN KEY (`type_2`) REFERENCES monster_types(`id`),
+  FOREIGN KEY (`type_1`) REFERENCES attack_types(`id`),
+  FOREIGN KEY (`type_2`) REFERENCES attack_types(`id`),
   FOREIGN KEY (`exp_group`) REFERENCES monster_exp_groups(`group`),
   UNIQUE KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
