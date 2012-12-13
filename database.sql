@@ -35,7 +35,7 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `monster_types` (
-  `id` varchar(15) NOT NULL COMMENT 'Type Name',
+  `id` varchar(8) NOT NULL COMMENT 'Type Name',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
