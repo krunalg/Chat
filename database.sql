@@ -722,6 +722,21 @@ INSERT INTO `attack_categories` (`id`, `name`) VALUES
 (3, 'status');
 
 --
+-- Table structure for table `attacks`
+--
+
+CREATE TABLE IF NOT EXISTS `attacks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `type` varchar(8) NOT NULL COMMENT 'Battle Type',
+  `category` int(11) NOT NULL COMMENT 'Effect Type',
+  `power` tinyint(4) DEFAULT NULL,
+  `accuracy` tinyint(4) DEFAULT NULL,
+  `pp` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+--
 -- Table structure for table `monsters`
 --
 
