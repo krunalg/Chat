@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `monsters`;
 DROP TABLE IF EXISTS `monster_types`;
+DROP TABLE IF EXISTS `monster_exp_groups`;
 
 -- --------------------------------------------------------
 
@@ -60,6 +61,25 @@ INSERT INTO `monster_types` (`id`) VALUES('psychic');
 INSERT INTO `monster_types` (`id`) VALUES('rock');
 INSERT INTO `monster_types` (`id`) VALUES('steel');
 INSERT INTO `monster_types` (`id`) VALUES('water');
+
+--
+-- Table structure for table `monster_exp_groups`
+--
+
+CREATE TABLE IF NOT EXISTS `monster_exp_groups` (
+  `group` varchar(15) NOT NULL,
+  PRIMARY KEY (`group`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Experience Groups';
+
+--
+-- Dumping data for table `monster_exp_groups`
+--
+
+INSERT INTO `monster_exp_groups` (`group`) VALUES('erratic');
+INSERT INTO `monster_exp_groups` (`group`) VALUES('fast');
+INSERT INTO `monster_exp_groups` (`group`) VALUES('fluctuating');
+INSERT INTO `monster_exp_groups` (`group`) VALUES('medium fast');
+INSERT INTO `monster_exp_groups` (`group`) VALUES('slow');
 
 --
 -- Table structure for table `monsters`
