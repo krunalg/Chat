@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `monster_exp` (
   `group` varchar(11) NOT NULL,
   `next_level` mediumint(9) NOT NULL,
   `total` mediumint(9) NOT NULL,
+  FOREIGN KEY (`group`) REFERENCES monster_exp_groups(`group`),
   UNIQUE KEY `no_duplicates` (`level`,`group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Table';
 
