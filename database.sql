@@ -63,3 +63,25 @@ CREATE TABLE IF NOT EXISTS `monster_types` (
   `id` varchar(15) NOT NULL COMMENT 'Type Name',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `monster_types`
+--
+
+INSERT INTO `monster_types` (`id`) VALUES('bug');
+INSERT INTO `monster_types` (`id`) VALUES('dark');
+INSERT INTO `monster_types` (`id`) VALUES('dragon');
+INSERT INTO `monster_types` (`id`) VALUES('electric');
+INSERT INTO `monster_types` (`id`) VALUES('fighting');
+INSERT INTO `monster_types` (`id`) VALUES('fire');
+INSERT INTO `monster_types` (`id`) VALUES('flying');
+INSERT INTO `monster_types` (`id`) VALUES('ghost');
+INSERT INTO `monster_types` (`id`) VALUES('grass');
+INSERT INTO `monster_types` (`id`) VALUES('ground');
+INSERT INTO `monster_types` (`id`) VALUES('ice');
+INSERT INTO `monster_types` (`id`) VALUES('normal');
+INSERT INTO `monster_types` (`id`) VALUES('poison');
+INSERT INTO `monster_types` (`id`) VALUES('psychic');
+INSERT INTO `monster_types` (`id`) VALUES('rock');
+INSERT INTO `monster_types` (`id`) VALUES('steel');
+INSERT INTO `monster_types` (`id`) VALUES('water');
