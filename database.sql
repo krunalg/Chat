@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `monster_exp` (
 -- Dumping data for table `monster_exp`
 --
 
-INSERT INTO `monster_exp` (`level`, `group`, `next_level`, `total`) VALUES
+INSERT INTO `monster_exp` (`level`, `group_id`, `next_level`, `total`) VALUES
 (1, 'erratic', 15, 0),
 (1, 'fast', 6, 0),
 (1, 'fluctuating', 4, 0),
