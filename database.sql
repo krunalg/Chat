@@ -54,3 +54,12 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   PRIMARY KEY (`id`),
   KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `monster_types`
+--
+
+CREATE TABLE IF NOT EXISTS `monster_types` (
+  `id` varchar(15) NOT NULL COMMENT 'Type Name',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
