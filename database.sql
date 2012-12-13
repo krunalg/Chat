@@ -733,7 +733,8 @@ CREATE TABLE IF NOT EXISTS `attacks` (
   `power` tinyint(4) DEFAULT NULL,
   `accuracy` tinyint(4) DEFAULT NULL,
   `pp` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`category`) REFERENCES attack_categories(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
