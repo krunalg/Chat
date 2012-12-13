@@ -729,12 +729,12 @@ CREATE TABLE IF NOT EXISTS `attacks` (
   `id` int(11) NOT NULL,
   `name` varchar(15) NOT NULL,
   `type` varchar(8) NOT NULL COMMENT 'Battle Type',
-  `category` int(11) NOT NULL COMMENT 'Effect Type',
+  `cat_id` int(11) NOT NULL COMMENT 'Effect Type',
   `power` tinyint(4) DEFAULT NULL,
   `accuracy` tinyint(4) DEFAULT NULL,
   `pp` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`category`) REFERENCES attack_categories(`id`)
+  FOREIGN KEY (`cat_id`) REFERENCES attack_categories(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
