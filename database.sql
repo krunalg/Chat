@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `monsters`;
 DROP TABLE IF EXISTS `monster_types`;
+DROP TABLE IF EXISTS `monster_exp`;
 DROP TABLE IF EXISTS `monster_exp_groups`;
 
 -- --------------------------------------------------------
@@ -80,6 +81,17 @@ INSERT INTO `monster_exp_groups` (`group`) VALUES('fast');
 INSERT INTO `monster_exp_groups` (`group`) VALUES('fluctuating');
 INSERT INTO `monster_exp_groups` (`group`) VALUES('medium fast');
 INSERT INTO `monster_exp_groups` (`group`) VALUES('slow');
+
+--
+-- Table structure for table `monster_exp`
+--
+
+CREATE TABLE IF NOT EXISTS `monster_exp` (
+  `level` tinyint(4) NOT NULL,
+  `group` varchar(11) NOT NULL,
+  `next_level` mediumint(9) NOT NULL,
+  `total` mediumint(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Table';
 
 --
 -- Table structure for table `monsters`
