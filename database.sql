@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `monster_exp_groups` (
 INSERT INTO `monster_exp_groups` (`group`) VALUES('erratic');
 INSERT INTO `monster_exp_groups` (`group`) VALUES('fast');
 INSERT INTO `monster_exp_groups` (`group`) VALUES('fluctuating');
-INSERT INTO `monster_exp_groups` (`group`) VALUES('medium fast');
+INSERT INTO `monster_exp_groups` (`group`) VALUES('medium_fast');
 INSERT INTO `monster_exp_groups` (`group`) VALUES('slow');
 
 --
