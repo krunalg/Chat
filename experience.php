@@ -112,10 +112,76 @@ $xp = preg_replace( "/[[:blank:]]+/", ' ', $xp );
 // Split into an array.
 $xp = explode( "\n", $xp );
 
+// Split up further.
+for( $i = 0; $i < count( $xp ); $i++ ) {
+
+	$xp[ $i ] = explode( " ", trim( $xp[ $i ] ) );
+
+}
+
+$output = "";
+
+// Obtain meaningful information from array.
+for( $i = 0; $i < count( $xp ); $i++ ) {
+
+	$total = Array();
+
+	$next_level = Array();
+
+	$total['erratic']          = $xp[$i][0];
+
+	$total['fast']             = $xp[$i][1];
+
+	$total['medium_fast']      = $xp[$i][2];
+
+	$total['medium_slow']      = $xp[$i][3];
+
+	$total['slow']             = $xp[$i][4];
+
+	$total['fluctuating']      = $xp[$i][5];
+
+	$level                     = $xp[$i][6];
+
+	$next_level['erratic']     = $xp[$i][7];
+
+	$next_level['fast']        = $xp[$i][8];
+
+	$next_level['medium_fast'] = $xp[$i][9];
+
+	$next_level['medium_slow'] = $xp[$i][10];
+
+	$next_level['slow']        = $xp[$i][11];
+
+	$next_level['fluctuating'] = $xp[$i][12];
+
+	// Create SQL statements for each exp_group.
+	foreach( $total as $exp_group => $value ) {
+
+		$table = 'monster_exp';
+
+		$sql = "INSERT INTO  `$table` ( "
+				 . "`level` , "
+				 . "`group` , "
+				 . "`next_level` , "
+				 . "`total` "
+			 . ") "
+				 . "VALUES ( "
+				 . "'$level', "
+				 . " '" . $exp_group . "', "
+				 . " '" . $next_level[ $exp_group ] . "', "
+				 . " '" . $total[ $exp_group ] . "' "
+			 . "); \n";
+
+		$output .= $sql;
+
+	}
+
+}
+
 
 ?>
 
 
 
 
-<pre><?php echo print_r( $xp ); ?></pre>
+<pre><?php echo $output; ?></pre>
