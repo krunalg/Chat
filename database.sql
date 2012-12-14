@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS `experience_groups`;
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` varchar(12) NOT NULL COMMENT 'in-game name',
   `x` int(11) NOT NULL DEFAULT '0' COMMENT 'last recorded x position',
   `y` int(11) NOT NULL DEFAULT '0' COMMENT 'last recorded y position',
