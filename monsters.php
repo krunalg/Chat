@@ -881,7 +881,8 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 	$table = 'monsters';
 
 	$sql = "INSERT INTO `$table` "
-		     . "(`id`, "
+		     . "( "
+		     . "`id`, "
 		     . "`hoenn_id`, "
 		     . "`name`, "
 		     . "`percent_male`, "
