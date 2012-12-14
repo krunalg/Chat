@@ -223,15 +223,20 @@ http://jquery.com/
 Useful curl example:
 ----------------------------
 
-# curl -X PUT http://www.foo.com/bar/1 -d "some=var" -d "other=var2"
+### curl -X PUT http://www.foo.com/bar/1 -d "some=var" -d "other=var2"
+
 -H "Accept: text/json" -I
+
 -X [METHOD] Specify the HTTP method.
+
 -d “name=value” Set a POST/PUT field name and value.
+
 -H [HEADER] Set a header.
+
 -I Only display response’s headers.
 
-- Display the output:
+### Display Body
 curl -X POST http://localhost/Chat/api/user/ -d "user=Joncom2" -d "x=0" -d "y=16" -d "facing=left" -d "skin=boy" -d "state=idle" -d "map=RsWorld"
 
-- Display just the header information:
+### Display Header
 curl -s -X POST -D- http://localhost/Chat/api/user/ -o/dev/null
