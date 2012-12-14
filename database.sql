@@ -72,7 +72,7 @@ INSERT INTO `attack_types` (`id`, `name`) VALUES(17, 'water');
 
 CREATE TABLE IF NOT EXISTS `experience_groups` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `name` varchar(15) NOT NULL,
+  `name` varchar(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Groups' AUTO_INCREMENT=7 ;
 
