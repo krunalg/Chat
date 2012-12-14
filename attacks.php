@@ -420,4 +420,12 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
 ?>
 
-<pre><?php print_r( $rebuilt ); ?></pre>
+<pre>
+<?php
+
+//print_r( $rebuilt );
+
+echo $output;
+
+?>
+</pre>
