@@ -849,7 +849,7 @@ $output = "";
 
 // Break up array into meaningful parts.
 
-for( $i = 0; $i < count( $rebuilt ); $i++ ) {
+for( $i = 0; $i < 385; $i++ ) {
 
 	$monster = explode( "/", $rebuilt[$i] );
 
