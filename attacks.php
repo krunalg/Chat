@@ -320,7 +320,14 @@ $rebuilt = Array();
 
 for( $i = 0; $i < count( $attacks ); $i += 3 ) {
 
-	$rebuilt[] = trim( $attacks[ $i ] ) . ' ' . trim( $attacks[ $i + 1 ] ) . ' ' . trim( $attacks[ $i + 2] );
+	$rebuilt[] = trim( $attacks[ $i ] ) . '/' . trim( $attacks[ $i + 1 ] ) . '/' . trim( $attacks[ $i + 2] );
+
+}
+
+// Put a slash between attack name and type.
+for( $i = 0; $i < count( $rebuilt ); $i++ ) {
+
+	$rebuilt = preg_replace( "/\t/", "/", $rebuilt );
 
 }
 
