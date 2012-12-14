@@ -732,7 +732,7 @@ CREATE TABLE IF NOT EXISTS `attacks` (
   `id` int(11) NOT NULL,
   `name` varchar(15) NOT NULL,
   `type` varchar(8) NOT NULL COMMENT 'Battle Type',
-  `cat_id` int(11) NOT NULL COMMENT 'Effect Type',
+  `cat_id` tinyint(4) NOT NULL COMMENT 'Effect Type',
   `power` tinyint(4) DEFAULT NULL,
   `accuracy` tinyint(4) DEFAULT NULL,
   `pp` tinyint(4) NOT NULL,
