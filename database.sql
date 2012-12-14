@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS `monsters`;
 DROP TABLE IF EXISTS `attacks`;
 DROP TABLE IF EXISTS `attack_categories`;
 DROP TABLE IF EXISTS `attack_types`;
-DROP TABLE IF EXISTS `monster_exp`;
-DROP TABLE IF EXISTS `monster_exp_groups`;
+DROP TABLE IF EXISTS `experience`;
+DROP TABLE IF EXISTS `experience_groups`;
 
 -- --------------------------------------------------------
 
@@ -67,44 +67,44 @@ INSERT INTO `attack_types` (`id`, `name`) VALUES(16, 'steel');
 INSERT INTO `attack_types` (`id`, `name`) VALUES(17, 'water');
 
 --
--- Table structure for table `monster_exp_groups`
+-- Table structure for table `experience_groups`
 --
 
-CREATE TABLE IF NOT EXISTS `monster_exp_groups` (
+CREATE TABLE IF NOT EXISTS `experience_groups` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Groups' AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `monster_exp_groups`
+-- Dumping data for table `experience_groups`
 --
 
-INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(1, 'erratic');
-INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(2, 'fast');
-INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(3, 'fluctuating');
-INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(4, 'medium_fast');
-INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(5, 'medium_slow');
-INSERT INTO `monster_exp_groups` (`id`, `name`) VALUES(6, 'slow');
+INSERT INTO `experience_groups` (`id`, `name`) VALUES(1, 'erratic');
+INSERT INTO `experience_groups` (`id`, `name`) VALUES(2, 'fast');
+INSERT INTO `experience_groups` (`id`, `name`) VALUES(3, 'fluctuating');
+INSERT INTO `experience_groups` (`id`, `name`) VALUES(4, 'medium_fast');
+INSERT INTO `experience_groups` (`id`, `name`) VALUES(5, 'medium_slow');
+INSERT INTO `experience_groups` (`id`, `name`) VALUES(6, 'slow');
 
 --
--- Table structure for table `monster_exp`
+-- Table structure for table `experience`
 --
 
-CREATE TABLE IF NOT EXISTS `monster_exp` (
+CREATE TABLE IF NOT EXISTS `experience` (
   `level` tinyint(4) NOT NULL,
   `group_id` tinyint(4) NOT NULL,
   `next_level` mediumint(9) NOT NULL,
   `total` mediumint(9) NOT NULL,
-  FOREIGN KEY (`group_id`) REFERENCES monster_exp_groups(`id`),
+  FOREIGN KEY (`group_id`) REFERENCES experience_groups(`id`),
   UNIQUE KEY `no_duplicates` (`level`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Table';
 
 --
--- Dumping data for table `monster_exp`
+-- Dumping data for table `experience`
 --
 
-INSERT INTO `monster_exp` (`level`, `group_id`, `next_level`, `total`) VALUES
+INSERT INTO `experience` (`level`, `group_id`, `next_level`, `total`) VALUES
 (1, 1, 15, 0),
 (1, 2, 6, 0),
 (1, 3, 4, 0),
@@ -877,6 +877,6 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_1`) REFERENCES attack_types(`id`),
   FOREIGN KEY (`type_2`) REFERENCES attack_types(`id`),
-  FOREIGN KEY (`group_id`) REFERENCES monster_exp_groups(`id`),
+  FOREIGN KEY (`group_id`) REFERENCES experience_groups(`id`),
   UNIQUE KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
