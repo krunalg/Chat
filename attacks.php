@@ -375,6 +375,9 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
 }
 
+// To eventually be echoed.
+$output = "";
+
 // Extract meaningful information from array.
 for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
@@ -407,6 +410,9 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 		     . " '$accuracy', "
 		     . " '$pp' "
 	     . " );";
+
+	// Add to output.
+	$output .= $sql . "\n";
 
 }
 
