@@ -873,7 +873,7 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `base_sp_atk` int(11) NOT NULL COMMENT 'Base Special Attack',
   `base_sp_def` int(11) NOT NULL COMMENT 'Base Special Defense',
   `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
-  `group_id` tinyint(4) NOT NULL COMMENT 'Experience Group',
+  `exp_group` tinyint(4) NOT NULL COMMENT 'Experience Rate Group',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_1`) REFERENCES attack_types(`id`),
   FOREIGN KEY (`type_2`) REFERENCES attack_types(`id`),
