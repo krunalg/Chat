@@ -319,39 +319,39 @@ $cat_id = Array( 'Special' => 1, 'Status' => 2, 'Physical' => 3 );
 
 $type_id = Array(
 
-	'bug' => 1,
+	'bug'      => 1,
 
-	'dark' => 1,
+	'dark'     => 2,
 
-	'dragon' => 1,
+	'dragon'   => 3,
 
-	'electric' => 1,
+	'electric' => 4,
 
-	'fighting' => 1,
+	'fighting' => 5,
 
-	'fire' => 1,
+	'fire'     => 6,
 
-	'flying' => 1,
+	'flying'   => 7,
 
-	'ghost' => 1,
+	'ghost'    => 8,
 
-	'grass' => 1,
+	'grass'    => 9,
 
-	'ground' => 1,
+	'ground'   => 10,
 
-	'ice' => 1,
+	'ice'      => 11,
 
-	'normal' => 1,
+	'normal'   => 12,
 
-	'poison' => 1,
+	'poison'   => 13,
 
-	'psychic' => 1,
+	'psychic'  => 14,
 
-	'rock' => 1,
+	'rock'     => 15,
 
-	'steel' => 1,
+	'steel'    => 16,
 
-	'water' => 1,
+	'water'    => 17
 
 );
 
