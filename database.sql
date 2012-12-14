@@ -739,7 +739,8 @@ CREATE TABLE IF NOT EXISTS `attacks` (
   `pp` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_id`) REFERENCES attack_types(`id`),
-  FOREIGN KEY (`cat_id`) REFERENCES attack_categories(`id`)
+  FOREIGN KEY (`cat_id`) REFERENCES attack_categories(`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=104 ;
 
 --
