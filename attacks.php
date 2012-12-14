@@ -405,8 +405,8 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 		     . " '$name', "
 		     . " '" . $type_id[ $type ] . "', "
 		     . " '" . $cat_id[ $category ] ."', "
-		     . " '$power', "
-		     . " '$accuracy', "
+		     . ( $power == '-' ? 'NULL,' : "'$power'," )
+		     . ( $accuracy == '-' ? 'NULL,' : "'$accuracy'," )
 		     . " '$pp' "
 	     . " );";
 
