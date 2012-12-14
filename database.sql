@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `id` smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT,
   /* Reduce VARCHAR after data entry. */
   `name` varchar(20) NOT NULL,
-  `description` varchar(11) NOT NULL,
+  `description` varchar(140) NOT NULL,
   `type_id` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_id`) REFERENCES item_types(`id`),
