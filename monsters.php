@@ -796,6 +796,16 @@ for( $i = 0; $i < count( $monsters ); $i++ ) {
 
 }
 
+// Rebuild array.
+
+$rebuilt = array();
+
+for( $i = 0; $i < count( $monsters ); $i += 2 ) {
+
+	$rebuilt[] = $monsters[$i] . '/' . $monsters[$i+1];
+
+}
+
 ?>
 
 <pre>
@@ -803,7 +813,7 @@ for( $i = 0; $i < count( $monsters ); $i++ ) {
 
 //echo $output;
 
-print_r( $monsters );
+print_r( $rebuilt );
 
 ?>
 </pre>
