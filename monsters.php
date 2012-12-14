@@ -1,5 +1,7 @@
 <?php
 
+// Table copied from http://pokemondb.net/pokedex/all
+
 $monsters = "001	Bulbasaur	GRASS
 POISON	45	49	49	65	65	45	318
  002	Ivysaur	GRASS
