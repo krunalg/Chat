@@ -382,7 +382,7 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
 	$name = $attack[0];
 
-	$type = $attack[1];
+	$type = strtolower( $attack[1] );
 
 	$category = $attack[2];
 
