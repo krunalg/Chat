@@ -349,7 +349,20 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 	$pp = $attack[5];
 
 	// Create SQL query.
-	$sql = "";
+
+	$table = 'attacks';
+
+	$sql = "INSERT INTO `$table` "
+	     	. "(`id`, `name`, `type`, `cat_id`, `power`, `accuracy`, `pp`) "
+	     . "VALUES ( "
+		     . " '', "
+		     . " 'name', "
+		     . " 'bug', "
+		     . " '1', "
+		     . " '33', "
+		     . " '100', "
+		     . " '5' "
+	     . " );";
 
 }
 
