@@ -929,7 +929,7 @@ CREATE TABLE IF NOT EXISTS `monsters` (
 -- Dumping data for table `monsters`
 --
 
-INSERT INTO `monsters` (`id`, `hoenn_id`, `name`, `percent_male`, `percent_female`, `class`, `type_1`, `type_2`, `height`, `weight`, `colour`, `base_hp`, `base_atk`, `base_def`, `base_sp_atk`, `base_sp_def`, `base_spd`, `exp_group`) VALUES
+INSERT INTO `monsters` (`id`, `hoenn_id`, `name`, `percent_male`, `percent_female`, `species`, `type_1`, `type_2`, `height`, `weight`, `colour`, `base_hp`, `base_atk`, `base_def`, `base_sp_atk`, `base_sp_def`, `base_spd`, `exp_group`) VALUES
 (25, 156, 'Pikachu', 50, 50, 'Mouse Pokémon', 4, NULL, '1''04"', '13.0 lbs', 'Yellow', 35, 55, 30, 50, 40, 90, 4);
 
 --
