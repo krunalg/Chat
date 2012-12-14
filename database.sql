@@ -940,5 +940,8 @@ CREATE TABLE IF NOT EXISTS `user_monsters` (
   `id` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `monster_id` smallint(6) NOT NULL,
-  `experience` int(11) NOT NULL
+  `experience` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+  FOREIGN KEY (`monster_id`) REFERENCES monsters(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
