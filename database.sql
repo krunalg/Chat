@@ -878,7 +878,7 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_1`) REFERENCES attack_types(`id`),
   FOREIGN KEY (`type_2`) REFERENCES attack_types(`id`),
-  FOREIGN KEY (`group_id`) REFERENCES experience_groups(`id`),
+  FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
