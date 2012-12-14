@@ -785,6 +785,25 @@ Defense form	PSYCHIC
 Speed form	PSYCHIC
 50	95	90	95	90	180	600";
 
+$monsters = explode( "\n", $monsters );
+
+for( $i = 0; $i < count( $monsters ); $i++ ) {
+
+	// Replace tabs with slashes.
+	$monsters[$i] = preg_replace( "/\t/", "/", $monsters[$i] );
+
+	$monsters[$i] = trim( $monsters[$i] );
+
+}
+
 ?>
 
-<pre><?php echo $output; ?></pre>
+<pre>
+<?php
+
+//echo $output;
+
+print_r( $monsters );
+
+?>
+</pre>
