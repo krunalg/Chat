@@ -53,9 +53,9 @@ CREATE TABLE IF NOT EXISTS `items` (
   /* Reduce VARCHAR after data entry. */
   `name` varchar(20) NOT NULL,
   `description` int(11) NOT NULL,
-  `type` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type`) REFERENCES item_types(`id`),
+  FOREIGN KEY (`type_id`) REFERENCES item_types(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
