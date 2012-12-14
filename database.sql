@@ -39,7 +39,7 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL UNSIGNED AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `description` int(11) NOT NULL,
   `type` int(11) NOT NULL,
