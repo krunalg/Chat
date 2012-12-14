@@ -876,6 +876,50 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
 	$total = $monster[ $count - 1 ];
 
+	// Create a SQL statement.
+
+	$table = 'monsters';
+
+	$sql = "INSERT INTO `$table` "
+		     . "(`id`, "
+		     . "`hoenn_id`, "
+		     . "`name`, "
+		     . "`percent_male`, "
+		     . "`percent_female`, "
+		     . "`species`, "
+		     . "`type_1`, "
+		     . "`type_2`, "
+		     . "`height`, "
+		     . "`weight`, "
+		     . "`colour`, "
+		     . "`base_hp`, "
+		     . "`base_attack`, "
+		     . "`base_defense`, "
+		     . "`base_sp_atk`, "
+		     . "`base_sp_def`, "
+		     . "`base_speed`, "
+		     . "`exp_group`"
+	     . ") VALUES ( "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "NULL, "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'', "
+		     . "'' "
+	     . ")";
+
 }
 
 ?>
