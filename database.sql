@@ -732,14 +732,14 @@ INSERT INTO `attack_types` (`id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `attacks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
-  `type_id` tinyint(4) NOT NULL COMMENT 'Element Type',
-  `cat_id` tinyint(4) NOT NULL COMMENT 'Effect Category',
+  `element_id` tinyint(4) NOT NULL,
+  `type_id` tinyint(4) NOT NULL COMMENT 'Effect Category',
   `power` tinyint(4) DEFAULT NULL,
   `accuracy` tinyint(4) DEFAULT NULL,
   `pp` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type_id`) REFERENCES attack_elements(`id`),
-  FOREIGN KEY (`cat_id`) REFERENCES attack_types(`id`),
+  FOREIGN KEY (`element_id`) REFERENCES attack_elements(`id`),
+  FOREIGN KEY (`type_id`) REFERENCES attack_types(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=104 ;
 
@@ -747,7 +747,7 @@ CREATE TABLE IF NOT EXISTS `attacks` (
 -- Dumping data for table `attacks`
 --
 
-INSERT INTO `attacks` (`id`, `name`, `type_id`, `cat_id`, `power`, `accuracy`, `pp`) VALUES
+INSERT INTO `attacks` (`id`, `name`, `element_id`, `type_id`, `power`, `accuracy`, `pp`) VALUES
 (1, 'Aerial Ace', 7, 3, 60, -1, 20),
 (2, 'Air Cutter', 7, 1, 55, 95, 25),
 (3, 'Arm Thrust', 5, 3, 15, 100, 20),
