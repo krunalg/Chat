@@ -910,7 +910,7 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `height` varchar(15) NOT NULL,
   `weight` varchar(15) NOT NULL,
   `colour` varchar(15) NOT NULL COMMENT 'Colour Category',
-  `base_hp` int(11) NOT NULL COMMENT 'Base Hit Points',
+  `base_hp` tinyint(4) UNSIGNED NOT NULL COMMENT 'Hit Points',
   `base_attack` int(11) NOT NULL,
   `base_defense` int(11) NOT NULL,
   `base_sp_atk` int(11) NOT NULL COMMENT 'Special Attack',
