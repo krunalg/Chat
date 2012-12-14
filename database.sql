@@ -35,6 +35,19 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
 
 --
+-- Table structure for table `items`
+--
+
+CREATE TABLE IF NOT EXISTS `items` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `description` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+--
 -- Table structure for table `attack_elements`
 --
 
