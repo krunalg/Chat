@@ -753,7 +753,7 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `percent_female` float NOT NULL,
   `class` int(11) NOT NULL COMMENT 'Classification',
   `type_1` tinyint(4) NOT NULL COMMENT 'Primary Type',
-  `type_2` tinyint(4) 'Secondary Type',
+  `type_2` tinyint(4) COMMENT 'Secondary Type',
   `height` varchar(15) NOT NULL,
   `weight` varchar(15) NOT NULL,
   `colour` varchar(15) NOT NULL COMMENT 'Colour Category',
