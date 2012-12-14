@@ -39,31 +39,32 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `attack_types` (
-  `id` varchar(8) NOT NULL COMMENT 'Type Name',
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `attack_types`
 --
 
-INSERT INTO `attack_types` (`id`) VALUES('bug');
-INSERT INTO `attack_types` (`id`) VALUES('dark');
-INSERT INTO `attack_types` (`id`) VALUES('dragon');
-INSERT INTO `attack_types` (`id`) VALUES('electric');
-INSERT INTO `attack_types` (`id`) VALUES('fighting');
-INSERT INTO `attack_types` (`id`) VALUES('fire');
-INSERT INTO `attack_types` (`id`) VALUES('flying');
-INSERT INTO `attack_types` (`id`) VALUES('ghost');
-INSERT INTO `attack_types` (`id`) VALUES('grass');
-INSERT INTO `attack_types` (`id`) VALUES('ground');
-INSERT INTO `attack_types` (`id`) VALUES('ice');
-INSERT INTO `attack_types` (`id`) VALUES('normal');
-INSERT INTO `attack_types` (`id`) VALUES('poison');
-INSERT INTO `attack_types` (`id`) VALUES('psychic');
-INSERT INTO `attack_types` (`id`) VALUES('rock');
-INSERT INTO `attack_types` (`id`) VALUES('steel');
-INSERT INTO `attack_types` (`id`) VALUES('water');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(1, 'bug');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(2, 'dark');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(3, 'dragon');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(4, 'electric');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(5, 'fighting');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(6, 'fire');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(7, 'flying');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(8, 'ghost');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(9, 'grass');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(10, 'ground');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(11, 'ice');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(12, 'normal');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(13, 'poison');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(14, 'psychic');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(15, 'rock');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(16, 'steel');
+INSERT INTO `attack_types` (`id`, `name`) VALUES(17, 'water');
 
 --
 -- Table structure for table `monster_exp_groups`
