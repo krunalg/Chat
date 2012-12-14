@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `items`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `monsters`;
 DROP TABLE IF EXISTS `attacks`;
