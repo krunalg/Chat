@@ -40,7 +40,8 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `items` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  /* Reduce VARCHAR after data entry. */
   `name` varchar(20) NOT NULL,
   `description` int(11) NOT NULL,
   `type` int(11) NOT NULL,
