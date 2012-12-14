@@ -785,6 +785,45 @@ Defense form	PSYCHIC
 Speed form	PSYCHIC
 50	95	90	95	90	180	600";
 
+// Map out word-to-ID conversions.
+$type_id = Array(
+
+	'bug'      => 1,
+
+	'dark'     => 2,
+
+	'dragon'   => 3,
+
+	'electric' => 4,
+
+	'fighting' => 5,
+
+	'fire'     => 6,
+
+	'flying'   => 7,
+
+	'ghost'    => 8,
+
+	'grass'    => 9,
+
+	'ground'   => 10,
+
+	'ice'      => 11,
+
+	'normal'   => 12,
+
+	'poison'   => 13,
+
+	'psychic'  => 14,
+
+	'rock'     => 15,
+
+	'steel'    => 16,
+
+	'water'    => 17
+
+);
+
 $monsters = explode( "\n", $monsters );
 
 for( $i = 0; $i < count( $monsters ); $i++ ) {
@@ -812,11 +851,30 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
 	$monster = explode( "/", $rebuilt[$i] );
 
+	$count = count( $monster );
+
 	$id =  $monster[0];
 
 	$name = $monster[1];
 
+	$type_1 = $type_id[ strtolower( $monster[2] ) ];
 
+	// If extra field, it's secondary type.
+	if( $count === 11 ) $type_2 = $type_id[ strtolower( $monster[3] ) ];
+
+	$hp = $monster[ $count - 7 ];
+
+	$attack = $monster[ $count - 6 ];
+
+	$defense = $monster[ $count - 5 ];
+
+	$sp_atk = $monster[ $count - 4 ];
+
+	$sp_def = $monster[ $count - 3 ];
+
+	$speed = $monster[ $count - 2 ];
+
+	$total = $monster[ $count - 1 ];
 
 }
 
