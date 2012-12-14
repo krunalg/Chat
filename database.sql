@@ -42,7 +42,8 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 CREATE TABLE IF NOT EXISTS `item_types` (
   `id` smallint(6) NOT NULL,
   /* Reduce VARCHAR after data entry. */
-  `name` varchar(15) NOT NULL
+  `name` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
