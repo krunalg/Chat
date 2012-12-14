@@ -806,6 +806,20 @@ for( $i = 0; $i < count( $monsters ); $i += 2 ) {
 
 }
 
+// Break up array into meaningful parts.
+
+for( $i = 0; $i < count( $rebuilt ); $i++ ) {
+
+	$monster = explode( "/", $rebuilt[$i] );
+
+	$id =  $monster[0];
+
+	$name = $monster[1];
+
+
+
+}
+
 ?>
 
 <pre>
