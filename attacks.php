@@ -356,12 +356,12 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 	     	. "(`id`, `name`, `type`, `cat_id`, `power`, `accuracy`, `pp`) "
 	     . "VALUES ( "
 		     . " '', "
-		     . " 'name', "
-		     . " 'bug', "
-		     . " '1', "
-		     . " '33', "
-		     . " '100', "
-		     . " '5' "
+		     . " '$name', "
+		     . " '" . $type_id[ $type ] . "', "
+		     . " '" . $cat_id[ $category ] ."', "
+		     . " '$power', "
+		     . " '$accuracy', "
+		     . " '$pp' "
 	     . " );";
 
 }
