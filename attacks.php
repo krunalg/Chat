@@ -1,5 +1,8 @@
 <?php
 
+// This script extracts attack moves copied from Chrome browser at:
+// http://pokemondb.net/move/generation/3
+
 $attacks = "Aerial Ace	FLYING
 Physical
 60	∞	20
