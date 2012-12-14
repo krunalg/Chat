@@ -732,7 +732,7 @@ INSERT INTO `attack_categories` (`id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `attacks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
-  `type_id` varchar(8) NOT NULL COMMENT 'Element Type',
+  `type_id` tinyint(4) NOT NULL COMMENT 'Element Type',
   `cat_id` tinyint(4) NOT NULL COMMENT 'Effect Category',
   `power` tinyint(4) DEFAULT NULL,
   `accuracy` tinyint(4) DEFAULT NULL,
