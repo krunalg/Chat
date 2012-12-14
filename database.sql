@@ -36,6 +36,15 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
 
 --
+-- Table structure for table `item_types`
+--
+
+CREATE TABLE IF NOT EXISTS `item_types` (
+  `id` smallint(6) NOT NULL,
+  `name` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
 -- Table structure for table `items`
 --
 
