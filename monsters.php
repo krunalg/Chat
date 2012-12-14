@@ -845,6 +845,8 @@ for( $i = 0; $i < count( $monsters ); $i += 2 ) {
 
 }
 
+$output = "";
+
 // Break up array into meaningful parts.
 
 for( $i = 0; $i < count( $rebuilt ); $i++ ) {
@@ -921,7 +923,7 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 		     . "'' "
 	     . ")";
 
-
+	$output .= $sql . "\n";
 
 }
 
@@ -930,9 +932,9 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 <pre>
 <?php
 
-//echo $output;
+echo $output;
 
-print_r( $rebuilt );
+//print_r( $rebuilt );
 
 ?>
 </pre>
