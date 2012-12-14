@@ -5,7 +5,7 @@
 
 $attacks = "Aerial Ace	FLYING
 Physical
-60	∞	20
+60	-1	20
 Air Cutter	FLYING
 Special
 55	95	25
@@ -158,7 +158,7 @@ Status
 -	-	15
 Magical Leaf	GRASS
 Special
-60	∞	20
+60	-1	20
 Memento	DARK
 Status
 -	100	10
@@ -227,13 +227,13 @@ Physical
 70	100	20
 Shadow Punch	GHOST
 Physical
-60	∞	20
+60	-1	20
 Sheer Cold	ICE
 Special
 -	-	5
 Shock Wave	ELECTRIC
 Special
-60	∞	20
+60	-1	20
 Signal Beam	BUG
 Special
 75	100	15
