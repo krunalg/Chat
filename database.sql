@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `monsters`;
 DROP TABLE IF EXISTS `attacks`;
 DROP TABLE IF EXISTS `attack_categories`;
-DROP TABLE IF EXISTS `attack_types`;
+DROP TABLE IF EXISTS `attack_elements`;
 DROP TABLE IF EXISTS `experience`;
 DROP TABLE IF EXISTS `experience_groups`;
 
@@ -35,36 +35,36 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
 
 --
--- Table structure for table `attack_types`
+-- Table structure for table `attack_elements`
 --
 
-CREATE TABLE IF NOT EXISTS `attack_types` (
+CREATE TABLE IF NOT EXISTS `attack_elements` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=18 ;
 
 --
--- Dumping data for table `attack_types`
+-- Dumping data for table `attack_elements`
 --
 
-INSERT INTO `attack_types` (`id`, `name`) VALUES(1, 'bug');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(2, 'dark');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(3, 'dragon');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(4, 'electric');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(5, 'fighting');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(6, 'fire');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(7, 'flying');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(8, 'ghost');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(9, 'grass');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(10, 'ground');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(11, 'ice');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(12, 'normal');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(13, 'poison');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(14, 'psychic');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(15, 'rock');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(16, 'steel');
-INSERT INTO `attack_types` (`id`, `name`) VALUES(17, 'water');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(1, 'bug');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(2, 'dark');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(3, 'dragon');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(4, 'electric');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(5, 'fighting');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(6, 'fire');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(7, 'flying');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(8, 'ghost');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(9, 'grass');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(10, 'ground');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(11, 'ice');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(12, 'normal');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(13, 'poison');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(14, 'psychic');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(15, 'rock');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(16, 'steel');
+INSERT INTO `attack_elements` (`id`, `name`) VALUES(17, 'water');
 
 --
 -- Table structure for table `experience_groups`
@@ -738,7 +738,7 @@ CREATE TABLE IF NOT EXISTS `attacks` (
   `accuracy` tinyint(4) DEFAULT NULL,
   `pp` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type_id`) REFERENCES attack_types(`id`),
+  FOREIGN KEY (`type_id`) REFERENCES attack_elements(`id`),
   FOREIGN KEY (`cat_id`) REFERENCES attack_categories(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=104 ;
@@ -876,8 +876,8 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `base_spd` int(11) NOT NULL COMMENT 'Base Speed',
   `exp_group` tinyint(4) NOT NULL COMMENT 'Experience Rate Group',
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type_1`) REFERENCES attack_types(`id`),
-  FOREIGN KEY (`type_2`) REFERENCES attack_types(`id`),
+  FOREIGN KEY (`type_1`) REFERENCES attack_elements(`id`),
+  FOREIGN KEY (`type_2`) REFERENCES attack_elements(`id`),
   FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `hoenn_id` (`hoenn_id`)
