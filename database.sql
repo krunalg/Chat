@@ -760,7 +760,7 @@ INSERT INTO `attack_types` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `attacks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(15) NOT NULL,
+  `name` varchar(12) NOT NULL,
   `element_id` tinyint(4) NOT NULL,
   `type_id` tinyint(4) NOT NULL COMMENT 'Effect Category',
   `power` tinyint(4) DEFAULT NULL,
