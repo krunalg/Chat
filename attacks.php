@@ -313,6 +313,12 @@ Yawn	NORMAL
 Status
 -	-	10";
 
+// Map out word-to-ID conversions.
+
+$cat_id = Array( 'Special' => 1, 'Status' => 2, 'Physical' => 3 );
+
+// Begin extracting attacks.
+
 $attacks = explode( "\n", $attacks );
 
 // Rebuild related lines.
