@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
   `next_level` mediumint(9) NOT NULL,
   `total` mediumint(9) NOT NULL,
   FOREIGN KEY (`group_id`) REFERENCES experience_groups(`id`),
-  UNIQUE KEY `no_duplicates` (`level`,`group_id`)
+  UNIQUE KEY (`level`, `group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Table';
 
 --
