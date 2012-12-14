@@ -904,7 +904,7 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `name` varchar(15) NOT NULL,
   `percent_male` float NOT NULL,
   `percent_female` float NOT NULL,
-  `class` varchar(20) NOT NULL COMMENT 'Classification',
+  `species` varchar(20) NOT NULL,
   `type_1` tinyint(4) NOT NULL COMMENT 'Primary Attack Type',
   `type_2` tinyint(4) COMMENT 'Secondary Attack Type',
   `height` varchar(15) NOT NULL,
