@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `monsters`;
 DROP TABLE IF EXISTS `attacks`;
-DROP TABLE IF EXISTS `attack_categories`;
+DROP TABLE IF EXISTS `attack_types`;
 DROP TABLE IF EXISTS `attack_elements`;
 DROP TABLE IF EXISTS `experience`;
 DROP TABLE IF EXISTS `experience_groups`;
@@ -707,20 +707,20 @@ INSERT INTO `experience` (`level`, `group_id`, `next_level`, `total`) VALUES
 (100, 6, 0, 1250000);
 
 --
--- Table structure for table `attack_categories`
+-- Table structure for table `attack_types`
 --
 
-CREATE TABLE IF NOT EXISTS `attack_categories` (
+CREATE TABLE IF NOT EXISTS `attack_types` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=UTF8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `attack_categories`
+-- Dumping data for table `attack_types`
 --
 
-INSERT INTO `attack_categories` (`id`, `name`) VALUES
+INSERT INTO `attack_types` (`id`, `name`) VALUES
 (0, 'physical'),
 (1, 'special'),
 (2, 'status');
@@ -739,7 +739,7 @@ CREATE TABLE IF NOT EXISTS `attacks` (
   `pp` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_id`) REFERENCES attack_elements(`id`),
-  FOREIGN KEY (`cat_id`) REFERENCES attack_categories(`id`),
+  FOREIGN KEY (`cat_id`) REFERENCES attack_types(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=104 ;
 
