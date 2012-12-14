@@ -331,6 +331,29 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
 }
 
+// Extract meaningful information from array.
+for( $i = 0; $i < count( $rebuilt ); $i++ ) {
+
+	$attack = explode( "/", $rebuilt[$i] );
+
+	$name = $attack[0];
+
+	$type = $attack[1];
+
+	$category = $attack[2];
+
+	$power = $attack[3];
+
+	$accuracy = $attack[4];
+
+	$pp = $attack[5];
+
+	// Create SQL query.
+	$sql = "";
+
+}
+
+
 
 ?>
 
