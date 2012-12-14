@@ -745,7 +745,7 @@ CREATE TABLE IF NOT EXISTS `attacks` (
 -- Dumping data for table `attacks`
 --
 
-INSERT INTO `attacks` (`id`, `name`, `type`, `cat_id`, `power`, `accuracy`, `pp`) VALUES
+INSERT INTO `attacks` (`id`, `name`, `type_id`, `cat_id`, `power`, `accuracy`, `pp`) VALUES
 (1, 'Aerial Ace', '7', 3, 60, -1, 20),
 (2, 'Air Cutter', '7', 1, 55, 95, 25),
 (3, 'Arm Thrust', '5', 3, 15, 100, 20),
