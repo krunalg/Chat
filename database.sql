@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `description` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  FOREIGN KEY (`type`) REFERENCES item_types(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
