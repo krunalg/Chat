@@ -400,9 +400,8 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 	$table = 'attacks';
 
 	$sql = "INSERT INTO `$table` "
-	     	. "(`id`, `name`, `type`, `cat_id`, `power`, `accuracy`, `pp`) "
+	     	. "(`name`, `type`, `cat_id`, `power`, `accuracy`, `pp`) "
 	     . "VALUES ( "
-		     . " '', "
 		     . " '$name', "
 		     . " '" . $type_id[ $type ] . "', "
 		     . " '" . $cat_id[ $category ] ."', "
