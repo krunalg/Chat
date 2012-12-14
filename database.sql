@@ -41,11 +41,24 @@ INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `item_types` (
-  `id` smallint(6) NOT NULL,
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
   /* Reduce VARCHAR after data entry. */
   `name` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `item_types`
+--
+
+INSERT INTO `item_types` (`id`, `name`) VALUES
+(1, 'main'),
+(2, 'held'),
+(3, 'balls'),
+(4, 'mail'),
+(5, 'key'),
+(6, 'decor'),
+(7, 'berries');
 
 --
 -- Table structure for table `items`
