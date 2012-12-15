@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: text/html; charset=utf-8');
+
 // Table copied from http://pokemondb.net/pokedex/all
 
 $monsters = "001	Bulbasaur	GRASS
