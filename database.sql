@@ -914,15 +914,8 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_1`) REFERENCES attack_elements(`id`),
   FOREIGN KEY (`type_2`) REFERENCES attack_elements(`id`),
-  FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`),
+  FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
-
---
--- Dumping data for table `monsters`
---
-
-INSERT INTO `monsters` (`id`, `hoenn_id`, `name`, `percent_male`, `percent_female`, `species`, `type_1`, `type_2`, `height`, `weight`, `colour`, `base_hp`, `base_attack`, `base_defense`, `base_sp_atk`, `base_sp_def`, `base_speed`, `exp_group`) VALUES
-(25, 156, 'Pikachu', 50, 50, 'Mouse Pokémon', 4, NULL, '1''04"', '13.0 lbs', 'Yellow', 35, 55, 30, 50, 40, 90, 4);
 
 --
 -- Table structure for table `user_monsters`
