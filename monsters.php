@@ -859,7 +859,8 @@ for( $i = 0; $i < 385; $i++ ) {
 
 	$id =  $monster[0];
 
-	$name = $monster[1];
+	// Escape apotrophes for names like Farfetch'd
+	$name = str_replace( "'", "\'", $monster[1] );
 
 	$type_1 = $type_id[ strtolower( $monster[2] ) ];
 
