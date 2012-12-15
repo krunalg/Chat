@@ -915,7 +915,7 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   FOREIGN KEY (`type_1`) REFERENCES attack_elements(`id`),
   FOREIGN KEY (`type_2`) REFERENCES attack_elements(`id`),
   FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=387 ;
 
 --
 -- Dumping data for table `monsters`
@@ -1306,7 +1306,8 @@ INSERT INTO `monsters` (`id`, `national_id`, `name`, `type_1`, `type_2`, `base_h
 (382, 382, 'Kyogre', 17, NULL, 100, 100, 90, 150, 140, 90, 1),
 (383, 383, 'Groudon', 10, NULL, 100, 150, 140, 100, 90, 90, 1),
 (384, 384, 'Rayquaza', 3, 7, 105, 150, 90, 150, 90, 95, 1),
-(385, 385, 'Jirachi', 16, 14, 100, 100, 100, 100, 100, 100, 1);
+(385, 385, 'Jirachi', 16, 14, 100, 100, 100, 100, 100, 100, 1),
+(386, 386, 'Deoxys', 14, NULL, 50, 150, 50, 150, 50, 150, 1);
 
 --
 -- Table structure for table `user_monsters`
