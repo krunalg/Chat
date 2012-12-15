@@ -383,7 +383,7 @@ for( $i = 0; $i < count( $rebuilt ); $i++ ) {
 
 	$attack = explode( "/", $rebuilt[$i] );
 
-	$name = $attack[0];
+	$name = preg_replace( "/'/", "\'", $attack[0] );
 
 	$type = strtolower( $attack[1] );
 
