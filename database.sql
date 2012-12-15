@@ -899,17 +899,11 @@ INSERT INTO `attacks` (`id`, `name`, `element_id`, `type_id`, `power`, `accuracy
 --
 
 CREATE TABLE IF NOT EXISTS `monsters` (
-  `id` smallint(6) NOT NULL COMMENT 'National Number',
-  `hoenn_id` smallint(6) NOT NULL COMMENT 'Hoenn Number',
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `national_id` smallint(6) NOT NULL,
   `name` varchar(15) NOT NULL,
-  `percent_male` float NOT NULL,
-  `percent_female` float NOT NULL,
-  `species` varchar(20) NOT NULL,
   `type_1` tinyint(4) NOT NULL COMMENT 'Primary Attack Type',
   `type_2` tinyint(4) COMMENT 'Secondary Attack Type',
-  `height` varchar(15) NOT NULL,
-  `weight` varchar(15) NOT NULL,
-  `colour` varchar(15) NOT NULL COMMENT 'Colour Category',
   `base_hp` tinyint(4) UNSIGNED NOT NULL COMMENT 'Hit Points',
   `base_attack` tinyint(4) UNSIGNED NOT NULL,
   `base_defense` tinyint(4) UNSIGNED NOT NULL,
@@ -921,8 +915,6 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   FOREIGN KEY (`type_1`) REFERENCES attack_elements(`id`),
   FOREIGN KEY (`type_2`) REFERENCES attack_elements(`id`),
   FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `hoenn_id` (`hoenn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
