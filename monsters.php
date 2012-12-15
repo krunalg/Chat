@@ -914,6 +914,9 @@ for( $i = 0; $i < 385; $i++ ) {
 
 	$output .= $sql . "\n";
 
+	// Prevent monsters from wrongly being given a 2nd type.
+	unset( $type_2 );
+
 }
 
 ?>
