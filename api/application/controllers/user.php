@@ -71,25 +71,6 @@ class User extends CI_Controller {
 
     }
 
-    // Returns TRUE if the array of values supplied
-    // each correspond to a column in the database table.
-    // Else returns the value of the bad column.
-    private function _columns_exist( $columns, $table ) {
-
-        foreach( $columns as $key => $value ) {
-
-            if( !$this->db->field_exists( $key, $table ) ) {
-
-                return $key;
-
-            }
-
-        }
-
-        return TRUE;
-
-    }
-
 }
 
 /* End of file user.php */
