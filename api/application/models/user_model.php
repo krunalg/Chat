@@ -42,12 +42,14 @@ class User_model extends CI_Model {
     }
     */
 
+    /*
     // Adds a new user to the database.
     function insert( $data, $table ) {
 
         $this->db->insert( $table, $data );
 
     }
+    */
 
     // Updates an existing user.
     function update( $id, $data, $table ) {
@@ -126,6 +128,49 @@ class User_model extends CI_Model {
 
             // A column was supplied that does not exist.
             echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+        }
+
+    }
+
+    // Add a new user.
+    function add_user() {
+
+        $this->load->library('form_validation');
+
+        // Does POST data pass validation?
+        if( $this->form_validation->run('add_user') ) {
+
+            // Returns all POST data with XSS filter.
+            $data = $this->input->post(NULL, TRUE);
+
+            $column_chk_result = $this->_columns_exist( $data, $this->tbl_user );
+
+            if( $column_chk_result === TRUE ) {
+
+                // Add user to database.
+                $this->db->insert( $this->tbl_user, $data );
+
+                $user_id = $this->db->insert_id();
+
+                // Allows us to use base_url().
+                $this->load->helper('url');
+
+                $location = base_url() . $this->tbl_user . '/' . $user_id;
+
+                echo $this->_response( 201, "Success: Added user.", NULL, $location );
+
+            } else {
+
+                // A column was supplied that does not exist.
+                echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+            }
+
+        } else {
+
+            // Form validation failed.
+            echo $this->_response( 400, 'Error validating: ' . validation_errors() );
 
         }
 

@@ -19,7 +19,7 @@ class User extends CI_Controller {
 
         if( $method === 'GET' ) $this->User_model->get_users();
 
-        else if( $method === 'POST' ) $this->_add_user();
+        else if( $method === 'POST' ) $this->User_model->add_user();
 
         else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
 
@@ -124,49 +124,6 @@ class User extends CI_Controller {
         } else {
 
             echo $this->_response( 500, "Error: No such user exists." );
-
-        }
-
-    }
-
-    // Add a new user.
-    private function _add_user() {
-
-        $this->load->library('form_validation');
-
-        // Does POST data pass validation?
-        if( $this->form_validation->run('add_user') ) {
-
-            // Returns all POST items with XSS filter.
-            $PUT = $this->input->post(NULL, TRUE);
-
-            $column_chk_result = $this->_columns_exist( $PUT, $this->tbl_user );
-
-            if( $column_chk_result === TRUE ) {
-
-                // Add user to database.
-                $this->User_model->insert( $PUT, $this->tbl_user );
-
-                $user_id = $this->db->insert_id();
-
-                // Allows us to use base_url().
-                $this->load->helper('url');
-
-                $location = base_url() . $this->tbl_user . '/' . $user_id;
-
-                echo $this->_response( 201, "Success: Added user.", NULL, $location );
-
-            } else {
-
-                // A column was supplied that does not exist.
-                echo $this->_response( 500, "Error: No such column $column_chk_result" );
-
-            }
-
-        } else {
-
-            // Form validation failed.
-            echo $this->_response( 400, 'Error validating: ' . validation_errors() );
 
         }
 
