@@ -905,8 +905,8 @@ CREATE TABLE IF NOT EXISTS `pokedex` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `national_id` smallint(6) NOT NULL,
   `name` varchar(15) NOT NULL,
-  `type_1` tinyint(4) NOT NULL COMMENT 'Primary Attack Type',
-  `type_2` tinyint(4) COMMENT 'Secondary Attack Type',
+  `element_1` tinyint(4) NOT NULL COMMENT 'Primary Element Type',
+  `element_2` tinyint(4) COMMENT 'Secondary Element Type',
   `base_hp` tinyint(4) UNSIGNED NOT NULL COMMENT 'Hit Points',
   `base_attack` tinyint(4) UNSIGNED NOT NULL,
   `base_defense` tinyint(4) UNSIGNED NOT NULL,
@@ -915,8 +915,8 @@ CREATE TABLE IF NOT EXISTS `pokedex` (
   `base_speed` tinyint(4) UNSIGNED NOT NULL,
   `exp_group` tinyint(4) NOT NULL COMMENT 'Experience Rate Group',
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type_1`) REFERENCES element(`id`),
-  FOREIGN KEY (`type_2`) REFERENCES element(`id`),
+  FOREIGN KEY (`element_1`) REFERENCES element(`id`),
+  FOREIGN KEY (`element_2`) REFERENCES element(`id`),
   FOREIGN KEY (`exp_group`) REFERENCES experience_group(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=387 ;
 
@@ -924,7 +924,7 @@ CREATE TABLE IF NOT EXISTS `pokedex` (
 -- Dumping data for table `pokedex`
 --
 
-INSERT INTO `pokedex` (`id`, `national_id`, `name`, `type_1`, `type_2`, `base_hp`, `base_attack`, `base_defense`, `base_sp_atk`, `base_sp_def`, `base_speed`, `exp_group`) VALUES
+INSERT INTO `pokedex` (`id`, `national_id`, `name`, `element_1`, `element_2`, `base_hp`, `base_attack`, `base_defense`, `base_sp_atk`, `base_sp_def`, `base_speed`, `exp_group`) VALUES
 (1, 1, 'Bulbasaur', 9, 13, 45, 49, 49, 65, 65, 45, 1),
 (2, 2, 'Ivysaur', 9, 13, 60, 62, 63, 80, 80, 60, 1),
 (3, 3, 'Venusaur', 9, 13, 80, 82, 83, 100, 100, 80, 1),
