@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `items`;
 DROP TABLE IF EXISTS `item_types`;
 DROP TABLE IF EXISTS `user`;
-DROP TABLE IF EXISTS `monsters`;
+DROP TABLE IF EXISTS `pokedex`;
 DROP TABLE IF EXISTS `attacks`;
 DROP TABLE IF EXISTS `attack_types`;
 DROP TABLE IF EXISTS `attack_elements`;
@@ -895,10 +895,10 @@ INSERT INTO `attacks` (`id`, `name`, `element_id`, `type_id`, `power`, `accuracy
 (103, 'Yawn', 12, 2, NULL, NULL, 10);
 
 --
--- Table structure for table `monsters`
+-- Table structure for table `pokedex`
 --
 
-CREATE TABLE IF NOT EXISTS `monsters` (
+CREATE TABLE IF NOT EXISTS `pokedex` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `national_id` smallint(6) NOT NULL,
   `name` varchar(15) NOT NULL,
@@ -918,10 +918,10 @@ CREATE TABLE IF NOT EXISTS `monsters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=387 ;
 
 --
--- Dumping data for table `monsters`
+-- Dumping data for table `pokedex`
 --
 
-INSERT INTO `monsters` (`id`, `national_id`, `name`, `type_1`, `type_2`, `base_hp`, `base_attack`, `base_defense`, `base_sp_atk`, `base_sp_def`, `base_speed`, `exp_group`) VALUES
+INSERT INTO `pokedex` (`id`, `national_id`, `name`, `type_1`, `type_2`, `base_hp`, `base_attack`, `base_defense`, `base_sp_atk`, `base_sp_def`, `base_speed`, `exp_group`) VALUES
 (1, 1, 'Bulbasaur', 9, 13, 45, 49, 49, 65, 65, 45, 1),
 (2, 2, 'Ivysaur', 9, 13, 60, 62, 63, 80, 80, 60, 1),
 (3, 3, 'Venusaur', 9, 13, 80, 82, 83, 100, 100, 80, 1),
@@ -1326,5 +1326,5 @@ CREATE TABLE IF NOT EXISTS `pokemon` (
   `experience` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES user(`id`),
-  FOREIGN KEY (`monster_id`) REFERENCES monsters(`id`)
+  FOREIGN KEY (`monster_id`) REFERENCES pokedex(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
