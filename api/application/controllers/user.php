@@ -166,7 +166,7 @@ class User extends CI_Controller {
         } else {
 
             // Form validation failed.
-            echo $this->_response( 400, validation_errors() );
+            echo $this->_response( 400, 'Error validating: ' . validation_errors() );
 
         }
 
