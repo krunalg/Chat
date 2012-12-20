@@ -1319,7 +1319,7 @@ INSERT INTO `pokedex` (`id`, `national_id`, `name`, `element_1`, `element_2`, `b
 CREATE TABLE IF NOT EXISTS `pokemon` (
   `id` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `monster_id` smallint(6) NOT NULL,
+  `pokedex_id` smallint(6) NOT NULL,
   `ev_hp` tinyint(4) UNSIGNED NOT NULL COMMENT 'Hit Points Effort Value',
   `ev_attack` tinyint(4) UNSIGNED NOT NULL COMMENT 'Attack Effort Value',
   `ev_defense` tinyint(4) UNSIGNED NOT NULL COMMENT 'Defense Effort Value',
@@ -1329,5 +1329,5 @@ CREATE TABLE IF NOT EXISTS `pokemon` (
   `experience` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES user(`id`),
-  FOREIGN KEY (`monster_id`) REFERENCES pokedex(`id`)
+  FOREIGN KEY (`pokedex_id`) REFERENCES pokedex(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
