@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS `experience_group`;
 -- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` varchar(12) NOT NULL COMMENT 'in-game name',
   `x` int(11) NOT NULL DEFAULT '0' COMMENT 'last recorded x position',
@@ -41,7 +41,7 @@ INSERT INTO `user` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 -- Table structure for table `item_type`
 --
 
-CREATE TABLE IF NOT EXISTS `item_type` (
+CREATE TABLE `item_type` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   /* Reduce VARCHAR after data entry. */
   `name` varchar(15) NOT NULL,
@@ -65,7 +65,7 @@ INSERT INTO `item_type` (`id`, `name`) VALUES
 -- Table structure for table `item`
 --
 
-CREATE TABLE IF NOT EXISTS `item` (
+CREATE TABLE `item` (
   `id` smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT,
   /* Reduce VARCHAR after data entry. */
   `name` varchar(20) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `item` (
 -- Table structure for table `element`
 --
 
-CREATE TABLE IF NOT EXISTS `element` (
+CREATE TABLE `element` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
@@ -114,7 +114,7 @@ INSERT INTO `element` (`id`, `name`) VALUES
 -- Table structure for table `experience_group`
 --
 
-CREATE TABLE IF NOT EXISTS `experience_group` (
+CREATE TABLE `experience_group` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -136,7 +136,7 @@ INSERT INTO `experience_group` (`id`, `name`) VALUES
 -- Table structure for table `experience`
 --
 
-CREATE TABLE IF NOT EXISTS `experience` (
+CREATE TABLE `experience` (
   `level` tinyint(4) NOT NULL,
   `group_id` tinyint(4) NOT NULL,
   `next_level` mediumint(9) NOT NULL,
@@ -755,7 +755,7 @@ INSERT INTO `experience` (`level`, `group_id`, `next_level`, `total`) VALUES
 -- Table structure for table `attack_type`
 --
 
-CREATE TABLE IF NOT EXISTS `attack_type` (
+CREATE TABLE `attack_type` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
@@ -774,7 +774,7 @@ INSERT INTO `attack_type` (`id`, `name`) VALUES
 -- Table structure for table `attack`
 --
 
-CREATE TABLE IF NOT EXISTS `attack` (
+CREATE TABLE `attack` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(12) NOT NULL,
   `element_id` tinyint(4) NOT NULL,
@@ -901,7 +901,7 @@ INSERT INTO `attack` (`id`, `name`, `element_id`, `type_id`, `power`, `accuracy`
 -- Table structure for table `pokedex`
 --
 
-CREATE TABLE IF NOT EXISTS `pokedex` (
+CREATE TABLE `pokedex` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `national_id` smallint(6) NOT NULL,
   `name` varchar(15) NOT NULL,
@@ -1316,7 +1316,7 @@ INSERT INTO `pokedex` (`id`, `national_id`, `name`, `element_1`, `element_2`, `b
 -- Table structure for table `pokemon`
 --
 
-CREATE TABLE IF NOT EXISTS `pokemon` (
+CREATE TABLE `pokemon` (
   `id` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `pokedex_id` smallint(6) NOT NULL,
