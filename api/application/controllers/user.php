@@ -8,6 +8,9 @@ class User extends CI_Controller {
 
         $this->load->model('User_model');
 
+        // Name of table containing users.
+        $this->tbl_user = 'users';
+
     }
 
     function index() {
@@ -82,7 +85,7 @@ class User extends CI_Controller {
         // Make empty array if no values exist.
         if( !$GET ) $GET = array();
 
-        $column_chk_result = $this->_columns_exist( $GET, 'users' );
+        $column_chk_result = $this->_columns_exist( $GET, $this->tbl_user );
 
         if( $column_chk_result === TRUE ) {
 
@@ -122,7 +125,7 @@ class User extends CI_Controller {
 
                 } else  {
 
-                    $column_chk_result = $this->_columns_exist( $data, 'users' );
+                    $column_chk_result = $this->_columns_exist( $data, $this->tbl_user );
 
                     // Do columns exist for all submitted values?
                     if( $column_chk_result === TRUE ) {
@@ -185,7 +188,7 @@ class User extends CI_Controller {
             // Returns all POST items with XSS filter.
             $PUT = $this->input->post(NULL, TRUE);
 
-            $column_chk_result = $this->_columns_exist( $PUT, 'users' );
+            $column_chk_result = $this->_columns_exist( $PUT, $this->tbl_user );
 
             if( $column_chk_result === TRUE ) {
 
@@ -197,7 +200,7 @@ class User extends CI_Controller {
                 // Allows us to use base_url().
                 $this->load->helper('url');
 
-                $location = base_url() . 'users/' . $user_id;
+                $location = base_url() . $this->tbl_user . '/' . $user_id;
 
                 echo $this->_response( 201, "Success: Added user.", NULL, $location );
 
