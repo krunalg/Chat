@@ -75,16 +75,22 @@ class User_model extends CI_Model {
 
             $data = $query->result();
 
-            $user_count = count( $data );
+            $code = 200;
 
-            echo $this->_response( 200, "Showing $user_count users.", $data );
+            $message = 'Showing ' . count( $data ) . ' users.';
+
+            return array( "code" => $code, "message" => $message, "data" => $data );
 
         } else {
 
-            // A column was supplied that does not exist.
-            echo $this->_response( 500, "Error: No such column $column_chk_result" );
+            $code = 500;
+
+            // Duplicate message.
+            $message = "Invalid column specified: $column_chk_result";
 
         }
+
+        return array( "code" => $code, "message" => $message );
 
     }
 

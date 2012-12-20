@@ -22,7 +22,9 @@ class User extends CI_Controller {
             // Returns all GET data with XSS filter.
             $criteria = $this->input->get(NULL, TRUE);
 
-            $this->User_model->get_users( $criteria );
+            $response = $this->User_model->get_users( $criteria );
+
+            $this->load->view( 'json_response', $response );
 
         } else if( $method === 'POST' ) {
 
