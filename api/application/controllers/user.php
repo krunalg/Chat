@@ -29,7 +29,7 @@ class User extends CI_Controller {
             // Returns all POST data with XSS filter.
             $data = $this->input->post(NULL, TRUE);
 
-            $this->User_model->add_user();
+            $this->User_model->add_user( $data );
 
         } else {
 
