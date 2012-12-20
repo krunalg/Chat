@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `attack`;
 DROP TABLE IF EXISTS `attack_type`;
 DROP TABLE IF EXISTS `element`;
 DROP TABLE IF EXISTS `experience`;
-DROP TABLE IF EXISTS `experience_groups`;
+DROP TABLE IF EXISTS `experience_group`;
 
 -- --------------------------------------------------------
 
@@ -111,25 +111,25 @@ INSERT INTO `element` (`id`, `name`) VALUES
 (17, 'water');
 
 --
--- Table structure for table `experience_groups`
+-- Table structure for table `experience_group`
 --
 
-CREATE TABLE IF NOT EXISTS `experience_groups` (
+CREATE TABLE IF NOT EXISTS `experience_group` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Groups' AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `experience_groups`
+-- Dumping data for table `experience_group`
 --
 
-INSERT INTO `experience_groups` (`id`, `name`) VALUES(1, 'erratic');
-INSERT INTO `experience_groups` (`id`, `name`) VALUES(2, 'fast');
-INSERT INTO `experience_groups` (`id`, `name`) VALUES(3, 'fluctuating');
-INSERT INTO `experience_groups` (`id`, `name`) VALUES(4, 'medium_fast');
-INSERT INTO `experience_groups` (`id`, `name`) VALUES(5, 'medium_slow');
-INSERT INTO `experience_groups` (`id`, `name`) VALUES(6, 'slow');
+INSERT INTO `experience_group` (`id`, `name`) VALUES(1, 'erratic');
+INSERT INTO `experience_group` (`id`, `name`) VALUES(2, 'fast');
+INSERT INTO `experience_group` (`id`, `name`) VALUES(3, 'fluctuating');
+INSERT INTO `experience_group` (`id`, `name`) VALUES(4, 'medium_fast');
+INSERT INTO `experience_group` (`id`, `name`) VALUES(5, 'medium_slow');
+INSERT INTO `experience_group` (`id`, `name`) VALUES(6, 'slow');
 
 --
 -- Table structure for table `experience`
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
   `group_id` tinyint(4) NOT NULL,
   `next_level` mediumint(9) NOT NULL,
   `total` mediumint(9) NOT NULL,
-  FOREIGN KEY (`group_id`) REFERENCES experience_groups(`id`),
+  FOREIGN KEY (`group_id`) REFERENCES experience_group(`id`),
   UNIQUE KEY (`level`, `group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COMMENT='Experience Table';
 
@@ -916,7 +916,7 @@ CREATE TABLE IF NOT EXISTS `pokedex` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`type_1`) REFERENCES element(`id`),
   FOREIGN KEY (`type_2`) REFERENCES element(`id`),
-  FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`)
+  FOREIGN KEY (`exp_group`) REFERENCES experience_group(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=387 ;
 
 --
