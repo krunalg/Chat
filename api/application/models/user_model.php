@@ -189,13 +189,19 @@ class User_model extends CI_Model {
 
             $this->db->delete( $this->table, array( 'id' => $id ) );
 
-            echo $this->_response( 200, "Success: User was removed." );
+            $code = 200;
+
+            $message = "Success: User was removed.";
 
         } else {
 
-            echo $this->_response( 500, "Error: No such user exists." );
+            $code = 500;
+
+            $message = "Error: No such user exists.";
 
         }
+
+        return array( "code" => $code, "message" => $message );
 
     }
 

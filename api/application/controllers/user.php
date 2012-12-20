@@ -56,7 +56,9 @@ class User extends CI_Controller {
 
         } else if( $method === 'DELETE' ) {
 
-            $this->User_model->delete_user( $id );
+            $data = $this->User_model->delete_user( $id );
+
+            $this->load->view( 'json_response', $data );
 
         } else {
 
