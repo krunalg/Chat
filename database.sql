@@ -124,12 +124,13 @@ CREATE TABLE IF NOT EXISTS `experience_group` (
 -- Dumping data for table `experience_group`
 --
 
-INSERT INTO `experience_group` (`id`, `name`) VALUES(1, 'erratic');
-INSERT INTO `experience_group` (`id`, `name`) VALUES(2, 'fast');
-INSERT INTO `experience_group` (`id`, `name`) VALUES(3, 'fluctuating');
-INSERT INTO `experience_group` (`id`, `name`) VALUES(4, 'medium_fast');
-INSERT INTO `experience_group` (`id`, `name`) VALUES(5, 'medium_slow');
-INSERT INTO `experience_group` (`id`, `name`) VALUES(6, 'slow');
+INSERT INTO `experience_group` (`id`, `name`) VALUES
+(1, 'erratic'),
+(2, 'fast'),
+(3, 'fluctuating'),
+(4, 'medium_fast'),
+(5, 'medium_slow'),
+(6, 'slow');
 
 --
 -- Table structure for table `experience`
