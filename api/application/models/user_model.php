@@ -21,6 +21,7 @@ class User_model extends CI_Model {
 
     }
 
+    /*
     // Returns an array containing info about a specific user.
     function get( $id, $table ) {
 
@@ -30,6 +31,7 @@ class User_model extends CI_Model {
         return array_shift( $query->result() );
 
     }
+    */
 
     /*
     // Returns an array of arrays like the one that get() returns.
@@ -80,8 +82,25 @@ class User_model extends CI_Model {
 
 
 
+    // Respond with a single user.
+    function get_user( $id ) {
 
+        if( $this->does_exist( $id, $this->tbl_user ) ) {
 
+            $query = $this->db->get_where( $this->tbl_user, array('id' => $id) );
+
+            // Take the first of the array.
+            $data = array_shift( $query->result() );
+
+            echo $this->_response( 200, 'Showing one user.', $data );
+
+        } else {
+
+            echo $this->_response( 404, "Error: No such user exists." );
+
+        }
+
+    }
 
     // Respond with a list of users.
     function get_users() {

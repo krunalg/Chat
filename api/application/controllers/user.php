@@ -29,30 +29,13 @@ class User extends CI_Controller {
 
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if( $method === 'GET' ) $this->_get_user( $id );
+        if( $method === 'GET' ) $this->User_model->get_user( $id );
 
         else if( $method === 'POST' ) $this->_update_user( $id );
 
         else if( $method === 'DELETE' ) $this->_delete_user( $id );
 
         else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
-
-    }
-
-    // Respond with a single user.
-    private function _get_user( $id ) {
-
-        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
-
-            $data = $this->User_model->get( $id, $this->tbl_user );
-
-            echo $this->_response( 200, 'Showing one user.', $data );
-
-        } else {
-
-            echo $this->_response( 404, "Error: No such user exists." );
-
-        }
 
     }
 
