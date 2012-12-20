@@ -43,11 +43,18 @@ class User extends CI_Controller {
 
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if( $method === 'GET' ) $this->User_model->get_user( $id );
+        if( $method === 'GET' ) {
 
-        else if( $method === 'POST' ) $this->User_model->update_user( $id );
+            $this->User_model->get_user( $id );
 
-        else if( $method === 'DELETE' ) $this->User_model->delete_user( $id );
+        } else if( $method === 'POST' ) {
+
+            // Returns all POST data with XSS filter.
+            $data = $this->input->post(NULL, TRUE);
+
+            $this->User_model->update_user( $id, $data );
+
+        } else if( $method === 'DELETE' ) $this->User_model->delete_user( $id );
 
         else {
 

@@ -129,7 +129,7 @@ class User_model extends CI_Model {
     }
 
     // Update a user.
-    public function update_user( $id ) {
+    public function update_user( $id, data ) {
 
         // Check that user exists.
         if( $this->user_exists( $id, $this->tbl_user ) ) {
@@ -138,9 +138,6 @@ class User_model extends CI_Model {
 
             // Does POST data pass validation?
             if( $this->form_validation->run('update_user') ) {
-
-                // Returns all POST items with XSS filter.
-                $data = $this->input->post(NULL, TRUE);
 
                 // Is an attempt being made to change the user ID?
                 if( array_key_exists( 'id', $data ) ) {
