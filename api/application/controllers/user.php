@@ -8,9 +8,6 @@ class User extends CI_Controller {
 
         $this->load->model('User_model');
 
-        // Name of table containing users.
-        $this->tbl_user = 'user';
-
     }
 
     function index() {
