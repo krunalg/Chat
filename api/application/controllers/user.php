@@ -31,65 +31,11 @@ class User extends CI_Controller {
 
         if( $method === 'GET' ) $this->User_model->get_user( $id );
 
-        else if( $method === 'POST' ) $this->_update_user( $id );
+        else if( $method === 'POST' ) $this->User_model->update_user( $id );
 
         else if( $method === 'DELETE' ) $this->_delete_user( $id );
 
         else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
-
-    }
-
-    // Update a user.
-    private function _update_user( $id ) {
-
-        // Check that user exists.
-        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
-
-            $this->load->library('form_validation');
-
-            // Does POST data pass validation?
-            if( $this->form_validation->run('update_user') ) {
-
-                // Returns all POST items with XSS filter.
-                $data = $this->input->post(NULL, TRUE);
-
-                // Is an attempt being made to change the user ID?
-                if( array_key_exists( 'id', $data ) ) {
-
-                    echo $this->_response( 403, "Error: Changing a user's ID is forbidden." );
-
-                } else  {
-
-                    $column_chk_result = $this->_columns_exist( $data, $this->tbl_user );
-
-                    // Do columns exist for all submitted values?
-                    if( $column_chk_result === TRUE ) {
-
-                       $this->User_model->update( $id, $data, $this->tbl_user );
-
-                       echo $this->_response( 200, "Success: User updated." );
-
-                    } else {
-
-                        // A column was supplied that does not exist.
-                        echo $this->_response( 500, "Error: No such column $column_chk_result" );
-
-                    }
-
-                }
-
-            }  else {
-
-                // Form validation failed.
-                echo $this->_response( 400, validation_errors() );
-
-            }
-
-        } else {
-
-            echo $this->_response( 404, "Error: No such user exists." );
-
-        }
 
     }
 

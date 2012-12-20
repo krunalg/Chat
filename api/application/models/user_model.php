@@ -53,6 +53,7 @@ class User_model extends CI_Model {
     }
     */
 
+    /*
     // Updates an existing user.
     function update( $id, $data, $table ) {
 
@@ -61,6 +62,7 @@ class User_model extends CI_Model {
         $this->db->update( $table, $data );
 
     }
+    */
 
     // Removes a user from the database.
     function delete( $id, $table ) {
@@ -190,6 +192,62 @@ class User_model extends CI_Model {
 
             // Form validation failed.
             echo $this->_response( 400, 'Error validating: ' . validation_errors() );
+
+        }
+
+    }
+
+    // Update a user.
+    function update_user( $id ) {
+
+        // Check that user exists.
+        if( $this->does_exist( $id, $this->tbl_user ) ) {
+
+            $this->load->library('form_validation');
+
+            // Does POST data pass validation?
+            if( $this->form_validation->run('update_user') ) {
+
+                // Returns all POST items with XSS filter.
+                $data = $this->input->post(NULL, TRUE);
+
+                // Is an attempt being made to change the user ID?
+                if( array_key_exists( 'id', $data ) ) {
+
+                    echo $this->_response( 403, "Error: Changing a user's ID is forbidden." );
+
+                } else  {
+
+                    $column_chk_result = $this->_columns_exist( $data, $this->tbl_user );
+
+                    // Do columns exist for all submitted values?
+                    if( $column_chk_result === TRUE ) {
+
+                        $this->db->where( 'id', $id );
+
+                        $this->db->update( $this->tbl_user, $data );
+
+                        echo $this->_response( 200, "Success: User updated." );
+
+                    } else {
+
+                         // A column was supplied that does not exist.
+                         echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+                    }
+
+                }
+
+            }  else {
+
+                // Form validation failed.
+                echo $this->_response( 400, validation_errors() );
+
+            }
+
+        } else {
+
+            echo $this->_response( 404, "Error: No such user exists." );
 
         }
 
