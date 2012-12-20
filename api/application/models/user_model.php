@@ -110,21 +110,31 @@ class User_model extends CI_Model {
 
                 $location = base_url() . $this->table . '/' . $user_id;
 
-                echo $this->_response( 201, "Success: Added user.", NULL, $location );
+                $code = 201;
+
+                $message = "Successfully added user.";
+
+                return array( "code" => $code, "message" => $message, "location" => $location );
 
             } else {
 
-                // A column was supplied that does not exist.
-                echo $this->_response( 500, "Error: No such column $column_chk_result" );
+                $code = 500;
+
+                // Duplicate message.
+                $message = "Invalid column specified: $column_chk_result";
 
             }
 
         } else {
 
-            // Form validation failed.
-            echo $this->_response( 400, 'Error validating: ' . validation_errors() );
+            $code = 400;
+
+            // Duplicate message.
+            $message = "Validation failure: " . validation_errors();
 
         }
+
+        return array( "code" => $code, "message" => $message );
 
     }
 
@@ -165,6 +175,7 @@ class User_model extends CI_Model {
 
                         $code = 500;
 
+                        // Duplicate message.
                         $message = "Invalid column specified: $column_chk_result";
 
                     }
@@ -175,6 +186,7 @@ class User_model extends CI_Model {
 
                 $code = 400;
 
+                // Duplicate message.
                 $message = "Validation failure: " . validation_errors();
 
             }
