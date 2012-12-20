@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `items`;
 DROP TABLE IF EXISTS `item_types`;
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `monsters`;
 DROP TABLE IF EXISTS `attacks`;
 DROP TABLE IF EXISTS `attack_types`;
@@ -11,10 +11,10 @@ DROP TABLE IF EXISTS `experience_groups`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` varchar(12) NOT NULL COMMENT 'in-game name',
   `x` int(11) NOT NULL DEFAULT '0' COMMENT 'last recorded x position',
@@ -28,10 +28,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `users` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
+INSERT INTO `user` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('Jake', 416, 2960, 'up', 'boy', 'idle', 'RsWorld'),
 ('Joncom', 416, 2960, 'up', 'girl', 'idle', 'RsWorld'),
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
@@ -1325,6 +1325,6 @@ CREATE TABLE IF NOT EXISTS `user_monsters` (
   `ev_speed` tinyint(4) UNSIGNED NOT NULL COMMENT 'Speed Effort Value',
   `experience` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+  FOREIGN KEY (`user_id`) REFERENCES user(`id`),
   FOREIGN KEY (`monster_id`) REFERENCES monsters(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
