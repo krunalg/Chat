@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `items`;
 DROP TABLE IF EXISTS `item_types`;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `pokedex`;
-DROP TABLE IF EXISTS `attacks`;
+DROP TABLE IF EXISTS `attack`;
 DROP TABLE IF EXISTS `attack_types`;
 DROP TABLE IF EXISTS `elements`;
 DROP TABLE IF EXISTS `experience`;
@@ -769,10 +769,10 @@ INSERT INTO `attack_types` (`id`, `name`) VALUES
 (2, 'status');
 
 --
--- Table structure for table `attacks`
+-- Table structure for table `attack`
 --
 
-CREATE TABLE IF NOT EXISTS `attacks` (
+CREATE TABLE IF NOT EXISTS `attack` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(12) NOT NULL,
   `element_id` tinyint(4) NOT NULL,
@@ -787,10 +787,10 @@ CREATE TABLE IF NOT EXISTS `attacks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=104 ;
 
 --
--- Dumping data for table `attacks`
+-- Dumping data for table `attack`
 --
 
-INSERT INTO `attacks` (`id`, `name`, `element_id`, `type_id`, `power`, `accuracy`, `pp`) VALUES
+INSERT INTO `attack` (`id`, `name`, `element_id`, `type_id`, `power`, `accuracy`, `pp`) VALUES
 (1, 'Aerial Ace', 7, 3, 60, -1, 20),
 (2, 'Air Cutter', 7, 1, 55, 95, 25),
 (3, 'Arm Thrust', 5, 3, 15, 100, 20),
