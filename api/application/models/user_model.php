@@ -42,14 +42,11 @@ class User_model extends CI_Model {
     }
 
     // Respond with a list of users.
-    public function get_users() {
+    public function get_users( $criteria ) {
 
         $limit = 10;
 
         $offset = 0;
-
-        // returns all GET items with XSS filter.
-        $criteria = $this->input->get(NULL, TRUE);
 
         if( isset( $criteria[ 'limit' ] ) ) {
 
