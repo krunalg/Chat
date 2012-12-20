@@ -7,7 +7,7 @@ class User_model extends CI_Model {
         parent::__construct();
 
         // Name of table containing users.
-        $this->tbl_user = 'user';
+        $this->table = 'user';
 
     }
 
@@ -24,9 +24,9 @@ class User_model extends CI_Model {
     // Respond with a single user.
     public function get_user( $id ) {
 
-        if( $this->user_exists( $id, $this->tbl_user ) ) {
+        if( $this->user_exists( $id, $this->table ) ) {
 
-            $query = $this->db->get_where( $this->tbl_user, array('id' => $id) );
+            $query = $this->db->get_where( $this->table, array('id' => $id) );
 
             // Take the first of the array.
             $data = array_shift( $query->result() );
@@ -67,11 +67,11 @@ class User_model extends CI_Model {
         // Make empty array if no values exist.
         if( !$criteria ) $criteria = array();
 
-        $column_chk_result = $this->_columns_exist( $criteria, $this->tbl_user );
+        $column_chk_result = $this->_columns_exist( $criteria, $this->table );
 
         if( $column_chk_result === TRUE ) {
 
-            $query = $this->db->get_where( $this->tbl_user, $criteria, $limit, $offset );
+            $query = $this->db->get_where( $this->table, $criteria, $limit, $offset );
 
             $data = $query->result();
 
@@ -96,19 +96,19 @@ class User_model extends CI_Model {
         // Does POST data pass validation?
         if( $this->form_validation->run('add_user') ) {
 
-            $column_chk_result = $this->_columns_exist( $data, $this->tbl_user );
+            $column_chk_result = $this->_columns_exist( $data, $this->table );
 
             if( $column_chk_result === TRUE ) {
 
                 // Add user to database.
-                $this->db->insert( $this->tbl_user, $data );
+                $this->db->insert( $this->table, $data );
 
                 $user_id = $this->db->insert_id();
 
                 // Allows us to use base_url().
                 $this->load->helper('url');
 
-                $location = base_url() . $this->tbl_user . '/' . $user_id;
+                $location = base_url() . $this->table . '/' . $user_id;
 
                 echo $this->_response( 201, "Success: Added user.", NULL, $location );
 
@@ -132,7 +132,7 @@ class User_model extends CI_Model {
     public function update_user( $id, $data ) {
 
         // Check that user exists.
-        if( $this->user_exists( $id, $this->tbl_user ) ) {
+        if( $this->user_exists( $id, $this->table ) ) {
 
             $this->load->library('form_validation');
 
@@ -146,14 +146,14 @@ class User_model extends CI_Model {
 
                 } else  {
 
-                    $column_chk_result = $this->_columns_exist( $data, $this->tbl_user );
+                    $column_chk_result = $this->_columns_exist( $data, $this->table );
 
                     // Do columns exist for all submitted values?
                     if( $column_chk_result === TRUE ) {
 
                         $this->db->where( 'id', $id );
 
-                        $this->db->update( $this->tbl_user, $data );
+                        $this->db->update( $this->table, $data );
 
                         echo $this->_response( 200, "Success: User updated." );
 
@@ -185,9 +185,9 @@ class User_model extends CI_Model {
     public function delete_user( $id ) {
 
         // Check that user exists.
-        if( $this->User_model->user_exists( $id, $this->tbl_user ) ) {
+        if( $this->User_model->user_exists( $id, $this->table ) ) {
 
-            $this->db->delete( $this->tbl_user, array( 'id' => $id ) );
+            $this->db->delete( $this->table, array( 'id' => $id ) );
 
             echo $this->_response( 200, "Success: User was removed." );
 
