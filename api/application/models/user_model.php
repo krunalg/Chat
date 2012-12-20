@@ -64,12 +64,14 @@ class User_model extends CI_Model {
     }
     */
 
+    /*
     // Removes a user from the database.
     function delete( $id, $table ) {
 
         $this->db->delete( $table, array( 'id' => $id ) );
 
     }
+    */
 
 
 
@@ -248,6 +250,24 @@ class User_model extends CI_Model {
         } else {
 
             echo $this->_response( 404, "Error: No such user exists." );
+
+        }
+
+    }
+
+    // Delete a user.
+    function delete_user( $id ) {
+
+        // Check that user exists.
+        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
+
+            $this->db->delete( $this->tbl_user, array( 'id' => $id ) );
+
+            echo $this->_response( 200, "Success: User was removed." );
+
+        } else {
+
+            echo $this->_response( 500, "Error: No such user exists." );
 
         }
 

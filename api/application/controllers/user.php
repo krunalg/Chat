@@ -33,28 +33,9 @@ class User extends CI_Controller {
 
         else if( $method === 'POST' ) $this->User_model->update_user( $id );
 
-        else if( $method === 'DELETE' ) $this->_delete_user( $id );
+        else if( $method === 'DELETE' ) $this->User_model->delete_user( $id );
 
         else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
-
-    }
-
-    // Delete a user.
-    private function _delete_user( $id ) {
-
-        // Check that user exists.
-        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
-
-            // Delete user.
-            $this->User_model->delete( $id, $this->tbl_user );
-
-            echo $this->_response( 200, "Success: User was removed." );
-
-        } else {
-
-            echo $this->_response( 500, "Error: No such user exists." );
-
-        }
 
     }
 
