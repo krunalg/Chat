@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `items`;
+DROP TABLE IF EXISTS `item`;
 DROP TABLE IF EXISTS `item_types`;
 DROP TABLE IF EXISTS `pokemon`;
 DROP TABLE IF EXISTS `pokedex`;
@@ -62,10 +62,10 @@ INSERT INTO `item_types` (`id`, `name`) VALUES
 (7, 'berries');
 
 --
--- Table structure for table `items`
+-- Table structure for table `item`
 --
 
-CREATE TABLE IF NOT EXISTS `items` (
+CREATE TABLE IF NOT EXISTS `item` (
   `id` smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT,
   /* Reduce VARCHAR after data entry. */
   `name` varchar(20) NOT NULL,
