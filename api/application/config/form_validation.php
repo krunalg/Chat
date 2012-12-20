@@ -84,7 +84,7 @@ $config = array(
 
             'label' => "username",
 
-            'rules' => 'required|is_unique[users.user]|min_length[3]|max_length[12]'
+            'rules' => 'required|is_unique[user.user]|min_length[3]|max_length[12]'
 
         ),
 
