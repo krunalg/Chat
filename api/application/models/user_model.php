@@ -13,7 +13,7 @@ class User_model extends CI_Model {
 
     // Returns TRUE if a user with that ID exists.
     // Else returns FALSE.
-    function user_exists( $id, $table ) {
+    private function user_exists( $id, $table ) {
 
         $query = $this->db->get_where( $table, array('id' => $id) );
 
@@ -22,7 +22,7 @@ class User_model extends CI_Model {
     }
 
     // Respond with a single user.
-    function get_user( $id ) {
+    public function get_user( $id ) {
 
         if( $this->user_exists( $id, $this->tbl_user ) ) {
 
@@ -42,7 +42,7 @@ class User_model extends CI_Model {
     }
 
     // Respond with a list of users.
-    function get_users() {
+    public function get_users() {
 
         $limit = 10;
 
@@ -92,7 +92,7 @@ class User_model extends CI_Model {
     }
 
     // Add a new user.
-    function add_user() {
+    public function add_user() {
 
         $this->load->library('form_validation');
 
@@ -135,7 +135,7 @@ class User_model extends CI_Model {
     }
 
     // Update a user.
-    function update_user( $id ) {
+    public function update_user( $id ) {
 
         // Check that user exists.
         if( $this->user_exists( $id, $this->tbl_user ) ) {
@@ -191,7 +191,7 @@ class User_model extends CI_Model {
     }
 
     // Delete a user.
-    function delete_user( $id ) {
+    public function delete_user( $id ) {
 
         // Check that user exists.
         if( $this->User_model->user_exists( $id, $this->tbl_user ) ) {
