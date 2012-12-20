@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS `item`;
-DROP TABLE IF EXISTS `item_types`;
+DROP TABLE IF EXISTS `item_type`;
 DROP TABLE IF EXISTS `pokemon`;
 DROP TABLE IF EXISTS `pokedex`;
 DROP TABLE IF EXISTS `user`;
@@ -38,10 +38,10 @@ INSERT INTO `user` (`user`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');
 
 --
--- Table structure for table `item_types`
+-- Table structure for table `item_type`
 --
 
-CREATE TABLE IF NOT EXISTS `item_types` (
+CREATE TABLE IF NOT EXISTS `item_type` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   /* Reduce VARCHAR after data entry. */
   `name` varchar(15) NOT NULL,
@@ -49,10 +49,10 @@ CREATE TABLE IF NOT EXISTS `item_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=8 ;
 
 --
--- Dumping data for table `item_types`
+-- Dumping data for table `item_type`
 --
 
-INSERT INTO `item_types` (`id`, `name`) VALUES
+INSERT INTO `item_type` (`id`, `name`) VALUES
 (1, 'main'),
 (2, 'held'),
 (3, 'balls'),
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `description` varchar(140) NOT NULL,
   `type_id` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type_id`) REFERENCES item_types(`id`),
+  FOREIGN KEY (`type_id`) REFERENCES item_type(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
