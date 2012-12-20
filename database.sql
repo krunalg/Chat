@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `pokemon`;
 DROP TABLE IF EXISTS `pokedex`;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `attack`;
-DROP TABLE IF EXISTS `attack_types`;
+DROP TABLE IF EXISTS `attack_type`;
 DROP TABLE IF EXISTS `element`;
 DROP TABLE IF EXISTS `experience`;
 DROP TABLE IF EXISTS `experience_groups`;
@@ -751,20 +751,20 @@ INSERT INTO `experience` (`level`, `group_id`, `next_level`, `total`) VALUES
 (100, 6, 0, 1250000);
 
 --
--- Table structure for table `attack_types`
+-- Table structure for table `attack_type`
 --
 
-CREATE TABLE IF NOT EXISTS `attack_types` (
+CREATE TABLE IF NOT EXISTS `attack_type` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=UTF8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `attack_types`
+-- Dumping data for table `attack_type`
 --
 
-INSERT INTO `attack_types` (`id`, `name`) VALUES
+INSERT INTO `attack_type` (`id`, `name`) VALUES
 (0, 'physical'),
 (1, 'special'),
 (2, 'status');
@@ -783,7 +783,7 @@ CREATE TABLE IF NOT EXISTS `attack` (
   `pp` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`element_id`) REFERENCES element(`id`),
-  FOREIGN KEY (`type_id`) REFERENCES attack_types(`id`),
+  FOREIGN KEY (`type_id`) REFERENCES attack_type(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=104 ;
 
