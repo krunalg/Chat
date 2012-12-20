@@ -1310,10 +1310,10 @@ INSERT INTO `monsters` (`id`, `national_id`, `name`, `type_1`, `type_2`, `base_h
 (386, 386, 'Deoxys', 14, NULL, 50, 150, 50, 150, 50, 150, 1);
 
 --
--- Table structure for table `user_monsters`
+-- Table structure for table `pokemon`
 --
 
-CREATE TABLE IF NOT EXISTS `user_monsters` (
+CREATE TABLE IF NOT EXISTS `pokemon` (
   `id` int(11) NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `monster_id` smallint(6) NOT NULL,
