@@ -31,7 +31,11 @@ class User extends CI_Controller {
 
             $this->User_model->add_user();
 
-        } else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
+        } else {
+
+            echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
+
+        }
 
     }
 
@@ -45,7 +49,11 @@ class User extends CI_Controller {
 
         else if( $method === 'DELETE' ) $this->User_model->delete_user( $id );
 
-        else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
+        else {
+
+            echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
+
+        }
 
     }
 
