@@ -90,23 +90,24 @@ CREATE TABLE IF NOT EXISTS `elements` (
 -- Dumping data for table `elements`
 --
 
-INSERT INTO `elements` (`id`, `name`) VALUES(1, 'bug');
-INSERT INTO `elements` (`id`, `name`) VALUES(2, 'dark');
-INSERT INTO `elements` (`id`, `name`) VALUES(3, 'dragon');
-INSERT INTO `elements` (`id`, `name`) VALUES(4, 'electric');
-INSERT INTO `elements` (`id`, `name`) VALUES(5, 'fighting');
-INSERT INTO `elements` (`id`, `name`) VALUES(6, 'fire');
-INSERT INTO `elements` (`id`, `name`) VALUES(7, 'flying');
-INSERT INTO `elements` (`id`, `name`) VALUES(8, 'ghost');
-INSERT INTO `elements` (`id`, `name`) VALUES(9, 'grass');
-INSERT INTO `elements` (`id`, `name`) VALUES(10, 'ground');
-INSERT INTO `elements` (`id`, `name`) VALUES(11, 'ice');
-INSERT INTO `elements` (`id`, `name`) VALUES(12, 'normal');
-INSERT INTO `elements` (`id`, `name`) VALUES(13, 'poison');
-INSERT INTO `elements` (`id`, `name`) VALUES(14, 'psychic');
-INSERT INTO `elements` (`id`, `name`) VALUES(15, 'rock');
-INSERT INTO `elements` (`id`, `name`) VALUES(16, 'steel');
-INSERT INTO `elements` (`id`, `name`) VALUES(17, 'water');
+INSERT INTO `elements` (`id`, `name`) VALUES
+(1, 'bug'),
+(2, 'dark'),
+(3, 'dragon'),
+(4, 'electric'),
+(5, 'fighting'),
+(6, 'fire'),
+(7, 'flying'),
+(8, 'ghost'),
+(9, 'grass'),
+(10, 'ground'),
+(11, 'ice'),
+(12, 'normal'),
+(13, 'poison'),
+(14, 'psychic'),
+(15, 'rock'),
+(16, 'steel'),
+(17, 'water');
 
 --
 -- Table structure for table `experience_groups`
