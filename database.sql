@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `pokedex`;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `attack`;
 DROP TABLE IF EXISTS `attack_types`;
-DROP TABLE IF EXISTS `elements`;
+DROP TABLE IF EXISTS `element`;
 DROP TABLE IF EXISTS `experience`;
 DROP TABLE IF EXISTS `experience_groups`;
 
@@ -78,20 +78,20 @@ CREATE TABLE IF NOT EXISTS `items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --
--- Table structure for table `elements`
+-- Table structure for table `element`
 --
 
-CREATE TABLE IF NOT EXISTS `elements` (
+CREATE TABLE IF NOT EXISTS `element` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=18 ;
 
 --
--- Dumping data for table `elements`
+-- Dumping data for table `element`
 --
 
-INSERT INTO `elements` (`id`, `name`) VALUES
+INSERT INTO `element` (`id`, `name`) VALUES
 (1, 'bug'),
 (2, 'dark'),
 (3, 'dragon'),
@@ -782,7 +782,7 @@ CREATE TABLE IF NOT EXISTS `attack` (
   `accuracy` tinyint(4) DEFAULT NULL,
   `pp` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`element_id`) REFERENCES elements(`id`),
+  FOREIGN KEY (`element_id`) REFERENCES element(`id`),
   FOREIGN KEY (`type_id`) REFERENCES attack_types(`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=104 ;
@@ -914,8 +914,8 @@ CREATE TABLE IF NOT EXISTS `pokedex` (
   `base_speed` tinyint(4) UNSIGNED NOT NULL,
   `exp_group` tinyint(4) NOT NULL COMMENT 'Experience Rate Group',
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`type_1`) REFERENCES elements(`id`),
-  FOREIGN KEY (`type_2`) REFERENCES elements(`id`),
+  FOREIGN KEY (`type_1`) REFERENCES element(`id`),
+  FOREIGN KEY (`type_2`) REFERENCES element(`id`),
   FOREIGN KEY (`exp_group`) REFERENCES experience_groups(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 AUTO_INCREMENT=387 ;
 
