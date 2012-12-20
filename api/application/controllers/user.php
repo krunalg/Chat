@@ -27,9 +27,11 @@ class User extends CI_Controller {
         } else if( $method === 'POST' ) {
 
             // Returns all POST data with XSS filter.
-            $data = $this->input->post(NULL, TRUE);
+            $post_data = $this->input->post(NULL, TRUE);
 
-            $this->User_model->add_user( $data );
+            $response = $this->User_model->add_user( $post_data );
+
+            $this->load->view( 'json_response', $response );
 
         } else {
 
