@@ -199,16 +199,6 @@ class User_model extends CI_Model {
 
     }
 
-
-
-
-
-
-
-
-
-
-
     // Returns TRUE if the array of values supplied
     // each correspond to a column in the database table.
     // Else returns the value of the bad column.
@@ -259,8 +249,6 @@ class User_model extends CI_Model {
         return $json;
 
     }
-
-
 
 }
 
