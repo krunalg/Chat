@@ -33,7 +33,9 @@ class User extends CI_Controller {
 
         } else {
 
-            echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
+            $data = array( "code" => 405, "message" => "Error: That HTTP method is not supported for this URL." );
+
+            $this->load->view( 'json_response', $data );
 
         }
 
@@ -62,7 +64,9 @@ class User extends CI_Controller {
 
         } else {
 
-            echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
+            $data = array( "code" => 405, "message" => "Error: That HTTP method is not supported for this URL." );
+
+            $this->load->view( 'json_response', $data );
 
         }
 
