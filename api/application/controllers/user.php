@@ -24,9 +24,14 @@ class User extends CI_Controller {
 
             $this->User_model->get_users( $criteria );
 
-        } else if( $method === 'POST' ) $this->User_model->add_user();
+        } else if( $method === 'POST' ) {
 
-        else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
+            // Returns all POST data with XSS filter.
+            $data = $this->input->post(NULL, TRUE);
+
+            $this->User_model->add_user();
+
+        } else echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
 
     }
 
