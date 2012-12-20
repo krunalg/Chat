@@ -42,9 +42,9 @@ class User extends CI_Controller {
     // Respond with a single user.
     private function _get_user( $id ) {
 
-        if( $this->User_model->does_exist( $id ) ) {
+        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
 
-            $data = $this->User_model->get( $id );
+            $data = $this->User_model->get( $id, $this->tbl_user );
 
             echo $this->_response( 200, 'Showing one user.', $data );
 
@@ -89,7 +89,7 @@ class User extends CI_Controller {
 
         if( $column_chk_result === TRUE ) {
 
-            $data = $this->User_model->get_list( $GET, $limit, $offset );
+            $data = $this->User_model->get_list( $GET, $limit, $offset, $this->tbl_user );
 
             $user_count = count( $data );
 
@@ -108,7 +108,7 @@ class User extends CI_Controller {
     private function _update_user( $id ) {
 
         // Check that user exists.
-        if( $this->User_model->does_exist( $id ) ) {
+        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
 
             $this->load->library('form_validation');
 
@@ -130,7 +130,7 @@ class User extends CI_Controller {
                     // Do columns exist for all submitted values?
                     if( $column_chk_result === TRUE ) {
 
-                       $this->User_model->update( $id, $data );
+                       $this->User_model->update( $id, $data, $this->tbl_user );
 
                        echo $this->_response( 200, "Success: User updated." );
 
@@ -162,10 +162,10 @@ class User extends CI_Controller {
     private function _delete_user( $id ) {
 
         // Check that user exists.
-        if( $this->User_model->does_exist( $id ) ) {
+        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
 
             // Delete user.
-            $this->User_model->delete( $id );
+            $this->User_model->delete( $id, $this->tbl_user );
 
             echo $this->_response( 200, "Success: User was removed." );
 
@@ -193,7 +193,7 @@ class User extends CI_Controller {
             if( $column_chk_result === TRUE ) {
 
                 // Add user to database.
-                $this->User_model->insert( $PUT );
+                $this->User_model->insert( $PUT, $this->tbl_user );
 
                 $user_id = $this->db->insert_id();
 
