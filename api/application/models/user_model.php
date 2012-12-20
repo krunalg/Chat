@@ -142,7 +142,9 @@ class User_model extends CI_Model {
                 // Is an attempt being made to change the user ID?
                 if( array_key_exists( 'id', $data ) ) {
 
-                    echo $this->_response( 403, "Error: Changing a user's ID is forbidden." );
+                    $code = 403;
+
+                    $message = "Changing a user's ID is forbidden.";
 
                 } else  {
 
@@ -155,12 +157,15 @@ class User_model extends CI_Model {
 
                         $this->db->update( $this->table, $data );
 
-                        echo $this->_response( 200, "Success: User updated." );
+                        $code = 200;
+
+                        $message = "User data was updated successfully.";
 
                     } else {
 
-                         // A column was supplied that does not exist.
-                         echo $this->_response( 500, "Error: No such column $column_chk_result" );
+                        $code = 500;
+
+                        $message = "Invalid column specified: $column_chk_result";
 
                     }
 
@@ -168,16 +173,21 @@ class User_model extends CI_Model {
 
             }  else {
 
-                // Form validation failed.
-                echo $this->_response( 400, validation_errors() );
+                $code = 400;
+
+                $message = "Validation failure: " . validation_errors();
 
             }
 
         } else {
 
-            echo $this->_response( 404, "Error: No such user exists." );
+            $code = 404;
+
+            $message = "No such user exists.";
 
         }
+
+        return array( "code" => $code, "message" => $message );
 
     }
 
