@@ -54,9 +54,11 @@ class User extends CI_Controller {
 
             $this->User_model->update_user( $id, $data );
 
-        } else if( $method === 'DELETE' ) $this->User_model->delete_user( $id );
+        } else if( $method === 'DELETE' ) {
 
-        else {
+            $this->User_model->delete_user( $id );
+
+        } else {
 
             echo $this->_response( 405, "Error: That HTTP method is not supported for this URL.");
 
