@@ -13,7 +13,7 @@ class User_model extends CI_Model {
 
     // Returns TRUE if a user with that ID exists.
     // Else returns FALSE.
-    function does_exist( $id, $table ) {
+    function user_exists( $id, $table ) {
 
         $query = $this->db->get_where( $table, array('id' => $id) );
 
@@ -24,7 +24,7 @@ class User_model extends CI_Model {
     // Respond with a single user.
     function get_user( $id ) {
 
-        if( $this->does_exist( $id, $this->tbl_user ) ) {
+        if( $this->user_exists( $id, $this->tbl_user ) ) {
 
             $query = $this->db->get_where( $this->tbl_user, array('id' => $id) );
 
@@ -138,7 +138,7 @@ class User_model extends CI_Model {
     function update_user( $id ) {
 
         // Check that user exists.
-        if( $this->does_exist( $id, $this->tbl_user ) ) {
+        if( $this->user_exists( $id, $this->tbl_user ) ) {
 
             $this->load->library('form_validation');
 
@@ -194,7 +194,7 @@ class User_model extends CI_Model {
     function delete_user( $id ) {
 
         // Check that user exists.
-        if( $this->User_model->does_exist( $id, $this->tbl_user ) ) {
+        if( $this->User_model->user_exists( $id, $this->tbl_user ) ) {
 
             $this->db->delete( $this->tbl_user, array( 'id' => $id ) );
 
