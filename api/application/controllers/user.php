@@ -54,17 +54,17 @@ class User extends CI_Controller {
         } else if( $method === 'POST' ) {
 
             // Returns all POST data with XSS filter.
-            $input = $this->input->post(NULL, TRUE);
+            $post_data = $this->input->post(NULL, TRUE);
 
-            $data = $this->User_model->update_user( $id, $input );
+            $response = $this->User_model->update_user( $id, $post_data );
 
-            $this->load->view( 'json_response', $data );
+            $this->load->view( 'json_response', $response );
 
         } else if( $method === 'DELETE' ) {
 
-            $data = $this->User_model->delete_user( $id );
+            $response = $this->User_model->delete_user( $id );
 
-            $this->load->view( 'json_response', $data );
+            $this->load->view( 'json_response', $response );
 
         } else {
 
