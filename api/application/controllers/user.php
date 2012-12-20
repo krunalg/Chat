@@ -17,7 +17,7 @@ class User extends CI_Controller {
 
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if( $method === 'GET' ) $this->_list_users();
+        if( $method === 'GET' ) $this->User_model->get_users();
 
         else if( $method === 'POST' ) $this->_add_user();
 
@@ -51,54 +51,6 @@ class User extends CI_Controller {
         } else {
 
             echo $this->_response( 404, "Error: No such user exists." );
-
-        }
-
-    }
-
-    // Respond with a list of users.
-    private function _list_users() {
-
-        $limit = 10;
-
-        $offset = 0;
-
-        // returns all GET items with XSS filter.
-        $GET = $this->input->get(NULL, TRUE);
-
-        if( isset( $GET[ 'limit' ] ) ) {
-
-            $limit = $GET[ 'limit' ];
-
-            unset( $GET[ 'limit' ] );
-
-        }
-
-        if( isset( $GET[ 'offset' ] ) ) {
-
-            $offset = $GET[ 'offset' ];
-
-            unset( $GET[ 'offset' ] );
-
-        }
-
-        // Make empty array if no values exist.
-        if( !$GET ) $GET = array();
-
-        $column_chk_result = $this->_columns_exist( $GET, $this->tbl_user );
-
-        if( $column_chk_result === TRUE ) {
-
-            $data = $this->User_model->get_list( $GET, $limit, $offset, $this->tbl_user );
-
-            $user_count = count( $data );
-
-            echo $this->_response( 200, "Showing $user_count users.", $data );
-
-        } else {
-
-            // A column was supplied that does not exist.
-            echo $this->_response( 500, "Error: No such column $column_chk_result" );
 
         }
 

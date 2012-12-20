@@ -6,6 +6,9 @@ class User_model extends CI_Model {
 
         parent::__construct();
 
+        // Name of table containing users.
+        $this->tbl_user = 'user';
+
     }
 
     // Returns TRUE if a user with that ID exists.
@@ -28,6 +31,7 @@ class User_model extends CI_Model {
 
     }
 
+    /*
     // Returns an array of arrays like the one that get() returns.
     function get_list( $criteria, $limit, $offset, $table ) {
 
@@ -36,6 +40,7 @@ class User_model extends CI_Model {
         return $query->result();
 
     }
+    */
 
     // Adds a new user to the database.
     function insert( $data, $table ) {
@@ -59,6 +64,135 @@ class User_model extends CI_Model {
         $this->db->delete( $table, array( 'id' => $id ) );
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Respond with a list of users.
+    function get_users() {
+
+        $limit = 10;
+
+        $offset = 0;
+
+        // returns all GET items with XSS filter.
+        $criteria = $this->input->get(NULL, TRUE);
+
+        if( isset( $criteria[ 'limit' ] ) ) {
+
+            $limit = $criteria[ 'limit' ];
+
+            unset( $criteria[ 'limit' ] );
+
+        }
+
+        if( isset( $criteria[ 'offset' ] ) ) {
+
+            $offset = $criteria[ 'offset' ];
+
+            unset( $criteria[ 'offset' ] );
+
+        }
+
+        // Make empty array if no values exist.
+        if( !$criteria ) $criteria = array();
+
+        $column_chk_result = $this->_columns_exist( $criteria, $this->tbl_user );
+
+        if( $column_chk_result === TRUE ) {
+
+            $query = $this->db->get_where( $this->tbl_user, $criteria, $limit, $offset );
+
+            $data = $query->result();
+
+            $user_count = count( $data );
+
+            echo $this->_response( 200, "Showing $user_count users.", $data );
+
+        } else {
+
+            // A column was supplied that does not exist.
+            echo $this->_response( 500, "Error: No such column $column_chk_result" );
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    // Returns TRUE if the array of values supplied
+    // each correspond to a column in the database table.
+    // Else returns the value of the bad column.
+    private function _columns_exist( $columns, $table ) {
+
+        foreach( $columns as $key => $value ) {
+
+            if( !$this->db->field_exists( $key, $table ) ) {
+
+                return $key;
+
+            }
+
+        }
+
+        return TRUE;
+
+    }
+
+    // Sets HTTP headers and generates a JSON response
+    // which can be used for output.
+    private function _response( $code, $message, $data = NULL, $location = '' ) {
+
+        if( $code == 201 ) {
+
+            // Special case requires URL of newly created resource.
+
+            $this->output->set_header("HTTP/1.1 201 Created");
+
+            $this->output->set_header("Location: $location");
+
+        } else {
+
+            $this->output->set_status_header( $code );
+
+        }
+
+        // If no data is supplied, leave the field out.
+        if( !isset( $data ) ) $response = array( 'code' => $code, 'message' => $message );
+
+        // But if data is supplied, then add it.
+        else $response = array( 'code' => $code, 'message' => $message, 'data' => $data );
+
+        $this->output->set_content_type('application/json');
+
+        $json = json_encode( $response );
+
+        return $json;
+
+    }
+
+
 
 }
 
