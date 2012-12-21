@@ -310,6 +310,15 @@ io.sockets.on('connection', function(socket) {
 
         }
 
+        // Get user data via API.
+
+        //var data = 'user=' + user;
+
+        //var path = 'user/?user=' + user;
+
+        //httpRequest('GET', path, data);
+
+        ///*
         http.get("http://localhost/Chat/api/user/?user=" + user, function(res) {
 
             res.setEncoding('utf8');
@@ -353,6 +362,8 @@ io.sockets.on('connection', function(socket) {
             console.log("Got error: " + e.message);
 
         });
+
+        //*/
 
     });
 
@@ -560,7 +571,7 @@ io.sockets.on('connection', function(socket) {
 
         var path = 'user/' + player.id;
 
-        httpRequest('POST', path, data);
+        httpRequest('POST', path, function(jsonObj){console.log(jsonObj.message);}, data);
 
         // remove client from onlinePlayers array
         for(i = 0; i < onlinePlayers.length; i++) {
@@ -581,7 +592,7 @@ io.sockets.on('connection', function(socket) {
 
 });
 
-var httpRequest = function( method, path, data ) {
+var httpRequest = function( method, path, callback, data ) {
 
     var options = {
 
@@ -611,7 +622,7 @@ var httpRequest = function( method, path, data ) {
 
             var jsonObj = JSON.parse(chunk);
 
-            console.log(jsonObj.message);
+            callback( jsonObj );
 
         });
 
