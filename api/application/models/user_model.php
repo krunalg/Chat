@@ -103,7 +103,7 @@ class User_model extends CI_Model {
     }
 
     // Add a new user.
-    public function add_user( $data ) {
+    public function add_user() {
 
         $this->load->library('form_validation');
 
