@@ -592,6 +592,18 @@ io.sockets.on('connection', function(socket) {
 
 });
 
+/**
+ * Sends an HTTP Request which expects a JSON response
+ * and upon success triggers a callback function
+ * with the fetched JSON object as an argument.
+ *
+ * @access  public
+ * @param   method     string
+ * @param   path       string
+ * @param   callback   function
+ * @param   data       string
+ * @return  undefined
+ */
 function httpRequest( method, path, callback, data ) {
 
     var options = {
