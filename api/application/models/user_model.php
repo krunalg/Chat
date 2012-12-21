@@ -183,10 +183,6 @@ class User_model extends CI_Model {
     // Add a new user.
     public function add_user() {
 
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules( $this->add_rules );
-
         if( ! isset( $_POST ) || count( $_POST ) === 0 ) {
 
             $code = 400;
@@ -194,48 +190,56 @@ class User_model extends CI_Model {
             // Duplicate message.
             $message = "Expecting POST data but none was supplied.";
 
-        } else if( $this->form_validation->run('add_user') === FALSE ) {
-
-            // No.
-
-            $code = 400;
-
-            // Duplicate message.
-            $message = "Validation failure: " . validation_errors();
-
         } else {
 
-            // Yes.
+            $this->load->library('form_validation');
 
-            // Returns all POST data with XSS filter.
-            $data = $this->input->post(NULL, TRUE);
+            $this->form_validation->set_rules( $this->add_rules );
 
-            $column_chk_result = $this->_columns_exist( $data, $this->table );
+            if( $this->form_validation->run('add_user') === FALSE ) {
 
-            if( $column_chk_result === TRUE ) {
+                // No.
 
-                // Add user to database.
-                $this->db->insert( $this->table, $data );
+                $code = 400;
 
-                $user_id = $this->db->insert_id();
-
-                // Allows us to use base_url().
-                $this->load->helper('url');
-
-                $location = base_url() . $this->table . '/' . $user_id;
-
-                $code = 201;
-
-                $message = "Successfully added user.";
-
-                return array( "code" => $code, "message" => $message, "location" => $location );
+                // Duplicate message.
+                $message = "Validation failure: " . validation_errors();
 
             } else {
 
-                $code = 500;
+                // Yes.
 
-                // Duplicate message.
-                $message = "Invalid column specified: $column_chk_result";
+                // Returns all POST data with XSS filter.
+                $data = $this->input->post(NULL, TRUE);
+
+                $column_chk_result = $this->_columns_exist( $data, $this->table );
+
+                if( $column_chk_result === TRUE ) {
+
+                    // Add user to database.
+                    $this->db->insert( $this->table, $data );
+
+                    $user_id = $this->db->insert_id();
+
+                    // Allows us to use base_url().
+                    $this->load->helper('url');
+
+                    $location = base_url() . $this->table . '/' . $user_id;
+
+                    $code = 201;
+
+                    $message = "Successfully added user.";
+
+                    return array( "code" => $code, "message" => $message, "location" => $location );
+
+                } else {
+
+                    $code = 500;
+
+                    // Duplicate message.
+                    $message = "Invalid column specified: $column_chk_result";
+
+                }
 
             }
 
