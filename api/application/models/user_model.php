@@ -31,13 +31,21 @@ class User_model extends CI_Model {
             // Take the first of the array.
             $data = array_shift( $query->result() );
 
-            echo $this->_response( 200, 'Showing one user.', $data );
+            $code = 200;
+
+            $message = 'Showing one user.';
+
+            return array( "code" => $code, "message" => $message, "data" => $data );
 
         } else {
 
-            echo $this->_response( 404, "Error: No such user exists." );
+            $code = 404;
+
+            $message = "No such user exists.";
 
         }
+
+        return array( "code" => $code, "message" => $message );
 
     }
 

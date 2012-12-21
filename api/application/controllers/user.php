@@ -49,7 +49,9 @@ class User extends CI_Controller {
 
         if( $method === 'GET' ) {
 
-            $this->User_model->get_user( $id );
+            $response = $this->User_model->get_user( $id );
+
+            $this->load->view( 'json_response', $response );
 
         } else if( $method === 'POST' ) {
 
