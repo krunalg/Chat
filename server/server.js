@@ -555,7 +555,7 @@ io.sockets.on('connection', function(socket) {
 
             port: 80,
 
-            path: '/Chat/api/users/' + player.id,
+            path: '/Chat/api/user/' + player.id,
 
             method: 'POST',
 
