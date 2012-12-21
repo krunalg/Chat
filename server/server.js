@@ -302,7 +302,7 @@ io.sockets.on('connection', function(socket) {
 
         }
 
-        http.get("http://localhost/Chat/api/users/?user=" + user, function(res) {
+        http.get("http://localhost/Chat/api/user/?user=" + user, function(res) {
 
             res.setEncoding('utf8');
 
