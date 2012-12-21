@@ -12,7 +12,7 @@ class Test extends CI_Controller {
 
         $this->load->library('unit_test');
 
-        $this->unit->set_test_items(array('test_name', 'result'));
+        $this->unit->set_test_items(array('test_name', 'result', 'notes'));
 
         $template = '
         <table style="width:100%; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">
@@ -54,7 +54,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
         unset($_POST);
 
@@ -69,7 +69,7 @@ class Test extends CI_Controller {
 
         $result = count( $test['data'] );
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
         // Save user ID for next tests.
         $user_id = $test['data'][0]->id;
@@ -83,7 +83,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
 
         $test_name = "Delete newly added user by his ID.";
@@ -94,7 +94,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
 
         $test_name = "Try to find recently deleted user by name.";
@@ -107,7 +107,7 @@ class Test extends CI_Controller {
 
         $result = count( $test['data'] );
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
 
         $test_name = "Try to find recently deleted user by ID.";
@@ -118,7 +118,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
 
         $test_name = "Try adding a new user with a too-short name.";
@@ -131,7 +131,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
         unset($_POST);
 
@@ -146,7 +146,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
         unset($_POST);
 
@@ -161,7 +161,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
         unset($_POST);
 
@@ -174,7 +174,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
 
         $test_name = "Try adding a new user with a bad column name.";
@@ -187,7 +187,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
         unset($_POST);
 
@@ -200,7 +200,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
 
     }
 
