@@ -35,6 +35,8 @@ class Test extends CI_Controller {
 
             $this->unit->run($result, $expected_result, $test_name);
 
+            unset($_POST);
+
         }
 
         {
