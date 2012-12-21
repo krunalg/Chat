@@ -27,11 +27,27 @@ class Test extends CI_Controller {
 
             $expected_result = 201;
 
-            $_POST = array('user' => 'Bigred2');
+            $_POST = array('user' => 'Unlikelyname');
 
             $test = $this->User_model->add_user();
 
             $result = $test['code'];
+
+            $this->unit->run($result, $expected_result, $test_name);
+
+        }
+
+        {
+
+            $test_name = "Find a user by name.";
+
+            $expected_result = 1;
+
+            $criteria = array('user' => 'Unlikelyname');
+
+            $test = $this->User_model->get_users( $criteria );
+
+            $result = count( $test['data'] );
 
             $this->unit->run($result, $expected_result, $test_name);
 
