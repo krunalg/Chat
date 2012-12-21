@@ -107,8 +107,14 @@ class User_model extends CI_Model {
 
         $this->load->library('form_validation');
 
-        // Does POST data pass validation?
-        if( $this->form_validation->run('add_user') === FALSE ) {
+        if( ! isset( $_POST ) || count( $_POST ) === 0 ) {
+
+            $code = 400;
+
+            // Duplicate message.
+            $message = "Expecting POST data but none was supplied.";
+
+        } else if( $this->form_validation->run('add_user') === FALSE ) {
 
             // No.
 
