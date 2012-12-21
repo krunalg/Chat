@@ -20,7 +20,7 @@ class Test extends CI_Controller {
 
         $this->load->model('User_model');
 
-
+        // Test User->Add/GetByName/GetById/Delete/GetByName
         {
 
             $test_name = "Add a user.";
