@@ -554,53 +554,13 @@ io.sockets.on('connection', function(socket) {
 
         }
 
-        // Define POST data to submit.
+        // Save user data via API.
+
         var data = 'x=' + player.pos.x + '&y=' + player.pos.y + '&facing=' + player.facing + '&state=' + player.state;
 
-        var options = {
+        var path = 'user/' + player.id;
 
-            hostname: api.host,
-
-            port: api.port,
-
-            path: api.path + 'user/' + player.id,
-
-            method: 'POST',
-
-            headers: {
-
-                'Content-Type': 'application/x-www-form-urlencoded',
-
-                'Content-Length': data.length
-
-            }
-
-        };
-
-        var req = http.request(options, function(res) {
-
-            res.setEncoding('utf8');
-
-            res.on('data', function (chunk) {
-
-                var jsonObj = JSON.parse(chunk);
-
-                console.log(jsonObj.message);
-
-            });
-
-        });
-
-        req.on('error', function(e) {
-
-            console.log('problem with request: ' + e.message);
-
-        });
-
-        // write data to request body
-        req.write(data);
-
-        req.end();
+        httpRequest('POST', path, data);
 
         // remove client from onlinePlayers array
         for(i = 0; i < onlinePlayers.length; i++) {
@@ -620,3 +580,52 @@ io.sockets.on('connection', function(socket) {
     });
 
 });
+
+var httpRequest = function( method, path, data ) {
+
+    var options = {
+
+        hostname: api.host,
+
+        port: api.port,
+
+        path: api.path + path,
+
+        method: method,
+
+        headers: {
+
+            'Content-Type': 'application/x-www-form-urlencoded',
+
+            'Content-Length': data.length
+
+        }
+
+    };
+
+    var req = http.request(options, function(res) {
+
+        res.setEncoding('utf8');
+
+        res.on('data', function (chunk) {
+
+            var jsonObj = JSON.parse(chunk);
+
+            console.log(jsonObj.message);
+
+        });
+
+    });
+
+    req.on('error', function(e) {
+
+        console.log('problem with request: ' + e.message);
+
+    });
+
+    // write data to request body
+    req.write(data);
+
+    req.end();
+
+};
