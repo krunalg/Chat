@@ -151,6 +151,21 @@ class Test extends CI_Controller {
         unset($_POST);
 
 
+        $test_name = "Try adding a new user with predefined ID.";
+
+        $expected_result = 400;
+
+        $_POST = array('username' => 'Legitname', 'id' => 10 );
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $test_name);
+
+        unset($_POST);
+
+
         $test_name = "Try adding a new user when there is no POST data.";
 
         $expected_result = 400;
@@ -175,6 +190,17 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name);
 
         unset($_POST);
+
+
+        $test_name = "Try to delete a non-existent user.";
+
+        $expected_result = 404;
+
+        $test = $this->User_model->delete_user( -1 );
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $test_name);
 
     }
 
