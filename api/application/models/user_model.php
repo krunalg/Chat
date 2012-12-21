@@ -110,6 +110,9 @@ class User_model extends CI_Model {
         // Does POST data pass validation?
         if( $this->form_validation->run('add_user') ) {
 
+            // Returns all POST data with XSS filter.
+            $data = $this->input->post(NULL, TRUE);
+
             $column_chk_result = $this->_columns_exist( $data, $this->table );
 
             if( $column_chk_result === TRUE ) {
