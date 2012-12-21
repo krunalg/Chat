@@ -602,17 +602,21 @@ var httpRequest = function( method, path, callback, data ) {
 
         path: api.path + path,
 
-        method: method,
+        method: method
 
-        headers: {
+    };
+
+    if( typeof data === 'string' ) {
+
+        options.headers = {
 
             'Content-Type': 'application/x-www-form-urlencoded',
 
             'Content-Length': data.length
 
-        }
+        };
 
-    };
+    }
 
     var req = http.request(options, function(res) {
 
