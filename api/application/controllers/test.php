@@ -51,8 +51,22 @@ class Test extends CI_Controller {
 
             $this->unit->run($result, $expected_result, $test_name);
 
-            // Save user ID for next test.
+            // Save user ID for next tests.
             $user_id = $test['data'][0]->id;
+
+        }
+
+        {
+
+            $test_name = "Find a user by ID.";
+
+            $expected_result = 200;
+
+            $test = $this->User_model->get_user( $user_id );
+
+            $result = $test['code'];
+
+            $this->unit->run($result, $expected_result, $test_name);
 
         }
 
