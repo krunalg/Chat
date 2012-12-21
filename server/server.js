@@ -34,7 +34,15 @@ server.listen(9090);
 
 
 
+var api = {
 
+    host: 'localhost',
+
+    port: 80,
+
+    path: '/Chat/api/'
+
+};
 
 
 
@@ -551,11 +559,11 @@ io.sockets.on('connection', function(socket) {
 
         var options = {
 
-            hostname: 'localhost',
+            hostname: api.host,
 
-            port: 80,
+            port: api.port,
 
-            path: '/Chat/api/user/' + player.id,
+            path: api.path + 'user/' + player.id,
 
             method: 'POST',
 
