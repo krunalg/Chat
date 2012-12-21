@@ -136,6 +136,21 @@ class Test extends CI_Controller {
         unset($_POST);
 
 
+        $test_name = "Try adding a new user with no name.";
+
+        $expected_result = 400;
+
+        $_POST = array('zone' => 'hi', 'direction' => 'left' );
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $test_name, $test['message']);
+
+        unset($_POST);
+
+
         $test_name = "Try adding a new user with a too-long name.";
 
         $expected_result = 400;
