@@ -592,7 +592,7 @@ io.sockets.on('connection', function(socket) {
 
 });
 
-var httpRequest = function( method, path, callback, data ) {
+function httpRequest( method, path, callback, data ) {
 
     var options = {
 
