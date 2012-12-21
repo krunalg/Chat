@@ -150,6 +150,17 @@ class Test extends CI_Controller {
 
         unset($_POST);
 
+
+        $test_name = "Try adding a new user when there is no POST data.";
+
+        $expected_result = 400;
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $test_name);
+
     }
 
 }
