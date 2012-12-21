@@ -326,13 +326,13 @@ io.sockets.on('connection', function(socket) {
 
                 var y = parseInt(jsonObj.data[0].y);
 
-                var facing = jsonObj.data[0].facing;
+                var facing = jsonObj.data[0].direction;
 
                 var skin = jsonObj.data[0].skin;
 
                 var state = jsonObj.data[0].state;
 
-                var map = jsonObj.data[0].map;
+                var map = jsonObj.data[0].zone;
 
                 initializePlayer( id, name, x, y, facing, skin, state, map, socket.id );
 
@@ -597,7 +597,7 @@ io.sockets.on('connection', function(socket) {
 
         // Save user data via API.
 
-        var data = 'x=' + player.pos.x + '&y=' + player.pos.y + '&facing=' + player.facing + '&state=' + player.state;
+        var data = 'x=' + player.pos.x + '&y=' + player.pos.y + '&direction=' + player.facing + '&state=' + player.state;
 
         var path = 'user/' + player.id;
 

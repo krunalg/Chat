@@ -20,10 +20,10 @@ CREATE TABLE `user` (
   `username` varchar(12) NOT NULL COMMENT 'in-game name',
   `x` int(11) NOT NULL DEFAULT '0' COMMENT 'last recorded x position',
   `y` int(11) NOT NULL DEFAULT '0' COMMENT 'last recorded y position',
-  `facing` varchar(5) NOT NULL DEFAULT 'down' COMMENT 'direction player faces',
+  `direction` varchar(5) NOT NULL DEFAULT 'down' COMMENT 'direction player faces',
   `skin` varchar(20) NOT NULL,
   `state` varchar(20) NOT NULL,
-  `map` varchar(30) NOT NULL,
+  `zone` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
@@ -32,7 +32,7 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `x`, `y`, `facing`, `skin`, `state`, `map`) VALUES
+INSERT INTO `user` (`username`, `x`, `y`, `direction`, `skin`, `state`, `zone`) VALUES
 ('Jake', 416, 2960, 'up', 'boy', 'idle', 'RsWorld'),
 ('Joncom', 416, 2960, 'up', 'girl', 'idle', 'RsWorld'),
 ('kitti', 256, 224, 'right', 'boy', 'idle', 'RsBattleTower');

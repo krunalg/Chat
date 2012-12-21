@@ -66,7 +66,7 @@ $config = array(
 
         array(
 
-            'field' => 'map',
+            'field' => 'zone',
 
             'label' => 'current zone',
 
@@ -140,7 +140,7 @@ $config = array(
 
         array(
 
-            'field' => 'map',
+            'field' => 'zone',
 
             'label' => 'current zone',
 
