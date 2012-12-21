@@ -21,24 +21,21 @@ class Test extends CI_Controller {
         $this->load->model('User_model');
 
 
-        // Test
+        {
 
-        $data = array();
+            $test_name = "Add a user.";
 
-        $data['sdfsdfsdfdf'] = "Bigred";
+            $expected_result = 201;
 
-        $test = $this->User_model->add_user( $data );
+            $_POST = array('user' => 'Bigred2');
 
-        $result = $test['code'];
+            $test = $this->User_model->add_user();
 
-        $expected_result = 201;
+            $result = $test['code'];
 
-        print_r($test);
+            $this->unit->run($result, $expected_result, $test_name);
 
-        $test_name = "Add a user.";
-
-        $this->unit->run($result, $expected_result, $test_name);
-
+        }
 
 
         // Report test results.
