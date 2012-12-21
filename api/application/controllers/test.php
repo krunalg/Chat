@@ -14,6 +14,18 @@ class Test extends CI_Controller {
 
         $this->unit->set_test_items(array('test_name', 'result'));
 
+        $template = '
+        <table style="width:100%; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">
+            {rows}
+                <tr>
+                <th style="text-align: left; border-bottom:1px solid #CCC; width: 100px;">{item}</th>
+                <td style="border-bottom:1px solid #CCC;">{result}</td>
+                </tr>
+            {/rows}
+        </table>';
+
+        $this->unit->set_template($template);
+
         $this->unit->use_strict(TRUE);
 
         // Test User_model
@@ -21,8 +33,7 @@ class Test extends CI_Controller {
 
 
         // Report test results.
-
-        echo $this->unit->report();
+        //echo $this->unit->report();
 
         //print_r( $this->unit->result() );
 
@@ -43,7 +54,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name);
 
         unset($_POST);
 
@@ -58,7 +69,7 @@ class Test extends CI_Controller {
 
         $result = count( $test['data'] );
 
-        $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name);
 
         // Save user ID for next tests.
         $user_id = $test['data'][0]->id;
@@ -72,7 +83,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name);
 
 
         $test_name = "Delete newly added user by his ID.";
@@ -85,7 +96,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name);
 
 
         $test_name = "Try to find recently deleted user in the database.";
@@ -98,7 +109,7 @@ class Test extends CI_Controller {
 
         $result = count( $test['data'] );
 
-        $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name);
 
     }
 
