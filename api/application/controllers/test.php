@@ -51,6 +51,25 @@ class Test extends CI_Controller {
 
             $this->unit->run($result, $expected_result, $test_name);
 
+            // Save user ID for next test.
+            $user_id = $test['data'][0]->id;
+
+        }
+
+        {
+
+            $test_name = "Delete a user by ID.";
+
+            $expected_result = 200;
+
+            $criteria = array('user' => 'Unlikelyname');
+
+            $test = $this->User_model->delete_user( $user_id );
+
+            $result = $test['code'];
+
+            $this->unit->run($result, $expected_result, $test_name);
+
         }
 
 
