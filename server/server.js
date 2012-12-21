@@ -681,7 +681,7 @@ function httpRequest( method, path, callback, data ) {
     });
 
     // write data to request body
-    req.write(data);
+    if( typeof data === 'string' ) req.write(data);
 
     req.end();
 
