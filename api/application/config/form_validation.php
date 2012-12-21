@@ -6,11 +6,11 @@ $config = array(
 
         array(
 
-            'field' => 'user',
+            'field' => 'username',
 
             'label' => "username",
 
-            'rules' => 'is_unique[user.user]|min_length[3]|max_length[12]'
+            'rules' => 'is_unique[user.username]|min_length[3]|max_length[12]'
 
         ),
 
@@ -80,11 +80,11 @@ $config = array(
 
         array(
 
-            'field' => 'user',
+            'field' => 'username',
 
             'label' => "username",
 
-            'rules' => 'required|is_unique[user.user]|min_length[3]|max_length[12]'
+            'rules' => 'required|is_unique[user.username]|min_length[3]|max_length[12]'
 
         ),
 

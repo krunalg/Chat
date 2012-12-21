@@ -48,7 +48,7 @@ class Test extends CI_Controller {
 
         $expected_result = 201;
 
-        $_POST = array('user' => 'Unlikelyname');
+        $_POST = array('username' => 'Unlikelyname');
 
         $test = $this->User_model->add_user();
 
@@ -63,7 +63,7 @@ class Test extends CI_Controller {
 
         $expected_result = 1;
 
-        $criteria = array('user' => 'Unlikelyname');
+        $criteria = array('username' => 'Unlikelyname');
 
         $test = $this->User_model->get_users( $criteria );
 
@@ -101,7 +101,7 @@ class Test extends CI_Controller {
 
         $expected_result = 0;
 
-        $criteria = array('user' => 'Unlikelyname');
+        $criteria = array('username' => 'Unlikelyname');
 
         $test = $this->User_model->get_users( $criteria );
 

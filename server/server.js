@@ -312,7 +312,7 @@ io.sockets.on('connection', function(socket) {
 
         // Get user data via API.
 
-        var path = 'user/?user=' + user;
+        var path = 'user/?username=' + user;
 
         var callback = function(jsonObj) {
 
@@ -320,7 +320,7 @@ io.sockets.on('connection', function(socket) {
 
                 var id = parseInt(jsonObj.data[0].id);
 
-                var name = jsonObj.data[0].user;
+                var name = jsonObj.data[0].username;
 
                 var x = parseInt(jsonObj.data[0].x);
 
