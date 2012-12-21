@@ -214,7 +214,14 @@ class User_model extends CI_Model {
 
                 $column_chk_result = $this->_columns_exist( $data, $this->table );
 
-                if( $column_chk_result === TRUE ) {
+                if( $column_chk_result !== TRUE ) {
+
+                    $code = 500;
+
+                    // Duplicate message.
+                    $message = "Invalid column specified: $column_chk_result";
+
+                } else {
 
                     // Add user to database.
                     $this->db->insert( $this->table, $data );
@@ -231,13 +238,6 @@ class User_model extends CI_Model {
                     $message = "Successfully added user.";
 
                     return array( "code" => $code, "message" => $message, "location" => $location );
-
-                } else {
-
-                    $code = 500;
-
-                    // Duplicate message.
-                    $message = "Invalid column specified: $column_chk_result";
 
                 }
 
