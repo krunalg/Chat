@@ -9,6 +9,84 @@ class User_model extends CI_Model {
         // Name of table containing users.
         $this->table = 'user';
 
+        $this->update_rules = array(
+
+            array(
+
+                'field' => 'username',
+
+                'label' => "username",
+
+                'rules' => 'is_unique[user.username]|min_length[3]|max_length[12]'
+
+            ),
+
+            array(
+
+                'field' => 'x',
+
+                'label' => 'X coordinate',
+
+                'rules' => 'integer'
+
+            ),
+
+            array(
+
+                'field' => 'y',
+
+                'label' => 'Y coordinate',
+
+                'rules' => 'integer'
+
+            ),
+
+            array(
+
+                'field' => 'facing',
+
+                'label' => 'direction faced',
+
+                'rules' => 'is_direction'
+
+            ),
+
+            array(
+
+                'field' => 'skin',
+
+                'label' => 'skin',
+
+                'rules' => 'alpha'
+
+            ),
+
+            array(
+
+                'field' => 'state',
+
+                'label' => 'movement state',
+
+                'rules' => 'alpha'
+
+            ),
+
+            array(
+
+                'field' => 'zone',
+
+                'label' => 'current zone',
+
+                'rules' => 'alpha'
+
+            )
+
+        );
+
+        $this->add_rules = $this->update_rules;
+
+        $this->add_rules[0]['rules'] .= '|required';
+
     }
 
     // Returns TRUE if a user with that ID exists.
@@ -107,6 +185,8 @@ class User_model extends CI_Model {
 
         $this->load->library('form_validation');
 
+        $this->form_validation->set_rules( $this->add_rules );
+
         if( ! isset( $_POST ) || count( $_POST ) === 0 ) {
 
             $code = 400;
@@ -184,6 +264,8 @@ class User_model extends CI_Model {
         } else {
 
             $this->load->library('form_validation');
+
+            $this->form_validation->set_rules( $this->update_rules );
 
             // Does POST data pass validation?
             if( $this->form_validation->run('update_user') === FALSE ) {
