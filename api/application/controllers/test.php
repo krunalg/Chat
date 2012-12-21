@@ -125,7 +125,7 @@ class Test extends CI_Controller {
 
         $expected_result = 400;
 
-        $_POST = array('username' => '');
+        $_POST = array('username' => 'J');
 
         $test = $this->User_model->add_user();
 
