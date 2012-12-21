@@ -168,8 +168,14 @@ class User_model extends CI_Model {
     // Update a user.
     public function update_user( $id ) {
 
-        // Check that user exists.
-        if( ! $this->user_exists( $id, $this->table ) ) {
+        if( ! isset( $_POST ) || count( $_POST ) === 0 ) {
+
+            $code = 400;
+
+            // Duplicate message.
+            $message = "Expecting POST data but none was supplied.";
+
+        } else if( ! $this->user_exists( $id, $this->table ) ) {
 
             $code = 404;
 
