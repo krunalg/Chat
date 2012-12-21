@@ -169,7 +169,7 @@ class User_model extends CI_Model {
 
         } else {
 
-            $code = 500;
+            $code = 400;
 
             // Duplicate message.
             $message = "Invalid column specified: $column_chk_result";
@@ -216,7 +216,7 @@ class User_model extends CI_Model {
 
                 if( $column_chk_result !== TRUE ) {
 
-                    $code = 500;
+                    $code = 400;
 
                     // Duplicate message.
                     $message = "Invalid column specified: $column_chk_result";
@@ -308,7 +308,7 @@ class User_model extends CI_Model {
 
                     } else {
 
-                        $code = 500;
+                        $code = 400;
 
                         // Duplicate message.
                         $message = "Invalid column specified: $column_chk_result";
@@ -339,7 +339,7 @@ class User_model extends CI_Model {
 
         } else {
 
-            $code = 500;
+            $code = 404;
 
             $message = "Error: No such user exists.";
 
