@@ -174,7 +174,14 @@ class User_model extends CI_Model {
             $this->load->library('form_validation');
 
             // Does POST data pass validation?
-            if( $this->form_validation->run('update_user') ) {
+            if( $this->form_validation->run('update_user') === FALSE ) {
+
+                $code = 400;
+
+                // Duplicate message.
+                $message = "Validation failure: " . validation_errors();
+
+            } else {
 
                 // Returns all POST data with XSS filter.
                 $data = $this->input->post(NULL, TRUE);
@@ -211,13 +218,6 @@ class User_model extends CI_Model {
                     }
 
                 }
-
-            }  else {
-
-                $code = 400;
-
-                // Duplicate message.
-                $message = "Validation failure: " . validation_errors();
 
             }
 
