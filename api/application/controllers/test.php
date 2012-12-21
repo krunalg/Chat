@@ -97,7 +97,7 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name);
 
 
-        $test_name = "Try to find recently deleted user in the database.";
+        $test_name = "Try to find recently deleted user by name.";
 
         $expected_result = 0;
 
@@ -106,6 +106,17 @@ class Test extends CI_Controller {
         $test = $this->User_model->get_users( $criteria );
 
         $result = count( $test['data'] );
+
+        echo $this->unit->run($result, $expected_result, $test_name);
+
+
+        $test_name = "Try to find recently deleted user by ID.";
+
+        $expected_result = 404;
+
+        $test = $this->User_model->get_user( $user_id );
+
+        $result = $test['code'];
 
         echo $this->unit->run($result, $expected_result, $test_name);
 
