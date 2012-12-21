@@ -72,6 +72,22 @@ class Test extends CI_Controller {
 
         }
 
+        {
+
+            $test_name = "Find a user that does not exist.";
+
+            $expected_result = 0;
+
+            $criteria = array('user' => 'Unlikelyname');
+
+            $test = $this->User_model->get_users( $criteria );
+
+            $result = count( $test['data'] );
+
+            $this->unit->run($result, $expected_result, $test_name);
+
+        }
+
 
         // Report test results.
 
