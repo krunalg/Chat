@@ -16,26 +16,32 @@ class Test extends CI_Controller {
 
         $this->unit->use_strict(TRUE);
 
+        // Test User_model
+
+        $this->load->model('User_model');
 
 
-        $test = 1 + 1;
+        // Test
 
-        $expected_result = 2;
+        $data = array();
 
-        $test_name = 'Adds one plus one';
+        $data['sdfsdfsdfdf'] = "Bigred";
 
-        echo $this->unit->run($test, $expected_result, $test_name);
+        $test = $this->User_model->add_user( $data );
 
-        $test = 2 + 2;
+        $result = $test['code'];
 
-        $expected_result = 4;
+        $expected_result = 201;
 
-        $test_name = 'Adds two plus two';
+        print_r($test);
 
-        echo $this->unit->run($test, $expected_result, $test_name);
+        $test_name = "Add a user.";
+
+        $this->unit->run($result, $expected_result, $test_name);
 
 
 
+        // Report test results.
 
         echo $this->unit->report();
 
