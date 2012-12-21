@@ -10,9 +10,9 @@ class Test extends CI_Controller {
 
     function index() {
 
-        $this->unit->use_strict(TRUE);
-
         $this->load->library('unit_test');
+
+        $this->unit->use_strict(TRUE);
 
         echo "Test";
 
