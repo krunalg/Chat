@@ -90,8 +90,6 @@ class Test extends CI_Controller {
 
         $expected_result = 200;
 
-        $criteria = array('user' => 'Unlikelyname');
-
         $test = $this->User_model->delete_user( $user_id );
 
         $result = $test['code'];
