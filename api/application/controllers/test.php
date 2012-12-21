@@ -120,6 +120,36 @@ class Test extends CI_Controller {
 
         echo $this->unit->run($result, $expected_result, $test_name);
 
+
+        $test_name = "Try adding a new user with a too-short name.";
+
+        $expected_result = 400;
+
+        $_POST = array('username' => '');
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $test_name);
+
+        unset($_POST);
+
+
+        $test_name = "Try adding a new user with a too-long name.";
+
+        $expected_result = 400;
+
+        $_POST = array('username' => 'Verylongnameismuchtoolong');
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $test_name);
+
+        unset($_POST);
+
     }
 
 }
