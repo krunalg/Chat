@@ -169,7 +169,13 @@ class User_model extends CI_Model {
     public function update_user( $id ) {
 
         // Check that user exists.
-        if( $this->user_exists( $id, $this->table ) ) {
+        if( ! $this->user_exists( $id, $this->table ) ) {
+
+            $code = 404;
+
+            $message = "No such user exists.";
+
+        } else {
 
             $this->load->library('form_validation');
 
@@ -220,12 +226,6 @@ class User_model extends CI_Model {
                 }
 
             }
-
-        } else {
-
-            $code = 404;
-
-            $message = "No such user exists.";
 
         }
 
