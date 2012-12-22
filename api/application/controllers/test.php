@@ -136,6 +136,21 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
+        $test_name = "Update x coordinate of newly added user.";
+
+        $path = $controller . '/' . $user_id;
+
+        $post_data = array('x' => '16');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
+        $expected_result = 200;
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
         $test_name = "Delete newly added user by his ID.";
 
         $path = $controller . '/' . $user_id;
