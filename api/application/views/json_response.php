@@ -1,5 +1,8 @@
 <?php
 
+$this->output->set_status_header( 200 );
+
+/*
 if( $code == 201 ) {
 
     // Special case requires URL of newly created resource.
@@ -13,6 +16,7 @@ if( $code == 201 ) {
     $this->output->set_status_header( $code );
 
 }
+*/
 
 // If no data is supplied, leave the field out.
 if( !isset( $data ) ) $response = array( 'code' => $code, 'message' => $message );
