@@ -1,5 +1,10 @@
 <?php
 
+// This controller is a lot like experience.php
+// and perhaps one controller could be made
+// and then this one and the other could extend it.
+// (And maybe the same for the models?)
+
 class Pokedex extends CI_Controller {
 
     function __construct() {
