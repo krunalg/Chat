@@ -429,6 +429,22 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
+        $test_name = "Try updating non-existent user's x coordinate.";
+
+        // No user exists with ID 0.
+        $path = $controller . '/0';
+
+        $post_data = array('x' => '0');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
+        $expected_result = 404;
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
         $test_name = "Try finding users, filtering by a non-existent column.";
 
         $path = $controller . '/?fakefield=test';
