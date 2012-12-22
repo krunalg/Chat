@@ -295,6 +295,36 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
+        $test_name = "Try adding a new user with an invalid x integer.";
+
+        $path = $controller;
+
+        $post_data = array('username' => 'Legitname', 'x' => '15');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
+        $expected_result = 400;
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
+        $test_name = "Try adding a new user with an invalid y integer.";
+
+        $path = $controller;
+
+        $post_data = array('username' => 'Legitname', 'y' => '15');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
+        $expected_result = 400;
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
         $test_name = "Try adding a new user with an invalid zone name.";
 
         $path = $controller;
