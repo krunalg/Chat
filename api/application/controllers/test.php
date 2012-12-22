@@ -167,6 +167,21 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
+        $test_name = "Try updating non-existent column of newly added user.";
+
+        $path = $controller . '/' . $user_id;
+
+        $post_data = array('fakecolumn' => 'fakedata');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->message;
+
+        $expected_result = "Invalid column specified: fakecolumn";
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
         $test_name = "Try updating newly added user without POST data.";
 
         $path = $controller . '/' . $user_id;
