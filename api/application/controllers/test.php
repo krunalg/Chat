@@ -54,6 +54,190 @@ class Test extends CI_Controller {
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
+
+        $test_name = "Fetch newly added user by name.";
+
+        $path = $controller . '/?username=Unlikelyname';
+
+        $response = json_decode( $this->curl->simple_get( $path ) );
+
+        $result = count( $response->data );
+
+        $expected_result = 1;
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+        // Save user ID for next tests.
+        $user_id = $response->data[0]->id;
+        /*
+
+
+        $test_name = "Fetch newly added user by obtained ID.";
+
+        $path = $controller . '/' . $user_id;
+
+        $expected_result = 200;
+
+        $test = $this->User_model->get_user( $user_id );
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+
+        $test_name = "Delete newly added user by his ID.";
+
+        $path = $controller . '/' . $user_id;
+
+        $expected_result = 200;
+
+        $test = $this->User_model->delete_user( $user_id );
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+
+        $test_name = "Try to find recently deleted user by name.";
+
+        $path = $controller;
+
+        $expected_result = 0;
+
+        $criteria = array('username' => 'Unlikelyname');
+
+        $test = $this->User_model->get_users( $criteria );
+
+        $result = count( $test['data'] );
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+
+        $test_name = "Try to find recently deleted user by ID.";
+
+        $path = $controller . '/' . $user_id;
+
+        $expected_result = 404;
+
+        $test = $this->User_model->get_user( $user_id );
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+
+        $test_name = "Try adding a new user with a too-short name.";
+
+        $path = $controller;
+
+        $expected_result = 400;
+
+        $_POST = array('username' => 'J');
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+        unset($_POST);
+
+
+        $test_name = "Try adding a new user with no name.";
+
+        $path = $controller;
+
+        $expected_result = 400;
+
+        $_POST = array('zone' => 'hi', 'direction' => 'left' );
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+        unset($_POST);
+
+
+        $test_name = "Try adding a new user with a too-long name.";
+
+        $path = $controller;
+
+        $expected_result = 400;
+
+        $_POST = array('username' => 'Verylongnameismuchtoolong');
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+        unset($_POST);
+
+
+        $test_name = "Try adding a new user with predefined ID.";
+
+        $path = $controller;
+
+        $expected_result = 400;
+
+        $_POST = array('username' => 'Legitname', 'id' => 10 );
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+        unset($_POST);
+
+
+        $test_name = "Try adding a new user when there is no POST data.";
+
+        $path = $controller;
+
+        $expected_result = 400;
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+
+        $test_name = "Try adding a new user with a bad column name.";
+
+        $path = $controller;
+
+        $expected_result = 400;
+
+        $_POST = array('username' => 'Legitname', 'fakecolumn' => 'value');
+
+        $test = $this->User_model->add_user();
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+
+        unset($_POST);
+
+
+        $test_name = "Try to delete a non-existent user.";
+
+        // No user exists with ID 0.
+        $path = $controller . '/0' ;
+
+        $expected_result = 404;
+
+        $test = $this->User_model->delete_user( -1 );
+
+        $result = $test['code'];
+
+        echo $this->unit->run($result, $expected_result, $response->message);
+        //*/
+
     }
 
 }
