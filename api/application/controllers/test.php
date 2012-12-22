@@ -88,22 +88,13 @@ class Test extends CI_Controller {
 
         $path = $controller . '/' . $user_id;
 
-        //$this->curl->option(CURLOPT_POSTFIELDS, 'DELETE');
-
-//        $this->curl->option(CURLOPT_CUSTOMREQUEST, 'DELETE');
-
-        //$response = json_decode( $this->curl->simple_get( $path ) );
-
-        // Start session (also wipes existing/previous sessions)
         $this->curl->create( $path );
 
         $this->curl->option(CURLOPT_POSTFIELDS, 'DELETE');
 
         $this->curl->option(CURLOPT_CUSTOMREQUEST, 'DELETE');
 
-        echo $this->curl->execute();
-
-
+        $response = json_decode( $this->curl->execute() );
 
         $result = $response->code;
 
