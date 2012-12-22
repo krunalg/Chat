@@ -265,7 +265,7 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
-        $test_name = "Try adding a new user with an invalid x value.";
+        $test_name = "Try adding a new user with an alphabetic x value.";
 
         $path = $controller;
 
@@ -280,7 +280,7 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
-        $test_name = "Try adding a new user with an invalid y value.";
+        $test_name = "Try adding a new user with an alphabetic y value.";
 
         $path = $controller;
 
