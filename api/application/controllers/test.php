@@ -16,7 +16,7 @@ class Test extends CI_Controller {
 
         $this->unit->set_test_items(array('test_name', 'result', 'notes'));
 
-            $template = '
+        $template = '
         <table style="width:100%; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">
             {rows}
                 <tr>
