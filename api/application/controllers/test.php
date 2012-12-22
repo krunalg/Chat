@@ -35,6 +35,32 @@ class Test extends CI_Controller {
 
     }
 
+    private function httpRequesObj( $method, $path, $data = NULL ) {
+
+        if( strtoupper( $method ) === 'GET') {
+
+            return json_decode( $this->curl->simple_get( $path ) );
+
+        } else if( strtoupper( $method ) === 'POST' ) {
+
+            return json_decode( $this->curl->simple_post( $path, $data ) );
+
+        } else if(strtoupper( $method ) === 'DELETE' ) {
+
+            $this->curl->create( $path );
+
+            $this->curl->option(CURLOPT_POSTFIELDS, 'DELETE');
+
+            $this->curl->option(CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+            return json_decode( $this->curl->execute() );
+
+        }
+
+        return FALSE;
+
+    }
+
     private function _userTest() {
 
         $controller = 'user';
