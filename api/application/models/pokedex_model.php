@@ -49,7 +49,9 @@ class Pokedex_model extends CI_Model {
 
             $message = 'Showing ' . count( $data ) . ' results.';
 
-            return array( "code" => $code, "message" => $message, "data" => $data );
+            $next_page = "?offset=" . ( $offset + $limit ) . "&limit=$limit";
+
+            return array( "code" => $code, "message" => $message, "next_page" => $next_page, "data" => $data );
 
         } else {
 
