@@ -37,7 +37,7 @@ class Test extends CI_Controller {
 
     private function _userTest() {
 
-        $controller = 'use/';
+        $controller = 'user';
 
 
         $test_name = "Add a new user to the database.";
@@ -46,7 +46,7 @@ class Test extends CI_Controller {
 
         $post_data = array('username' => 'Unlikelyname');
 
-        $response = $this->curl->simple_post( 'user', $post_data );
+        $response = $this->curl->simple_post( $path, $post_data );
 
         $expected_result = 201;
 
