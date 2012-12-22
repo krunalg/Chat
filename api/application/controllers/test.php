@@ -151,6 +151,21 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
+        $test_name = "Try updating ID of newly added user.";
+
+        $path = $controller . '/' . $user_id;
+
+        $post_data = array('id' => '7');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->message;
+
+        $expected_result = "Changing a user's ID is forbidden.";
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
         $test_name = "Try updating newly added user without POST data.";
 
         $path = $controller . '/' . $user_id;
