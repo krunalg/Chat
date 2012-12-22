@@ -158,24 +158,22 @@ class Test extends CI_Controller {
         $expected_result = 404;
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-/*
+
 
         $test_name = "Try adding a new user with a too-short name.";
 
         $path = $controller;
 
+        $post_data = array('username' => 'J');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
         $expected_result = 400;
 
-        $_POST = array('username' => 'J');
-
-        $test = $this->User_model->add_user();
-
-        $result = $test['code'];
-
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-
-        unset($_POST);
-
+/*
 
         $test_name = "Try adding a new user with no name.";
 
