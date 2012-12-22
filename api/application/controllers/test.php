@@ -83,7 +83,7 @@ class Test extends CI_Controller {
 
         $post_data = array('username' => 'Unlikelyname');
 
-        $response = json_decode( $this->curl->simple_post( $path, $post_data ) );
+        $response = $this->httpRequesObj('POST', $path, $post_data);
 
         $result = $response->code;
 
@@ -96,7 +96,7 @@ class Test extends CI_Controller {
 
         $path = $controller . '/?username=Unlikelyname';
 
-        $response = json_decode( $this->curl->simple_get( $path ) );
+        $response = $this->httpRequesObj('GET', $path );
 
         $result = count( $response->data );
 
@@ -112,7 +112,7 @@ class Test extends CI_Controller {
 
         $path = $controller . '/' . $user_id;
 
-        $response = json_decode( $this->curl->simple_get( $path ) );
+        $response = $this->httpRequesObj('GET', $path );
 
         $result = $response->code;
 
@@ -125,13 +125,7 @@ class Test extends CI_Controller {
 
         $path = $controller . '/' . $user_id;
 
-        $this->curl->create( $path );
-
-        $this->curl->option(CURLOPT_POSTFIELDS, 'DELETE');
-
-        $this->curl->option(CURLOPT_CUSTOMREQUEST, 'DELETE');
-
-        $response = json_decode( $this->curl->execute() );
+        $response = $this->httpRequesObj('DELETE', $path );
 
         $result = $response->code;
 
