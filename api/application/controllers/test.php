@@ -46,7 +46,7 @@ class Test extends CI_Controller {
      * @param   data         array
      * @return  object/bool
      */
-    private function httpRequesObj( $method, $path, $data = NULL ) {
+    private function apiReponseObj( $method, $path, $data = NULL ) {
 
         if( strtoupper( $method ) === 'GET') {
 
@@ -83,7 +83,7 @@ class Test extends CI_Controller {
 
         $post_data = array('username' => 'Unlikelyname');
 
-        $response = $this->httpRequesObj('POST', $path, $post_data);
+        $response = $this->apiReponseObj('POST', $path, $post_data);
 
         $result = $response->code;
 
@@ -96,7 +96,7 @@ class Test extends CI_Controller {
 
         $path = $controller . '/?username=Unlikelyname';
 
-        $response = $this->httpRequesObj('GET', $path );
+        $response = $this->apiReponseObj('GET', $path );
 
         $result = count( $response->data );
 
@@ -112,7 +112,7 @@ class Test extends CI_Controller {
 
         $path = $controller . '/' . $user_id;
 
-        $response = $this->httpRequesObj('GET', $path );
+        $response = $this->apiReponseObj('GET', $path );
 
         $result = $response->code;
 
@@ -125,7 +125,7 @@ class Test extends CI_Controller {
 
         $path = $controller . '/' . $user_id;
 
-        $response = $this->httpRequesObj('DELETE', $path );
+        $response = $this->apiReponseObj('DELETE', $path );
 
         $result = $response->code;
 
