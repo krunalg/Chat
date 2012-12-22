@@ -28,6 +28,7 @@ class Test extends CI_Controller {
 
         $this->unit->set_template($template);
 
+        // Use strict (===) not loose (==) comparisons.
         $this->unit->use_strict(TRUE);
 
         // Test User_model
