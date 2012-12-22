@@ -43,7 +43,7 @@ class User_model extends CI_Model {
 
             array(
 
-                'field' => 'facing',
+                'field' => 'direction',
 
                 'label' => 'direction faced',
 
