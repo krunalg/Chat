@@ -65,26 +65,25 @@ class Test extends CI_Controller {
 
         $expected_result = 1;
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
         // Save user ID for next tests.
         $user_id = $response->data[0]->id;
-        /*
 
 
         $test_name = "Fetch newly added user by obtained ID.";
 
         $path = $controller . '/' . $user_id;
 
+        $response = json_decode( $this->curl->simple_get( $path ) );
+
+        $result = $response->code;
+
         $expected_result = 200;
 
-        $test = $this->User_model->get_user( $user_id );
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
-        $result = $test['code'];
-
-        echo $this->unit->run($result, $expected_result, $response->message);
-
-
+/*
         $test_name = "Delete newly added user by his ID.";
 
         $path = $controller . '/' . $user_id;
@@ -95,7 +94,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
         $test_name = "Try to find recently deleted user by name.";
@@ -110,7 +109,7 @@ class Test extends CI_Controller {
 
         $result = count( $test['data'] );
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
         $test_name = "Try to find recently deleted user by ID.";
@@ -123,7 +122,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
         $test_name = "Try adding a new user with a too-short name.";
@@ -138,7 +137,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
         unset($_POST);
 
@@ -155,7 +154,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
         unset($_POST);
 
@@ -172,7 +171,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
         unset($_POST);
 
@@ -189,7 +188,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
         unset($_POST);
 
@@ -204,7 +203,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
         $test_name = "Try adding a new user with a bad column name.";
@@ -219,7 +218,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
         unset($_POST);
 
@@ -235,7 +234,7 @@ class Test extends CI_Controller {
 
         $result = $test['code'];
 
-        echo $this->unit->run($result, $expected_result, $response->message);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
         //*/
 
     }
