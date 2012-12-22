@@ -18,11 +18,21 @@ if( $code == 201 ) {
 }
 */
 
-// If no data is supplied, leave the field out.
-if( !isset( $data ) ) $response = array( 'code' => $code, 'message' => $message );
+if( ! isset( $code ) || ! isset( $message ) ) {
 
-// But if data is supplied, then add it.
-else $response = array( 'code' => $code, 'message' => $message, 'data' => $data );
+	$response = array( 'code' => 500, 'message' => 'View did not receive its minimum requirement of a code/message pair.');
+
+} else {
+
+	$response = array( 'code' => $code, 'message' => $message );
+
+	if( isset( $location ) ) $response['location'] = $location;
+
+	if( isset( $next_page ) ) $response['next_page'] = $next_page;
+
+	if( isset( $data ) ) $response['data'] = $data;
+
+}
 
 $this->output->set_content_type('application/json');
 
