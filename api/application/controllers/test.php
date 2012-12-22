@@ -83,19 +83,34 @@ class Test extends CI_Controller {
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
-/*
+
         $test_name = "Delete newly added user by his ID.";
 
         $path = $controller . '/' . $user_id;
 
+        //$this->curl->option(CURLOPT_POSTFIELDS, 'DELETE');
+
+//        $this->curl->option(CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+        //$response = json_decode( $this->curl->simple_get( $path ) );
+
+        // Start session (also wipes existing/previous sessions)
+        $this->curl->create( $path );
+
+        $this->curl->option(CURLOPT_POSTFIELDS, 'DELETE');
+
+        $this->curl->option(CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+        echo $this->curl->execute();
+
+
+
+        $result = $response->code;
+
         $expected_result = 200;
 
-        $test = $this->User_model->delete_user( $user_id );
-
-        $result = $test['code'];
-
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-
+/*
 
         $test_name = "Try to find recently deleted user by name.";
 
