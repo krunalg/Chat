@@ -132,22 +132,20 @@ class Test extends CI_Controller {
         $expected_result = 200;
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-/*
+
 
         $test_name = "Try to find recently deleted user by name.";
 
-        $path = $controller;
+        $path = $controller . '/?username=Unlikelyname';
+
+        $response = $this->apiReponseObj('GET', $path );
+
+        $result = count( $response->data );
 
         $expected_result = 0;
 
-        $criteria = array('username' => 'Unlikelyname');
-
-        $test = $this->User_model->get_users( $criteria );
-
-        $result = count( $test['data'] );
-
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-
+/*
 
         $test_name = "Try to find recently deleted user by ID.";
 
