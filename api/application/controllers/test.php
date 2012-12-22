@@ -188,25 +188,23 @@ class Test extends CI_Controller {
         $expected_result = 400;
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-/*
+
 
         $test_name = "Try adding a new user with a too-long name.";
 
         $path = $controller;
 
+        $post_data = array('username' => 'Verylongnameismuchtoolong');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
         $expected_result = 400;
-
-        $_POST = array('username' => 'Verylongnameismuchtoolong');
-
-        $test = $this->User_model->add_user();
-
-        $result = $test['code'];
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
-        unset($_POST);
-
-
+/*
         $test_name = "Try adding a new user with predefined ID.";
 
         $path = $controller;
@@ -220,8 +218,6 @@ class Test extends CI_Controller {
         $result = $test['code'];
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-
-        unset($_POST);
 
 
         $test_name = "Try adding a new user when there is no POST data.";
@@ -250,8 +246,6 @@ class Test extends CI_Controller {
         $result = $test['code'];
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-
-        unset($_POST);
 
 
         $test_name = "Try to delete a non-existent user.";
