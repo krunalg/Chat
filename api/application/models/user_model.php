@@ -27,7 +27,7 @@ class User_model extends CI_Model {
 
                 'label' => 'X coordinate',
 
-                'rules' => 'integer'
+                'rules' => 'integer|divides_by[16]'
 
             ),
 
@@ -37,7 +37,7 @@ class User_model extends CI_Model {
 
                 'label' => 'Y coordinate',
 
-                'rules' => 'integer'
+                'rules' => 'integer|divides_by[16]'
 
             ),
 
