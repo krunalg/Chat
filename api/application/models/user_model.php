@@ -208,32 +208,43 @@ class User_model extends CI_Model {
                 // Returns all POST data with XSS filter.
                 $data = $this->input->post(NULL, TRUE);
 
-                $column_chk_result = $this->_columns_exist( $data, $this->table );
-
-                if( $column_chk_result !== TRUE ) {
+                if( array_key_exists('id', $data) ) {
 
                     $code = 400;
 
-                    // Duplicate message.
-                    $message = "Invalid column specified: $column_chk_result";
+                    $message = "You may not manually specify ID.";
+
 
                 } else {
 
-                    // Add user to database.
-                    $this->db->insert( $this->table, $data );
+                    $column_chk_result = $this->_columns_exist( $data, $this->table );
 
-                    $user_id = $this->db->insert_id();
+                    if( $column_chk_result !== TRUE ) {
 
-                    // Allows us to use base_url().
-                    $this->load->helper('url');
+                        $code = 400;
 
-                    $location = base_url() . $this->table . '/' . $user_id;
+                        // Duplicate message.
+                        $message = "Invalid column specified: $column_chk_result";
 
-                    $code = 201;
+                    } else {
 
-                    $message = "Successfully added user.";
+                        // Add user to database.
+                        $this->db->insert( $this->table, $data );
 
-                    return array( "code" => $code, "message" => $message, "location" => $location );
+                        $user_id = $this->db->insert_id();
+
+                        // Allows us to use base_url().
+                        $this->load->helper('url');
+
+                        $location = base_url() . $this->table . '/' . $user_id;
+
+                        $code = 201;
+
+                        $message = "Successfully added user.";
+
+                        return array( "code" => $code, "message" => $message, "location" => $location );
+
+                    }
 
                 }
 
