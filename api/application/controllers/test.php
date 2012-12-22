@@ -265,6 +265,36 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
+        $test_name = "Try adding a new user with an invalid x value.";
+
+        $path = $controller;
+
+        $post_data = array('username' => 'Legitname', 'x' => 'abc');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
+        $expected_result = 400;
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
+        $test_name = "Try adding a new user with an invalid y value.";
+
+        $path = $controller;
+
+        $post_data = array('username' => 'Legitname', 'y' => 'abc');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
+        $expected_result = 400;
+
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
+
+
         $test_name = "Try to delete a non-existent user.";
 
         // No user exists with ID 0.
