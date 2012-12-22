@@ -145,20 +145,20 @@ class Test extends CI_Controller {
         $expected_result = 0;
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-/*
+
 
         $test_name = "Try to find recently deleted user by ID.";
 
         $path = $controller . '/' . $user_id;
 
+        $response = $this->apiReponseObj('GET', $path );
+
+        $result = $response->code;
+
         $expected_result = 404;
 
-        $test = $this->User_model->get_user( $user_id );
-
-        $result = $test['code'];
-
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-
+/*
 
         $test_name = "Try adding a new user with a too-short name.";
 
