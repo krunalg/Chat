@@ -198,16 +198,12 @@ class User_model extends CI_Model {
 
             if( $this->form_validation->run('add_user') === FALSE ) {
 
-                // No.
-
                 $code = 400;
 
                 // Duplicate message.
                 $message = "Validation failure: " . validation_errors();
 
             } else {
-
-                // Yes.
 
                 // Returns all POST data with XSS filter.
                 $data = $this->input->post(NULL, TRUE);
