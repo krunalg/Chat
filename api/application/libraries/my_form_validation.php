@@ -14,6 +14,8 @@ class MY_Form_validation extends CI_Form_validation {
         // Use this custom message for this custom rule.
         $this->set_message('is_direction', "The %s field must be one of the following: 'left', 'right', 'up', or 'down'." );
 
+        $this->set_message('divides_by', "The %s field must be divisible by %s." );
+
     }
 
     /**
@@ -32,6 +34,21 @@ class MY_Form_validation extends CI_Form_validation {
         if( in_array( $str, $directions ) ) return TRUE;
 
         else return FALSE;
+
+    }
+
+    /**
+     * Return TRUE if number divides evenly into N.
+     * Else return FALSE.
+     *
+     * @access  public
+     * @param   str   string
+     * @param   n     integer
+     * @return  bool
+     */
+    function divides_by($str, $n) {
+
+        return intval($str) % $n === 0;
 
     }
 
