@@ -233,19 +233,19 @@ class Test extends CI_Controller {
         $expected_result = 400;
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-/*
+
 
         $test_name = "Try adding a new user with a bad column name.";
 
         $path = $controller;
 
+        $post_data = array('username' => 'Legitname', 'fakecolumn' => 'value');
+
+        $response = $this->apiReponseObj('POST', $path, $post_data );
+
+        $result = $response->code;
+
         $expected_result = 400;
-
-        $_POST = array('username' => 'Legitname', 'fakecolumn' => 'value');
-
-        $test = $this->User_model->add_user();
-
-        $result = $test['code'];
 
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
@@ -255,14 +255,13 @@ class Test extends CI_Controller {
         // No user exists with ID 0.
         $path = $controller . '/0' ;
 
+        $response = $this->apiReponseObj('DELETE', $path );
+
+        $result = $response->code;
+
         $expected_result = 404;
 
-        $test = $this->User_model->delete_user( -1 );
-
-        $result = $test['code'];
-
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
-        //*/
 
     }
 
