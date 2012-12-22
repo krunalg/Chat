@@ -340,7 +340,7 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
-        $test_name = "Try adding a new user with an invalid zone name.";
+        $test_name = "Try adding a new user with an non-alpha zone name.";
 
         $path = $controller;
 
@@ -355,7 +355,7 @@ class Test extends CI_Controller {
         echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
 
-        $test_name = "Try adding a new user with an invalid skin name.";
+        $test_name = "Try adding a new user with a non-alpha skin name.";
 
         $path = $controller;
 
