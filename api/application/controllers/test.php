@@ -46,13 +46,13 @@ class Test extends CI_Controller {
 
         $post_data = array('username' => 'Unlikelyname');
 
-        $response = $this->curl->simple_post( $path, $post_data );
+        $response = json_decode( $this->curl->simple_post( $path, $post_data ) );
+
+        $result = $response->code;
 
         $expected_result = 201;
 
-        $result = $this->curl->info['http_code'];
-
-        echo $this->unit->run($result, $expected_result, $test_name);
+        echo $this->unit->run($result, $expected_result, $test_name, $response->message);
 
     }
 
