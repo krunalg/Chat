@@ -35,6 +35,17 @@ class Test extends CI_Controller {
 
     }
 
+    /**
+     * Sends an HTTP Request which expects a JSON response
+     * and upon success decodes the JSON, returning it
+     * as an object. Returns FALSE on failure.
+     *
+     * @access  private
+     * @param   method       string
+     * @param   path         string
+     * @param   data         array
+     * @return  object/bool
+     */
     private function httpRequesObj( $method, $path, $data = NULL ) {
 
         if( strtoupper( $method ) === 'GET') {
