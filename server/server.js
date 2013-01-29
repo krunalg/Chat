@@ -685,4 +685,4 @@ function httpRequest( method, path, callback, data ) {
 
     req.end();
 
-};
+}
