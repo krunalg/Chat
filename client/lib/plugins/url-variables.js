@@ -43,7 +43,7 @@ ig.module('plugins.url-variables')
 
         return GETDATA;
 
-    }
+    };
 
     ig.urlVars = getUrlVars();
 
