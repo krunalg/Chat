@@ -291,8 +291,6 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('init', function(user) {
 
-        socket.clientname = user;
-
         // Check that user not already online.
         for(var i = 0; i < onlinePlayers.length; i++) {
 
@@ -335,6 +333,8 @@ io.sockets.on('connection', function(socket) {
                 var map = jsonObj.data[0].zone;
 
                 initializePlayer( id, name, x, y, facing, skin, state, map, socket.id );
+
+                socket.clientname = name;
 
             } else {
 
