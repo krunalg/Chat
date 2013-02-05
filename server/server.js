@@ -293,19 +293,12 @@ io.sockets.on('connection', function(socket) {
 
         // Check that user not already online.
         for(var i = 0; i < onlinePlayers.length; i++) {
-
             if(onlinePlayers[i].name === socket.clientname) {
-
                 console.log(getTime() + ' ' + "DROPPING " + socket.clientname + " FOR USING ALREADY IN-USE NAME.");
-
                 socket.emit('error', 'The username ' + socket.clientname + ' is already in use. Please use another.');
-
                 socket.disconnect();
-
                 return;
-
             }
-
         }
 
         // Get user data via API.
