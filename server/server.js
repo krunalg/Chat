@@ -305,7 +305,7 @@ io.sockets.on('connection', function(socket) {
 
         var path = 'user/?username=' + user;
 
-        var callback = function(jsonObj) {
+        httpRequest('GET', path, function(jsonObj) {
 
             if(jsonObj.data.length > 0) {
 
@@ -330,9 +330,7 @@ io.sockets.on('connection', function(socket) {
 
             }
 
-        };
-
-        httpRequest('GET', path, callback);
+        });
 
     });
 
