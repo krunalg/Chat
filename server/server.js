@@ -3,49 +3,28 @@
  */
 
 var http = require('http');
-
 var server = http.createServer(handler);
-
 var io = require('socket.io').listen(server);
-
 var fs = require('fs');
 
 function handler(req, res) {
-
     fs.readFile(__dirname + '/index.html', function(err, data) {
-
         if(err) {
-
             res.writeHead(500);
-
             return res.end('Error loading index.html');
-
         }
-
         res.writeHead(200);
-
         res.end(data);
-
     });
-
 }
 
 server.listen(9090);
 
-
-
 var api = {
-
     host: 'localhost',
-
     port: 80,
-
     path: '/Chat/api/'
-
 };
-
-
-
 
 var onlinePlayers = [];
 
