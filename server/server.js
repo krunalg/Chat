@@ -316,21 +316,14 @@ io.sockets.on('connection', function(socket) {
 
             if(jsonObj.data.length > 0) {
 
-                var id = parseInt(jsonObj.data[0].id);
-
-                var name = jsonObj.data[0].username;
-
-                var x = parseInt(jsonObj.data[0].x);
-
-                var y = parseInt(jsonObj.data[0].y);
-
+                var id     = parseInt(jsonObj.data[0].id);
+                var name   = jsonObj.data[0].username;
+                var x      = parseInt(jsonObj.data[0].x);
+                var y      = parseInt(jsonObj.data[0].y);
                 var facing = jsonObj.data[0].direction;
-
-                var skin = jsonObj.data[0].skin;
-
-                var state = jsonObj.data[0].state;
-
-                var map = jsonObj.data[0].zone;
+                var skin   = jsonObj.data[0].skin;
+                var state  = jsonObj.data[0].state;
+                var map    = jsonObj.data[0].zone;
 
                 initializePlayer( id, name, x, y, facing, skin, state, map, socket.id );
 
