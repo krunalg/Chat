@@ -114,27 +114,17 @@ function initializePlayer(id, name, x, y, facing, skin, state, map, sessionID) {
     console.log(getTime() + " ADDING PLAYER " + name);
 
     // Create live player object.
-    var player = {};
-
-    player.id = id;
-
-    player.name = name;
-
-    player.pos = {};
-
-    player.pos.x = x;
-
-    player.pos.y = y;
-
-    player.facing = facing;
-
-    player.state = state;
-
-    player.skin = skin;
-
+    var player     = {};
+    player.id      = id;
+    player.name    = name;
+    player.pos     = {};
+    player.pos.x   = x;
+    player.pos.y   = y;
+    player.facing  = facing;
+    player.state   = state;
+    player.skin    = skin;
     player.session = sessionID;
-
-    player.room = map;
+    player.room    = map;
 
     onlinePlayers.push(player);
 
