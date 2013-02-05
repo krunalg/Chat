@@ -22,58 +22,6 @@ Installation:
 7. In a web browser, open `client/index.php?user=Joncom`.
 
 
-Change-Log:
-----------------------------
-
-### June
-- Grass entities spawn only as needed and self-prune after use. (June 2, 2012)
-- Repeating borders update according to player's position in the world. (June 2, 2012)
-- Player can travel over water. (June 3, 2012)
-- Chat log with auto-scrolling text, multi-colored messages, and clicking names or pressing R to private message. (June 7, 2012)
-- As the player walks over sand tiles, foot prints are left behind him. (June 8, 2012)
-- Player reflection is shown with animation in certain types of water. (June 11, 2012)
-- Player can now ride a bicycle by pressing C. The bicycle leaves tracks in sand tiles. (June 12, 2012)
-- Weather effects for 'raining', 'sandstorm' and 'falling ashes' can be spawned using the weather-controller entity. (June 14, 2012)
-- Auto-generated map borders on no longer walkable. (June 15, 2012)
-- Duration which a chat bubbles lives for is based on message length. (June 15, 2012)
-- Removed extra pixel between character in chat bubbles. (June 15, 2012)
-- Server will no longer accept names longer than 20 characters. (June 15, 2012)
-- Server converts special HTML characters in messages to safe strings. (June 15, 2012)
-- Players can no longer have more than one chat bubble visible at any given moment. (June 16, 2012)
-- Walking in shallow water produced a splash effect at the players feet. (June 17, 2012)
-- Walking through ash-covered grass spawns a cloud/puff of ash and the grass turns (and then stays) green. (June 17, 2012)
-- Fixed: Ash puff only spawn if persistent-grass has not yet spawned. (June 18, 2012)
-- Fixed: Grass entities spawned along-side persistent grass entities now self-despawn. (June 18, 2012)
-- Added tall-grass with animations. (June 18, 2012)
-- Added deep-sand effect which covers players feet in sand in certain areas. (June 18, 2012)
-- Camera restrictions can be added to prevent unsightly areas from being seen by the player. (June 18, 2012)
-- Automated generation of levels from image sources; just run cron.php (June 20, 2012)
-- Added 319 maps (all areas and interiors). (June 23, 2012)
-- Fixed bug where player reflections could sometimes be see over trees. (June 24, 2012)
-- Fixed bug causing reflection animation to not fully animate when facing right. (June 24, 2012)
-- Fixed bug that allowed players to walk along a ledge if approached from the side. (June 24, 2012)
-- Up and down arrows are given precedence over left and right when moving. (June 24, 2012)
-- Fixed bug which caused the bike to not show during ledge hops. (June 24, 2012)
-- Server will disconnect any user that tries sending data without being authenticated. (June 27, 2012)
-- Server remembers player location, skin, faced direction, state, and map when reconnecting. (June 27, 2012)
-- Server console timestamps everything with a 12-hour clock instead of 24-hour. (June 27, 2012)
-- Server informs client when his private message goes undelivered. (June 28, 2012)
-- Recipient name when sending a private message is no longer case-sensitive. (June 28, 2012)
-- User is informed when he types an invalid command. (June 28, 2012)
-- Added map borders for interiors with repeating backgrounds, such as caves. (June 30, 2012)
-- Server sends heartbeat to keep connection alive when user is idle. (June 30, 2012)
-
-### July
-- Framerate improvement by not drawing repeating border in areas where it will be covered up. (July 4, 2012)
-
-### December
-- Added simple login form. (December 6, 2012)
-- A simple API supports add/remove/update/view functions on users. (December 10, 2012)
-- Socket server now logs all chat messages to a file. (December 11, 2012)
-- Socket server uses API instead of a MySQL module to access the database. (December 11, 2012)
-- Player positions are saved upon disconnect. (December 11, 2012)
-
-
 To-do:
 ----------------------------
 
