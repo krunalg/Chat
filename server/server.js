@@ -344,20 +344,13 @@ io.sockets.on('connection', function(socket) {
 
             if(onlinePlayers[i].room === socket.roomname) {
 
-                var player = {};
-
-                player.name = onlinePlayers[i].name;
-
-                player.pos = {};
-
-                player.pos.x = onlinePlayers[i].pos.x;
-
-                player.pos.y = onlinePlayers[i].pos.y;
-
-                player.facing = onlinePlayers[i].facing;
-
-                player.skin = onlinePlayers[i].skin;
-
+                var player       = {};
+                player.name      = onlinePlayers[i].name;
+                player.pos       = {};
+                player.pos.x     = onlinePlayers[i].pos.x;
+                player.pos.y     = onlinePlayers[i].pos.y;
+                player.facing    = onlinePlayers[i].facing;
+                player.skin      = onlinePlayers[i].skin;
                 player.moveState = onlinePlayers[i].state;
 
                 nearbyPlayers.push(player);
