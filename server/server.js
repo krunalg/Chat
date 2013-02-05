@@ -371,15 +371,11 @@ io.sockets.on('connection', function(socket) {
 
             if(onlinePlayers[i].name == socket.clientname) {
 
-                var x = onlinePlayers[i].pos.x;
-
-                var y = onlinePlayers[i].pos.y;
-
+                var x      = onlinePlayers[i].pos.x;
+                var y      = onlinePlayers[i].pos.y;
                 var facing = onlinePlayers[i].facing;
-
-                var skin = onlinePlayers[i].skin;
-
-                var state = onlinePlayers[i].state;
+                var skin   = onlinePlayers[i].skin;
+                var state  = onlinePlayers[i].state;
 
                 socket.emit('playerStart-' + socket.clientname, x, y, facing, state, skin);
 
@@ -440,13 +436,9 @@ io.sockets.on('connection', function(socket) {
             if(onlinePlayers[i].name == socket.clientname) {
 
                 onlinePlayers[i].pos.x = x;
-
                 onlinePlayers[i].pos.y = y;
-
                 onlinePlayers[i].facing = direction;
-
                 onlinePlayers[i].state = state;
-
                 break;
 
             }
@@ -567,27 +559,17 @@ io.sockets.on('connection', function(socket) {
 function httpRequest( method, path, callback, data ) {
 
     var options = {
-
         hostname: api.host,
-
         port: api.port,
-
         path: api.path + path,
-
         method: method
-
     };
 
     if( typeof data === 'string' ) {
-
         options.headers = {
-
             'Content-Type': 'application/x-www-form-urlencoded',
-
             'Content-Length': data.length
-
         };
-
     }
 
     var req = http.request(options, function(res) {
