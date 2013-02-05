@@ -34,9 +34,6 @@ Day 6 - Water ripple effect.
 Day 7 - Collision editor supports multiple types.
 Day 8 - Single side tile restrictions.
 
-### Server:
-- Handle unexpected mySQL database disconnections gracefully.
-
 ### Reflection:
 - Add: brightness/fading effect to reflections.
 
