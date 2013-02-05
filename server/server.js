@@ -341,53 +341,6 @@ io.sockets.on('connection', function(socket) {
 
         httpRequest('GET', path, callback);
 
-        /*
-        http.get("http://localhost/Chat/api/user/?user=" + user, function(res) {
-
-            res.setEncoding('utf8');
-
-            res.on('data', function(chunk) {
-
-                var jsonObj = JSON.parse(chunk);
-
-                if(jsonObj.data.length > 0) {
-
-                    var id = parseInt(jsonObj.data[0].id);
-
-                    var name = jsonObj.data[0].user;
-
-                    var x = parseInt(jsonObj.data[0].x);
-
-                    var y = parseInt(jsonObj.data[0].y);
-
-                    var facing = jsonObj.data[0].facing;
-
-                    var skin = jsonObj.data[0].skin;
-
-                    var state = jsonObj.data[0].state;
-
-                    var map = jsonObj.data[0].map;
-
-                    initializePlayer( id, name, x, y, facing, skin, state, map, socket.id );
-
-                } else {
-
-                    socket.emit('error', 'No such user in database.');
-
-                    socket.disconnect();
-
-                }
-
-            });
-
-        }).on('error', function(e) {
-
-            console.log("Got error: " + e.message);
-
-        });
-
-        //*/
-
     });
 
     socket.on('getNearbyPlayers', function() {
